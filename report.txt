@@ -1,0 +1,90 @@
+
+======================================================================
+PHASE 4 REPORT
+======================================================================
+
+1. Implementation Summary
+----------------------------------------
+Files added:
+  - memory/embedding.py: embed_observation() using TF-IDF, fixed vocabulary
+Files modified:
+  - memory/graph_memory.py: store embedding in each event node
+  - memory/retrieval.py: retrieve_similar_events(), retrieve_events() hybrid
+  - agent/loop.py: configurable retrieval_mode (graph|embedding|hybrid)
+  - evaluation/run.py: eval no_memory, graph, embedding, hybrid
+  - requirements.txt: + numpy, scikit-learn
+Retrieval methods:
+  - Graph: entity-based traversal (Phase 3)
+  - Embedding: cosine similarity over TF-IDF vectors
+  - Hybrid: union of graph + embedding results
+
+2. Retrieval Behavior
+----------------------------------------
+Query: "You see a red door"
+  - event_2 (score=0.72): You are in a room. You see a red key....
+  - event_4 (score=0.72): You are in a room. You see a blue door....
+  - event_3 (score=0.61): You are in a room. You see nothing of interes...
+
+Query: "You see a red key"
+  - event_2 (score=0.84): You are in a room. You see a red key....
+  - event_3 (score=0.70): You are in a room. You see nothing of interes...
+  - event_4 (score=0.60): You are in a room. You see a blue door....
+
+Query: "You are carrying a blue key"
+  - event_3 (score=0.72): You are in a room. You see nothing of interes...
+  - event_2 (score=0.65): You are in a room. You see a red key....
+  - event_4 (score=0.65): You are in a room. You see a blue door....
+
+
+3. Performance
+----------------------------------------
+no_memory   : 20/100 = 20.0% success, avg steps=72.8, avg(success)=44.0
+graph       : 19/100 = 19.0% success, avg steps=73.5, avg(success)=46.1
+embedding   : 22/100 = 22.0% success, avg steps=72.4, avg(success)=45.5
+hybrid      : 19/100 = 19.0% success, avg steps=73.3, avg(success)=44.6
+learnable(1.0,1.0,0.1): 19/100 = 19.0% success, avg steps=75.1, avg(success)=54.1
+learnable(1.5,1.0,0.2): 27/100 = 27.0% success, avg steps=74.3, avg(success)=59.0
+learnable(1.0,2.0,0.1): 22/100 = 22.0% success, avg steps=71.3, avg(success)=40.7
+
+4. Comparison to Phase 3
+----------------------------------------
+Hybrid SAME as graph-only.
+Embedding-only BETTER than no-memory.
+
+5. Observations
+----------------------------------------
+TF-IDF embeddings capture lexical overlap: 'red key' similar to 'red door' (shared 'red').
+Graph retrieval uses entity structure; embedding uses word co-occurrence.
+Hybrid merges both; may help when one method misses relevant events.
+Variance across runs is expected with random exploration.
+
+======================================================================
+=== Phase 5 Learnable Retrieval Report ===
+======================================================================
+
+Weights: w_graph=1.0, w_embed=1.0, w_recency=0.1
+Condition: learnable
+Success: 19/100
+Success Rate: 19.0%
+Avg Steps: 75.1
+Avg Steps (success only): 54.1
+learnable >= graph: yes
+learnable >= hybrid: yes
+
+Weights: w_graph=1.5, w_embed=1.0, w_recency=0.2
+Condition: learnable
+Success: 27/100
+Success Rate: 27.0%
+Avg Steps: 74.3
+Avg Steps (success only): 59.0
+learnable >= graph: yes
+learnable >= hybrid: yes
+
+Weights: w_graph=1.0, w_embed=2.0, w_recency=0.1
+Condition: learnable
+Success: 22/100
+Success Rate: 22.0%
+Avg Steps: 71.3
+Avg Steps (success only): 40.7
+learnable >= graph: yes
+learnable >= hybrid: yes
