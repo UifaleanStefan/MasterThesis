@@ -12,10 +12,19 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from environment import GoalRoom, HardKeyDoor, ToyEnvironment
-from memory import GraphMemory, MemoryParams, retrieve_similar_events
+from environment import GoalRoom, HardKeyDoor, QuestRoom, ToyEnvironment
+from memory import (
+    EpisodicSemanticMemory,
+    FlatMemory,
+    GraphMemory,
+    MemoryParams,
+    RAGMemory,
+    SemanticMemory,
+    SummaryMemory,
+    retrieve_similar_events,
+)
 from agent import ExplorationPolicy, run_episode_with_logging, run_episode_with_memory
-from evaluation import run_evaluation
+from evaluation import run_evaluation, run_memory_comparison
 
 LEARNABLE_RETRIEVAL_WEIGHTS = (1.5, 1.0, 0.2)
 
@@ -562,6 +571,32 @@ def print_cross_environment_comparison(env_results: dict) -> None:
     print("=" * 70)
 
 
+def print_memory_comparison_report(
+    results: dict[str, dict],
+    env_name: str,
+    n_episodes: int,
+    lambda_penalty: float,
+) -> None:
+    """Print the memory system comparison table."""
+    print("\n" + "=" * 70)
+    print(f"=== MEMORY SYSTEM COMPARISON ({env_name}, n={n_episodes}) ===")
+    print("=" * 70)
+    print(f"Objective: J = partial_score - {lambda_penalty} * retrieval_tokens")
+    print(f"\n{'System':<22} | {'PartialScore':>12} | {'Tokens':>8} | {'MemSize':>7} | {'Efficiency':>10} | {'MeanJ':>8}")
+    print("-" * 80)
+    for name, r in sorted(results.items(), key=lambda x: -x[1]["mean_partial_score"]):
+        print(
+            f"{name:<22} | {r['mean_partial_score']:>12.3f} | "
+            f"{r['mean_retrieval_tokens']:>8.1f} | {r['mean_memory_size']:>7.1f} | "
+            f"{r['efficiency']:>10.5f} | {r['mean_j']:>8.4f}"
+        )
+    best = max(results.items(), key=lambda x: x[1]["mean_j"])
+    print(f"\nBest by mean J: {best[0]} (J={best[1]['mean_j']:.4f})")
+    best_eff = max(results.items(), key=lambda x: x[1]["efficiency"])
+    print(f"Best efficiency: {best_eff[0]} (eff={best_eff[1]['efficiency']:.5f})")
+    print("=" * 70)
+
+
 def main() -> None:
     n_episodes = 100
     learnable_configs = [
@@ -717,8 +752,53 @@ def main() -> None:
                 },
             )
         print_cross_environment_comparison(env_results)
+
+    # -----------------------------------------------------------------------
+    # Memory System Comparison on QuestRoom
+    # -----------------------------------------------------------------------
+    print("\n--- Memory System Comparison (QuestRoom) ---")
+    quest_env = QuestRoom(seed=77)
+    quest_policy = ExplorationPolicy(seed=42)
+    n_comparison_episodes = 30
+    lambda_comp = 0.001
+
+    memory_systems: dict = {
+        "FlatWindow(50)": FlatMemory(window_size=50),
+        "GraphMemory+θ": GraphMemory(params=MemoryParams(
+            theta_store=0.864, theta_entity=0.230, theta_temporal=1.0, mode="learnable"
+        )),
+        "SemanticMemory": SemanticMemory(max_capacity=80, alpha=1.0, beta=5.0, gamma=2.0),
+        "SummaryMemory": SummaryMemory(raw_buffer_size=30, summarize_every=25),
+        "EpisodicSemantic": EpisodicSemanticMemory(episodic_size=30),
+        "RAGMemory": RAGMemory(),
+    }
+
+    comparison_results = run_memory_comparison(
+        quest_env,
+        quest_policy,
+        memory_systems,
+        n_episodes=n_comparison_episodes,
+        k=8,
+        env_seed=77,
+        lambda_penalty=lambda_comp,
+    )
+    print_memory_comparison_report(
+        comparison_results, "QuestRoom", n_comparison_episodes, lambda_comp
+    )
+
     report_path.write_text(buf.getvalue(), encoding="utf-8")
     print(f"\nReport saved to: {report_path}")
+
+    # Append comparison to report
+    import io as _io
+    from contextlib import redirect_stdout as _rds
+    comp_buf = _io.StringIO()
+    with _rds(comp_buf):
+        print_memory_comparison_report(
+            comparison_results, "QuestRoom", n_comparison_episodes, lambda_comp
+        )
+    with open(report_path, "a", encoding="utf-8") as f:
+        f.write(comp_buf.getvalue())
 
 
 if __name__ == "__main__":

@@ -1,8 +1,10 @@
-"""Run evaluation: compare no-memory vs graph vs embedding vs hybrid vs learnable."""
+"""Evaluation utilities: per-retrieval-mode and per-memory-system comparisons."""
 
+from typing import Any
+
+from agent import ExplorationPolicy, run_episode_no_memory, run_episode_with_any_memory, run_episode_with_memory
 from environment import ToyEnvironment
 from memory import GraphMemory, MemoryParams
-from agent import ExplorationPolicy, run_episode_no_memory, run_episode_with_memory
 
 
 def run_evaluation(
@@ -85,3 +87,70 @@ def run_evaluation(
             )
 
     return out
+
+
+def run_memory_comparison(
+    env: Any,
+    policy: ExplorationPolicy,
+    memory_systems: dict[str, Any],
+    n_episodes: int = 30,
+    k: int = 8,
+    env_seed: int | None = None,
+    lambda_penalty: float = 0.001,
+) -> dict[str, dict]:
+    """
+    Run each memory system in memory_systems for n_episodes on env.
+    Returns a dict: system_name -> result_dict with:
+        success_rate, mean_partial_score, mean_retrieval_tokens,
+        mean_memory_size, efficiency, mean_j.
+
+    Each memory system must expose the uniform interface:
+        add_event(event, episode_seed=None)
+        get_relevant_events(observation, current_step, k) -> list[Event]
+        clear()
+        get_stats() -> dict
+    """
+    base_seed = env_seed if env_seed is not None else 0
+    results: dict[str, dict] = {}
+
+    for name, memory in memory_systems.items():
+        successes = 0
+        partial_scores: list[float] = []
+        retrieval_tokens_list: list[int] = []
+        memory_size_list: list[int] = []
+        j_list: list[float] = []
+
+        for ep_idx in range(n_episodes):
+            episode_seed = base_seed + ep_idx
+            success, events, stats_dict = run_episode_with_any_memory(
+                env,
+                policy,
+                memory,
+                k=k,
+                episode_seed=episode_seed,
+            )
+            successes += int(success)
+            reward = stats_dict["reward"]
+            partial_scores.append(reward)
+            retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
+            memory_size_list.append(stats_dict["memory_size"])
+            j = reward - lambda_penalty * stats_dict["retrieval_tokens"]
+            j_list.append(j)
+
+        mean_partial = sum(partial_scores) / n_episodes
+        mean_tokens = sum(retrieval_tokens_list) / n_episodes
+        mean_size = sum(memory_size_list) / n_episodes
+        mean_j = sum(j_list) / n_episodes
+        efficiency = mean_partial / (1.0 + mean_tokens)
+
+        results[name] = {
+            "success_rate": successes / n_episodes,
+            "successes": successes,
+            "mean_partial_score": mean_partial,
+            "mean_retrieval_tokens": mean_tokens,
+            "mean_memory_size": mean_size,
+            "efficiency": efficiency,
+            "mean_j": mean_j,
+        }
+
+    return results

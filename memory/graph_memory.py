@@ -149,6 +149,27 @@ class GraphMemory:
             "n_entities": n_entities,
         }
 
+    def get_relevant_events(
+        self,
+        observation: str,
+        current_step: int,
+        k: int = 8,
+    ) -> list[Event]:
+        """
+        Uniform interface for the memory comparison framework.
+        Uses learnable retrieval with default weights (equal graph + embedding, low recency).
+        """
+        from .retrieval import retrieve_events_learnable
+        return retrieve_events_learnable(
+            self._graph,
+            observation,
+            current_step=current_step,
+            k=k,
+            w_graph=1.5,
+            w_embed=1.0,
+            w_recency=0.2,
+        )
+
     def clear(self) -> None:
         self._graph.clear()
         self._entity_mention_count.clear()

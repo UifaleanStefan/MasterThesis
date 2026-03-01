@@ -1,6 +1,6 @@
 # Thesis Story — Learning Task-Adaptive Structured Memory
 
-*Last updated: Feb 2026. This document captures the full research narrative, what has been built, what the results show, and what comes next. It is intended to align implementation with the thesis argument and to serve as a reference for writing the thesis.*
+*Last updated: Feb 2026 (Memory System Comparison update). This document captures the full research narrative, what has been built, what the results show, and what comes next. It is intended to align implementation with the thesis argument and to serve as a reference for writing the thesis.*
 
 ---
 
@@ -204,10 +204,18 @@ Demo (current):
   Goal-Room → sparse, temporal memory.
   Cross-env θ comparison confirms task-dependence.
 
-Demo (next):
-  Harder task with genuine memory pressure (distractors, chained doors).
-  Clearer performance gap between fixed and learned θ.
-  Learning curves showing ES convergence.
+Demo (harder task + memory comparison):
+  QuestRoom: 12x12, 500 steps, 4 chained doors, 2 NPCs giving one-time hints,
+  distractor observations. NPC hints arrive early; agent must recall them 300+ steps later.
+  Six memory systems compared on QuestRoom:
+    1. FlatWindow      — sliding window, no structure, no filtering
+    2. GraphMemory+θ   — current system, graph + θ parameters
+    3. SemanticMemory  — importance-weighted pool (entity count + NPC hint + novelty)
+    4. SummaryMemory   — periodic compression of old events into summaries
+    5. EpisodicSemantic — dual store: episodic buffer + persistent semantic facts
+    6. RAGMemory       — dense sentence embeddings + cosine retrieval (production LLM analog)
+  Comparison metric: efficiency = partial_score / (1 + mean_retrieval_tokens)
+  and J = partial_score − λ × retrieval_tokens.
 
 Scaling argument:
   θ_store = context window management.
@@ -223,32 +231,97 @@ Contribution:
 
 ---
 
-## 8. File Map
+## 8. Why the Current Graph Memory Is Too Simple
+
+Honest assessment of the existing system's limitations (motivates the comparison):
+
+| Component | What it actually does | Why it's not real learning |
+|---|---|---|
+| Entity extraction | `if "red key" in obs_lower` | Pure regex; can't generalize |
+| Graph edges | Hardcoded temporal chain + keyword entity links | No learned relationship types |
+| θ_store | Bernoulli coin flip | Learning = finding the right drop probability |
+| θ_entity | Frequency counter vs. threshold | Not semantic; "goal" scores same as "key" |
+| θ_temporal | Another coin flip | No content-based structure |
+| TF-IDF embeddings | 21-word fixed vocab | "red key" ≈ "red door" because they share "red" |
+| Retrieval weights | Tuned by random search | Not gradient descent; not online learning |
+
+The comparison with SemanticMemory, SummaryMemory, EpisodicSemantic, and RAGMemory
+tests whether richer memory architectures outperform the θ-parameterized graph on a
+task where memory genuinely matters.
+
+---
+
+## 9. Memory System Comparison (QuestRoom)
+
+### Why QuestRoom creates genuine memory pressure
+
+- **NPC hints:** Two NPCs each give a one-time hint about which key opens a specific door.
+  Hints arrive at random early steps; agent must recall them 200–400 steps later.
+  A flat window forgets them. A semantic store retains them indefinitely.
+- **Chained doors:** Door 1 must open before Door 2 is accessible, etc.
+  Agent must track *which* doors are open to know what to do next.
+- **Distractor observations** (~10% of steps): `"You hear wind."`, `"You see a painting."` —
+  purely noise. Systems that store everything pay a token cost for irrelevant events.
+- **500 steps, 12x12 grid:** 3600–4000 retrieval tokens per episode at k=8.
+  The penalty term in J(θ) = partial_score − 0.001 × tokens has real bite.
+
+### Six memory systems
+
+| System | Structure | Retrieval | Key strength | Key weakness |
+|---|---|---|---|---|
+| FlatWindow(50) | Last 50 events | Last k | Cheap | Forgets NPC hints |
+| GraphMemory+θ | Graph + entity nodes | Learnable weighted score | Structured, learnable | Rule-based extraction, TF-IDF only |
+| SemanticMemory | Importance-ranked pool (cap 80) | Importance × cosine sim | Retains high-value events | Importance is heuristic |
+| SummaryMemory | Raw buffer + compressed summaries | Summaries + recent raw | Bounded cost, long-term compression | Lossy compression |
+| EpisodicSemantic | Episodic buffer + semantic facts | Facts + recent events | NPC hints always in semantic store | Semantic extraction is rule-based |
+| RAGMemory | All events + dense embeddings | Cosine similarity (MiniLM) | Semantic similarity, no rules | Stores everything; high memory cost |
+
+### Expected thesis outcome
+
+EpisodicSemantic should perform well on QuestRoom because NPC hints go directly into
+the semantic store and are always retrieved. RAGMemory should perform well if MiniLM
+embeddings capture the relevance of "blue key" when the agent sees "blue door".
+FlatWindow should fail on episodes where the NPC hint was > 50 steps ago.
+SummaryMemory should score in the middle: summaries capture hints but lose detail.
+
+The comparison table in `report.txt` directly supports the thesis claim:
+**memory structure matters, and different structures are optimal for different properties
+of the task (short-term vs. long-term, entity-focused vs. sequence-focused).**
+
+---
+
+## 10. File Map
 
 ```
 d:\Bocconi\Thesis\
-├── main.py                        # Entry point; Phase 4–7 orchestration, report generation
-├── report.txt                     # Auto-generated experiment results
-├── requirements.txt               # networkx, numpy, scikit-learn
+├── main.py                            # Entry point; all phases + memory comparison
+├── report.txt                         # Auto-generated experiment results
+├── requirements.txt                   # networkx, numpy, scikit-learn, sentence-transformers
 ├── environment/
-│   ├── env.py                     # ToyEnvironment (Key-Door), GoalRoom
+│   ├── env.py                         # ToyEnvironment, GoalRoom, HardKeyDoor, QuestRoom
 │   └── __init__.py
 ├── memory/
-│   ├── graph_memory.py            # GraphMemory + MemoryParams (θ)
-│   ├── retrieval.py               # Graph, embedding, learnable retrieval
-│   ├── embedding.py               # TF-IDF embeddings (fixed vocab)
-│   ├── entity_extraction.py       # Rule-based entity detection
-│   ├── event.py                   # Event dataclass
+│   ├── graph_memory.py                # GraphMemory + MemoryParams (θ) + get_relevant_events()
+│   ├── flat_memory.py                 # FlatMemory (sliding window)
+│   ├── semantic_memory.py             # SemanticMemory (importance-weighted pool)
+│   ├── summary_memory.py              # SummaryMemory (periodic compression)
+│   ├── episodic_semantic_memory.py    # EpisodicSemanticMemory (dual store)
+│   ├── rag_memory.py                  # RAGMemory (sentence-transformers)
+│   ├── retrieval.py                   # Graph, embedding, learnable retrieval
+│   ├── embedding.py                   # TF-IDF embeddings (fixed vocab)
+│   ├── entity_extraction.py           # Rule-based entity detection
+│   ├── event.py                       # Event dataclass
 │   └── __init__.py
 ├── agent/
-│   ├── policy.py                  # ExplorationPolicy (rule-based, uses memory)
-│   ├── loop.py                    # Episode runners; returns (success, events, stats_dict)
+│   ├── policy.py                      # ExplorationPolicy (multi-door aware)
+│   ├── loop.py                        # run_episode_with_memory + run_episode_with_any_memory
 │   └── __init__.py
 ├── evaluation/
-│   ├── run.py                     # run_evaluation(); compares all retrieval modes
+│   ├── run.py                         # run_evaluation() + run_memory_comparison()
 │   └── __init__.py
 └── docs/
-    ├── THESIS_STORY.md            # This file
+    ├── THESIS_STORY.md                # This file
+    ├── STEP1_HARDER_ENVIRONMENT.md    # HardKeyDoor design rationale
     ├── THESIS_VISION_AND_PHASE6.md
     └── PHASE6_IMPLEMENTATION_PLAN.md
 ```

@@ -1,4 +1,17 @@
-"""Agent loop: observe, store event, retrieve memory, decide."""
+"""Agent loop: observe, store event, retrieve memory, decide.
+
+Supports two runner styles:
+1. run_episode_with_memory  — GraphMemory with graph/embedding/hybrid/learnable retrieval (existing).
+2. run_episode_with_any_memory — accepts any memory class exposing the uniform interface:
+       add_event(event, episode_seed=None) -> None
+       get_relevant_events(observation, current_step, k=8) -> list[Event]
+       clear() -> None
+       get_stats() -> dict
+   Used by the memory system comparison (FlatMemory, SemanticMemory, SummaryMemory,
+   EpisodicSemanticMemory, RAGMemory, and the GraphMemory adapter).
+"""
+
+from typing import Any
 
 from environment import ToyEnvironment
 from memory import Event, GraphMemory, retrieve_events, retrieve_events_learnable
@@ -162,6 +175,55 @@ def run_episode_with_memory(
 
     stats = memory.get_stats()
     # partial_score supports HardKeyDoor (doors_opened / 3); falls back to binary for other envs
+    reward = getattr(env, "partial_score", 1.0 if env.success else 0.0)
+    stats_dict = {
+        "retrieval_tokens": retrieval_tokens,
+        "memory_size": stats["n_events"],
+        "reward": reward,
+    }
+    return env.success, events, stats_dict
+
+
+def run_episode_with_any_memory(
+    env: Any,
+    policy: ExplorationPolicy,
+    memory: Any,
+    k: int = 8,
+    episode_seed: int | None = None,
+) -> tuple[bool, list[Event], dict]:
+    """
+    Universal episode runner that works with ANY memory system exposing:
+        add_event(event, episode_seed=None) -> None
+        get_relevant_events(observation, current_step, k) -> list[Event]
+        clear() -> None
+        get_stats() -> dict
+
+    Compatible with: FlatMemory, SemanticMemory, SummaryMemory,
+    EpisodicSemanticMemory, RAGMemory, GraphMemoryAdapter, and GraphMemory itself
+    (via GraphMemory.get_relevant_events if added).
+
+    Returns (success, events, stats_dict) with same shape as run_episode_with_memory.
+    """
+    memory.clear()
+    obs = env.reset()
+    events: list[Event] = []
+    step = 0
+    retrieval_tokens = 0
+
+    while not env.done:
+        past: list[Event] = memory.get_relevant_events(obs, current_step=step, k=k)
+        retrieval_tokens += len(past)
+
+        action = policy.decide(obs, past_events=past)
+
+        event = Event(step=step, observation=obs, action=action)
+        memory.add_event(event, episode_seed=episode_seed)
+        events.append(event)
+
+        obs, done, success = env.step(action)
+        step += 1
+
+    stats = memory.get_stats()
     reward = getattr(env, "partial_score", 1.0 if env.success else 0.0)
     stats_dict = {
         "retrieval_tokens": retrieval_tokens,
