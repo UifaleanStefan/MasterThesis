@@ -1,0 +1,21 @@
+name: full_benchmark_v1
+seed: 42
+environment:
+  name: MultiHopKeyDoor
+  seed: 0
+memory:
+  system: EpisodicSemanticMemory
+  episodic_size: 30
+optimization:
+  method: none
+eval:
+  n_episodes: 50
+  k: 8
+  run_benchmark: true
+  run_statistical_tests: true
+  generate_figures: true
+llm:
+  enabled: false
+output_dir: results
+figures_dir: docs/figures
+notes: "Full benchmark: all memory systems x all environments"

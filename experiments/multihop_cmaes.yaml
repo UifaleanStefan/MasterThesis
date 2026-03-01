@@ -1,0 +1,32 @@
+name: multihop_cmaes_v1
+seed: 42
+environment:
+  name: MultiHopKeyDoor
+  seed: 0
+memory:
+  system: GraphMemory
+  theta:
+    - 0.5
+    - 0.1
+    - 0.8
+optimization:
+  method: cmaes
+  n_generations: 20
+  n_candidates: 10
+  n_episodes_per_candidate: 40
+  sigma: 0.3
+eval:
+  n_episodes: 100
+  k: 8
+  run_ablation: true
+  n_ablation_episodes: 50
+  run_sensitivity: true
+  sensitivity_resolution: 10
+  sensitivity_episodes_per_cell: 20
+  run_statistical_tests: true
+  generate_figures: true
+llm:
+  enabled: false
+output_dir: results
+figures_dir: docs/figures
+notes: "CMA-ES optimization on MultiHopKeyDoor with ablation and sensitivity"

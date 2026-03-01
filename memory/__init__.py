@@ -15,6 +15,11 @@ from .retrieval import (
 )
 from .semantic_memory import SemanticMemory
 from .summary_memory import SummaryMemory
+from .hierarchical_memory import HierarchicalMemory
+from .working_memory import WorkingMemory
+from .causal_memory import CausalMemory
+from .attention_memory import AttentionMemory
+from .neural_controller import NeuralMemoryController
 
 __all__ = [
     "EpisodicSemanticMemory",
@@ -25,6 +30,11 @@ __all__ = [
     "RAGMemory",
     "SemanticMemory",
     "SummaryMemory",
+    "HierarchicalMemory",
+    "WorkingMemory",
+    "CausalMemory",
+    "AttentionMemory",
+    "NeuralMemoryController",
     "embed_observation",
     "extract_entities",
     "retrieve_events",

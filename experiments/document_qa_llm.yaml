@@ -1,0 +1,27 @@
+name: document_qa_episodic_v1
+seed: 42
+environment:
+  name: DocumentQA
+  document_name: fantasy_lore
+  seed: 0
+memory:
+  system: EpisodicSemanticMemory
+  episodic_size: 30
+optimization:
+  method: bayesian
+  n_trials: 15
+  n_random_init: 5
+  n_episodes_per_candidate: 10
+eval:
+  n_episodes: 20
+  k: 8
+  generate_figures: true
+  run_statistical_tests: true
+llm:
+  enabled: false
+  model: gpt-4o-mini
+  format_style: structured
+  lambda_cost: 1000.0
+output_dir: results
+figures_dir: docs/figures
+notes: "DocumentQA benchmark with EpisodicSemantic + Bayesian optimization"
