@@ -3,11 +3,15 @@
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Fixed vocabulary covering our observation space
+# Fixed vocabulary covering our observation space (all environments).
+# Includes MultiHopKeyDoor colors (orange, cyan, magenta, white) and
+# hint-related words (sign, opens, north, east, south, requires).
 VOCAB = [
     "you", "are", "in", "a", "room", "see", "red", "blue", "green",
     "key", "door", "nothing", "interest", "carrying", "of", "goal",
     "yellow", "purple", "opened", "have", "doors",
+    "orange", "cyan", "magenta", "white",
+    "sign", "opens", "north", "east", "south", "requires",
 ]
 _vectorizer: TfidfVectorizer | None = None
 

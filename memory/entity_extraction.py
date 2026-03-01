@@ -1,6 +1,6 @@
 """Rule-based entity extraction from observations."""
 
-COLORS = ["red", "blue", "green", "yellow", "purple"]
+COLORS = ["red", "blue", "green", "yellow", "purple", "orange", "cyan", "magenta", "white"]
 OBJECTS = ["key", "door"]
 
 

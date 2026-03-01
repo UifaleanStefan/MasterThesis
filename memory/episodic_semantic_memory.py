@@ -22,7 +22,10 @@ This is the closest analog to the cognitive distinction between episodic memory
 from .entity_extraction import extract_entities
 from .event import Event
 
-_NPC_MARKERS = ("says:", "guard says", "sage says")
+# Observations that carry long-term semantic facts:
+#   - NPC hints ("A guard says: ...")
+#   - Sign hints ("You see a sign: the X key opens the Y door")
+_NPC_MARKERS = ("says:", "guard says", "sage says", "see a sign:")
 
 
 def _is_npc_hint(obs: str) -> bool:
@@ -47,10 +50,16 @@ class EpisodicSemanticMemory:
 
         # --- Semantic extraction ---
         if _is_npc_hint(obs):
-            # Store the full NPC observation as a semantic fact (once per unique hint)
+            # Store the full hint observation as a semantic fact (once per unique hint).
+            # Preserve is_hint flag so retrieval_precision tracking works correctly.
             if obs not in self._seen_hints:
                 self._seen_hints.add(obs)
-                fact_event = Event(step=event.step, observation=obs, action=event.action)
+                fact_event = Event(
+                    step=event.step,
+                    observation=obs,
+                    action=event.action,
+                    is_hint=event.is_hint,
+                )
                 self._semantic.append(fact_event)
 
         # New entity seen for the first time → store as semantic fact

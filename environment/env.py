@@ -356,6 +356,223 @@ class HardKeyDoor:
 
 
 # ---------------------------------------------------------------------------
+# MultiHopKeyDoor: the designed-for-memory-pressure benchmark
+# ---------------------------------------------------------------------------
+
+# Hint observation template — appears only at steps 0, 1, 2 (one per door).
+# Policy reads these from memory to build the key->door map.
+_MULTIHOP_HINT_TEMPLATE = "You see a sign: the {key} key opens the {door} door."
+_MULTIHOP_DOOR_NAMES = ["north", "east", "south"]
+_MULTIHOP_REAL_KEYS = ["red", "blue", "green", "yellow", "purple", "orange"]
+_MULTIHOP_DISTRACTOR_KEYS = ["cyan", "magenta", "white"]
+
+_MULTIHOP_DISTRACTOR_OBS = [
+    "You hear the wind howling.",
+    "You see a painting on the wall.",
+    "You notice some dust on the floor.",
+    "You smell something faintly sweet.",
+    "You hear distant footsteps.",
+    "You see a torch flickering.",
+    "You notice a crack in the ceiling.",
+    "You hear water dripping.",
+    "You see a shadow move.",
+    "You feel a cold draft.",
+]
+
+
+@dataclass
+class MultiHopKeyDoor:
+    """
+    Memory-pressure benchmark designed so that the rule-based policy can succeed
+    if and only if the memory system delivers the right hint events at the right time.
+
+    Layout:
+    - 10x10 grid, 250 max steps.
+    - 3 doors (north, east, south), each requiring exactly one specific real key.
+    - Key-door pairings are randomly assigned per episode (seeded), so the agent
+      cannot rely on a fixed mapping — it MUST recall the hint observations.
+    - 6 real key colors sampled per episode; 3 are assigned to doors, 3 remain
+      as unused keys (partial distractors — correct color family but unused).
+    - 3 explicit distractor keys (cyan, magenta, white) that match no door.
+    - Hint observations appear ONLY at steps 0, 1, 2 (one per door), then never again.
+      If memory doesn't store them, the policy cannot know which key opens which door.
+    - ~15% distractor observations injected to simulate noise and raise token cost.
+    - Partial score: doors_opened / 3.
+
+    Memory dependency chain:
+      Step 0: "You see a sign: the red key opens the north door."
+      Step 1: "You see a sign: the blue key opens the east door."
+      Step 2: "You see a sign: the green key opens the south door."
+      Step 50-200: agent finds and carries keys, uses doors.
+      If hint not in retrieved events -> wrong key used -> door won't open.
+
+    This is the core experimental environment for thesis Claim 2 and Claim 3.
+    """
+
+    width: int = 10
+    height: int = 10
+    max_steps: int = 250
+    seed: int | None = None
+    distractor_prob: float = 0.15
+
+    _N_DOORS: int = 3
+
+    def __post_init__(self) -> None:
+        self._rng = random.Random(self.seed)
+        self._reset_state()
+
+    def _reset_state(self) -> None:
+        cells = [(x, y) for x in range(self.width) for y in range(self.height)]
+        self._rng.shuffle(cells)
+        idx = 0
+
+        self.agent_pos: tuple[int, int] = cells[idx]; idx += 1
+
+        # Choose 3 real keys for the doors (randomly selected each episode)
+        all_real = list(_MULTIHOP_REAL_KEYS)
+        self._rng.shuffle(all_real)
+        self._door_keys: list[str] = all_real[:3]   # 3 keys that actually open doors
+        self._spare_keys: list[str] = all_real[3:]  # 3 real-color but unused keys
+
+        # All 9 key colors that appear on the grid: 3 door keys + 3 spares + 3 distractors
+        self._all_key_colors: list[str] = self._door_keys + self._spare_keys + list(_MULTIHOP_DISTRACTOR_KEYS)
+
+        self.key_positions: dict[str, tuple[int, int]] = {}
+        for color in self._all_key_colors:
+            self.key_positions[color] = cells[idx]; idx += 1
+
+        # 3 door positions
+        self.door_positions: list[tuple[int, int]] = [cells[idx + i] for i in range(3)]; idx += 3
+
+        # door_key_map[i] = color of key that opens door i
+        # The 3 door keys are assigned to doors in the shuffled order
+        self.door_key_map: list[str] = list(self._door_keys)
+
+        self.carried_key: str | None = None
+        self.doors_opened: list[bool] = [False, False, False]
+        self.step_count: int = 0
+        self.done: bool = False
+        self.success: bool = False
+
+        # Hint observations: generated once, delivered at steps 0, 1, 2
+        self._hints: list[str] = [
+            _MULTIHOP_HINT_TEMPLATE.format(key=self.door_key_map[i], door=_MULTIHOP_DOOR_NAMES[i])
+            for i in range(3)
+        ]
+        self._hint_delivered: list[bool] = [False, False, False]
+        self._pending_distractor: str | None = None
+
+    def reset(self) -> str:
+        self._reset_state()
+        return self._get_observation()
+
+    def _get_observation(self) -> str:
+        # Priority 1: undelivered hint at steps 0, 1, 2
+        for i, delivered in enumerate(self._hint_delivered):
+            if not delivered and self.step_count == i:
+                self._hint_delivered[i] = True
+                obs = f"You are in a room. {self._hints[i]}"
+                if self.carried_key:
+                    obs += f" You are carrying a {self.carried_key} key."
+                return obs
+
+        # Priority 2: pending distractor
+        if self._pending_distractor:
+            d = self._pending_distractor
+            self._pending_distractor = None
+            return f"You are in a room. {d}"
+
+        parts = ["You are in a room."]
+        pos = self.agent_pos
+
+        # At a door?
+        for i, dpos in enumerate(self.door_positions):
+            if pos == dpos and not self.doors_opened[i]:
+                required = self.door_key_map[i]
+                parts.append(f"You see the {_MULTIHOP_DOOR_NAMES[i]} door (requires {required} key).")
+                if self.carried_key:
+                    parts.append(f"You are carrying a {self.carried_key} key.")
+                opened = sum(self.doors_opened)
+                if opened:
+                    parts.append(f"You have opened {opened} door(s).")
+                return " ".join(parts)
+
+        # At a key?
+        for color, kpos in self.key_positions.items():
+            if pos == kpos and self.carried_key != color:
+                parts.append(f"You see a {color} key.")
+                if self.carried_key:
+                    parts.append(f"You are carrying a {self.carried_key} key.")
+                return " ".join(parts)
+
+        # Default
+        parts.append("You see nothing of interest.")
+        if self.carried_key:
+            parts.append(f"You are carrying a {self.carried_key} key.")
+        opened = sum(self.doors_opened)
+        if opened:
+            parts.append(f"You have opened {opened} door(s).")
+        return " ".join(parts)
+
+    def step(self, action: Action) -> tuple[str, bool, bool]:
+        if self.done:
+            return self._get_observation(), self.done, self.success
+
+        self.step_count += 1
+
+        # Maybe schedule a distractor for the NEXT observation
+        if self._rng.random() < self.distractor_prob:
+            self._pending_distractor = self._rng.choice(_MULTIHOP_DISTRACTOR_OBS)
+
+        pos = self.agent_pos
+
+        if action == "pickup":
+            for color, kpos in self.key_positions.items():
+                if pos == kpos:
+                    self.carried_key = color
+                    break
+
+        elif action == "use_door":
+            for i, dpos in enumerate(self.door_positions):
+                if pos == dpos and not self.doors_opened[i]:
+                    if self.carried_key == self.door_key_map[i]:
+                        self.doors_opened[i] = True
+                        self.carried_key = None
+                    break
+
+        elif action == "move_north":
+            x, y = pos; self.agent_pos = (x, min(self.height - 1, y + 1))
+        elif action == "move_south":
+            x, y = pos; self.agent_pos = (x, max(0, y - 1))
+        elif action == "move_east":
+            x, y = pos; self.agent_pos = (min(self.width - 1, x + 1), y)
+        elif action == "move_west":
+            x, y = pos; self.agent_pos = (max(0, x - 1), y)
+
+        if all(self.doors_opened):
+            self.done = True
+            self.success = True
+        elif self.step_count >= self.max_steps:
+            self.done = True
+            self.success = any(self.doors_opened)
+
+        return self._get_observation(), self.done, self.success
+
+    def get_actions(self) -> list[Action]:
+        return ["move_north", "move_south", "move_east", "move_west", "pickup", "use_door"]
+
+    @property
+    def partial_score(self) -> float:
+        """Fraction of doors opened (0.0 to 1.0). Reward signal for J(theta)."""
+        return sum(self.doors_opened) / self._N_DOORS
+
+    @property
+    def hint_observations(self) -> list[str]:
+        """Return the hint strings for this episode (used to mark is_hint in Event)."""
+        return list(self._hints)
+
+
+# ---------------------------------------------------------------------------
 # Distractor observations injected randomly (not tied to agent position)
 # ---------------------------------------------------------------------------
 _DISTRACTOR_OBS = [

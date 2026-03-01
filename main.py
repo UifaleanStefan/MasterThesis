@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from environment import GoalRoom, HardKeyDoor, QuestRoom, ToyEnvironment
+from environment import GoalRoom, HardKeyDoor, MultiHopKeyDoor, QuestRoom, ToyEnvironment
 from memory import (
     EpisodicSemanticMemory,
     FlatMemory,
@@ -190,11 +190,14 @@ def run_phase6_bandit(
     Uses learnable retrieval weights (1.5, 1.0, 0.2). J = reward - lambda * retrieval_tokens.
     Returns (best_theta, all_results_list, baseline_fixed).
     """
+    from environment import MultiHopKeyDoor
     rng = random.Random(bandit_seed)
     if env_name == "Goal-Room":
         env = GoalRoom(seed=env_seed)
     elif env_name == "Hard-KeyDoor":
         env = HardKeyDoor(seed=env_seed)
+    elif env_name == "MultiHop-KeyDoor":
+        env = MultiHopKeyDoor(seed=env_seed)
     else:
         env = ToyEnvironment(seed=env_seed)
     policy = ExplorationPolicy(seed=policy_seed)
@@ -219,7 +222,7 @@ def run_phase6_bandit(
         )
         memory = GraphMemory(params=params)
         successes = 0
-        j_sum = 0.0
+        reward_sum = 0.0
         retrieval_tokens_list: list[int] = []
         memory_size_list: list[int] = []
         for ep_idx in range(n_episodes_per_theta):
@@ -234,19 +237,20 @@ def run_phase6_bandit(
             )
             successes += int(success)
             reward = stats_dict.get("reward", 1.0 if success else 0.0)
-            j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
+            reward_sum += reward
             retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
             memory_size_list.append(stats_dict["memory_size"])
-        mean_j = j_sum / n_episodes_per_theta
+        mean_reward = reward_sum / n_episodes_per_theta
         mean_retrieval_tokens = sum(retrieval_tokens_list) / len(retrieval_tokens_list)
         mean_memory_size = sum(memory_size_list) / len(memory_size_list)
         all_results.append({
             "theta": theta,
             "success_rate": successes / n_episodes_per_theta,
             "successes": successes,
-            "mean_j": mean_j,
+            "mean_j": mean_reward,   # optimization = pure reward
             "mean_retrieval_tokens": mean_retrieval_tokens,
             "mean_memory_size": mean_memory_size,
+            "efficiency": mean_reward / (1.0 + mean_retrieval_tokens),
         })
 
     best = max(all_results, key=lambda x: x["mean_j"])
@@ -254,7 +258,7 @@ def run_phase6_bandit(
 
     baseline_memory = GraphMemory()
     baseline_successes = 0
-    baseline_j_sum = 0.0
+    baseline_reward_sum = 0.0
     baseline_retrieval_tokens_list: list[int] = []
     baseline_memory_size_list: list[int] = []
     for ep_idx in range(n_episodes_per_theta):
@@ -269,15 +273,18 @@ def run_phase6_bandit(
         )
         baseline_successes += int(success)
         reward = stats_dict.get("reward", 1.0 if success else 0.0)
-        baseline_j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
+        baseline_reward_sum += reward
         baseline_retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
         baseline_memory_size_list.append(stats_dict["memory_size"])
+    bl_mean_reward = baseline_reward_sum / n_episodes_per_theta
+    bl_mean_tokens = sum(baseline_retrieval_tokens_list) / len(baseline_retrieval_tokens_list)
     baseline_fixed = {
         "success_rate": baseline_successes / n_episodes_per_theta,
         "successes": baseline_successes,
-        "mean_j": baseline_j_sum / n_episodes_per_theta,
-        "mean_retrieval_tokens": sum(baseline_retrieval_tokens_list) / len(baseline_retrieval_tokens_list),
+        "mean_j": bl_mean_reward,
+        "mean_retrieval_tokens": bl_mean_tokens,
         "mean_memory_size": sum(baseline_memory_size_list) / len(baseline_memory_size_list),
+        "efficiency": bl_mean_reward / (1.0 + bl_mean_tokens),
     }
 
     return best_theta, all_results, baseline_fixed
@@ -294,25 +301,28 @@ def print_phase6_report(
     print("\n" + "=" * 70)
     print("=== Phase 6 Learnable Memory Creation Report ===")
     print("=" * 70)
-    print(f"\nObjective: J = reward - {lambda_penalty} * retrieval_tokens")
+    print(f"\nObjective (optimization): J_learn = mean_reward  [token penalty removed from optimizer]")
+    print(f"Efficiency (reporting):   efficiency = reward / (1 + retrieval_tokens)")
     print(f"Episodes per theta: {n_episodes_per_theta}")
     print(f"\nBest theta: theta_store={best_theta[0]:.3f}, theta_entity={best_theta[1]:.3f}, theta_temporal={best_theta[2]:.3f}")
     print("\nFixed memory baseline (learnable retrieval only):")
     print(f"  Success: {baseline_fixed['successes']}/{n_episodes_per_theta} = {baseline_fixed['success_rate']:.1%}")
-    print(f"  Mean J: {baseline_fixed['mean_j']:.4f}")
+    print(f"  Mean reward (J_learn): {baseline_fixed['mean_j']:.4f}")
     print(f"  Mean retrieval_tokens: {baseline_fixed['mean_retrieval_tokens']:.1f}")
     print(f"  Mean memory_size: {baseline_fixed['mean_memory_size']:.1f}")
+    print(f"  Efficiency: {baseline_fixed.get('efficiency', 0.0):.6f}")
     best_result = max(all_results, key=lambda x: x["mean_j"])
     print("\nBest learnable memory config:")
     print(f"  Success: {best_result['successes']}/{n_episodes_per_theta} = {best_result['success_rate']:.1%}")
-    print(f"  Mean J: {best_result['mean_j']:.4f}")
+    print(f"  Mean reward (J_learn): {best_result['mean_j']:.4f}")
     print(f"  Mean retrieval_tokens: {best_result['mean_retrieval_tokens']:.1f}")
     print(f"  Mean memory_size: {best_result['mean_memory_size']:.1f}")
+    print(f"  Efficiency: {best_result.get('efficiency', 0.0):.6f}")
     print("\nComparison: learnable memory vs fixed")
     if best_result["mean_j"] >= baseline_fixed["mean_j"]:
-        print("  Learnable memory >= fixed (by mean J).")
+        print("  Learnable memory >= fixed (by mean reward).")
     else:
-        print("  Learnable memory < fixed (by mean J).")
+        print("  Learnable memory < fixed (by mean reward).")
 
 
 def _eval_theta(
@@ -323,7 +333,17 @@ def _eval_theta(
     n_episodes: int,
     lambda_penalty: float,
 ) -> dict:
-    """Run n_episodes with given theta; return mean J, success_rate, mean retrieval_tokens, mean memory_size."""
+    """
+    Run n_episodes with given theta.
+
+    Optimization objective: J_learn = mean_reward (pure task performance).
+    Token penalty is NOT part of the optimization signal — it is reported as a
+    secondary efficiency metric only. This prevents ES from collapsing to
+    theta_store=0 just to zero out the token cost.
+
+    Returns mean_j (= mean_reward), success_rate, mean_retrieval_tokens,
+    mean_memory_size, and efficiency = mean_reward / (1 + mean_tokens).
+    """
     params = MemoryParams(
         theta_store=theta[0],
         theta_entity=theta[1],
@@ -332,7 +352,7 @@ def _eval_theta(
     )
     memory = GraphMemory(params=params)
     successes = 0
-    j_sum = 0.0
+    reward_sum = 0.0
     retrieval_tokens_list: list[int] = []
     memory_size_list: list[int] = []
     for ep_idx in range(n_episodes):
@@ -347,16 +367,19 @@ def _eval_theta(
         )
         successes += int(success)
         reward = stats_dict.get("reward", 1.0 if success else 0.0)
-        j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
+        reward_sum += reward
         retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
         memory_size_list.append(stats_dict["memory_size"])
     n = len(retrieval_tokens_list)
+    mean_reward = reward_sum / n
+    mean_tokens = sum(retrieval_tokens_list) / n
     return {
-        "mean_j": j_sum / n,
+        "mean_j": mean_reward,          # optimization target = pure reward
         "success_rate": successes / n,
         "successes": successes,
-        "mean_retrieval_tokens": sum(retrieval_tokens_list) / n,
+        "mean_retrieval_tokens": mean_tokens,
         "mean_memory_size": sum(memory_size_list) / n,
+        "efficiency": mean_reward / (1.0 + mean_tokens),
     }
 
 
@@ -379,11 +402,14 @@ def run_phase7_es(
     N(mu, sigma) clipped to [0,1]; evaluate each with n_episodes_per_candidate; set mu to
     best candidate; decay sigma. Returns (best_theta, per_generation_stats, baseline_fixed).
     """
+    from environment import MultiHopKeyDoor
     rng = random.Random(es_seed)
     if env_name == "Goal-Room":
         env = GoalRoom(seed=env_seed)
     elif env_name == "Hard-KeyDoor":
         env = HardKeyDoor(seed=env_seed)
+    elif env_name == "MultiHop-KeyDoor":
+        env = MultiHopKeyDoor(seed=env_seed)
     else:
         env = ToyEnvironment(seed=env_seed)
     policy = ExplorationPolicy(seed=policy_seed)
@@ -427,7 +453,7 @@ def run_phase7_es(
 
     baseline_memory = GraphMemory()
     baseline_successes = 0
-    baseline_j_sum = 0.0
+    baseline_reward_sum = 0.0
     baseline_retrieval_tokens_list: list[int] = []
     baseline_memory_size_list: list[int] = []
     n_baseline = n_episodes_per_candidate
@@ -443,15 +469,18 @@ def run_phase7_es(
         )
         baseline_successes += int(success)
         reward = stats_dict.get("reward", 1.0 if success else 0.0)
-        baseline_j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
+        baseline_reward_sum += reward
         baseline_retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
         baseline_memory_size_list.append(stats_dict["memory_size"])
+    bl_mean_reward = baseline_reward_sum / n_baseline
+    bl_mean_tokens = sum(baseline_retrieval_tokens_list) / n_baseline
     baseline_fixed = {
         "success_rate": baseline_successes / n_baseline,
         "successes": baseline_successes,
-        "mean_j": baseline_j_sum / n_baseline,
-        "mean_retrieval_tokens": sum(baseline_retrieval_tokens_list) / n_baseline,
+        "mean_j": bl_mean_reward,   # pure reward, matching _eval_theta
+        "mean_retrieval_tokens": bl_mean_tokens,
         "mean_memory_size": sum(baseline_memory_size_list) / n_baseline,
+        "efficiency": bl_mean_reward / (1.0 + bl_mean_tokens),
     }
 
     return best_theta, generations_stats, baseline_fixed
@@ -498,35 +527,38 @@ def print_experiment_summary(
     baseline: dict,
     learnable: dict,
 ) -> None:
-    """Print structured EXPERIMENT SUMMARY block for ChatGPT/scripts."""
+    """Print structured EXPERIMENT SUMMARY block."""
     print("\n" + "=" * 70)
     print("=== EXPERIMENT SUMMARY ===")
     print("=" * 70)
     print(f"Environment: {environment}")
     print(f"Method: {method}")
     print(f"Best theta: theta_store={best_theta[0]:.3f}, theta_entity={best_theta[1]:.3f}, theta_temporal={best_theta[2]:.3f}")
-    print(f"Lambda: {lambda_penalty}, n_episodes (or equivalent): {n_episodes}")
-    print("\nBaseline (fixed memory):")
-    print(f"  Reward (success rate): {baseline.get('success_rate', 0):.2%}")
+    print(f"Optimization: J_learn = mean_reward  (token penalty NOT in optimizer)")
+    print(f"n_episodes (or equivalent): {n_episodes}")
+    print("\nBaseline (fixed memory, theta=(1,0,1)):")
+    print(f"  Mean reward:           {baseline.get('mean_j', 0):.4f}")
+    print(f"  Success rate:          {baseline.get('success_rate', 0):.2%}")
     print(f"  Mean retrieval_tokens: {baseline.get('mean_retrieval_tokens', 0):.1f}")
-    print(f"  Mean memory_size: {baseline.get('mean_memory_size', 0):.1f}")
-    print(f"  Mean J: {baseline.get('mean_j', 0):.4f}")
-    print("\nLearnable:")
-    print(f"  Reward (success rate): {learnable.get('success_rate', 0):.2%}")
+    print(f"  Mean memory_size:      {baseline.get('mean_memory_size', 0):.1f}")
+    print(f"  Efficiency:            {baseline.get('efficiency', 0.0):.6f}")
+    print("\nLearnable (ES-learned theta):")
+    print(f"  Mean reward:           {learnable.get('mean_j', 0):.4f}")
+    print(f"  Success rate:          {learnable.get('success_rate', 0):.2%}")
     print(f"  Mean retrieval_tokens: {learnable.get('mean_retrieval_tokens', 0):.1f}")
-    print(f"  Mean memory_size: {learnable.get('mean_memory_size', 0):.1f}")
-    print(f"  Mean J: {learnable.get('mean_j', 0):.4f}")
+    print(f"  Mean memory_size:      {learnable.get('mean_memory_size', 0):.1f}")
+    print(f"  Efficiency:            {learnable.get('efficiency', 0.0):.6f}")
     print("\nInterpretation:")
     ts, te, tt = best_theta
     interp = []
-    if ts < 1.0:
+    if ts < 0.95:
         interp.append("theta_store < 1 -> event filtering reduces storage.")
-    if te > 0.0:
+    if te > 0.05:
         interp.append("theta_entity > 0 -> entity importance threshold active.")
-    if tt < 1.0:
+    if tt < 0.95:
         interp.append("theta_temporal < 1 -> sparse temporal chain.")
     if not interp:
-        interp.append("Learned theta near default (1,0,1); task may favor full memory.")
+        interp.append("Learned theta near default (1,0,1); task favors full memory.")
     print("  " + " ".join(interp))
     print("=" * 70)
 
@@ -558,16 +590,16 @@ def print_cross_environment_comparison(env_results: dict) -> None:
     print("  Memory structure (theta) is task-dependent: different tasks converge to different learned theta.")
     kd = env_results.get("Key-Door", {})
     gr = env_results.get("Goal-Room", {})
-    hk = env_results.get("Hard-KeyDoor", {})
+    mh = env_results.get("MultiHop-KeyDoor", {})
     if kd:
         t = kd.get("learned_theta", (1, 0, 1))
         print(f"  Key-Door: theta=({t[0]:.2f},{t[1]:.2f},{t[2]:.2f}) — key-door entity matching dominates.")
     if gr:
         t = gr.get("learned_theta", (1, 0, 1))
         print(f"  Goal-Room: theta=({t[0]:.2f},{t[1]:.2f},{t[2]:.2f}) — sparse, recency-focused memory.")
-    if hk:
-        t = hk.get("learned_theta", (1, 0, 1))
-        print(f"  Hard-KeyDoor: theta=({t[0]:.2f},{t[1]:.2f},{t[2]:.2f}) — must track entities across 300 steps; distractors penalize low theta_entity.")
+    if mh:
+        t = mh.get("learned_theta", (1, 0, 1))
+        print(f"  MultiHop-KeyDoor: theta=({t[0]:.2f},{t[1]:.2f},{t[2]:.2f}) — hint recall requires selective storage; distractors raise token cost.")
     print("=" * 70)
 
 
@@ -577,27 +609,40 @@ def print_memory_comparison_report(
     n_episodes: int,
     lambda_penalty: float,
 ) -> None:
-    """Print the memory system comparison table."""
+    """Print the memory system comparison table including retrieval_precision."""
     print("\n" + "=" * 70)
     print(f"=== MEMORY SYSTEM COMPARISON ({env_name}, n={n_episodes}) ===")
     print("=" * 70)
-    print(f"Objective: J = partial_score - {lambda_penalty} * retrieval_tokens")
-    print(f"\n{'System':<22} | {'PartialScore':>12} | {'Tokens':>8} | {'MemSize':>7} | {'Efficiency':>10} | {'MeanJ':>8}")
-    print("-" * 80)
+    print(f"Metric: partial_score (doors/3), efficiency = score/(1+tokens)")
+    print(f"retrieval_precision = fraction of door-query steps where hint was in top-k")
+    print(f"\n{'System':<22} | {'Score':>6} | {'Tokens':>8} | {'Mem':>5} | {'Effic':>8} | {'Prec':>6}")
+    print("-" * 70)
     for name, r in sorted(results.items(), key=lambda x: -x[1]["mean_partial_score"]):
+        prec = r.get("mean_retrieval_precision")
+        prec_str = f"{prec:>6.3f}" if prec is not None else "   N/A"
         print(
-            f"{name:<22} | {r['mean_partial_score']:>12.3f} | "
-            f"{r['mean_retrieval_tokens']:>8.1f} | {r['mean_memory_size']:>7.1f} | "
-            f"{r['efficiency']:>10.5f} | {r['mean_j']:>8.4f}"
+            f"{name:<22} | {r['mean_partial_score']:>6.3f} | "
+            f"{r['mean_retrieval_tokens']:>8.1f} | {r['mean_memory_size']:>5.1f} | "
+            f"{r['efficiency']:>8.5f} | {prec_str}"
         )
-    best = max(results.items(), key=lambda x: x[1]["mean_j"])
-    print(f"\nBest by mean J: {best[0]} (J={best[1]['mean_j']:.4f})")
+    best = max(results.items(), key=lambda x: x[1]["mean_partial_score"])
+    print(f"\nBest by partial score: {best[0]} (score={best[1]['mean_partial_score']:.3f})")
     best_eff = max(results.items(), key=lambda x: x[1]["efficiency"])
-    print(f"Best efficiency: {best_eff[0]} (eff={best_eff[1]['efficiency']:.5f})")
+    print(f"Best efficiency:       {best_eff[0]} (eff={best_eff[1]['efficiency']:.5f})")
+    items_with_prec = [(n, r) for n, r in results.items() if r.get("mean_retrieval_precision") is not None]
+    if items_with_prec:
+        best_prec = max(items_with_prec, key=lambda x: x[1]["mean_retrieval_precision"])
+        print(f"Best retrieval prec:   {best_prec[0]} (prec={best_prec[1]['mean_retrieval_precision']:.3f})")
     print("=" * 70)
 
 
 def main() -> None:
+    import io
+    from contextlib import redirect_stdout
+
+    # -----------------------------------------------------------------------
+    # Phase 4 / 5: baseline evaluation on ToyEnvironment
+    # -----------------------------------------------------------------------
     n_episodes = 100
     learnable_configs = [
         (1.0, 1.0, 0.1),
@@ -610,9 +655,7 @@ def main() -> None:
         policy_seed=42,
         learnable_configs=learnable_configs,
     )
-
     embedding_demo = demo_embedding_retrieval()
-
     print_report(results, embedding_demo)
     print_phase5_report(results)
 
@@ -627,21 +670,26 @@ def main() -> None:
         verbose=True,
     )
 
+    # -----------------------------------------------------------------------
+    # Phase 6 / 7: learnable theta search + ES on 3 environments
+    # Key-Door and Goal-Room are kept as baselines.
+    # MultiHop-KeyDoor is the new designed-for-memory-pressure benchmark.
+    # -----------------------------------------------------------------------
     n_generations = 12
     n_candidates = 6
-    n_episodes_per_candidate = 25
+    n_episodes_per_candidate = 40
     lambda_penalty_es = 0.001
     n_episodes_equiv = n_generations * n_candidates * n_episodes_per_candidate
 
     env_data: dict = {}
     env_results: dict = {}
 
-    for env_name in ["Key-Door", "Goal-Room", "Hard-KeyDoor"]:
+    for env_name in ["Key-Door", "Goal-Room", "MultiHop-KeyDoor"]:
         print(f"\n--- Phase 6: Learnable Memory Creation ({env_name}) ---")
         best_theta, phase6_results, baseline_fixed = run_phase6_bandit(
             n_theta_configs=15,
-            n_episodes_per_theta=75,
-            lambda_penalty=0.001,
+            n_episodes_per_theta=100,
+            lambda_penalty=lambda_penalty_es,
             env_seed=None,
             policy_seed=42,
             bandit_seed=123,
@@ -651,8 +699,8 @@ def main() -> None:
             best_theta,
             phase6_results,
             baseline_fixed,
-            n_episodes_per_theta=75,
-            lambda_penalty=0.001,
+            n_episodes_per_theta=100,
+            lambda_penalty=lambda_penalty_es,
         )
 
         print(f"\n--- Phase 7: Adaptive Theta (Evolution Strategy) ({env_name}) ---")
@@ -680,6 +728,13 @@ def main() -> None:
             lambda_penalty=lambda_penalty_es,
         )
         learnable_es = phase7_generations[-1] if phase7_generations else {}
+        learnable_es_with_eff = {
+            "success_rate": learnable_es.get("success_rate", 0),
+            "mean_retrieval_tokens": learnable_es.get("mean_retrieval_tokens", 0),
+            "mean_memory_size": learnable_es.get("mean_memory_size", 0),
+            "mean_j": learnable_es.get("mean_j", 0),
+            "efficiency": learnable_es.get("efficiency", 0.0),
+        }
         print_experiment_summary(
             environment=env_name,
             method="ES",
@@ -687,12 +742,7 @@ def main() -> None:
             lambda_penalty=lambda_penalty_es,
             n_episodes=n_episodes_equiv,
             baseline=baseline_es,
-            learnable={
-                "success_rate": learnable_es.get("success_rate", 0),
-                "mean_retrieval_tokens": learnable_es.get("mean_retrieval_tokens", 0),
-                "mean_memory_size": learnable_es.get("mean_memory_size", 0),
-                "mean_j": learnable_es.get("mean_j", 0),
-            },
+            learnable=learnable_es_with_eff,
         )
         env_data[env_name] = {
             "best_theta": best_theta,
@@ -706,26 +756,72 @@ def main() -> None:
             "best_theta": best_theta,
             "learned_theta": es_theta,
             "baseline": baseline_es,
-            "learnable": learnable_es,
+            "learnable": learnable_es_with_eff,
         }
 
     print_cross_environment_comparison(env_results)
 
+    # -----------------------------------------------------------------------
+    # Memory System Comparison on MultiHopKeyDoor
+    # This is the primary comparison table for the thesis.
+    # Each memory system is tested on n=50 episodes and scored on:
+    #   - partial_score (doors opened / 3)
+    #   - retrieval_precision (hint recalled when needed)
+    #   - efficiency = score / (1 + tokens)
+    # -----------------------------------------------------------------------
+    print("\n--- Memory System Comparison (MultiHopKeyDoor) ---")
+    from environment import MultiHopKeyDoor
+    multihop_env = MultiHopKeyDoor(seed=77)
+    multihop_policy = ExplorationPolicy(seed=42)
+    n_comparison_episodes = 50
+    lambda_comp = 0.001
+
+    # Use the ES-learned theta from MultiHop-KeyDoor run for GraphMemory+Theta
+    multihop_es_theta = env_data.get("MultiHop-KeyDoor", {}).get("learned_theta", (1.0, 0.0, 1.0))
+
+    memory_systems: dict = {
+        "FlatWindow(50)": FlatMemory(window_size=50),
+        "GraphMemory+Theta": GraphMemory(params=MemoryParams(
+            theta_store=multihop_es_theta[0],
+            theta_entity=multihop_es_theta[1],
+            theta_temporal=multihop_es_theta[2],
+            mode="learnable",
+        )),
+        "SemanticMemory": SemanticMemory(max_capacity=80, alpha=1.0, beta=5.0, gamma=2.0),
+        "SummaryMemory": SummaryMemory(raw_buffer_size=30, summarize_every=25),
+        "EpisodicSemantic": EpisodicSemanticMemory(episodic_size=30),
+        "RAGMemory": RAGMemory(),
+    }
+
+    comparison_results = run_memory_comparison(
+        multihop_env,
+        multihop_policy,
+        memory_systems,
+        n_episodes=n_comparison_episodes,
+        k=8,
+        env_seed=77,
+        lambda_penalty=lambda_comp,
+    )
+    print_memory_comparison_report(
+        comparison_results, "MultiHopKeyDoor", n_comparison_episodes, lambda_comp
+    )
+
+    # -----------------------------------------------------------------------
+    # Write report.txt
+    # -----------------------------------------------------------------------
     report_path = Path(__file__).parent / "report.txt"
-    import io
-    from contextlib import redirect_stdout
     buf = io.StringIO()
     with redirect_stdout(buf):
         print_report(results, embedding_demo)
         print_phase5_report(results)
-        for env_name in ["Key-Door", "Goal-Room", "Hard-KeyDoor"]:
+        for env_name in ["Key-Door", "Goal-Room", "MultiHop-KeyDoor"]:
             d = env_data[env_name]
             print_phase6_report(
                 d["best_theta"],
                 d["phase6_results"],
                 d["baseline_fixed"],
-                n_episodes_per_theta=75,
-                lambda_penalty=0.001,
+                n_episodes_per_theta=100,
+                lambda_penalty=lambda_penalty_es,
             )
             print_phase7_report(
                 d["learned_theta"],
@@ -737,6 +833,13 @@ def main() -> None:
                 lambda_penalty=lambda_penalty_es,
             )
             learnable_es = d["phase7_generations"][-1] if d["phase7_generations"] else {}
+            learnable_es_rpt = {
+                "success_rate": learnable_es.get("success_rate", 0),
+                "mean_retrieval_tokens": learnable_es.get("mean_retrieval_tokens", 0),
+                "mean_memory_size": learnable_es.get("mean_memory_size", 0),
+                "mean_j": learnable_es.get("mean_j", 0),
+                "efficiency": learnable_es.get("efficiency", 0.0),
+            }
             print_experiment_summary(
                 environment=env_name,
                 method="ES",
@@ -744,61 +847,15 @@ def main() -> None:
                 lambda_penalty=lambda_penalty_es,
                 n_episodes=n_episodes_equiv,
                 baseline=d["baseline_es"],
-                learnable={
-                    "success_rate": learnable_es.get("success_rate", 0),
-                    "mean_retrieval_tokens": learnable_es.get("mean_retrieval_tokens", 0),
-                    "mean_memory_size": learnable_es.get("mean_memory_size", 0),
-                    "mean_j": learnable_es.get("mean_j", 0),
-                },
+                learnable=learnable_es_rpt,
             )
         print_cross_environment_comparison(env_results)
-
-    # -----------------------------------------------------------------------
-    # Memory System Comparison on QuestRoom
-    # -----------------------------------------------------------------------
-    print("\n--- Memory System Comparison (QuestRoom) ---")
-    quest_env = QuestRoom(seed=77)
-    quest_policy = ExplorationPolicy(seed=42)
-    n_comparison_episodes = 30
-    lambda_comp = 0.001
-
-    memory_systems: dict = {
-        "FlatWindow(50)": FlatMemory(window_size=50),
-        "GraphMemory+θ": GraphMemory(params=MemoryParams(
-            theta_store=0.864, theta_entity=0.230, theta_temporal=1.0, mode="learnable"
-        )),
-        "SemanticMemory": SemanticMemory(max_capacity=80, alpha=1.0, beta=5.0, gamma=2.0),
-        "SummaryMemory": SummaryMemory(raw_buffer_size=30, summarize_every=25),
-        "EpisodicSemantic": EpisodicSemanticMemory(episodic_size=30),
-        "RAGMemory": RAGMemory(),
-    }
-
-    comparison_results = run_memory_comparison(
-        quest_env,
-        quest_policy,
-        memory_systems,
-        n_episodes=n_comparison_episodes,
-        k=8,
-        env_seed=77,
-        lambda_penalty=lambda_comp,
-    )
-    print_memory_comparison_report(
-        comparison_results, "QuestRoom", n_comparison_episodes, lambda_comp
-    )
+        print_memory_comparison_report(
+            comparison_results, "MultiHopKeyDoor", n_comparison_episodes, lambda_comp
+        )
 
     report_path.write_text(buf.getvalue(), encoding="utf-8")
     print(f"\nReport saved to: {report_path}")
-
-    # Append comparison to report
-    import io as _io
-    from contextlib import redirect_stdout as _rds
-    comp_buf = _io.StringIO()
-    with _rds(comp_buf):
-        print_memory_comparison_report(
-            comparison_results, "QuestRoom", n_comparison_episodes, lambda_comp
-        )
-    with open(report_path, "a", encoding="utf-8") as f:
-        f.write(comp_buf.getvalue())
 
 
 if __name__ == "__main__":

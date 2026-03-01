@@ -199,10 +199,15 @@ def run_episode_with_any_memory(
         get_stats() -> dict
 
     Compatible with: FlatMemory, SemanticMemory, SummaryMemory,
-    EpisodicSemanticMemory, RAGMemory, GraphMemoryAdapter, and GraphMemory itself
-    (via GraphMemory.get_relevant_events if added).
+    EpisodicSemanticMemory, RAGMemory, and GraphMemory (via get_relevant_events).
 
-    Returns (success, events, stats_dict) with same shape as run_episode_with_memory.
+    Tracks retrieval_precision: when the agent is at a door and the environment
+    has hint events, measures whether any hint appeared in the retrieved top-k.
+    This is the direct memory quality metric independent of task success rate.
+
+    Returns (success, events, stats_dict).
+    stats_dict keys: retrieval_tokens, memory_size, reward, retrieval_precision.
+    retrieval_precision is None when no door-query moments occurred.
     """
     memory.clear()
     obs = env.reset()
@@ -210,13 +215,36 @@ def run_episode_with_any_memory(
     step = 0
     retrieval_tokens = 0
 
+    # Retrieval precision tracking: count door-step queries and hint hits
+    hint_queries = 0   # steps where agent was at a door (memory needed)
+    hint_hits = 0      # of those, retrieved events contained at least one hint
+
+    # Get hint observations from the environment if available (MultiHopKeyDoor)
+    env_hints: set[str] = set()
+    if hasattr(env, "hint_observations"):
+        env_hints = set(env.hint_observations)
+
     while not env.done:
         past: list[Event] = memory.get_relevant_events(obs, current_step=step, k=k)
         retrieval_tokens += len(past)
 
+        # Retrieval precision: if at a door step and hints exist, score this retrieval.
+        # "door" obs with "requires" means agent is standing at an unopened door
+        # and needs to know the correct key — the prime moment to recall a hint.
+        if env_hints and "door" in obs.lower() and "requires" in obs.lower():
+            hint_queries += 1
+            # A hit: any retrieved event is marked as a hint OR its obs contains a hint substring
+            if any(
+                e.is_hint or any(h in e.observation for h in env_hints)
+                for e in past
+            ):
+                hint_hits += 1
+
         action = policy.decide(obs, past_events=past)
 
-        event = Event(step=step, observation=obs, action=action)
+        # Mark hint events: obs contains one of the hint substrings
+        is_hint = any(h in obs for h in env_hints)
+        event = Event(step=step, observation=obs, action=action, is_hint=is_hint)
         memory.add_event(event, episode_seed=episode_seed)
         events.append(event)
 
@@ -225,9 +253,13 @@ def run_episode_with_any_memory(
 
     stats = memory.get_stats()
     reward = getattr(env, "partial_score", 1.0 if env.success else 0.0)
+    retrieval_precision = (hint_hits / hint_queries) if hint_queries > 0 else None
     stats_dict = {
         "retrieval_tokens": retrieval_tokens,
         "memory_size": stats["n_events"],
         "reward": reward,
+        "retrieval_precision": retrieval_precision,
+        "hint_queries": hint_queries,
+        "hint_hits": hint_hits,
     }
     return env.success, events, stats_dict

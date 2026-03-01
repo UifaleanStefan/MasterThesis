@@ -119,6 +119,7 @@ def run_memory_comparison(
         retrieval_tokens_list: list[int] = []
         memory_size_list: list[int] = []
         j_list: list[float] = []
+        precision_list: list[float] = []   # only episodes where hint_queries > 0
 
         for ep_idx in range(n_episodes):
             episode_seed = base_seed + ep_idx
@@ -134,14 +135,17 @@ def run_memory_comparison(
             partial_scores.append(reward)
             retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
             memory_size_list.append(stats_dict["memory_size"])
-            j = reward - lambda_penalty * stats_dict["retrieval_tokens"]
-            j_list.append(j)
+            j_list.append(reward)   # optimization metric = pure reward
+            rp = stats_dict.get("retrieval_precision")
+            if rp is not None:
+                precision_list.append(rp)
 
         mean_partial = sum(partial_scores) / n_episodes
         mean_tokens = sum(retrieval_tokens_list) / n_episodes
         mean_size = sum(memory_size_list) / n_episodes
         mean_j = sum(j_list) / n_episodes
         efficiency = mean_partial / (1.0 + mean_tokens)
+        mean_precision = sum(precision_list) / len(precision_list) if precision_list else None
 
         results[name] = {
             "success_rate": successes / n_episodes,
@@ -151,6 +155,7 @@ def run_memory_comparison(
             "mean_memory_size": mean_size,
             "efficiency": efficiency,
             "mean_j": mean_j,
+            "mean_retrieval_precision": mean_precision,
         }
 
     return results

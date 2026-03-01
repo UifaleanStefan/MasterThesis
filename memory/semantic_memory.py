@@ -61,7 +61,10 @@ class SemanticMemory:
         entities = extract_entities(obs)
         entity_count = len(entities)
 
-        is_npc_hint = 1.0 if ("says:" in obs_lower or "guard says" in obs_lower or "sage says" in obs_lower) else 0.0
+        is_npc_hint = 1.0 if (
+            "says:" in obs_lower or "guard says" in obs_lower
+            or "sage says" in obs_lower or "see a sign:" in obs_lower
+        ) else 0.0
 
         novel_count = sum(1 for e in entities if e not in self._seen_entities)
         is_novel = 1.0 if novel_count > 0 else 0.0
