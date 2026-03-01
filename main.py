@@ -869,6 +869,16 @@ def main() -> None:
     report_path.write_text(buf.getvalue(), encoding="utf-8")
     print(f"\nReport saved to: {report_path}")
 
+    # -----------------------------------------------------------------------
+    # Generate all visualization figures
+    # -----------------------------------------------------------------------
+    try:
+        from viz import generate_all_figures
+        figures_dir = Path(__file__).parent / "docs" / "figures"
+        generate_all_figures(env_data, comparison_results, output_dir=figures_dir)
+    except Exception as _viz_err:
+        print(f"\n[Visualization] Failed to generate figures: {_viz_err}")
+
 
 if __name__ == "__main__":
     main()
