@@ -1,0 +1,37 @@
+name: neural_controller_v2_cmaes
+seed: 42
+
+environment:
+  name: MultiHopKeyDoor
+  seed: 0
+
+memory:
+  system: NeuralControllerV2
+  # theta is not used directly — the MLP outputs it per observation
+  theta: [0.5, 0.5, 0.5]
+
+optimization:
+  method: cmaes
+  # n_params will be overridden at runtime to match controller.n_params (~5578)
+  n_generations: 50
+  n_candidates: 20
+  n_episodes_per_candidate: 40
+  sigma: 0.1   # small sigma — weight perturbations should be small
+
+eval:
+  n_episodes: 100
+  k: 8
+  run_benchmark: false
+  run_statistical_tests: true
+  generate_figures: true
+
+llm:
+  enabled: false
+
+output_dir: results
+figures_dir: docs/figures
+notes: >
+  Train NeuralMemoryControllerV2 on MultiHopKeyDoor via CMA-ES.
+  After training, run zero-shot evaluation on MegaQuestRoom to test
+  whether the learned memory policy generalizes across tasks.
+  This is the generalization experiment for thesis Chapter 4.

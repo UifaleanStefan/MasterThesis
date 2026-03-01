@@ -20,6 +20,10 @@ from .working_memory import WorkingMemory
 from .causal_memory import CausalMemory
 from .attention_memory import AttentionMemory
 from .neural_controller import NeuralMemoryController
+from .graph_memory_v2 import GraphMemoryV2, MemoryParamsV2
+from .graph_memory_v3 import GraphMemoryV3, MemoryParamsV3
+from .graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
+from .neural_controller_v2 import NeuralMemoryControllerV2
 
 __all__ = [
     "EpisodicSemanticMemory",
@@ -35,6 +39,13 @@ __all__ = [
     "CausalMemory",
     "AttentionMemory",
     "NeuralMemoryController",
+    "GraphMemoryV2",
+    "MemoryParamsV2",
+    "GraphMemoryV3",
+    "MemoryParamsV3",
+    "GraphMemoryV4",
+    "MemoryParamsV4",
+    "NeuralMemoryControllerV2",
     "embed_observation",
     "extract_entities",
     "retrieve_events",
