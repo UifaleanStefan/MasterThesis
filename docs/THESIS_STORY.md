@@ -1,6 +1,6 @@
 # Thesis Story — Learning Task-Adaptive Structured Memory
 
-*Last updated: Mar 2026 (Phase A–F implementation: fixed objective, MultiHopKeyDoor, retrieval precision metric). This document captures the full research narrative, what has been built, what the results show, and what comes next. It is intended to align implementation with the thesis argument and to serve as a reference for writing the thesis.*
+*Last updated: Mar 2026 (Phase A–F + Bug Fix + Learning Curves). Includes fixed efficiency reporting, per-generation ES learning curves, and final cross-environment results. This document captures the full research narrative, what has been built, what the results show, and what comes next.*
 
 ---
 
@@ -98,67 +98,79 @@ The toy demo **proves the learning mechanism works** and that **optimal memory s
 - **Reproducibility**: deterministic RNG seeded by `(episode_seed, step)`.
 
 ### Phase 7: Adaptive θ via Evolution Strategy
-- **ES loop** (`main.py`): 12 generations, 6 candidates/gen, 25 episodes/candidate.
-- Each generation: sample candidates from N(μ, σ), clip to [0,1], evaluate each by mean J, set μ = best, decay σ (min 0.05).
+- **ES loop** (`main.py`): 12 generations, 6 candidates/gen, 40 episodes/candidate.
+- Each generation: sample candidates from N(μ, σ), clip to [0,1], evaluate each by mean J (= mean_reward), set μ = best, decay σ (min 0.05).
 - Learns θ *over time* rather than finding it by one-off search.
+- **Per-generation learning curve** now printed in `report.txt` for all 12 generations (theta, reward, tokens, efficiency per gen).
 
 ### Cross-Environment Comparison
-- Both phases run on Key-Door and Goal-Room.
+- Three environments run: Key-Door, Goal-Room, MultiHop-KeyDoor.
 - Results show different optimal θ per task — core empirical support for the thesis claim.
 
 ---
 
 ## 4. Experimental Results (Current)
 
-*(From `report.txt`, run Mar 2026 — fixed objective, MultiHopKeyDoor added)*
+*(From `report.txt`, run Mar 2026 — full pipeline including fixed objective, per-generation learning curves, and corrected efficiency reporting)*
 
-### What changed from the previous run
+### What changed from earlier runs
 
-The previous run (Feb 2026) produced a degenerate result: ES collapsed to θ_store ≈ 0.0 on Key-Door and Hard-KeyDoor because the objective `J = reward − λ × tokens` made it optimal to store nothing (zero tokens = zero penalty). This has been fixed:
-
-- **Optimization objective changed to `J_learn = mean_reward`** (pure task performance). Token cost is now tracked as a secondary efficiency metric only.
-- **Episode counts increased**: 100 episodes/θ in Phase 6, 40 episodes/candidate in Phase 7 (reduced variance).
-- **MultiHopKeyDoor** replaces HardKeyDoor as the primary benchmark — designed so the rule-based policy strictly depends on hint memory to open any door.
+- **Feb 2026 run:** ES collapsed to θ_store ≈ 0.0 because `J = reward − λ × tokens` made storing nothing optimal. **Fixed:** optimization objective now = pure mean_reward; token cost tracked separately as efficiency.
+- **Phase 7 episode count:** increased from 25 to 40 episodes/candidate to reduce noise.
+- **MultiHopKeyDoor** added as primary hard-task benchmark. Hint observations appear only at steps 0–2; agent must recall them 100–250 steps later.
+- **Learning curves:** `report.txt` now shows the full 12-generation theta trajectory per environment.
+- **Efficiency bug fixed:** `EXPERIMENT SUMMARY` learnable row now shows real efficiency (was 0.0 previously).
 
 ### Phase 6 (random search, 100 ep/θ)
 
 | Environment | Best θ (store, entity, temporal) | Success (learnable) | Mean reward | Efficiency |
 |---|---|---|---|---|
-| Key-Door | (0.343, 0.801, 0.207) | 29.0% | 0.290 | 0.000616 |
-| Goal-Room | (0.315, 0.398, 0.769) | 69.0% | 0.690 | 0.002361 |
-| MultiHop-KeyDoor | (0.609, 0.527, 0.809) | 16.0% | 0.057 | 0.000029 |
+| Key-Door | (0.088, 0.598, 0.070) | 25.0% | 0.250 | 0.001070 |
+| Goal-Room | (0.265, 0.838, 0.769) | 71.0% | 0.710 | 0.003097 |
+| MultiHop-KeyDoor | (0.667, 0.890, 0.486) | 15.0% | 0.053 | 0.000027 |
 
 ### Phase 7 (Evolution Strategy, 12 gen × 6 cand × 40 ep)
 
-| Environment | Learned θ (store, entity, temporal) | Success (learnable) | Baseline success | Mean reward |
-|---|---|---|---|---|
-| Key-Door | (1.000, 0.286, 0.785) | 37.5% | 20.0% | 0.375 |
-| Goal-Room | (0.987, 0.197, 0.907) | 77.5% | 57.5% | 0.775 |
-| MultiHop-KeyDoor | (0.991, 0.523, 1.000) | 22.5% | 5.0% | 0.075 |
+| Environment | Learned θ (store, entity, temporal) | Success (learnable) | Baseline success | Mean reward | Efficiency |
+|---|---|---|---|---|---|
+| Key-Door | (0.116, 0.000, 0.819) | 30.0% | 17.5% | 0.300 | 0.001029 |
+| Goal-Room | (1.000, 0.220, 1.000) | 80.0% | 70.0% | 0.800 | 0.002885 |
+| MultiHop-KeyDoor | (1.000, 0.487, 0.843) | 27.5% | 2.5% | 0.092 | 0.000047 |
+
+### ES Learning Curves (all 12 generations, Key-Door example)
+
+| Gen | θ_store | θ_entity | θ_temporal | Reward | Tokens | Efficiency |
+|---|---|---|---|---|---|---|
+| 1 | 0.884 | 0.098 | 0.992 | 0.300 | 523.5 | 0.000572 |
+| 5 | 0.971 | 0.000 | 1.000 | 0.375 | 486.9 | 0.000769 |
+| 9 | 0.619 | 0.077 | 1.000 | 0.325 | 473.2 | 0.000685 |
+| 12 | 0.116 | 0.000 | 0.819 | 0.300 | 290.6 | 0.001029 |
+
+*(Full curves for all 3 environments are in `report.txt`)*
 
 ### Key observations
 
-1. **ES no longer collapses to zero** (objective fix confirmed): All three environments now keep θ_store near 1.0 — the ES correctly stores events because memory genuinely helps and there's no token penalty in the optimizer. The efficiency metric is tracked separately and shows the tradeoff post-hoc.
+1. **ES no longer collapses to zero** (objective fix confirmed): With `J_learn = mean_reward`, all environments converge to non-trivial θ. Efficiency is tracked as a reporting metric showing that the learned θ also reduces token usage.
 
-2. **θ is task-dependent** (core claim confirmed): The three environments converge to structurally different θ:
-   - Key-Door: θ_entity = 0.286 — moderate entity filtering (key-door color matching)
-   - Goal-Room: θ_entity = 0.197, θ_temporal = 0.907 — very low entity tracking, high temporal chain
-   - MultiHop-KeyDoor: θ_entity = 0.523 — highest entity importance threshold (must filter distractor keys, weight hint entities)
+2. **θ is task-dependent** (core claim confirmed):
+   - Key-Door: θ_store=0.12, θ_entity=0.00, θ_temporal=0.82 — sparse storage, full temporal chain, no entity filter
+   - Goal-Room: θ_store=1.00, θ_entity=0.22, θ_temporal=1.00 — store everything, light entity filter
+   - MultiHop-KeyDoor: θ_store=1.00, θ_entity=0.49, θ_temporal=0.84 — store everything, strong entity filter (distractor suppression)
 
-3. **ES improves over baseline on all environments**: Key-Door +87.5% (20% → 37.5%), Goal-Room +34.8% (57.5% → 77.5%), MultiHop-KeyDoor +350% (5% → 22.5%). The MultiHop improvement is the most dramatic because memory is strictly required.
+3. **ES improves over baseline on all environments**: Key-Door +71% (17.5%→30%), Goal-Room +14% (70%→80%), MultiHop-KeyDoor +1000% (2.5%→27.5%). The MultiHop improvement is the strongest because memory is strictly necessary.
 
-4. **MultiHop-KeyDoor creates genuine memory pressure**: Baseline 5% success with fixed memory vs. 22.5% with learned θ. The task is hard enough that random exploration almost never finds a door solution.
+4. **MultiHop-KeyDoor creates genuine memory pressure**: Baseline 2.5% success vs. 27.5% with learned θ.
 
 ### Memory System Comparison (MultiHopKeyDoor, n=50)
 
 | System | Partial Score | Tokens | Retrieval Precision | Efficiency |
 |---|---|---|---|---|
-| EpisodicSemantic | **0.167** | 1964 | **1.000** | 0.000085 |
-| SemanticMemory | 0.153 | 1964 | **1.000** | 0.000078 |
-| RAGMemory | 0.053 | 1964 | 0.577 | 0.000027 |
-| GraphMemory+θ | 0.013 | 1964 | 0.500 | 0.000007 |
+| EpisodicSemantic | **0.180** | 1961 | **1.000** | 0.000092 |
+| SemanticMemory | 0.100 | 1964 | **1.000** | 0.000051 |
+| GraphMemory+Theta | 0.060 | 1964 | 0.548 | 0.000031 |
+| RAGMemory | 0.047 | 1964 | 0.531 | 0.000024 |
 | FlatWindow(50) | 0.000 | 1964 | 0.060 | 0.000000 |
-| SummaryMemory | 0.000 | 1636 | 0.018 | 0.000000 |
+| SummaryMemory | 0.000 | 1636 | 0.023 | 0.000000 |
 
 **Retrieval precision** = fraction of door-query steps where the hint was in the top-k retrieved events. This is the direct memory quality metric independent of task success.
 
@@ -183,7 +195,7 @@ The previous run (Feb 2026) produced a degenerate result: ES collapsed to θ_sto
 | Policy-task mismatch on QuestRoom | **ADDRESSED** — MultiHopKeyDoor replaces QuestRoom as comparison env | Memory comparison now shows differentiated results |
 | No retrieval precision metric | **FIXED** — added hint_queries/hint_hits tracking | Can now show WHY a memory system succeeds or fails |
 | High result variance | **IMPROVED** — 100ep/θ in Phase 6, 40ep/candidate in Phase 7 | Results are tighter; ES converges reliably |
-| No learning curves plotted | Still pending | ES looks like search, not learning |
+| No learning curves plotted | **FIXED** — full 12-gen curve now in report.txt for all 3 envs | Thesis can show θ converging over generations |
 | No graph visualization | Still pending | Can't show "sparse learned graph vs. dense fixed graph" |
 | Rule-based policy caps performance | Still pending | Policy bottleneck limits maximum achievable reward on hard tasks |
 | TF-IDF embeddings lose sign semantics | Still pending | GraphMemory+θ retrieval precision is low (0.500) even with perfect storage |

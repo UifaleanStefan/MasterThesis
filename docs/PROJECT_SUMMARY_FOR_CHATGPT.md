@@ -1,7 +1,7 @@
 # Project Summary — Learning Task-Adaptive Structured Memory
 
-*For ChatGPT / external analysis. Last updated: Feb 2026.*
-*Paste this entire file when asking ChatGPT to help with thesis writing, analysis, or experiment interpretation.*
+*For external analysis / thesis writing. Last updated: Mar 2026 (final POC results — learning curves, fixed efficiency, 3-environment comparison, 6-system memory comparison on MultiHopKeyDoor).*
+*Paste this entire file when asking an LLM to help with thesis writing, analysis, or experiment interpretation.*
 
 ---
 
@@ -26,8 +26,11 @@ This is a **proof of concept** — a controlled simulation that validates the le
 |---|---|---|---|---|
 | ToyEnvironment (Key-Door) | 6×6 | 80 | Pick up key matching door color | Low — task solvable by random walk |
 | GoalRoom | 6×6 | 80 | Reach goal cell, use_door | Minimal |
+| MultiHopKeyDoor | 10×10 | 250 | 3 doors, 6 real keys, 3 distractor keys, hint observations at steps 0–2 | High — hints arrive at steps 0/1/2, must be recalled up to 250 steps later |
 | HardKeyDoor | 10×10 | 300 | 3 doors, 5 keys, 2 distractors | Medium |
-| QuestRoom | 12×12 | 500 | 4 chained doors, 2 NPCs giving one-time hints, distractor observations | High — NPC hints must be recalled 300+ steps later |
+| QuestRoom | 12×12 | 500 | 4 chained doors, 2 NPCs giving one-time hints, distractor observations | Very high — NPC hints must be recalled 300+ steps later |
+
+**Primary benchmark: MultiHopKeyDoor.** Designed so the rule-based policy *can* succeed if memory delivers hint events, but *cannot* succeed without them. This gives clean, verifiable memory dependency.
 
 All environments use the same interface: `reset()`, `step(action)`, `get_actions()`, `.done`, `.success`, `.partial_score`.
 
@@ -66,9 +69,9 @@ Default θ = (1.0, 0.0, 1.0) exactly reproduces the fixed-memory baseline. Repro
 
 ### 2.4 Learning mechanism
 
-**Phase 6 — Random search (bandit):** Sample 15 θ configs uniformly from [0,1]³. Run 75 episodes per config. Objective: `J(θ) = partial_score − λ × retrieval_tokens` (λ = 0.001). Pick best θ.
+**Phase 6 — Random search (bandit):** Sample 15 θ configs uniformly from [0,1]³. Run 100 episodes per config. Objective: `J_learn(θ) = mean_reward` (pure task performance — no token penalty in optimizer). Pick best θ. Token cost tracked separately as efficiency = reward / (1 + tokens).
 
-**Phase 7 — Evolution Strategy (ES):** 12 generations × 6 candidates × 25 episodes. Each generation: sample candidates from N(μ, σ), clip to [0,1], evaluate by mean J, set μ = best candidate, decay σ. Learns θ over time rather than by one-off search.
+**Phase 7 — Evolution Strategy (ES):** 12 generations × 6 candidates × 40 episodes. Each generation: sample candidates from N(μ, σ), clip to [0,1], evaluate by mean reward, set μ = best candidate, decay σ. Learns θ over time. Full per-generation learning curve (theta, reward, tokens, efficiency) is logged to `report.txt`.
 
 **token_usage** in this system = `Σ_t len(retrieved_events_at_step_t)` — a proxy for LLM context cost. Not real API tokens.
 
@@ -82,34 +85,57 @@ Default θ = (1.0, 0.0, 1.0) exactly reproduces the fixed-memory baseline. Repro
 
 ## 3. Experimental results
 
-*(From `report.txt`, Key-Door and Goal-Room runs, Feb 2026)*
+*(From `report.txt`, Mar 2026 — 3 environments, Phase 6 + Phase 7 + Memory System Comparison)*
 
-### Phase 6 results (random search, 15 configs × 75 episodes)
+### Phase 6 results (random search, 15 configs × 100 episodes)
 
-| Environment | Best θ (store, entity, temporal) | Success (learnable) | Mean J | Mean retrieval_tokens |
+| Environment | Best θ (store, entity, temporal) | Success (learnable) | Mean reward | Efficiency |
 |---|---|---|---|---|
-| Key-Door | (0.021, 0.911, 0.573) | 21.3% | 0.145 | 68.8 |
-| Goal-Room | (0.052, 0.087, 0.407) | 68.0% | 0.592 | 87.8 |
+| Key-Door | (0.088, 0.598, 0.070) | 25.0% | 0.250 | 0.001070 |
+| Goal-Room | (0.265, 0.838, 0.769) | 71.0% | 0.710 | 0.003097 |
+| MultiHop-KeyDoor | (0.667, 0.890, 0.486) | 15.0% | 0.053 | 0.000027 |
 
-### Phase 7 results (Evolution Strategy, 12 gen × 6 cand × 25 ep)
+### Phase 7 results (ES, 12 gen × 6 cand × 40 ep)
 
-| Environment | Learned θ (store, entity, temporal) | Success | Baseline success | Mean J |
-|---|---|---|---|---|
-| Key-Door | (0.864, 0.230, 1.000) | 32.0% | 8.0% | −0.183 |
-| Goal-Room | (0.492, 0.145, 0.952) | 72.0% | 72.0% | 0.434 |
+| Environment | Learned θ (store, entity, temporal) | Learnable success | Baseline success | Mean reward | Efficiency |
+|---|---|---|---|---|---|
+| Key-Door | (0.116, 0.000, 0.819) | 30.0% | 17.5% | 0.300 | 0.001029 |
+| Goal-Room | (1.000, 0.220, 1.000) | 80.0% | 70.0% | 0.800 | 0.002885 |
+| MultiHop-KeyDoor | (1.000, 0.487, 0.843) | 27.5% | 2.5% | 0.092 | 0.000047 |
 
-### Cross-environment comparison
+### Cross-environment comparison (core thesis result)
 
-- **Key-Door** learned θ: high θ_store (store most events), moderate θ_entity (track some entities), max θ_temporal (full chain) — entity-focused, sequential memory needed for key-door matching.
-- **Goal-Room** learned θ: medium θ_store (filter aggressively), very low θ_entity (no entity tracking needed), high θ_temporal — sparse, recency-focused memory sufficient to reach goal.
-- **Core finding confirmed:** θ is task-dependent. Different tasks converge to structurally different memory policies.
+- **Key-Door:** θ_store=0.12 (aggressive filtering), θ_entity=0.00 (no entity threshold), θ_temporal=0.82. Interpretation: most events filtered, temporal chain maintained, entity nodes created freely.
+- **Goal-Room:** θ_store=1.00 (store everything), θ_entity=0.22 (light entity filter), θ_temporal=1.00. Interpretation: simple goal task — store all, maintain full chain.
+- **MultiHop-KeyDoor:** θ_store=1.00, θ_entity=0.49 (strong entity filter), θ_temporal=0.84. Interpretation: must store everything (hints), but filter entity nodes strongly (suppress distractor keys).
+- **Core finding confirmed:** θ is task-dependent — different tasks converge to structurally different memory policies. This is the primary empirical support for the thesis claim.
 
-### Token efficiency
+### ES improvement over baseline
 
-| Environment | Baseline tokens | Learned θ tokens | Reduction |
+| Environment | Baseline reward | Learnable reward | Improvement |
 |---|---|---|---|
-| Key-Door | 594 | 503 | −15% |
-| Goal-Room | 320 | 286 | −11% |
+| Key-Door | 0.175 | 0.300 | +71% |
+| Goal-Room | 0.700 | 0.800 | +14% |
+| MultiHop-KeyDoor | 0.008 | 0.092 | +1000% |
+
+### Memory system comparison (MultiHopKeyDoor, n=50 episodes)
+
+| System | Partial Score (doors/3) | Tokens | Retrieval Precision | Efficiency |
+|---|---|---|---|---|
+| EpisodicSemantic | **0.180** | 1961 | **1.000** | 0.000092 |
+| SemanticMemory | 0.100 | 1964 | **1.000** | 0.000051 |
+| GraphMemory+Theta | 0.060 | 1964 | 0.548 | 0.000031 |
+| RAGMemory | 0.047 | 1964 | 0.531 | 0.000024 |
+| FlatWindow(50) | 0.000 | 1964 | 0.060 | 0.000000 |
+| SummaryMemory | 0.000 | 1636 | 0.023 | 0.000000 |
+
+**Retrieval precision** = fraction of door-query steps where a hint event was in the top-k retrieved events. This is a direct memory quality metric independent of task success.
+
+**Why EpisodicSemantic wins:** It stores hint observations verbatim in its semantic store (never evicted). At door steps, semantic facts are always returned → precision = 1.0.
+
+**Why FlatWindow fails:** Hint observations arrive at steps 0–2. By the time the agent reaches a door (often 100+ steps later), the hint has scrolled out of the 50-event window.
+
+**Why SummaryMemory fails:** Periodic compression destroys the exact text of the hint observation. The summary notes "saw red_key" but not "the red key opens the north door."
 
 ---
 
@@ -198,11 +224,13 @@ d:\Bocconi\Thesis\
 
 ## 8. Next steps (what comes after the POC)
 
-**Near-term (still POC, but stronger):**
-- Run `main.py` on all environments (Key-Door, Goal-Room, HardKeyDoor, QuestRoom) and get the memory comparison table
-- Install `sentence-transformers` to activate RAGMemory with real embeddings
-- Add learning curves: plot mean J per ES generation to show θ convergence
-- Add graph visualization: render the memory graph before/after θ filtering
+**Near-term (still POC, but stronger) — PARTIALLY DONE:**
+- ✅ Run `main.py` on all 3 environments — complete
+- ✅ Memory comparison table (6 systems on MultiHopKeyDoor) — complete
+- ✅ ES learning curves — now in `report.txt` (all 12 generations per env)
+- ✅ Efficiency correctly reported in EXPERIMENT SUMMARY
+- ⬜ Graph visualization: render learned graph (sparse θ) vs. fixed graph (dense) — not yet
+- ⬜ Local LLM integration (Ollama / Llama 3) as the policy — not yet
 
 **Medium-term (bridge to real system):**
 - Wrap a real LLM (e.g. Ollama + Llama 3 locally, or OpenAI API) as the policy
