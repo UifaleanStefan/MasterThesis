@@ -390,7 +390,7 @@ def run_phase7_es(
     sigma_min: float = 0.05,
     n_generations: int = 12,
     n_candidates: int = 6,
-    n_episodes_per_candidate: int = 25,
+    n_episodes_per_candidate: int = 40,
     lambda_penalty: float = 0.001,
     env_seed: int | None = None,
     policy_seed: int | None = 42,
@@ -447,6 +447,7 @@ def run_phase7_es(
             "success_rate": best_stats["success_rate"],
             "mean_retrieval_tokens": best_stats["mean_retrieval_tokens"],
             "mean_memory_size": best_stats["mean_memory_size"],
+            "efficiency": best_stats["efficiency"],
         })
 
     best_theta = tuple(mu)
@@ -495,27 +496,38 @@ def print_phase7_report(
     n_episodes_per_candidate: int,
     lambda_penalty: float,
 ) -> None:
-    """Print Phase 7 Adaptive Theta (ES) report."""
+    """Print Phase 7 Adaptive Theta (ES) report including full per-generation learning curve."""
     print("\n" + "=" * 70)
     print("=== Phase 7 Adaptive Theta (Evolution Strategy) Report ===")
     print("=" * 70)
-    print(f"\nObjective: J = reward - {lambda_penalty} * retrieval_tokens")
+    print(f"\nOptimization: J_learn = mean_reward  (token penalty NOT in optimizer)")
     print(f"Generations: {n_generations}, candidates per gen: {n_candidates}, episodes per candidate: {n_episodes_per_candidate}")
     print(f"Total episodes (learnable): {n_generations * n_candidates * n_episodes_per_candidate}")
     print(f"\nLearned theta: theta_store={best_theta[0]:.3f}, theta_entity={best_theta[1]:.3f}, theta_temporal={best_theta[2]:.3f}")
-    print("\nPer-generation best (last 3 generations):")
-    for g in generations_stats[-3:]:
-        print(f"  Gen {g['generation']}: theta={g['best_theta']}, mean_J={g['mean_j']:.4f}, success={g['success_rate']:.1%}, tokens={g['mean_retrieval_tokens']:.0f}")
+
+    # Full learning curve — shows theta converging over generations
+    print(f"\nLearning curve (all {len(generations_stats)} generations):")
+    print(f"  {'Gen':>4}  {'store':>6} {'entity':>6} {'temp':>6}  {'reward':>7}  {'tokens':>7}  {'efficiency':>12}")
+    print("  " + "-" * 60)
+    for g in generations_stats:
+        ts, te, tt = g["best_theta"]
+        eff = g.get("efficiency", 0.0)
+        print(
+            f"  {g['generation']:>4}  {ts:>6.3f} {te:>6.3f} {tt:>6.3f}"
+            f"  {g['mean_j']:>7.4f}  {g['mean_retrieval_tokens']:>7.1f}  {eff:>12.6f}"
+        )
+
     print("\nFixed memory baseline:")
     print(f"  Success: {baseline_fixed['successes']} (rate={baseline_fixed['success_rate']:.1%})")
-    print(f"  Mean J: {baseline_fixed['mean_j']:.4f}")
+    print(f"  Mean reward: {baseline_fixed['mean_j']:.4f}")
     print(f"  Mean retrieval_tokens: {baseline_fixed['mean_retrieval_tokens']:.1f}")
     print(f"  Mean memory_size: {baseline_fixed['mean_memory_size']:.1f}")
+    print(f"  Efficiency: {baseline_fixed.get('efficiency', 0.0):.6f}")
     best_final = generations_stats[-1] if generations_stats else {}
     if best_final and best_final.get("mean_j", 0) >= baseline_fixed["mean_j"]:
-        print("\nComparison: ES learned theta >= fixed (by mean J).")
+        print("\nComparison: ES learned theta >= fixed (by mean reward).")
     else:
-        print("\nComparison: ES learned theta < fixed (by mean J).")
+        print("\nComparison: ES learned theta < fixed (by mean reward).")
 
 
 def print_experiment_summary(
