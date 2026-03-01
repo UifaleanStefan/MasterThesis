@@ -1,6 +1,6 @@
 # Thesis Story — Learning Task-Adaptive Structured Memory
 
-*Last updated: Feb 2026 (Memory System Comparison update). This document captures the full research narrative, what has been built, what the results show, and what comes next. It is intended to align implementation with the thesis argument and to serve as a reference for writing the thesis.*
+*Last updated: Feb 2026 (POC clarification + full memory comparison). This document captures the full research narrative, what has been built, what the results show, and what comes next. It is intended to align implementation with the thesis argument and to serve as a reference for writing the thesis.*
 
 ---
 
@@ -290,7 +290,56 @@ of the task (short-term vs. long-term, entity-focused vs. sequence-focused).**
 
 ---
 
-## 10. File Map
+## 10. POC vs. Full System — What This Is and What It Will Become
+
+### What this codebase is right now
+
+This is a **Proof of Concept (POC)**. Its purpose is to:
+1. Prove the learning mechanism works (θ adapts, ES converges, J improves).
+2. Prove the core claim empirically (different tasks → different optimal θ).
+3. Establish the architecture and interfaces that scale to a real system.
+
+### What this codebase is NOT (yet)
+
+| Component | Current (POC) | Target (full system) |
+|---|---|---|
+| Environment | Grid worlds (6×12, text obs) | Real task: document QA, game engine, API workflows |
+| Policy (agent) | Rule-based string matching | LLM (GPT-4o, Claude 3.5, Llama 3 via Ollama) |
+| Embeddings | TF-IDF, 21-word fixed vocab | `text-embedding-3-small` or `all-MiniLM-L6-v2` via API |
+| `retrieval_tokens` | Proxy count (`len(past_events)`) | Actual API token count billed in dollars |
+| J = reward − λ×tokens | Partial score − λ×event count | Task score − λ×API cost (real money) |
+| Long-horizon task | QuestRoom, 500 steps, 12×12 grid | 500-page lore, multi-session agent, beyond-context-window reasoning |
+| Memory comparison | 6 custom Python classes | Drop-in for LangChain, MemGPT, LlamaIndex memory modules |
+
+### Why the POC is still a valid thesis contribution
+
+The architecture, the interface, and the learning mechanism (θ-parameterized graph, ES optimization, J = reward − λ×cost) are **identical** between the POC and the full system. The POC demonstrates:
+- That the mechanism is learnable (ES converges to task-specific θ).
+- That the mechanism generalizes (different environments → different θ).
+- That the interface is modular (6 memory systems, same 4-method contract).
+- That memory structure has real impact on performance and token cost.
+
+A real LLM policy + real API costs would make the results more dramatic (token cost becomes real money), not change the fundamental finding.
+
+### The development path
+
+```
+[NOW] POC — toy environments, rule-based policy, TF-IDF, proxy tokens
+        ↓
+[NEXT] Harder environments — QuestRoom comparison, ES on HardKeyDoor
+        ↓
+[BRIDGE] Real embeddings (MiniLM local), real retrieval, larger obs spaces
+        ↓
+[FULL] LLM as policy (Ollama local or OpenAI API), real token costs,
+       real long-horizon task (document corpus / game world / codebase)
+        ↓
+[CONTRIBUTION] Publishable: learnable θ reduces API cost while maintaining
+               task performance on tasks that exceed context window
+```
+
+---
+
+## 12. File Map
 
 ```
 d:\Bocconi\Thesis\
