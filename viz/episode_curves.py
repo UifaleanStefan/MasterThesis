@@ -36,6 +36,7 @@ def collect_episode_metrics(
             "episode": ep + 1,
             "reward": stats.get("reward", float(success)),
             "retrieval_tokens": stats.get("retrieval_tokens", 0),
+            "memory_size": stats.get("memory_size", 0),
             "retrieval_precision": stats.get("retrieval_precision"),
         })
     return records
@@ -50,7 +51,7 @@ def plot_episode_metrics(
     """
     Three-panel figure:
     - Top: reward per episode (bar) + rolling mean (line)
-    - Middle: retrieval_tokens per episode
+    - Middle: memory_size per episode (how many events stored at episode end)
     - Bottom: retrieval_precision per episode (scatter)
     """
     output_dir = Path(output_dir)
@@ -58,7 +59,7 @@ def plot_episode_metrics(
 
     eps = [r["episode"] for r in records]
     rewards = [r["reward"] for r in records]
-    tokens = [r["retrieval_tokens"] for r in records]
+    mem_sizes = [r.get("memory_size", 0) for r in records]
     precisions = [r["retrieval_precision"] if r["retrieval_precision"] is not None else float("nan")
                   for r in records]
 
@@ -72,7 +73,7 @@ def plot_episode_metrics(
     )
 
     # Panel 1: Reward
-    axes[0].bar(eps, rewards, color="#90CAF9", alpha=0.7, label="Reward")
+    axes[0].bar(eps, rewards, color="#90CAF9", alpha=0.7, label="Reward (partial score)")
     axes[0].plot(eps, rolling_reward, color="#1565C0", linewidth=2,
                  label=f"Rolling mean (w={window})")
     mean_r = np.nanmean(rewards)
@@ -83,14 +84,12 @@ def plot_episode_metrics(
     axes[0].legend(fontsize=8, loc="upper right")
     axes[0].grid(axis="y", alpha=0.3)
 
-    # Panel 2: Retrieval tokens
-    axes[1].plot(eps, tokens, color="#FF7043", marker=".", linewidth=1.5,
-                 markersize=4, label="Retrieval tokens")
-    axes[1].fill_between(eps, tokens, alpha=0.15, color="#FF7043")
-    mean_t = np.mean(tokens)
-    axes[1].axhline(mean_t, color="grey", linestyle=":", linewidth=1.2,
-                    label=f"Mean={mean_t:.0f}")
-    axes[1].set_ylabel("Retrieval tokens", fontsize=10)
+    # Panel 2: Memory size (events stored at end of episode)
+    axes[1].bar(eps, mem_sizes, color="#FF7043", alpha=0.7, label="Memory size (events)")
+    mean_m = np.mean(mem_sizes)
+    axes[1].axhline(mean_m, color="grey", linestyle=":", linewidth=1.2,
+                    label=f"Mean={mean_m:.1f}")
+    axes[1].set_ylabel("Memory size\n(# events stored)", fontsize=10)
     axes[1].legend(fontsize=8, loc="upper right")
     axes[1].grid(axis="y", alpha=0.3)
 

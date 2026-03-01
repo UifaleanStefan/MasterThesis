@@ -139,13 +139,13 @@ def generate_all_figures(
         from agent import ExplorationPolicy
         from memory.episodic_semantic_memory import EpisodicSemanticMemory
 
-        _env_traj = MultiHopKeyDoor(seed=42)
-        _policy_traj = ExplorationPolicy(seed=42)
+        _env_traj = MultiHopKeyDoor(seed=36)
+        _policy_traj = ExplorationPolicy(seed=36)
         _mem_traj = EpisodicSemanticMemory(episodic_size=30)
 
         p = plot_grid_trajectory(
             _env_traj, _policy_traj, _mem_traj,
-            output_dir=output_dir, episode_seed=42, k=8
+            output_dir=output_dir, episode_seed=36, k=8
         )
         saved.append(p)
         print(f"  Saved: {p}")
