@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from environment import GoalRoom, ToyEnvironment
+from environment import GoalRoom, HardKeyDoor, ToyEnvironment
 from memory import GraphMemory, MemoryParams, retrieve_similar_events
 from agent import ExplorationPolicy, run_episode_with_logging, run_episode_with_memory
 from evaluation import run_evaluation
@@ -184,6 +184,8 @@ def run_phase6_bandit(
     rng = random.Random(bandit_seed)
     if env_name == "Goal-Room":
         env = GoalRoom(seed=env_seed)
+    elif env_name == "Hard-KeyDoor":
+        env = HardKeyDoor(seed=env_seed)
     else:
         env = ToyEnvironment(seed=env_seed)
     policy = ExplorationPolicy(seed=policy_seed)
@@ -222,7 +224,7 @@ def run_phase6_bandit(
                 episode_seed=episode_seed,
             )
             successes += int(success)
-            reward = 1.0 if success else 0.0
+            reward = stats_dict.get("reward", 1.0 if success else 0.0)
             j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
             retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
             memory_size_list.append(stats_dict["memory_size"])
@@ -257,7 +259,7 @@ def run_phase6_bandit(
             episode_seed=episode_seed,
         )
         baseline_successes += int(success)
-        reward = 1.0 if success else 0.0
+        reward = stats_dict.get("reward", 1.0 if success else 0.0)
         baseline_j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
         baseline_retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
         baseline_memory_size_list.append(stats_dict["memory_size"])
@@ -335,7 +337,7 @@ def _eval_theta(
             episode_seed=episode_seed,
         )
         successes += int(success)
-        reward = 1.0 if success else 0.0
+        reward = stats_dict.get("reward", 1.0 if success else 0.0)
         j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
         retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
         memory_size_list.append(stats_dict["memory_size"])
@@ -371,6 +373,8 @@ def run_phase7_es(
     rng = random.Random(es_seed)
     if env_name == "Goal-Room":
         env = GoalRoom(seed=env_seed)
+    elif env_name == "Hard-KeyDoor":
+        env = HardKeyDoor(seed=env_seed)
     else:
         env = ToyEnvironment(seed=env_seed)
     policy = ExplorationPolicy(seed=policy_seed)
@@ -429,7 +433,7 @@ def run_phase7_es(
             episode_seed=episode_seed,
         )
         baseline_successes += int(success)
-        reward = 1.0 if success else 0.0
+        reward = stats_dict.get("reward", 1.0 if success else 0.0)
         baseline_j_sum += reward - lambda_penalty * stats_dict["retrieval_tokens"]
         baseline_retrieval_tokens_list.append(stats_dict["retrieval_tokens"])
         baseline_memory_size_list.append(stats_dict["memory_size"])
@@ -542,14 +546,19 @@ def print_cross_environment_comparison(env_results: dict) -> None:
         print(f"  Mean retrieval_tokens: baseline={base.get('mean_retrieval_tokens', 0):.1f}, learnable={learn.get('mean_retrieval_tokens', 0):.1f}")
         print(f"  Mean J: baseline={base.get('mean_j', 0):.4f}, learnable={learn.get('mean_j', 0):.4f}")
     print("\nInterpretation:")
-    names = list(env_results)
-    if len(names) >= 2:
-        kd = env_results.get("Key-Door", {})
-        gr = env_results.get("Goal-Room", {})
-        kd_learned = kd.get("learned_theta", (1, 0, 1))
-        gr_learned = gr.get("learned_theta", (1, 0, 1))
-        print("  Key-Door favors entity and store (key-door matching); Goal-Room favors recency/temporal (reach goal).")
-        print("  Memory structure (theta) is task-dependent.")
+    print("  Memory structure (theta) is task-dependent: different tasks converge to different learned theta.")
+    kd = env_results.get("Key-Door", {})
+    gr = env_results.get("Goal-Room", {})
+    hk = env_results.get("Hard-KeyDoor", {})
+    if kd:
+        t = kd.get("learned_theta", (1, 0, 1))
+        print(f"  Key-Door: theta=({t[0]:.2f},{t[1]:.2f},{t[2]:.2f}) — key-door entity matching dominates.")
+    if gr:
+        t = gr.get("learned_theta", (1, 0, 1))
+        print(f"  Goal-Room: theta=({t[0]:.2f},{t[1]:.2f},{t[2]:.2f}) — sparse, recency-focused memory.")
+    if hk:
+        t = hk.get("learned_theta", (1, 0, 1))
+        print(f"  Hard-KeyDoor: theta=({t[0]:.2f},{t[1]:.2f},{t[2]:.2f}) — must track entities across 300 steps; distractors penalize low theta_entity.")
     print("=" * 70)
 
 
@@ -592,7 +601,7 @@ def main() -> None:
     env_data: dict = {}
     env_results: dict = {}
 
-    for env_name in ["Key-Door", "Goal-Room"]:
+    for env_name in ["Key-Door", "Goal-Room", "Hard-KeyDoor"]:
         print(f"\n--- Phase 6: Learnable Memory Creation ({env_name}) ---")
         best_theta, phase6_results, baseline_fixed = run_phase6_bandit(
             n_theta_configs=15,
@@ -674,7 +683,7 @@ def main() -> None:
     with redirect_stdout(buf):
         print_report(results, embedding_demo)
         print_phase5_report(results)
-        for env_name in ["Key-Door", "Goal-Room"]:
+        for env_name in ["Key-Door", "Goal-Room", "Hard-KeyDoor"]:
             d = env_data[env_name]
             print_phase6_report(
                 d["best_theta"],

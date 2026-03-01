@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 VOCAB = [
     "you", "are", "in", "a", "room", "see", "red", "blue", "green",
     "key", "door", "nothing", "interest", "carrying", "of", "goal",
+    "yellow", "purple", "opened", "have", "doors",
 ]
 _vectorizer: TfidfVectorizer | None = None
 

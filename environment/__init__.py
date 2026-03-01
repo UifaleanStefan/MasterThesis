@@ -1,5 +1,5 @@
-"""Simple toy environments: Key-Door and Goal-Room."""
+"""Environments for learnable memory thesis experiments."""
 
-from .env import GoalRoom, ToyEnvironment
+from .env import GoalRoom, HardKeyDoor, ToyEnvironment
 
-__all__ = ["GoalRoom", "ToyEnvironment"]
+__all__ = ["GoalRoom", "HardKeyDoor", "ToyEnvironment"]

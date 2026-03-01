@@ -161,8 +161,11 @@ def run_episode_with_memory(
         step += 1
 
     stats = memory.get_stats()
+    # partial_score supports HardKeyDoor (doors_opened / 3); falls back to binary for other envs
+    reward = getattr(env, "partial_score", 1.0 if env.success else 0.0)
     stats_dict = {
         "retrieval_tokens": retrieval_tokens,
         "memory_size": stats["n_events"],
+        "reward": reward,
     }
     return env.success, events, stats_dict

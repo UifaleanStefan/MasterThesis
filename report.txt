@@ -38,17 +38,17 @@ Query: "You are carrying a blue key"
 
 3. Performance
 ----------------------------------------
-no_memory   : 20/100 = 20.0% success, avg steps=72.8, avg(success)=44.0
-graph       : 19/100 = 19.0% success, avg steps=73.5, avg(success)=46.1
-embedding   : 22/100 = 22.0% success, avg steps=72.4, avg(success)=45.5
-hybrid      : 19/100 = 19.0% success, avg steps=73.3, avg(success)=44.6
-learnable(1.0,1.0,0.1): 19/100 = 19.0% success, avg steps=75.1, avg(success)=54.1
-learnable(1.5,1.0,0.2): 27/100 = 27.0% success, avg steps=74.3, avg(success)=59.0
-learnable(1.0,2.0,0.1): 22/100 = 22.0% success, avg steps=71.3, avg(success)=40.7
+no_memory   : 16/100 = 16.0% success, avg steps=74.1, avg(success)=43.3
+graph       : 28/100 = 28.0% success, avg steps=70.4, avg(success)=45.7
+embedding   : 20/100 = 20.0% success, avg steps=71.8, avg(success)=39.0
+hybrid      : 24/100 = 24.0% success, avg steps=71.2, avg(success)=43.2
+learnable(1.0,1.0,0.1): 16/100 = 16.0% success, avg steps=74.4, avg(success)=44.9
+learnable(1.5,1.0,0.2): 19/100 = 19.0% success, avg steps=74.4, avg(success)=50.4
+learnable(1.0,2.0,0.1): 22/100 = 22.0% success, avg steps=73.0, avg(success)=48.0
 
 4. Comparison to Phase 3
 ----------------------------------------
-Hybrid SAME as graph-only.
+Hybrid WORSE than graph-only.
 Embedding-only BETTER than no-memory.
 
 5. Observations
@@ -64,27 +64,192 @@ Variance across runs is expected with random exploration.
 
 Weights: w_graph=1.0, w_embed=1.0, w_recency=0.1
 Condition: learnable
-Success: 19/100
-Success Rate: 19.0%
-Avg Steps: 75.1
-Avg Steps (success only): 54.1
-learnable >= graph: yes
-learnable >= hybrid: yes
+Success: 16/100
+Success Rate: 16.0%
+Avg Steps: 74.4
+Avg Steps (success only): 44.9
+learnable >= graph: no
+learnable >= hybrid: no
 
 Weights: w_graph=1.5, w_embed=1.0, w_recency=0.2
 Condition: learnable
-Success: 27/100
-Success Rate: 27.0%
-Avg Steps: 74.3
-Avg Steps (success only): 59.0
-learnable >= graph: yes
-learnable >= hybrid: yes
+Success: 19/100
+Success Rate: 19.0%
+Avg Steps: 74.4
+Avg Steps (success only): 50.4
+learnable >= graph: no
+learnable >= hybrid: no
 
 Weights: w_graph=1.0, w_embed=2.0, w_recency=0.1
 Condition: learnable
 Success: 22/100
 Success Rate: 22.0%
-Avg Steps: 71.3
-Avg Steps (success only): 40.7
-learnable >= graph: yes
-learnable >= hybrid: yes
+Avg Steps: 73.0
+Avg Steps (success only): 48.0
+learnable >= graph: no
+learnable >= hybrid: no
+
+======================================================================
+=== Phase 6 Learnable Memory Creation Report ===
+======================================================================
+
+Objective: J = reward - 0.001 * retrieval_tokens
+Episodes per theta: 75
+
+Best theta: theta_store=0.021, theta_entity=0.911, theta_temporal=0.573
+
+Fixed memory baseline (learnable retrieval only):
+  Success: 14/75 = 18.7%
+  Mean J: -0.3659
+  Mean retrieval_tokens: 552.6
+  Mean memory_size: 73.6
+
+Best learnable memory config:
+  Success: 16/75 = 21.3%
+  Mean J: 0.1446
+  Mean retrieval_tokens: 68.8
+  Mean memory_size: 1.7
+
+Comparison: learnable memory vs fixed
+  Learnable memory >= fixed (by mean J).
+
+======================================================================
+=== Phase 7 Adaptive Theta (Evolution Strategy) Report ===
+======================================================================
+
+Objective: J = reward - 0.001 * retrieval_tokens
+Generations: 12, candidates per gen: 6, episodes per candidate: 25
+Total episodes (learnable): 1800
+
+Learned theta: theta_store=0.864, theta_entity=0.230, theta_temporal=1.000
+
+Per-generation best (last 3 generations):
+  Gen 10: theta=(0.6434693814300401, 0.280743488283679, 1.0), mean_J=-0.0358, success=44.0%, tokens=476
+  Gen 11: theta=(0.8217920354241895, 0.18796114022276195, 1.0), mean_J=-0.3708, success=20.0%, tokens=571
+  Gen 12: theta=(0.8636440458876391, 0.23023931902462794, 1.0), mean_J=-0.1828, success=32.0%, tokens=503
+
+Fixed memory baseline:
+  Success: 2 (rate=8.0%)
+  Mean J: -0.5144
+  Mean retrieval_tokens: 594.4
+  Mean memory_size: 78.8
+
+Comparison: ES learned theta >= fixed (by mean J).
+
+======================================================================
+=== EXPERIMENT SUMMARY ===
+======================================================================
+Environment: Key-Door
+Method: ES
+Best theta: theta_store=0.864, theta_entity=0.230, theta_temporal=1.000
+Lambda: 0.001, n_episodes (or equivalent): 1800
+
+Baseline (fixed memory):
+  Reward (success rate): 8.00%
+  Mean retrieval_tokens: 594.4
+  Mean memory_size: 78.8
+  Mean J: -0.5144
+
+Learnable:
+  Reward (success rate): 32.00%
+  Mean retrieval_tokens: 502.8
+  Mean memory_size: 59.5
+  Mean J: -0.1828
+
+Interpretation:
+  theta_store < 1 -> event filtering reduces storage. theta_entity > 0 -> entity importance threshold active.
+======================================================================
+
+======================================================================
+=== Phase 6 Learnable Memory Creation Report ===
+======================================================================
+
+Objective: J = reward - 0.001 * retrieval_tokens
+Episodes per theta: 75
+
+Best theta: theta_store=0.052, theta_entity=0.087, theta_temporal=0.407
+
+Fixed memory baseline (learnable retrieval only):
+  Success: 55/75 = 73.3%
+  Mean J: 0.4200
+  Mean retrieval_tokens: 313.4
+  Mean memory_size: 43.4
+
+Best learnable memory config:
+  Success: 51/75 = 68.0%
+  Mean J: 0.5922
+  Mean retrieval_tokens: 87.8
+  Mean memory_size: 2.6
+
+Comparison: learnable memory vs fixed
+  Learnable memory >= fixed (by mean J).
+
+======================================================================
+=== Phase 7 Adaptive Theta (Evolution Strategy) Report ===
+======================================================================
+
+Objective: J = reward - 0.001 * retrieval_tokens
+Generations: 12, candidates per gen: 6, episodes per candidate: 25
+Total episodes (learnable): 1800
+
+Learned theta: theta_store=0.492, theta_entity=0.145, theta_temporal=0.952
+
+Per-generation best (last 3 generations):
+  Gen 10: theta=(0.5128070484925157, 0.11762114854129944, 0.724295324395278), mean_J=0.5230, success=76.0%, tokens=237
+  Gen 11: theta=(0.4500674379450146, 0.10290818347975335, 0.9155790157282057), mean_J=0.4506, success=72.0%, tokens=269
+  Gen 12: theta=(0.4919194484084641, 0.14518636228161932, 0.9517774977686955), mean_J=0.4341, success=72.0%, tokens=286
+
+Fixed memory baseline:
+  Success: 18 (rate=72.0%)
+  Mean J: 0.3997
+  Mean retrieval_tokens: 320.3
+  Mean memory_size: 44.4
+
+Comparison: ES learned theta >= fixed (by mean J).
+
+======================================================================
+=== EXPERIMENT SUMMARY ===
+======================================================================
+Environment: Goal-Room
+Method: ES
+Best theta: theta_store=0.492, theta_entity=0.145, theta_temporal=0.952
+Lambda: 0.001, n_episodes (or equivalent): 1800
+
+Baseline (fixed memory):
+  Reward (success rate): 72.00%
+  Mean retrieval_tokens: 320.3
+  Mean memory_size: 44.4
+  Mean J: 0.3997
+
+Learnable:
+  Reward (success rate): 72.00%
+  Mean retrieval_tokens: 285.9
+  Mean memory_size: 21.7
+  Mean J: 0.4341
+
+Interpretation:
+  theta_store < 1 -> event filtering reduces storage. theta_entity > 0 -> entity importance threshold active. theta_temporal < 1 -> sparse temporal chain.
+======================================================================
+
+======================================================================
+=== CROSS-ENVIRONMENT COMPARISON ===
+======================================================================
+
+Key-Door:
+  Best theta (Phase 6):   store=0.021, entity=0.911, temporal=0.573
+  Learned theta (Phase 7): store=0.864, entity=0.230, temporal=1.000
+  Success rate: baseline=8.00%, learnable=32.00%
+  Mean retrieval_tokens: baseline=594.4, learnable=502.8
+  Mean J: baseline=-0.5144, learnable=-0.1828
+
+Goal-Room:
+  Best theta (Phase 6):   store=0.052, entity=0.087, temporal=0.407
+  Learned theta (Phase 7): store=0.492, entity=0.145, temporal=0.952
+  Success rate: baseline=72.00%, learnable=72.00%
+  Mean retrieval_tokens: baseline=320.3, learnable=285.9
+  Mean J: baseline=0.3997, learnable=0.4341
+
+Interpretation:
+  Key-Door favors entity and store (key-door matching); Goal-Room favors recency/temporal (reach goal).
+  Memory structure (theta) is task-dependent.
+======================================================================
