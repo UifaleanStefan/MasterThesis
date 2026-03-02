@@ -146,6 +146,8 @@ neural_controller_v2.py  — MLP: 50-dim input → 10D θ output. Wraps V4 Graph
 
 **GraphMemoryV4 is now the #1 system on MultiHopKeyDoor** (reward=0.178, precision=0.997), surpassing EpisodicSemantic. Achieved via CMA-ES on 10D theta with 30 gens × 50 eps. See `docs/GRAPHMEMORY_V4_RESULTS.md` for full analysis.
 
+**NeuralControllerV2Small** (50->32->10 MLP, 1,962 params) was trained via CMA-ES (30 gens) and achieved reward=0.033 on MultiHopKeyDoor — significantly below scalar V4. See `docs/NEURAL_CONTROLLER_V2_RESULTS.md` for analysis of why (sigma too small, insufficient training budget).
+
 ---
 
 ## 4. Key Experimental Results (What We Know)
@@ -176,12 +178,12 @@ These are implemented but have never been executed:
 | Experiment | Command / Config | What it tests | Priority | Status |
 |---|---|---|---|---|
 | ~~CMA-ES on MultiHop with V4 GraphMemory~~ | `run_graphmemory_v4_cmaes.py` | Does 10D θ push GraphMemory to precision=1.000? | HIGH | **DONE** — reward=0.178, precision=0.997, #1 ranking |
-| Ablation study | `evaluation/ablation.py` | Which θ component contributes most? | **HIGH** | Pending |
-| NeuralControllerV2 training | `python runner.py --config experiments/neural_controller_v2_cmaes.yaml` | Can MLP meta-controller generalize? | HIGH | Pending |
-| Zero-shot transfer test | Train on MultiHop, eval on MegaQuestRoom | Does learned V4 theta transfer? | HIGH | Pending |
-| Sensitivity analysis | `evaluation/sensitivity.py` | Is the reward landscape convex or rugged? | Medium | Pending |
-| Cross-task transfer matrix | `evaluation/transfer.py` | Does MultiHop θ generalize? | Medium | Pending |
+| ~~Ablation study~~ | `run_ablation.py` | Which θ component contributes most? | HIGH | **DONE** — theta_novel is critical (100% degradation), theta_erich is 2nd (55%) |
+| ~~NeuralControllerV2Small training~~ | `run_neural_controller_v2.py` | Can MLP meta-controller beat scalar V4? | HIGH | **DONE** — reward=0.033 (vs V4=0.178), underperforms due to optimization challenges |
+| ~~Zero-shot transfer test~~ | `run_transfer.py` | Does learned V4 theta transfer? | HIGH | **DONE** — GoalRoom=0.69, HardKeyDoor=0.16, MegaQuestRoom=0.00 |
+| ~~Sensitivity analysis~~ | `run_sensitivity.py` | Is the reward landscape convex or rugged? | Medium | **DONE** — broad plateau (not sharp peak), theta_novel dominates |
 | DocumentQA + Bayesian Opt | `experiments/document_qa_llm.yaml` | Real LLM cost optimization | **HIGH (needs API key)** | Pending |
+| NeuralControllerV2 full training | `run_neural_controller_v2.py --generations 200 --sigma 0.3` | Full neural controller with larger budget | HIGH | Pending (overnight run) |
 
 ---
 

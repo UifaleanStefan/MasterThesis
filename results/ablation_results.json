@@ -1,0 +1,114 @@
+{
+  "experiment": "graphmemory_v4_ablation",
+  "config": {
+    "n_episodes": 100,
+    "k": 8,
+    "seed_offset": 2000,
+    "environment": "MultiHopKeyDoor"
+  },
+  "learned_params": {
+    "theta_store": 0.2930596309748046,
+    "theta_novel": 0.9076792231317986,
+    "theta_erich": 0.19835951371038626,
+    "theta_surprise": 0.7849390987135371,
+    "theta_entity": 0.2854533807130707,
+    "theta_temporal": 0.2781870244886271,
+    "theta_decay": 0.6680303253858517,
+    "w_graph": 0.0,
+    "w_embed": 1.079209116140441,
+    "w_recency": 3.7771729692347
+  },
+  "results": {
+    "full": {
+      "description": "Learned theta (upper bound)",
+      "mean_reward": 0.16333333333333333,
+      "std_reward": 0.19242092841601288,
+      "mean_tokens": 1745.02,
+      "mean_memory_size": 9.8,
+      "mean_precision": 0.9993339993339994,
+      "degradation": 0.0
+    },
+    "no_novelty": {
+      "description": "theta_novel=0.0 \u2014 novelty feature disabled",
+      "mean_reward": 0.0,
+      "std_reward": 0.0,
+      "mean_tokens": 0,
+      "mean_memory_size": 0,
+      "mean_precision": 0.0,
+      "degradation": 1.0
+    },
+    "no_surprise": {
+      "description": "theta_surprise=0.0 \u2014 surprise feature disabled",
+      "mean_reward": 0.1733333333333333,
+      "std_reward": 0.18028534559453013,
+      "mean_tokens": 1356.73,
+      "mean_memory_size": 6.26,
+      "mean_precision": 1.0,
+      "degradation": -0.061224489795918255
+    },
+    "no_erich": {
+      "description": "theta_erich=0.0 \u2014 entity richness feature disabled",
+      "mean_reward": 0.07333333333333333,
+      "std_reward": 0.13877773329774218,
+      "mean_tokens": 249,
+      "mean_memory_size": 1,
+      "mean_precision": 1.0,
+      "degradation": 0.5510204081632653
+    },
+    "no_decay": {
+      "description": "theta_decay=0.0 \u2014 entity temporal decay disabled",
+      "mean_reward": 0.13666666666666666,
+      "std_reward": 0.18407410794734425,
+      "mean_tokens": 1744.88,
+      "mean_memory_size": 9.87,
+      "mean_precision": 0.9956799158758005,
+      "degradation": 0.16326530612244902
+    },
+    "no_embed": {
+      "description": "w_embed=0.0 \u2014 embedding retrieval disabled",
+      "mean_reward": 0.12333333333333332,
+      "std_reward": 0.187457439988277,
+      "mean_tokens": 1747.94,
+      "mean_memory_size": 10.24,
+      "mean_precision": 0.9122565577722478,
+      "degradation": 0.24489795918367352
+    },
+    "no_recency": {
+      "description": "w_recency=0.0 \u2014 recency retrieval disabled",
+      "mean_reward": 0.16999999999999998,
+      "std_reward": 0.2037526724122938,
+      "mean_tokens": 1726.08,
+      "mean_memory_size": 9.87,
+      "mean_precision": 1.0,
+      "degradation": -0.040816326530612165
+    },
+    "graph_only": {
+      "description": "w_embed=0, w_recency=0, w_graph=2.0 \u2014 graph traversal only",
+      "mean_reward": 0.13999999999999999,
+      "std_reward": 0.18459164139817943,
+      "mean_tokens": 1759.75,
+      "mean_memory_size": 9.97,
+      "mean_precision": 1.0,
+      "degradation": 0.14285714285714293
+    },
+    "v1_equivalent": {
+      "description": "V1 defaults: store=0.874, entity=0.946, temporal=0.648, all V3/V4 dims=0",
+      "mean_reward": 0.013333333333333332,
+      "std_reward": 0.06564879518897745,
+      "mean_tokens": 1964,
+      "mean_memory_size": 250,
+      "mean_precision": 0.20820292100520932,
+      "degradation": 0.9183673469387755
+    },
+    "store_all": {
+      "description": "theta_store=0.0, all importance weights=0 \u2014 store every event (no filter)",
+      "mean_reward": 0.0,
+      "std_reward": 0.0,
+      "mean_tokens": 1964,
+      "mean_memory_size": 250,
+      "mean_precision": 0.024306346124040812,
+      "degradation": 1.0
+    }
+  },
+  "elapsed_s": 177.88377475738525
+}

@@ -32,6 +32,112 @@ from memory.graph_memory import GraphMemory, MemoryParams
 from agent.loop import run_episode_with_any_memory
 
 
+# ---------------------------------------------------------------------------
+# V4 transfer evaluation — added for GraphMemoryV4 experiments
+# ---------------------------------------------------------------------------
+
+def evaluate_v4_theta_on_task(
+    params,
+    env: Any,
+    policy: Any,
+    n_episodes: int = 100,
+    k: int = 8,
+    seed_offset: int = 3000,
+) -> dict:
+    """
+    Evaluate a MemoryParamsV4 configuration on a given environment.
+
+    Uses GraphMemoryV4 (not V1 GraphMemory). Drop-in replacement for
+    evaluate_theta_on_task but for the 10D parameterization.
+
+    Parameters
+    ----------
+    params : MemoryParamsV4
+        The parameter configuration to evaluate (e.g. learned on MultiHopKeyDoor).
+    env : environment instance
+    policy : policy instance
+    n_episodes : int
+    k : int — retrieval top-k
+    seed_offset : int — episode seeds start here (avoid training overlap)
+
+    Returns
+    -------
+    dict with mean_reward, std_reward, mean_precision, mean_memory_size, mean_tokens
+    """
+    from memory.graph_memory_v4 import GraphMemoryV4
+
+    rewards, tokens, sizes, precisions = [], [], [], []
+
+    for ep in range(n_episodes):
+        mem = GraphMemoryV4(params)
+        _, _, stats = run_episode_with_any_memory(
+            env, policy, mem, k=k, episode_seed=seed_offset + ep
+        )
+        rewards.append(stats.get("reward", 0.0))
+        tokens.append(stats.get("retrieval_tokens", 0))
+        sizes.append(stats.get("memory_size", 0))
+        prec = stats.get("retrieval_precision")
+        if prec is not None:
+            precisions.append(prec)
+
+    return {
+        "mean_reward": statistics.mean(rewards),
+        "std_reward": statistics.stdev(rewards) if len(rewards) > 1 else 0.0,
+        "mean_tokens": statistics.mean(tokens),
+        "mean_memory_size": statistics.mean(sizes),
+        "mean_precision": statistics.mean(precisions) if precisions else None,
+        "n_episodes": n_episodes,
+    }
+
+
+def run_v4_transfer_matrix(
+    envs: dict[str, Any],
+    policies: dict[str, Any],
+    learned_params_map: dict[str, Any],
+    n_episodes: int = 100,
+    k: int = 8,
+    verbose: bool = True,
+) -> dict[str, dict[str, dict]]:
+    """
+    Run full cross-task V4 transfer matrix.
+
+    Parameters
+    ----------
+    envs : {task_name: env_instance}
+    policies : {task_name: policy_instance}
+    learned_params_map : {task_name: MemoryParamsV4}
+        Params learned on each task (or just one task for zero-shot eval).
+    n_episodes : int
+
+    Returns
+    -------
+    matrix : {source_task: {target_task: result_dict}}
+    """
+    task_names = list(envs.keys())
+    matrix: dict[str, dict[str, dict]] = {}
+
+    for source_task, params in learned_params_map.items():
+        matrix[source_task] = {}
+        for target_task in task_names:
+            if verbose:
+                print(f"  Transfer: V4 params from '{source_task}' -> eval on '{target_task}'")
+            result = evaluate_v4_theta_on_task(
+                params=params,
+                env=envs[target_task],
+                policy=policies[target_task],
+                n_episodes=n_episodes,
+                k=k,
+                seed_offset=abs(hash(source_task + target_task)) % 10000,
+            )
+            matrix[source_task][target_task] = result
+            if verbose:
+                prec = result.get("mean_precision")
+                prec_str = f"{prec:.4f}" if prec is not None else "N/A"
+                print(f"    reward={result['mean_reward']:.4f}  precision={prec_str}  mem={result['mean_memory_size']:.1f}")
+
+    return matrix
+
+
 def evaluate_theta_on_task(
     theta: tuple[float, float, float],
     env: Any,

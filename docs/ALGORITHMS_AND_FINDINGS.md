@@ -492,18 +492,76 @@ Putting both experiments together:
 
 ---
 
-## Part III — What Has Not Been Run Yet
+## Part III — Completed Experiments (V4 Phase)
+
+### GraphMemoryV4 CMA-ES (DONE)
+
+**Result:** reward=0.178, precision=0.997, #1 on MultiHopKeyDoor. See `docs/GRAPHMEMORY_V4_RESULTS.md`.
+
+### V4 Ablation Study (DONE)
+
+**Key findings:**
+- `theta_novel` is CRITICAL — setting to 0 causes 100% degradation (no events stored)
+- `theta_erich` is 2nd most important — 55% degradation when disabled
+- `w_embed` is 3rd — 24.5% degradation
+- `theta_decay` is 4th — 16.3% degradation
+- `theta_surprise` and `w_recency` have near-zero or slightly negative effect (noise)
+- V1 equivalent achieves only 0.013 reward (91.8% degradation)
+- Storing everything fails completely (0.0 reward, 250 events)
+
+See `docs/ABLATION_RESULTS.md`.
+
+### V4 Zero-Shot Transfer (DONE)
+
+**Key findings:**
+- MultiHopKeyDoor (in-dist): 0.163 reward, 0.999 precision
+- GoalRoom (zero-shot): 0.690 reward — strong positive transfer (simpler task)
+- HardKeyDoor (zero-shot): 0.160 reward — near-identical (similar task structure)
+- MegaQuestRoom (zero-shot): 0.000 reward — complete failure (harder OOD task)
+
+**Conclusion:** Task-dependence hypothesis confirmed. The theta optimized for MultiHop fails on MegaQuestRoom because the memory management strategy doesn't scale to 1000-step episodes.
+
+See `docs/TRANSFER_RESULTS.md`.
+
+### V4 Sensitivity Analysis (DONE)
+
+**Grid:** 12x12 over theta_novel x w_recency, all other dims fixed at learned values.
+
+**Key findings:**
+- Landscape is a BROAD PLATEAU (not sharp peak) — the system is robust
+- theta_novel dominates: reward increases monotonically with theta_novel
+- Grid optimum: theta_novel=1.0, w_recency=0.727 (reward=0.217 on 20 eps)
+- Learned theta: theta_novel=0.908, w_recency=3.777 (reward=0.178 on 200 eps)
+- Discrepancy likely due to noise in 20-episode evaluation
+
+See `docs/SENSITIVITY_RESULTS.md`.
+
+### NeuralMemoryControllerV2Small CMA-ES (DONE)
+
+**Architecture:** 50->32->10 MLP (1,962 params)  
+**Training:** 30 gens x 26 candidates x 20 eps = 4,878 seconds
+
+**Key findings:**
+- Best training fitness: 0.1333 (gen 21, after 20-gen plateau)
+- Held-out MultiHopKeyDoor: reward=0.033 (vs V4=0.178 — 81% worse)
+- Zero-shot MegaQuestRoom: reward=0.000 (same as scalar V4)
+- Root cause: sigma=0.05 too small for 1,962-dim weight space; need sigma=0.3 and 200+ gens
+
+**Conclusion:** Neural controller underperforms scalar V4 due to optimization challenges. Expressivity-trainability tradeoff: more expressive models require more training compute to realize their advantage.
+
+See `docs/NEURAL_CONTROLLER_V2_RESULTS.md`.
+
+---
+
+## Part IV — What Has Not Been Run Yet
 
 | Experiment | Algorithm | What it tests | Priority |
 |---|---|---|---|
-| CMA-ES on MultiHop | CMA-ES | Does CMA-ES find better θ than ES? Does it push GraphMemory into precision=1.000? | **High** |
-| Ablation study | ES (fixed ablation configs) | Which θ component contributes most? Can we recover the θ=0 baseline degradation? | **High** |
-| Sensitivity analysis | Grid search | 2D reward landscape over θ_store × θ_entity — is it convex or rugged? | Medium |
-| Cross-task transfer | ES | Does MultiHop θ = (0.96, 0.38, 1.00) generalize to MegaQuestRoom? | Medium |
-| Meta-learning | Reptile | Does θ_meta generalize across tasks, or does this confirm task-specificity? | Medium |
-| DocumentQA + BO | Bayesian Opt | Does BO find θ minimizing `J = QA_score − λ × cost_usd`? Does RAGMemory recover? | **High (needs API key)** |
+| NeuralControllerV2 full training | CMA-ES (sigma=0.3, 200 gens) | Can neural controller beat scalar V4 with more compute? | **High** |
+| Meta-learning | Reptile | Does θ_meta generalize across tasks? | Medium |
+| DocumentQA + BO | Bayesian Opt | Does BO find θ minimizing `J = QA_score - lambda * cost_usd`? | **High (needs API key)** |
 | Online adaptation demo | StatisticsAdapter | Does θ converge within a single episode on MultiHop? | Low |
 
 ---
 
-*Maintained by the project assistant. For raw data: `results/benchmark_results.json`. For POC results: `docs/POC_RESULTS.md`. For benchmark analysis: `docs/BENCHMARK_RESULTS.md`.*
+*Maintained by the project assistant. For raw data: `results/benchmark_results.json`. For POC results: `docs/POC_RESULTS.md`. For benchmark analysis: `docs/BENCHMARK_RESULTS.md`. For V4 results: `docs/GRAPHMEMORY_V4_RESULTS.md`. For ablation: `docs/ABLATION_RESULTS.md`. For transfer: `docs/TRANSFER_RESULTS.md`. For sensitivity: `docs/SENSITIVITY_RESULTS.md`. For neural controller: `docs/NEURAL_CONTROLLER_V2_RESULTS.md`.*
