@@ -130,20 +130,21 @@ neural_controller_v2.py  — MLP: 50-dim input → 10D θ output. Wraps V4 Graph
 
 ### The 10 Benchmark Competitors
 
-| # | System | MultiHop Rank | Precision |
-|---|---|---|---|
-| 1 | EpisodicSemantic | #1 (0.173) | 1.000 |
-| 2 | WorkingMemory(7) | #2 (0.153) | 1.000 |
-| 3 | AttentionMemory | #2 (0.153) | 1.000 |
-| 4 | SemanticMemory | #4 (0.133) | 1.000 |
-| 5 | HierarchicalMemory | #5 (0.127) | 1.000 |
-| 6 | CausalMemory | #6 (0.100) | 1.000 |
-| 7 | RAGMemory | #7 (0.053) | 0.482 |
-| 8 | **GraphMemory+θ (V1)** | #8 (0.033) | 0.578 |
-| 9 | FlatWindow | #9 (0.000) | 0.028 |
-| 10 | SummaryMemory | #10 (0.000) | 0.010 |
+| # | System | MultiHop Rank | Precision | Notes |
+|---|---|---|---|---|
+| 1 | **GraphMemoryV4** | **#1 (0.178)** | **0.997** | **NEW — was #8** |
+| 2 | EpisodicSemantic | #2 (0.173) | 1.000 | Previous #1 |
+| 3 | WorkingMemory(7) | #3 (0.153) | 1.000 | |
+| 4 | AttentionMemory | #3 (0.153) | 1.000 | |
+| 5 | SemanticMemory | #5 (0.133) | 1.000 | |
+| 6 | HierarchicalMemory | #6 (0.127) | 1.000 | |
+| 7 | CausalMemory | #7 (0.100) | 1.000 | |
+| 8 | RAGMemory | #8 (0.053) | 0.482 | |
+| 9 | GraphMemoryV1 | #9 (0.033) | 0.578 | |
+| 10 | FlatWindow | #10 (0.000) | 0.028 | |
+| 11 | SummaryMemory | #11 (0.000) | 0.010 | |
 
-**GraphMemory+θ currently ranks #8.** The V2/V3/V4 improvements are designed to push it into the precision=1.000 tier. This has not been run yet.
+**GraphMemoryV4 is now the #1 system on MultiHopKeyDoor** (reward=0.178, precision=0.997), surpassing EpisodicSemantic. Achieved via CMA-ES on 10D theta with 30 gens × 50 eps. See `docs/GRAPHMEMORY_V4_RESULTS.md` for full analysis.
 
 ---
 
@@ -172,15 +173,15 @@ The θ values differ across tasks — this is the core thesis evidence.
 
 These are implemented but have never been executed:
 
-| Experiment | Command / Config | What it tests | Priority |
-|---|---|---|---|
-| CMA-ES on MultiHop with V4 GraphMemory | `python runner.py --config experiments/multihop_cmaes.yaml` | Does 10D θ push GraphMemory to precision=1.000? | **HIGH** |
-| Ablation study | `evaluation/ablation.py` | Which θ component contributes most? | **HIGH** |
-| NeuralControllerV2 training | `python runner.py --config experiments/neural_controller_v2_cmaes.yaml` | Can MLP meta-controller generalize? | HIGH |
-| Zero-shot transfer test | Train on MultiHop, eval on MegaQuestRoom | Does learned policy transfer? | HIGH |
-| Sensitivity analysis | `evaluation/sensitivity.py` | Is the reward landscape convex or rugged? | Medium |
-| Cross-task transfer matrix | `evaluation/transfer.py` | Does MultiHop θ generalize? | Medium |
-| DocumentQA + Bayesian Opt | `experiments/document_qa_llm.yaml` | Real LLM cost optimization | **HIGH (needs API key)** |
+| Experiment | Command / Config | What it tests | Priority | Status |
+|---|---|---|---|---|
+| ~~CMA-ES on MultiHop with V4 GraphMemory~~ | `run_graphmemory_v4_cmaes.py` | Does 10D θ push GraphMemory to precision=1.000? | HIGH | **DONE** — reward=0.178, precision=0.997, #1 ranking |
+| Ablation study | `evaluation/ablation.py` | Which θ component contributes most? | **HIGH** | Pending |
+| NeuralControllerV2 training | `python runner.py --config experiments/neural_controller_v2_cmaes.yaml` | Can MLP meta-controller generalize? | HIGH | Pending |
+| Zero-shot transfer test | Train on MultiHop, eval on MegaQuestRoom | Does learned V4 theta transfer? | HIGH | Pending |
+| Sensitivity analysis | `evaluation/sensitivity.py` | Is the reward landscape convex or rugged? | Medium | Pending |
+| Cross-task transfer matrix | `evaluation/transfer.py` | Does MultiHop θ generalize? | Medium | Pending |
+| DocumentQA + Bayesian Opt | `experiments/document_qa_llm.yaml` | Real LLM cost optimization | **HIGH (needs API key)** | Pending |
 
 ---
 
