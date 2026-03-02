@@ -320,5 +320,47 @@ All V2/V3/V4 classes have `from_vector(v)` and `to_vector()` methods for CMA-ES 
 | `docs/BENCHMARK_RESULTS.md` | Full analysis of the 10-system benchmark |
 | `docs/THESIS_STORY.md` | Research narrative and rationale |
 | `docs/POC_RESULTS.md` | POC phase results in detail |
+| `docs/THESIS_HANDOFF.md` | **Single-document project summary** — read this first on a new machine |
 | `results/benchmark_results.json` | Raw benchmark data (10 systems × 3 envs × 50 episodes) |
 | `report.txt` | Full output from last `python main.py` run |
+
+---
+
+## 13. Latest Results Summary
+
+*All experiments complete as of March 2026. Numbers are from real data.*
+
+### Key Numbers at a Glance
+
+| Experiment | Best Result | File |
+|---|---|---|
+| V4 CMA-ES (200 eval eps) | reward=**0.178**, precision=**0.997**, mem=**10 events** | `results/graphmemory_v4_cmaes_results.json` |
+| V1 baseline (200 eval eps) | reward=0.102, precision=0.632, mem=218 events | same file |
+| Ablation — theta_novel removed | reward=**0.000** (100% degradation) | `results/ablation_results.json` |
+| Ablation — theta_erich removed | reward=0.073 (55% degradation) | same file |
+| Transfer — GoalRoom | reward=**0.690** (strong positive) | `results/transfer_results.json` |
+| Transfer — MegaQuestRoom | reward=**0.000** (complete failure) | same file |
+| Sensitivity — best cell | theta_novel=0.909, w_recency=3.636 → reward=**0.200** | `results/sensitivity_results.json` |
+| NeuralV2Small (30 gens) | reward=**0.033** (81% below V4 scalar) | `results/neural_controller_v2_results.json` |
+
+### What This Means for the Thesis
+
+1. **GraphMemoryV4 is the current state-of-the-art** on MultiHopKeyDoor (reward=0.178, #1 of 11 systems)
+2. **theta_novel is non-negotiable** — the system breaks without novelty-based storage filtering
+3. **Memory is task-dependent** — V4 theta fails completely on MegaQuestRoom (OOD)
+4. **Neural meta-controllers need more compute** — 30 gens with sigma=0.05 is insufficient for 1,962D space
+5. **The next critical experiment is DocumentQA + GPT-4o** — this is the first real LLM cost demonstration
+
+### Figures Generated (all from real data)
+
+```
+docs/figures/fig_master_benchmark.png    — 2×2 master summary (most important figure)
+docs/figures/fig_ablation_ranked.png     — feature importance ranking
+docs/figures/fig_transfer_annotated.png  — transfer heatmap with annotations
+docs/figures/fig_sensitivity_annotated.png — 2D landscape with contours
+docs/figures/fig_neural_analysis.png     — neural controller analysis
+docs/figures/fig11_pareto.png            — Pareto front (reward vs token cost)
+docs/figures/fig13_memory_size.png       — memory footprint comparison
+```
+
+Regenerate all: `python generate_thesis_figures.py`
