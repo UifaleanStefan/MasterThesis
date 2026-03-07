@@ -16,7 +16,7 @@ The thesis contribution is **not** a better RL policy. It is a parameterized gra
 
 The project has a clear narrative arc:
 - **Stage 1 (DONE):** POC — grid worlds, scalar 3D θ, Evolution Strategy, 6-system comparison
-- **Stage 2 (DONE):** Full benchmark — 10 memory systems × 3 environments, GraphMemoryV4 (10D θ), CMA-ES, ablation, transfer, sensitivity, neural meta-controller
+- **Stage 2 (DONE):** Full benchmark — 12 memory systems × 4 environments (incl. MegaQuestRoom), GraphMemoryV4/V5, CMA-ES, ablation, transfer, sensitivity, DocumentQA memory recall@k (no LLM), neural meta-controller
 - **Stage 3 (PENDING):** Real LLM — GPT-4o + DocumentQA, optimize J = QA_score − λ × cost_usd
 
 ---
@@ -27,19 +27,23 @@ The project has a clear narrative arc:
 d:\Bocconi\Thesis\
 ├── main.py                        POC experiments (Phases 4–7)
 ├── runner.py                      CLI experiment runner
-├── run_benchmark.py               10-system × 3-env benchmark
+├── run_benchmark.py               12-system × 4-env benchmark (skip systems via args, e.g. RAGMemory)
+├── run_document_qa_memory.py      DocumentQA memory recall@k (no LLM; skip systems via args)
+├── run_smoke_tests.py             Quick pipeline check (grid + DocQA memory + DocQA+LLM path)
 ├── run_graphmemory_v4_cmaes.py    CMA-ES for V4 (30 gens, 200 eval eps)
 ├── run_ablation.py                V4 ablation study (10 configs)
 ├── run_transfer.py                Zero-shot transfer (4 environments)
 ├── run_sensitivity.py             2D reward landscape (theta_novel × w_recency)
 ├── run_neural_controller_v2.py    NeuralControllerV2Small CMA-ES training
-├── generate_thesis_figures.py     Master figure generation (7 publication figures)
+├── generate_thesis_figures.py     Master figure generation (7 publication figures; --allow-missing)
+├── regen_all_figures.py           Regenerate all figures (thesis + benchmark + extended with real data)
 │
 ├── memory/
 │   ├── graph_memory.py            V1: 3D θ (store, entity, temporal). ORIGINAL — never modify.
 │   ├── graph_memory_v2.py         V2: 6D θ — adds learnable retrieval weights
 │   ├── graph_memory_v3.py         V3: 9D θ — adds learned importance scoring
 │   ├── graph_memory_v4.py         V4: 10D θ — adds Bayesian entity decay. MOST COMPLETE.
+│   ├── graph_memory_v5.py         V5: V4 + attention-based storage gating
 │   ├── neural_controller.py       V1 NeuralController: 36-dim → 3D θ. ORIGINAL.
 │   ├── neural_controller_v2.py    V2 NeuralController: 50-dim → 10D θ. 5,674 params.
 │   ├── neural_controller_v2_small.py  Smaller MLP: 50→32→10. 1,962 params. Used for CMA-ES.
@@ -69,10 +73,12 @@ d:\Bocconi\Thesis\
 │   ├── ablation.py                AblationConfigV4, run_ablation_study_v4
 │   ├── transfer.py                run_v4_transfer_matrix
 │   ├── sensitivity.py             compute_sensitivity_v4 (2D landscape)
-│   └── benchmark.py               run_full_benchmark (10 systems × all envs)
+│   ├── benchmark.py               run_full_benchmark (12 systems × 4 envs; optional skip_systems)
+│   └── document_qa_memory.py      DocumentQA memory-quality eval (recall@k, no LLM)
 │
 ├── results/
-│   ├── benchmark_results.json     10 systems × 3 envs × 50 episodes
+│   ├── benchmark_results.json     12 systems × 4 envs
+│   ├── document_qa_memory_results.json  Recall@k per system (fantasy_lore)
 │   ├── graphmemory_v4_cmaes_results.json  V4 CMA-ES (30 gens × 50 eps, 200 eval)
 │   ├── ablation_results.json      10 ablation configs × 100 episodes
 │   ├── transfer_results.json      4 environments × 100 episodes
@@ -81,6 +87,9 @@ d:\Bocconi\Thesis\
 │
 └── docs/
     ├── THESIS_HANDOFF.md          THIS FILE
+    ├── RUNNING_EXPERIMENTS.md     Exact commands and order to regenerate results/figures
+    ├── DEPENDENCIES.md            Optional deps (RAG), skip/fallback behaviour
+    ├── archive/                   Historical phase docs (STEP1, PHASE6, THESIS_VISION)
     ├── AGENTS.md                  Full AI agent guide
     ├── ALGORITHMS_AND_FINDINGS.md All algorithms + findings
     ├── GRAPHMEMORY_V4_RESULTS.md  V4 CMA-ES detailed analysis

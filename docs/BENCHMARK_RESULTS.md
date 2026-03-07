@@ -11,13 +11,14 @@
 
 | Parameter | Value |
 |---|---|
-| Memory systems | 10 |
-| Environments | 3 (Key-Door, Goal-Room, MultiHopKeyDoor) |
-| Episodes per (system, env) pair | 50 |
+| Memory systems | 12 (includes GraphMemoryV4, GraphMemoryV5) |
+| Environments | 4 (Key-Door, Goal-Room, MultiHopKeyDoor, MegaQuestRoom) |
+| Episodes per (system, env) pair | 50 (MegaQuestRoom: 20, to keep runtime acceptable) |
 | Retrieval k | 8 |
 | Bootstrap CI | 95%, 500 resamples |
 | GraphMemory+Theta | θ = (0.956, 0.378, 1.000) — best from Phase 7 ES on MultiHop |
-| Policy | ExplorationPolicy (rule-based, hint-aware) |
+| GraphMemoryV4 / V5 | 10D θ from CMA-ES (best on MultiHopKeyDoor) |
+| Policy | ExplorationPolicy (rule-based, hint-aware; supports 6 door names for MegaQuestRoom) |
 | Seeding | Deterministic, `hash(env_name + sys_name) % 10000` as seed offset |
 
 ---
@@ -180,6 +181,23 @@ All four new systems achieve perfect hint precision — they all solve the core 
 | MultiHopKeyDoor | 3 doors, 6 keys, 3 hints at steps 0-2, 250 steps | **High** — hint must survive 150+ steps of noise | Systems without persistent retention fail completely |
 
 The benchmark confirms that MultiHopKeyDoor is the right difficulty level for discriminating memory architectures. Key-Door and Goal-Room do not discriminate — too many systems cluster around 0.16–0.36 and 0.54–0.80 respectively, with CIs overlapping. MultiHopKeyDoor creates a clear performance stratification.
+
+**MegaQuestRoom (4th environment):** 20×20 grid, 1000 steps, 6 doors, 4 NPCs. Included in the benchmark with 20 episodes per (system, env) to keep runtime acceptable. Transfer results show that θ learned on MultiHopKeyDoor fails (0.00 reward) on MegaQuestRoom — strong evidence of task-dependence. The policy supports all 6 door names (north, east, south, west, inner, outer) for this environment.
+
+---
+
+## 6b. DocumentQA memory-quality evaluation (no LLM)
+
+A separate evaluation measures **recall@k** on the DocumentQA task: during the reading phase, each paragraph is stored as an event; for each question, we retrieve top-k and check whether any of the ground-truth `relevant_paragraphs` (from doc metadata) appear in the retrieved set. This isolates memory quality without using an LLM.
+
+- **Script:** `run_document_qa_memory.py`
+- **Output:** `results/document_qa_memory_results.json`
+- **Document:** fantasy_lore (40 paragraphs, 8 QA pairs)
+- **Metric:** mean recall@k per system (fraction of questions for which at least one relevant paragraph was in top-k)
+
+Run with: `python run_document_qa_memory.py`. All 12 memory systems (including GraphMemoryV4 and GraphMemoryV5) are evaluated.
+
+**DocumentQA + LLM + cost (Phase C):** For the full real-world experiment (optimize J = QA_score − λ×cost_usd), use the runner with DocumentQA and LLM enabled: `python runner.py --config experiments/document_qa_llm.yaml`. Requires `OPENAI_API_KEY`. The episode runner stores paragraphs during reading, then for each question retrieves top-k, calls the LLM to answer, and records cost and score. Metrics include `mean_reward` (QA partial score), `mean_cost_usd`, and `J_score_minus_lambda_cost`.
 
 ---
 

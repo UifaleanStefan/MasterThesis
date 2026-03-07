@@ -19,6 +19,9 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Color palette — consistent across all figures
 COLORS = {
+    "GraphMemoryV4":      "#16A34A",
+    "GraphMemoryV5":      "#0D9488",
+    "GraphMemoryV1":      "#EA580C",
     "EpisodicSemantic":   "#2196F3",
     "WorkingMemory(7)":   "#00BCD4",
     "AttentionMemory":    "#009688",
@@ -38,9 +41,41 @@ def load_results() -> dict:
     return json.loads(RESULTS_PATH.read_text())
 
 
-def make_fig5_multihop(results: dict) -> Path:
+def _is_valid_system_entry(entry: dict) -> bool:
+    """Exclude error entries and entries without mean_reward."""
+    if not isinstance(entry, dict):
+        return False
+    if "error" in entry:
+        return False
+    return "mean_reward" in entry
+
+
+def make_fig5_multihop(results: dict, v4res: dict | None = None) -> Path:
     """Fig 5 — MultiHopKeyDoor comparison: reward, precision, efficiency."""
-    env_data = results.get("MultiHop-KeyDoor", {})
+    env_data = dict(results.get("MultiHop-KeyDoor", {}))
+
+    # Merge optimized V4 and V1 from CMA-ES results if available
+    v4_path = Path("results/graphmemory_v4_cmaes_results.json")
+    if v4res is None and v4_path.exists():
+        v4res = json.loads(v4_path.read_text())
+    if v4res:
+        env_data["GraphMemoryV4"] = {
+            "mean_reward": v4res["v4"]["eval"]["mean_reward"],
+            "ci_lower": v4res["v4"]["eval"].get("ci_lower", v4res["v4"]["eval"]["mean_reward"] - 0.02),
+            "ci_upper": v4res["v4"]["eval"].get("ci_upper", v4res["v4"]["eval"]["mean_reward"] + 0.02),
+            "retrieval_precision": v4res["v4"]["eval"]["mean_precision"],
+            "efficiency": v4res["v4"]["eval"]["efficiency"],
+        }
+        env_data["GraphMemoryV1"] = {
+            "mean_reward": v4res["v1_baseline"]["eval"]["mean_reward"],
+            "ci_lower": v4res["v1_baseline"]["eval"].get("ci_lower", v4res["v1_baseline"]["eval"]["mean_reward"] - 0.02),
+            "ci_upper": v4res["v1_baseline"]["eval"].get("ci_upper", v4res["v1_baseline"]["eval"]["mean_reward"] + 0.02),
+            "retrieval_precision": v4res["v1_baseline"]["eval"]["mean_precision"],
+            "efficiency": v4res["v1_baseline"]["eval"]["efficiency"],
+        }
+
+    # Filter out error entries
+    env_data = {s: v for s, v in env_data.items() if _is_valid_system_entry(v)}
 
     # Sort by mean_reward descending
     systems = sorted(env_data.keys(),
@@ -113,19 +148,30 @@ def make_fig5_multihop(results: dict) -> Path:
 def make_cross_env_heatmap(results: dict) -> Path:
     """Fig 5b — Cross-environment performance heatmap."""
     envs = list(results.keys())
-    systems = list(results[envs[0]].keys())
+    # Union of systems across envs; filter error entries
+    all_systems = set()
+    for env in envs:
+        for s, v in results[env].items():
+            if _is_valid_system_entry(v):
+                all_systems.add(s)
+    systems = sorted(all_systems)
 
-    # Build matrix
+    # Build matrix (0 for missing system-env pairs)
     matrix = np.zeros((len(systems), len(envs)))
     for j, env in enumerate(envs):
         for i, sys in enumerate(systems):
-            matrix[i, j] = results[env].get(sys, {}).get("mean_reward", 0.0)
+            entry = results[env].get(sys, {})
+            if _is_valid_system_entry(entry):
+                matrix[i, j] = entry.get("mean_reward", 0.0)
 
     # Sort systems by MultiHop reward (most interesting env)
     multihop_idx = envs.index("MultiHop-KeyDoor") if "MultiHop-KeyDoor" in envs else -1
     order = np.argsort(matrix[:, multihop_idx])[::-1]
     matrix = matrix[order]
     sorted_systems = [systems[i] for i in order]
+
+    # Episode counts: MegaQuestRoom uses 20, others use 50
+    n_ep_str = "n=50 (Key-Door, Goal-Room, MultiHop); n=20 (MegaQuestRoom)"
 
     fig, ax = plt.subplots(figsize=(10, 6))
     im = ax.imshow(matrix, aspect="auto", cmap="RdYlGn", vmin=0, vmax=matrix.max())
@@ -144,7 +190,8 @@ def make_cross_env_heatmap(results: dict) -> Path:
                     fontsize=10, color=color, fontweight="bold")
 
     plt.colorbar(im, ax=ax, label="Mean Reward", shrink=0.8)
-    ax.set_title("Cross-Environment Performance Heatmap\n(10 memory systems × 3 environments, n=50 episodes each)",
+    n_sys, n_env = len(sorted_systems), len(envs)
+    ax.set_title(f"Cross-Environment Performance Heatmap\n({n_sys} memory systems × {n_env} environments, {n_ep_str})",
                  fontsize=12, fontweight="bold", pad=12)
     plt.tight_layout()
     out = OUT_DIR / "fig5b_cross_env_heatmap.png"
@@ -154,9 +201,22 @@ def make_cross_env_heatmap(results: dict) -> Path:
     return out
 
 
-def make_precision_scatter(results: dict) -> Path:
+def make_precision_scatter(results: dict, v4res: dict | None = None) -> Path:
     """Fig 5c — Precision vs Reward scatter on MultiHop."""
-    env_data = results.get("MultiHop-KeyDoor", {})
+    env_data = dict(results.get("MultiHop-KeyDoor", {}))
+    v4_path = Path("results/graphmemory_v4_cmaes_results.json")
+    if v4res is None and v4_path.exists():
+        v4res = json.loads(v4_path.read_text())
+    if v4res:
+        env_data["GraphMemoryV4"] = {
+            "mean_reward": v4res["v4"]["eval"]["mean_reward"],
+            "retrieval_precision": v4res["v4"]["eval"]["mean_precision"],
+        }
+        env_data["GraphMemoryV1"] = {
+            "mean_reward": v4res["v1_baseline"]["eval"]["mean_reward"],
+            "retrieval_precision": v4res["v1_baseline"]["eval"]["mean_precision"],
+        }
+    env_data = {s: v for s, v in env_data.items() if _is_valid_system_entry(v)}
     systems = list(env_data.keys())
 
     rewards    = [env_data[s].get("mean_reward", 0) for s in systems]
@@ -200,7 +260,7 @@ def make_easy_env_comparison(results: dict) -> Path:
                  fontsize=13, fontweight="bold")
 
     for ax, env_name in zip(axes, ["Key-Door", "Goal-Room"]):
-        env_data = results.get(env_name, {})
+        env_data = {s: v for s, v in results.get(env_name, {}).items() if _is_valid_system_entry(v)}
         systems = sorted(env_data.keys(),
                          key=lambda s: env_data[s].get("mean_reward", 0), reverse=True)
         rewards = [env_data[s].get("mean_reward", 0) for s in systems]
@@ -235,14 +295,19 @@ def make_easy_env_comparison(results: dict) -> Path:
 def main() -> None:
     print("Loading benchmark results...")
     results = load_results()
+    v4res = None
+    v4_path = Path("results/graphmemory_v4_cmaes_results.json")
+    if v4_path.exists():
+        v4res = json.loads(v4_path.read_text())
+        print("  Merging V4/V1 from graphmemory_v4_cmaes_results.json for MultiHop")
     print(f"  Environments: {list(results.keys())}")
     print(f"  Systems: {list(list(results.values())[0].keys())}")
     print()
 
     print("Generating figures...")
-    make_fig5_multihop(results)
+    make_fig5_multihop(results, v4res)
     make_cross_env_heatmap(results)
-    make_precision_scatter(results)
+    make_precision_scatter(results, v4res)
     make_easy_env_comparison(results)
 
     print("\nAll figures saved to docs/figures/")

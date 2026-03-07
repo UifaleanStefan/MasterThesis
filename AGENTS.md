@@ -29,16 +29,22 @@ The thesis has a clear narrative arc: POC (grid worlds, scalar θ) → full fram
 d:\Bocconi\Thesis\
 ├── main.py                    ← All POC experiments (Phases 4-7, memory comparison)
 ├── runner.py                  ← CLI: python runner.py --config experiments/X.yaml
-├── run_benchmark.py           ← Full 10-system × 3-env benchmark (run this for results)
+├── run_benchmark.py           ← Full 12-system × 4-env benchmark (run this for results)
+├── run_document_qa_memory.py  ← DocumentQA memory recall@k (no LLM)
+├── run_smoke_tests.py         ← Quick pipeline check (grid + DocQA memory + DocQA+LLM path)
 ├── config.py                  ← ExperimentConfig dataclass, YAML serializable
 ├── report.txt                 ← Full experiment output from last main.py run
 ├── requirements.txt
+├── scripts/                   ← Dev utilities (run from project root)
+│   ├── find_seed.py           ← Find seeds where EpisodicSemantic opens ≥1 door
+│   └── test_new_systems.py    ← Functional test for Phase A memory systems + envs
 │
 ├── memory/
 │   ├── graph_memory.py        ← V1: ORIGINAL — 3D θ (store, entity, temporal). DO NOT MODIFY.
 │   ├── graph_memory_v2.py     ← V2: 6D θ — adds learnable retrieval weights (w_graph, w_embed, w_recency)
 │   ├── graph_memory_v3.py     ← V3: 9D θ — adds learned importance scoring (novelty, richness, surprise)
 │   ├── graph_memory_v4.py     ← V4: 10D θ — adds Bayesian entity decay (theta_decay). MOST COMPLETE.
+│   ├── graph_memory_v5.py     ← V5: V4 + attention-based storage gating.
 │   ├── neural_controller.py   ← V1 NeuralController: MLP → 3D θ, 36-dim input. DO NOT MODIFY.
 │   ├── neural_controller_v2.py← V2 NeuralController: MLP → 10D θ, 50-dim input. MOST ADVANCED.
 │   ├── flat_memory.py         ← Baseline floor (sliding window)
@@ -72,7 +78,8 @@ d:\Bocconi\Thesis\
 │
 ├── evaluation/
 │   ├── run.py                 ← run_evaluation + run_memory_comparison
-│   ├── benchmark.py           ← run_full_benchmark (10 systems × all envs)
+│   ├── benchmark.py           ← run_full_benchmark (12 systems × 4 envs)
+│   ├── document_qa_memory.py  ← DocumentQA memory-quality (recall@k, no LLM)
 │   ├── ablation.py            ← run_ablation_study
 │   ├── transfer.py            ← run_transfer_matrix
 │   ├── sensitivity.py         ← compute_sensitivity (2D reward landscape)
@@ -81,7 +88,7 @@ d:\Bocconi\Thesis\
 │
 ├── results/
 │   ├── db.py                  ← SQLite results database
-│   └── benchmark_results.json ← REAL benchmark data (10 systems × 3 envs × 50 episodes)
+│   └── benchmark_results.json ← REAL benchmark data (12 systems × 4 envs)
 │
 ├── experiments/
 │   ├── multihop_cmaes.yaml
@@ -114,9 +121,10 @@ graph_memory.py (V1)     — 3D θ = (store, entity, temporal). ORIGINAL. Backwa
 graph_memory_v2.py (V2)  — 6D θ = V1 + (w_graph, w_embed, w_recency). Retrieval now learnable.
 graph_memory_v3.py (V3)  — 9D θ = V2 + (novel, erich, surprise). Storage now importance-scored.
 graph_memory_v4.py (V4)  — 10D θ = V3 + (theta_decay). Entity importance now Bayesian + temporal.
+graph_memory_v5.py (V5)  — V4 + attention-based storage gating (softmax over recent embeddings).
 ```
 
-**V4 is the most complete scalar θ system.** Each version is a separate file — originals are never modified.
+**V4 is the most complete scalar θ system.** V5 adds attention-based gating at storage time. Each version is a separate file — originals are never modified.
 
 ### Lineage 2: Neural θ (context-dependent θ per observation)
 
@@ -146,7 +154,7 @@ neural_controller_v2.py  — MLP: 50-dim input → 10D θ output. Wraps V4 Graph
 
 **GraphMemoryV4 is now the #1 system on MultiHopKeyDoor** (reward=0.178, precision=0.997), surpassing EpisodicSemantic. Achieved via CMA-ES on 10D theta with 30 gens × 50 eps. See `docs/GRAPHMEMORY_V4_RESULTS.md` for full analysis.
 
-**NeuralControllerV2Small** (50->32->10 MLP, 1,962 params) was trained via CMA-ES (30 gens) and achieved reward=0.033 on MultiHopKeyDoor — significantly below scalar V4. See `docs/NEURAL_CONTROLLER_V2_RESULTS.md` for analysis of why (sigma too small, insufficient training budget).
+**NeuralControllerV2Small** (50->32->10 MLP, 1,962 params): 30-gen run achieved reward=0.033 (below V4). **200-gen run** (sigma=0.3, ~15 h) achieved **reward=0.19** on MultiHop — matches or exceeds scalar V4 (0.178). See `docs/NEURAL_CONTROLLER_V2_RESULTS.md`.
 
 ---
 
@@ -183,7 +191,7 @@ These are implemented but have never been executed:
 | ~~Zero-shot transfer test~~ | `run_transfer.py` | Does learned V4 theta transfer? | HIGH | **DONE** — GoalRoom=0.69, HardKeyDoor=0.16, MegaQuestRoom=0.00 |
 | ~~Sensitivity analysis~~ | `run_sensitivity.py` | Is the reward landscape convex or rugged? | Medium | **DONE** — broad plateau (not sharp peak), theta_novel dominates |
 | DocumentQA + Bayesian Opt | `experiments/document_qa_llm.yaml` | Real LLM cost optimization | **HIGH (needs API key)** | Pending |
-| NeuralControllerV2 full training | `run_neural_controller_v2.py --generations 200 --sigma 0.3` | Full neural controller with larger budget | HIGH | Pending (overnight run) |
+| ~~NeuralControllerV2 full training~~ | `run_neural_controller_v2.py --generations 200 --sigma 0.3` | Full neural controller with larger budget | HIGH | **DONE** — reward=0.19 (≥ V4 0.178), MegaQuest 0.0 |
 
 ---
 
@@ -235,11 +243,29 @@ Set-Location "d:\Bocconi\Thesis"; python run_benchmark.py
 # Run a specific experiment config
 Set-Location "d:\Bocconi\Thesis"; python runner.py --config experiments/multihop_cmaes.yaml
 
+# Full list of commands and order to regenerate all results/figures
+# See docs/RUNNING_EXPERIMENTS.md
+
+# Smoke tests (quick pipeline check)
+Set-Location "d:\Bocconi\Thesis"; python run_smoke_tests.py
+
 # Run functional tests for GraphMemory variants
 Set-Location "d:\Bocconi\Thesis"; python test_graph_memory_variants.py
 
+# Regenerate thesis figures (requires results/*.json; use --allow-missing for partial)
+Set-Location "d:\Bocconi\Thesis"; python generate_thesis_figures.py
+
+# Regenerate all figures (thesis + benchmark fig5 + extended Fig 8–15 with real data when available)
+Set-Location "d:\Bocconi\Thesis"; python regen_all_figures.py
+
 # Regenerate benchmark figures from real data
 Set-Location "d:\Bocconi\Thesis"; python regen_benchmark_figs.py
+
+# Fig 6 & 7 (grid trajectory, episode curves) require live runs:
+Set-Location "d:\Bocconi\Thesis"; python regen_figs.py
+
+# Interactive dashboard (Streamlit; requires streamlit, pandas):
+Set-Location "d:\Bocconi\Thesis"; streamlit run dashboard/app.py
 
 # Commit and push
 Set-Location "d:\Bocconi\Thesis"
@@ -315,13 +341,16 @@ All V2/V3/V4 classes have `from_vector(v)` and `to_vector()` methods for CMA-ES 
 
 | File | When to read |
 |---|---|
+| `docs/THESIS_HANDOFF.md` | **Single-document project summary** — read this first on a new machine |
+| `docs/RECENT_CHANGES.md` | **Session log** — bar chart fixes, dashboard, figure audit, pipeline changes |
+| `docs/RUNNING_EXPERIMENTS.md` | **Exact commands and order** to regenerate all result files and figures |
+| `docs/DEPENDENCIES.md` | Optional deps (RAG/sentence_transformers), skip/fallback behaviour |
 | `docs/PROJECT_SUMMARY.md` | Full inventory of everything implemented |
 | `docs/ALGORITHMS_AND_FINDINGS.md` | All algorithms with pseudocode + experimental findings |
-| `docs/BENCHMARK_RESULTS.md` | Full analysis of the 10-system benchmark |
+| `docs/BENCHMARK_RESULTS.md` | Full analysis of the 12-system × 4-env benchmark |
 | `docs/THESIS_STORY.md` | Research narrative and rationale |
 | `docs/POC_RESULTS.md` | POC phase results in detail |
-| `docs/THESIS_HANDOFF.md` | **Single-document project summary** — read this first on a new machine |
-| `results/benchmark_results.json` | Raw benchmark data (10 systems × 3 envs × 50 episodes) |
+| `results/benchmark_results.json` | Raw benchmark data (12 systems × 4 envs) |
 | `report.txt` | Full output from last `python main.py` run |
 
 ---
@@ -341,7 +370,8 @@ All V2/V3/V4 classes have `from_vector(v)` and `to_vector()` methods for CMA-ES 
 | Transfer — GoalRoom | reward=**0.690** (strong positive) | `results/transfer_results.json` |
 | Transfer — MegaQuestRoom | reward=**0.000** (complete failure) | same file |
 | Sensitivity — best cell | theta_novel=0.909, w_recency=3.636 → reward=**0.200** | `results/sensitivity_results.json` |
-| NeuralV2Small (30 gens) | reward=**0.033** (81% below V4 scalar) | `results/neural_controller_v2_results.json` |
+| NeuralV2Small (30 gens) | reward=0.033 (below V4) | same file |
+| NeuralV2Small (200 gens) | reward=**0.19** (≥ V4 0.178), MegaQuest 0.0 | `results/neural_controller_v2_results.json` |
 
 ### What This Means for the Thesis
 

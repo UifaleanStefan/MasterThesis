@@ -250,36 +250,72 @@ def main() -> None:
 
     t0 = time.time()
 
-    # Run optimization
-    print(f"\nPhase 1: Optimization ({cfg.optimization.method})")
-    best_theta, opt_history = run_optimization(cfg, env, policy)
-    print(f"Best theta: {[round(x, 3) for x in best_theta]}")
+    # DocumentQA + LLM path: skip grid-world optimization, run DocumentQA episodes with LLM.
+    # Keep rewards/tokens/sizes defined in both branches so DB save never sees undefined vars.
+    docqa_llm = cfg.environment.name == "DocumentQA" and cfg.llm.enabled
+    rewards, tokens, sizes = [], [], []
 
-    # Evaluation
-    print(f"\nPhase 2: Evaluation ({cfg.eval.n_episodes} episodes)")
-    from agent.loop import run_episode_with_any_memory
-    rewards, tokens, sizes, precisions = [], [], [], []
-    for ep in range(cfg.eval.n_episodes):
-        mem = instantiate_memory(cfg, theta=best_theta)
-        _, _, stats = run_episode_with_any_memory(
-            env, policy, mem, k=cfg.eval.k, episode_seed=ep
-        )
-        rewards.append(stats.get("reward", 0.0))
-        tokens.append(stats.get("retrieval_tokens", 0))
-        sizes.append(stats.get("memory_size", 0))
-        prec = stats.get("retrieval_precision")
-        if prec is not None:
-            precisions.append(prec)
+    if docqa_llm:
+        print("\nPhase: DocumentQA + LLM evaluation (no theta optimization)")
+        from agent.loop import run_document_qa_episode_with_llm
+        lambda_cost = getattr(cfg.llm, "lambda_cost", 1000.0)
+        costs = []
+        for ep in range(cfg.eval.n_episodes):
+            mem = instantiate_memory(cfg)
+            _, score, cost_usd, stats = run_document_qa_episode_with_llm(
+                env, mem, policy, k=cfg.eval.k, episode_seed=cfg.seed + ep
+            )
+            rewards.append(score)
+            costs.append(cost_usd)
+            tokens.append(stats.get("retrieval_tokens", 0))
+            sizes.append(stats.get("memory_size", 0))
+        import statistics as st
+        mean_score = st.mean(rewards)
+        mean_cost = st.mean(costs)
+        J = mean_score - lambda_cost * mean_cost
+        metrics = {
+            "mean_reward": mean_score,
+            "std_reward": st.stdev(rewards) if len(rewards) > 1 else 0.0,
+            "mean_cost_usd": mean_cost,
+            "mean_tokens": st.mean(tokens),
+            "mean_memory_size": st.mean(sizes),
+            "J_score_minus_lambda_cost": J,
+            "lambda_cost": lambda_cost,
+        }
+        best_theta = tuple(cfg.memory.theta)
+        opt_history = []
+    else:
+        costs = []
+        # Run optimization
+        print(f"\nPhase 1: Optimization ({cfg.optimization.method})")
+        best_theta, opt_history = run_optimization(cfg, env, policy)
+        print(f"Best theta: {[round(x, 3) for x in best_theta]}")
 
-    import statistics as st
-    metrics = {
-        "mean_reward": st.mean(rewards),
-        "std_reward": st.stdev(rewards) if len(rewards) > 1 else 0.0,
-        "mean_tokens": st.mean(tokens),
-        "mean_memory_size": st.mean(sizes),
-        "mean_precision": st.mean(precisions) if precisions else -1.0,
-        "efficiency": st.mean(rewards) / (1 + st.mean(tokens)),
-    }
+        # Evaluation
+        print(f"\nPhase 2: Evaluation ({cfg.eval.n_episodes} episodes)")
+        from agent.loop import run_episode_with_any_memory
+        rewards, tokens, sizes, precisions = [], [], [], []
+        for ep in range(cfg.eval.n_episodes):
+            mem = instantiate_memory(cfg, theta=best_theta)
+            _, _, stats = run_episode_with_any_memory(
+                env, policy, mem, k=cfg.eval.k, episode_seed=ep
+            )
+            rewards.append(stats.get("reward", 0.0))
+            tokens.append(stats.get("retrieval_tokens", 0))
+            sizes.append(stats.get("memory_size", 0))
+            prec = stats.get("retrieval_precision")
+            if prec is not None:
+                precisions.append(prec)
+
+        import statistics as st
+        metrics = {
+            "mean_reward": st.mean(rewards),
+            "std_reward": st.stdev(rewards) if len(rewards) > 1 else 0.0,
+            "mean_tokens": st.mean(tokens),
+            "mean_memory_size": st.mean(sizes),
+            "mean_precision": st.mean(precisions) if precisions else -1.0,
+            "efficiency": st.mean(rewards) / (1 + st.mean(tokens)),
+        }
 
     print(f"\nResults:")
     for k, v in metrics.items():

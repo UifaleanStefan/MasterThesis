@@ -23,6 +23,7 @@ from .neural_controller import NeuralMemoryController
 from .graph_memory_v2 import GraphMemoryV2, MemoryParamsV2
 from .graph_memory_v3 import GraphMemoryV3, MemoryParamsV3
 from .graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
+from .graph_memory_v5 import GraphMemoryV5
 from .neural_controller_v2 import NeuralMemoryControllerV2
 
 __all__ = [
@@ -45,6 +46,7 @@ __all__ = [
     "MemoryParamsV3",
     "GraphMemoryV4",
     "MemoryParamsV4",
+    "GraphMemoryV5",
     "NeuralMemoryControllerV2",
     "embed_observation",
     "extract_entities",

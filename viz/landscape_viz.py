@@ -169,7 +169,9 @@ def plot_reward_landscape(
         f"Environment: {env_name}, θ_temporal fixed={landscape.get('fixed_temporal', 0.8):.2f}",
         fontsize=12,
     )
-    ax.legend(fontsize=9, loc="upper right")
+    handles, labels = ax.get_legend_handles_labels()
+    if handles:
+        ax.legend(handles, labels, fontsize=9, loc="upper right")
 
     plt.tight_layout()
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)

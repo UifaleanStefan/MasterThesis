@@ -57,19 +57,29 @@ def _make_memory_systems(learned_thetas: dict[str, tuple] | None = None) -> dict
     from memory.episodic_semantic_memory import EpisodicSemanticMemory
     from memory.rag_memory import RAGMemory
     from memory.graph_memory import GraphMemory, MemoryParams
+    from memory.graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
+    from memory.graph_memory_v5 import GraphMemoryV5
     from memory.hierarchical_memory import HierarchicalMemory
     from memory.working_memory import WorkingMemory
     from memory.causal_memory import CausalMemory
     from memory.attention_memory import AttentionMemory
 
-    # Default learned theta for MultiHop (best from Phase 7)
+    # Default learned theta for MultiHop (best from Phase 7, 3D)
     default_theta = (0.956, 0.378, 1.000)
     if learned_thetas:
         default_theta = learned_thetas.get("MultiHop-KeyDoor", default_theta)
+    # Best V4 10D theta from CMA-ES (MultiHopKeyDoor) for GraphMemoryV4 and V5
+    default_v4_params = MemoryParamsV4(
+        theta_store=0.293, theta_novel=0.908, theta_erich=0.198, theta_surprise=0.785,
+        theta_entity=0.285, theta_temporal=0.278, theta_decay=0.668,
+        w_graph=0.0, w_embed=1.079, w_recency=3.777, mode="learnable",
+    )
 
     return {
         "FlatWindow(50)":       lambda: FlatMemory(window_size=50),
         "GraphMemory+Theta":    lambda: GraphMemory(MemoryParams(*default_theta, "learnable")),
+        "GraphMemoryV4":        lambda: GraphMemoryV4(default_v4_params),
+        "GraphMemoryV5":        lambda: GraphMemoryV5(default_v4_params),
         "SemanticMemory":       lambda: SemanticMemory(max_capacity=80),
         "SummaryMemory":        lambda: SummaryMemory(raw_buffer_size=30, summarize_every=25),
         "EpisodicSemantic":     lambda: EpisodicSemanticMemory(episodic_size=30),
@@ -125,8 +135,10 @@ def run_system_on_env(
 def run_full_benchmark(
     envs: dict[str, tuple] | None = None,
     n_episodes: int = 50,
+    episodes_per_env: dict[str, int] | None = None,
     k: int = 8,
     learned_thetas: dict[str, tuple] | None = None,
+    skip_systems: list[str] | None = None,
     verbose: bool = True,
 ) -> dict[str, dict[str, dict]]:
     """
@@ -135,9 +147,11 @@ def run_full_benchmark(
     Parameters
     ----------
     envs : dict mapping env_name -> (env_instance, policy_instance)
-        If None, uses default set (MultiHopKeyDoor + GoalRoom).
+        If None, uses default set (Key-Door, Goal-Room, MultiHop-KeyDoor, MegaQuestRoom).
     n_episodes : int
-        Episodes per (system, env) pair.
+        Default episodes per (system, env) pair when episodes_per_env is not set.
+    episodes_per_env : dict mapping env_name -> int, optional
+        Override episode count per environment (e.g. fewer for MegaQuestRoom).
     learned_thetas : dict mapping env_name -> theta tuple
         Learned thetas from Phase 7 for GraphMemory+Theta.
     verbose : bool
@@ -146,7 +160,7 @@ def run_full_benchmark(
     -------
     results : {env_name: {system_name: result_dict}}
     """
-    from environment import MultiHopKeyDoor, GoalRoom, ToyEnvironment
+    from environment import MultiHopKeyDoor, GoalRoom, ToyEnvironment, MegaQuestRoom
     from agent import ExplorationPolicy
 
     if envs is None:
@@ -154,17 +168,23 @@ def run_full_benchmark(
             "Key-Door":        (ToyEnvironment(seed=0),      ExplorationPolicy(seed=0)),
             "Goal-Room":       (GoalRoom(seed=0),             ExplorationPolicy(seed=0)),
             "MultiHop-KeyDoor":(MultiHopKeyDoor(seed=0),     ExplorationPolicy(seed=0)),
+            "MegaQuestRoom":   (MegaQuestRoom(seed=0),      ExplorationPolicy(seed=0)),
         }
 
     memory_factories = _make_memory_systems(learned_thetas)
     results: dict[str, dict[str, dict]] = {}
 
     for env_name, (env, policy) in envs.items():
+        n_eps = (episodes_per_env or {}).get(env_name, n_episodes)
         results[env_name] = {}
         if verbose:
-            print(f"\n[Benchmark] Environment: {env_name}")
+            print(f"\n[Benchmark] Environment: {env_name} (n={n_eps})")
 
         for sys_name, factory in memory_factories.items():
+            if skip_systems and sys_name in skip_systems:
+                if verbose:
+                    print(f"  System: {sys_name} (skipped)")
+                continue
             if verbose:
                 print(f"  System: {sys_name}")
             try:
@@ -172,7 +192,7 @@ def run_full_benchmark(
                     memory_factory=factory,
                     env=env,
                     policy=policy,
-                    n_episodes=n_episodes,
+                    n_episodes=n_eps,
                     k=k,
                     seed_offset=hash(env_name + sys_name) % 10000,
                 )

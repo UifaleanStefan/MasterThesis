@@ -9,6 +9,11 @@ from .statistics import (
     full_comparison, print_comparison_report, run_all_comparisons,
 )
 from .benchmark import run_full_benchmark, print_benchmark_table, save_benchmark_results
+from .document_qa_memory import (
+    run_document_qa_memory_eval,
+    print_document_qa_table,
+    save_document_qa_results,
+)
 from .cost_tracker import CostTracker, compare_costs
 
 __all__ = [
@@ -32,6 +37,9 @@ __all__ = [
     "run_full_benchmark",
     "print_benchmark_table",
     "save_benchmark_results",
+    "run_document_qa_memory_eval",
+    "print_document_qa_table",
+    "save_document_qa_results",
     "CostTracker",
     "compare_costs",
 ]

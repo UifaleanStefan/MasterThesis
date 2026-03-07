@@ -58,9 +58,10 @@ class ExplorationPolicy:
         return key_to_door
 
     def _get_door_name_from_obs(self, observation: str) -> str | None:
-        """Extract door name (north/east/south) from current observation."""
+        """Extract door name (north/east/south/west/inner/outer) from current observation.
+        Supports MultiHopKeyDoor (3 doors) and MegaQuestRoom (6 doors)."""
         obs = observation.lower()
-        for name in ["north", "east", "south"]:
+        for name in ["north", "east", "south", "west", "inner", "outer"]:
             if f"{name} door" in obs:
                 return name
         return None

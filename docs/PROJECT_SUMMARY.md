@@ -44,23 +44,25 @@ Why this matters: in real LLM-based agents (RAG, MemGPT, LangMem), storing and r
 
 **Key design principle for MultiHopKeyDoor:** Hint observations (`"You see a sign: the red key opens the north door"`) appear *only* at steps 0–2. By step 50+, they're gone. Without memory that retains them, the agent cannot match keys to doors — guaranteed 0% success. With good memory, it achieves 30%+.
 
-### 2.2 Memory Systems (10 total)
+### 2.2 Memory Systems (12 in benchmark)
 
-All share the uniform interface: `add_event(event, episode_seed)`, `get_relevant_events(obs, step, k)`, `clear()`, `get_stats()`.
+All share the uniform interface: `add_event(event, episode_seed)`, `get_relevant_events(obs, step, k)`, `clear()`, `get_stats()`. The full benchmark runs 12 systems × 4 environments (Key-Door, Goal-Room, MultiHop-KeyDoor, MegaQuestRoom). DocumentQA memory-quality evaluation (recall@k, no LLM) is in `evaluation/document_qa_memory.py`; run with `run_document_qa_memory.py`.
 
 | # | System | File | Key Mechanism |
 |---|---|---|---|
 | 1 | `FlatMemory` | `memory/flat_memory.py` | Sliding window, last N events. Baseline floor. |
 | 2 | `GraphMemory + θ` | `memory/graph_memory.py` | Graph with event/entity nodes, parameterized by θ. **Core contribution.** |
-| 3 | `SemanticMemory` | `memory/semantic_memory.py` | Importance-weighted pool: NPC hints + entity richness + novelty score |
-| 4 | `SummaryMemory` | `memory/summary_memory.py` | Compresses every 25 steps into a summary node |
-| 5 | `EpisodicSemanticMemory` | `memory/episodic_semantic_memory.py` | **Dual store:** episodic sliding window + persistent semantic facts (hints never evicted). Best performer. |
-| 6 | `RAGMemory` | `memory/rag_memory.py` | Dense embeddings via `sentence-transformers` (`all-MiniLM-L6-v2`), cosine retrieval |
-| 7 | `HierarchicalMemory` | `memory/hierarchical_memory.py` | **NEW.** 3 levels: raw (last 20) → episode summaries (every 25 steps) → long-term facts (never evicted) |
-| 8 | `WorkingMemory` | `memory/working_memory.py` | **NEW.** 7-slot LRU-retrieval eviction (Miller's Law). Recently retrieved events survive. |
-| 9 | `CausalMemory` | `memory/causal_memory.py` | **NEW.** Tracks event→action→outcome causal chains. Retrieves by causal relevance. |
-| 10 | `AttentionMemory` | `memory/attention_memory.py` | **NEW.** Softmax scaled dot-product attention. Differentiable retrieval. |
-| 11 | `NeuralMemoryController` | `memory/neural_controller.py` | **NEW.** MLP (~4,400 params) outputs context-dependent θ per observation. |
+| 3 | `GraphMemoryV4` | `memory/graph_memory_v4.py` | 10D θ, importance scoring, Bayesian entity decay. |
+| 4 | `GraphMemoryV5` | `memory/graph_memory_v5.py` | V4 + attention-based storage gating. |
+| 5 | `SemanticMemory` | `memory/semantic_memory.py` | Importance-weighted pool: NPC hints + entity richness + novelty score |
+| 6 | `SummaryMemory` | `memory/summary_memory.py` | Compresses every 25 steps into a summary node |
+| 7 | `EpisodicSemanticMemory` | `memory/episodic_semantic_memory.py` | **Dual store:** episodic sliding window + persistent semantic facts (hints never evicted). Best performer. |
+| 8 | `RAGMemory` | `memory/rag_memory.py` | Dense embeddings via `sentence-transformers` (fallback to TF-IDF if unavailable). |
+| 9 | `HierarchicalMemory` | `memory/hierarchical_memory.py` | 3 levels: raw (last 20) → episode summaries (every 25 steps) → long-term facts (never evicted) |
+| 10 | `WorkingMemory` | `memory/working_memory.py` | 7-slot LRU-retrieval eviction (Miller's Law). Recently retrieved events survive. |
+| 11 | `CausalMemory` | `memory/causal_memory.py` | Tracks event→action→outcome causal chains. Retrieves by causal relevance. |
+| 12 | `AttentionMemory` | `memory/attention_memory.py` | Softmax scaled dot-product attention. Differentiable retrieval. |
+| — | `NeuralMemoryController` | `memory/neural_controller.py` | MLP outputs context-dependent θ per observation. |
 
 ### 2.3 Retrieval
 

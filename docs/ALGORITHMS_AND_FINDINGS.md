@@ -202,6 +202,24 @@ Unlike top-k hard selection, attention weights all events — low-weight events 
 
 ---
 
+#### 11. GraphMemoryV5 — Attention-based storage gating
+
+**Type:** Learnable graph memory (V4 + attention gate)  
+**File:** `memory/graph_memory_v5.py`  
+**Status:** New — extends V4 with attention-based storage gating
+
+Extends GraphMemoryV4 by adding an attention mechanism at storage time. Before storing an event, compute an attention distribution over the last W stored observation embeddings (cosine similarity with current observation embedding), then softmax to get weights. The **attention score** is the maximum attention weight (high when the current observation is similar to some recently stored observation). The storage gate becomes:
+
+```
+store if (importance + alpha_attn * attention_score) > theta_store
+```
+
+where `importance` is the same as V4 (novelty, entity richness, surprise) and `alpha_attn = 0.5` (fixed). Observations that strongly "attend to" recent stored content get a bonus to be stored (contextually relevant). Entity nodes, temporal edges, and retrieval are unchanged from V4 (same 10D params, same `retrieve_events_learnable`). Uses the same 4-method interface as all other memory systems.
+
+**Purpose:** Tests whether attention-weighted relevance at storage time improves over pure importance scoring (V4). Included in the 12-system × 4-env benchmark and in DocumentQA memory-quality evaluation.
+
+---
+
 ### Layer 2: Optimization Algorithms
 
 These are the algorithms that *learn* θ. Each answers: *given a task, how do we find the best θ?*

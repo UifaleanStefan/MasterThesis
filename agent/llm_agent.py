@@ -196,6 +196,70 @@ class LLMAgent:
         self._step += 1
         return action
 
+    _QA_SYSTEM_PROMPT = (
+        "You are a question-answering assistant. You receive a question and relevant document passages. "
+        "Answer the question concisely using only the provided context. "
+        "Output only the answer text, no preamble or explanation."
+    )
+
+    def answer_question(self, question: str, past_events: list[Event] | None = None) -> str:
+        """
+        Generate an answer to a question given retrieved document context (for DocumentQA).
+        Returns raw answer string. Tracks cost like decide().
+        """
+        if not self._has_openai:
+            return self._fallback_answer_question(question, past_events or [])
+
+        memory_context = self._formatter.format(past_events or [])
+        user_msg = f"Relevant passages:\n{memory_context}\n\nQuestion: {question}\n\nAnswer:"
+
+        t0 = time.monotonic()
+        try:
+            response = self._client.chat.completions.create(
+                model=self._model,
+                messages=[
+                    {"role": "system", "content": self._QA_SYSTEM_PROMPT},
+                    {"role": "user", "content": user_msg},
+                ],
+                temperature=self._temperature,
+                max_tokens=150,
+                seed=self._seed,
+            )
+        except Exception as e:
+            print(f"[LLMAgent] API error: {e} — fallback answer")
+            return self._fallback_answer_question(question, past_events or [])
+
+        latency_ms = (time.monotonic() - t0) * 1000
+        answer = response.choices[0].message.content.strip()
+
+        usage = response.usage
+        pricing = _PRICING.get(self._model, {"input": 0.15, "output": 0.60})
+        cost = (
+            usage.prompt_tokens * pricing["input"]
+            + usage.completion_tokens * pricing["output"]
+        ) / 1_000_000
+
+        record = CallRecord(
+            step=self._step,
+            prompt_tokens=usage.prompt_tokens,
+            completion_tokens=usage.completion_tokens,
+            cost_usd=cost,
+            action=answer[:50],
+            latency_ms=latency_ms,
+        )
+        self._episode_stats.add(record)
+        self._session_stats.add(record)
+        self._step += 1
+        return answer
+
+    def _fallback_answer_question(self, question: str, past_events: list[Event]) -> str:
+        """Heuristic: return first sentence of the first passage that contains question words."""
+        q_words = set(re.findall(r"\b[a-z]{4,}\b", question.lower()))
+        for e in past_events[:5]:
+            if q_words & set(re.findall(r"\b[a-z]{4,}\b", e.observation.lower())):
+                return e.observation[:200].rsplit(".", 1)[0] + "." if "." in e.observation[:200] else e.observation[:200]
+        return "I do not know." if past_events else "No context provided."
+
     def reset_episode(self) -> EpisodeStats:
         """Reset per-episode stats and return the completed episode stats."""
         completed = self._episode_stats

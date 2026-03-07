@@ -1,6 +1,6 @@
 # Project Summary — Learning Task-Adaptive Structured Memory
 
-*For external analysis / thesis writing. Last updated: Mar 2026 (final POC results — learning curves, fixed efficiency, 3-environment comparison, 6-system memory comparison on MultiHopKeyDoor).*
+*For external analysis / thesis writing. Last updated: Mar 2026. For run instructions and command order see **THESIS_HANDOFF.md** and **docs/RUNNING_EXPERIMENTS.md**.*
 *Paste this entire file when asking an LLM to help with thesis writing, analysis, or experiment interpretation.*
 
 ---

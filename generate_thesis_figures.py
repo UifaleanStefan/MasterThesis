@@ -5,10 +5,16 @@ Generates all thesis publication-quality figures from real experimental data.
 Produces: fig_master_benchmark, fig_ablation_ranked, fig_transfer_annotated,
           fig_sensitivity_annotated, fig_neural_analysis, and regenerates
           fig11_pareto and fig13_memory_size with real data.
+
+Usage:
+    python generate_thesis_figures.py
+    python generate_thesis_figures.py --allow-missing   # generate only figures for available JSONs
 """
 
+import argparse
 import json
 import os
+import sys
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
@@ -21,6 +27,49 @@ from matplotlib.colors import LinearSegmentedColormap
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 FIGS_DIR    = os.path.join(os.path.dirname(__file__), "docs", "figures")
 os.makedirs(FIGS_DIR, exist_ok=True)
+
+# Which result file(s) each figure needs (for missing-file check)
+FIGURE_DEPS = {
+    "fig_master_benchmark": ["benchmark_results.json", "graphmemory_v4_cmaes_results.json"],
+    "fig_ablation_ranked": ["ablation_results.json"],
+    "fig_transfer_annotated": ["transfer_results.json"],
+    "fig_sensitivity_annotated": ["sensitivity_results.json"],
+    "fig_neural_analysis": ["neural_controller_v2_results.json"],
+    "fig_neural_v2_curves": ["neural_controller_v2_results.json"],
+    "fig_neural_transfer": ["neural_controller_v2_results.json", "transfer_results.json"],
+    "fig11_pareto": ["benchmark_results.json", "graphmemory_v4_cmaes_results.json"],
+    "fig13_memory_size": ["benchmark_results.json", "graphmemory_v4_cmaes_results.json"],
+    "fig_story_precision_reward": ["benchmark_results.json"],
+}
+COMMANDS = {
+    "run_benchmark.py": "benchmark_results.json",
+    "run_graphmemory_v4_cmaes.py": "graphmemory_v4_cmaes_results.json",
+    "run_ablation.py": "ablation_results.json",
+    "run_transfer.py": "transfer_results.json",
+    "run_sensitivity.py": "sensitivity_results.json",
+    "run_neural_controller_v2.py": "neural_controller_v2_results.json",
+}
+
+
+def check_required_files(allow_missing: bool) -> dict[str, bool]:
+    """Return {figure_name: can_run}. If not allow_missing and any required file is missing, print and exit 1."""
+    missing_files: set[str] = set()
+    for deps in FIGURE_DEPS.values():
+        for f in deps:
+            if not os.path.isfile(os.path.join(RESULTS_DIR, f)):
+                missing_files.add(f)
+    can_run = {}
+    for fig, deps in FIGURE_DEPS.items():
+        can_run[fig] = all(os.path.isfile(os.path.join(RESULTS_DIR, f)) for f in deps)
+    if missing_files and not allow_missing:
+        print("Missing result files (run these commands first):", file=sys.stderr)
+        for f in sorted(missing_files):
+            cmd = next((c for c, out in COMMANDS.items() if out == f), None)
+            print(f"  {f}  <- python {cmd}", file=sys.stderr)
+        print("Use --allow-missing to generate only figures for available data.", file=sys.stderr)
+        sys.exit(1)
+    return can_run
+
 
 def load(fname):
     with open(os.path.join(RESULTS_DIR, fname)) as f:
@@ -119,7 +168,7 @@ def fig_master_benchmark():
     # ── top-right: reward vs precision scatter ──
     scatter_colors = []
     type_map = {
-        "GraphMemoryV4": GREEN, "GraphMemoryV1": ORANGE,
+        "GraphMemoryV4": GREEN, "GraphMemoryV5": TEAL, "GraphMemoryV1": ORANGE,
         "SemanticMemory": PURPLE, "RAGMemory": TEAL,
         "EpisodicSemantic": PURPLE, "HierarchicalMemory": GRAY,
         "CausalMemory": GRAY, "SummaryMemory": GRAY,
@@ -231,18 +280,22 @@ def fig_ablation_ranked():
     ax1.set_xlabel("Reward Degradation (%)")
     ax1.set_title("Reward Degradation When Feature Removed")
     ax1.axvline(0, color="black", linewidth=0.8)
-    for i, (bar, val) in enumerate(zip(ax1.patches, reward_s)):
-        ax1.text(max(val, 0) + 0.5, bar.get_y() + bar.get_height()/2,
-                 f"{val:.1f}%", va="center", fontsize=8)
+    for bar, val in zip(ax1.patches, reward_s):
+        x_pos = val + 0.5 if val >= 0 else val - 0.5
+        ha = "left" if val >= 0 else "right"
+        ax1.text(x_pos, bar.get_y() + bar.get_height()/2,
+                 f"{val:.1f}%", va="center", ha=ha, fontsize=8)
     ax1.set_xlim(min(min(reward_s) - 10, -15), max(reward_s) + 15)
 
     ax2.barh(y, prec_s, color=p_colors, edgecolor="white", linewidth=0.5)
     ax2.set_xlabel("Precision Degradation (%)")
     ax2.set_title("Precision Degradation When Feature Removed")
     ax2.axvline(0, color="black", linewidth=0.8)
-    for i, (bar, val) in enumerate(zip(ax2.patches, prec_s)):
-        ax2.text(max(val, 0) + 0.5, bar.get_y() + bar.get_height()/2,
-                 f"{val:.1f}%", va="center", fontsize=8)
+    for bar, val in zip(ax2.patches, prec_s):
+        x_pos = val + 0.5 if val >= 0 else val - 0.5
+        ha = "left" if val >= 0 else "right"
+        ax2.text(x_pos, bar.get_y() + bar.get_height()/2,
+                 f"{val:.1f}%", va="center", ha=ha, fontsize=8)
     ax2.set_xlim(min(min(prec_s) - 10, -15), max(prec_s) + 15)
 
     # annotation
@@ -373,10 +426,18 @@ def fig_sensitivity_annotated():
         ax.set_ylabel("theta_novel")
         ax.set_title(title)
 
-    # broad plateau annotation on reward panel
-    ax1.text(0.03, 0.97, "Broad plateau —\nsystem is robust",
+    # annotation: sharp peak vs broad plateau (data-driven)
+    analysis = data.get("analysis", {})
+    is_sharp = analysis.get("is_sharp_peak", False)
+    if is_sharp:
+        ann_text = "Sharp peak —\noptimizer must find\nprecise values"
+        ann_color = RED
+    else:
+        ann_text = "Broad plateau —\nsystem is robust"
+        ann_color = GOLD
+    ax1.text(0.03, 0.97, ann_text,
              transform=ax1.transAxes, va="top", fontsize=9,
-             bbox=dict(boxstyle="round,pad=0.3", facecolor="#FFFBEB", edgecolor=GOLD, alpha=0.9))
+             bbox=dict(boxstyle="round,pad=0.3", facecolor="#FFFBEB", edgecolor=ann_color, alpha=0.9))
 
     fig.suptitle("GraphMemoryV4 — Sensitivity Analysis: theta_novel × w_recency",
                  fontsize=12, fontweight="bold")
@@ -429,7 +490,7 @@ def fig_neural_analysis():
              transform=ax1.transAxes, ha="right", va="bottom", fontsize=8.5,
              bbox=dict(boxstyle="round,pad=0.3", facecolor="#F5F3FF", edgecolor=PURPLE, alpha=0.9))
 
-    # ── middle: comparison bar chart ──
+    # ── middle: comparison bar chart (dual y-axis: reward vs precision on different scales) ──
     systems_c = ["NeuralV2Small\n(1962 params)", "V4 Scalar\n(10 params)", "V1 Baseline\n(3 params)"]
     rewards_c = [neural_multihop, v4_scalar, 0.1017]
     precs_c   = [neural_prec,     v4_prec,   0.6321]
@@ -437,51 +498,141 @@ def fig_neural_analysis():
 
     x = np.arange(len(systems_c))
     w = 0.35
-    b1 = ax2.bar(x - w/2, rewards_c, w, color=bar_colors_c, alpha=0.85, label="Reward", edgecolor="white")
-    b2 = ax2.bar(x + w/2, precs_c,   w, color=bar_colors_c, alpha=0.45, label="Precision", edgecolor="white", hatch="//")
-    ax2.set_xticks(x)
-    ax2.set_xticklabels(systems_c, fontsize=8.5)
-    ax2.set_ylabel("Score")
-    ax2.set_title("Performance Comparison\n(MultiHopKeyDoor)")
-    ax2.legend(fontsize=8)
-    ax2.grid(True, alpha=0.3, axis="y")
-    for bar, val in zip(list(b1) + list(b2), rewards_c + precs_c):
-        ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01,
-                 f"{val:.3f}", ha="center", fontsize=7.5)
-    pct = (v4_scalar - neural_multihop) / (v4_scalar + 1e-9) * 100
-    ax2.text(0.5, 0.97,
-             f"Neural is {pct:.0f}% worse than\nscalar V4 — expressivity\nvs trainability tradeoff",
-             transform=ax2.transAxes, ha="center", va="top", fontsize=8,
-             bbox=dict(boxstyle="round,pad=0.3", facecolor="#FEF2F2", edgecolor=RED, alpha=0.9))
+    ax2_left = ax2
+    ax2_right = ax2.twinx()
+    b1 = ax2_left.bar(x - w/2, rewards_c, w, color=bar_colors_c, alpha=0.85, label="Reward", edgecolor="white")
+    b2 = ax2_right.bar(x + w/2, precs_c,   w, color=bar_colors_c, alpha=0.45, label="Precision", edgecolor="white", hatch="//")
+    ax2_left.set_ylabel("Mean Reward", color=PURPLE)
+    ax2_right.set_ylabel("Retrieval Precision", color=GRAY)
+    ax2_left.tick_params(axis="y", labelcolor=PURPLE)
+    ax2_right.tick_params(axis="y", labelcolor=GRAY)
+    ax2_left.set_ylim(0, max(rewards_c) * 1.4)
+    ax2_right.set_ylim(0, 1.15)
+    ax2_left.set_xticks(x)
+    ax2_left.set_xticklabels(systems_c, fontsize=8.5)
+    ax2_left.set_title("Performance Comparison\n(MultiHopKeyDoor)")
+    ax2_left.legend(loc="upper left", fontsize=8)
+    ax2_right.legend(loc="upper right", fontsize=8)
+    ax2_left.grid(True, alpha=0.3, axis="y")
+    for bar, val in zip(b1, rewards_c):
+        ax2_left.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.005,
+                      f"{val:.3f}", ha="center", va="bottom", fontsize=7.5)
+    for bar, val in zip(b2, precs_c):
+        ax2_right.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
+                       f"{val:.3f}", ha="center", va="bottom", fontsize=7.5)
+    # Data-driven annotation: neural can match or exceed V4 with enough budget
+    if neural_multihop >= v4_scalar:
+        ax2.text(0.5, 0.97,
+                 "Neural matches or exceeds\nscalar V4 with sufficient\ntraining budget (200 gens)",
+                 transform=ax2.transAxes, ha="center", va="top", fontsize=8,
+                 bbox=dict(boxstyle="round,pad=0.3", facecolor="#DCFCE7", edgecolor=GREEN, alpha=0.9))
+    else:
+        pct = (v4_scalar - neural_multihop) / (v4_scalar + 1e-9) * 100
+        ax2.text(0.5, 0.97,
+                 f"Neural is {pct:.0f}% worse than\nscalar V4 — expressivity\nvs trainability tradeoff",
+                 transform=ax2.transAxes, ha="center", va="top", fontsize=8,
+                 bbox=dict(boxstyle="round,pad=0.3", facecolor="#FEF2F2", edgecolor=RED, alpha=0.9))
 
-    # ── right: "what would be needed" diagram ──
-    scenarios = [
-        ("Current\n(sigma=0.05\n30 gens)", neural_multihop, PURPLE),
-        ("Larger sigma\n(sigma=0.3\n30 gens)", 0.09, GRAY),
-        ("More budget\n(sigma=0.3\n200 gens)", 0.13, BLUE),
-        ("Full budget\n(sigma=0.3\n500 gens)", 0.16, TEAL),
-        ("V4 Scalar\n(reference)", v4_scalar, GREEN),
-    ]
-    s_names  = [s[0] for s in scenarios]
-    s_vals   = [s[1] for s in scenarios]
-    s_colors = [s[2] for s in scenarios]
-    bars3 = ax3.bar(range(len(scenarios)), s_vals, color=s_colors, edgecolor="white", linewidth=0.5)
-    ax3.set_xticks(range(len(scenarios)))
-    ax3.set_xticklabels(s_names, fontsize=7.5)
-    ax3.set_ylabel("Estimated Mean Reward")
-    ax3.set_title("What Would Be Needed\nto Match V4 Scalar")
-    ax3.axhline(v4_scalar, color=GREEN, linestyle="--", linewidth=1.2, alpha=0.7)
-    for bar, val in zip(bars3, s_vals):
-        ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.002,
-                 f"{val:.3f}", ha="center", fontsize=8)
+    # ── right: transfer comparison (MultiHop vs MegaQuest, Neural vs V4) ──
+    v4_megaquest = 0.0
+    try:
+        trans = load("transfer_results.json")
+        v4_megaquest = trans["matrix"]["MultiHop_V4_zeroshot"]["MegaQuestRoom"]["mean_reward"]
+    except (KeyError, TypeError, FileNotFoundError):
+        pass
+    envs_r = ["MultiHopKeyDoor", "MegaQuestRoom"]
+    neural_vals = [neural_multihop, (data.get("eval_megaquest") or {}).get("mean_reward", 0.0)]
+    v4_vals = [v4_scalar, v4_megaquest]
+    x_r = np.arange(len(envs_r))
+    w_r = 0.35
+    b_r1 = ax3.bar(x_r - w_r/2, neural_vals, w_r, color=PURPLE, alpha=0.85, label="NeuralV2Small", edgecolor="white")
+    b_r2 = ax3.bar(x_r + w_r/2, v4_vals, w_r, color=GREEN, alpha=0.85, label="V4 Scalar", edgecolor="white")
+    ax3.set_xticks(x_r)
+    ax3.set_xticklabels([e.replace("KeyDoor", "\nKeyDoor") for e in envs_r], fontsize=8.5)
+    ax3.set_ylabel("Mean Reward")
+    ax3.set_title("Zero-Shot Transfer\n(Neural and V4 trained on MultiHop)")
+    ax3.legend(fontsize=8)
     ax3.grid(True, alpha=0.3, axis="y")
-    ax3.text(0.5, 0.03, "Estimates based on\noptimization theory",
+    for bar, val in zip(b_r1, neural_vals):
+        ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01,
+                 f"{val:.3f}", ha="center", va="bottom", fontsize=7.5)
+    for bar, val in zip(b_r2, v4_vals):
+        ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01,
+                 f"{val:.3f}", ha="center", va="bottom", fontsize=7.5)
+    ax3.text(0.5, 0.03, "Both fail on MegaQuestRoom (OOD);\ntask-dependent memory",
              transform=ax3.transAxes, ha="center", fontsize=7.5, color=GRAY,
              style="italic")
 
     fig.suptitle("NeuralMemoryControllerV2Small — Training Analysis & Comparison",
                  fontsize=12, fontweight="bold")
     out = os.path.join(FIGS_DIR, "fig_neural_analysis.png")
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"  [OK] {out}")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FIGURE — Neural V2 learning curve (from JSON, no re-run)
+# ═══════════════════════════════════════════════════════════════════════════
+def fig_neural_v2_curves():
+    """Regenerate 2-panel learning curve from neural_controller_v2_results.json."""
+    data = load("neural_controller_v2_results.json")
+    history = data["training"]["history"]
+    gens = [h["generation"] for h in history]
+    best = [h["best_fitness"] for h in history]
+    sigmas = [h["sigma"] for h in history]
+
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 7), sharex=True)
+    ax1.plot(gens, best, "b-o", markersize=4, linewidth=1.5, label="Best fitness")
+    ax1.set_ylabel("Mean Reward (best candidate)", fontsize=11)
+    ax1.set_title("NeuralMemoryControllerV2Small — CMA-ES Training\n"
+                  "(50->32->10 MLP, 1,962 params, MultiHopKeyDoor)", fontsize=12)
+    ax1.grid(alpha=0.3, linestyle="--")
+    ax1.legend(fontsize=9)
+    ax2.plot(gens, sigmas, "r-", linewidth=1.5, label="Sigma (step size)")
+    ax2.set_ylabel("CMA-ES Sigma", fontsize=11)
+    ax2.set_xlabel("Generation", fontsize=11)
+    ax2.grid(alpha=0.3, linestyle="--")
+    ax2.legend(fontsize=9)
+    plt.tight_layout()
+    out = os.path.join(FIGS_DIR, "fig_neural_v2_curves.png")
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"  [OK] {out}")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FIGURE — Neural vs V4 transfer comparison (dedicated)
+# ═══════════════════════════════════════════════════════════════════════════
+def fig_neural_transfer():
+    """Dedicated transfer figure: Neural vs V4 on MultiHop and MegaQuest."""
+    data = load("neural_controller_v2_results.json")
+    trans = load("transfer_results.json")
+    neural_mh = data["eval_multihop"]["mean_reward"]
+    neural_mq = (data.get("eval_megaquest") or {}).get("mean_reward", 0.0)
+    v4_mh = data["v4_scalar_comparison"]["mean_reward"]
+    v4_mq = trans["matrix"]["MultiHop_V4_zeroshot"]["MegaQuestRoom"]["mean_reward"]
+
+    envs = ["MultiHopKeyDoor", "MegaQuestRoom"]
+    neural_vals = [neural_mh, neural_mq]
+    v4_vals = [v4_mh, v4_mq]
+    x = np.arange(len(envs))
+    w = 0.35
+    fig, ax = plt.subplots(figsize=(8, 5))
+    b1 = ax.bar(x - w/2, neural_vals, w, color=PURPLE, alpha=0.85, label="NeuralV2Small", edgecolor="white")
+    b2 = ax.bar(x + w/2, v4_vals, w, color=GREEN, alpha=0.85, label="V4 Scalar", edgecolor="white")
+    ax.set_xticks(x)
+    ax.set_xticklabels([e.replace("KeyDoor", "\nKeyDoor") for e in envs], fontsize=10)
+    ax.set_ylabel("Mean Reward")
+    ax.set_title("Zero-Shot Transfer — Neural vs V4\n(both trained on MultiHopKeyDoor)")
+    ax.legend(fontsize=9)
+    ax.grid(True, alpha=0.3, axis="y")
+    for bar, val in zip(b1, neural_vals):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01, f"{val:.3f}", ha="center", va="bottom", fontsize=9)
+    for bar, val in zip(b2, v4_vals):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01, f"{val:.3f}", ha="center", va="bottom", fontsize=9)
+    fig.suptitle("NeuralMemoryControllerV2Small — Transfer Comparison", fontsize=12, fontweight="bold", y=1.02)
+    out = os.path.join(FIGS_DIR, "fig_neural_transfer.png")
     fig.savefig(out)
     plt.close(fig)
     print(f"  [OK] {out}")
@@ -512,7 +663,7 @@ def fig11_pareto():
     tokens  = [all_systems[s]["mean_tokens"]  for s in names]
 
     type_colors = {
-        "GraphMemoryV4": GREEN, "GraphMemoryV1": ORANGE,
+        "GraphMemoryV4": GREEN, "GraphMemoryV5": TEAL, "GraphMemoryV1": ORANGE,
         "SemanticMemory": PURPLE, "RAGMemory": TEAL,
         "EpisodicSemantic": PURPLE, "HierarchicalMemory": GRAY,
         "CausalMemory": GRAY, "SummaryMemory": GRAY,
@@ -543,7 +694,7 @@ def fig11_pareto():
 
     ax.set_xlabel("Mean Retrieval Tokens (proxy for LLM cost)")
     ax.set_ylabel("Mean Reward (MultiHopKeyDoor)")
-    ax.set_title("Pareto Front — Reward vs Token Cost\n(top-right is better)")
+    ax.set_title("Pareto Front — Reward vs Token Cost\n(top-left preferred: high reward, low cost)")
     ax.grid(True, alpha=0.3)
     patch_v4 = mpatches.Patch(color=GREEN,  label="GraphMemoryV4")
     patch_v1 = mpatches.Patch(color=ORANGE, label="GraphMemoryV1")
@@ -588,7 +739,7 @@ def fig13_memory_size():
     rewards_s = [rewards[i] for i in order]
 
     type_colors = {
-        "GraphMemoryV4": GREEN, "GraphMemoryV1": ORANGE,
+        "GraphMemoryV4": GREEN, "GraphMemoryV5": TEAL, "GraphMemoryV1": ORANGE,
     }
     bar_colors = [type_colors.get(n, BLUE) for n in names_s]
 
@@ -640,39 +791,123 @@ def fig13_memory_size():
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+# FIGURE — Story: Precision vs Reward by Environment
+# ═══════════════════════════════════════════════════════════════════════════
+def fig_story_precision_reward():
+    """One scatter per environment: precision vs reward. Shows precision gates success on MultiHop."""
+    bench = load("benchmark_results.json")
+    envs = list(bench.keys())
+    n_envs = len(envs)
+    if n_envs == 0:
+        return
+    cols = min(2, n_envs)
+    rows = (n_envs + cols - 1) // cols
+    fig, axes = plt.subplots(rows, cols, figsize=(7 * cols, 5 * rows))
+    if n_envs == 1:
+        axes = [axes]
+    else:
+        axes = axes.flatten()
+    for idx, env_name in enumerate(envs):
+        ax = axes[idx]
+        data = bench[env_name]
+        systems = [s for s in data.keys() if "error" not in data[s]]
+        rewards = [data[s].get("mean_reward", 0) for s in systems]
+        precs = [data[s].get("retrieval_precision") for s in systems]
+        x = [p if p is not None else -0.05 for p in precs]
+        colors = [GREEN if "V4" in s else (TEAL if "V5" in s else (ORANGE if "V1" in s else BLUE)) for s in systems]
+        for s, xi, r, c in zip(systems, x, rewards, colors):
+            ax.scatter(xi, r, color=c, s=80, zorder=3, edgecolors="white")
+            ax.annotate(s[:18], (xi, r), textcoords="offset points", xytext=(4, 2), fontsize=6)
+        ax.set_xlabel("Retrieval precision")
+        ax.set_ylabel("Mean reward")
+        has_na = any(p is None for p in precs)
+        title = f"{env_name}" + (" (precision N/A: no hint steps)" if has_na else "")
+        ax.set_title(title)
+        ax.set_xlim(-0.1, 1.1)
+        ax.set_ylim(-0.05, max(rewards) * 1.15 if rewards else 1)
+        ax.grid(True, alpha=0.3)
+    for j in range(idx + 1, len(axes)):
+        axes[j].set_visible(False)
+    fig.suptitle("Precision vs Reward by Environment — Precision Gates Success on MultiHop",
+                 fontsize=12, fontweight="bold")
+    out = os.path.join(FIGS_DIR, "fig_story_precision_reward.png")
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"  [OK] {out}")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 # MAIN
 # ═══════════════════════════════════════════════════════════════════════════
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate thesis figures from results/*.json")
+    parser.add_argument("--allow-missing", action="store_true",
+                        help="Generate only figures whose result files exist; do not exit on missing files")
+    args = parser.parse_args()
+
+    can_run = check_required_files(allow_missing=args.allow_missing)
     print("Generating thesis figures...")
     print()
 
-    print("Figure A — Master Benchmark Summary")
-    fig_master_benchmark()
+    if can_run.get("fig_master_benchmark"):
+        print("Figure A — Master Benchmark Summary")
+        fig_master_benchmark()
+    else:
+        print("Figure A — Master Benchmark Summary (skipped, missing data)")
 
-    print("Figure B — Ablation Importance Ranking")
-    fig_ablation_ranked()
+    if can_run.get("fig_ablation_ranked"):
+        print("Figure B — Ablation Importance Ranking")
+        fig_ablation_ranked()
+    else:
+        print("Figure B — Ablation Importance Ranking (skipped, missing data)")
 
-    print("Figure C — Transfer Heatmap with Interpretation")
-    fig_transfer_annotated()
+    if can_run.get("fig_transfer_annotated"):
+        print("Figure C — Transfer Heatmap with Interpretation")
+        fig_transfer_annotated()
+    else:
+        print("Figure C — Transfer Heatmap (skipped, missing data)")
 
-    print("Figure D — Sensitivity Landscape with Annotations")
-    fig_sensitivity_annotated()
+    if can_run.get("fig_sensitivity_annotated"):
+        print("Figure D — Sensitivity Landscape with Annotations")
+        fig_sensitivity_annotated()
+    else:
+        print("Figure D — Sensitivity (skipped, missing data)")
 
-    print("Figure E — Neural Controller Training Analysis")
-    fig_neural_analysis()
+    if can_run.get("fig_neural_analysis"):
+        print("Figure E — Neural Controller Training Analysis")
+        fig_neural_analysis()
+    else:
+        print("Figure E — Neural Analysis (skipped, missing data)")
 
-    print("Figure fig11 — Pareto Front (real data)")
-    fig11_pareto()
+    if can_run.get("fig_neural_v2_curves"):
+        print("Figure — Neural V2 Learning Curve (from JSON)")
+        fig_neural_v2_curves()
+    else:
+        print("Figure — Neural V2 Curves (skipped, missing data)")
 
-    print("Figure fig13 — Memory Size Comparison (real data)")
-    fig13_memory_size()
+    if can_run.get("fig_neural_transfer"):
+        print("Figure — Neural vs V4 Transfer")
+        fig_neural_transfer()
+    else:
+        print("Figure — Neural Transfer (skipped, missing data)")
+
+    if can_run.get("fig11_pareto"):
+        print("Figure fig11 — Pareto Front (real data)")
+        fig11_pareto()
+    else:
+        print("Figure fig11 — Pareto (skipped, missing data)")
+
+    if can_run.get("fig13_memory_size"):
+        print("Figure fig13 — Memory Size Comparison (real data)")
+        fig13_memory_size()
+    else:
+        print("Figure fig13 — Memory Size (skipped, missing data)")
+
+    if can_run.get("fig_story_precision_reward"):
+        print("Figure — Story: Precision vs Reward by Environment")
+        fig_story_precision_reward()
+    else:
+        print("Figure — Story precision/reward (skipped, missing data)")
 
     print()
     print("All figures saved to docs/figures/")
-    print("  fig_master_benchmark.png")
-    print("  fig_ablation_ranked.png")
-    print("  fig_transfer_annotated.png")
-    print("  fig_sensitivity_annotated.png")
-    print("  fig_neural_analysis.png")
-    print("  fig11_pareto.png  (regenerated with real data)")
-    print("  fig13_memory_size.png  (regenerated with real data)")

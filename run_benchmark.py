@@ -1,18 +1,19 @@
 """
-Full benchmark runner — 10 memory systems × 3 environments × 50 episodes.
+Full benchmark runner — 12 memory systems × 4 environments.
 Outputs results to results/benchmark_results.json and prints a summary table.
-Run with: python run_benchmark.py
+
+Usage (PowerShell):
+    python run_benchmark.py
+    python run_benchmark.py RAGMemory          # skip RAGMemory (e.g. if sentence-transformers is broken)
 """
 
 from __future__ import annotations
 
-import json
 import sys
-import traceback
 from pathlib import Path
+from typing import Sequence
 
 from evaluation.benchmark import run_full_benchmark, print_benchmark_table, save_benchmark_results
-from evaluation.statistics import bootstrap_ci
 
 # Learned thetas from Phase 7 ES (best found per environment)
 LEARNED_THETAS = {
@@ -22,17 +23,26 @@ LEARNED_THETAS = {
 }
 
 N_EPISODES = 50
+# MegaQuestRoom is 1000 steps per episode; use fewer episodes to keep runtime acceptable
+MEGAQUEST_EPISODES = 20
 
 
-def main() -> None:
+def main(argv: Sequence[str] | None = None) -> None:
+    if argv is None:
+        argv = sys.argv[1:]
+    skip_systems = list(argv)  # positional args are interpreted as systems to skip
     print("=" * 70)
     print("FULL BENCHMARK — Learnable Memory Construction")
-    print(f"  Systems: 10 | Environments: 3 | Episodes per cell: {N_EPISODES}")
+    skip_str = ", ".join(skip_systems) if skip_systems else "none"
+    print(f"  Systems: 12 | Environments: 4 | Episodes: {N_EPISODES} (MegaQuestRoom: {MEGAQUEST_EPISODES})")
+    print(f"  Skipped systems: {skip_str}")
     print("=" * 70)
 
     results = run_full_benchmark(
         n_episodes=N_EPISODES,
+        episodes_per_env={"MegaQuestRoom": MEGAQUEST_EPISODES},
         learned_thetas=LEARNED_THETAS,
+        skip_systems=skip_systems,
         verbose=True,
     )
 

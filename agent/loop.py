@@ -263,3 +263,62 @@ def run_episode_with_any_memory(
         "hint_hits": hint_hits,
     }
     return env.success, events, stats_dict
+
+
+def run_document_qa_episode_with_llm(
+    env: Any,
+    memory: Any,
+    llm_agent: Any,
+    k: int = 8,
+    episode_seed: int | None = None,
+) -> tuple[bool, float, float, dict]:
+    """
+    Run one DocumentQA episode with LLM: reading phase stores paragraphs in memory;
+    QA phase retrieves top-k per question, calls LLM to answer, records cost and score.
+
+    Returns (success, partial_score, cost_usd, stats_dict).
+    stats_dict includes retrieval_tokens, memory_size, reward (= partial_score), cost_usd.
+    """
+    from memory.event import Event
+
+    memory.clear()
+    llm_agent.reset_episode()
+    obs = env.reset()
+    step = 0
+    # Reading phase: store each paragraph
+    memory.add_event(Event(step=step, observation=obs, action="next"), episode_seed=episode_seed or 0)
+    step += 1
+    while not env.done:
+        obs, done, _ = env.step("next")
+        if done:
+            break
+        if getattr(env, "phase", None) == "reading":
+            memory.add_event(Event(step=step, observation=obs, action="next"), episode_seed=episode_seed or 0)
+            step += 1
+        else:
+            break
+
+    # QA phase: for each question, retrieve, call LLM, submit answer
+    retrieval_tokens = 0
+    while not env.done:
+        question_obs = obs
+        if "QUESTION" not in question_obs:
+            break
+        retrieved = memory.get_relevant_events(question_obs, current_step=step, k=k)
+        retrieval_tokens += len(retrieved)
+        answer = llm_agent.answer_question(question_obs, retrieved)
+        obs, done, _ = env.step(answer)
+        step += 1
+
+    stats = memory.get_stats()
+    score = getattr(env, "partial_score", 0.0)
+    ep_stats = llm_agent.reset_episode()
+    cost_usd = ep_stats.total_cost_usd
+    stats_dict = {
+        "retrieval_tokens": retrieval_tokens,
+        "memory_size": stats.get("n_events", 0),
+        "reward": score,
+        "cost_usd": cost_usd,
+        "n_qa_calls": ep_stats.n_calls,
+    }
+    return env.success, score, cost_usd, stats_dict

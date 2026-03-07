@@ -17,18 +17,37 @@ import numpy as np
 
 from .event import Event
 
+# Best-effort import of sentence-transformers. In some environments this can
+# fail with runtime errors (e.g. Keras/tf-keras incompatibilities) even when
+# the package is installed, so we treat *any* exception as a signal to fall
+# back to the lightweight TF-IDF embedder.
+_HAS_ST = False
+_MODEL = None  # type: ignore[attr-defined]
+_ST_ERROR: str | None = None
+
 try:
-    from sentence_transformers import SentenceTransformer as _ST
-    _MODEL = _ST("all-MiniLM-L6-v2")
-    _HAS_ST = True
-except ImportError:
+    from sentence_transformers import SentenceTransformer as _ST  # type: ignore[assignment]
+    try:
+        _MODEL = _ST("all-MiniLM-L6-v2")
+        _HAS_ST = True
+    except Exception as e:  # pragma: no cover - defensive against env issues
+        _MODEL = None  # type: ignore[assignment]
+        _HAS_ST = False
+        _ST_ERROR = repr(e)
+except Exception as e:  # pragma: no cover - defensive against env issues
     _HAS_ST = False
-    _MODEL = None  # type: ignore
+    _MODEL = None  # type: ignore[assignment]
+    _ST_ERROR = repr(e)
 
 
 def _embed(text: str) -> np.ndarray:
+    global _HAS_ST, _ST_ERROR
     if _HAS_ST and _MODEL is not None:
-        return _MODEL.encode(text, convert_to_numpy=True).astype(np.float32)
+        try:
+            return _MODEL.encode(text, convert_to_numpy=True).astype(np.float32)
+        except Exception as e:  # pragma: no cover - defensive
+            _HAS_ST = False
+            _ST_ERROR = repr(e)
     # Fallback to TF-IDF embedder
     from .embedding import embed_observation
     return embed_observation(text)

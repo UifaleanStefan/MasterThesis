@@ -1,14 +1,64 @@
 # NeuralMemoryControllerV2Small Results
 
-**Date:** February 2026  
-**Experiment:** `run_neural_controller_v2.py`  
 **Architecture:** 50 -> 32 -> 10 MLP (1,962 parameters)  
-**Optimizer:** CMA-ES (lambda=26, sigma=0.05, 30 generations)  
 **Train env:** MultiHopKeyDoor  
 **Transfer env:** MegaQuestRoom (zero-shot)  
-**Training time:** ~81 minutes (4,878 seconds)  
-**Figure:** `docs/figures/fig_neural_v2_curves.png`  
-**Raw data:** `results/neural_controller_v2_results.json`
+**Raw data:** `results/neural_controller_v2_results.json`  
+**Figures:** `docs/figures/fig_neural_v2_curves.png`, `docs/figures/fig_neural_analysis.png`, `docs/figures/fig_neural_transfer.png`
+
+---
+
+## 200-generation run (March 2026)
+
+**Config:** 200 generations, sigma=0.3, 20 episodes per candidate (from JSON; actual run may have used 50/200), 100 eval episodes.  
+**Training time:** 55,422 seconds (~15.4 hours).
+
+| Metric | Value |
+|--------|-------|
+| Best training fitness | **0.2333** |
+| MultiHopKeyDoor eval reward | **0.19** |
+| MultiHopKeyDoor eval precision | 0.961 |
+| MegaQuestRoom eval reward | **0.0** |
+| MegaQuestRoom eval precision | 0.228 |
+| vs V4 scalar (MultiHop) | **+0.012 (neural ahead)** |
+
+### Learning curve (200 gens)
+
+| Phase | Generations | Best fitness | Notes |
+|-------|-------------|--------------|-------|
+| Initial plateau | 1–20 | ~0.1167 | No improvement |
+| First jump | 21 | 0.1333 | +14% |
+| Plateau | 22–40 | 0.1333 | — |
+| Second jump | 41 | 0.1667 | +25% |
+| Later improvement | 41–192 | up to 0.2333 | Gradual / stepwise |
+| Final | 193–200 | 0.2333 | Best fitness |
+
+Larger sigma (0.3 vs 0.05) allowed the optimizer to escape local optima; 200 generations provided enough budget to reach and surpass the scalar V4 level on MultiHop.
+
+### Comparison with scalar V4
+
+- **Neural 200-gen:** MultiHop reward **0.19**, precision 0.96.  
+- **V4 scalar (CMA-ES):** MultiHop reward 0.178, precision 0.997.  
+- The neural controller **matches or slightly exceeds** scalar V4 on MultiHop when given sufficient training (200 gens, sigma 0.3). The previous 30-gen run (0.033) had far too little budget.
+
+### Transfer
+
+- **MegaQuestRoom (zero-shot):** Neural 0.0, V4 0.0. Both fail on the much harder OOD environment.  
+- **Interpretation:** Supports task-dependent memory — the same weights do not transfer; task-specific θ (or retraining) is needed.
+
+### Thesis implications
+
+1. **Neural meta-controller can reach scalar-V4 level** on MultiHop with 200 generations and sigma 0.3.  
+2. **Transfer failure** on MegaQuestRoom reinforces that memory construction is task-dependent.  
+3. **Training cost:** 15+ hours vs scalar CMA-ES on 10D is a practical tradeoff; the neural controller is a research result, not yet a drop-in replacement.
+
+---
+
+## 30-generation run (February 2026)
+
+**Date:** February 2026  
+**Config:** CMA-ES (lambda=26, sigma=0.05, 30 generations), 20 episodes per candidate.  
+**Training time:** ~81 minutes (4,878 seconds).
 
 ---
 
@@ -161,16 +211,18 @@ The scalar V4 theta has 196x fewer parameters, making it far easier to optimize 
 
 ### For the thesis chapter
 
-The neural controller experiment should be presented as:
-- **Motivation:** Scalar theta is fixed per episode; neural controller adapts per-observation
-- **Result:** Neural controller underperforms due to optimization challenges
-- **Analysis:** Expressivity-trainability tradeoff; 1,962 params requires much more compute
-- **Future work:** Gradient-based pre-training, larger compute budget, PBT
+With **both** runs, the neural controller narrative is:
+
+- **Motivation:** Scalar theta is fixed per episode; neural controller adapts per-observation.
+- **30-gen result:** Neural underperforms (0.033 vs V4 0.178) due to small sigma and insufficient budget — expressivity–trainability tradeoff.
+- **200-gen result:** With sigma=0.3 and 200 generations, neural **matches or exceeds** V4 on MultiHop (0.19 vs 0.178), showing that the meta-controller can work given enough compute.
+- **Transfer:** Both neural and V4 fail on MegaQuestRoom (0.0); supports task-dependent memory.
+- **Takeaway:** Neural meta-controller is viable but costly to train; scalar θ remains the practical choice unless per-observation adaptation is essential.
 
 ---
 
-## Figure
+## Figures
 
-`docs/figures/fig_neural_v2_curves.png` — Dual-panel:
-- **Top panel:** Best fitness vs generation (flat plateau with single jump at gen 21)
-- **Bottom panel:** CMA-ES sigma vs generation (monotonically decreasing)
+- **fig_neural_v2_curves.png** — Dual-panel: best fitness vs generation; sigma vs generation (from JSON, 200-gen or 30-gen depending on last run).
+- **fig_neural_analysis.png** — Three panels: training curve, MultiHop comparison (Neural vs V4 vs V1), zero-shot transfer (MultiHop vs MegaQuest).
+- **fig_neural_transfer.png** — Dedicated transfer comparison: Neural vs V4 on MultiHopKeyDoor and MegaQuestRoom.

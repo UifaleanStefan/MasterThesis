@@ -307,7 +307,10 @@ def generate_extended_figures(
         from viz.cost_viz import plot_online_adaptation
         theta_histories = _synthetic_online_adaptation()
         p = output_dir / "fig12_online_adaptation.png"
-        plot_online_adaptation(theta_histories, output_path=p)
+        plot_online_adaptation(
+            theta_histories, output_path=p,
+            title="Online θ Adaptation During Episode (Illustrative — synthetic data)",
+        )
         saved.append(p)
         print(f"  Saved: {p}")
     except Exception:
@@ -315,14 +318,17 @@ def generate_extended_figures(
         traceback.print_exc()
 
     # ------------------------------------------------------------------ #
-    # Fig 13 — Memory size over episode
+    # Fig 13 — Memory size over episode (renamed to avoid overwriting thesis fig13)
     # ------------------------------------------------------------------ #
-    print("\n[Fig 13] Memory size over episode steps ...")
+    print("\n[Fig 13] Memory size over episode steps (illustrative) ...")
     try:
         from viz.cost_viz import plot_memory_size_over_episode
         memory_curves = _synthetic_memory_curves()
-        p = output_dir / "fig13_memory_size.png"
-        plot_memory_size_over_episode(memory_curves, output_path=p)
+        p = output_dir / "fig13_memory_curves.png"
+        plot_memory_size_over_episode(
+            memory_curves, output_path=p,
+            title="Memory Size Over Episode Steps (Illustrative — synthetic data)",
+        )
         saved.append(p)
         print(f"  Saved: {p}")
     except Exception:
@@ -337,7 +343,10 @@ def generate_extended_figures(
         from viz.cost_viz import plot_cost_breakdown
         cost_data = _synthetic_cost_data()
         p = output_dir / "fig14_cost_breakdown.png"
-        plot_cost_breakdown(cost_data, output_path=p)
+        plot_cost_breakdown(
+            cost_data, output_path=p,
+            title="LLM Token Cost Breakdown (Illustrative — synthetic data)",
+        )
         saved.append(p)
         print(f"  Saved: {p}")
     except Exception:
@@ -352,7 +361,10 @@ def generate_extended_figures(
         from viz.cost_viz import plot_multi_session_persistence
         scores, sizes = _synthetic_multi_session()
         p = output_dir / "fig15_multi_session.png"
-        plot_multi_session_persistence(scores, sizes, output_path=p)
+        plot_multi_session_persistence(
+            scores, sizes, output_path=p,
+            title="Multi-Session Memory Persistence (Illustrative — synthetic data)",
+        )
         saved.append(p)
         print(f"  Saved: {p}")
     except Exception:
