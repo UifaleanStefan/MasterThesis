@@ -5,11 +5,12 @@ import { Hero } from "./sections/Hero";
 import { TheQuestion } from "./sections/TheQuestion";
 import { Architecture } from "./sections/Architecture";
 import { Progression } from "./sections/Progression";
+import { Benchmark } from "./sections/Benchmark";
+import { MiniLMPivot } from "./sections/MiniLMPivot";
 import { ScrollProgress } from "./components/nav/ScrollProgress";
 import { StickyNav } from "./components/nav/StickyNav";
 import { Section } from "./components/shared/Section";
 import { SectionHeader } from "./components/shared/SectionHeader";
-import { Stat } from "./components/shared/Stat";
 
 function App() {
   const { data: manifest } = useData<AggregatedManifest>("manifest.json");
@@ -23,41 +24,10 @@ function App() {
       <TheQuestion />
       <Architecture />
       <Progression />
+      <Benchmark />
+      <MiniLMPivot />
 
-      {/* Phase D-E placeholders */}
-
-      <Section id="benchmark" eyebrow="Benchmark" variant="raised">
-        <SectionHeader
-          title="12 systems, 4 environments."
-          lede="The headline comparison on MultiHopKeyDoor — under both embedding backends. Pairwise significance overlaid."
-        />
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          <Stat label="V4 reward (MiniLM)" value="0.130" tone="cyan" hint="100 held-out eps · re-tuned θ" />
-          <Stat label="V4 precision" value="1.000" tone="emerald" hint="memory always retrieves the right hint" />
-          <Stat label="memory size" value="≈ 10" tone="violet" hint="vs 218 for V1 baseline" />
-          <Stat label="systems compared" value="12" hint="across 4 environments" />
-        </div>
-
-        <p className="mt-8" style={{ color: "var(--color-text-2)" }}>
-          [Phase D builds the heatmap, Pareto scatter, and the embedding toggle.]
-        </p>
-      </Section>
-
-      <Section id="minilm" eyebrow="The Pivot">
-        <SectionHeader
-          title={
-            <>
-              When the embedding changed, the{" "}
-              <span style={{ color: "var(--color-violet)" }}>optimum did too</span>.
-            </>
-          }
-          lede="Under TF-IDF, V4's optimum was recency-dominated (w_recency=3.78, w_graph=0). Under MiniLM the same CMA-ES finds w_graph=1.19, w_embed=1.31, w_recency=1.21 — all balanced."
-        />
-        <p style={{ color: "var(--color-text-2)" }}>
-          [Phase D builds the side-by-side θ-radar diff.]
-        </p>
-      </Section>
+      {/* Phase E placeholders */}
 
       <Section id="ablation" eyebrow="What Matters" variant="raised">
         <SectionHeader
