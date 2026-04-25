@@ -1,6 +1,10 @@
 import { useData } from "./data/useData";
 import type { AggregatedManifest } from "./data/types";
+import { EmbeddingProvider } from "./components/interactive/EmbeddingToggle";
 import { Hero } from "./sections/Hero";
+import { TheQuestion } from "./sections/TheQuestion";
+import { Architecture } from "./sections/Architecture";
+import { Progression } from "./sections/Progression";
 import { ScrollProgress } from "./components/nav/ScrollProgress";
 import { StickyNav } from "./components/nav/StickyNav";
 import { Section } from "./components/shared/Section";
@@ -11,78 +15,28 @@ function App() {
   const { data: manifest } = useData<AggregatedManifest>("manifest.json");
 
   return (
-    <>
+    <EmbeddingProvider>
       <ScrollProgress />
       <StickyNav />
 
       <Hero />
+      <TheQuestion />
+      <Architecture />
+      <Progression />
 
-      {/* Phase-B placeholders. Phase C-E replace each one with its real content. */}
+      {/* Phase D-E placeholders */}
 
-      <Section id="question" eyebrow="The Question">
-        <SectionHeader
-          title={
-            <>
-              Why{" "}
-              <span style={{ color: "var(--color-cyan)" }}>
-                fixed memory
-              </span>{" "}
-              isn&apos;t enough.
-            </>
-          }
-          lede="Most LLM agents bolt on a memory architecture and never adapt it. The thesis claim: optimal memory structure is task-dependent, and θ can be learned from reward."
-        />
-        <p style={{ color: "var(--color-text-2)" }}>
-          [Phase C will replace this with a side-by-side fixed-memory ↔ learnable-θ visualization.]
-        </p>
-      </Section>
-
-      <Section id="architecture" eyebrow="Architecture" variant="raised">
-        <SectionHeader
-          title={
-            <>
-              GraphMemoryV4 — a{" "}
-              <span style={{ color: "var(--color-violet)" }}>10-D θ</span>{" "}
-              vector that shapes the memory.
-            </>
-          }
-          lede="Six storage dimensions, one decay rate, three retrieval weights. Every event is filtered by importance, every retrieval is a learned weighted sum."
-        />
-        <p style={{ color: "var(--color-text-2)" }}>
-          [Phase C will replace this with the interactive θ explorer + an embedding-backend toggle.]
-        </p>
-      </Section>
-
-      <Section id="benchmark" eyebrow="Benchmark">
+      <Section id="benchmark" eyebrow="Benchmark" variant="raised">
         <SectionHeader
           title="12 systems, 4 environments."
           lede="The headline comparison on MultiHopKeyDoor — under both embedding backends. Pairwise significance overlaid."
         />
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          <Stat
-            label="V4 reward"
-            value="0.130"
-            tone="cyan"
-            hint="100 held-out eps · MiniLM · re-tuned θ"
-          />
-          <Stat
-            label="V4 precision"
-            value="1.000"
-            tone="emerald"
-            hint="memory always retrieves the right hint"
-          />
-          <Stat
-            label="memory size"
-            value="≈ 10"
-            tone="violet"
-            hint="vs 218 for V1 baseline"
-          />
-          <Stat
-            label="systems compared"
-            value="12"
-            hint="across 4 environments"
-          />
+          <Stat label="V4 reward (MiniLM)" value="0.130" tone="cyan" hint="100 held-out eps · re-tuned θ" />
+          <Stat label="V4 precision" value="1.000" tone="emerald" hint="memory always retrieves the right hint" />
+          <Stat label="memory size" value="≈ 10" tone="violet" hint="vs 218 for V1 baseline" />
+          <Stat label="systems compared" value="12" hint="across 4 environments" />
         </div>
 
         <p className="mt-8" style={{ color: "var(--color-text-2)" }}>
@@ -90,7 +44,7 @@ function App() {
         </p>
       </Section>
 
-      <Section id="minilm" eyebrow="The Pivot" variant="raised">
+      <Section id="minilm" eyebrow="The Pivot">
         <SectionHeader
           title={
             <>
@@ -105,11 +59,51 @@ function App() {
         </p>
       </Section>
 
+      <Section id="ablation" eyebrow="What Matters" variant="raised">
+        <SectionHeader
+          title={
+            <>
+              <code className="text-[var(--color-rose)]">θ_novel</code> is non-negotiable.
+            </>
+          }
+          lede="Set theta_novel to 0 and the system stores nothing. theta_erich is the second pillar at 64% degradation. Recency and surprise are nearly free to remove."
+        />
+        <p style={{ color: "var(--color-text-2)" }}>[Phase E builds the ablation knockout.]</p>
+      </Section>
+
+      <Section id="transfer" eyebrow="Transfer">
+        <SectionHeader
+          title={
+            <>
+              The learned θ <span style={{ color: "var(--color-emerald)" }}>generalizes</span> —
+              and breaks honestly.
+            </>
+          }
+          lede="GoalRoom: 0.69 (strong positive). HardKeyDoor: 0.16. MegaQuestRoom: 0.00 — but precision is 0.94+, so memory is fine. The failure is policy."
+        />
+      </Section>
+
+      <Section id="neural" eyebrow="Neural Meta-Controller" variant="raised">
+        <SectionHeader
+          title="A 5,674-parameter MLP that outputs θ per observation."
+          lede="200-gen CMA-ES, warm-started from V4. Matches scalar V4 reward (0.19), confirms the same OOD failure on MegaQuest."
+        />
+      </Section>
+
+      <Section id="stage3" eyebrow="What's Next">
+        <SectionHeader
+          title={
+            <>
+              Real LLM cost on{" "}
+              <span style={{ color: "var(--color-amber)" }}>DocumentQA</span>.
+            </>
+          }
+          lede="Bayesian opt on θ to minimize J = QA_score − λ·cost_usd. Configs are ready — execution awaits an OpenAI budget."
+        />
+      </Section>
+
       <Section id="footer" className="!min-h-[40vh] !py-16">
-        <p
-          className="text-xs"
-          style={{ color: "var(--color-muted)" }}
-        >
+        <p className="text-xs text-center" style={{ color: "var(--color-muted)" }}>
           {manifest ? (
             <>
               Built {manifest.built_at_utc} · backend{" "}
@@ -121,7 +115,7 @@ function App() {
           )}
         </p>
       </Section>
-    </>
+    </EmbeddingProvider>
   );
 }
 
