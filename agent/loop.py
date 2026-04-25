@@ -190,6 +190,7 @@ def run_episode_with_any_memory(
     memory: Any,
     k: int = 8,
     episode_seed: int | None = None,
+    lesson_generator: "Any | None" = None,
 ) -> tuple[bool, list[Event], dict]:
     """
     Universal episode runner that works with ANY memory system exposing:
@@ -204,6 +205,11 @@ def run_episode_with_any_memory(
     Tracks retrieval_precision: when the agent is at a door and the environment
     has hint events, measures whether any hint appeared in the retrieved top-k.
     This is the direct memory quality metric independent of task success rate.
+
+    Reflexion hook (V6+): when ``lesson_generator`` is provided AND ``memory``
+    exposes ``record_lesson`` (e.g. GraphMemoryV6), the generator is called at
+    episode end with (events, final_reward); any returned Lesson is persisted
+    and ``memory.end_episode()`` is invoked to advance the decay counter.
 
     Returns (success, events, stats_dict).
     stats_dict keys: retrieval_tokens, memory_size, reward, retrieval_precision.
@@ -254,6 +260,21 @@ def run_episode_with_any_memory(
     stats = memory.get_stats()
     reward = getattr(env, "partial_score", 1.0 if env.success else 0.0)
     retrieval_precision = (hint_hits / hint_queries) if hint_queries > 0 else None
+
+    # Reflexion hook (V6+): generate and record an end-of-episode lesson, then
+    # advance the memory's episode counter so decay logic applies on next run.
+    lesson_recorded = False
+    if (
+        lesson_generator is not None
+        and hasattr(memory, "record_lesson")
+        and hasattr(memory, "end_episode")
+    ):
+        lesson = lesson_generator(events, reward)
+        if lesson is not None:
+            memory.record_lesson(lesson, episode_seed=episode_seed)
+            lesson_recorded = True
+        memory.end_episode()
+
     stats_dict = {
         "retrieval_tokens": retrieval_tokens,
         "memory_size": stats["n_events"],
@@ -261,6 +282,7 @@ def run_episode_with_any_memory(
         "retrieval_precision": retrieval_precision,
         "hint_queries": hint_queries,
         "hint_hits": hint_hits,
+        "lesson_recorded": lesson_recorded,
     }
     return env.success, events, stats_dict
 

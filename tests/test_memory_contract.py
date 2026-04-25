@@ -28,11 +28,13 @@ from memory import (
     GraphMemoryV3,
     GraphMemoryV4,
     GraphMemoryV5,
+    GraphMemoryV6,
     HierarchicalMemory,
     MemoryParams,
     MemoryParamsV2,
     MemoryParamsV3,
     MemoryParamsV4,
+    MemoryParamsV6,
     SemanticMemory,
     SummaryMemory,
     WorkingMemory,
@@ -55,6 +57,7 @@ def _factories():
         ("GraphMemoryV3", lambda: GraphMemoryV3(MemoryParamsV3())),
         ("GraphMemoryV4", lambda: GraphMemoryV4(MemoryParamsV4())),
         ("GraphMemoryV5", lambda: GraphMemoryV5(MemoryParamsV4())),
+        ("GraphMemoryV6", lambda: GraphMemoryV6(MemoryParamsV6())),
     ]
 
 

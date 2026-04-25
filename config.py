@@ -67,7 +67,8 @@ class MemoryConfig:
         "EpisodicSemanticMemory", "RAGMemory", "HierarchicalMemory",
         "WorkingMemory", "CausalMemory", "AttentionMemory", "NeuralController",
         # V4 lineage and neural meta-controllers (Stage 3 / DocumentQA experiments)
-        "GraphMemoryV4", "GraphMemoryV5", "NeuralMemoryControllerV2Small",
+        "GraphMemoryV4", "GraphMemoryV5", "GraphMemoryV6",
+        "NeuralMemoryControllerV2Small",
     ] = "GraphMemory"
     theta: list[float] = field(default_factory=lambda: [0.5, 0.1, 0.8])
     """

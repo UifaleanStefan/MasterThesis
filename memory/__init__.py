@@ -24,6 +24,8 @@ from .graph_memory_v2 import GraphMemoryV2, MemoryParamsV2
 from .graph_memory_v3 import GraphMemoryV3, MemoryParamsV3
 from .graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
 from .graph_memory_v5 import GraphMemoryV5
+from .graph_memory_v6 import GraphMemoryV6, MemoryParamsV6
+from .lesson import Lesson, heuristic_lesson, llm_lesson, make_generator
 from .neural_controller_v2 import NeuralMemoryControllerV2
 
 __all__ = [
@@ -47,6 +49,12 @@ __all__ = [
     "GraphMemoryV4",
     "MemoryParamsV4",
     "GraphMemoryV5",
+    "GraphMemoryV6",
+    "MemoryParamsV6",
+    "Lesson",
+    "heuristic_lesson",
+    "llm_lesson",
+    "make_generator",
     "NeuralMemoryControllerV2",
     "embed_observation",
     "extract_entities",
