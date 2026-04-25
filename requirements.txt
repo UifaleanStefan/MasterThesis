@@ -6,11 +6,11 @@ matplotlib>=3.5
 scipy>=1.9
 openai>=1.0
 pyyaml>=6.0
-streamlit>=1.28
-pandas>=1.5
-plotly>=5.14
 pytest>=7
 cma>=3.3
+# NB: streamlit, pandas, plotly were removed when the Streamlit dashboard
+# was replaced by the web/ static site (April 2026). The web/ frontend uses
+# Vite + React + Tailwind and lives independently of Python deps.
 # Optional — install for Bayesian optimization backend:
 # scikit-optimize>=0.9
 # Optional — install for TextWorld integration:
