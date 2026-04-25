@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "data": "python ../scripts/build_web_data.py",
+    "predev": "npm run data",
     "dev": "vite",
+    "prebuild": "npm run data",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
