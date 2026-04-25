@@ -1,19 +1,29 @@
 """
-Phase 2/5 of the Reflexion plan — 4-variant comparison runner.
+Phase 3 of the Reflexion plan — same-env retry experiment.
 
-Variants compared (paired episode seeds → paired t-tests downstream):
-  * V4-base       — fresh-memory-per-episode V4 (control)
-  * V6-no-lessons — fresh-memory-per-ep, w_lesson=0 (sanity check that V6
-                    with the lesson channel disabled matches V4-base)
-  * V6-w-lessons  — persistent V6 across eps, lessons recorded but not
-                    injected into the policy via Reflexion wrapper
-  * V6-Reflexion  — persistent V6 + ReflexionPolicy injecting lessons as
-                    synthetic past_events for the rule-based policy to parse
+Reflexion's standard setup is "same task, multiple tries, lessons accumulate
+across tries". This runner implements that:
+
+  * For each env_seed in --env-seeds, instantiate a NEW env layout.
+  * For each try_idx in 0..--n-tries-1, run a single episode against that
+    env. V6 variants persist memory across tries (lessons accumulate);
+    V4-base resets memory each try.
+  * Across all (env_seed, try_idx) cells we measure reward, then aggregate
+    by try_idx to see if reward improves over tries.
+
+Three variants:
+  * V4-base       — fresh-memory-per-try V4 (control; no cross-try learning).
+  * V6-w-lessons  — persistent V6, lessons recorded each try, base policy.
+                    (Tests whether *retrieval* from lessons helps even
+                    without explicit policy-injection.)
+  * V6-Reflexion  — persistent V6 + ReflexionPolicy: lessons are injected
+                    as synthetic past_events so the rule-based policy's
+                    hint regex picks them up. Headline experiment.
 
 Usage:
     python run_reflexion_ablation.py
-    python run_reflexion_ablation.py --episodes 50 --envs MegaQuestRoom MultiHop-KeyDoor
-    python run_reflexion_ablation.py --w-lesson 2.0 --theta-lesson-decay 0.0
+    python run_reflexion_ablation.py --env-seeds 1000 1001 1002 --n-tries 5
+    python run_reflexion_ablation.py --envs MultiHop-KeyDoor --w-lesson 2.0
 """
 
 from __future__ import annotations
@@ -46,22 +56,25 @@ def _env_factory_for(name: str):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--episodes", type=int, default=30,
-                        help="Episodes per variant per env (default: 30)")
+    parser.add_argument("--n-env-seeds", type=int, default=10,
+                        help="Number of distinct env layouts to evaluate (default: 10)")
+    parser.add_argument("--n-tries", type=int, default=5,
+                        help="Tries per env layout (default: 5; more tries gives "
+                             "Reflexion more episodes to learn from)")
     parser.add_argument("--envs", nargs="*",
-                        default=["MegaQuestRoom", "MultiHop-KeyDoor"],
-                        help="Envs to evaluate on (default: MegaQuestRoom + MultiHop)")
+                        default=["MultiHop-KeyDoor"],
+                        help="Envs to evaluate on (default: MultiHop-KeyDoor)")
     parser.add_argument("--w-lesson", type=float, default=2.0,
                         help="V6 w_lesson for the with-lessons variants (default: 2.0)")
     parser.add_argument("--theta-lesson-decay", type=float, default=0.0,
-                        help="V6 theta_lesson_decay (default: 0.0 — no decay)")
+                        help="V6 theta_lesson_decay (default: 0.0 — no decay within a run)")
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--seed-offset", type=int, default=6000)
+    parser.add_argument("--env-seed-base", type=int, default=7000)
     parser.add_argument("--k", type=int, default=8)
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
 
-    from evaluation.reflexion_eval import compare_variants
+    from evaluation.reflexion_eval import compare_retry_variants, summarize_by_try
     from evaluation.statistics import full_comparison
     from memory.graph_memory_v4 import MemoryParamsV4
     from memory.graph_memory_v6 import MemoryParamsV6
@@ -85,98 +98,128 @@ def main():
         mode="learnable",
     )
 
+    env_seeds = list(range(args.env_seed_base, args.env_seed_base + args.n_env_seeds))
+
     print("=" * 78)
-    print(f"  Reflexion ablation  ({args.episodes} eps × 4 variants × {len(args.envs)} envs)")
+    print(f"  Reflexion retry experiment "
+          f"({args.n_env_seeds} envs * {args.n_tries} tries * 3 variants * "
+          f"{len(args.envs)} env-types)")
     print("=" * 78)
     print(f"  V6 w_lesson           = {args.w_lesson}")
     print(f"  V6 theta_lesson_decay = {args.theta_lesson_decay}")
-    print(f"  Seed offset           = {args.seed_offset}")
+    print(f"  env_seeds             = {env_seeds[:3]}{'...' if len(env_seeds) > 3 else ''}")
 
     t0 = time.time()
-    by_env: dict[str, dict[str, dict]] = {}
-    by_env_pairwise: dict[str, dict[str, dict]] = {}
+    by_env: dict[str, dict] = {}
 
     for env_name in args.envs:
         print(f"\n  -- Environment: {env_name} --")
         env_factory = _env_factory_for(env_name)
-        results = compare_variants(
+        variants = compare_retry_variants(
             env_factory=env_factory,
             v4_params=v4_params,
             v6_params=v6_params,
-            n_episodes=args.episodes,
+            env_seeds=env_seeds,
+            n_tries=args.n_tries,
             k=args.k,
-            seed_offset=args.seed_offset,
             policy_seed=args.seed,
             verbose=args.verbose,
         )
-        # Print summary
-        print(f"\n  variant         reward     std    precision  mem    n_lessons")
-        for name in ["V4-base", "V6-no-lessons", "V6-w-lessons", "V6-Reflexion"]:
-            r = results[name]
-            prec = f"{r.mean_precision:.3f}" if r.mean_precision is not None else "  N/A"
-            print(
-                f"  {name:<14}  {r.mean_reward:.4f}  ±{r.std_reward:.3f}  "
-                f"{prec}     {r.mean_mem_size:5.1f}  {r.n_lessons_final:5d}"
-            )
 
-        # Pairwise significance
-        baseline = results["V4-base"].rewards
+        # Aggregate by try_idx to see learning curves.
+        print(f"\n  variant         try   mean_reward   std       n")
+        per_try: dict[str, dict[int, dict]] = {}
+        for vname, results in variants.items():
+            per_try[vname] = summarize_by_try(results)
+            for tidx, summary in per_try[vname].items():
+                print(
+                    f"  {vname:<14}  {tidx:2d}    {summary['mean_reward']:.4f}     "
+                    f"{summary['std_reward']:.3f}     {summary['n']}"
+                )
+            print()
+
+        # Overall mean (across all tries).
+        print(f"  variant         overall_mean   final_try_mean")
+        for vname, results in variants.items():
+            all_r = [r.reward for r in results]
+            final_r = [r.reward for r in results if r.try_idx == args.n_tries - 1]
+            om = sum(all_r) / len(all_r) if all_r else 0.0
+            fm = sum(final_r) / len(final_r) if final_r else 0.0
+            print(f"  {vname:<14}  {om:.4f}         {fm:.4f}")
+
+        # Pairwise significance on the FINAL-try rewards (most diagnostic for
+        # whether learning over tries actually helped).
+        print(f"\n  Pairwise on final-try rewards (n={args.n_env_seeds} env layouts):")
+        baseline_final = [r.reward for r in variants["V4-base"]
+                          if r.try_idx == args.n_tries - 1]
         pairwise: dict[str, dict] = {}
-        for vname in ["V6-no-lessons", "V6-w-lessons", "V6-Reflexion"]:
+        for vname in ["V6-w-lessons", "V6-Reflexion"]:
+            other_final = [r.reward for r in variants[vname]
+                           if r.try_idx == args.n_tries - 1]
             comp = full_comparison(
-                baseline,
-                results[vname].rewards,
-                label_a="V4-base",
-                label_b=vname,
+                baseline_final, other_final,
+                label_a="V4-base", label_b=vname,
             )
             sig = comp["ttest"]["p_value"] < 0.05
-            marker = (
-                "**" if comp["ttest"]["p_value"] < 0.01
-                else "*" if sig else "  "
-            )
+            marker = "**" if comp["ttest"]["p_value"] < 0.01 else "*" if sig else "  "
             print(
                 f"  {marker} V4-base vs {vname:<14} "
                 f"diff={comp['improvement']:+.4f}  "
                 f"p={comp['ttest']['p_value']:.4f}  "
                 f"d={comp['cohens_d']['d']:+.3f} ({comp['cohens_d']['magnitude']})"
             )
-            # Strip the per-episode arrays from the saved comp (they're in the
-            # variant results above).
-            comp[f"V4-base"].pop("values", None)
+            comp["V4-base"].pop("values", None)
             comp[vname].pop("values", None)
             pairwise[vname] = comp
 
-        by_env[env_name] = {name: r.to_dict() for name, r in results.items()}
-        by_env_pairwise[env_name] = pairwise
+        by_env[env_name] = {
+            "per_try": per_try,
+            "pairwise_final_try": pairwise,
+            "raw": {
+                vname: [
+                    {
+                        "env_seed": r.env_seed,
+                        "try_idx": r.try_idx,
+                        "reward": r.reward,
+                        "precision": r.precision,
+                        "memory_size": r.memory_size,
+                        "lesson_recorded": r.lesson_recorded,
+                    }
+                    for r in res
+                ]
+                for vname, res in variants.items()
+            },
+        }
 
     elapsed = time.time() - t0
     print(f"\n  Total elapsed: {elapsed:.1f}s")
 
     out = {
         "_manifest": build_manifest(seed=args.seed, extra={
-            "experiment": "reflexion_ablation",
-            "n_episodes_per_variant": args.episodes,
+            "experiment": "reflexion_retry",
+            "n_env_seeds": args.n_env_seeds,
+            "n_tries": args.n_tries,
             "envs": args.envs,
             "w_lesson": args.w_lesson,
             "theta_lesson_decay": args.theta_lesson_decay,
-            "seed_offset": args.seed_offset,
+            "env_seed_base": args.env_seed_base,
         }),
-        "experiment": "reflexion_ablation",
+        "experiment": "reflexion_retry",
         "config": {
-            "n_episodes": args.episodes,
+            "n_env_seeds": args.n_env_seeds,
+            "n_tries": args.n_tries,
             "envs": args.envs,
             "w_lesson": args.w_lesson,
             "theta_lesson_decay": args.theta_lesson_decay,
             "k": args.k,
             "seed": args.seed,
-            "seed_offset": args.seed_offset,
+            "env_seed_base": args.env_seed_base,
         },
         "v6_params": vars(v6_params),
         "by_env": by_env,
-        "pairwise": by_env_pairwise,
         "elapsed_s": elapsed,
     }
-    out_path = Path("results/reflexion_ablation.json")
+    out_path = Path("results/reflexion_retry.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"  Saved to {out_path}")

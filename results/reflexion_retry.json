@@ -1,0 +1,769 @@
+{
+  "_manifest": {
+    "git_sha": "09866fa",
+    "git_dirty": true,
+    "timestamp_utc": "2026-04-25T21:02:20+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "reflexion_retry",
+    "n_env_seeds": 5,
+    "n_tries": 4,
+    "envs": [
+      "MultiHop-KeyDoor"
+    ],
+    "w_lesson": 2.0,
+    "theta_lesson_decay": 0.0,
+    "env_seed_base": 7000
+  },
+  "experiment": "reflexion_retry",
+  "config": {
+    "n_env_seeds": 5,
+    "n_tries": 4,
+    "envs": [
+      "MultiHop-KeyDoor"
+    ],
+    "w_lesson": 2.0,
+    "theta_lesson_decay": 0.0,
+    "k": 8,
+    "seed": 42,
+    "env_seed_base": 7000
+  },
+  "v6_params": {
+    "theta_store": 0.348,
+    "theta_novel": 0.442,
+    "theta_erich": 0.312,
+    "theta_surprise": 0.418,
+    "theta_entity": 0.063,
+    "theta_temporal": 0.732,
+    "theta_decay": 0.718,
+    "w_graph": 1.188,
+    "w_embed": 1.313,
+    "w_recency": 1.207,
+    "mode": "learnable",
+    "w_lesson": 2.0,
+    "theta_lesson_decay": 0.0
+  },
+  "by_env": {
+    "MultiHop-KeyDoor": {
+      "per_try": {
+        "V4-base": {
+          "0": {
+            "mean_reward": 0.3333333333333333,
+            "std_reward": 0.3333333333333333,
+            "n": 5,
+            "rewards": [
+              0.3333333333333333,
+              0.0,
+              0.6666666666666666,
+              0.6666666666666666,
+              0.0
+            ]
+          },
+          "1": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "2": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.0,
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "3": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.3333333333333333
+            ]
+          }
+        },
+        "V6-w-lessons": {
+          "0": {
+            "mean_reward": 0.3333333333333333,
+            "std_reward": 0.3333333333333333,
+            "n": 5,
+            "rewards": [
+              0.3333333333333333,
+              0.0,
+              0.6666666666666666,
+              0.6666666666666666,
+              0.0
+            ]
+          },
+          "1": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "2": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.0,
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "3": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.3333333333333333
+            ]
+          }
+        },
+        "V6-Reflexion": {
+          "0": {
+            "mean_reward": 0.3333333333333333,
+            "std_reward": 0.3333333333333333,
+            "n": 5,
+            "rewards": [
+              0.3333333333333333,
+              0.0,
+              0.6666666666666666,
+              0.6666666666666666,
+              0.0
+            ]
+          },
+          "1": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "2": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.0,
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "3": {
+            "mean_reward": 0.06666666666666667,
+            "std_reward": 0.14907119849998599,
+            "n": 5,
+            "rewards": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.3333333333333333
+            ]
+          }
+        }
+      },
+      "pairwise_final_try": {
+        "V6-w-lessons": {
+          "V4-base": {
+            "point_estimate": 0.06666666666666667,
+            "ci_lower": 0.0,
+            "ci_upper": 0.19999999999999998,
+            "ci_width": 0.19999999999999998,
+            "n": 5,
+            "alpha": 0.05
+          },
+          "V6-w-lessons": {
+            "point_estimate": 0.06666666666666667,
+            "ci_lower": 0.0,
+            "ci_upper": 0.19999999999999998,
+            "ci_width": 0.19999999999999998,
+            "n": 5,
+            "alpha": 0.05
+          },
+          "ttest": {
+            "t_statistic": 0.0,
+            "p_value": 1.0,
+            "df": 4,
+            "mean_diff": 0.0,
+            "significant": false,
+            "n": 5
+          },
+          "cohens_d": {
+            "d": 0.0,
+            "magnitude": "negligible",
+            "mean_a": 0.06666666666666667,
+            "mean_b": 0.06666666666666667,
+            "pooled_std": 0.14907119849998599
+          },
+          "improvement": 0.0,
+          "improvement_pct": 0.0,
+          "conclusion": "No statistically significant difference between V4-base and V6-w-lessons (p=1.0000, negligible effect size d=0.000)."
+        },
+        "V6-Reflexion": {
+          "V4-base": {
+            "point_estimate": 0.06666666666666667,
+            "ci_lower": 0.0,
+            "ci_upper": 0.19999999999999998,
+            "ci_width": 0.19999999999999998,
+            "n": 5,
+            "alpha": 0.05
+          },
+          "V6-Reflexion": {
+            "point_estimate": 0.06666666666666667,
+            "ci_lower": 0.0,
+            "ci_upper": 0.19999999999999998,
+            "ci_width": 0.19999999999999998,
+            "n": 5,
+            "alpha": 0.05
+          },
+          "ttest": {
+            "t_statistic": 0.0,
+            "p_value": 1.0,
+            "df": 4,
+            "mean_diff": 0.0,
+            "significant": false,
+            "n": 5
+          },
+          "cohens_d": {
+            "d": 0.0,
+            "magnitude": "negligible",
+            "mean_a": 0.06666666666666667,
+            "mean_b": 0.06666666666666667,
+            "pooled_std": 0.14907119849998599
+          },
+          "improvement": 0.0,
+          "improvement_pct": 0.0,
+          "conclusion": "No statistically significant difference between V4-base and V6-Reflexion (p=1.0000, negligible effect size d=0.000)."
+        }
+      },
+      "raw": {
+        "V4-base": [
+          {
+            "env_seed": 7000,
+            "try_idx": 0,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 1,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 0,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 8.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 2,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 5.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 0,
+            "reward": 0.6666666666666666,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 9.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 5.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 0,
+            "reward": 0.6666666666666666,
+            "precision": 1.0,
+            "memory_size": 11.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 11.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 0,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 7.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 3,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": false
+          }
+        ],
+        "V6-w-lessons": [
+          {
+            "env_seed": 7000,
+            "try_idx": 0,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 1,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 0,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 8.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 2,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 5.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 0,
+            "reward": 0.6666666666666666,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 9.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 5.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 0,
+            "reward": 0.6666666666666666,
+            "precision": 1.0,
+            "memory_size": 11.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 11.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 0,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 7.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 3,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": false
+          }
+        ],
+        "V6-Reflexion": [
+          {
+            "env_seed": 7000,
+            "try_idx": 0,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 1,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7000,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 0,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 8.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 2,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": false
+          },
+          {
+            "env_seed": 7001,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 5.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 0,
+            "reward": 0.6666666666666666,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 9.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7002,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 5.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 0,
+            "reward": 0.6666666666666666,
+            "precision": 1.0,
+            "memory_size": 11.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 11.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 7.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7003,
+            "try_idx": 3,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 12.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 0,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 10.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 1,
+            "reward": 0.0,
+            "precision": null,
+            "memory_size": 7.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 2,
+            "reward": 0.0,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": true
+          },
+          {
+            "env_seed": 7004,
+            "try_idx": 3,
+            "reward": 0.3333333333333333,
+            "precision": 1.0,
+            "memory_size": 8.0,
+            "lesson_recorded": false
+          }
+        ]
+      }
+    }
+  },
+  "elapsed_s": 6.371693849563599
+}

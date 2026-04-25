@@ -267,3 +267,199 @@ def compare_variants(
     )
 
     return results
+
+
+# ---------------------------------------------------------------------------
+# Same-env retry experiment (Reflexion's original setup)
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class RetryResult:
+    """Per (env_seed, try_idx) cell."""
+    env_seed: int
+    try_idx: int
+    reward: float
+    precision: float | None
+    memory_size: float
+    lesson_recorded: bool
+
+
+def retry_run(
+    memory_factory: Callable[[], Any],
+    env_factory: Callable[[int], Any],
+    policy_factory: Callable[[int, Any], Any],
+    *,
+    env_seeds: list[int],
+    n_tries: int,
+    k: int = 8,
+    policy_seed: int = 42,
+    lesson_generator_factory: Callable[[int], Callable] | None = None,
+    persistent_memory: bool = True,
+    name: str = "variant",
+    verbose: bool = False,
+) -> list[RetryResult]:
+    """
+    Same-env retry experiment.
+
+    For each env_seed in env_seeds:
+        construct ONE memory instance (if persistent_memory) or none yet
+        for try_idx in 0..n_tries-1:
+            if not persistent_memory: memory = memory_factory()
+            policy = policy_factory(policy_seed + try_idx, memory)
+            episode_seed = env_seed
+            run one episode, optionally generating a lesson at the end
+        memory is discarded (or reused next env_seed if not persistent)
+
+    Returns a flat list of RetryResult (one per cell).
+
+    Reflexion semantics:
+      * persistent_memory=True, lesson_generator=heuristic:
+            V6 accumulates lessons across tries on the same env layout.
+            ReflexionPolicy (passed in via policy_factory) injects them.
+      * persistent_memory=False:
+            V4-base behavior: each try gets fresh memory, no learning.
+    """
+    results: list[RetryResult] = []
+    for env_seed in env_seeds:
+        memory = memory_factory() if persistent_memory else None
+        gen = lesson_generator_factory(env_seed) if lesson_generator_factory else None
+
+        for try_idx in range(n_tries):
+            if not persistent_memory:
+                memory = memory_factory()
+            env = env_factory(env_seed)
+            env.reset()
+            policy = policy_factory(policy_seed + try_idx, memory)
+            success, _, stats = run_episode_with_any_memory(
+                env,
+                policy,
+                memory,
+                k=k,
+                episode_seed=env_seed,
+                lesson_generator=gen,
+            )
+            results.append(
+                RetryResult(
+                    env_seed=env_seed,
+                    try_idx=try_idx,
+                    reward=float(stats.get("reward", 0.0)),
+                    precision=stats.get("retrieval_precision"),
+                    memory_size=float(stats.get("memory_size", 0)),
+                    lesson_recorded=bool(stats.get("lesson_recorded", False)),
+                )
+            )
+            if verbose:
+                tag = "L" if stats.get("lesson_recorded") else "."
+                print(
+                    f"    [{name}] env_seed={env_seed:5d} try={try_idx:2d}  "
+                    f"reward={results[-1].reward:.3f}  {tag}"
+                )
+    return results
+
+
+def compare_retry_variants(
+    env_factory: Callable[[int], Any],
+    *,
+    v4_params: MemoryParamsV4,
+    v6_params: MemoryParamsV6,
+    env_seeds: list[int],
+    n_tries: int,
+    k: int = 8,
+    policy_seed: int = 42,
+    verbose: bool = False,
+) -> dict[str, list[RetryResult]]:
+    """
+    Three-way same-env retry comparison:
+      * V4-base       — fresh memory each try; no learning across tries.
+      * V6-w-lessons  — persistent V6, lessons accumulate, base policy.
+      * V6-Reflexion  — persistent V6 + ReflexionPolicy reading lessons.
+
+    Returns a dict mapping variant_name -> list[RetryResult] flattened
+    over (env_seed, try_idx).
+    """
+    out: dict[str, list[RetryResult]] = {}
+
+    def base_policy(seed, _m):
+        return ExplorationPolicy(seed=seed)
+
+    def reflex_policy(seed, mem):
+        return ReflexionPolicy(
+            base_policy=ExplorationPolicy(seed=seed),
+            memory=mem,
+            k_lessons=3,
+        )
+
+    out["V4-base"] = retry_run(
+        memory_factory=lambda: GraphMemoryV4(v4_params),
+        env_factory=env_factory,
+        policy_factory=base_policy,
+        env_seeds=env_seeds,
+        n_tries=n_tries,
+        k=k,
+        policy_seed=policy_seed,
+        persistent_memory=False,
+        lesson_generator_factory=None,
+        name="V4-base",
+        verbose=verbose,
+    )
+
+    def v6_factory():
+        return GraphMemoryV6(v6_params)
+
+    def gen_factory(env_seed):
+        return make_generator("heuristic", episode_seed=env_seed)
+
+    out["V6-w-lessons"] = retry_run(
+        memory_factory=v6_factory,
+        env_factory=env_factory,
+        policy_factory=base_policy,
+        env_seeds=env_seeds,
+        n_tries=n_tries,
+        k=k,
+        policy_seed=policy_seed,
+        persistent_memory=True,
+        lesson_generator_factory=gen_factory,
+        name="V6-w-lessons",
+        verbose=verbose,
+    )
+
+    out["V6-Reflexion"] = retry_run(
+        memory_factory=v6_factory,
+        env_factory=env_factory,
+        policy_factory=reflex_policy,
+        env_seeds=env_seeds,
+        n_tries=n_tries,
+        k=k,
+        policy_seed=policy_seed,
+        persistent_memory=True,
+        lesson_generator_factory=gen_factory,
+        name="V6-Reflexion",
+        verbose=verbose,
+    )
+
+    return out
+
+
+def summarize_by_try(
+    results: list[RetryResult],
+) -> dict[int, dict]:
+    """
+    Aggregate RetryResults by try_idx — compute mean reward, std, and a list
+    of (env_seed, reward) pairs per try index.
+
+    Used to plot reward-vs-try-number curves for each variant.
+    """
+    from collections import defaultdict
+    bucket: dict[int, list[float]] = defaultdict(list)
+    for r in results:
+        bucket[r.try_idx].append(r.reward)
+    out: dict[int, dict] = {}
+    for tidx, vals in sorted(bucket.items()):
+        out[tidx] = {
+            "mean_reward": statistics.mean(vals),
+            "std_reward": statistics.stdev(vals) if len(vals) > 1 else 0.0,
+            "n": len(vals),
+            "rewards": list(vals),
+        }
+    return out
