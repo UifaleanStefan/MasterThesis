@@ -187,13 +187,30 @@ class GraphMemoryV6(GraphMemoryV4):
         self._episode_index += 1
 
     def clear(self) -> None:
+        """
+        Reset event/entity state — but NOT lessons.
+
+        V6 deliberately diverges from V4's `clear()` contract here. The whole
+        point of the lesson buffer is to persist verbal reflections *across*
+        episodes; if `clear()` wiped them, every episode would start cold and
+        Reflexion couldn't learn anything across episodes.
+
+        Use `reset_lesson_buffer()` to wipe lessons explicitly (e.g. between
+        unrelated benchmark runs).
+        """
+        # Snapshot the lesson nodes before V4's clear nukes the graph.
+        lesson_node_ids = [
+            n for n, d in self._graph.nodes(data=True) if d.get("type") == "lesson"
+        ]
+        lesson_nodes_data = {
+            n: dict(self._graph.nodes[n]) for n in lesson_node_ids
+        }
         super().clear()
-        self._lessons.clear()
-        self._lesson_embeddings.clear()
-        self._lesson_episode_idx.clear()
-        self._lessons_recorded = 0
-        # Note: episode_index is NOT reset on clear — it persists across
-        # episodes within a single benchmark run (lessons are durable).
+        # Restore lesson nodes to the freshly-cleared graph.
+        for node_id, data in lesson_nodes_data.items():
+            self._graph.add_node(node_id, **data)
+        # Note: _lessons / _lesson_embeddings / _lesson_episode_idx /
+        # _lessons_recorded / _episode_index are all preserved.
 
     def reset_lesson_buffer(self) -> None:
         """

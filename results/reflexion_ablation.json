@@ -1,0 +1,245 @@
+{
+  "_manifest": {
+    "git_sha": "b1c4cf1",
+    "git_dirty": true,
+    "timestamp_utc": "2026-04-25T20:58:50+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "reflexion_ablation",
+    "n_episodes_per_variant": 5,
+    "envs": [
+      "MultiHop-KeyDoor"
+    ],
+    "w_lesson": 2.0,
+    "theta_lesson_decay": 0.0,
+    "seed_offset": 6000
+  },
+  "experiment": "reflexion_ablation",
+  "config": {
+    "n_episodes": 5,
+    "envs": [
+      "MultiHop-KeyDoor"
+    ],
+    "w_lesson": 2.0,
+    "theta_lesson_decay": 0.0,
+    "k": 8,
+    "seed": 42,
+    "seed_offset": 6000
+  },
+  "v6_params": {
+    "theta_store": 0.348,
+    "theta_novel": 0.442,
+    "theta_erich": 0.312,
+    "theta_surprise": 0.418,
+    "theta_entity": 0.063,
+    "theta_temporal": 0.732,
+    "theta_decay": 0.718,
+    "w_graph": 1.188,
+    "w_embed": 1.313,
+    "w_recency": 1.207,
+    "mode": "learnable",
+    "w_lesson": 2.0,
+    "theta_lesson_decay": 0.0
+  },
+  "by_env": {
+    "MultiHop-KeyDoor": {
+      "V4-base": {
+        "name": "V4-base",
+        "mean_reward": 0.13333333333333333,
+        "std_reward": 0.18257418583505536,
+        "mean_precision": 1.0,
+        "mean_memory_size": 9.4,
+        "rewards": [
+          0.0,
+          0.0,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.0
+        ],
+        "lessons_recorded_per_ep": [],
+        "n_lessons_final": 0,
+        "n_episodes": 5
+      },
+      "V6-no-lessons": {
+        "name": "V6-no-lessons",
+        "mean_reward": 0.13333333333333333,
+        "std_reward": 0.18257418583505536,
+        "mean_precision": 1.0,
+        "mean_memory_size": 9.4,
+        "rewards": [
+          0.0,
+          0.0,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.0
+        ],
+        "lessons_recorded_per_ep": [],
+        "n_lessons_final": 0,
+        "n_episodes": 5
+      },
+      "V6-w-lessons": {
+        "name": "V6-w-lessons",
+        "mean_reward": 0.06666666666666667,
+        "std_reward": 0.14907119849998599,
+        "mean_precision": 1.0,
+        "mean_memory_size": 9.2,
+        "rewards": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.3333333333333333
+        ],
+        "lessons_recorded_per_ep": [
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "n_lessons_final": 4,
+        "n_episodes": 5
+      },
+      "V6-Reflexion": {
+        "name": "V6-Reflexion",
+        "mean_reward": 0.06666666666666667,
+        "std_reward": 0.14907119849998599,
+        "mean_precision": 1.0,
+        "mean_memory_size": 9.2,
+        "rewards": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.3333333333333333
+        ],
+        "lessons_recorded_per_ep": [
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "n_lessons_final": 4,
+        "n_episodes": 5
+      }
+    }
+  },
+  "pairwise": {
+    "MultiHop-KeyDoor": {
+      "V6-no-lessons": {
+        "V4-base": {
+          "point_estimate": 0.13333333333333333,
+          "ci_lower": 0.0,
+          "ci_upper": 0.26666666666666666,
+          "ci_width": 0.26666666666666666,
+          "n": 5,
+          "alpha": 0.05
+        },
+        "V6-no-lessons": {
+          "point_estimate": 0.13333333333333333,
+          "ci_lower": 0.0,
+          "ci_upper": 0.26666666666666666,
+          "ci_width": 0.26666666666666666,
+          "n": 5,
+          "alpha": 0.05
+        },
+        "ttest": {
+          "t_statistic": 0.0,
+          "p_value": 1.0,
+          "df": 4,
+          "mean_diff": 0.0,
+          "significant": false,
+          "n": 5
+        },
+        "cohens_d": {
+          "d": 0.0,
+          "magnitude": "negligible",
+          "mean_a": 0.13333333333333333,
+          "mean_b": 0.13333333333333333,
+          "pooled_std": 0.18257418583505536
+        },
+        "improvement": 0.0,
+        "improvement_pct": 0.0,
+        "conclusion": "No statistically significant difference between V4-base and V6-no-lessons (p=1.0000, negligible effect size d=0.000)."
+      },
+      "V6-w-lessons": {
+        "V4-base": {
+          "point_estimate": 0.13333333333333333,
+          "ci_lower": 0.0,
+          "ci_upper": 0.26666666666666666,
+          "ci_width": 0.26666666666666666,
+          "n": 5,
+          "alpha": 0.05
+        },
+        "V6-w-lessons": {
+          "point_estimate": 0.06666666666666667,
+          "ci_lower": 0.0,
+          "ci_upper": 0.19999999999999998,
+          "ci_width": 0.19999999999999998,
+          "n": 5,
+          "alpha": 0.05
+        },
+        "ttest": {
+          "t_statistic": -0.5345224838248489,
+          "p_value": 0.6213082950374968,
+          "df": 4,
+          "mean_diff": -0.06666666666666667,
+          "significant": false,
+          "n": 5
+        },
+        "cohens_d": {
+          "d": -0.4,
+          "magnitude": "small",
+          "mean_a": 0.13333333333333333,
+          "mean_b": 0.06666666666666667,
+          "pooled_std": 0.16666666666666666
+        },
+        "improvement": -0.06666666666666667,
+        "improvement_pct": -50.0,
+        "conclusion": "No statistically significant difference between V4-base and V6-w-lessons (p=0.6213, small effect size d=-0.400)."
+      },
+      "V6-Reflexion": {
+        "V4-base": {
+          "point_estimate": 0.13333333333333333,
+          "ci_lower": 0.0,
+          "ci_upper": 0.26666666666666666,
+          "ci_width": 0.26666666666666666,
+          "n": 5,
+          "alpha": 0.05
+        },
+        "V6-Reflexion": {
+          "point_estimate": 0.06666666666666667,
+          "ci_lower": 0.0,
+          "ci_upper": 0.19999999999999998,
+          "ci_width": 0.19999999999999998,
+          "n": 5,
+          "alpha": 0.05
+        },
+        "ttest": {
+          "t_statistic": -0.5345224838248489,
+          "p_value": 0.6213082950374968,
+          "df": 4,
+          "mean_diff": -0.06666666666666667,
+          "significant": false,
+          "n": 5
+        },
+        "cohens_d": {
+          "d": -0.4,
+          "magnitude": "small",
+          "mean_a": 0.13333333333333333,
+          "mean_b": 0.06666666666666667,
+          "pooled_std": 0.16666666666666666
+        },
+        "improvement": -0.06666666666666667,
+        "improvement_pct": -50.0,
+        "conclusion": "No statistically significant difference between V4-base and V6-Reflexion (p=0.6213, small effect size d=-0.400)."
+      }
+    }
+  },
+  "elapsed_s": 4.5389251708984375
+}

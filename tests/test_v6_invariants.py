@@ -203,7 +203,30 @@ class TestLessonLifecycle:
         assert retrieved[0].episode_seed == 2  # newer one ranks first
         assert retrieved[1].episode_seed == 1  # older one second
 
-    def test_clear_resets_lesson_buffer(self):
+    def test_clear_keeps_lessons_but_wipes_events(self):
+        """
+        V6's `clear()` deliberately keeps lessons across episodes — the whole
+        point of the lesson buffer is cross-episode persistence. Events DO
+        get wiped (matching V4's contract for the event subset).
+        """
+        params = MemoryParamsV6(w_lesson=2.0)
+        v6 = GraphMemoryV6(params)
+        v6.add_event(Event(0, "you see a red key.", "pickup"), episode_seed=1)
+        v6.record_lesson(Lesson(
+            episode_seed=1, final_reward=1.0,
+            text="Open the door.", relevant_entities=("door",),
+        ))
+        before = v6.get_stats()
+        assert before["n_lessons"] == 1
+        assert before["n_events"] >= 1
+
+        v6.clear()
+        after = v6.get_stats()
+        assert after["n_lessons"] == 1, "lessons must survive clear()"
+        assert after["n_events"] == 0, "events must be wiped by clear()"
+
+    def test_reset_lesson_buffer_wipes_lessons(self):
+        """The explicit reset is needed for unrelated-run boundaries."""
         params = MemoryParamsV6(w_lesson=2.0)
         v6 = GraphMemoryV6(params)
         v6.record_lesson(Lesson(
@@ -211,12 +234,12 @@ class TestLessonLifecycle:
             text="Open the door.", relevant_entities=("door",),
         ))
         assert v6.get_stats()["n_lessons"] == 1
-        v6.clear()
+        v6.reset_lesson_buffer()
         assert v6.get_stats()["n_lessons"] == 0
 
     def test_episode_index_persists_across_clear(self):
-        """clear() wipes lessons but NOT the episode counter — lessons recorded
-        before a clear still get older-episode decay if added back later."""
+        """clear() wipes events but NOT the episode counter — lesson decay
+        keeps tracking time elapsed across episodes."""
         params = MemoryParamsV6(w_lesson=2.0, theta_lesson_decay=0.5)
         v6 = GraphMemoryV6(params)
         v6.end_episode()
