@@ -5,6 +5,58 @@
 
 ---
 
+## -3. Reflexion plan: GraphMemoryV6 + lesson buffer (April 2026)
+
+After a research deep-dive (covered in three parallel agent reports), the
+single highest-leverage 2024-2026 thesis improvement was identified as a
+Reflexion-style verbal-lesson buffer to address V4's MegaQuest 0.0 reward
+finding. The plan: prove the bottleneck is policy (Phase 0), build the
+architecture (Phase 1-2), and run the canonical same-env retry experiment
+(Phase 3).
+
+**Phase 0 — oracle diagnosis (PASS):** OmniscientOracle (env-cheating)
+hits 100% reward on MegaQuest across all 30 episodes; OracleHonest gets
+0.03; ExplorationPolicy gets 0.00. Policy-bottleneck confirmed: env is
+fully solvable with optimal info.
+
+**Phase 1 — V6 architecture (PASS):** GraphMemoryV6 extends V4 with two
+theta dimensions (`w_lesson`, `theta_lesson_decay`) and a new `Lesson`
+node type. Strict-generalization invariant holds (`w_lesson=0` matches V4
+bit-identically). pytest invariants 40 → 60.
+
+**Phase 2 — ReflexionPolicy + runners (PASS):** policy wrapper that
+injects retrieved lessons as synthetic past_events; persistent-memory
+runner; same-env retry runner.
+
+**Phase 3 — empirical lift (NEGATIVE RESULT):** on MultiHop-KeyDoor across
+5 env layouts × 4 tries, V4-base / V6-w-lessons / V6-Reflexion are
+statistically indistinguishable (p = 1.000, d = 0.000 for all pairs).
+
+**Diagnosis:** ExplorationPolicy is rule-based and deterministic given
+parsed hints; `heuristic_lesson()` paraphrases hints already visible in
+observations; the lesson channel adds no new information for a rule-based
+policy. The architecture is sound but its empirical lift is gated on
+richer lesson generators (LLM-judged reflections — Stage 3) or LLM-agent
+policies that can act on strategic verbal text beyond regex-parseable
+hints.
+
+**Defensible thesis claim:** V6 is a plumbing-complete, evidence-gated
+contribution. The framework is in place (60 invariants, determinism audit
+green); the empirical lift awaits the richer reflective signal an LLM
+judge can provide.
+
+Full writeup: [docs/REFLEXION_RESULTS.md](REFLEXION_RESULTS.md).
+
+**Files added:** `agent/oracle_policy.py`, `agent/reflexion_policy.py`,
+`memory/lesson.py`, `memory/graph_memory_v6.py`,
+`evaluation/reflexion_eval.py`, `run_oracle_diagnosis.py`,
+`run_reflexion_ablation.py`, `tests/test_v6_invariants.py`,
+`docs/REFLEXION_RESULTS.md`.
+
+V7 (skill library) deferred per the same architectural ceiling.
+
+---
+
 ## -2. Frontend refactor — Vite + React replaces Streamlit dashboard (April 2026)
 
 The 842-line Streamlit dashboard at `dashboard/` has been replaced with a
