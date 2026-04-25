@@ -47,6 +47,43 @@ from agent.loop import run_episode_with_any_memory
 from evaluation.statistics import bootstrap_ci
 
 
+def _load_v4_default_params():
+    """
+    Load the V4 default theta — preferring the latest CMA-ES result on disk.
+
+    Reads ``results/graphmemory_v4_cmaes_results.json`` if present and returns
+    a MemoryParamsV4 built from its ``v4.best_params``. If the file is missing
+    or malformed, falls back to the MiniLM-era inlined defaults (post Phase 3
+    re-tune). Old TF-IDF-tuned theta (w_recency=3.78, w_graph=0) is no longer
+    used as a fallback because it was an embedding artifact.
+    """
+    from memory.graph_memory_v4 import MemoryParamsV4
+
+    fallback = MemoryParamsV4(
+        theta_store=0.348, theta_novel=0.442, theta_erich=0.312, theta_surprise=0.418,
+        theta_entity=0.063, theta_temporal=0.732, theta_decay=0.718,
+        w_graph=1.188, w_embed=1.313, w_recency=1.207, mode="learnable",
+    )
+    try:
+        path = Path("results/graphmemory_v4_cmaes_results.json")
+        if not path.exists():
+            return fallback
+        data = json.loads(path.read_text())
+        bp = data.get("v4", {}).get("best_params")
+        if not bp:
+            return fallback
+        return MemoryParamsV4(
+            theta_store=bp["theta_store"], theta_novel=bp["theta_novel"],
+            theta_erich=bp["theta_erich"], theta_surprise=bp["theta_surprise"],
+            theta_entity=bp["theta_entity"], theta_temporal=bp["theta_temporal"],
+            theta_decay=bp["theta_decay"],
+            w_graph=bp["w_graph"], w_embed=bp["w_embed"], w_recency=bp["w_recency"],
+            mode="learnable",
+        )
+    except Exception:
+        return fallback
+
+
 def _make_memory_systems(learned_thetas: dict[str, tuple] | None = None) -> dict[str, Any]:
     """
     Instantiate all memory systems. Uses best learned theta for GraphMemory+Theta.
@@ -68,12 +105,16 @@ def _make_memory_systems(learned_thetas: dict[str, tuple] | None = None) -> dict
     default_theta = (0.956, 0.378, 1.000)
     if learned_thetas:
         default_theta = learned_thetas.get("MultiHop-KeyDoor", default_theta)
-    # Best V4 10D theta from CMA-ES (MultiHopKeyDoor) for GraphMemoryV4 and V5
-    default_v4_params = MemoryParamsV4(
-        theta_store=0.293, theta_novel=0.908, theta_erich=0.198, theta_surprise=0.785,
-        theta_entity=0.285, theta_temporal=0.278, theta_decay=0.668,
-        w_graph=0.0, w_embed=1.079, w_recency=3.777, mode="learnable",
-    )
+
+    # Best V4 10D theta from CMA-ES on MultiHopKeyDoor under MiniLM embedding.
+    # Source: results/graphmemory_v4_cmaes_results.json (30 gens × 50 eps × 100 eval).
+    # Eval reward = 0.130, precision = 1.000.
+    # Notable shift vs the TF-IDF-era optimum (which had w_recency=3.78 / w_graph=0):
+    # under MiniLM the retrieval weights are balanced (graph IS contributing) and
+    # theta_novel halves because the embedding distinguishes events on its own.
+    # If `results/graphmemory_v4_cmaes_results.json` exists at run time we load
+    # those values dynamically; otherwise we fall back to the inlined ones.
+    default_v4_params = _load_v4_default_params()
 
     return {
         "FlatWindow(50)":       lambda: FlatMemory(window_size=50),

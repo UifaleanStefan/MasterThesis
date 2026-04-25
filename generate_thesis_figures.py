@@ -107,7 +107,9 @@ def fig_master_benchmark():
 
     multihop = bench["MultiHop-KeyDoor"]
 
-    # Add V4 entry to multihop data
+    # Add V4 entry to multihop data (use CMA-ES eval — held-out, more episodes
+    # than benchmark's 50). Skip systems whose entry is "error" before adding.
+    multihop = {k: v for k, v in multihop.items() if "error" not in v}
     multihop["GraphMemoryV4"] = {
         "mean_reward":        v4res["v4"]["eval"]["mean_reward"],
         "mean_tokens":        v4res["v4"]["eval"]["mean_tokens"],
@@ -115,13 +117,16 @@ def fig_master_benchmark():
         "retrieval_precision": v4res["v4"]["eval"]["mean_precision"],
         "efficiency":         v4res["v4"]["eval"]["efficiency"],
     }
-    multihop["GraphMemoryV1"] = {
-        "mean_reward":        v4res["v1_baseline"]["eval"]["mean_reward"],
-        "mean_tokens":        v4res["v1_baseline"]["eval"]["mean_tokens"],
-        "mean_memory_size":   v4res["v1_baseline"]["eval"]["mean_memory_size"],
-        "retrieval_precision": v4res["v1_baseline"]["eval"]["mean_precision"],
-        "efficiency":         v4res["v1_baseline"]["eval"]["efficiency"],
-    }
+    # V1 baseline section may be absent (run with --no-baseline) — guard it.
+    v1_block = v4res.get("v1_baseline")
+    if v1_block:
+        multihop["GraphMemoryV1"] = {
+            "mean_reward":        v1_block["eval"]["mean_reward"],
+            "mean_tokens":        v1_block["eval"]["mean_tokens"],
+            "mean_memory_size":   v1_block["eval"]["mean_memory_size"],
+            "retrieval_precision": v1_block["eval"]["mean_precision"],
+            "efficiency":         v1_block["eval"]["efficiency"],
+        }
 
     systems = sorted(multihop.keys(), key=lambda s: multihop[s]["mean_reward"], reverse=True)
     rewards  = [multihop[s]["mean_reward"]      for s in systems]
@@ -133,9 +138,9 @@ def fig_master_benchmark():
     colors  = [GREEN if i == v4_idx else (ORANGE if s == "GraphMemoryV1" else BLUE)
                for i, s in enumerate(systems)]
 
-    # V4 CMA-ES learning curve
+    # V4 CMA-ES learning curve (V1 baseline curve absent if run with --no-baseline).
     v4_hist = v4res["v4"]["opt_history"]
-    v1_hist = v4res["v1_baseline"]["opt_history"]
+    v1_hist = v1_block["opt_history"] if v1_block else []
     v4_gens = [h["generation"]    for h in v4_hist]
     v4_fit  = [h["best_fitness"]  for h in v4_hist]
     v1_gens = [h["generation"]    for h in v1_hist]
@@ -192,9 +197,11 @@ def fig_master_benchmark():
 
     # ── bottom-left: CMA-ES learning curves ──
     ax3.plot(v4_gens, v4_fit, color=GREEN,  linewidth=2.0, marker="o", markersize=3, label="GraphMemoryV4 (10D)")
-    ax3.plot(v1_gens, v1_fit, color=ORANGE, linewidth=2.0, marker="s", markersize=3, label="GraphMemoryV1 (3D)")
+    if v1_gens:
+        ax3.plot(v1_gens, v1_fit, color=ORANGE, linewidth=2.0, marker="s", markersize=3, label="GraphMemoryV1 (3D)")
     ax3.axhline(v4res["v4"]["eval"]["mean_reward"],        color=GREEN,  linestyle="--", alpha=0.6, linewidth=1.2, label=f"V4 eval: {v4res['v4']['eval']['mean_reward']:.3f}")
-    ax3.axhline(v4res["v1_baseline"]["eval"]["mean_reward"], color=ORANGE, linestyle="--", alpha=0.6, linewidth=1.2, label=f"V1 eval: {v4res['v1_baseline']['eval']['mean_reward']:.3f}")
+    if v1_block:
+        ax3.axhline(v1_block["eval"]["mean_reward"], color=ORANGE, linestyle="--", alpha=0.6, linewidth=1.2, label=f"V1 eval: {v1_block['eval']['mean_reward']:.3f}")
     ax3.set_xlabel("Generation")
     ax3.set_ylabel("Best Fitness (mean reward)")
     ax3.set_title("CMA-ES Optimization — Learning Curves")
@@ -207,15 +214,21 @@ def fig_master_benchmark():
         ax3.text(jump_gen + 0.3, min(v4_fit) + 0.005, f"Jump\ngen {jump_gen}", fontsize=7.5, color=GREEN)
 
     # ── bottom-right: memory size comparison ──
-    size_systems = ["GraphMemoryV1\n(V1 baseline)", "GraphMemoryV4\n(V4 optimized)"]
-    size_vals    = [v4res["v1_baseline"]["eval"]["mean_memory_size"],
-                    v4res["v4"]["eval"]["mean_memory_size"]]
+    if v1_block:
+        size_systems = ["GraphMemoryV1\n(V1 baseline)", "GraphMemoryV4\n(V4 optimized)"]
+        size_vals    = [v1_block["eval"]["mean_memory_size"],
+                        v4res["v4"]["eval"]["mean_memory_size"]]
+        bar_colors = [ORANGE, GREEN]
+    else:
+        size_systems = ["GraphMemoryV4\n(V4 optimized)"]
+        size_vals    = [v4res["v4"]["eval"]["mean_memory_size"]]
+        bar_colors = [GREEN]
     # add a few benchmark systems for context
     for s in ["FlatWindow(50)", "SemanticMemory", "WorkingMemory(7)"]:
         if s in multihop:
             size_systems.append(s)
             size_vals.append(multihop[s]["mean_memory_size"])
-    bar_colors = [ORANGE, GREEN] + [BLUE] * (len(size_systems) - 2)
+            bar_colors.append(BLUE)
     bars4 = ax4.bar(range(len(size_systems)), size_vals, color=bar_colors, edgecolor="white", linewidth=0.5)
     ax4.set_xticks(range(len(size_systems)))
     ax4.set_xticklabels(size_systems, fontsize=8)
@@ -224,10 +237,11 @@ def fig_master_benchmark():
     for bar, v in zip(bars4, size_vals):
         ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
                  f"{v:.0f}", ha="center", fontsize=8, fontweight="bold")
-    reduction = size_vals[0] / size_vals[1]
-    ax4.text(0.5, 0.92, f"V4 uses {reduction:.0f}x fewer events than V1",
-             transform=ax4.transAxes, ha="center", fontsize=9,
-             bbox=dict(boxstyle="round,pad=0.3", facecolor="#DCFCE7", edgecolor=GREEN, alpha=0.9))
+    if v1_block:
+        reduction = size_vals[0] / size_vals[1]
+        ax4.text(0.5, 0.92, f"V4 uses {reduction:.0f}x fewer events than V1",
+                 transform=ax4.transAxes, ha="center", fontsize=9,
+                 bbox=dict(boxstyle="round,pad=0.3", facecolor="#DCFCE7", edgecolor=GREEN, alpha=0.9))
     ax4.grid(True, alpha=0.3, axis="y")
 
     fig.suptitle("GraphMemoryV4 — Master Benchmark Summary", fontsize=13, fontweight="bold", y=1.01)
@@ -652,13 +666,15 @@ def fig11_pareto():
         "mean_tokens":      v4res["v4"]["eval"]["mean_tokens"],
         "mean_memory_size": v4res["v4"]["eval"]["mean_memory_size"],
     }
-    all_systems["GraphMemoryV1"] = {
-        "mean_reward":      v4res["v1_baseline"]["eval"]["mean_reward"],
-        "mean_tokens":      v4res["v1_baseline"]["eval"]["mean_tokens"],
-        "mean_memory_size": v4res["v1_baseline"]["eval"]["mean_memory_size"],
-    }
+    v1_block = v4res.get("v1_baseline")
+    if v1_block:
+        all_systems["GraphMemoryV1"] = {
+            "mean_reward":      v1_block["eval"]["mean_reward"],
+            "mean_tokens":      v1_block["eval"]["mean_tokens"],
+            "mean_memory_size": v1_block["eval"]["mean_memory_size"],
+        }
 
-    names   = list(all_systems.keys())
+    names   = [n for n, v in all_systems.items() if "error" not in v]
     rewards = [all_systems[s]["mean_reward"] for s in names]
     tokens  = [all_systems[s]["mean_tokens"]  for s in names]
 
@@ -723,13 +739,15 @@ def fig13_memory_size():
         "mean_tokens":      v4res["v4"]["eval"]["mean_tokens"],
         "mean_memory_size": v4res["v4"]["eval"]["mean_memory_size"],
     }
-    all_systems["GraphMemoryV1"] = {
-        "mean_reward":      v4res["v1_baseline"]["eval"]["mean_reward"],
-        "mean_tokens":      v4res["v1_baseline"]["eval"]["mean_tokens"],
-        "mean_memory_size": v4res["v1_baseline"]["eval"]["mean_memory_size"],
-    }
+    v1_block = v4res.get("v1_baseline")
+    if v1_block:
+        all_systems["GraphMemoryV1"] = {
+            "mean_reward":      v1_block["eval"]["mean_reward"],
+            "mean_tokens":      v1_block["eval"]["mean_tokens"],
+            "mean_memory_size": v1_block["eval"]["mean_memory_size"],
+        }
 
-    names    = list(all_systems.keys())
+    names    = [n for n, v in all_systems.items() if "error" not in v]
     sizes    = [all_systems[s]["mean_memory_size"] for s in names]
     rewards  = [all_systems[s]["mean_reward"]      for s in names]
 
@@ -766,21 +784,26 @@ def fig13_memory_size():
     ax2.set_title("Memory Efficiency — Reward vs Size")
     ax2.grid(True, alpha=0.3)
 
-    v4_size   = all_systems["GraphMemoryV4"]["mean_memory_size"]
-    v4_reward = all_systems["GraphMemoryV4"]["mean_reward"]
-    v1_size   = all_systems["GraphMemoryV1"]["mean_memory_size"]
-    v1_reward = all_systems["GraphMemoryV1"]["mean_reward"]
-    ax2.annotate("",
-                 xy=(v4_size, v4_reward), xytext=(v1_size, v1_reward),
-                 arrowprops=dict(arrowstyle="->", color=GREEN, lw=2.0))
-    ax2.text((v1_size + v4_size)/2, (v1_reward + v4_reward)/2 + 0.005,
-             f"{v1_size/v4_size:.0f}x smaller\n+{(v4_reward-v1_reward):.3f} reward",
-             ha="center", fontsize=8.5, color=GREEN, fontweight="bold")
-
-    patch_v4 = mpatches.Patch(color=GREEN,  label="GraphMemoryV4 (ours)")
-    patch_v1 = mpatches.Patch(color=ORANGE, label="GraphMemoryV1 (baseline)")
-    patch_ot = mpatches.Patch(color=BLUE,   label="Other systems")
-    ax2.legend(handles=[patch_v4, patch_v1, patch_ot], fontsize=8)
+    # V4 vs V1 arrow — only when V1 baseline data is available.
+    if "GraphMemoryV1" in all_systems:
+        v4_size   = all_systems["GraphMemoryV4"]["mean_memory_size"]
+        v4_reward = all_systems["GraphMemoryV4"]["mean_reward"]
+        v1_size   = all_systems["GraphMemoryV1"]["mean_memory_size"]
+        v1_reward = all_systems["GraphMemoryV1"]["mean_reward"]
+        ax2.annotate("",
+                     xy=(v4_size, v4_reward), xytext=(v1_size, v1_reward),
+                     arrowprops=dict(arrowstyle="->", color=GREEN, lw=2.0))
+        ax2.text((v1_size + v4_size)/2, (v1_reward + v4_reward)/2 + 0.005,
+                 f"{v1_size/v4_size:.0f}x smaller\n+{(v4_reward-v1_reward):.3f} reward",
+                 ha="center", fontsize=8.5, color=GREEN, fontweight="bold")
+        patch_v4 = mpatches.Patch(color=GREEN,  label="GraphMemoryV4 (ours)")
+        patch_v1 = mpatches.Patch(color=ORANGE, label="GraphMemoryV1 (baseline)")
+        patch_ot = mpatches.Patch(color=BLUE,   label="Other systems")
+        ax2.legend(handles=[patch_v4, patch_v1, patch_ot], fontsize=8)
+    else:
+        patch_v4 = mpatches.Patch(color=GREEN, label="GraphMemoryV4 (ours)")
+        patch_ot = mpatches.Patch(color=BLUE,  label="Other systems")
+        ax2.legend(handles=[patch_v4, patch_ot], fontsize=8)
 
     fig.suptitle("Memory Size Comparison — All Systems on MultiHopKeyDoor",
                  fontsize=12, fontweight="bold")

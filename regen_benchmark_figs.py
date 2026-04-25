@@ -66,13 +66,15 @@ def make_fig5_multihop(results: dict, v4res: dict | None = None) -> Path:
             "retrieval_precision": v4res["v4"]["eval"]["mean_precision"],
             "efficiency": v4res["v4"]["eval"]["efficiency"],
         }
-        env_data["GraphMemoryV1"] = {
-            "mean_reward": v4res["v1_baseline"]["eval"]["mean_reward"],
-            "ci_lower": v4res["v1_baseline"]["eval"].get("ci_lower", v4res["v1_baseline"]["eval"]["mean_reward"] - 0.02),
-            "ci_upper": v4res["v1_baseline"]["eval"].get("ci_upper", v4res["v1_baseline"]["eval"]["mean_reward"] + 0.02),
-            "retrieval_precision": v4res["v1_baseline"]["eval"]["mean_precision"],
-            "efficiency": v4res["v1_baseline"]["eval"]["efficiency"],
-        }
+        v1_block = v4res.get("v1_baseline")
+        if v1_block:
+            env_data["GraphMemoryV1"] = {
+                "mean_reward": v1_block["eval"]["mean_reward"],
+                "ci_lower": v1_block["eval"].get("ci_lower", v1_block["eval"]["mean_reward"] - 0.02),
+                "ci_upper": v1_block["eval"].get("ci_upper", v1_block["eval"]["mean_reward"] + 0.02),
+                "retrieval_precision": v1_block["eval"]["mean_precision"],
+                "efficiency": v1_block["eval"]["efficiency"],
+            }
 
     # Filter out error entries
     env_data = {s: v for s, v in env_data.items() if _is_valid_system_entry(v)}
@@ -147,7 +149,7 @@ def make_fig5_multihop(results: dict, v4res: dict | None = None) -> Path:
 
 def make_cross_env_heatmap(results: dict) -> Path:
     """Fig 5b — Cross-environment performance heatmap."""
-    envs = list(results.keys())
+    envs = [k for k in results.keys() if not k.startswith("_")]
     # Union of systems across envs; filter error entries
     all_systems = set()
     for env in envs:
@@ -212,10 +214,12 @@ def make_precision_scatter(results: dict, v4res: dict | None = None) -> Path:
             "mean_reward": v4res["v4"]["eval"]["mean_reward"],
             "retrieval_precision": v4res["v4"]["eval"]["mean_precision"],
         }
-        env_data["GraphMemoryV1"] = {
-            "mean_reward": v4res["v1_baseline"]["eval"]["mean_reward"],
-            "retrieval_precision": v4res["v1_baseline"]["eval"]["mean_precision"],
-        }
+        v1_block = v4res.get("v1_baseline")
+        if v1_block:
+            env_data["GraphMemoryV1"] = {
+                "mean_reward": v1_block["eval"]["mean_reward"],
+                "retrieval_precision": v1_block["eval"]["mean_precision"],
+            }
     env_data = {s: v for s, v in env_data.items() if _is_valid_system_entry(v)}
     systems = list(env_data.keys())
 
@@ -300,7 +304,7 @@ def main() -> None:
     if v4_path.exists():
         v4res = json.loads(v4_path.read_text())
         print("  Merging V4/V1 from graphmemory_v4_cmaes_results.json for MultiHop")
-    print(f"  Environments: {list(results.keys())}")
+    print(f"  Environments: {[k for k in results.keys() if not k.startswith('_')]}")
     print(f"  Systems: {list(list(results.values())[0].keys())}")
     print()
 

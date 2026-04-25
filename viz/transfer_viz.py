@@ -38,14 +38,25 @@ def plot_transfer_matrix(
     output_path : path to save PNG
     """
     source_tasks = list(matrix.keys())
-    target_tasks = list(matrix[source_tasks[0]].keys()) if source_tasks else []
+    # Targets are the union of all sources' target keys, so heterogeneous matrices
+    # (e.g. zero-shot transfer + an A2 w_recency clamp investigation) plot
+    # without crashing. Missing cells default to 0.0 reward.
+    target_tasks: list[str] = []
+    for src in source_tasks:
+        for tgt in matrix.get(src, {}):
+            if tgt not in target_tasks:
+                target_tasks.append(tgt)
     n_src, n_tgt = len(source_tasks), len(target_tasks)
 
     # Build value matrix
     values = np.zeros((n_src, n_tgt))
     for i, src in enumerate(source_tasks):
         for j, tgt in enumerate(target_tasks):
-            values[i, j] = matrix[src][tgt].get(metric, 0.0)
+            entry = matrix.get(src, {}).get(tgt)
+            if entry is None or "error" in entry:
+                values[i, j] = 0.0
+            else:
+                values[i, j] = entry.get(metric, 0.0)
 
     fig, ax = plt.subplots(figsize=(max(6, n_tgt * 1.8), max(5, n_src * 1.5)))
     im = ax.imshow(values, cmap="RdYlGn", aspect="auto",

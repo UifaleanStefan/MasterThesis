@@ -483,11 +483,11 @@ def render_playground() -> None:
                 "MultiHop-KeyDoor": lambda: MultiHopKeyDoor(seed=0),
                 "MegaQuestRoom": lambda: MegaQuestRoom(seed=0),
             }
-            default_v4 = MemoryParamsV4(
-                theta_store=0.293, theta_novel=0.908, theta_erich=0.198, theta_surprise=0.785,
-                theta_entity=0.285, theta_temporal=0.278, theta_decay=0.668,
-                w_graph=0.0, w_embed=1.079, w_recency=3.777, mode="learnable",
-            )
+            # V4 default theta — loaded dynamically from the latest CMA-ES result
+            # so the dashboard reflects whatever's currently best (post-MiniLM
+            # numbers as of April 2026).
+            from evaluation.benchmark import _load_v4_default_params
+            default_v4 = _load_v4_default_params()
             mem_map = {
                 "FlatMemory": lambda: FlatMemory(window_size=50),
                 "GraphMemoryV4": lambda: GraphMemoryV4(default_v4),
