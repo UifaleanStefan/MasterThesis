@@ -267,8 +267,10 @@ Set-Location "d:\Bocconi\Thesis"; python regen_benchmark_figs.py
 # Fig 6 & 7 (grid trajectory, episode curves) require live runs:
 Set-Location "d:\Bocconi\Thesis"; python regen_figs.py
 
-# Interactive dashboard (Streamlit; requires streamlit, pandas):
-Set-Location "d:\Bocconi\Thesis"; streamlit run dashboard/app.py
+# Interactive thesis presentation (Vite + React + Tailwind v4 — replaces the old Streamlit dashboard):
+Set-Location "d:\Bocconi\Thesis\web"; npm install; npm run dev    # http://localhost:5173
+Set-Location "d:\Bocconi\Thesis\web"; npm run build              # static export to web/dist/
+# Data is auto-rebuilt from results/*.json before each dev/build via scripts/build_web_data.py
 
 # Commit and push
 Set-Location "d:\Bocconi\Thesis"

@@ -5,6 +5,67 @@
 
 ---
 
+## -2. Frontend refactor — Vite + React replaces Streamlit dashboard (April 2026)
+
+The 842-line Streamlit dashboard at `dashboard/` has been replaced with a
+modern static site at `web/`. The Streamlit version produced functional
+charts but couldn't deliver a "thesis-grade" presentation; the new site is
+single-page scrollytelling with eleven sections covering the full thesis
+arc, four interactive components, and a maximalist cinematic aesthetic.
+
+**Stack:**
+- Vite 8 + React 19 + TypeScript 6
+- Tailwind CSS v4 (CSS-first `@theme` config via `@tailwindcss/vite`)
+- framer-motion v12 for scroll choreography
+- recharts v3 + custom SVG for charts; react-force-graph-2d for the
+  animated event/entity graph
+
+**Sections (the story arc):**
+1. Hero — animated 10D θ vector that periodically morphs between TF-IDF
+   and MiniLM optima over a constellation backdrop.
+2. The Question — fixed memory ↔ learnable θ side-by-side diagram.
+3. Architecture — three-card explainer + the live ThetaExplorer.
+4. Progression V1 → V5 — clickable timeline with dim-by-dim explanations.
+5. Benchmark — 12 × 4 heatmap, Pareto scatter, pairwise significance
+   table, force-directed memory graph.
+6. The MiniLM Pivot — side-by-side ThetaRadar (TF-IDF vs MiniLM) with
+   delta breakdown and three story-callouts.
+7. Ablation — interactive knockout panel with the theta_novel = 100%-
+   degradation flash.
+8. Transfer & Sensitivity — transfer cards + the MegaQuest A2 finding +
+   2D reward landscape with learned-θ marker.
+9. Neural Meta-Controller — 200-gen learning curve with σ secondary axis.
+10. Stage 3 — formula display + ready-to-run config commands.
+11. Reproducibility — stack callouts + provenance from the manifest.
+
+**Four interactive components live:**
+- ThetaExplorer: 10 sliders, live preview of stored fraction, predicted
+  reward (bilinear interp on sensitivity grid), and dominant retrieval
+  signal.
+- EmbeddingToggle: React context that flips the V4 numbers shown
+  throughout between TF-IDF (legacy) and MiniLM (current default).
+- BenchmarkHeatmap: 12 × 4 matrix with per-cell precision rings, V4
+  highlighted, click-through detail panel.
+- MemoryGraph: react-force-graph-2d animated event/entity graph with
+  a "store rate" slider and play/pause/reset controls.
+
+**Data pipeline:**
+- `scripts/build_web_data.py` runs as `npm run`'s `predev` / `prebuild`
+  hook. Copies `results/*.json` into `web/public/data/` and slims
+  `neural_controller_v2_results.json` from 12 MB to 26 KB by dropping
+  the per-generation 5,674-float weight arrays. Builds an aggregated
+  manifest with embedding backend, git_sha, and timestamps.
+
+**Removed:**
+- `dashboard/app.py`, `dashboard/charts.py`, `dashboard/copy.py`.
+- `streamlit`, `pandas`, `plotly` from `requirements.txt`.
+
+**Build:** `cd web && npm run build` produces `web/dist/` (~1 MB JS / 300 KB
+gzipped). No GitHub Pages workflow yet (deferred); the static output can be
+hosted on Netlify, Vercel, or `gh-pages` on demand.
+
+---
+
 ## -1. PoC hardening pass (April 2026)
 
 A Phase 1–4 implementation plan landed end-to-end. Highlights:
