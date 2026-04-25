@@ -1,0 +1,41 @@
+name: document_qa_neural_v2
+seed: 42
+environment:
+  name: DocumentQA
+  document_name: fantasy_lore
+  seed: 0
+memory:
+  system: NeuralMemoryControllerV2Small
+  # NeuralController systems ignore the theta list — their parameters live
+  # in MLP weights. Theta is recorded only for ExperimentConfig serialization.
+  theta: []
+optimization:
+  # Neural V2 optimization is performed by run_neural_controller_v2.py, not
+  # by runner.py. This config is the reference for evaluating an already-trained
+  # controller on DocumentQA + LLM. Bayesian opt over 5,674 weights via runner.py
+  # would be intractable.
+  method: none
+  n_trials: 1
+  n_random_init: 0
+  n_episodes_per_candidate: 1
+eval:
+  n_episodes: 20
+  k: 8
+  generate_figures: true
+  run_statistical_tests: true
+llm:
+  enabled: true
+  model: gpt-4o-mini
+  format_style: structured
+  lambda_cost: 1000.0
+output_dir: results
+figures_dir: docs/figures
+notes: |
+  Stage 3 — NeuralMemoryControllerV2Small (per-observation theta via MLP)
+  on DocumentQA with GPT-4o-mini. Tests whether adaptive theta beats
+  scalar V4 on a real LLM cost objective.
+
+  Workflow: (1) train weights via `python run_neural_controller_v2.py`,
+  (2) load weights + run this config to evaluate.
+
+  Requires OPENAI_API_KEY. NOT executed as part of the PoC plan.

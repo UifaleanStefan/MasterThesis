@@ -142,7 +142,18 @@ V4 is **#1** with 22× smaller memory footprint than V1 (10 vs 218 events).
 | Mean tokens | 1,958 | 1,754 | −10.4% |
 | Optimization time | — | 35.4 min | 30 gens × 50 eps |
 
-**Learned V4 θ:** theta_store=0.293, theta_novel=0.908, theta_erich=0.198, theta_surprise=0.785, theta_entity=0.285, theta_temporal=0.278, theta_decay=0.668, w_graph=0.000, w_embed=1.079, w_recency=3.777
+**Learned V4 θ:** theta_store=0.293, theta_novel=0.908, theta_erich=0.198, theta_surprise=0.785, theta_entity=0.285, theta_temporal=0.278, theta_decay=0.668, **w_graph=0.000**, w_embed=1.079, w_recency=3.777
+
+**Graph-as-scaffold finding (S3):** the learned `w_graph = 0.000` means
+graph traversal contributes nothing to retrieval — V4 is in practice
+"selective importance-scored storage + recency-weighted embedding
+retrieval", with the graph data structure serving as a typed-storage
+scaffold and the substrate for entity decay. A dedicated sweep
+(`python run_ablation.py --w-graph-sweep`) confirms reward is flat in
+`w_graph`. See `docs/figures/fig_w_graph_ablation.png` and
+`docs/GRAPHMEMORY_V4_RESULTS.md` for the framing detail. Whether a
+relational benchmark would surface a non-zero optimal `w_graph` is
+deferred to Stage 3 / future work.
 
 ### 3.4 Ablation Study (100 episodes per config)
 

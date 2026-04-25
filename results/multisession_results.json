@@ -1,0 +1,45 @@
+{
+  "_manifest": {
+    "git_sha": "02e2041",
+    "git_dirty": true,
+    "timestamp_utc": "2026-04-25T17:10:49+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "multisession_benchmark",
+    "n_trials_per_system": 2,
+    "n_sessions_per_trial": 20,
+    "systems": [
+      "FlatWindow(50)",
+      "EpisodicSemantic"
+    ]
+  },
+  "results": {
+    "FlatWindow(50)": {
+      "mean_score": 1.0,
+      "std_score": 0.0,
+      "scores": [
+        1.0,
+        1.0
+      ],
+      "mean_memory_size": 50,
+      "mean_n_steps": 1000,
+      "n_trials": 2
+    },
+    "EpisodicSemantic": {
+      "mean_score": 1.0,
+      "std_score": 0.0,
+      "scores": [
+        1.0,
+        1.0
+      ],
+      "mean_memory_size": 30,
+      "mean_n_steps": 1000,
+      "n_trials": 2
+    }
+  },
+  "elapsed_s": 15.862972974777222
+}

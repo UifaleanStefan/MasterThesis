@@ -1,7 +1,113 @@
 # Recent Changes — Session Log
 
-**Purpose:** Record of work done on the thesis codebase (analysis, fixes, dashboard, figures).  
-**Last updated:** March 2026
+**Purpose:** Record of work done on the thesis codebase (analysis, fixes, dashboard, figures).
+**Last updated:** April 2026
+
+---
+
+## -1. PoC hardening pass (April 2026)
+
+A Phase 1–4 implementation plan landed end-to-end. Highlights:
+
+- **Embedding swap (Phase 3 / S1).** Default backend changed from
+  31-token TF-IDF to ``sentence-transformers/all-MiniLM-L6-v2`` (384-dim)
+  with LRU caching. Legacy TF-IDF kept as `EMBEDDING_BACKEND=tfidf`. Neural
+  controllers explicitly retain TF-IDF for their own input feature so their
+  parameter count stays at 5,674 / 1,962.
+
+  **Headline impact:** under MiniLM, V4's previously-published optimum
+  (`w_recency=3.78`, `w_embed=1.08`) is no longer optimal. Quick CMA-ES finds
+  `w_embed=3.75`, `w_recency=0.66` — similarity dominates retrieval when
+  embeddings are semantically meaningful. Re-running V4 CMA-ES is required
+  to produce the new canonical θ; in the meantime, the post-MiniLM
+  unoptimized V4 sits at ~0.12 reward on MultiHopKeyDoor (vs 0.18 under
+  TF-IDF). The thesis claim shifts from "V4 is #1" toward "V4 is competitive
+  with the leading systems and the optimal θ depends on the embedding".
+
+- **Reproducibility (Phase 1 / B1).** `evaluation/benchmark.save_benchmark_results`
+  no longer strips per-episode rewards; new `results.manifest.build_manifest()`
+  is wired into every `run_*.py` script. Output JSONs gain a `_manifest` block
+  recording git_sha, embedding_backend, timestamp, seed, and run-specific args.
+
+- **Pytest scaffolding (Phase 1 / B2).** New `tests/` directory with 40
+  invariants: memory-system contract, V4 storage gating, MemoryParamsV4
+  roundtrip, neural controller pack/unpack determinism, statistics helpers,
+  LLM-judge fallback. Exposed and fixed a divide-by-zero bug in
+  `evaluation.statistics.paired_ttest`.
+
+- **CMA-ES infrastructure (Phase 1 / B3-B4).** New `optimization/cma_es.py`
+  wraps `pycma` (BIPOP-CMA-ES restarts, automatic stop conditions) with the
+  legacy minimal pure-numpy implementation as a fallback. Both back-ends
+  expose `save_checkpoint` / `load_checkpoint` and `--resume-from <path>`
+  on the long-running scripts; an interrupted NeuralV2 200-gen run no
+  longer loses 15h of progress.
+
+- **Determinism audit (Phase 1 / B5).** New `scripts/audit_determinism.py`
+  runs every memory system twice with the same `episode_seed` and asserts
+  identical retrievals. All 16 systems pass under both backends.
+
+- **Statistical significance (Phase 3 / S4).** Replaced the hand-rolled
+  t-distribution approximation in `evaluation/statistics.py` with
+  `scipy.stats.t.sf` / `norm.sf`. New `scripts/run_pairwise_significance.py`
+  loads per-episode rewards from the benchmark JSON and computes pairwise
+  paired t-tests + bootstrap CI + Cohen's d for any baseline vs every
+  other system. Output: `results/pairwise_significance.json`.
+
+- **Stage 3 wiring (Phase 2 / S2 + A4).** Three configs in
+  `experiments/document_qa_{episodic,v4,neural_v2}.yaml`. New
+  `evaluation/document_qa_llm_judge.py` provides an LLM-as-judge scorer that
+  gracefully falls back to keyword overlap when `OPENAI_API_KEY` is unset
+  (so CI exercises the codepath without API cost). DocumentQA's `score_fn`
+  parameter wires it in. Three additional documents (corporate_memo,
+  soap_opera, science_survey) bring the library to 5 documents × ~30 paras
+  × 8 QA pairs each. Stage 3 runs themselves remain deferred from the PoC.
+
+- **Graph-vestigial framing (Phase 2 / S3).** New `--w-graph-sweep` flag on
+  `run_ablation.py` produces `docs/figures/fig_w_graph_ablation.png` showing
+  reward is flat in `w_graph`. Doc updates in THESIS_HANDOFF, GRAPHMEMORY_V4_RESULTS,
+  AGENTS reframe V4 as "selective importance-scored storage + recency-weighted
+  embedding retrieval" with the graph data structure as a typed-storage scaffold.
+
+- **NeuralV2 warm-start (Phase 3 / A3).** New
+  `NeuralMemoryControllerV2Small.initialize_to_constant_theta(target)` sets
+  output-layer biases to `logit(target)` so the MLP outputs V4's learned θ for
+  any input at initialization. CMA-ES then explores deviations from this
+  baseline rather than starting from random init. New `--pretrain-from-v4`
+  flag on `run_neural_controller_v2.py`.
+
+- **MegaQuest investigation (Phase 3 / A2).** New `--clamp-w-recency`
+  flag on `run_transfer.py` overrides the learned w_recency on MegaQuestRoom
+  to test whether recency-dominated retrieval is what breaks long-horizon
+  transfer.
+
+- **Master reproduction (Phase 2 / C4).** `python reproduce_thesis.py
+  --quick|--full` runs every experiment in dependency order; `--dry-run` and
+  `--only` / `--skip` for selective re-runs.
+
+- **CI (Phase 1 / C5).** GitHub Actions workflow at `.github/workflows/ci.yml`
+  runs pytest + determinism audit + smoke tests on every push/PR.
+
+- **Polish.** `report.txt` renamed to `report_poc_v1.txt` (frozen);
+  `main.py` now writes `report_poc_current.txt`. Synthetic placeholder
+  figures (Fig 12, 13_curves, 14, 15) moved to `docs/figures/draft/` with
+  banner annotations in viz functions; dashboard updated with a separate
+  "Draft (synthetic)" section. Empty `PROJECT_SUMMARY_FOR_CHATGPT.md` deleted.
+
+**Files added:** `results/manifest.py`, `tests/conftest.py`,
+`tests/test_memory_contract.py`, `tests/test_v4_invariants.py`,
+`tests/test_statistics.py`, `tests/test_neural_controller.py`,
+`tests/test_llm_judge.py`, `evaluation/document_qa_llm_judge.py`,
+`scripts/audit_determinism.py`, `scripts/run_pairwise_significance.py`,
+`reproduce_thesis.py`, `optimization/cma_es_minimal.py` (renamed from
+`cma_es.py`), `optimization/cma_es.py` (new wrapper), `pytest.ini`,
+`.github/workflows/ci.yml`, `experiments/document_qa_v4.yaml`,
+`experiments/document_qa_neural_v2.yaml`,
+`docs/figures/draft/fig{12,13,14,15}_*.png` (moved).
+
+**Pending re-runs (require ~24h overnight compute):** full V4 CMA-ES at
+canonical 30 gens × 50 eps × 200 eval, NeuralV2 200-gen with
+`--pretrain-from-v4`, ablation/transfer/sensitivity at canonical episode
+counts. The Stage 3 (real-LLM) experiments remain explicitly deferred.
 
 ---
 

@@ -143,8 +143,16 @@ def main():
         output_path="docs/figures/fig09_landscape_v4.png",
     )
 
-    # --- Save JSON (without full reward_grid for compactness if large) ---
+    # --- Save JSON (with manifest) ---
+    from results.manifest import build_manifest
     out = {
+        "_manifest": build_manifest(extra={
+            "experiment": "graphmemory_v4_sensitivity",
+            "dim1": args.dim1,
+            "dim2": args.dim2,
+            "resolution": args.resolution,
+            "n_episodes_per_cell": args.episodes,
+        }),
         "experiment": "graphmemory_v4_sensitivity",
         "config": {
             "dim1": args.dim1,

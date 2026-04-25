@@ -21,7 +21,7 @@ import numpy as np
 
 def plot_online_adaptation(
     theta_histories: dict[str, list[tuple]],
-    output_path: str | Path = "docs/figures/fig12_online_adaptation.png",
+    output_path: str | Path = "docs/figures/draft/fig12_online_adaptation.png",
     title: str = "Online θ Adaptation During Episode",
 ) -> None:
     """
@@ -106,7 +106,7 @@ def plot_memory_size_over_episode(
 
 def plot_cost_breakdown(
     cost_data: dict[str, dict],
-    output_path: str | Path = "docs/figures/fig14_cost_breakdown.png",
+    output_path: str | Path = "docs/figures/draft/fig14_cost_breakdown.png",
     title: str = "LLM Token Cost Breakdown by Memory System",
 ) -> None:
     """
@@ -173,7 +173,7 @@ def plot_multi_session_persistence(
     session_scores: list[float],
     session_memory_sizes: list[int],
     session_names: list[str] | None = None,
-    output_path: str | Path = "docs/figures/fig15_multi_session.png",
+    output_path: str | Path = "docs/figures/draft/fig15_multi_session.png",
     title: str = "Multi-Session Memory Persistence",
 ) -> None:
     """

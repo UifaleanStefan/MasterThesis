@@ -1,0 +1,33 @@
+name: document_qa_episodic_baseline
+seed: 42
+environment:
+  name: DocumentQA
+  document_name: fantasy_lore
+  seed: 0
+memory:
+  system: EpisodicSemanticMemory
+  episodic_size: 30
+optimization:
+  # No optimizer for the baseline — fixed episodic_size. This run just
+  # measures QA score and LLM cost as a reference point against V4 / NeuralV2.
+  method: none
+  n_trials: 1
+  n_random_init: 0
+  n_episodes_per_candidate: 1
+eval:
+  n_episodes: 20
+  k: 8
+  generate_figures: true
+  run_statistical_tests: true
+llm:
+  enabled: true
+  model: gpt-4o-mini
+  format_style: structured
+  lambda_cost: 1000.0
+output_dir: results
+figures_dir: docs/figures
+notes: |
+  Stage 3 baseline — EpisodicSemanticMemory on DocumentQA with GPT-4o-mini.
+  Reference run for the V4 / NeuralV2 comparisons. Requires OPENAI_API_KEY
+  to produce meaningful cost figures; without it, LLMAgent falls back to
+  heuristics. NOT executed as part of the PoC plan.

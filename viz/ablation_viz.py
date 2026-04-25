@@ -19,6 +19,69 @@ import matplotlib.patches as mpatches
 import numpy as np
 
 
+def plot_w_graph_sweep(
+    sweep_results: dict[str, dict],
+    output_path: str | Path = "docs/figures/fig_w_graph_ablation.png",
+    title: str | None = None,
+    annotate_slope: bool = True,
+) -> None:
+    """
+    Line plot of mean reward vs ``w_graph`` over a sweep, with bootstrap CI band.
+
+    Each entry in ``sweep_results`` should expose ``w_graph`` (float) and a
+    ``rewards`` list of per-episode rewards (added by run_w_graph_sweep_v4).
+    The figure includes a horizontal reference line at the learned-V4 reward
+    (the first entry where w_graph is closest to the published optimum) and
+    annotates the linear-regression slope to make "flat in w_graph" visible
+    at a glance.
+    """
+    import statistics as _st
+    entries = list(sweep_results.values())
+    entries.sort(key=lambda e: e["w_graph"])
+    xs = [e["w_graph"] for e in entries]
+    means = [e["mean_reward"] for e in entries]
+    # Quick analytic CI from per-episode rewards (avoid an extra dependency)
+    ci_lo, ci_hi = [], []
+    for e in entries:
+        rewards = e.get("rewards", [])
+        if len(rewards) >= 2:
+            sd = _st.stdev(rewards)
+            half = 1.96 * sd / (len(rewards) ** 0.5)
+            ci_lo.append(e["mean_reward"] - half)
+            ci_hi.append(e["mean_reward"] + half)
+        else:
+            ci_lo.append(e["mean_reward"])
+            ci_hi.append(e["mean_reward"])
+
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    ax.plot(xs, means, color="#2E7D32", marker="o", linewidth=2, label="Mean reward")
+    ax.fill_between(xs, ci_lo, ci_hi, color="#2E7D32", alpha=0.18, label="95% CI")
+    ax.set_xlabel(r"$w_\text{graph}$ (graph-traversal retrieval weight)")
+    ax.set_ylabel("Mean reward")
+    if title is None:
+        title = ("V4 sweep over $w_\\text{graph}$ on MultiHopKeyDoor\n"
+                 "(other dims fixed at CMA-ES learned optimum)")
+    ax.set_title(title)
+    ax.grid(alpha=0.3)
+    ax.set_xlim(min(xs) - 0.05, max(xs) + 0.05)
+
+    if annotate_slope and len(xs) >= 2:
+        # Linear regression slope as a quick "is reward flat in w_graph?" stat
+        a = np.array(xs, dtype=float)
+        b = np.array(means, dtype=float)
+        slope = float(np.polyfit(a, b, 1)[0]) if len(a) >= 2 else 0.0
+        ax.text(0.02, 0.92, f"Slope: {slope:+.4f} (reward / unit $w_\\text{{graph}}$)",
+                transform=ax.transAxes, fontsize=9,
+                bbox=dict(boxstyle="round,pad=0.3", facecolor="lightyellow", alpha=0.8))
+
+    ax.legend(loc="lower right", fontsize=9)
+    plt.tight_layout()
+    out = Path(output_path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+
+
 def plot_ablation_results_v4(
     ablation_results: dict[str, dict],
     output_path: str | Path = "docs/figures/fig08_ablation_v4.png",

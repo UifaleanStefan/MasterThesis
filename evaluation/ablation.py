@@ -138,6 +138,88 @@ def get_ablation_configs_v4(learned_params) -> list[AblationConfigV4]:
     ]
 
 
+def run_w_graph_sweep_v4(
+    env: Any,
+    policy: Any,
+    learned_params,
+    w_graph_values: list[float] | None = None,
+    n_episodes: int = 100,
+    k: int = 8,
+    seed_offset: int = 3000,
+    verbose: bool = True,
+) -> dict[str, dict]:
+    """
+    Sweep ``w_graph`` (graph-traversal retrieval weight) while holding all other
+    V4 parameters at their learned values.
+
+    Motivation: CMA-ES on V4 converges to ``w_graph ≈ 0`` on MultiHopKeyDoor,
+    indicating the entity-graph signal contributes little to retrieval. This
+    sweep produces a one-dimensional curve of reward vs ``w_graph`` so the
+    "graph-as-scaffold" framing can be supported by a figure rather than a
+    single bar.
+
+    Parameters
+    ----------
+    env, policy : the environment/policy to evaluate in.
+    learned_params : MemoryParamsV4 — the optimum from CMA-ES, used as base.
+    w_graph_values : list of values to sweep (default [0, 0.25, 0.5, 1.0, 2.0]).
+    n_episodes : episodes per setting.
+    k : retrieval top-k.
+    seed_offset : episode seed offset (held-out from training/ablation seeds).
+
+    Returns
+    -------
+    dict keyed on ``"w_graph={value:.2f}"`` with the same fields as
+    ``run_ablation_study_v4``: mean_reward, std_reward, mean_tokens,
+    mean_memory_size, mean_precision, rewards (per-episode list), and
+    a numeric ``w_graph`` field for plotting.
+    """
+    from memory.graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
+
+    if w_graph_values is None:
+        w_graph_values = [0.0, 0.25, 0.5, 1.0, 2.0]
+
+    base = learned_params
+    results: dict[str, dict] = {}
+    for w in w_graph_values:
+        params = MemoryParamsV4(
+            theta_store=base.theta_store, theta_novel=base.theta_novel,
+            theta_erich=base.theta_erich, theta_surprise=base.theta_surprise,
+            theta_entity=base.theta_entity, theta_temporal=base.theta_temporal,
+            theta_decay=base.theta_decay,
+            w_graph=float(w), w_embed=base.w_embed, w_recency=base.w_recency,
+            mode="learnable",
+        )
+        rewards, tokens, sizes, precisions = [], [], [], []
+        for ep in range(n_episodes):
+            mem = GraphMemoryV4(params)
+            _, _, stats = run_episode_with_any_memory(
+                env, policy, mem, k=k, episode_seed=seed_offset + ep
+            )
+            rewards.append(stats.get("reward", 0.0))
+            tokens.append(stats.get("retrieval_tokens", 0))
+            sizes.append(stats.get("memory_size", 0))
+            prec = stats.get("retrieval_precision")
+            if prec is not None:
+                precisions.append(prec)
+        key = f"w_graph={w:.2f}"
+        results[key] = {
+            "description": f"w_graph={w:.2f}",
+            "w_graph": float(w),
+            "mean_reward": statistics.mean(rewards),
+            "std_reward": statistics.stdev(rewards) if len(rewards) > 1 else 0.0,
+            "mean_tokens": statistics.mean(tokens),
+            "mean_memory_size": statistics.mean(sizes),
+            "mean_precision": statistics.mean(precisions) if precisions else None,
+            "rewards": rewards,
+        }
+        if verbose:
+            prec_str = f"{results[key]['mean_precision']:.4f}" if results[key]["mean_precision"] is not None else "N/A"
+            print(f"  w_graph={w:.2f} | reward={results[key]['mean_reward']:.4f} "
+                  f"| precision={prec_str} | mem={results[key]['mean_memory_size']:.1f}")
+    return results
+
+
 def run_ablation_study_v4(
     env: Any,
     policy: Any,

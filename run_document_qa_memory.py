@@ -42,7 +42,14 @@ def main(argv: Sequence[str] | None = None) -> None:
     print_document_qa_table(results)
     out_path = Path("results") / "document_qa_memory_results.json"
     out_path.parent.mkdir(exist_ok=True)
-    save_document_qa_results(results, out_path)
+    from results.manifest import build_manifest
+    manifest = build_manifest(seed=0, extra={
+        "experiment": "document_qa_memory_recall",
+        "document": "fantasy_lore",
+        "k": 8,
+        "skipped_systems": skip_systems,
+    })
+    save_document_qa_results(results, out_path, manifest=manifest)
     print(f"\nResults saved to {out_path}")
 
 

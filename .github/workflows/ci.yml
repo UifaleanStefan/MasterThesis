@@ -1,0 +1,42 @@
+name: CI
+
+# Light-weight checks that should run on every commit.
+# Heavy experiments (CMA-ES, full benchmark, NeuralV2 training) are NOT run here
+# — those are gated by the @pytest.mark.slow marker and run locally / overnight.
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run pytest invariants (excludes slow experiments)
+        run: pytest -m "not slow" -q
+
+      - name: Run determinism audit
+        run: python scripts/audit_determinism.py
+
+      - name: Run smoke tests (quick pipeline check)
+        run: python run_smoke_tests.py

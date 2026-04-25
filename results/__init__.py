@@ -1,3 +1,5 @@
-"""Results package — SQLite database and result management."""
+"""Results package — SQLite database, result management, reproducibility manifest."""
 from .db import ResultsDB
-__all__ = ["ResultsDB"]
+from .manifest import build_manifest
+
+__all__ = ["ResultsDB", "build_manifest"]

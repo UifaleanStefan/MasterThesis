@@ -39,7 +39,7 @@ from typing import Any
 
 import numpy as np
 
-from .embedding import embed_observation, VOCAB
+from .embedding import embed_observation_tfidf as embed_observation, VOCAB
 from .event import Event
 from .graph_memory import GraphMemory, MemoryParams
 

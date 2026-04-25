@@ -37,7 +37,7 @@ from typing import Any
 
 import numpy as np
 
-from .embedding import embed_observation, VOCAB
+from .embedding import embed_observation_tfidf as embed_observation, VOCAB
 from .entity_extraction import extract_entities
 from .event import Event
 from .graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
@@ -109,6 +109,49 @@ class NeuralMemoryControllerV2Small:
     @property
     def n_params(self) -> int:
         return len(self.get_weights())
+
+    # ------------------------------------------------------------------
+    # Pretrain-to-constant initialization (Phase 3 / A3)
+    # ------------------------------------------------------------------
+
+    def initialize_to_constant_theta(self, target_params: MemoryParamsV4) -> None:
+        """
+        Set the output-layer bias so the MLP produces ``target_params`` for any
+        input at initialization. This is the closed-form equivalent of
+        supervised pretraining on a constant target — V4's optimum θ doesn't
+        depend on the observation, so the optimal pretrained MLP is simply
+        ``output_bias = sigmoid_inv(target)`` with all weights ≈ 0.
+
+        The first hidden layer is zeroed out (so its post-ReLU activations
+        are zero regardless of input), making the output equal to
+        ``sigmoid(b2) = target`` exactly. CMA-ES can then explore deviations
+        from this constant baseline rather than starting from ``mean = 0``.
+
+        Mathematical detail:
+            * Dims 0-6 (theta_store ... theta_decay) are sigmoid-bounded to [0, 1]
+            * Dims 7-9 (w_graph, w_embed, w_recency) are sigmoid * 4 -> [0, 4]
+            * For dim i in 0..6: b2[i] = logit(target_θ_i)
+            * For dim i in 7..9: b2[i] = logit(target_w_i / 4)
+        """
+        eps = 1e-6
+        target = np.array([
+            target_params.theta_store, target_params.theta_novel,
+            target_params.theta_erich, target_params.theta_surprise,
+            target_params.theta_entity, target_params.theta_temporal,
+            target_params.theta_decay,
+            target_params.w_graph / _RETRIEVAL_WEIGHT_SCALE,
+            target_params.w_embed / _RETRIEVAL_WEIGHT_SCALE,
+            target_params.w_recency / _RETRIEVAL_WEIGHT_SCALE,
+        ], dtype=np.float32)
+        target = np.clip(target, eps, 1.0 - eps)
+        # Inverse sigmoid: logit(p) = ln(p / (1-p))
+        b2 = np.log(target / (1.0 - target)).astype(np.float32)
+
+        # Zero out W1 / W2 so input cannot reach the output, then set b2 to logit(target).
+        self._W1 = np.zeros_like(self._W1)
+        self._b1 = np.zeros_like(self._b1)
+        self._W2 = np.zeros_like(self._W2)
+        self._b2 = b2
 
     # ------------------------------------------------------------------
     # Forward pass

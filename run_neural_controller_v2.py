@@ -132,13 +132,21 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--no-transfer", action="store_true",
                         help="Skip zero-shot MegaQuestRoom evaluation")
+    parser.add_argument("--checkpoint-every", type=int, default=10,
+                        help="Save CMA-ES state every N generations (default: 10; 0=never)")
+    parser.add_argument("--resume-from", type=str, default=None,
+                        help="Path to a previous checkpoint .pkl to resume from")
+    parser.add_argument("--pretrain-from-v4", action="store_true",
+                        help="A3: initialize MLP weights so the controller outputs V4's "
+                             "learned theta for any input. Acts as a warm start: gen 0 "
+                             "starts at scalar V4's reward, then CMA-ES explores deviations.")
     args = parser.parse_args()
 
     from environment.env import MultiHopKeyDoor
     from environment.mega_quest import MegaQuestRoom
     from agent.policy import ExplorationPolicy
     from memory.neural_controller_v2_small import NeuralMemoryControllerV2Small
-    from optimization.cma_es import CMAES
+    from optimization.cma_es import CMAES, save_checkpoint, load_checkpoint
 
     np.random.seed(args.seed)
 
@@ -176,16 +184,49 @@ def main():
         k=args.k,
     )
 
-    optimizer = CMAES(
-        n_params=n_params,
-        sigma=args.sigma,
-        seed=args.seed,
-        clip_to_unit=False,  # weights are unbounded
-    )
-    history = []
-    t0 = time.time()
+    nv2_ckpt = Path("results/checkpoints/neural_v2/state.pkl")
+    nv2_ckpt.parent.mkdir(parents=True, exist_ok=True)
 
-    for gen in range(args.generations):
+    initial_mean: np.ndarray | None = None
+    if args.pretrain_from_v4 and not args.resume_from:
+        # A3: warm-start the MLP weights from V4's learned theta.
+        try:
+            v4_data = json.loads(Path("results/graphmemory_v4_cmaes_results.json").read_text())
+            bp = v4_data["v4"]["best_params"]
+            from memory.graph_memory_v4 import MemoryParamsV4
+            v4_target = MemoryParamsV4(
+                theta_store=bp["theta_store"], theta_novel=bp["theta_novel"],
+                theta_erich=bp["theta_erich"], theta_surprise=bp["theta_surprise"],
+                theta_entity=bp["theta_entity"], theta_temporal=bp["theta_temporal"],
+                theta_decay=bp["theta_decay"],
+                w_graph=bp["w_graph"], w_embed=bp["w_embed"], w_recency=bp["w_recency"],
+                mode="learnable",
+            )
+            warm_ctrl = NeuralMemoryControllerV2Small(seed=args.seed)
+            warm_ctrl.initialize_to_constant_theta(v4_target)
+            initial_mean = warm_ctrl.get_weights().astype(np.float64)
+            print(f"  [A3 pretrain] CMA-ES initialized from V4-mimic weights "
+                  f"(target: {[f'{x:.2f}' for x in [bp['theta_store'], bp['theta_novel'], bp['theta_erich'], bp['theta_surprise'], bp['theta_entity'], bp['theta_temporal'], bp['theta_decay'], bp['w_graph'], bp['w_embed'], bp['w_recency']]]})")
+        except (FileNotFoundError, KeyError) as exc:
+            print(f"  [A3 pretrain] could not load V4 params ({exc}); falling back to "
+                  f"random init. Run `python run_graphmemory_v4_cmaes.py` first.")
+            initial_mean = None
+
+    if args.resume_from:
+        optimizer, history, _extra = load_checkpoint(args.resume_from)
+        print(f"  [resume] loaded {len(history)} gens from {args.resume_from}")
+    else:
+        optimizer = CMAES(
+            n_params=n_params,
+            mean=initial_mean,
+            sigma=args.sigma,
+            seed=args.seed,
+            clip_to_unit=False,  # weights are unbounded
+        )
+        history = []
+
+    t0 = time.time()
+    for gen in range(len(history), args.generations):
         candidates = optimizer.ask()
         fitnesses = [eval_fn(c) for c in candidates]
         optimizer.tell(candidates, fitnesses)
@@ -193,6 +234,13 @@ def main():
         history.append(summary)
         print(f"  CMA-ES gen {gen+1:3d} | best={summary['best_fitness']:.4f} "
               f"| sigma={summary['sigma']:.5f}")
+        if args.checkpoint_every > 0 and (gen + 1) % args.checkpoint_every == 0:
+            save_checkpoint(optimizer, nv2_ckpt, history=history,
+                            extra={"args": vars(args)})
+            print(f"  [checkpoint] saved gen {gen+1} -> {nv2_ckpt}")
+
+    # Final checkpoint
+    save_checkpoint(optimizer, nv2_ckpt, history=history, extra={"args": vars(args)})
 
     elapsed_train = time.time() - t0
     best_weights = optimizer.best_solution
@@ -292,6 +340,12 @@ def main():
             "mean_precision": v4_prec,
         } if v4_reward is not None else None,
     }
+    from results.manifest import build_manifest
+    out["_manifest"] = build_manifest(seed=args.seed, extra={
+        "experiment": "neural_controller_v2_cmaes",
+        "n_generations": args.generations,
+        "sigma": args.sigma,
+    })
     out_path = Path("results/neural_controller_v2_results.json")
     out_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\n  Results saved to {out_path}")

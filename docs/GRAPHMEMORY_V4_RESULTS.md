@@ -68,6 +68,27 @@ V1 converges to 0.127 (training), significantly below V4's 0.200.
 | w_embed | 1.079 | Moderate embedding similarity weight |
 | **w_recency** | **3.777** | Very high recency weight — retrieve most recent relevant events |
 
+### Graph-as-scaffold framing (S3)
+
+`w_graph = 0.000` means the entity-graph traversal contributes nothing to
+retrieval. V4 in practice is **selective importance-scored storage +
+recency-weighted embedding retrieval**, with the graph data structure used
+as a typed-storage scaffold rather than as a relational retrieval engine.
+
+Sweep evidence: `python run_ablation.py --w-graph-sweep` evaluates V4 with
+`w_graph ∈ [0, 0.25, 0.5, 1.0, 2.0]` (all other dims fixed at the learned
+optimum) and finds reward essentially flat across the range. Figure:
+[`docs/figures/fig_w_graph_ablation.png`](figures/fig_w_graph_ablation.png).
+Raw data: [`results/w_graph_sweep_results.json`](../results/w_graph_sweep_results.json).
+
+Implication for the thesis writeup: V4's contribution is most accurately
+described as "learnable importance-scored storage with adaptive retrieval
+weighting." The graph remains useful as a typed event store and as the
+substrate for entity-aware decay (`theta_decay` operates on entity
+nodes), but multi-hop graph traversal does not improve retrieval on
+MultiHopKeyDoor. Whether a relational benchmark would surface a non-zero
+optimal `w_graph` is open and deferred to Stage 3 / future work.
+
 ### V1 (3D) — Full Run
 
 | Parameter | Value |

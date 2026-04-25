@@ -97,6 +97,12 @@ def main():
                         help="Episodes per candidate for in-distribution CMA-ES (default: 20)")
     parser.add_argument("--k", type=int, default=8)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--clamp-w-recency", type=float, nargs="+", default=None,
+                        metavar="W",
+                        help="A2: also evaluate MegaQuestRoom (1000-step horizon) with "
+                             "w_recency clamped to each value in this list. Tests the "
+                             "hypothesis that recency-dominated retrieval breaks long-horizon "
+                             "transfer. Example: --clamp-w-recency 0.5 1.0 2.0")
     args = parser.parse_args()
 
     from environment.env import MultiHopKeyDoor, GoalRoom, HardKeyDoor
@@ -178,6 +184,43 @@ def main():
             prec_str = f"{prec:.4f}" if prec is not None else "N/A"
             print(f"    In-dist reward={result['mean_reward']:.4f}  precision={prec_str}")
 
+    # --- Phase 2b (optional A2): MegaQuest w_recency clamp investigation ---
+    if args.clamp_w_recency:
+        from memory.graph_memory_v4 import MemoryParamsV4
+        print(f"\n[Phase 2b / A2] MegaQuestRoom w_recency clamp sweep: {args.clamp_w_recency}")
+        matrix["MegaQuest_w_recency_clamp"] = {}
+        for w in args.clamp_w_recency:
+            clamped = MemoryParamsV4(
+                theta_store=multihop_params.theta_store,
+                theta_novel=multihop_params.theta_novel,
+                theta_erich=multihop_params.theta_erich,
+                theta_surprise=multihop_params.theta_surprise,
+                theta_entity=multihop_params.theta_entity,
+                theta_temporal=multihop_params.theta_temporal,
+                theta_decay=multihop_params.theta_decay,
+                w_graph=multihop_params.w_graph,
+                w_embed=multihop_params.w_embed,
+                w_recency=float(w),
+                mode="learnable",
+            )
+            result = evaluate_v4_theta_on_task(
+                params=clamped,
+                env=envs["MegaQuestRoom"],
+                policy=policies["MegaQuestRoom"],
+                n_episodes=args.episodes,
+                k=args.k,
+                seed_offset=4000,
+            )
+            matrix["MegaQuest_w_recency_clamp"][f"w_recency={w:.2f}"] = result
+            prec = result.get("mean_precision")
+            prec_str = f"{prec:.4f}" if prec is not None else "N/A"
+            print(f"  w_recency={w:.2f} | reward={result['mean_reward']:.4f}  "
+                  f"prec={prec_str}  mem={result['mean_memory_size']:.1f}")
+        # Reference: the unclamped (learned) value's MegaQuest result for comparison
+        baseline_mq = matrix["MultiHop_V4_zeroshot"]["MegaQuestRoom"]
+        print(f"  (learned w_recency={multihop_params.w_recency:.2f} | "
+              f"reward={baseline_mq['mean_reward']:.4f} — baseline)")
+
     elapsed = time.time() - t0
 
     # --- Results report ---
@@ -222,8 +265,15 @@ def main():
     except Exception as e:
         print(f"  [Warning] Figure generation failed: {e}")
 
-    # --- Save JSON ---
+    # --- Save JSON (with manifest, retaining per-episode rewards for paired stats) ---
+    from results.manifest import build_manifest
     out = {
+        "_manifest": build_manifest(seed=args.seed, extra={
+            "experiment": "graphmemory_v4_transfer",
+            "n_episodes_per_target": args.episodes,
+            "k": args.k,
+            "in_distribution_cmaes": args.in_distribution,
+        }),
         "experiment": "graphmemory_v4_transfer",
         "config": {
             "n_episodes": args.episodes,
@@ -244,11 +294,7 @@ def main():
             "w_recency": multihop_params.w_recency,
         },
         "matrix": {
-            source: {
-                target: {k: v for k, v in res.items() if k != "rewards"}
-                for target, res in targets.items()
-            }
-            for source, targets in matrix.items()
+            source: dict(targets) for source, targets in matrix.items()
         },
         "elapsed_s": elapsed,
     }

@@ -300,13 +300,22 @@ def generate_extended_figures(
         traceback.print_exc()
 
     # ------------------------------------------------------------------ #
-    # Fig 12 — Online adaptation curves
+    # SYNTHETIC PLACEHOLDER figures: Fig 12, 13_curves, 14, 15
+    # These have no real-data source yet (Stage 3 / multi-session experiments).
+    # They are written under docs/figures/draft/ so the user-facing
+    # docs/figures/ directory contains only real-data figures.
     # ------------------------------------------------------------------ #
-    print("\n[Fig 12] Online adaptation theta curves ...")
+    draft_dir = output_dir / "draft"
+    draft_dir.mkdir(parents=True, exist_ok=True)
+
+    # ------------------------------------------------------------------ #
+    # Fig 12 — Online adaptation curves [SYNTHETIC PLACEHOLDER]
+    # ------------------------------------------------------------------ #
+    print("\n[Fig 12] Online adaptation theta curves [SYNTHETIC] ...")
     try:
         from viz.cost_viz import plot_online_adaptation
         theta_histories = _synthetic_online_adaptation()
-        p = output_dir / "fig12_online_adaptation.png"
+        p = draft_dir / "fig12_online_adaptation.png"
         plot_online_adaptation(
             theta_histories, output_path=p,
             title="Online θ Adaptation During Episode (Illustrative — synthetic data)",
@@ -318,13 +327,14 @@ def generate_extended_figures(
         traceback.print_exc()
 
     # ------------------------------------------------------------------ #
-    # Fig 13 — Memory size over episode (renamed to avoid overwriting thesis fig13)
+    # Fig 13 — Memory size over episode [SYNTHETIC PLACEHOLDER]
+    # (NB: fig13_memory_size.png is the real-data sibling, generated elsewhere)
     # ------------------------------------------------------------------ #
-    print("\n[Fig 13] Memory size over episode steps (illustrative) ...")
+    print("\n[Fig 13] Memory size over episode steps [SYNTHETIC] ...")
     try:
         from viz.cost_viz import plot_memory_size_over_episode
         memory_curves = _synthetic_memory_curves()
-        p = output_dir / "fig13_memory_curves.png"
+        p = draft_dir / "fig13_memory_curves.png"
         plot_memory_size_over_episode(
             memory_curves, output_path=p,
             title="Memory Size Over Episode Steps (Illustrative — synthetic data)",
@@ -336,13 +346,13 @@ def generate_extended_figures(
         traceback.print_exc()
 
     # ------------------------------------------------------------------ #
-    # Fig 14 — LLM cost breakdown
+    # Fig 14 — LLM cost breakdown [SYNTHETIC PLACEHOLDER, awaits Stage 3]
     # ------------------------------------------------------------------ #
-    print("\n[Fig 14] LLM cost breakdown ...")
+    print("\n[Fig 14] LLM cost breakdown [SYNTHETIC] ...")
     try:
         from viz.cost_viz import plot_cost_breakdown
         cost_data = _synthetic_cost_data()
-        p = output_dir / "fig14_cost_breakdown.png"
+        p = draft_dir / "fig14_cost_breakdown.png"
         plot_cost_breakdown(
             cost_data, output_path=p,
             title="LLM Token Cost Breakdown (Illustrative — synthetic data)",
@@ -354,13 +364,13 @@ def generate_extended_figures(
         traceback.print_exc()
 
     # ------------------------------------------------------------------ #
-    # Fig 15 — Multi-session persistence
+    # Fig 15 — Multi-session persistence [SYNTHETIC PLACEHOLDER, awaits Phase 4 A1]
     # ------------------------------------------------------------------ #
-    print("\n[Fig 15] Multi-session memory persistence ...")
+    print("\n[Fig 15] Multi-session memory persistence [SYNTHETIC] ...")
     try:
         from viz.cost_viz import plot_multi_session_persistence
         scores, sizes = _synthetic_multi_session()
-        p = output_dir / "fig15_multi_session.png"
+        p = draft_dir / "fig15_multi_session.png"
         plot_multi_session_persistence(
             scores, sizes, output_path=p,
             title="Multi-Session Memory Persistence (Illustrative — synthetic data)",

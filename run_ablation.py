@@ -51,12 +51,22 @@ def main():
                         help="Episodes per ablation config (default: 100)")
     parser.add_argument("--k", type=int, default=8)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--w-graph-sweep", action="store_true",
+                        help="Instead of the standard 10-config ablation, sweep w_graph "
+                             "to confirm the graph-traversal signal is vestigial (S3).")
+    parser.add_argument("--w-graph-values", type=float, nargs="+",
+                        default=[0.0, 0.25, 0.5, 1.0, 2.0],
+                        help="w_graph values to sweep (default: 0 0.25 0.5 1 2)")
     args = parser.parse_args()
 
     from environment.env import MultiHopKeyDoor
     from agent.policy import ExplorationPolicy
-    from evaluation.ablation import run_ablation_study_v4, print_ablation_report_v4
-    from viz.ablation_viz import plot_ablation_results_v4
+    from evaluation.ablation import (
+        print_ablation_report_v4,
+        run_ablation_study_v4,
+        run_w_graph_sweep_v4,
+    )
+    from viz.ablation_viz import plot_ablation_results_v4, plot_w_graph_sweep
 
     env = MultiHopKeyDoor(seed=0)
     policy = ExplorationPolicy(seed=args.seed)
@@ -79,31 +89,64 @@ def main():
     print()
 
     t0 = time.time()
-    results = run_ablation_study_v4(
-        env, policy, params,
-        n_episodes=args.episodes,
-        k=args.k,
-        seed_offset=2000,
-        verbose=True,
-    )
+    if args.w_graph_sweep:
+        print(f"\n  [w_graph sweep] values = {args.w_graph_values}")
+        results = run_w_graph_sweep_v4(
+            env, policy, params,
+            w_graph_values=args.w_graph_values,
+            n_episodes=args.episodes,
+            k=args.k,
+            seed_offset=3000,
+            verbose=True,
+        )
+    else:
+        results = run_ablation_study_v4(
+            env, policy, params,
+            n_episodes=args.episodes,
+            k=args.k,
+            seed_offset=2000,
+            verbose=True,
+        )
     elapsed = time.time() - t0
 
-    print_ablation_report_v4(results)
+    if args.w_graph_sweep:
+        # Brief tabular report
+        print("\n  w_graph    reward    precision    mem_size")
+        for k, v in sorted(results.items(), key=lambda kv: kv[1]["w_graph"]):
+            prec = v.get("mean_precision")
+            prec_str = f"{prec:.4f}" if prec is not None else "  N/A"
+            print(f"    {v['w_graph']:.2f}    {v['mean_reward']:.4f}    {prec_str}     {v['mean_memory_size']:.1f}")
+        plot_w_graph_sweep(
+            results,
+            output_path="docs/figures/fig_w_graph_ablation.png",
+        )
+    else:
+        print_ablation_report_v4(results)
+        # --- Figure ---
+        plot_ablation_results_v4(
+            results,
+            output_path="docs/figures/fig08_ablation_v4.png",
+            title="GraphMemoryV4 Ablation: 10D Theta Component Contributions\n(MultiHopKeyDoor, 100 held-out episodes)",
+        )
 
-    # --- Figure ---
-    plot_ablation_results_v4(
-        results,
-        output_path="docs/figures/fig08_ablation_v4.png",
-        title="GraphMemoryV4 Ablation: 10D Theta Component Contributions\n(MultiHopKeyDoor, 100 held-out episodes)",
-    )
-
-    # --- Save JSON ---
+    # --- Save JSON (with manifest, retaining per-episode rewards for paired stats) ---
+    from results.manifest import build_manifest
+    experiment_tag = ("graphmemory_v4_w_graph_sweep" if args.w_graph_sweep
+                      else "graphmemory_v4_ablation")
+    seed_offset = 3000 if args.w_graph_sweep else 2000
     out = {
-        "experiment": "graphmemory_v4_ablation",
+        "_manifest": build_manifest(seed=args.seed, extra={
+            "experiment": experiment_tag,
+            "n_episodes_per_config": args.episodes,
+            "k": args.k,
+            "seed_offset": seed_offset,
+            "w_graph_values": args.w_graph_values if args.w_graph_sweep else None,
+        }),
+        "experiment": experiment_tag,
         "config": {
             "n_episodes": args.episodes,
             "k": args.k,
-            "seed_offset": 2000,
+            "seed_offset": seed_offset,
             "environment": "MultiHopKeyDoor",
         },
         "learned_params": {
@@ -118,28 +161,28 @@ def main():
             "w_embed": params.w_embed,
             "w_recency": params.w_recency,
         },
-        "results": {
-            name: {k: v for k, v in res.items() if k != "rewards"}
-            for name, res in results.items()
-        },
+        "results": dict(results),
         "elapsed_s": elapsed,
     }
-    out_path = Path("results/ablation_results.json")
+    out_path = Path("results/w_graph_sweep_results.json" if args.w_graph_sweep
+                    else "results/ablation_results.json")
     out_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\n  Results saved to {out_path}")
-    print(f"  Figure saved to docs/figures/fig08_ablation_v4.png")
+    print(f"  Figure saved to "
+          f"{'docs/figures/fig_w_graph_ablation.png' if args.w_graph_sweep else 'docs/figures/fig08_ablation_v4.png'}")
     print(f"  Elapsed: {elapsed:.1f}s")
 
-    # --- Print ranked summary for quick analysis ---
-    print("\n  Ranked by mean_reward (degradation from full):")
-    sorted_items = sorted(results.items(), key=lambda x: -x[1]["mean_reward"])
-    full_r = results["full"]["mean_reward"]
-    for name, res in sorted_items:
-        prec = res.get("mean_precision")
-        prec_str = f"{prec:.4f}" if prec is not None else "  N/A"
-        deg = res.get("degradation", 0.0)
-        print(f"    {name:<18}  reward={res['mean_reward']:.4f}  prec={prec_str}  "
-              f"mem={res['mean_memory_size']:.1f}  degradation={deg:.1%}")
+    if not args.w_graph_sweep:
+        # --- Print ranked summary for quick analysis (full ablation only) ---
+        print("\n  Ranked by mean_reward (degradation from full):")
+        sorted_items = sorted(results.items(), key=lambda x: -x[1]["mean_reward"])
+        full_r = results["full"]["mean_reward"]
+        for name, res in sorted_items:
+            prec = res.get("mean_precision")
+            prec_str = f"{prec:.4f}" if prec is not None else "  N/A"
+            deg = res.get("degradation", 0.0)
+            print(f"    {name:<18}  reward={res['mean_reward']:.4f}  prec={prec_str}  "
+                  f"mem={res['mean_memory_size']:.1f}  degradation={deg:.1%}")
 
 
 if __name__ == "__main__":

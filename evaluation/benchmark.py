@@ -243,14 +243,26 @@ def print_benchmark_table(results: dict[str, dict[str, dict]]) -> None:
     print("=" * 100)
 
 
-def save_benchmark_results(results: dict, path: str | Path) -> None:
-    """Save benchmark results to JSON (excluding raw rewards list for file size)."""
+def save_benchmark_results(
+    results: dict,
+    path: str | Path,
+    manifest: dict | None = None,
+) -> None:
+    """
+    Save benchmark results to JSON.
+
+    Per-episode rewards are now retained under each system's "rewards" key for
+    downstream paired statistical tests (see scripts/run_pairwise_significance.py).
+
+    The top-level shape stays env-keyed (consumers like dashboard/app.py and
+    generate_thesis_figures.py iterate ``data.keys()`` directly). When a manifest
+    is provided it is added as a sibling key prefixed with ``_`` so iterators
+    that filter out underscore-prefixed keys remain unaffected.
+    """
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    clean = {}
-    for env, sys_dict in results.items():
-        clean[env] = {}
-        for sys_name, res in sys_dict.items():
-            clean[env][sys_name] = {k: v for k, v in res.items() if k != "rewards"}
-    path.write_text(json.dumps(clean, indent=2, default=str))
+    payload: dict = dict(results)
+    if manifest is not None:
+        payload["_manifest"] = manifest
+    path.write_text(json.dumps(payload, indent=2, default=str))
     print(f"[Benchmark] Results saved to {path}")

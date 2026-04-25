@@ -170,16 +170,31 @@ def print_document_qa_table(results: dict[str, dict]) -> None:
     print("=" * 60)
 
 
-def save_document_qa_results(results: dict, path: str | Path) -> None:
-    """Save results to JSON (exclude per_question_recalls if large)."""
+def save_document_qa_results(
+    results: dict,
+    path: str | Path,
+    manifest: dict | None = None,
+) -> None:
+    """
+    Save DocumentQA recall@k results to JSON.
+
+    Per-question recall lists are retained when present so downstream paired
+    significance tests can run. The manifest, when provided, is added under
+    the top-level ``_manifest`` sibling key.
+    """
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     import json
-    out = {}
+    out: dict = {}
     for sys_name, data in results.items():
-        out[sys_name] = {
+        entry = {
             "mean_recall": data["mean_recall"],
             "std_recall": data["std_recall"],
             "n_questions": data["n_questions"],
         }
+        if "per_question_recalls" in data:
+            entry["per_question_recalls"] = data["per_question_recalls"]
+        out[sys_name] = entry
+    if manifest is not None:
+        out["_manifest"] = manifest
     path.write_text(json.dumps(out, indent=2))

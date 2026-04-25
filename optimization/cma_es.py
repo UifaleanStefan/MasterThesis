@@ -1,51 +1,75 @@
 """
-CMA-ES — Covariance Matrix Adaptation Evolution Strategy.
+CMA-ES — public entry point.
 
-CMA-ES is the gold-standard black-box optimizer for continuous parameter spaces.
-Unlike the simple ES in main.py (which only maintains a mean and isotropic sigma),
-CMA-ES maintains a full covariance matrix C that captures the correlation structure
-of the search landscape. This allows it to:
-  1. Detect and exploit correlations between theta components (e.g., theta_store and
-     theta_entity may be positively correlated on hint-heavy tasks).
-  2. Adapt the step size (sigma) per dimension independently.
-  3. Scale to high-dimensional parameter spaces (e.g., NeuralMemoryController with
-     4,000+ weight parameters) — basic ES cannot handle this reliably.
+This module preserves the historical API (``CMAES`` class and
+``run_cmaes_optimization`` function) while transparently picking the best
+available backend:
 
-Implementation follows the original Hansen (2006) CMA-ES algorithm.
-Key parameters:
-  - mu (μ): number of selected parents (default: lambda/2)
-  - lambda (λ): population size (default: 4 + floor(3*ln(n)))
-  - sigma: initial step size
-  - n: number of parameters
+  * **pycma** (`cma` library, default when installed) — the reference
+    implementation by Hansen et al. Provides BIPOP-CMA-ES restarts,
+    automatic stop-condition handling, and well-tested eigendecomposition.
+  * **Minimal** (``optimization.cma_es_minimal``) — pure-numpy fallback
+    used when pycma is unavailable. Kept as the thesis pedagogy reference.
 
-Clipping to [0, 1]:
-  When optimizing theta = (store, entity, temporal), parameters are clipped to [0,1]
-  after sampling. This is a simple constraint-handling strategy appropriate for the
-  bounded parameter space.
+Override the backend with the ``CMA_ES_BACKEND`` env var:
+  * ``CMA_ES_BACKEND=pycma`` (default when installed)
+  * ``CMA_ES_BACKEND=minimal``
 
-For NeuralMemoryController weights (unbounded), clipping is disabled.
+Public API (unchanged from the minimal implementation):
 
-Usage:
-    optimizer = CMAES(n_params=3, sigma=0.3)
-    for generation in range(n_generations):
-        candidates = optimizer.ask()             # list of np.ndarray
-        fitnesses = [evaluate(c) for c in candidates]
-        optimizer.tell(candidates, fitnesses)    # update distribution
-        best = optimizer.best_solution
+    optimizer = CMAES(n_params=10, sigma=0.3, seed=42, clip_to_unit=True)
+    candidates = optimizer.ask()
+    optimizer.tell(candidates, fitnesses)
+    best_x, best_f = optimizer.best_solution, optimizer.best_fitness
+    info = optimizer.summary()
+
+    best_theta, history = run_cmaes_optimization(
+        eval_fn, n_params=10, n_generations=30, sigma=0.3, seed=42,
+    )
 """
 
 from __future__ import annotations
 
 import math
+import os
+import pickle
+from pathlib import Path
 from typing import Callable
 
 import numpy as np
 
+from optimization.cma_es_minimal import CMAES as CMAESMinimal
+from optimization.cma_es_minimal import run_cmaes_optimization as _run_cmaes_minimal
 
-class CMAES:
+try:
+    import cma as _pycma
+    _HAS_PYCMA = True
+except ImportError:
+    _HAS_PYCMA = False
+
+
+def _pick_backend() -> str:
+    """Return either 'pycma' or 'minimal' based on availability and env override."""
+    requested = os.environ.get("CMA_ES_BACKEND", "").lower()
+    if requested == "minimal":
+        return "minimal"
+    if requested == "pycma":
+        if not _HAS_PYCMA:
+            raise RuntimeError(
+                "CMA_ES_BACKEND=pycma but the `cma` package is not installed. "
+                "Install with `pip install cma>=3.3` or unset CMA_ES_BACKEND."
+            )
+        return "pycma"
+    # Default: prefer pycma when available, fall back to minimal otherwise.
+    return "pycma" if _HAS_PYCMA else "minimal"
+
+
+class CMAESPyCma:
     """
-    Pure-numpy CMA-ES implementation.
-    Minimizes the negative reward (i.e., maximizes reward).
+    Thin wrapper over ``cma.CMAEvolutionStrategy`` exposing the same API as
+    the minimal implementation. Pycma minimizes a cost; this wrapper negates
+    the user's fitness so the convention "higher is better" is preserved
+    end-to-end.
     """
 
     def __init__(
@@ -57,119 +81,48 @@ class CMAES:
         clip_to_unit: bool = True,
     ) -> None:
         self.n = n_params
-        self.sigma = sigma
         self.clip_to_unit = clip_to_unit
-        self._rng = np.random.RandomState(seed)
 
-        # Mean (μ)
-        if mean is not None:
-            self.mean = mean.astype(np.float64).copy()
-        else:
-            self.mean = np.full(n_params, 0.5, dtype=np.float64)
+        x0 = (np.full(n_params, 0.5, dtype=np.float64)
+              if mean is None
+              else np.asarray(mean, dtype=np.float64).copy())
 
-        # Population and selection sizes
-        self.lam = max(4, 4 + int(3 * math.log(n_params)))   # λ
-        self.mu = self.lam // 2                                 # μ
+        # pycma seed=0 is reserved (means "use a random seed"); coerce to a positive int.
+        opts: dict = {
+            "seed": int(seed) if seed > 0 else 1,
+            "verbose": -9,  # silence pycma's per-generation prints
+        }
+        if clip_to_unit:
+            opts["bounds"] = [[0.0] * n_params, [1.0] * n_params]
 
-        # Recombination weights
-        raw_w = np.array([math.log(self.mu + 0.5) - math.log(i + 1) for i in range(self.mu)])
-        self.weights = raw_w / raw_w.sum()
-        self.mu_eff = 1.0 / (self.weights ** 2).sum()
-
-        # Step-size control
-        self.c_sigma = (self.mu_eff + 2) / (n_params + self.mu_eff + 5)
-        self.d_sigma = 1 + 2 * max(0, math.sqrt((self.mu_eff - 1) / (n_params + 1)) - 1) + self.c_sigma
-        self.p_sigma = np.zeros(n_params, dtype=np.float64)
-
-        # Covariance matrix control
-        self.cc = (4 + self.mu_eff / n_params) / (n_params + 4 + 2 * self.mu_eff / n_params)
-        self.c1 = 2 / ((n_params + 1.3) ** 2 + self.mu_eff)
-        self.c_mu = min(
-            1 - self.c1,
-            2 * (self.mu_eff - 2 + 1 / self.mu_eff) / ((n_params + 2) ** 2 + self.mu_eff),
-        )
-        self.p_c = np.zeros(n_params, dtype=np.float64)
-
-        # Covariance matrix and its eigendecomposition
-        self.C = np.eye(n_params, dtype=np.float64)
-        self.eigen_eval = 0
-        self.D: np.ndarray | None = None     # eigenvalues
-        self.B: np.ndarray | None = None     # eigenvectors
-
-        # Tracking (must be initialized before _update_eigen)
-        self.generation = 0
-        self._update_eigen()
-        self.best_solution: np.ndarray = self.mean.copy()
-        self.best_fitness: float = -np.inf
+        self._es = _pycma.CMAEvolutionStrategy(x0.tolist(), float(sigma), opts)
         self._last_candidates: list[np.ndarray] = []
 
+        # best_solution / best_fitness are kept in sync with es.best
+        self.best_solution: np.ndarray = x0.copy()
+        self.best_fitness: float = -np.inf
+
     # ------------------------------------------------------------------
-    # Public API
+    # Public API mirroring the minimal CMAES
     # ------------------------------------------------------------------
 
     def ask(self) -> list[np.ndarray]:
-        """Sample λ candidate solutions."""
-        self._update_eigen()
-        candidates = []
-        for _ in range(self.lam):
-            z = self._rng.randn(self.n)
-            y = self.B @ (self.D * z)   # transform by covariance
-            x = self.mean + self.sigma * y
-            if self.clip_to_unit:
-                x = np.clip(x, 0.0, 1.0)
-            candidates.append(x)
+        candidates = [np.asarray(c, dtype=np.float64) for c in self._es.ask()]
         self._last_candidates = candidates
         return candidates
 
     def tell(self, candidates: list[np.ndarray], fitnesses: list[float]) -> None:
-        """
-        Update the distribution given evaluated candidates and their fitnesses.
-        Higher fitness = better.
-        """
-        assert len(candidates) == len(fitnesses) == self.lam
+        # pycma minimizes; we maximize, so flip sign for the optimizer.
+        costs = [-float(f) for f in fitnesses]
+        self._es.tell([np.asarray(c, dtype=np.float64) for c in candidates], costs)
 
-        # Sort by fitness descending
-        ranked = sorted(zip(fitnesses, candidates), key=lambda x: -x[0])
-        selected = [c for _, c in ranked[: self.mu]]
-        if ranked[0][0] > self.best_fitness:
-            self.best_fitness = ranked[0][0]
-            self.best_solution = ranked[0][1].copy()
-
-        # Weighted recombination
-        old_mean = self.mean.copy()
-        self.mean = sum(w * x for w, x in zip(self.weights, selected))
-        if self.clip_to_unit:
-            self.mean = np.clip(self.mean, 0.0, 1.0)
-
-        # Step-size control (CSA)
-        inv_sqrt_C = self.B @ np.diag(1.0 / self.D) @ self.B.T
-        self.p_sigma = (1 - self.c_sigma) * self.p_sigma + math.sqrt(
-            self.c_sigma * (2 - self.c_sigma) * self.mu_eff
-        ) * inv_sqrt_C @ (self.mean - old_mean) / self.sigma
-
-        hs = (np.linalg.norm(self.p_sigma) / math.sqrt(1 - (1 - self.c_sigma) ** (2 * (self.generation + 1)))
-              < (1.4 + 2 / (self.n + 1)) * self._chi_n())
-
-        # Covariance matrix adaptation (CMA)
-        self.p_c = (1 - self.cc) * self.p_c + hs * math.sqrt(
-            self.cc * (2 - self.cc) * self.mu_eff
-        ) * (self.mean - old_mean) / self.sigma
-
-        artmp = np.array([(x - old_mean) / self.sigma for x in selected])
-        self.C = (
-            (1 - self.c1 - self.c_mu) * self.C
-            + self.c1 * (np.outer(self.p_c, self.p_c) + (1 - hs) * self.cc * (2 - self.cc) * self.C)
-            + self.c_mu * sum(w * np.outer(d, d) for w, d in zip(self.weights, artmp))
-        )
-
-        # Sigma update
-        self.sigma *= math.exp(
-            (self.c_sigma / self.d_sigma) * (np.linalg.norm(self.p_sigma) / self._chi_n() - 1)
-        )
-        self.sigma = max(self.sigma, 1e-8)
-
-        self.generation += 1
-        self._update_eigen()
+        # Keep best-so-far in sync (note: es.best.f is the negated cost)
+        if self._es.best is not None and self._es.best.x is not None:
+            best_x = np.asarray(self._es.best.x, dtype=np.float64)
+            best_f = -float(self._es.best.f)
+            if best_f > self.best_fitness:
+                self.best_fitness = best_f
+                self.best_solution = best_x
 
     def summary(self) -> dict:
         return {
@@ -180,24 +133,129 @@ class CMAES:
         }
 
     # ------------------------------------------------------------------
-    # Internal
+    # Properties exposing pycma's internal state under the legacy names
     # ------------------------------------------------------------------
 
-    def _chi_n(self) -> float:
-        n = self.n
-        return math.sqrt(n) * (1 - 1 / (4 * n) + 1 / (21 * n * n))
+    @property
+    def generation(self) -> int:
+        return int(self._es.countiter)
 
-    def _update_eigen(self) -> None:
-        """Recompute eigendecomposition of C (expensive, do periodically)."""
-        # Always update on first call (D and B are None)
-        if self.D is not None and self.generation - self.eigen_eval < self.lam / (10 * self.n):
-            return
-        # Enforce symmetry
-        self.C = (self.C + self.C.T) / 2.0
-        eigenvalues, self.B = np.linalg.eigh(self.C)
-        eigenvalues = np.maximum(eigenvalues, 1e-20)
-        self.D = np.sqrt(eigenvalues)
-        self.eigen_eval = self.generation
+    @property
+    def mean(self) -> np.ndarray:
+        return np.asarray(self._es.mean, dtype=np.float64)
+
+    @property
+    def sigma(self) -> float:
+        return float(self._es.sigma)
+
+    @property
+    def lam(self) -> int:
+        return int(self._es.popsize)
+
+
+_BACKEND = _pick_backend()
+
+
+def CMAES(*args, **kwargs):
+    """Construct a CMA-ES optimizer using the active backend."""
+    if _BACKEND == "pycma":
+        return CMAESPyCma(*args, **kwargs)
+    return CMAESMinimal(*args, **kwargs)
+
+
+def get_active_backend() -> str:
+    """Return the active CMA-ES backend ('pycma' or 'minimal')."""
+    return _BACKEND
+
+
+# ----------------------------------------------------------------------------
+# Checkpointing
+# ----------------------------------------------------------------------------
+
+def save_checkpoint(
+    optimizer,
+    path: str | Path,
+    history: list[dict] | None = None,
+    extra: dict | None = None,
+) -> None:
+    """
+    Save CMA-ES optimizer state plus per-generation history to ``path``.
+
+    The payload format is a versioned dict so future optimizer additions
+    can be carried forward without breaking older checkpoints.
+
+    Parameters
+    ----------
+    optimizer : CMAESPyCma | CMAESMinimal
+        The optimizer to checkpoint.
+    path : str | Path
+        Destination filename. Parent directory is created if needed.
+    history : list[dict], optional
+        Per-generation summary dicts produced by ``optimizer.summary()``.
+    extra : dict, optional
+        Caller-provided fields (CLI args, run_id, etc.) preserved alongside
+        the optimizer state for context.
+    """
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload: dict = {
+        "version": 1,
+        "history": list(history or []),
+        "extra": dict(extra or {}),
+    }
+    if isinstance(optimizer, CMAESPyCma):
+        payload["backend"] = "pycma"
+        payload["pycma_pickle"] = optimizer._es.pickle_dumps()
+        payload["best_solution"] = optimizer.best_solution.tolist()
+        payload["best_fitness"] = float(optimizer.best_fitness)
+        payload["n"] = optimizer.n
+        payload["clip_to_unit"] = optimizer.clip_to_unit
+    else:  # CMAESMinimal — pickleable directly
+        payload["backend"] = "minimal"
+        payload["optimizer_pickle"] = pickle.dumps(optimizer)
+    with open(path, "wb") as f:
+        pickle.dump(payload, f)
+
+
+def load_checkpoint(path: str | Path) -> tuple[object, list[dict], dict]:
+    """
+    Restore an optimizer + history + extra context from a checkpoint file.
+
+    Returns
+    -------
+    (optimizer, history, extra)
+        ``optimizer`` is a reconstructed CMAES instance (backend matches the
+        one originally used). ``history`` is the per-generation list saved
+        with it. ``extra`` is the caller-provided context dict.
+    """
+    path = Path(path)
+    with open(path, "rb") as f:
+        payload = pickle.load(f)
+    if payload.get("version") != 1:
+        raise ValueError(f"Unsupported checkpoint version: {payload.get('version')}")
+    history = list(payload.get("history", []))
+    extra = dict(payload.get("extra", {}))
+    backend = payload["backend"]
+    if backend == "pycma":
+        if not _HAS_PYCMA:
+            raise RuntimeError(
+                "Checkpoint was saved with the pycma backend but the `cma` "
+                "package is not installed in the current environment."
+            )
+        optimizer = CMAESPyCma.__new__(CMAESPyCma)
+        # pycma exposes ``pickle_dumps()`` (returns bytes) but no matching
+        # classmethod; the standard pickle.loads round-trips the instance.
+        optimizer._es = pickle.loads(payload["pycma_pickle"])
+        optimizer.best_solution = np.asarray(payload["best_solution"], dtype=np.float64)
+        optimizer.best_fitness = float(payload["best_fitness"])
+        optimizer.n = int(payload["n"])
+        optimizer.clip_to_unit = bool(payload["clip_to_unit"])
+        optimizer._last_candidates = []
+        return optimizer, history, extra
+    if backend == "minimal":
+        optimizer = pickle.loads(payload["optimizer_pickle"])
+        return optimizer, history, extra
+    raise ValueError(f"Unrecognized backend in checkpoint: {backend!r}")
 
 
 def run_cmaes_optimization(
@@ -208,50 +266,71 @@ def run_cmaes_optimization(
     seed: int = 0,
     clip_to_unit: bool = True,
     verbose: bool = True,
+    checkpoint_path: str | Path | None = None,
+    checkpoint_every: int = 0,
+    resume_from: str | Path | None = None,
 ) -> tuple[np.ndarray, list[dict]]:
     """
-    Convenience wrapper: run CMA-ES for n_generations, return (best_theta, history).
+    Convenience wrapper: run CMA-ES for ``n_generations``, return
+    ``(best_theta, history)``.
 
-    Parameters
-    ----------
-    eval_fn : callable
-        Takes a parameter array, returns scalar fitness (higher = better).
-    n_params : int
-        Dimensionality of the parameter space.
-    n_generations : int
-        Number of CMA-ES generations.
-    sigma : float
-        Initial step size.
-    seed : int
-        Random seed.
-    clip_to_unit : bool
-        Whether to clip parameters to [0, 1].
-    verbose : bool
-        Print per-generation summary.
+    When pycma is the active backend, this delegates to the same loop the
+    minimal implementation uses (so caller-visible behavior is unchanged).
+    The minimal pure-numpy version is invoked when pycma is unavailable or
+    explicitly disabled via ``CMA_ES_BACKEND=minimal``.
 
-    Returns
-    -------
-    best_theta : np.ndarray
-        Best parameter vector found.
-    history : list[dict]
-        Per-generation stats (generation, best_fitness, mean, sigma).
+    Checkpointing:
+        - ``checkpoint_path``: file where per-generation state is written.
+        - ``checkpoint_every``: write checkpoint every K generations (0 = never).
+        - ``resume_from``: load checkpoint and continue from saved generation.
     """
-    optimizer = CMAES(n_params=n_params, sigma=sigma, seed=seed, clip_to_unit=clip_to_unit)
-    history: list[dict] = []
+    if resume_from is not None:
+        optimizer, history, _extra = load_checkpoint(resume_from)
+        already_done = len(history)
+        if verbose:
+            print(f"  [resume] loaded {already_done} gens from {resume_from}")
+    elif _BACKEND == "minimal":
+        # Minimal backend doesn't support checkpoint mid-run via this entry
+        # point; fall through to its native loop unless checkpointing requested.
+        if checkpoint_every <= 0 and checkpoint_path is None:
+            return _run_cmaes_minimal(
+                eval_fn,
+                n_params=n_params,
+                n_generations=n_generations,
+                sigma=sigma,
+                seed=seed,
+                clip_to_unit=clip_to_unit,
+                verbose=verbose,
+            )
+        optimizer = CMAESMinimal(n_params=n_params, sigma=sigma, seed=seed,
+                                 clip_to_unit=clip_to_unit)
+        history = []
+    else:
+        optimizer = CMAESPyCma(
+            n_params=n_params,
+            sigma=sigma,
+            seed=seed,
+            clip_to_unit=clip_to_unit,
+        )
+        history = []
 
-    for gen in range(n_generations):
+    for gen in range(len(history), n_generations):
         candidates = optimizer.ask()
         fitnesses = [eval_fn(c) for c in candidates]
         optimizer.tell(candidates, fitnesses)
-
-        summary = optimizer.summary()
-        history.append(summary)
-
+        info = optimizer.summary()
+        history.append(info)
         if verbose:
             print(
-                f"  CMA-ES gen {gen+1:3d} | best={summary['best_fitness']:.4f} "
-                f"| sigma={summary['sigma']:.4f} "
-                f"| mean={[round(x, 3) for x in summary['mean']]}"
+                f"  CMA-ES gen {gen+1:3d} | best={info['best_fitness']:.4f} "
+                f"| sigma={info['sigma']:.4f} "
+                f"| mean={[round(x, 3) for x in info['mean']]}"
             )
-
+        if checkpoint_path and checkpoint_every > 0 and (gen + 1) % checkpoint_every == 0:
+            save_checkpoint(optimizer, checkpoint_path, history=history)
+            if verbose:
+                print(f"  [checkpoint] saved gen {gen+1} -> {checkpoint_path}")
+    # Always save final checkpoint if a path was specified
+    if checkpoint_path:
+        save_checkpoint(optimizer, checkpoint_path, history=history)
     return optimizer.best_solution, history

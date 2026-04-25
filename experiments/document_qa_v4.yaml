@@ -1,0 +1,36 @@
+name: document_qa_v4
+seed: 42
+environment:
+  name: DocumentQA
+  document_name: fantasy_lore
+  seed: 0
+memory:
+  system: GraphMemoryV4
+  # 10D theta — initialized to the published-best MultiHop V4 optimum.
+  # When optimization.method != "none", this serves as the starting point.
+  theta: [0.293, 0.908, 0.198, 0.785, 0.285, 0.278, 0.668, 0.0, 1.079, 3.777]
+optimization:
+  method: bayesian
+  n_trials: 15
+  n_random_init: 5
+  n_episodes_per_candidate: 10
+eval:
+  n_episodes: 20
+  k: 8
+  generate_figures: true
+  run_statistical_tests: true
+llm:
+  enabled: true
+  model: gpt-4o-mini
+  format_style: structured
+  lambda_cost: 1000.0
+output_dir: results
+figures_dir: docs/figures
+notes: |
+  Stage 3 — GraphMemoryV4 (10D theta) on DocumentQA with GPT-4o-mini and
+  Bayesian optimization on theta. The headline thesis demonstration: can
+  V4's selective-storage parameters be tuned to minimize J = QA_score
+  − lambda_cost × cost_usd?
+
+  Requires OPENAI_API_KEY. NOT executed as part of the PoC plan; configured
+  here so the experiment can be launched verbatim once a budget is approved.

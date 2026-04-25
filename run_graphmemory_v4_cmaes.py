@@ -185,6 +185,10 @@ def main():
                         help="Skip V1 baseline run")
     parser.add_argument("--quick", action="store_true",
                         help="Quick smoke test: 5 generations x 20 episodes")
+    parser.add_argument("--checkpoint-every", type=int, default=5,
+                        help="Save CMA-ES state every N generations (default: 5; 0=never)")
+    parser.add_argument("--resume-from", type=str, default=None,
+                        help="Path to a previous checkpoint .pkl to resume from")
     args = parser.parse_args()
 
     if args.quick:
@@ -223,10 +227,14 @@ def main():
     eval_fn = make_eval_fn(env, policy, n_episodes=args.episodes, k=args.k)
 
     t0 = time.time()
+    v4_ckpt = Path("results/checkpoints/v4_cmaes/state.pkl")
     best_v4, history_v4 = run_cmaes_optimization(
         eval_fn,
         n_params=10,
         n_generations=args.generations,
+        checkpoint_path=str(v4_ckpt),
+        checkpoint_every=args.checkpoint_every,
+        resume_from=args.resume_from,
         sigma=args.sigma,
         seed=args.seed,
         clip_to_unit=True,   # all 10 dims kept in [0,1]; retrieval weights scaled at eval time
@@ -322,9 +330,18 @@ def main():
           f"precision={v4_eval['mean_precision']:.3f}  << new")
 
     # -----------------------------------------------------------------------
-    # Save results
+    # Save results (with reproducibility manifest)
     # -----------------------------------------------------------------------
+    from results.manifest import build_manifest
     results = {
+        "_manifest": build_manifest(seed=args.seed, extra={
+            "experiment": "graphmemory_v4_cmaes",
+            "n_generations": args.generations,
+            "n_episodes_per_candidate": args.episodes,
+            "n_eval_episodes": args.eval_episodes,
+            "k": args.k,
+            "sigma": args.sigma,
+        }),
         "experiment": "graphmemory_v4_cmaes",
         "config": {
             "n_generations": args.generations,

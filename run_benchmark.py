@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Sequence
 
 from evaluation.benchmark import run_full_benchmark, print_benchmark_table, save_benchmark_results
+from results.manifest import build_manifest
 
 # Learned thetas from Phase 7 ES (best found per environment)
 LEARNED_THETAS = {
@@ -48,10 +49,16 @@ def main(argv: Sequence[str] | None = None) -> None:
 
     print_benchmark_table(results)
 
-    # Save JSON
+    # Save JSON (with reproducibility manifest)
     out_path = Path("results") / "benchmark_results.json"
     out_path.parent.mkdir(exist_ok=True)
-    save_benchmark_results(results, out_path)
+    manifest = build_manifest(extra={
+        "experiment": "full_benchmark",
+        "n_episodes": N_EPISODES,
+        "megaquest_episodes": MEGAQUEST_EPISODES,
+        "skipped_systems": skip_systems,
+    })
+    save_benchmark_results(results, out_path, manifest=manifest)
 
     # Also print a plain compact summary for easy reading
     print("\n\n--- COMPACT SUMMARY (reward | precision) ---")

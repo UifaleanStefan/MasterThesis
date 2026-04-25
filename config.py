@@ -65,9 +65,17 @@ class MemoryConfig:
     system: Literal[
         "FlatMemory", "GraphMemory", "SemanticMemory", "SummaryMemory",
         "EpisodicSemanticMemory", "RAGMemory", "HierarchicalMemory",
-        "WorkingMemory", "CausalMemory", "AttentionMemory", "NeuralController"
+        "WorkingMemory", "CausalMemory", "AttentionMemory", "NeuralController",
+        # V4 lineage and neural meta-controllers (Stage 3 / DocumentQA experiments)
+        "GraphMemoryV4", "GraphMemoryV5", "NeuralMemoryControllerV2Small",
     ] = "GraphMemory"
     theta: list[float] = field(default_factory=lambda: [0.5, 0.1, 0.8])
+    """
+    For GraphMemory (V1) the default 3D theta is (store, entity, temporal).
+    For GraphMemoryV4/V5 use a 10D theta (store, novel, erich, surprise,
+    entity, temporal, decay, w_graph, w_embed, w_recency).
+    NeuralController systems ignore theta — their parameters live in MLP weights.
+    """
     window_size: int = 50            # FlatMemory
     capacity: int = 7                # WorkingMemory
     episodic_size: int = 30          # EpisodicSemanticMemory

@@ -75,7 +75,7 @@ from typing import Any
 
 import numpy as np
 
-from .embedding import embed_observation, VOCAB
+from .embedding import embed_observation_tfidf as embed_observation, VOCAB
 from .entity_extraction import extract_entities
 from .event import Event
 from .graph_memory_v4 import GraphMemoryV4, MemoryParamsV4

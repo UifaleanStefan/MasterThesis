@@ -110,6 +110,8 @@ def instantiate_env(cfg):
 
 def instantiate_memory(cfg, theta: tuple | None = None):
     from memory.graph_memory import GraphMemory, MemoryParams
+    from memory.graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
+    from memory.graph_memory_v5 import GraphMemoryV5
     from memory.flat_memory import FlatMemory
     from memory.semantic_memory import SemanticMemory
     from memory.summary_memory import SummaryMemory
@@ -119,12 +121,27 @@ def instantiate_memory(cfg, theta: tuple | None = None):
     from memory.working_memory import WorkingMemory
     from memory.causal_memory import CausalMemory
     from memory.attention_memory import AttentionMemory
+    from memory.neural_controller_v2_small import NeuralMemoryControllerV2Small
 
     t = theta or tuple(cfg.memory.theta)
     sys = cfg.memory.system
 
+    def _make_v4_params() -> "MemoryParamsV4":
+        if len(t) >= 10:
+            return MemoryParamsV4.from_vector(t)
+        # Fall back to the published-best V4 theta when caller supplied a 3D
+        # default. This lets a 3D-default config still instantiate a usable V4.
+        return MemoryParamsV4(
+            theta_store=0.293, theta_novel=0.908, theta_erich=0.198,
+            theta_surprise=0.785, theta_entity=0.285, theta_temporal=0.278,
+            theta_decay=0.668, w_graph=0.0, w_embed=1.079, w_recency=3.777,
+            mode="learnable",
+        )
+
     mem_map = {
-        "GraphMemory": lambda: GraphMemory(MemoryParams(*t, "learnable")),
+        "GraphMemory": lambda: GraphMemory(MemoryParams(*t[:3], "learnable")),
+        "GraphMemoryV4": lambda: GraphMemoryV4(_make_v4_params()),
+        "GraphMemoryV5": lambda: GraphMemoryV5(_make_v4_params()),
         "FlatMemory": lambda: FlatMemory(cfg.memory.window_size),
         "SemanticMemory": lambda: SemanticMemory(),
         "SummaryMemory": lambda: SummaryMemory(),
@@ -134,6 +151,7 @@ def instantiate_memory(cfg, theta: tuple | None = None):
         "WorkingMemory": lambda: WorkingMemory(cfg.memory.capacity),
         "CausalMemory": lambda: CausalMemory(),
         "AttentionMemory": lambda: AttentionMemory(cfg.memory.temperature),
+        "NeuralMemoryControllerV2Small": lambda: NeuralMemoryControllerV2Small(seed=cfg.seed),
     }
     if sys not in mem_map:
         raise ValueError(f"Unknown memory system: {sys}")

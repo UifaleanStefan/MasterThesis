@@ -93,7 +93,28 @@ def paired_ttest(values_a: list[float], values_b: list[float]) -> dict:
 
     diffs = [values_b[i] - values_a[i] for i in range(n)]
     mean_diff = statistics.mean(diffs)
-    std_diff = statistics.stdev(diffs) if len(diffs) > 1 else 1e-9
+    std_diff = statistics.stdev(diffs) if len(diffs) > 1 else 0.0
+
+    if std_diff < 1e-12:
+        # All paired diffs are identical: t-statistic is undefined.
+        # mean_diff == 0 → no difference → p=1.0; otherwise → perfect separation, p≈0.
+        if abs(mean_diff) < 1e-12:
+            return {
+                "t_statistic": 0.0,
+                "p_value": 1.0,
+                "df": n - 1,
+                "mean_diff": mean_diff,
+                "significant": False,
+                "n": n,
+            }
+        return {
+            "t_statistic": float("inf") if mean_diff > 0 else float("-inf"),
+            "p_value": 0.0,
+            "df": n - 1,
+            "mean_diff": mean_diff,
+            "significant": True,
+            "n": n,
+        }
 
     t_stat = mean_diff / (std_diff / math.sqrt(n))
     df = n - 1
@@ -232,31 +253,45 @@ def run_all_comparisons(
 
 
 # ------------------------------------------------------------------
-# Helper math (no scipy required)
+# P-value helpers — scipy when available, fallback to math approx otherwise
 # ------------------------------------------------------------------
 
+try:
+    from scipy.stats import norm as _scipy_norm, t as _scipy_t
+    _HAS_SCIPY = True
+except ImportError:  # pragma: no cover - fallback exercised only when scipy missing
+    _scipy_norm = None
+    _scipy_t = None
+    _HAS_SCIPY = False
+
+
 def _normal_cdf(z: float) -> float:
-    """Approximate standard normal CDF using error function."""
+    """Standard normal CDF — scipy when available, math.erf fallback otherwise."""
+    if _HAS_SCIPY:
+        return float(_scipy_norm.cdf(z))
     return 0.5 * (1 + math.erf(z / math.sqrt(2)))
 
 
 def _t_pvalue(t: float, df: int) -> float:
     """
-    Approximate two-tailed p-value for t-distribution.
-    Uses a simple approximation adequate for df > 5.
+    Two-tailed p-value for the t-distribution at statistic ``t`` with ``df`` dof.
+
+    Prefers ``scipy.stats.t.sf`` (survival function = 1 - CDF) for accuracy.
+    Falls back to a math-only approximation when scipy is unavailable; the
+    fallback is adequate for df > 5 but should not be relied on for thesis
+    figures.
     """
-    # Cornish-Fisher approximation
     if df <= 0:
         return 1.0
-    x = df / (df + t * t)
-    # Incomplete beta function approximation
+    if _HAS_SCIPY:
+        return float(2.0 * _scipy_t.sf(abs(t), df))
+    # Cornish-Fisher fallback (kept for environments without scipy)
     if t <= 0:
         return 1.0
     p = math.exp(
         math.lgamma((df + 1) / 2) - math.lgamma(df / 2) - 0.5 * math.log(df * math.pi)
         - (df + 1) / 2 * math.log(1 + t * t / df)
     )
-    # Two-tailed approximation
     return min(1.0, 2 * p * math.sqrt(df) / abs(t) if abs(t) > 0 else 1.0)
 
 

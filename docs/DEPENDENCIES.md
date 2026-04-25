@@ -16,11 +16,36 @@ benchmark, ablation, transfer, sensitivity, and most visualizations:
 
 They are captured in `requirements.txt`.
 
-## Sentence-transformers and RAGMemory
+## Sentence-transformers (now the default embedding)
 
-The `RAGMemory` system in `memory/rag_memory.py` uses
-`sentence-transformers` (`all-MiniLM-L6-v2`) for dense embeddings. This is
-**optional** and can be disabled without affecting the rest of the thesis.
+As of the April 2026 PoC hardening pass (Phase 3 / S1), the **default**
+embedding backend is ``sentence-transformers/all-MiniLM-L6-v2`` (384-dim).
+The legacy 31-token TF-IDF embedding remains available via the
+``EMBEDDING_BACKEND=tfidf`` env var.
+
+Selection precedence (high → low):
+
+1. ``EMBEDDING_BACKEND`` env var (case-insensitive: ``sentence-transformers``
+   / ``minilm`` or ``tfidf``).
+2. Default: try sentence-transformers; if the model can't load, fall back to
+   TF-IDF and emit a one-time warning.
+
+Under the default backend, RAGMemory and GraphMemoryV4/V5 share the same
+embedding function (`memory.embedding.embed_observation`). The neural
+controllers (`memory.neural_controller*`) explicitly stay on TF-IDF for
+their own input feature so their parameter count (5,674 / 1,962) is
+independent of the storage embedding choice.
+
+Reproducibility note: changing the backend invalidates every numeric
+result that touches embeddings. The active backend is recorded in the
+per-run manifest (`results/manifest.py`) so legacy reproductions are
+identifiable.
+
+### Sentence-transformers — historical fallback path
+
+The `RAGMemory` system in `memory/rag_memory.py` originally guarded its
+sentence-transformers usage behind a try/except. This guard is still in
+place — RAGMemory works with or without the model installed.
 
 - If `sentence-transformers` cannot be imported *or* the model fails to load
   due to a Keras / `tf-keras` / Transformers mismatch, `RAGMemory` now falls

@@ -819,9 +819,9 @@ def main() -> None:
     )
 
     # -----------------------------------------------------------------------
-    # Write report.txt
+    # Write current POC report
     # -----------------------------------------------------------------------
-    report_path = Path(__file__).parent / "report.txt"
+    report_path = Path(__file__).parent / "report_poc_current.txt"
     buf = io.StringIO()
     with redirect_stdout(buf):
         print_report(results, embedding_demo)

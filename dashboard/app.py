@@ -110,8 +110,8 @@ def _benchmark_df_and_envs() -> tuple[pd.DataFrame | None, list[str], list[str]]
     data = load_json("benchmark_results.json")
     if not data:
         return None, [], []
-    envs = list(data.keys())
-    systems = list(next(iter(data.values())).keys()) if data else []
+    envs = [k for k in data.keys() if not k.startswith("_")]
+    systems = list(data[envs[0]].keys()) if envs else []
     rows = []
     for sys_name in systems:
         row = {"System": sys_name}
@@ -415,16 +415,18 @@ FIG_GROUPS = {
         ("fig13_memory_size.png", "Memory Size Comparison", "Mean events stored per episode.", "V4 stores ~10 events (selective)."),
     ],
     "Extended": [
-        ("fig13_memory_curves.png", "Fig 13 — Memory Over Episode", "Illustrative growth over steps.", None),
         ("fig08_ablation.png", "Fig 8 — Ablation (generic)", "Generic 3D θ ablation.", None),
         ("fig08_ablation_v4.png", "Fig 8 V4 — Ablation 10D", "V4 ablation from run_ablation.py.", None),
         ("fig09_landscape.png", "Fig 9 — Landscape (theta_store × entity)", "3D θ sensitivity.", None),
         ("fig09_landscape_v4.png", "Fig 9 V4 — theta_novel × w_recency", "From run_sensitivity.py.", None),
         ("fig10_transfer.png", "Fig 10 — Transfer Matrix", "Source × target heatmap.", None),
         ("fig10_transfer_v4.png", "Fig 10 V4 — Zero-Shot Transfer", "V4 transfer.", None),
-        ("fig12_online_adaptation.png", "Fig 12 — Online Adaptation", "Placeholder θ curves.", None),
-        ("fig14_cost_breakdown.png", "Fig 14 — LLM Cost Breakdown", "Placeholder cost components.", None),
-        ("fig15_multi_session.png", "Fig 15 — Multi-Session", "Placeholder multi-session.", None),
+    ],
+    "Draft (synthetic)": [
+        ("draft/fig12_online_adaptation.png", "Fig 12 — Online Adaptation", "Placeholder θ curves (no real-data source yet).", None),
+        ("draft/fig13_memory_curves.png", "Fig 13 — Memory Over Episode (illustrative)", "Synthetic placeholder; the real-data sibling is fig13_memory_size.png.", None),
+        ("draft/fig14_cost_breakdown.png", "Fig 14 — LLM Cost Breakdown", "Placeholder; awaits Stage 3 LLM run.", None),
+        ("draft/fig15_multi_session.png", "Fig 15 — Multi-Session", "Placeholder; awaits Phase 4 MultiSession benchmark.", None),
     ],
 }
 

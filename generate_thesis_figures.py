@@ -796,7 +796,7 @@ def fig13_memory_size():
 def fig_story_precision_reward():
     """One scatter per environment: precision vs reward. Shows precision gates success on MultiHop."""
     bench = load("benchmark_results.json")
-    envs = list(bench.keys())
+    envs = [k for k in bench.keys() if not k.startswith("_")]
     n_envs = len(envs)
     if n_envs == 0:
         return

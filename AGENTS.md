@@ -33,7 +33,8 @@ d:\Bocconi\Thesis\
 ├── run_document_qa_memory.py  ← DocumentQA memory recall@k (no LLM)
 ├── run_smoke_tests.py         ← Quick pipeline check (grid + DocQA memory + DocQA+LLM path)
 ├── config.py                  ← ExperimentConfig dataclass, YAML serializable
-├── report.txt                 ← Full experiment output from last main.py run
+├── report_poc_v1.txt          ← Frozen POC-era output (V1 3D θ, pre-V4)
+├── report_poc_current.txt     ← Latest main.py output (regenerated each run)
 ├── requirements.txt
 ├── scripts/                   ← Dev utilities (run from project root)
 │   ├── find_seed.py           ← Find seeds where EpisodicSemantic opens ≥1 door
@@ -154,13 +155,15 @@ neural_controller_v2.py  — MLP: 50-dim input → 10D θ output. Wraps V4 Graph
 
 **GraphMemoryV4 is now the #1 system on MultiHopKeyDoor** (reward=0.178, precision=0.997), surpassing EpisodicSemantic. Achieved via CMA-ES on 10D theta with 30 gens × 50 eps. See `docs/GRAPHMEMORY_V4_RESULTS.md` for full analysis.
 
+**Graph-as-scaffold caveat (S3):** the learned optimum has `w_graph = 0.000` — graph traversal contributes nothing to retrieval. V4 in practice is selective importance-scored storage + recency-weighted embedding retrieval, with the graph data structure serving as a typed-storage scaffold and the substrate for entity decay. The `--w-graph-sweep` flag on `run_ablation.py` produces a figure confirming reward is flat in `w_graph`. Frame the contribution accordingly in thesis prose.
+
 **NeuralControllerV2Small** (50->32->10 MLP, 1,962 params): 30-gen run achieved reward=0.033 (below V4). **200-gen run** (sigma=0.3, ~15 h) achieved **reward=0.19** on MultiHop — matches or exceeds scalar V4 (0.178). See `docs/NEURAL_CONTROLLER_V2_RESULTS.md`.
 
 ---
 
 ## 4. Key Experimental Results (What We Know)
 
-### POC Results (real data, in report.txt)
+### POC Results (real data, in `report_poc_v1.txt`)
 
 | Environment | Fixed θ reward | Learned θ (ES) | θ learned |
 |---|---|---|---|
@@ -317,7 +320,7 @@ All V2/V3/V4 classes have `from_vector(v)` and `to_vector()` methods for CMA-ES 
 | Chapter | Content | Key Data |
 |---|---|---|
 | 1. Introduction | The problem, the claim, LLM cost motivation | — |
-| 2. POC | Grid worlds, 3D θ, ES, 6-system comparison, 7 figures | `report.txt`, `docs/figures/fig1-7` |
+| 2. POC | Grid worlds, 3D θ, ES, 6-system comparison, 7 figures | `report_poc_v1.txt`, `docs/figures/fig1-7` |
 | 3. Memory Architecture Taxonomy | All 10 systems on MegaQuestRoom + TextWorld | Phase A experiments |
 | 4. Learning to Construct Memory | ES vs CMA-ES vs Bayesian vs OnlineAdapter. V1→V4 progression. NeuralControllerV2. | Phase B experiments |
 | 5. Scaling to Real Tasks | GPT-4o + DocumentQA + `J = score − λ × cost_usd` | Phase C+D experiments |
@@ -351,7 +354,8 @@ All V2/V3/V4 classes have `from_vector(v)` and `to_vector()` methods for CMA-ES 
 | `docs/THESIS_STORY.md` | Research narrative and rationale |
 | `docs/POC_RESULTS.md` | POC phase results in detail |
 | `results/benchmark_results.json` | Raw benchmark data (12 systems × 4 envs) |
-| `report.txt` | Full output from last `python main.py` run |
+| `report_poc_v1.txt` | Frozen POC-era output (V1 3D θ baseline, pre-V4) |
+| `report_poc_current.txt` | Latest `python main.py` output (regenerated each run) |
 
 ---
 
