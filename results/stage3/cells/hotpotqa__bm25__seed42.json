@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "c3e204c",
+    "git_sha": "a19b5c1",
     "git_dirty": true,
-    "timestamp_utc": "2026-05-19T12:22:16+00:00",
+    "timestamp_utc": "2026-05-19T21:31:57+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -13,24 +13,24 @@
     "mode": "full",
     "model": "gpt-4o-mini",
     "benchmark": "hotpotqa",
-    "config": "v4-canonical",
+    "config": "bm25",
     "k": 8,
     "n_questions": 100
   },
   "ok": true,
   "benchmark": "hotpotqa",
-  "config": "v4-canonical",
+  "config": "bm25",
   "mode": "full",
   "n_questions": 100,
   "n_with_gold": 100,
   "n_with_judge": 100,
   "mean_recall_at_k": 1.0,
-  "mean_judge_score": 0.6890000000000001,
-  "total_prompt_tokens": 110740,
+  "mean_judge_score": 0.698,
+  "total_prompt_tokens": 117144,
   "total_completion_tokens_max": 15000,
-  "projected_cost_usd": 0.025611,
-  "actual_cost_usd": 0.017922899999999995,
-  "elapsed_seconds": 171.54509162902832,
+  "projected_cost_usd": 0.026571599999999997,
+  "actual_cost_usd": 0.018851999999999997,
+  "elapsed_seconds": 142.55702567100525,
   "questions": [
     {
       "doc_idx": 0,
@@ -38,24 +38,24 @@
       "n_paragraphs": 10,
       "question": "In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?",
       "gold_answer": "1755",
-      "predicted": "Moscow State University was founded in 1755.",
+      "predicted": "1755",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         8,
-        7,
-        6,
-        5,
+        0,
+        9,
         4,
-        3,
-        2
+        2,
+        5,
+        7,
+        6
       ],
       "relevant_paragraphs": [
         0,
         8
       ],
-      "prompt_tokens_estimated": 723,
+      "prompt_tokens_estimated": 815,
       "projected_cost_usd": 0.0
     },
     {
@@ -68,20 +68,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         8,
-        7,
-        3,
-        4,
-        5,
+        9,
         1,
-        2
+        3,
+        7,
+        2,
+        0,
+        5
       ],
       "relevant_paragraphs": [
         6,
         8
       ],
-      "prompt_tokens_estimated": 1010,
+      "prompt_tokens_estimated": 1155,
       "projected_cost_usd": 0.0
     },
     {
@@ -94,20 +94,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        4,
         7,
         6,
-        4,
         5,
-        3,
         0,
-        1
+        2,
+        9,
+        8
       ],
       "relevant_paragraphs": [
         8,
         9
       ],
-      "prompt_tokens_estimated": 1004,
+      "prompt_tokens_estimated": 1145,
       "projected_cost_usd": 0.0
     },
     {
@@ -116,24 +116,24 @@
       "n_paragraphs": 10,
       "question": "Ken Pruitt  was a Republican member of an upper house of the legislature with how many members ?",
       "gold_answer": "40 members",
-      "predicted": "The upper house of the Florida Senate, where Ken Pruitt served, has 40 members.",
+      "predicted": "40 members",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        7,
-        6,
         2,
-        5,
-        4,
+        1,
+        8,
+        6,
+        0,
         3,
-        1
+        7,
+        4
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 1134,
+      "prompt_tokens_estimated": 1075,
       "projected_cost_usd": 0.0
     },
     {
@@ -142,24 +142,24 @@
       "n_paragraphs": 10,
       "question": "Between Greyia and Calibanus, which genus contains more species?",
       "gold_answer": "Greyia",
-      "predicted": "Calibanus contains more species.",
+      "predicted": "Greyia contains more species.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        5,
         8,
         7,
-        5,
-        6,
-        4,
         3,
-        2
+        9,
+        1,
+        4,
+        6
       ],
       "relevant_paragraphs": [
         5,
         8
       ],
-      "prompt_tokens_estimated": 1417,
+      "prompt_tokens_estimated": 1444,
       "projected_cost_usd": 0.0
     },
     {
@@ -168,21 +168,24 @@
       "n_paragraphs": 10,
       "question": "Did John Updike and Tom Clancy both publish more than 15 bestselling novels?",
       "gold_answer": "yes",
-      "predicted": "No, only Tom Clancy published more than 15 bestselling novels.",
+      "predicted": "Yes, both John Updike and Tom Clancy published more than 15 bestselling novels.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        7,
-        3,
         2,
-        0,
-        1
+        3,
+        6,
+        4,
+        5,
+        8,
+        9,
+        0
       ],
       "relevant_paragraphs": [
         2,
         3
       ],
-      "prompt_tokens_estimated": 645,
+      "prompt_tokens_estimated": 711,
       "projected_cost_usd": 0.0
     },
     {
@@ -195,20 +198,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
         6,
-        5,
         3,
-        4,
-        0
+        8,
+        2,
+        0,
+        5,
+        1,
+        7
       ],
       "relevant_paragraphs": [
         3,
         6
       ],
-      "prompt_tokens_estimated": 1129,
+      "prompt_tokens_estimated": 1417,
       "projected_cost_usd": 0.0
     },
     {
@@ -221,20 +224,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
         2,
+        3,
+        9,
+        1,
         5,
         4,
-        3
+        7,
+        8
       ],
       "relevant_paragraphs": [
         2,
         3
       ],
-      "prompt_tokens_estimated": 764,
+      "prompt_tokens_estimated": 816,
       "projected_cost_usd": 0.0
     },
     {
@@ -247,20 +250,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
-        7,
         5,
-        4,
         1,
+        4,
+        9,
         3,
+        8,
         2,
-        0
+        6
       ],
       "relevant_paragraphs": [
         1,
         5
       ],
-      "prompt_tokens_estimated": 1433,
+      "prompt_tokens_estimated": 1386,
       "projected_cost_usd": 0.0
     },
     {
@@ -273,20 +276,20 @@
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
         7,
-        6,
-        5,
-        4,
+        8,
         3,
-        2
+        4,
+        1,
+        5,
+        9,
+        0
       ],
       "relevant_paragraphs": [
         7,
         8
       ],
-      "prompt_tokens_estimated": 950,
+      "prompt_tokens_estimated": 1001,
       "projected_cost_usd": 0.0
     },
     {
@@ -299,20 +302,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        0,
         9,
+        1,
         7,
-        4,
         5,
         6,
-        2,
         3,
-        1
+        2
       ],
       "relevant_paragraphs": [
         2,
         7
       ],
-      "prompt_tokens_estimated": 1313,
+      "prompt_tokens_estimated": 1405,
       "projected_cost_usd": 0.0
     },
     {
@@ -325,20 +328,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
         7,
         6,
-        5,
+        2,
         4,
+        9,
+        5,
         3,
-        2
+        0
       ],
       "relevant_paragraphs": [
         6,
         7
       ],
-      "prompt_tokens_estimated": 983,
+      "prompt_tokens_estimated": 1038,
       "projected_cost_usd": 0.0
     },
     {
@@ -351,20 +354,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
-        6,
-        5,
-        4,
         3,
+        8,
+        4,
+        7,
+        2,
+        5,
         1,
-        0,
-        2
+        0
       ],
       "relevant_paragraphs": [
         3,
         6
       ],
-      "prompt_tokens_estimated": 1276,
+      "prompt_tokens_estimated": 1461,
       "projected_cost_usd": 0.0
     },
     {
@@ -373,24 +376,24 @@
       "n_paragraphs": 10,
       "question": "In what city is the company that Fastjet Tanzania was originally founded as a part of prior to rebranding based?",
       "gold_answer": "Nairobi, Kenya",
-      "predicted": "Nairobi, Kenya",
-      "judge_score": 1.0,
+      "predicted": "Dar es Salaam",
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
         2,
-        6,
-        5,
+        3,
+        1,
+        9,
+        7,
         4,
-        0
+        8,
+        6
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 1037,
+      "prompt_tokens_estimated": 1091,
       "projected_cost_usd": 0.0
     },
     {
@@ -403,20 +406,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
         6,
-        5,
-        4,
+        1,
+        7,
+        2,
+        0,
         3,
-        2
+        9,
+        5
       ],
       "relevant_paragraphs": [
         4,
         6
       ],
-      "prompt_tokens_estimated": 1164,
+      "prompt_tokens_estimated": 1343,
       "projected_cost_usd": 0.0
     },
     {
@@ -430,19 +433,19 @@
       "recall_at_k": 1.0,
       "retrieved_steps": [
         8,
+        9,
         7,
-        6,
-        5,
+        2,
+        1,
         4,
         3,
-        0,
-        2
+        5
       ],
       "relevant_paragraphs": [
         4,
         9
       ],
-      "prompt_tokens_estimated": 1830,
+      "prompt_tokens_estimated": 1516,
       "projected_cost_usd": 0.0
     },
     {
@@ -451,24 +454,24 @@
       "n_paragraphs": 10,
       "question": "A Pair of Brown Eyes and Wild Mountain Thyme is based from what artists song?",
       "gold_answer": "Francis McPeake",
-      "predicted": "Francis McPeake",
-      "judge_score": 1.0,
+      "predicted": "\"A Pair of Brown Eyes\" is based on the melody of \"Wild Mountain Thyme,\" a song by Francis McPeake.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        1,
         8,
-        7,
+        0,
         6,
         5,
-        3,
-        1,
-        4
+        4,
+        9,
+        3
       ],
       "relevant_paragraphs": [
         0,
         1
       ],
-      "prompt_tokens_estimated": 1018,
+      "prompt_tokens_estimated": 1214,
       "projected_cost_usd": 0.0
     },
     {
@@ -477,24 +480,24 @@
       "n_paragraphs": 10,
       "question": "Armageddon in Retrospect was written by the author who was best known for what 1969 satire novel?",
       "gold_answer": "Slaughterhouse-Five",
-      "predicted": "The Magic Christian",
-      "judge_score": 0.0,
+      "predicted": "Slaughterhouse-Five",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
+        4,
+        1,
         8,
         7,
-        6,
         5,
-        4,
         3,
-        2
+        0
       ],
       "relevant_paragraphs": [
         0,
         9
       ],
-      "prompt_tokens_estimated": 1087,
+      "prompt_tokens_estimated": 1205,
       "projected_cost_usd": 0.0
     },
     {
@@ -507,20 +510,20 @@
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
-        4,
+        2,
         0,
-        3
+        5,
+        8,
+        3,
+        6,
+        7,
+        1
       ],
       "relevant_paragraphs": [
         0,
         1
       ],
-      "prompt_tokens_estimated": 1430,
+      "prompt_tokens_estimated": 1221,
       "projected_cost_usd": 0.0
     },
     {
@@ -535,18 +538,18 @@
       "retrieved_steps": [
         9,
         8,
-        7,
-        5,
-        4,
-        3,
         0,
-        2
+        5,
+        2,
+        1,
+        7,
+        6
       ],
       "relevant_paragraphs": [
         5,
         8
       ],
-      "prompt_tokens_estimated": 1227,
+      "prompt_tokens_estimated": 1256,
       "projected_cost_usd": 0.0
     },
     {
@@ -559,20 +562,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
         4,
-        6,
-        5,
         1,
-        3
+        5,
+        3,
+        7,
+        6,
+        2,
+        9
       ],
       "relevant_paragraphs": [
         1,
         4
       ],
-      "prompt_tokens_estimated": 1130,
+      "prompt_tokens_estimated": 1003,
       "projected_cost_usd": 0.0
     },
     {
@@ -585,20 +588,20 @@
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        1,
         9,
-        7,
         6,
         5,
+        0,
         3,
         4,
-        1,
-        2
+        7
       ],
       "relevant_paragraphs": [
         1,
         8
       ],
-      "prompt_tokens_estimated": 1366,
+      "prompt_tokens_estimated": 1422,
       "projected_cost_usd": 0.0
     },
     {
@@ -607,24 +610,24 @@
       "n_paragraphs": 10,
       "question": "What where both Hawker Hurricane and No. 1455 Flight apart of?",
       "gold_answer": "Royal Air Force",
-      "predicted": "Both the Hawker Hurricane and No. 1455 Flight were part of the Royal Air Force (RAF) during World War II.",
+      "predicted": "Both the Hawker Hurricane and No. 1455 Flight were part of the Royal Air Force (RAF).",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        7,
-        6,
         5,
         4,
+        9,
+        1,
+        8,
+        7,
         3,
-        2,
-        1
+        0
       ],
       "relevant_paragraphs": [
         5,
         8
       ],
-      "prompt_tokens_estimated": 854,
+      "prompt_tokens_estimated": 901,
       "projected_cost_usd": 0.0
     },
     {
@@ -633,24 +636,24 @@
       "n_paragraphs": 10,
       "question": "what language did the ethnic group which Torstein Ellingsen was its drumer  speaks",
       "gold_answer": "Norwegian language",
-      "predicted": "The relevant passage does not provide information about the language spoken by the ethnic group associated with Torstein Ellingsen.",
-      "judge_score": 0.0,
+      "predicted": "Norwegian",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        0,
+        2,
         9,
         8,
         7,
-        6,
-        5,
         4,
-        3,
-        2
+        1,
+        6
       ],
       "relevant_paragraphs": [
         5,
         9
       ],
-      "prompt_tokens_estimated": 1666,
+      "prompt_tokens_estimated": 1681,
       "projected_cost_usd": 0.0
     },
     {
@@ -663,20 +666,20 @@
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        2,
+        0,
         8,
         6,
-        2,
-        5,
+        7,
         4,
-        3,
+        9,
         1
       ],
       "relevant_paragraphs": [
         2,
         8
       ],
-      "prompt_tokens_estimated": 970,
+      "prompt_tokens_estimated": 1005,
       "projected_cost_usd": 0.0
     },
     {
@@ -690,19 +693,19 @@
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
-        8,
-        6,
-        5,
-        2,
         4,
-        3,
-        1
+        8,
+        2,
+        7,
+        6,
+        0,
+        3
       ],
       "relevant_paragraphs": [
         8,
         9
       ],
-      "prompt_tokens_estimated": 828,
+      "prompt_tokens_estimated": 1073,
       "projected_cost_usd": 0.0
     },
     {
@@ -711,20 +714,24 @@
       "n_paragraphs": 10,
       "question": "Which head coach has led their team for a longer period of time, Tim Cluess or Steve Prohm?",
       "gold_answer": "Tim Cluess",
-      "predicted": "Tim Cluess has led his team for a longer period of time.",
-      "judge_score": 0.0,
+      "predicted": "Tim Cluess",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        7,
         4,
+        1,
+        7,
+        9,
         3,
-        0
+        2,
+        0,
+        5
       ],
       "relevant_paragraphs": [
         2,
         3
       ],
-      "prompt_tokens_estimated": 576,
+      "prompt_tokens_estimated": 1209,
       "projected_cost_usd": 0.0
     },
     {
@@ -737,14 +744,14 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
-        7,
-        6,
         4,
-        5,
         2,
         3,
-        0
+        6,
+        8,
+        5,
+        0,
+        7
       ],
       "relevant_paragraphs": [
         4,
@@ -759,24 +766,24 @@
       "n_paragraphs": 10,
       "question": "How far from Sacramento is the flight school in Atwater?",
       "gold_answer": "about 115 miles (185 km)",
-      "predicted": "The distance from Sacramento to Atwater is not provided in the relevant passages.",
-      "judge_score": 0.0,
+      "predicted": "The flight school in Atwater is about 115 miles (185 km) south of Sacramento.",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
+        4,
         6,
+        0,
+        7,
         5,
-        2,
         1,
-        4
+        8,
+        9
       ],
       "relevant_paragraphs": [
         0,
         6
       ],
-      "prompt_tokens_estimated": 1101,
+      "prompt_tokens_estimated": 969,
       "projected_cost_usd": 0.0
     },
     {
@@ -785,24 +792,24 @@
       "n_paragraphs": 10,
       "question": "Baraki Barak District is situated in the western part of a province whose capital is what?",
       "gold_answer": "Puli Alam",
-      "predicted": "Puli Alam",
-      "judge_score": 1.0,
+      "predicted": "Baraki Barak District is situated in the western part of Logar Province, whose capital is Pul-i-Alam.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        6,
         7,
+        8,
         4,
-        3,
-        5,
-        2,
+        9,
         1,
-        0
+        0,
+        3
       ],
       "relevant_paragraphs": [
         5,
         6
       ],
-      "prompt_tokens_estimated": 1449,
+      "prompt_tokens_estimated": 1290,
       "projected_cost_usd": 0.0
     },
     {
@@ -815,12 +822,12 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         8,
-        7,
-        6,
         4,
+        6,
         2,
+        9,
+        7,
         0,
         3
       ],
@@ -837,24 +844,24 @@
       "n_paragraphs": 10,
       "question": "In the NASA mission where Moon trees were taken into space, what was the nickname of the Command Module?",
       "gold_answer": "\"Kitty Hawk\"",
-      "predicted": "Kitty Hawk",
-      "judge_score": 1.0,
+      "predicted": "The nickname of the Command Module was \"Kitty Hawk.\"",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
         5,
-        4,
+        1,
+        6,
+        9,
         3,
-        2
+        4,
+        2,
+        0
       ],
       "relevant_paragraphs": [
         5,
         6
       ],
-      "prompt_tokens_estimated": 1220,
+      "prompt_tokens_estimated": 1252,
       "projected_cost_usd": 0.0
     },
     {
@@ -863,22 +870,24 @@
       "n_paragraphs": 10,
       "question": "Which comic series involves characters such as Nick Fury and Baron von Strucker?",
       "gold_answer": "Marvel",
-      "predicted": "The comic series that involves characters such as Nick Fury and Baron von Strucker is \"Marvel Comics.\"",
-      "judge_score": 0.5,
+      "predicted": "Nick Fury: Agent of S.H.I.E.L.D.",
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        7,
         5,
-        6,
         1,
-        0
+        6,
+        4,
+        7,
+        8,
+        3,
+        9
       ],
       "relevant_paragraphs": [
         4,
         5
       ],
-      "prompt_tokens_estimated": 675,
+      "prompt_tokens_estimated": 902,
       "projected_cost_usd": 0.0
     },
     {
@@ -892,19 +901,19 @@
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
-        8,
-        7,
-        6,
-        5,
         2,
-        4,
-        3
+        5,
+        8,
+        6,
+        3,
+        7,
+        1
       ],
       "relevant_paragraphs": [
         2,
         9
       ],
-      "prompt_tokens_estimated": 676,
+      "prompt_tokens_estimated": 698,
       "projected_cost_usd": 0.0
     },
     {
@@ -917,20 +926,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        2,
+        0,
         6,
-        7,
-        5,
-        1,
         3,
-        4,
-        0
+        9,
+        8,
+        1,
+        5
       ],
       "relevant_paragraphs": [
         2,
         6
       ],
-      "prompt_tokens_estimated": 1098,
+      "prompt_tokens_estimated": 1072,
       "projected_cost_usd": 0.0
     },
     {
@@ -943,19 +952,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        4,
         9,
-        8,
-        6,
-        5,
-        0,
         2,
-        3
+        0,
+        6,
+        1,
+        3,
+        8
       ],
       "relevant_paragraphs": [
         2,
         4
       ],
-      "prompt_tokens_estimated": 1194,
+      "prompt_tokens_estimated": 1464,
       "projected_cost_usd": 0.0
     },
     {
@@ -968,20 +978,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
         6,
-        7,
-        5,
+        8,
+        1,
+        2,
         4,
         3,
-        2
+        7,
+        9
       ],
       "relevant_paragraphs": [
         6,
         8
       ],
-      "prompt_tokens_estimated": 793,
+      "prompt_tokens_estimated": 743,
       "projected_cost_usd": 0.0
     },
     {
@@ -990,22 +1000,24 @@
       "n_paragraphs": 10,
       "question": "What was the capital of India when the Taj Mahal was commissioned?",
       "gold_answer": "Agra",
-      "predicted": "The capital of India when the Taj Mahal was commissioned was Agra.",
-      "judge_score": 1.0,
+      "predicted": "The capital of India was Agra when the Taj Mahal was commissioned.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         5,
         0,
+        6,
         1,
-        3,
-        2
+        9,
+        4,
+        7,
+        8
       ],
       "relevant_paragraphs": [
         0,
         5
       ],
-      "prompt_tokens_estimated": 684,
+      "prompt_tokens_estimated": 1002,
       "projected_cost_usd": 0.0
     },
     {
@@ -1018,20 +1030,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
         3,
+        6,
+        1,
+        0,
         2,
-        1
+        8,
+        5,
+        4
       ],
       "relevant_paragraphs": [
         3,
         6
       ],
-      "prompt_tokens_estimated": 1024,
+      "prompt_tokens_estimated": 1311,
       "projected_cost_usd": 0.0
     },
     {
@@ -1044,20 +1056,20 @@
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        2,
         8,
+        9,
+        4,
+        3,
         7,
         6,
-        4,
-        5,
-        2,
-        3
+        0
       ],
       "relevant_paragraphs": [
         8,
         9
       ],
-      "prompt_tokens_estimated": 1056,
+      "prompt_tokens_estimated": 991,
       "projected_cost_usd": 0.0
     },
     {
@@ -1070,20 +1082,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         8,
-        7,
         6,
         5,
         4,
         3,
-        1
+        9,
+        0,
+        7
       ],
       "relevant_paragraphs": [
         4,
         8
       ],
-      "prompt_tokens_estimated": 998,
+      "prompt_tokens_estimated": 949,
       "projected_cost_usd": 0.0
     },
     {
@@ -1092,23 +1104,24 @@
       "n_paragraphs": 10,
       "question": "The On Tour Forever album gave Blues Traveler the opportunity to display what musical trademark?",
       "gold_answer": "extensive use of segues",
-      "predicted": "The extensive use of segues in their live performances.",
-      "judge_score": 1.0,
+      "predicted": "The On Tour Forever album gave Blues Traveler the opportunity to display their trademark jam band sound.",
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
+        1,
         4,
-        5,
-        3,
+        6,
         2,
-        0
+        9,
+        5,
+        7,
+        8
       ],
       "relevant_paragraphs": [
         0,
         4
       ],
-      "prompt_tokens_estimated": 832,
+      "prompt_tokens_estimated": 841,
       "projected_cost_usd": 0.0
     },
     {
@@ -1121,20 +1134,20 @@
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        2,
+        7,
+        0,
+        4,
+        6,
         9,
         8,
-        7,
-        6,
-        5,
-        4,
-        2,
-        3
+        5
       ],
       "relevant_paragraphs": [
         2,
         7
       ],
-      "prompt_tokens_estimated": 720,
+      "prompt_tokens_estimated": 754,
       "projected_cost_usd": 0.0
     },
     {
@@ -1147,20 +1160,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
         3,
+        0,
+        9,
+        7,
+        8,
+        6,
         4,
-        5,
-        1
+        2
       ],
       "relevant_paragraphs": [
         0,
         3
       ],
-      "prompt_tokens_estimated": 1492,
+      "prompt_tokens_estimated": 1180,
       "projected_cost_usd": 0.0
     },
     {
@@ -1169,24 +1182,24 @@
       "n_paragraphs": 10,
       "question": "Where did Cale Gundy's brother play football in college?",
       "gold_answer": "Oklahoma State University",
-      "predicted": "Cale Gundy's brother, Mike Gundy, played college football at Oklahoma State University.",
-      "judge_score": 0.5,
+      "predicted": "Oklahoma State University.",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
+        7,
+        0,
         6,
         4,
-        5,
+        9,
+        2,
         3,
-        0,
-        1
+        8
       ],
       "relevant_paragraphs": [
         0,
         7
       ],
-      "prompt_tokens_estimated": 1651,
+      "prompt_tokens_estimated": 1455,
       "projected_cost_usd": 0.0
     },
     {
@@ -1195,23 +1208,24 @@
       "n_paragraphs": 10,
       "question": "Who has released more solo albums, Nick Carter or Brady Seals?",
       "gold_answer": "Brady Seals",
-      "predicted": "Nick Carter has released more solo albums.",
+      "predicted": "Nick Carter has released more solo albums than Brady Seals.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
         5,
-        6,
         3,
-        4,
-        0,
-        1
+        6,
+        9,
+        8,
+        1,
+        2,
+        4
       ],
       "relevant_paragraphs": [
         3,
         5
       ],
-      "prompt_tokens_estimated": 932,
+      "prompt_tokens_estimated": 929,
       "projected_cost_usd": 0.0
     },
     {
@@ -1224,18 +1238,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
+        1,
+        0,
+        6,
         5,
         4,
-        1,
-        2,
-        0
+        3,
+        7,
+        9
       ],
       "relevant_paragraphs": [
         1,
         7
       ],
-      "prompt_tokens_estimated": 914,
+      "prompt_tokens_estimated": 1048,
       "projected_cost_usd": 0.0
     },
     {
@@ -1248,20 +1264,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         8,
         7,
-        6,
-        5,
         4,
-        3,
-        1
+        9,
+        1,
+        6,
+        0,
+        5
       ],
       "relevant_paragraphs": [
         7,
         8
       ],
-      "prompt_tokens_estimated": 1334,
+      "prompt_tokens_estimated": 1418,
       "projected_cost_usd": 0.0
     },
     {
@@ -1274,18 +1290,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         7,
-        5,
-        4,
+        8,
         2,
-        0
+        1,
+        4,
+        9,
+        6,
+        3
       ],
       "relevant_paragraphs": [
         7,
         8
       ],
-      "prompt_tokens_estimated": 773,
+      "prompt_tokens_estimated": 928,
       "projected_cost_usd": 0.0
     },
     {
@@ -1299,19 +1317,19 @@
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
-        8,
-        7,
         6,
-        4,
-        5,
         1,
-        2
+        0,
+        8,
+        5,
+        3,
+        4
       ],
       "relevant_paragraphs": [
         1,
         9
       ],
-      "prompt_tokens_estimated": 1163,
+      "prompt_tokens_estimated": 1225,
       "projected_cost_usd": 0.0
     },
     {
@@ -1320,24 +1338,24 @@
       "n_paragraphs": 10,
       "question": "Who created the NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson?",
       "gold_answer": "Justin Spitzer",
-      "predicted": "The creators of the NBC sitcom \"Superstore\" are Justin Spitzer.",
+      "predicted": "Justin Spitzer",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
         0,
+        2,
         4,
-        3
+        5,
+        9,
+        1,
+        6,
+        8
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 1272,
+      "prompt_tokens_estimated": 1627,
       "projected_cost_usd": 0.0
     },
     {
@@ -1350,19 +1368,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
         6,
-        5,
-        4,
-        3,
+        9,
         0,
-        1
+        7,
+        2,
+        4,
+        1,
+        8
       ],
       "relevant_paragraphs": [
         0,
         6
       ],
-      "prompt_tokens_estimated": 976,
+      "prompt_tokens_estimated": 1027,
       "projected_cost_usd": 0.0
     },
     {
@@ -1372,23 +1391,23 @@
       "question": "Do both Korematsu v. United States and Chaplinsky v. New Hampshire cases regard the rights of U. S. citizens?",
       "gold_answer": "yes",
       "predicted": "Yes, both Korematsu v. United States and Chaplinsky v. New Hampshire regard the rights of U.S. citizens.",
-      "judge_score": 0.5,
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
         4,
-        5,
+        6,
+        7,
         3,
-        1
+        9,
+        5,
+        1,
+        0
       ],
       "relevant_paragraphs": [
         1,
         4
       ],
-      "prompt_tokens_estimated": 1382,
+      "prompt_tokens_estimated": 1413,
       "projected_cost_usd": 0.0
     },
     {
@@ -1397,24 +1416,24 @@
       "n_paragraphs": 10,
       "question": "What is the title of the memoir written by the honoree of the Black and White Ball?",
       "gold_answer": "Personal History",
-      "predicted": "The title of the memoir written by the honoree of the Black and White Ball is \"Personal History.\"",
-      "judge_score": 1.0,
+      "predicted": "Personal History",
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        5,
+        2,
+        3,
         9,
-        8,
         7,
         6,
-        2,
-        5,
-        4,
-        3
+        0,
+        1
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 854,
+      "prompt_tokens_estimated": 811,
       "projected_cost_usd": 0.0
     },
     {
@@ -1427,19 +1446,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        7,
-        6,
         1,
+        8,
+        4,
+        9,
+        6,
+        7,
         2,
-        3,
-        0
+        5
       ],
       "relevant_paragraphs": [
         1,
         8
       ],
-      "prompt_tokens_estimated": 777,
+      "prompt_tokens_estimated": 845,
       "projected_cost_usd": 0.0
     },
     {
@@ -1452,20 +1472,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
         5,
-        6,
+        8,
         4,
+        1,
         3,
-        1
+        0,
+        9,
+        6
       ],
       "relevant_paragraphs": [
         5,
         6
       ],
-      "prompt_tokens_estimated": 1427,
+      "prompt_tokens_estimated": 1370,
       "projected_cost_usd": 0.0
     },
     {
@@ -1478,20 +1498,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
+        0,
         2,
-        4,
-        0
+        1,
+        7,
+        3,
+        5,
+        9,
+        6
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 886,
+      "prompt_tokens_estimated": 1065,
       "projected_cost_usd": 0.0
     },
     {
@@ -1500,24 +1520,24 @@
       "n_paragraphs": 10,
       "question": "In what year was the most famous statute at Po Lin Monastery built?",
       "gold_answer": "Tian Tan Buddha",
-      "predicted": "The passage does not provide the specific year when the most famous statue at Po Lin Monastery, the Tian Tan Buddha, was built.",
-      "judge_score": 0.5,
+      "predicted": "1993",
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
-        7,
-        6,
-        4,
-        2,
         1,
+        4,
+        0,
+        7,
+        5,
+        6,
         3,
-        0
+        9
       ],
       "relevant_paragraphs": [
         1,
         5
       ],
-      "prompt_tokens_estimated": 1217,
+      "prompt_tokens_estimated": 1333,
       "projected_cost_usd": 0.0
     },
     {
@@ -1530,20 +1550,20 @@
       "judge_score": 0.9,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        7,
-        6,
         5,
+        9,
+        1,
         3,
+        0,
+        8,
         4,
-        2,
-        1
+        7
       ],
       "relevant_paragraphs": [
         3,
         9
       ],
-      "prompt_tokens_estimated": 1305,
+      "prompt_tokens_estimated": 1655,
       "projected_cost_usd": 0.0
     },
     {
@@ -1556,18 +1576,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        7,
         5,
-        4,
+        1,
         2,
-        0,
-        1
+        3,
+        7,
+        8,
+        6,
+        4
       ],
       "relevant_paragraphs": [
         1,
         5
       ],
-      "prompt_tokens_estimated": 726,
+      "prompt_tokens_estimated": 859,
       "projected_cost_usd": 0.0
     },
     {
@@ -1576,23 +1598,24 @@
       "n_paragraphs": 10,
       "question": "Are Phlebodium and Pieris both species of ferns?",
       "gold_answer": "no",
-      "predicted": "No, only Phlebodium is a genus of ferns; Pieris is a genus of shrubs.",
-      "judge_score": 1.0,
+      "predicted": "No, Phlebodium is a genus of ferns, while Pieris is a genus of shrubs.",
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        6,
         4,
         3,
+        8,
+        9,
+        6,
         2,
-        1,
+        5,
         0
       ],
       "relevant_paragraphs": [
         2,
         4
       ],
-      "prompt_tokens_estimated": 1181,
+      "prompt_tokens_estimated": 1446,
       "projected_cost_usd": 0.0
     },
     {
@@ -1601,18 +1624,18 @@
       "n_paragraphs": 10,
       "question": "Who was the great grandfather of Franklin Seaver Pratt's wife?",
       "gold_answer": "Kalokuokamaile",
-      "predicted": "Kamehameha I",
-      "judge_score": 0.0,
+      "predicted": "Kalokuokamaile",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
         2,
+        8,
+        5,
+        0,
+        3,
+        6,
         4,
-        3
+        7
       ],
       "relevant_paragraphs": [
         2,
@@ -1631,20 +1654,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
+        0,
         6,
         4,
-        5,
-        0,
+        7,
+        8,
+        2,
         3,
-        2
+        9
       ],
       "relevant_paragraphs": [
         0,
         6
       ],
-      "prompt_tokens_estimated": 771,
+      "prompt_tokens_estimated": 710,
       "projected_cost_usd": 0.0
     },
     {
@@ -1654,23 +1677,23 @@
       "question": "Which late 1980s and 1990s English super model was featured in the song nasty girl by The Notorious B.I.G.?",
       "gold_answer": "Naomi Elaine Campbell",
       "predicted": "Naomi Campbell",
-      "judge_score": 0.5,
+      "judge_score": 0.9,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
+        2,
+        0,
         7,
         5,
-        6,
+        9,
         3,
-        0,
-        4
+        6,
+        1
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 2001,
+      "prompt_tokens_estimated": 1864,
       "projected_cost_usd": 0.0
     },
     {
@@ -1680,23 +1703,23 @@
       "question": "What is the name of the film directed by Alex Cox  adapted from a 1606 play starring Diana Quick as the Dutchess?",
       "gold_answer": "Revengers Tragedy",
       "predicted": "Revengers Tragedy",
-      "judge_score": 0.0,
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
-        3,
+        0,
         4,
-        0
+        8,
+        1,
+        5,
+        2,
+        9,
+        6
       ],
       "relevant_paragraphs": [
         0,
         3
       ],
-      "prompt_tokens_estimated": 998,
+      "prompt_tokens_estimated": 1009,
       "projected_cost_usd": 0.0
     },
     {
@@ -1705,24 +1728,24 @@
       "n_paragraphs": 10,
       "question": "Josh Trank and Mike Valerio both work in what industry?",
       "gold_answer": "entertainment",
-      "predicted": "Entertainment industry",
+      "predicted": "The entertainment industry.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
-        8,
-        6,
-        5,
-        4,
+        1,
         3,
-        2,
-        1
+        6,
+        8,
+        0,
+        4,
+        2
       ],
       "relevant_paragraphs": [
         1,
         9
       ],
-      "prompt_tokens_estimated": 964,
+      "prompt_tokens_estimated": 1033,
       "projected_cost_usd": 0.0
     },
     {
@@ -1735,20 +1758,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
-        4,
+        2,
         0,
-        2
+        9,
+        6,
+        1,
+        8,
+        5,
+        3
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 847,
+      "prompt_tokens_estimated": 1038,
       "projected_cost_usd": 0.0
     },
     {
@@ -1761,20 +1784,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        5,
+        3,
         9,
         8,
-        5,
-        7,
-        6,
+        2,
+        0,
         4,
-        3,
-        1
+        6
       ],
       "relevant_paragraphs": [
         5,
         8
       ],
-      "prompt_tokens_estimated": 1000,
+      "prompt_tokens_estimated": 1230,
       "projected_cost_usd": 0.0
     },
     {
@@ -1787,20 +1810,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
         4,
         3,
-        2
+        2,
+        5,
+        7,
+        1,
+        0,
+        6
       ],
       "relevant_paragraphs": [
         1,
         4
       ],
-      "prompt_tokens_estimated": 1280,
+      "prompt_tokens_estimated": 1043,
       "projected_cost_usd": 0.0
     },
     {
@@ -1809,23 +1832,24 @@
       "n_paragraphs": 10,
       "question": "What 3 countries are part of the legal name of the airline that merged with Braathens in 2004?",
       "gold_answer": "Denmark\u2013Norway\u2013Sweden",
-      "predicted": "Norway, Sweden, Denmark",
+      "predicted": "Norway, Sweden, and Denmark.",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        7,
-        6,
-        2,
-        1,
         4,
+        1,
+        0,
         3,
-        0
+        7,
+        9,
+        6,
+        5
       ],
       "relevant_paragraphs": [
         7,
         8
       ],
-      "prompt_tokens_estimated": 1043,
+      "prompt_tokens_estimated": 1248,
       "projected_cost_usd": 0.0
     },
     {
@@ -1834,24 +1858,24 @@
       "n_paragraphs": 10,
       "question": "What is the ratio of flow velocity past a boundary to the local speed of sound for a Saab JAS 39 Gripen?",
       "gold_answer": "2",
-      "predicted": "The Mach number for a Saab JAS 39 Gripen is 2.",
-      "judge_score": 1.0,
+      "predicted": "The Mach number for a Saab JAS 39 Gripen is up to Mach 2.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
-        8,
-        7,
-        6,
-        5,
+        2,
         4,
+        1,
+        6,
+        8,
         3,
-        2
+        0
       ],
       "relevant_paragraphs": [
         4,
         9
       ],
-      "prompt_tokens_estimated": 991,
+      "prompt_tokens_estimated": 1012,
       "projected_cost_usd": 0.0
     },
     {
@@ -1860,23 +1884,24 @@
       "n_paragraphs": 10,
       "question": "SWX Right Now airs on the station that broadcasts on what channel in Billings, Montana?",
       "gold_answer": "8",
-      "predicted": "SWX Right Now airs on KULR-TV, which broadcasts on channel 11 in Billings, Montana.",
-      "judge_score": 0.0,
+      "predicted": "SWX Right Now airs on KULR-TV, which broadcasts on channel 8 in Billings, Montana.",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
-        7,
         4,
-        3,
-        2,
+        5,
+        6,
         1,
-        0
+        2,
+        8,
+        7
       ],
       "relevant_paragraphs": [
         7,
         9
       ],
-      "prompt_tokens_estimated": 923,
+      "prompt_tokens_estimated": 1276,
       "projected_cost_usd": 0.0
     },
     {
@@ -1889,20 +1914,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
+        3,
         9,
-        8,
+        0,
         7,
         6,
-        3,
+        8,
         5,
-        4,
         1
       ],
       "relevant_paragraphs": [
         0,
         3
       ],
-      "prompt_tokens_estimated": 1399,
+      "prompt_tokens_estimated": 1255,
       "projected_cost_usd": 0.0
     },
     {
@@ -1911,24 +1936,24 @@
       "n_paragraphs": 10,
       "question": "Saltillo Engine is an engine plant in Ramos Arizpe that belongs to the American subsidiary of what company?",
       "gold_answer": "Fiat Chrysler Automobiles N.V.",
-      "predicted": "Chrysler",
-      "judge_score": 0.5,
+      "predicted": "Fiat Chrysler Automobiles N.V.",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
-        7,
-        6,
-        2,
-        3,
-        5,
+        1,
         4,
-        0
+        8,
+        5,
+        2,
+        9,
+        6,
+        3
       ],
       "relevant_paragraphs": [
         1,
         2
       ],
-      "prompt_tokens_estimated": 982,
+      "prompt_tokens_estimated": 977,
       "projected_cost_usd": 0.0
     },
     {
@@ -1937,24 +1962,24 @@
       "n_paragraphs": 10,
       "question": "What type of television show did Dylan Everett star in, in 2015?",
       "gold_answer": "American-Canadian mystery-drama",
-      "predicted": "Dylan Everett starred in a mystery-drama television series in 2015 called \"Open Heart.\"",
+      "predicted": "Dylan Everett starred in a mystery-drama television series in 2015.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
+        2,
         7,
+        0,
+        8,
         5,
-        6,
-        4,
-        3,
-        1
+        9,
+        1,
+        3
       ],
       "relevant_paragraphs": [
         5,
         8
       ],
-      "prompt_tokens_estimated": 952,
+      "prompt_tokens_estimated": 1094,
       "projected_cost_usd": 0.0
     },
     {
@@ -1967,20 +1992,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        6,
         7,
+        2,
+        4,
+        6,
         0,
-        5,
+        1,
         3,
-        2
+        8
       ],
       "relevant_paragraphs": [
         0,
         6
       ],
-      "prompt_tokens_estimated": 1538,
+      "prompt_tokens_estimated": 1883,
       "projected_cost_usd": 0.0
     },
     {
@@ -1993,19 +2018,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        8,
-        6,
-        5,
-        4,
-        3,
         0,
-        1
+        7,
+        5,
+        9,
+        3,
+        6,
+        1,
+        4
       ],
       "relevant_paragraphs": [
         0,
         5
       ],
-      "prompt_tokens_estimated": 950,
+      "prompt_tokens_estimated": 1155,
       "projected_cost_usd": 0.0
     },
     {
@@ -2018,20 +2044,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
+        3,
         6,
         5,
+        8,
         0,
-        4,
-        3
+        7,
+        1,
+        2
       ],
       "relevant_paragraphs": [
         0,
         7
       ],
-      "prompt_tokens_estimated": 1047,
+      "prompt_tokens_estimated": 866,
       "projected_cost_usd": 0.0
     },
     {
@@ -2044,20 +2070,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        5,
+        3,
         8,
         7,
         6,
-        5,
-        4,
-        3,
+        0,
+        9,
         2
       ],
       "relevant_paragraphs": [
         3,
         5
       ],
-      "prompt_tokens_estimated": 1601,
+      "prompt_tokens_estimated": 1501,
       "projected_cost_usd": 0.0
     },
     {
@@ -2070,20 +2096,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        6,
-        2,
-        4,
-        3,
         0,
-        1
+        3,
+        5,
+        2,
+        1,
+        6,
+        8,
+        4
       ],
       "relevant_paragraphs": [
         0,
         2
       ],
-      "prompt_tokens_estimated": 1240,
+      "prompt_tokens_estimated": 1283,
       "projected_cost_usd": 0.0
     },
     {
@@ -2096,20 +2122,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
         0,
-        4,
+        9,
+        2,
+        5,
+        8,
+        6,
+        1,
         3
       ],
       "relevant_paragraphs": [
         0,
         6
       ],
-      "prompt_tokens_estimated": 1265,
+      "prompt_tokens_estimated": 1253,
       "projected_cost_usd": 0.0
     },
     {
@@ -2122,20 +2148,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
         4,
-        5,
+        8,
+        2,
+        0,
+        6,
         3,
-        2
+        5,
+        9
       ],
       "relevant_paragraphs": [
         4,
         8
       ],
-      "prompt_tokens_estimated": 970,
+      "prompt_tokens_estimated": 902,
       "projected_cost_usd": 0.0
     },
     {
@@ -2144,24 +2170,24 @@
       "n_paragraphs": 10,
       "question": "Who conducted the negotiations  with the owners and the longest serving commandant of Auschwitz concentration and extermination camp?",
       "gold_answer": "Rudolf H\u00f6ss",
-      "predicted": "Carl Clauberg conducted the negotiations with the owners and Rudolf H\u00f6ss was the longest-serving commandant of Auschwitz concentration and extermination camp.",
+      "predicted": "Kurt Gerstein conducted the negotiations with the owners and Rudolf H\u00f6ss was the longest-serving commandant of Auschwitz concentration and extermination camp.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        0,
         8,
-        7,
-        6,
         5,
+        3,
         4,
+        7,
         1,
-        2
+        6
       ],
       "relevant_paragraphs": [
         0,
         8
       ],
-      "prompt_tokens_estimated": 1064,
+      "prompt_tokens_estimated": 1360,
       "projected_cost_usd": 0.0
     },
     {
@@ -2174,20 +2200,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         8,
-        7,
-        6,
-        5,
         3,
+        0,
+        9,
+        4,
         2,
-        1
+        1,
+        5
       ],
       "relevant_paragraphs": [
         6,
         8
       ],
-      "prompt_tokens_estimated": 851,
+      "prompt_tokens_estimated": 980,
       "projected_cost_usd": 0.0
     },
     {
@@ -2196,24 +2222,24 @@
       "n_paragraphs": 10,
       "question": "What kind of musicians are Mark Gaudet and Jan Axel Blomberg?",
       "gold_answer": "drummer",
-      "predicted": "Mark Gaudet and Jan Axel Blomberg are musicians involved in indie and metal music groups.",
+      "predicted": "Both Mark Gaudet and Jan Axel Blomberg are musicians in the metal genre.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
         7,
-        6,
-        5,
-        4,
-        3,
         1,
-        2
+        8,
+        3,
+        5,
+        2,
+        4,
+        6
       ],
       "relevant_paragraphs": [
         1,
         8
       ],
-      "prompt_tokens_estimated": 844,
+      "prompt_tokens_estimated": 836,
       "projected_cost_usd": 0.0
     },
     {
@@ -2226,20 +2252,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
         1,
+        5,
+        0,
+        6,
         4,
-        3
+        7,
+        8,
+        2
       ],
       "relevant_paragraphs": [
         1,
         6
       ],
-      "prompt_tokens_estimated": 851,
+      "prompt_tokens_estimated": 959,
       "projected_cost_usd": 0.0
     },
     {
@@ -2248,24 +2274,24 @@
       "n_paragraphs": 10,
       "question": "The Airport located next to the A13 handled how many passengers in 2016 ?",
       "gold_answer": "1.6 million passengers",
-      "predicted": "The airport located next to the A13, Rotterdam The Hague Airport, handled over 1.6 million passengers in 2016.",
+      "predicted": "Rotterdam The Hague Airport handled over 1.6 million passengers in 2016.",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         9,
+        1,
         8,
         7,
-        6,
-        5,
-        4,
+        0,
         2,
-        3
+        4,
+        5
       ],
       "relevant_paragraphs": [
         8,
         9
       ],
-      "prompt_tokens_estimated": 1236,
+      "prompt_tokens_estimated": 1355,
       "projected_cost_usd": 0.0
     },
     {
@@ -2278,20 +2304,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
-        4,
         0,
-        3
+        5,
+        6,
+        7,
+        1,
+        4,
+        8,
+        2
       ],
       "relevant_paragraphs": [
         0,
         5
       ],
-      "prompt_tokens_estimated": 1209,
+      "prompt_tokens_estimated": 1249,
       "projected_cost_usd": 0.0
     },
     {
@@ -2304,20 +2330,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
         6,
+        7,
         5,
-        4,
         3,
+        4,
         2,
-        0
+        8,
+        1
       ],
       "relevant_paragraphs": [
         3,
         6
       ],
-      "prompt_tokens_estimated": 1315,
+      "prompt_tokens_estimated": 1291,
       "projected_cost_usd": 0.0
     },
     {
@@ -2330,20 +2356,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
+        0,
         4,
         3,
-        5,
-        1
+        9,
+        2,
+        1,
+        6,
+        8
       ],
       "relevant_paragraphs": [
         3,
         4
       ],
-      "prompt_tokens_estimated": 1548,
+      "prompt_tokens_estimated": 1611,
       "projected_cost_usd": 0.0
     },
     {
@@ -2356,20 +2382,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
         4,
-        5,
+        2,
+        9,
+        6,
+        1,
+        0,
         3,
-        1
+        5
       ],
       "relevant_paragraphs": [
         1,
         4
       ],
-      "prompt_tokens_estimated": 1333,
+      "prompt_tokens_estimated": 1283,
       "projected_cost_usd": 0.0
     },
     {
@@ -2382,20 +2408,20 @@
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        0,
         8,
-        7,
-        6,
-        5,
-        3,
+        1,
+        2,
         4,
-        0
+        9,
+        3,
+        5
       ],
       "relevant_paragraphs": [
         0,
         8
       ],
-      "prompt_tokens_estimated": 918,
+      "prompt_tokens_estimated": 1197,
       "projected_cost_usd": 0.0
     },
     {
@@ -2408,20 +2434,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        5,
-        6,
         4,
-        3,
-        1
+        5,
+        1,
+        6,
+        7,
+        9,
+        0,
+        2
       ],
       "relevant_paragraphs": [
         4,
         5
       ],
-      "prompt_tokens_estimated": 1362,
+      "prompt_tokens_estimated": 1539,
       "projected_cost_usd": 0.0
     },
     {
@@ -2434,20 +2460,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
         5,
+        0,
+        6,
+        9,
+        1,
         3,
-        2,
-        1
+        4,
+        2
       ],
       "relevant_paragraphs": [
         5,
         6
       ],
-      "prompt_tokens_estimated": 1074,
+      "prompt_tokens_estimated": 1086,
       "projected_cost_usd": 0.0
     },
     {
@@ -2456,24 +2482,24 @@
       "n_paragraphs": 10,
       "question": "What sports team included both of the brothers Case McCoy and Colt McCoy during different years?",
       "gold_answer": "University of Texas Longhorns",
-      "predicted": "University of Texas",
-      "judge_score": 0.5,
+      "predicted": "University of Texas Longhorns football team",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
+        0,
         6,
-        1,
-        4,
+        5,
+        7,
         3,
-        2
+        8,
+        1,
+        4
       ],
       "relevant_paragraphs": [
         1,
         5
       ],
-      "prompt_tokens_estimated": 1202,
+      "prompt_tokens_estimated": 1228,
       "projected_cost_usd": 0.0
     },
     {
@@ -2482,24 +2508,24 @@
       "n_paragraphs": 10,
       "question": "Which member of The New Russian School was both a doctor and a chemist besides being a composer?",
       "gold_answer": "Alexander Porfiryevich Borodin",
-      "predicted": "Alexander Porfiryevich Borodin",
-      "judge_score": 1.0,
+      "predicted": "Alexander Borodin",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        7,
-        6,
         4,
+        9,
+        5,
+        0,
         3,
-        2,
-        1,
-        0
+        6,
+        8,
+        1
       ],
       "relevant_paragraphs": [
         4,
         5
       ],
-      "prompt_tokens_estimated": 1025,
+      "prompt_tokens_estimated": 898,
       "projected_cost_usd": 0.0
     },
     {
@@ -2512,20 +2538,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
         7,
         6,
+        9,
         5,
+        1,
         4,
-        3,
-        2
+        0,
+        8
       ],
       "relevant_paragraphs": [
         7,
         9
       ],
-      "prompt_tokens_estimated": 1006,
+      "prompt_tokens_estimated": 1057,
       "projected_cost_usd": 0.0
     },
     {
@@ -2538,20 +2564,20 @@
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
-        8,
-        7,
-        6,
-        5,
         2,
+        6,
+        7,
+        8,
         4,
-        3
+        3,
+        0,
+        9
       ],
       "relevant_paragraphs": [
         2,
         4
       ],
-      "prompt_tokens_estimated": 978,
+      "prompt_tokens_estimated": 1125,
       "projected_cost_usd": 0.0
     },
     {
@@ -2560,24 +2586,24 @@
       "n_paragraphs": 10,
       "question": "Luke Rockhold defeated the MMA fighter who was the first to earn a win against which champion in the UFC?",
       "gold_answer": "Anderson Silva",
-      "predicted": "Luke Rockhold defeated Chris Weidman, who was the first to earn a win against Anderson Silva, the former UFC Middleweight Champion.",
-      "judge_score": 0.5,
+      "predicted": "Anderson Silva",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        4,
+        2,
+        5,
+        3,
+        1,
         8,
         7,
-        6,
-        5,
-        2,
-        3,
-        1
+        6
       ],
       "relevant_paragraphs": [
         2,
         4
       ],
-      "prompt_tokens_estimated": 1379,
+      "prompt_tokens_estimated": 1349,
       "projected_cost_usd": 0.0
     },
     {
@@ -2586,24 +2612,24 @@
       "n_paragraphs": 10,
       "question": "What type of art does The Consul and Arlecchino have in common?",
       "gold_answer": "music",
-      "predicted": "Both The Consul and Arlecchino are operas.",
+      "predicted": "Both The Consul and Arlecchino involve elements of visual art, particularly in their use of theatrical and operatic conventions.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
-        9,
+        3,
+        0,
         8,
+        5,
         6,
         4,
-        5,
-        0,
-        1,
-        3
+        2,
+        7
       ],
       "relevant_paragraphs": [
         0,
         9
       ],
-      "prompt_tokens_estimated": 1050,
+      "prompt_tokens_estimated": 1241,
       "projected_cost_usd": 0.0
     }
   ]

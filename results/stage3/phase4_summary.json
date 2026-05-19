@@ -2,16 +2,18 @@
   "config": {
     "benchmarks": [
       "cuad",
-      "financebench",
+      "qasper",
       "hotpotqa",
       "longmemeval",
-      "narrativeqa",
-      "qasper"
+      "financebench",
+      "narrativeqa"
     ],
     "configs": [
       "v4-canonical",
       "v4-tuned",
-      "flat-50"
+      "flat-50",
+      "bm25",
+      "attention-tuned"
     ],
     "seeds": [
       42,
@@ -176,587 +178,108 @@
             "elapsed_seconds": 247.21047043800354
           }
         ]
-      }
-    },
-    "financebench": {
-      "v4-canonical": {
+      },
+      "bm25": {
         "status": "ok",
         "n_seeds": 3,
         "n_questions_per_seed": 100,
         "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.4416666666666667,
-        "std_judge_across_seeds": 0.017097758137642846,
+        "mean_judge_across_seeds": 0.2247037037037037,
+        "std_judge_across_seeds": 0.0739091938126858,
         "judge_95ci_pooled": [
-          0.39466666666666667,
-          0.4870083333333333
+          0.18829722222222223,
+          0.2647236111111111
         ],
-        "mean_recall_across_seeds": 1.0,
+        "mean_recall_across_seeds": 0.3,
         "std_recall_across_seeds": 0.0,
         "recall_95ci_pooled": [
-          1.0,
-          1.0
+          0.24333333333333335,
+          0.34674999999999995
         ],
-        "total_cost_usd": 0.02826900000000001,
-        "total_prompt_tokens": 152932,
+        "total_cost_usd": 0.034865400000000005,
+        "total_prompt_tokens": 632085,
         "per_seed": [
           {
             "seed": 42,
-            "mean_recall": 1.0,
-            "mean_judge": 0.42200000000000004,
+            "mean_recall": 0.3,
+            "mean_judge": 0.31,
             "n_questions": 100,
             "n_with_gold": 100,
-            "prompt_tokens": 49968,
-            "actual_cost_usd": 0.009244950000000005,
-            "elapsed_seconds": 212.18581700325012
+            "prompt_tokens": 196901,
+            "actual_cost_usd": 0.034865400000000005,
+            "elapsed_seconds": 274.9499955177307
           },
           {
             "seed": 7,
-            "mean_recall": 1.0,
-            "mean_judge": 0.45,
+            "mean_recall": 0.3,
+            "mean_judge": 0.17961111111111108,
             "n_questions": 100,
             "n_with_gold": 100,
-            "prompt_tokens": 52062,
-            "actual_cost_usd": 0.009546750000000001,
-            "elapsed_seconds": 233.16596126556396
+            "prompt_tokens": 213066,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 0.6751422882080078
           },
           {
             "seed": 100,
-            "mean_recall": 1.0,
-            "mean_judge": 0.45299999999999996,
+            "mean_recall": 0.3,
+            "mean_judge": 0.18449999999999997,
             "n_questions": 100,
             "n_with_gold": 100,
-            "prompt_tokens": 50902,
-            "actual_cost_usd": 0.009477300000000003,
-            "elapsed_seconds": 250.70501804351807
+            "prompt_tokens": 222118,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 0.817620038986206
           }
         ]
       },
-      "v4-tuned": {
+      "attention-tuned": {
         "status": "ok",
         "n_seeds": 3,
         "n_questions_per_seed": 100,
         "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.45,
-        "std_judge_across_seeds": 0.006999999999999994,
+        "mean_judge_across_seeds": 0.3688888888888888,
+        "std_judge_across_seeds": 0.08323804274043972,
         "judge_95ci_pooled": [
-          0.4003333333333333,
-          0.4960083333333334
+          0.3281923611111111,
+          0.4060555555555555
         ],
-        "mean_recall_across_seeds": 1.0,
-        "std_recall_across_seeds": 0.0,
+        "mean_recall_across_seeds": 0.43,
+        "std_recall_across_seeds": 0.04999999999999999,
         "recall_95ci_pooled": [
-          1.0,
-          1.0
+          0.37333333333333335,
+          0.4834166666666666
         ],
-        "total_cost_usd": 0.028213200000000008,
-        "total_prompt_tokens": 152932,
+        "total_cost_usd": 0.02264595,
+        "total_prompt_tokens": 436386,
         "per_seed": [
           {
             "seed": 42,
-            "mean_recall": 1.0,
-            "mean_judge": 0.442,
+            "mean_recall": 0.48,
+            "mean_judge": 0.465,
             "n_questions": 100,
             "n_with_gold": 100,
-            "prompt_tokens": 49968,
-            "actual_cost_usd": 0.009196350000000004,
-            "elapsed_seconds": 233.80837273597717
+            "prompt_tokens": 132099,
+            "actual_cost_usd": 0.02264595,
+            "elapsed_seconds": 261.0036404132843
           },
           {
             "seed": 7,
-            "mean_recall": 1.0,
-            "mean_judge": 0.45299999999999996,
+            "mean_recall": 0.43,
+            "mean_judge": 0.32008333333333316,
             "n_questions": 100,
             "n_with_gold": 100,
-            "prompt_tokens": 52062,
-            "actual_cost_usd": 0.00960615,
-            "elapsed_seconds": 220.90294218063354
+            "prompt_tokens": 152766,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 101.33501768112183
           },
           {
             "seed": 100,
-            "mean_recall": 1.0,
-            "mean_judge": 0.455,
+            "mean_recall": 0.38,
+            "mean_judge": 0.32158333333333333,
             "n_questions": 100,
             "n_with_gold": 100,
-            "prompt_tokens": 50902,
-            "actual_cost_usd": 0.009410700000000003,
-            "elapsed_seconds": 252.54136276245117
-          }
-        ]
-      },
-      "flat-50": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.4883333333333333,
-        "std_judge_across_seeds": 0.02761038451983845,
-        "judge_95ci_pooled": [
-          0.4426333333333334,
-          0.5343333333333333
-        ],
-        "mean_recall_across_seeds": 1.0,
-        "std_recall_across_seeds": 0.0,
-        "recall_95ci_pooled": [
-          1.0,
-          1.0
-        ],
-        "total_cost_usd": 0.033983400000000004,
-        "total_prompt_tokens": 189285,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 1.0,
-            "mean_judge": 0.45799999999999996,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 61120,
-            "actual_cost_usd": 0.011087100000000004,
-            "elapsed_seconds": 188.52352929115295
-          },
-          {
-            "seed": 7,
-            "mean_recall": 1.0,
-            "mean_judge": 0.495,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 63553,
-            "actual_cost_usd": 0.0114009,
-            "elapsed_seconds": 226.92301082611084
-          },
-          {
-            "seed": 100,
-            "mean_recall": 1.0,
-            "mean_judge": 0.512,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 64612,
-            "actual_cost_usd": 0.011495400000000001,
-            "elapsed_seconds": 262.04688262939453
-          }
-        ]
-      }
-    },
-    "hotpotqa": {
-      "v4-canonical": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.648,
-        "std_judge_across_seeds": 0.04491102314577128,
-        "judge_95ci_pooled": [
-          0.6016666666666667,
-          0.6980083333333333
-        ],
-        "mean_recall_across_seeds": 0.9833333333333334,
-        "std_recall_across_seeds": 0.01527525231651948,
-        "recall_95ci_pooled": [
-          0.9666666666666667,
-          0.9966666666666667
-        ],
-        "total_cost_usd": 0.05378325000000001,
-        "total_prompt_tokens": 331345,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 1.0,
-            "mean_judge": 0.6890000000000001,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 110740,
-            "actual_cost_usd": 0.017922899999999995,
-            "elapsed_seconds": 171.54509162902832
-          },
-          {
-            "seed": 7,
-            "mean_recall": 0.97,
-            "mean_judge": 0.6,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 106708,
-            "actual_cost_usd": 0.017453700000000006,
-            "elapsed_seconds": 216.8812153339386
-          },
-          {
-            "seed": 100,
-            "mean_recall": 0.98,
-            "mean_judge": 0.655,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 113897,
-            "actual_cost_usd": 0.01840665000000001,
-            "elapsed_seconds": 241.93263220787048
-          }
-        ]
-      },
-      "v4-tuned": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.6363333333333334,
-        "std_judge_across_seeds": 0.034645827069552486,
-        "judge_95ci_pooled": [
-          0.5883333333333334,
-          0.6873416666666665
-        ],
-        "mean_recall_across_seeds": 0.9633333333333333,
-        "std_recall_across_seeds": 0.01527525231651948,
-        "recall_95ci_pooled": [
-          0.9399166666666667,
-          0.98
-        ],
-        "total_cost_usd": 0.05248290000000001,
-        "total_prompt_tokens": 322359,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 0.98,
-            "mean_judge": 0.669,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 107754,
-            "actual_cost_usd": 0.017496300000000006,
-            "elapsed_seconds": 180.62482285499573
-          },
-          {
-            "seed": 7,
-            "mean_recall": 0.95,
-            "mean_judge": 0.6,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 103324,
-            "actual_cost_usd": 0.016933499999999997,
-            "elapsed_seconds": 199.78059434890747
-          },
-          {
-            "seed": 100,
-            "mean_recall": 0.96,
-            "mean_judge": 0.64,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 111281,
-            "actual_cost_usd": 0.018053100000000006,
-            "elapsed_seconds": 236.02056241035461
-          }
-        ]
-      },
-      "flat-50": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.6156666666666667,
-        "std_judge_across_seeds": 0.009291573243177578,
-        "judge_95ci_pooled": [
-          0.5706666666666667,
-          0.66535
-        ],
-        "mean_recall_across_seeds": 0.98,
-        "std_recall_across_seeds": 0.0,
-        "recall_95ci_pooled": [
-          0.9632500000000002,
-          0.9933333333333333
-        ],
-        "total_cost_usd": 0.055053450000000004,
-        "total_prompt_tokens": 339420,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 0.98,
-            "mean_judge": 0.622,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 113461,
-            "actual_cost_usd": 0.018324750000000004,
-            "elapsed_seconds": 166.27258157730103
-          },
-          {
-            "seed": 7,
-            "mean_recall": 0.98,
-            "mean_judge": 0.605,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 108844,
-            "actual_cost_usd": 0.017817600000000006,
-            "elapsed_seconds": 173.16354250907898
-          },
-          {
-            "seed": 100,
-            "mean_recall": 0.98,
-            "mean_judge": 0.62,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 117115,
-            "actual_cost_usd": 0.018911099999999997,
-            "elapsed_seconds": 199.16677451133728
-          }
-        ]
-      }
-    },
-    "longmemeval": {
-      "v4-canonical": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.4366666666666667,
-        "std_judge_across_seeds": 0.054151023382142394,
-        "judge_95ci_pooled": [
-          0.38865833333333333,
-          0.4846666666666666
-        ],
-        "mean_recall_across_seeds": 1.0,
-        "std_recall_across_seeds": 0.0,
-        "recall_95ci_pooled": [
-          1.0,
-          1.0
-        ],
-        "total_cost_usd": 0.25244325000000006,
-        "total_prompt_tokens": 1643116,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 1.0,
-            "mean_judge": 0.385,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 602948,
-            "actual_cost_usd": 0.09231600000000001,
-            "elapsed_seconds": 282.23567485809326
-          },
-          {
-            "seed": 7,
-            "mean_recall": 1.0,
-            "mean_judge": 0.493,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 490493,
-            "actual_cost_usd": 0.07550595000000003,
-            "elapsed_seconds": 336.27378726005554
-          },
-          {
-            "seed": 100,
-            "mean_recall": 1.0,
-            "mean_judge": 0.43200000000000005,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 549675,
-            "actual_cost_usd": 0.08462130000000001,
-            "elapsed_seconds": 359.7089145183563
-          }
-        ]
-      },
-      "v4-tuned": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.4263333333333333,
-        "std_judge_across_seeds": 0.058483615939281086,
-        "judge_95ci_pooled": [
-          0.3789833333333333,
-          0.47369999999999995
-        ],
-        "mean_recall_across_seeds": 1.0,
-        "std_recall_across_seeds": 0.0,
-        "recall_95ci_pooled": [
-          1.0,
-          1.0
-        ],
-        "total_cost_usd": 0.2519196000000001,
-        "total_prompt_tokens": 1639006,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 1.0,
-            "mean_judge": 0.375,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 602948,
-            "actual_cost_usd": 0.09235020000000002,
-            "elapsed_seconds": 223.14344954490662
-          },
-          {
-            "seed": 7,
-            "mean_recall": 1.0,
-            "mean_judge": 0.49,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 490493,
-            "actual_cost_usd": 0.07552155000000003,
-            "elapsed_seconds": 350.5693609714508
-          },
-          {
-            "seed": 100,
-            "mean_recall": 1.0,
-            "mean_judge": 0.414,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 545565,
-            "actual_cost_usd": 0.08404785000000004,
-            "elapsed_seconds": 388.14887952804565
-          }
-        ]
-      },
-      "flat-50": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.4503333333333333,
-        "std_judge_across_seeds": 0.0515396287659635,
-        "judge_95ci_pooled": [
-          0.4029916666666667,
-          0.4990083333333333
-        ],
-        "mean_recall_across_seeds": 1.0,
-        "std_recall_across_seeds": 0.0,
-        "recall_95ci_pooled": [
-          1.0,
-          1.0
-        ],
-        "total_cost_usd": 0.27325905,
-        "total_prompt_tokens": 1780867,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 1.0,
-            "mean_judge": 0.4,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 640184,
-            "actual_cost_usd": 0.09794280000000002,
-            "elapsed_seconds": 245.0888068675995
-          },
-          {
-            "seed": 7,
-            "mean_recall": 1.0,
-            "mean_judge": 0.503,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 540102,
-            "actual_cost_usd": 0.08299604999999997,
-            "elapsed_seconds": 347.73526644706726
-          },
-          {
-            "seed": 100,
-            "mean_recall": 1.0,
-            "mean_judge": 0.44799999999999995,
-            "n_questions": 100,
-            "n_with_gold": 100,
-            "prompt_tokens": 600581,
-            "actual_cost_usd": 0.09232020000000002,
-            "elapsed_seconds": 266.4932613372803
-          }
-        ]
-      }
-    },
-    "narrativeqa": {
-      "v4-canonical": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.21166666666666667,
-        "std_judge_across_seeds": 0.015275252316519465,
-        "judge_95ci_pooled": [
-          0.17166666666666666,
-          0.25333333333333335
-        ],
-        "mean_recall_across_seeds": 0.0,
-        "std_recall_across_seeds": 0.0,
-        "recall_95ci_pooled": [
-          null,
-          null
-        ],
-        "total_cost_usd": 0.18025455,
-        "total_prompt_tokens": 1166533,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 0.0,
-            "mean_judge": 0.195,
-            "n_questions": 100,
-            "n_with_gold": 0,
-            "prompt_tokens": 477791,
-            "actual_cost_usd": 0.07341765,
-            "elapsed_seconds": 654.5139100551605
-          },
-          {
-            "seed": 7,
-            "mean_recall": 0.0,
-            "mean_judge": 0.225,
-            "n_questions": 100,
-            "n_with_gold": 0,
-            "prompt_tokens": 335975,
-            "actual_cost_usd": 0.05215785,
-            "elapsed_seconds": 635.6045064926147
-          },
-          {
-            "seed": 100,
-            "mean_recall": 0.0,
-            "mean_judge": 0.215,
-            "n_questions": 100,
-            "n_with_gold": 0,
-            "prompt_tokens": 352767,
-            "actual_cost_usd": 0.054679050000000014,
-            "elapsed_seconds": 678.6327567100525
-          }
-        ]
-      },
-      "v4-tuned": {
-        "status": "missing"
-      },
-      "flat-50": {
-        "status": "ok",
-        "n_seeds": 3,
-        "n_questions_per_seed": 100,
-        "n_questions_pooled": 300,
-        "mean_judge_across_seeds": 0.15833333333333333,
-        "std_judge_across_seeds": 0.025166114784235825,
-        "judge_95ci_pooled": [
-          0.125,
-          0.195
-        ],
-        "mean_recall_across_seeds": 0.0,
-        "std_recall_across_seeds": 0.0,
-        "recall_95ci_pooled": [
-          null,
-          null
-        ],
-        "total_cost_usd": 0.18014565000000002,
-        "total_prompt_tokens": 1165135,
-        "per_seed": [
-          {
-            "seed": 42,
-            "mean_recall": 0.0,
-            "mean_judge": 0.185,
-            "n_questions": 100,
-            "n_with_gold": 0,
-            "prompt_tokens": 473389,
-            "actual_cost_usd": 0.07279035000000002,
-            "elapsed_seconds": 291.82310700416565
-          },
-          {
-            "seed": 7,
-            "mean_recall": 0.0,
-            "mean_judge": 0.155,
-            "n_questions": 100,
-            "n_with_gold": 0,
-            "prompt_tokens": 338218,
-            "actual_cost_usd": 0.0524949,
-            "elapsed_seconds": 325.6591114997864
-          },
-          {
-            "seed": 100,
-            "mean_recall": 0.0,
-            "mean_judge": 0.135,
-            "n_questions": 100,
-            "n_with_gold": 0,
-            "prompt_tokens": 353528,
-            "actual_cost_usd": 0.054860400000000004,
-            "elapsed_seconds": 288.03713274002075
+            "prompt_tokens": 151521,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 100.7639799118042
           }
         ]
       }
@@ -917,6 +440,833 @@
             "elapsed_seconds": 187.50044870376587
           }
         ]
+      },
+      "bm25": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.12959579116253409,
+        "std_judge_across_seeds": 0.10897889628058836,
+        "judge_95ci_pooled": [
+          0.09950691367105363,
+          0.1614482181236567
+        ],
+        "mean_recall_across_seeds": 0.7008011585985887,
+        "std_recall_across_seeds": 0.023532968035479458,
+        "recall_95ci_pooled": [
+          0.6461538461538462,
+          0.7538461538461538
+        ],
+        "total_cost_usd": 0.01926449999999999,
+        "total_prompt_tokens": 334454,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 0.7108433734939759,
+            "mean_judge": 0.255,
+            "n_questions": 100,
+            "n_with_gold": 83,
+            "prompt_tokens": 113674,
+            "actual_cost_usd": 0.01926449999999999,
+            "elapsed_seconds": 163.28198790550232
+          },
+          {
+            "seed": 7,
+            "mean_recall": 0.7176470588235294,
+            "mean_judge": 0.07593460146091724,
+            "n_questions": 100,
+            "n_with_gold": 85,
+            "prompt_tokens": 110407,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 0.32083749771118164
+          },
+          {
+            "seed": 100,
+            "mean_recall": 0.6739130434782609,
+            "mean_judge": 0.05785277202668507,
+            "n_questions": 100,
+            "n_with_gold": 92,
+            "prompt_tokens": 110373,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 0.3076622486114502
+          }
+        ]
+      },
+      "attention-tuned": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.15008155145699004,
+        "std_judge_across_seeds": 0.07387977859892392,
+        "judge_95ci_pooled": [
+          0.11808509885825678,
+          0.18385440583295845
+        ],
+        "mean_recall_across_seeds": 0.6965016074528293,
+        "std_recall_across_seeds": 0.04920141621832479,
+        "recall_95ci_pooled": [
+          0.6423076923076924,
+          0.7461538461538462
+        ],
+        "total_cost_usd": 0.013693799999999996,
+        "total_prompt_tokens": 225160,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 0.6626506024096386,
+            "mean_judge": 0.235,
+            "n_questions": 100,
+            "n_with_gold": 83,
+            "prompt_tokens": 76328,
+            "actual_cost_usd": 0.013693799999999996,
+            "elapsed_seconds": 208.71776485443115
+          },
+          {
+            "seed": 7,
+            "mean_recall": 0.7529411764705882,
+            "mean_judge": 0.1146838078101236,
+            "n_questions": 100,
+            "n_with_gold": 85,
+            "prompt_tokens": 75227,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 44.910544633865356
+          },
+          {
+            "seed": 100,
+            "mean_recall": 0.6739130434782609,
+            "mean_judge": 0.10056084656084653,
+            "n_questions": 100,
+            "n_with_gold": 92,
+            "prompt_tokens": 73605,
+            "actual_cost_usd": 0.0,
+            "elapsed_seconds": 44.654935359954834
+          }
+        ]
+      }
+    },
+    "hotpotqa": {
+      "v4-canonical": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.648,
+        "std_judge_across_seeds": 0.04491102314577128,
+        "judge_95ci_pooled": [
+          0.6016666666666667,
+          0.6980083333333333
+        ],
+        "mean_recall_across_seeds": 0.9833333333333334,
+        "std_recall_across_seeds": 0.01527525231651948,
+        "recall_95ci_pooled": [
+          0.9666666666666667,
+          0.9966666666666667
+        ],
+        "total_cost_usd": 0.05378325000000001,
+        "total_prompt_tokens": 331345,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.6890000000000001,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 110740,
+            "actual_cost_usd": 0.017922899999999995,
+            "elapsed_seconds": 171.54509162902832
+          },
+          {
+            "seed": 7,
+            "mean_recall": 0.97,
+            "mean_judge": 0.6,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 106708,
+            "actual_cost_usd": 0.017453700000000006,
+            "elapsed_seconds": 216.8812153339386
+          },
+          {
+            "seed": 100,
+            "mean_recall": 0.98,
+            "mean_judge": 0.655,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 113897,
+            "actual_cost_usd": 0.01840665000000001,
+            "elapsed_seconds": 241.93263220787048
+          }
+        ]
+      },
+      "v4-tuned": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.6363333333333334,
+        "std_judge_across_seeds": 0.034645827069552486,
+        "judge_95ci_pooled": [
+          0.5883333333333334,
+          0.6873416666666665
+        ],
+        "mean_recall_across_seeds": 0.9633333333333333,
+        "std_recall_across_seeds": 0.01527525231651948,
+        "recall_95ci_pooled": [
+          0.9399166666666667,
+          0.98
+        ],
+        "total_cost_usd": 0.05248290000000001,
+        "total_prompt_tokens": 322359,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 0.98,
+            "mean_judge": 0.669,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 107754,
+            "actual_cost_usd": 0.017496300000000006,
+            "elapsed_seconds": 180.62482285499573
+          },
+          {
+            "seed": 7,
+            "mean_recall": 0.95,
+            "mean_judge": 0.6,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 103324,
+            "actual_cost_usd": 0.016933499999999997,
+            "elapsed_seconds": 199.78059434890747
+          },
+          {
+            "seed": 100,
+            "mean_recall": 0.96,
+            "mean_judge": 0.64,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 111281,
+            "actual_cost_usd": 0.018053100000000006,
+            "elapsed_seconds": 236.02056241035461
+          }
+        ]
+      },
+      "flat-50": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.6156666666666667,
+        "std_judge_across_seeds": 0.009291573243177578,
+        "judge_95ci_pooled": [
+          0.5706666666666667,
+          0.66535
+        ],
+        "mean_recall_across_seeds": 0.98,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          0.9632500000000002,
+          0.9933333333333333
+        ],
+        "total_cost_usd": 0.055053450000000004,
+        "total_prompt_tokens": 339420,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 0.98,
+            "mean_judge": 0.622,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 113461,
+            "actual_cost_usd": 0.018324750000000004,
+            "elapsed_seconds": 166.27258157730103
+          },
+          {
+            "seed": 7,
+            "mean_recall": 0.98,
+            "mean_judge": 0.605,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 108844,
+            "actual_cost_usd": 0.017817600000000006,
+            "elapsed_seconds": 173.16354250907898
+          },
+          {
+            "seed": 100,
+            "mean_recall": 0.98,
+            "mean_judge": 0.62,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 117115,
+            "actual_cost_usd": 0.018911099999999997,
+            "elapsed_seconds": 199.16677451133728
+          }
+        ]
+      },
+      "bm25": {
+        "status": "ok",
+        "n_seeds": 1,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 100,
+        "mean_judge_across_seeds": 0.698,
+        "std_judge_across_seeds": 0.0,
+        "judge_95ci_pooled": [
+          0.624,
+          0.773025
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.018851999999999997,
+        "total_prompt_tokens": 117144,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.698,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 117144,
+            "actual_cost_usd": 0.018851999999999997,
+            "elapsed_seconds": 142.55702567100525
+          }
+        ]
+      },
+      "attention-tuned": {
+        "status": "missing"
+      }
+    },
+    "longmemeval": {
+      "v4-canonical": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.4366666666666667,
+        "std_judge_across_seeds": 0.054151023382142394,
+        "judge_95ci_pooled": [
+          0.38865833333333333,
+          0.4846666666666666
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.25244325000000006,
+        "total_prompt_tokens": 1643116,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.385,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 602948,
+            "actual_cost_usd": 0.09231600000000001,
+            "elapsed_seconds": 282.23567485809326
+          },
+          {
+            "seed": 7,
+            "mean_recall": 1.0,
+            "mean_judge": 0.493,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 490493,
+            "actual_cost_usd": 0.07550595000000003,
+            "elapsed_seconds": 336.27378726005554
+          },
+          {
+            "seed": 100,
+            "mean_recall": 1.0,
+            "mean_judge": 0.43200000000000005,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 549675,
+            "actual_cost_usd": 0.08462130000000001,
+            "elapsed_seconds": 359.7089145183563
+          }
+        ]
+      },
+      "v4-tuned": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.4263333333333333,
+        "std_judge_across_seeds": 0.058483615939281086,
+        "judge_95ci_pooled": [
+          0.3789833333333333,
+          0.47369999999999995
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.2519196000000001,
+        "total_prompt_tokens": 1639006,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.375,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 602948,
+            "actual_cost_usd": 0.09235020000000002,
+            "elapsed_seconds": 223.14344954490662
+          },
+          {
+            "seed": 7,
+            "mean_recall": 1.0,
+            "mean_judge": 0.49,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 490493,
+            "actual_cost_usd": 0.07552155000000003,
+            "elapsed_seconds": 350.5693609714508
+          },
+          {
+            "seed": 100,
+            "mean_recall": 1.0,
+            "mean_judge": 0.414,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 545565,
+            "actual_cost_usd": 0.08404785000000004,
+            "elapsed_seconds": 388.14887952804565
+          }
+        ]
+      },
+      "flat-50": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.4503333333333333,
+        "std_judge_across_seeds": 0.0515396287659635,
+        "judge_95ci_pooled": [
+          0.4029916666666667,
+          0.4990083333333333
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.27325905,
+        "total_prompt_tokens": 1780867,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.4,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 640184,
+            "actual_cost_usd": 0.09794280000000002,
+            "elapsed_seconds": 245.0888068675995
+          },
+          {
+            "seed": 7,
+            "mean_recall": 1.0,
+            "mean_judge": 0.503,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 540102,
+            "actual_cost_usd": 0.08299604999999997,
+            "elapsed_seconds": 347.73526644706726
+          },
+          {
+            "seed": 100,
+            "mean_recall": 1.0,
+            "mean_judge": 0.44799999999999995,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 600581,
+            "actual_cost_usd": 0.09232020000000002,
+            "elapsed_seconds": 266.4932613372803
+          }
+        ]
+      },
+      "bm25": {
+        "status": "ok",
+        "n_seeds": 1,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 100,
+        "mean_judge_across_seeds": 0.4,
+        "std_judge_across_seeds": 0.0,
+        "judge_95ci_pooled": [
+          0.315,
+          0.48
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.09794400000000002,
+        "total_prompt_tokens": 640184,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.4,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 640184,
+            "actual_cost_usd": 0.09794400000000002,
+            "elapsed_seconds": 224.14000034332275
+          }
+        ]
+      },
+      "attention-tuned": {
+        "status": "missing"
+      }
+    },
+    "financebench": {
+      "v4-canonical": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.4416666666666667,
+        "std_judge_across_seeds": 0.017097758137642846,
+        "judge_95ci_pooled": [
+          0.39466666666666667,
+          0.4870083333333333
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.02826900000000001,
+        "total_prompt_tokens": 152932,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.42200000000000004,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 49968,
+            "actual_cost_usd": 0.009244950000000005,
+            "elapsed_seconds": 212.18581700325012
+          },
+          {
+            "seed": 7,
+            "mean_recall": 1.0,
+            "mean_judge": 0.45,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 52062,
+            "actual_cost_usd": 0.009546750000000001,
+            "elapsed_seconds": 233.16596126556396
+          },
+          {
+            "seed": 100,
+            "mean_recall": 1.0,
+            "mean_judge": 0.45299999999999996,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 50902,
+            "actual_cost_usd": 0.009477300000000003,
+            "elapsed_seconds": 250.70501804351807
+          }
+        ]
+      },
+      "v4-tuned": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.45,
+        "std_judge_across_seeds": 0.006999999999999994,
+        "judge_95ci_pooled": [
+          0.4003333333333333,
+          0.4960083333333334
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.028213200000000008,
+        "total_prompt_tokens": 152932,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.442,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 49968,
+            "actual_cost_usd": 0.009196350000000004,
+            "elapsed_seconds": 233.80837273597717
+          },
+          {
+            "seed": 7,
+            "mean_recall": 1.0,
+            "mean_judge": 0.45299999999999996,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 52062,
+            "actual_cost_usd": 0.00960615,
+            "elapsed_seconds": 220.90294218063354
+          },
+          {
+            "seed": 100,
+            "mean_recall": 1.0,
+            "mean_judge": 0.455,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 50902,
+            "actual_cost_usd": 0.009410700000000003,
+            "elapsed_seconds": 252.54136276245117
+          }
+        ]
+      },
+      "flat-50": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.4883333333333333,
+        "std_judge_across_seeds": 0.02761038451983845,
+        "judge_95ci_pooled": [
+          0.4426333333333334,
+          0.5343333333333333
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.033983400000000004,
+        "total_prompt_tokens": 189285,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.45799999999999996,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 61120,
+            "actual_cost_usd": 0.011087100000000004,
+            "elapsed_seconds": 188.52352929115295
+          },
+          {
+            "seed": 7,
+            "mean_recall": 1.0,
+            "mean_judge": 0.495,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 63553,
+            "actual_cost_usd": 0.0114009,
+            "elapsed_seconds": 226.92301082611084
+          },
+          {
+            "seed": 100,
+            "mean_recall": 1.0,
+            "mean_judge": 0.512,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 64612,
+            "actual_cost_usd": 0.011495400000000001,
+            "elapsed_seconds": 262.04688262939453
+          }
+        ]
+      },
+      "bm25": {
+        "status": "ok",
+        "n_seeds": 1,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 100,
+        "mean_judge_across_seeds": 0.45399999999999996,
+        "std_judge_across_seeds": 0.0,
+        "judge_95ci_pooled": [
+          0.365,
+          0.5330499999999999
+        ],
+        "mean_recall_across_seeds": 1.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          1.0,
+          1.0
+        ],
+        "total_cost_usd": 0.011091300000000005,
+        "total_prompt_tokens": 61120,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 1.0,
+            "mean_judge": 0.45399999999999996,
+            "n_questions": 100,
+            "n_with_gold": 100,
+            "prompt_tokens": 61120,
+            "actual_cost_usd": 0.011091300000000005,
+            "elapsed_seconds": 157.19224524497986
+          }
+        ]
+      },
+      "attention-tuned": {
+        "status": "missing"
+      }
+    },
+    "narrativeqa": {
+      "v4-canonical": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.21166666666666667,
+        "std_judge_across_seeds": 0.015275252316519465,
+        "judge_95ci_pooled": [
+          0.17166666666666666,
+          0.25333333333333335
+        ],
+        "mean_recall_across_seeds": 0.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          null,
+          null
+        ],
+        "total_cost_usd": 0.18025455,
+        "total_prompt_tokens": 1166533,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 0.0,
+            "mean_judge": 0.195,
+            "n_questions": 100,
+            "n_with_gold": 0,
+            "prompt_tokens": 477791,
+            "actual_cost_usd": 0.07341765,
+            "elapsed_seconds": 654.5139100551605
+          },
+          {
+            "seed": 7,
+            "mean_recall": 0.0,
+            "mean_judge": 0.225,
+            "n_questions": 100,
+            "n_with_gold": 0,
+            "prompt_tokens": 335975,
+            "actual_cost_usd": 0.05215785,
+            "elapsed_seconds": 635.6045064926147
+          },
+          {
+            "seed": 100,
+            "mean_recall": 0.0,
+            "mean_judge": 0.215,
+            "n_questions": 100,
+            "n_with_gold": 0,
+            "prompt_tokens": 352767,
+            "actual_cost_usd": 0.054679050000000014,
+            "elapsed_seconds": 678.6327567100525
+          }
+        ]
+      },
+      "v4-tuned": {
+        "status": "missing"
+      },
+      "flat-50": {
+        "status": "ok",
+        "n_seeds": 3,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 300,
+        "mean_judge_across_seeds": 0.15833333333333333,
+        "std_judge_across_seeds": 0.025166114784235825,
+        "judge_95ci_pooled": [
+          0.125,
+          0.195
+        ],
+        "mean_recall_across_seeds": 0.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          null,
+          null
+        ],
+        "total_cost_usd": 0.18014565000000002,
+        "total_prompt_tokens": 1165135,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 0.0,
+            "mean_judge": 0.185,
+            "n_questions": 100,
+            "n_with_gold": 0,
+            "prompt_tokens": 473389,
+            "actual_cost_usd": 0.07279035000000002,
+            "elapsed_seconds": 291.82310700416565
+          },
+          {
+            "seed": 7,
+            "mean_recall": 0.0,
+            "mean_judge": 0.155,
+            "n_questions": 100,
+            "n_with_gold": 0,
+            "prompt_tokens": 338218,
+            "actual_cost_usd": 0.0524949,
+            "elapsed_seconds": 325.6591114997864
+          },
+          {
+            "seed": 100,
+            "mean_recall": 0.0,
+            "mean_judge": 0.135,
+            "n_questions": 100,
+            "n_with_gold": 0,
+            "prompt_tokens": 353528,
+            "actual_cost_usd": 0.054860400000000004,
+            "elapsed_seconds": 288.03713274002075
+          }
+        ]
+      },
+      "bm25": {
+        "status": "ok",
+        "n_seeds": 1,
+        "n_questions_per_seed": 100,
+        "n_questions_pooled": 100,
+        "mean_judge_across_seeds": 0.575,
+        "std_judge_across_seeds": 0.0,
+        "judge_95ci_pooled": [
+          0.49,
+          0.665
+        ],
+        "mean_recall_across_seeds": 0.0,
+        "std_recall_across_seeds": 0.0,
+        "recall_95ci_pooled": [
+          null,
+          null
+        ],
+        "total_cost_usd": 0.0788859,
+        "total_prompt_tokens": 514987,
+        "per_seed": [
+          {
+            "seed": 42,
+            "mean_recall": 0.0,
+            "mean_judge": 0.575,
+            "n_questions": 100,
+            "n_with_gold": 0,
+            "prompt_tokens": 514987,
+            "actual_cost_usd": 0.0788859,
+            "elapsed_seconds": 261.82159781455994
+          }
+        ]
+      },
+      "attention-tuned": {
+        "status": "missing"
       }
     }
   },
@@ -928,51 +1278,40 @@
       "n": 300,
       "mean_diff": 0.06733333333333333,
       "std_diff": 0.34203730881923283,
+      "wilcoxon": {
+        "W": 2272.5,
+        "W_plus": 4513.5,
+        "W_minus": 2272.5,
+        "p_two_sided": 0.0006402367207938298,
+        "p_one_sided": 0.0003201183603969149,
+        "n_nonzero": 116,
+        "n_total": 300,
+        "median_diff": 0.0,
+        "significant": true
+      },
+      "cohens_d": {
+        "d": 0.1912297213353664,
+        "magnitude": "negligible",
+        "mean_a": 0.249,
+        "mean_b": 0.31633333333333336,
+        "pooled_std": 0.35210705147265514
+      },
+      "lift_cluster_ci": {
+        "point_estimate": 0.06733333333333333,
+        "ci_lower": 0.028333333333333332,
+        "ci_upper": 0.105,
+        "ci_width": 0.07666666666666666,
+        "n_clusters": 300,
+        "n_observations": 300,
+        "alpha": 0.05
+      },
       "canonical_mean": 0.24899999999999997,
       "tuned_mean": 0.31633333333333336,
-      "lift": 0.06733333333333333
-    },
-    "financebench": {
-      "n_pairs": 300,
-      "t": 1.1264478414170065,
-      "p_two_sided": 0.2599760063139027,
-      "n": 300,
-      "mean_diff": 0.008333333333333333,
-      "std_diff": 0.1281351537021351,
-      "canonical_mean": 0.44166666666666665,
-      "tuned_mean": 0.45,
-      "lift": 0.008333333333333333
-    },
-    "hotpotqa": {
-      "n_pairs": 300,
-      "t": -0.7678240295094582,
-      "p_two_sided": 0.4425917364734713,
-      "n": 300,
-      "mean_diff": -0.011666666666666667,
-      "std_diff": 0.26317565802866016,
-      "canonical_mean": 0.648,
-      "tuned_mean": 0.6363333333333333,
-      "lift": -0.011666666666666667
-    },
-    "longmemeval": {
-      "n_pairs": 300,
-      "t": -1.197607582913162,
-      "p_two_sided": 0.23106982265018816,
-      "n": 300,
-      "mean_diff": -0.010333333333333333,
-      "std_diff": 0.14944676870984847,
-      "canonical_mean": 0.43666666666666665,
-      "tuned_mean": 0.42633333333333334,
-      "lift": -0.010333333333333333
-    },
-    "narrativeqa": {
-      "n_pairs": 0,
-      "t": null,
-      "p_two_sided": null,
-      "n": 0,
-      "canonical_mean": null,
-      "tuned_mean": null,
-      "lift": null
+      "lift": 0.06733333333333333,
+      "p_holm_t": 0.0032516165168039457,
+      "significant_holm_t": true,
+      "p_holm_wilcoxon": 0.003201183603969149,
+      "significant_holm_wilcoxon": true
     },
     "qasper": {
       "n_pairs": 300,
@@ -981,13 +1320,186 @@
       "n": 300,
       "mean_diff": 0.023166666666666665,
       "std_diff": 0.28503060720860823,
+      "wilcoxon": {
+        "W": 1446.0,
+        "W_plus": 1957.0,
+        "W_minus": 1446.0,
+        "p_two_sided": 0.1908390935834534,
+        "p_one_sided": 0.0954195467917267,
+        "n_nonzero": 82,
+        "n_total": 300,
+        "median_diff": 0.0,
+        "significant": false
+      },
+      "cohens_d": {
+        "d": 0.07889560470197157,
+        "magnitude": "negligible",
+        "mean_a": 0.18016666666666667,
+        "mean_b": 0.20333333333333334,
+        "pooled_std": 0.2936369745080076
+      },
+      "lift_cluster_ci": {
+        "point_estimate": 0.023166666666666665,
+        "ci_lower": -0.009333333333333334,
+        "ci_upper": 0.056,
+        "ci_width": 0.06533333333333334,
+        "n_clusters": 300,
+        "n_observations": 300,
+        "alpha": 0.05
+      },
       "canonical_mean": 0.18016666666666667,
       "tuned_mean": 0.20333333333333334,
-      "lift": 0.023166666666666665
+      "lift": 0.023166666666666665,
+      "p_holm_t": 0.6367930078156787,
+      "significant_holm_t": false,
+      "p_holm_wilcoxon": 0.7633563743338136,
+      "significant_holm_wilcoxon": false
+    },
+    "hotpotqa": {
+      "n_pairs": 300,
+      "t": -0.7678240295094582,
+      "p_two_sided": 0.4425917364734713,
+      "n": 300,
+      "mean_diff": -0.011666666666666667,
+      "std_diff": 0.26317565802866016,
+      "wilcoxon": {
+        "W": 318.0,
+        "W_plus": 318.0,
+        "W_minus": 423.0,
+        "p_two_sided": 0.4347340785497562,
+        "p_one_sided": 0.2173670392748781,
+        "n_nonzero": 38,
+        "n_total": 300,
+        "median_diff": 0.0,
+        "significant": false
+      },
+      "cohens_d": {
+        "d": -0.02785239301516456,
+        "magnitude": "negligible",
+        "mean_a": 0.648,
+        "mean_b": 0.6363333333333333,
+        "pooled_std": 0.41887483995772506
+      },
+      "lift_cluster_ci": {
+        "point_estimate": -0.011666666666666667,
+        "ci_lower": -0.04,
+        "ci_upper": 0.016666666666666666,
+        "ci_width": 0.05666666666666667,
+        "n_clusters": 300,
+        "n_observations": 300,
+        "alpha": 0.05
+      },
+      "canonical_mean": 0.648,
+      "tuned_mean": 0.6363333333333333,
+      "lift": -0.011666666666666667,
+      "p_holm_t": 0.6932094679505645,
+      "significant_holm_t": false,
+      "p_holm_wilcoxon": 0.7691297698136887,
+      "significant_holm_wilcoxon": false
+    },
+    "longmemeval": {
+      "n_pairs": 300,
+      "t": -1.197607582913162,
+      "p_two_sided": 0.23106982265018816,
+      "n": 300,
+      "mean_diff": -0.010333333333333333,
+      "std_diff": 0.14944676870984847,
+      "wilcoxon": {
+        "W": 83.5,
+        "W_plus": 83.5,
+        "W_minus": 147.5,
+        "p_two_sided": 0.25637658993789625,
+        "p_one_sided": 0.12818829496894812,
+        "n_nonzero": 21,
+        "n_total": 300,
+        "median_diff": 0.0,
+        "significant": false
+      },
+      "cohens_d": {
+        "d": -0.024509090229389748,
+        "magnitude": "negligible",
+        "mean_a": 0.43666666666666665,
+        "mean_b": 0.42633333333333334,
+        "pooled_std": 0.4216122767764846
+      },
+      "lift_cluster_ci": {
+        "point_estimate": -0.010333333333333333,
+        "ci_lower": -0.02766666666666667,
+        "ci_upper": 0.007333333333333333,
+        "ci_width": 0.035,
+        "n_clusters": 300,
+        "n_observations": 300,
+        "alpha": 0.05
+      },
+      "canonical_mean": 0.43666666666666665,
+      "tuned_mean": 0.42633333333333334,
+      "lift": -0.010333333333333333,
+      "p_holm_t": 0.6932094679505645,
+      "significant_holm_t": false,
+      "p_holm_wilcoxon": 0.7691297698136887,
+      "significant_holm_wilcoxon": false
+    },
+    "financebench": {
+      "n_pairs": 300,
+      "t": 1.1264478414170065,
+      "p_two_sided": 0.2599760063139027,
+      "n": 300,
+      "mean_diff": 0.008333333333333333,
+      "std_diff": 0.1281351537021351,
+      "wilcoxon": {
+        "W": 41.5,
+        "W_plus": 78.5,
+        "W_minus": 41.5,
+        "p_two_sided": 0.28398530219089513,
+        "p_one_sided": 0.14199265109544756,
+        "n_nonzero": 15,
+        "n_total": 300,
+        "median_diff": 0.0,
+        "significant": false
+      },
+      "cohens_d": {
+        "d": 0.020261272820964137,
+        "magnitude": "negligible",
+        "mean_a": 0.44166666666666665,
+        "mean_b": 0.45,
+        "pooled_std": 0.4112936737474332
+      },
+      "lift_cluster_ci": {
+        "point_estimate": 0.008333333333333333,
+        "ci_lower": -0.004666666666666667,
+        "ci_upper": 0.024333333333333332,
+        "ci_width": 0.028999999999999998,
+        "n_clusters": 300,
+        "n_observations": 300,
+        "alpha": 0.05
+      },
+      "canonical_mean": 0.44166666666666665,
+      "tuned_mean": 0.45,
+      "lift": 0.008333333333333333,
+      "p_holm_t": 0.6932094679505645,
+      "significant_holm_t": false,
+      "p_holm_wilcoxon": 0.7691297698136887,
+      "significant_holm_wilcoxon": false
+    },
+    "narrativeqa": {
+      "n_pairs": 0,
+      "t": null,
+      "p_two_sided": null,
+      "n": 0,
+      "wilcoxon": null,
+      "cohens_d": null,
+      "lift_cluster_ci": null,
+      "canonical_mean": null,
+      "tuned_mean": null,
+      "lift": null
     }
   },
   "rankings_by_judge": {
     "cuad": [
+      [
+        "attention-tuned",
+        0.3688888888888888
+      ],
       [
         "v4-tuned",
         0.3163333333333333
@@ -997,25 +1509,41 @@
         0.249
       ],
       [
+        "bm25",
+        0.2247037037037037
+      ],
+      [
         "flat-50",
         0.20199999999999999
       ]
     ],
-    "financebench": [
-      [
-        "flat-50",
-        0.4883333333333333
-      ],
+    "qasper": [
       [
         "v4-tuned",
-        0.45
+        0.20333333333333334
       ],
       [
         "v4-canonical",
-        0.4416666666666667
+        0.18016666666666667
+      ],
+      [
+        "flat-50",
+        0.16166666666666665
+      ],
+      [
+        "attention-tuned",
+        0.15008155145699004
+      ],
+      [
+        "bm25",
+        0.12959579116253409
       ]
     ],
     "hotpotqa": [
+      [
+        "bm25",
+        0.698
+      ],
       [
         "v4-canonical",
         0.648
@@ -1041,9 +1569,35 @@
       [
         "v4-tuned",
         0.4263333333333333
+      ],
+      [
+        "bm25",
+        0.4
+      ]
+    ],
+    "financebench": [
+      [
+        "flat-50",
+        0.4883333333333333
+      ],
+      [
+        "bm25",
+        0.45399999999999996
+      ],
+      [
+        "v4-tuned",
+        0.45
+      ],
+      [
+        "v4-canonical",
+        0.4416666666666667
       ]
     ],
     "narrativeqa": [
+      [
+        "bm25",
+        0.575
+      ],
       [
         "v4-canonical",
         0.21166666666666667
@@ -1052,21 +1606,7 @@
         "flat-50",
         0.15833333333333333
       ]
-    ],
-    "qasper": [
-      [
-        "v4-tuned",
-        0.20333333333333334
-      ],
-      [
-        "v4-canonical",
-        0.18016666666666667
-      ],
-      [
-        "flat-50",
-        0.16166666666666665
-      ]
     ]
   },
-  "total_cost_usd": 1.6705008000000001
+  "total_cost_usd": 1.96774365
 }

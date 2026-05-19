@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "c3e204c",
+    "git_sha": "a19b5c1",
     "git_dirty": true,
-    "timestamp_utc": "2026-05-19T12:51:40+00:00",
+    "timestamp_utc": "2026-05-19T21:40:10+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -13,24 +13,24 @@
     "mode": "full",
     "model": "gpt-4o-mini",
     "benchmark": "narrativeqa",
-    "config": "v4-canonical",
+    "config": "bm25",
     "k": 8,
     "n_questions": 100
   },
   "ok": true,
   "benchmark": "narrativeqa",
-  "config": "v4-canonical",
+  "config": "bm25",
   "mode": "full",
   "n_questions": 100,
   "n_with_gold": 0,
   "n_with_judge": 100,
   "mean_recall_at_k": 0.0,
-  "mean_judge_score": 0.195,
-  "total_prompt_tokens": 477791,
+  "mean_judge_score": 0.575,
+  "total_prompt_tokens": 514987,
   "total_completion_tokens_max": 15000,
-  "projected_cost_usd": 0.08066865,
-  "actual_cost_usd": 0.07341765,
-  "elapsed_seconds": 654.5139100551605,
+  "projected_cost_usd": 0.08624805,
+  "actual_cost_usd": 0.0788859,
+  "elapsed_seconds": 261.82159781455994,
   "questions": [
     {
       "doc_idx": 0,
@@ -41,21 +41,21 @@
         "Sandy.",
         "Sandy"
       ],
-      "predicted": "The provided passages do not contain any information regarding Wendy getting naked with anyone in bed.",
-      "judge_score": 0.0,
+      "predicted": "Sandy",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        444,
-        443,
-        442,
-        441,
-        440,
-        434,
-        438,
-        430
+        356,
+        217,
+        402,
+        200,
+        405,
+        421,
+        134,
+        401
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1086,
+      "prompt_tokens_estimated": 750,
       "projected_cost_usd": 0.0
     },
     {
@@ -67,21 +67,21 @@
         "shoe shining",
         "Shoe-shiner."
       ],
-      "predicted": "Ratso learned the trade of a butcher from his father.",
+      "predicted": "The passages do not provide information about the form of work Ratso learned from his father.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        430,
-        429,
-        428,
-        425,
-        426,
-        424,
-        421,
-        420
+        249,
+        419,
+        297,
+        4,
+        283,
+        64,
+        284,
+        313
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1200,
+      "prompt_tokens_estimated": 934,
       "projected_cost_usd": 0.0
     },
     {
@@ -93,21 +93,21 @@
         "He failed to soak the sponge that would've conducted electricity to Del's head.",
         "Soak the sponge."
       ],
-      "predicted": "Percy failed to wet the sponge before the execution, which resulted in Del's painful death.",
-      "judge_score": 0.5,
+      "predicted": "Percy failed to prevent the sabotage of Del's execution.",
+      "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        821,
-        820,
-        819,
-        818,
-        817,
-        815,
-        814,
-        812
+        447,
+        317,
+        323,
+        45,
+        148,
+        663,
+        424,
+        478
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1158,
+      "prompt_tokens_estimated": 695,
       "projected_cost_usd": 0.0
     },
     {
@@ -119,21 +119,21 @@
         "To protect her because he knew she was pregnant.",
         "To protect her"
       ],
-      "predicted": "Mr. Royall married Charity because he wanted her to go back looking stylisher than any of them, indicating his desire to have her as his wife and to elevate her status.",
-      "judge_score": 0.0,
+      "predicted": "Mr. Royall married Charity to protect her, as he knew she was pregnant.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        463,
-        462,
-        461,
-        460,
-        458,
-        457,
-        455,
-        456
+        346,
+        0,
+        50,
+        321,
+        112,
+        147,
+        320,
+        344
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1006,
+      "prompt_tokens_estimated": 2621,
       "projected_cost_usd": 0.0
     },
     {
@@ -145,21 +145,21 @@
         "Mr. Woodcourt",
         "Mr. Woodcourt"
       ],
-      "predicted": "Esther became engaged to Mr. Jarndyce.",
-      "judge_score": 0.0,
+      "predicted": "Esther became engaged to Mr. Woodcourt.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        2000,
-        1999,
-        1998,
-        1997,
-        1996,
-        1993,
-        1995,
-        1994
+        0,
+        233,
+        1181,
+        731,
+        970,
+        1961,
+        1193,
+        767
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 939,
+      "prompt_tokens_estimated": 2574,
       "projected_cost_usd": 0.0
     },
     {
@@ -171,21 +171,21 @@
         "She didn't want to raise Mary alone.",
         "She can't raise Mary alone"
       ],
-      "predicted": "Sylvia didn't go to London because she couldn't cope anymore, was overwhelmed with work and taking care of the baby, and was not getting enough sleep.",
-      "judge_score": 0.0,
+      "predicted": "Sylvia didn't want to give up her acting career and felt she couldn't raise Mary alone.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        210,
-        209,
-        206,
+        0,
+        131,
+        159,
+        51,
         205,
-        204,
-        198,
-        201,
-        200
+        36,
+        176,
+        55
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 2247,
+      "prompt_tokens_estimated": 4084,
       "projected_cost_usd": 0.0
     },
     {
@@ -197,21 +197,21 @@
         "Pet hamster",
         "a hamster"
       ],
-      "predicted": "Mary Horowitz believes that Howard is her only friend.",
-      "judge_score": 0.0,
+      "predicted": "Mary Horowitz believes her pet hamster is her only true friend.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        492,
-        491,
-        490,
-        489,
-        488,
-        486,
-        487,
-        485
+        63,
+        26,
+        280,
+        115,
+        0,
+        474,
+        242,
+        123
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1206,
+      "prompt_tokens_estimated": 1321,
       "projected_cost_usd": 0.0
     },
     {
@@ -223,21 +223,21 @@
         "His grandfather",
         "his grandfather"
       ],
-      "predicted": "Brewster inherits the money from Jim Sedgwick.",
-      "judge_score": 0.0,
+      "predicted": "Brewster inherits the money from his rich grandfather.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        622,
-        621,
-        620,
-        619,
-        618,
-        617,
-        614,
-        616
+        511,
+        71,
+        187,
+        375,
+        0,
+        28,
+        613,
+        621
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1382,
+      "prompt_tokens_estimated": 1396,
       "projected_cost_usd": 0.0
     },
     {
@@ -249,21 +249,21 @@
         "Poems",
         "Poems and songs that express her feelings"
       ],
-      "predicted": "Rebecca composes a word and a message sent to her just at the first moment when Riverboro chimneys rise into view.",
-      "judge_score": 0.0,
+      "predicted": "Rebecca composes little poems and songs to express her feelings or to amuse her younger brothers and sisters.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        617,
-        616,
-        615,
-        612,
-        610,
-        609,
-        607,
-        598
+        0,
+        44,
+        483,
+        156,
+        535,
+        452,
+        28,
+        218
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1087,
+      "prompt_tokens_estimated": 1910,
       "projected_cost_usd": 0.0
     },
     {
@@ -275,21 +275,21 @@
         "Starman uses Silver Sphere to heal Jenny",
         "a silver sphere"
       ],
-      "predicted": "The provided passages do not contain any information about how Jenny's wounds healed after the car crash.",
-      "judge_score": 0.0,
+      "predicted": "Jenny has been completely healed and there are no scars.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        720,
-        719,
-        718,
-        717,
-        716,
-        715,
-        712,
-        711
+        493,
+        602,
+        128,
+        262,
+        461,
+        336,
+        624,
+        614
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1215,
+      "prompt_tokens_estimated": 824,
       "projected_cost_usd": 0.0
     },
     {
@@ -301,21 +301,21 @@
         "Tabor Island",
         "A desert island."
       ],
-      "predicted": "Aryton is left on the island of Auckland when they find Captain Grant.",
-      "judge_score": 0.0,
+      "predicted": "Ayrton is left on Tabor Island.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1823,
-        1822,
-        1821,
-        1819,
-        1820,
-        1818,
-        1815,
-        1810
+        1194,
+        56,
+        315,
+        0,
+        1665,
+        506,
+        391,
+        1060
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 2612,
+      "prompt_tokens_estimated": 1634,
       "projected_cost_usd": 0.0
     },
     {
@@ -327,21 +327,21 @@
         "On the trip to Nettleton.",
         "On a trip to Nettleton"
       ],
-      "predicted": "The provided passages do not contain information about when Harney and Charity kissed for the first time.",
-      "judge_score": 0.0,
+      "predicted": "On a trip to Nettleton.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        463,
-        462,
-        461,
-        460,
-        458,
-        457,
-        455,
-        456
+        282,
+        308,
+        96,
+        291,
+        331,
+        121,
+        56,
+        0
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1009,
+      "prompt_tokens_estimated": 2763,
       "projected_cost_usd": 0.0
     },
     {
@@ -353,21 +353,21 @@
         "Lizzie feeds Laura the pulp and fruit from her body.",
         "She is in a trance"
       ],
-      "predicted": "When Lizzie returns home to Laura from the goblin market, she finds Laura in a weakened state, suffering from the effects of the goblin fruit. Lizzie tries to help Laura by offering her the juice from the goblin fruit, which Laura initially refuses but eventually consumes, leading to her recovery.",
+      "predicted": "Lizzie returns home drenched in fruit juice and pulp after being assaulted by the goblins, hoping that Laura will eat and drink the pulp and juice from her body. However, when Laura tastes it, she is repulsed rather than satisfied. Despite this, Laura undergoes a violent transformation and ultimately is restored emotionally, physically, and mentally by morning.",
       "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        574,
-        573,
-        572,
-        571,
-        569,
-        570,
-        568,
-        562
+        0,
+        20,
+        8,
+        14,
+        3,
+        13,
+        7,
+        574
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 815,
+      "prompt_tokens_estimated": 2605,
       "projected_cost_usd": 0.0
     },
     {
@@ -379,21 +379,21 @@
         "Mary was in love with Ann.",
         "Because she had control of the money to do so and her family was going to lose their home."
       ],
-      "predicted": "The provided passages do not contain information regarding why Mary paid off the debt for Ann's family.",
-      "judge_score": 0.0,
+      "predicted": "Mary paid off the debt for Ann's family after her marriage to Charles gave her limited control over her money.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        168,
-        166,
-        165,
-        164,
-        162,
-        163,
-        161,
-        159
+        0,
+        82,
+        41,
+        40,
+        58,
+        43,
+        55,
+        32
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1135,
+      "prompt_tokens_estimated": 1736,
       "projected_cost_usd": 0.0
     },
     {
@@ -405,21 +405,21 @@
         "So the Jews could immigrate without persecution.",
         "To stop the influx of Jews into Palestine"
       ],
-      "predicted": "Herzl wanted legal sanction from the Ottoman authorities to secure a pro-Jewish proclamation and facilitate Jewish colonization in Palestine.",
+      "predicted": "Herzl wanted legal sanction from the Ottoman authorities to ensure that immigration of Jews to Palestine could continue without being halted by the native population feeling threatened, as he believed that immigration was futile without the sovereign right to continue it.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        324,
-        323,
-        322,
-        320,
-        321,
-        319,
-        317,
-        316
+        0,
+        121,
+        93,
+        73,
+        82,
+        62,
+        281,
+        243
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 581,
+      "prompt_tokens_estimated": 1576,
       "projected_cost_usd": 0.0
     },
     {
@@ -431,21 +431,21 @@
         "He creates fake letters to and from Kate.",
         "FABRICATES AN UNCLE THAT SHE IS VISITING"
       ],
-      "predicted": "Pete removes her in custody and ensures she is well cared for.",
+      "predicted": "Pete tries to ward off despair and disbelief regarding Kate's disappearance by focusing on the child and expressing his love for both the child and Kate, believing she wouldn't leave them.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        2000,
-        1999,
-        1998,
-        1997,
-        1994,
-        1995,
-        1993,
-        1991
+        1395,
+        908,
+        1347,
+        1396,
+        487,
+        1776,
+        1464,
+        6
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 878,
+      "prompt_tokens_estimated": 798,
       "projected_cost_usd": 0.0
     },
     {
@@ -461,17 +461,17 @@
       "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        15,
+        0,
+        12,
         14,
         13,
-        12,
-        11,
-        10,
-        0,
-        9
+        1,
+        2,
+        3,
+        4
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 40206,
+      "prompt_tokens_estimated": 40603,
       "projected_cost_usd": 0.0
     },
     {
@@ -487,17 +487,17 @@
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        15,
-        14,
-        13,
         12,
-        11,
-        10,
-        9,
-        0
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 40210,
+      "prompt_tokens_estimated": 40986,
       "projected_cost_usd": 0.0
     },
     {
@@ -509,21 +509,21 @@
         "Charles",
         "Charles"
       ],
-      "predicted": "Mary marries Henry.",
-      "judge_score": 0.0,
+      "predicted": "Mary marries Charles.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        168,
-        166,
-        165,
-        164,
-        162,
-        163,
-        161,
-        158
+        0,
+        37,
+        62,
+        76,
+        105,
+        160,
+        85,
+        68
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1209,
+      "prompt_tokens_estimated": 1813,
       "projected_cost_usd": 0.0
     },
     {
@@ -535,21 +535,21 @@
         "Gulliver",
         "gulliver"
       ],
-      "predicted": "The horse that dies is Pilgrim.",
+      "predicted": "Judith's horse.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        744,
-        743,
-        742,
-        741,
-        740,
-        739,
-        738,
-        737
+        572,
+        51,
+        85,
+        372,
+        169,
+        489,
+        191,
+        143
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1169,
+      "prompt_tokens_estimated": 677,
       "projected_cost_usd": 0.0
     },
     {
@@ -561,21 +561,21 @@
         "Eliza Millward.",
         "Helen Graham"
       ],
-      "predicted": "Helen.",
-      "judge_score": 0.5,
+      "predicted": "Eliza Millward.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1483,
+        53,
+        847,
         1482,
-        1481,
-        1480,
-        1479,
-        1478,
-        1476,
-        1477
+        0,
+        848,
+        1214,
+        166,
+        632
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1601,
+      "prompt_tokens_estimated": 2363,
       "projected_cost_usd": 0.0
     },
     {
@@ -587,21 +587,21 @@
         "Braithwaite Lowe",
         "Braithwaite"
       ],
-      "predicted": "The provided passages do not contain information about a professor leading students on a field trip.",
-      "judge_score": 0.0,
+      "predicted": "Professor Braithwaite Lowe",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        586,
-        585,
-        584,
-        583,
-        582,
-        581,
-        580,
-        579
+        61,
+        426,
+        20,
+        104,
+        354,
+        53,
+        271,
+        0
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1216,
+      "prompt_tokens_estimated": 1831,
       "projected_cost_usd": 0.0
     },
     {
@@ -613,21 +613,21 @@
         "They are shot.",
         "they get shot at"
       ],
-      "predicted": "Wolfe and Plummer are shot while boarding the escape helicopter, resulting in Plummer's death.",
+      "predicted": "Wolfe and Plummer are shot while boarding the escape helicopter, resulting in Plummer being killed in the attack.",
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        13,
         11,
-        10,
-        9,
-        7,
         0,
-        6,
+        12,
+        1,
+        2,
+        3,
+        4,
         5
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 63050,
+      "prompt_tokens_estimated": 63271,
       "projected_cost_usd": 0.0
     },
     {
@@ -639,21 +639,21 @@
         "John had never seen a movie before.",
         "As a last request before execution."
       ],
-      "predicted": "The provided passages do not contain any information regarding John Coffey watching \"Top Hat.\"",
+      "predicted": "The provided passages do not contain information about John Coffey watching \"Top Hat.\"",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        821,
-        820,
-        819,
-        818,
-        817,
-        815,
-        809,
-        814
+        517,
+        47,
+        42,
+        349,
+        746,
+        260,
+        640,
+        747
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1185,
+      "prompt_tokens_estimated": 632,
       "projected_cost_usd": 0.0
     },
     {
@@ -665,21 +665,21 @@
         "Charmian's",
         "Charmians"
       ],
-      "predicted": "The diary of the Chinese girl, Ai-kut, is read.",
-      "judge_score": 0.0,
+      "predicted": "Charmian's diary",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        1031,
-        1030,
-        1029,
-        1028,
-        1027,
-        1026,
-        1023,
-        1021
+        724,
+        434,
+        714,
+        898,
+        261,
+        0,
+        743,
+        858
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 816,
+      "prompt_tokens_estimated": 1072,
       "projected_cost_usd": 0.0
     },
     {
@@ -691,21 +691,21 @@
         "In the Middle East.",
         "Middle East"
       ],
-      "predicted": "Don Revie spent the rest of his career in Saudi Arabia.",
-      "judge_score": 0.5,
+      "predicted": "Don Revie spent the rest of his career at Leeds United.",
+      "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        548,
-        547,
-        546,
-        545,
-        544,
-        542,
-        540,
-        536
+        338,
+        509,
+        505,
+        42,
+        451,
+        157,
+        431,
+        140
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1315,
+      "prompt_tokens_estimated": 636,
       "projected_cost_usd": 0.0
     },
     {
@@ -717,21 +717,21 @@
         "Clarence's father.",
         "Clarence father."
       ],
-      "predicted": "Clifford Worley",
-      "judge_score": 0.0,
+      "predicted": "Clifford is Clarence Worley's estranged father, a former cop and now a security guard.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        656,
-        655,
-        654,
+        0,
         653,
-        652,
-        651,
-        649,
-        650
+        341,
+        557,
+        501,
+        373,
+        132,
+        234
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1462,
+      "prompt_tokens_estimated": 1533,
       "projected_cost_usd": 0.0
     },
     {
@@ -743,21 +743,21 @@
         "A new red petticoat",
         "a red petticoat for his mother."
       ],
-      "predicted": "Curdie's reward for saving Princess Irene is the opportunity to serve the king and the promise of future assistance from the king.",
-      "judge_score": 0.0,
+      "predicted": "Curdie accepts a new red petticoat for his mother as a reward for saving Princess Irene.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        538,
-        537,
-        536,
+        0,
+        96,
+        356,
         535,
-        534,
-        532,
-        524,
-        527
+        247,
+        348,
+        384,
+        349
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 828,
+      "prompt_tokens_estimated": 1400,
       "projected_cost_usd": 0.0
     },
     {
@@ -769,21 +769,21 @@
         "2006",
         "In 2006."
       ],
-      "predicted": "The provided passages do not contain information about when Phillip was released from prison.",
-      "judge_score": 0.0,
+      "predicted": "Phillip was released from prison in 2006.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        654,
-        653,
-        652,
+        0,
+        232,
+        150,
+        279,
         651,
-        650,
-        649,
-        648,
-        645
+        280,
+        163,
+        38
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1144,
+      "prompt_tokens_estimated": 1336,
       "projected_cost_usd": 0.0
     },
     {
@@ -795,21 +795,21 @@
         "they got angry, tried to force her to eat the fruit, then they covered her in pulp and juice from the fruit",
         "They beat Lizzie and try to force feed her the fruit."
       ],
-      "predicted": "The goblins laugh at Lizzie and try to entice her with their fruit, but when she insists on paying with a silver coin, they become angry and refuse to sell her the fruit.",
-      "judge_score": 0.5,
+      "predicted": "When the goblins realize that Lizzie means to pay with mere silver to buy the goblin-fruits to help another person, they turn upon her and viciously pummel and assault her, trying to feed her their fruits by force.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        574,
-        573,
-        572,
-        571,
-        570,
-        569,
-        568,
-        567
+        0,
+        8,
+        16,
+        14,
+        19,
+        535,
+        9,
+        10
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 793,
+      "prompt_tokens_estimated": 2644,
       "projected_cost_usd": 0.0
     },
     {
@@ -821,21 +821,21 @@
         "fakes letters between him and Kate",
         "he fake written corrospondence"
       ],
-      "predicted": "The provided passages do not contain information about Pete or any actions he takes to make people believe lies about Kate's disappearance.",
+      "predicted": "Pete aims to make Kate stand well with Philip to counter the lies being told about her.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        2000,
-        1999,
-        1998,
-        1997,
-        1994,
-        1995,
-        1993,
-        1991
+        464,
+        1476,
+        1395,
+        928,
+        1046,
+        1040,
+        1099,
+        1401
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 885,
+      "prompt_tokens_estimated": 1286,
       "projected_cost_usd": 0.0
     },
     {
@@ -847,21 +847,21 @@
         "A truck",
         "A truck"
       ],
-      "predicted": "The relevant passages do not provide information about the girls running into anything when their horses slip and fall.",
-      "judge_score": 0.0,
+      "predicted": "They run into a truck.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        744,
-        743,
-        742,
-        741,
-        740,
-        739,
-        738,
-        736
+        38,
+        24,
+        27,
+        604,
+        583,
+        55,
+        0,
+        85
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1181,
+      "prompt_tokens_estimated": 1418,
       "projected_cost_usd": 0.0
     },
     {
@@ -873,21 +873,21 @@
         "The bad bloods gang.",
         "The Hans."
       ],
-      "predicted": "The Hans attacked Wilma Deering and the boy when they were on air patrol.",
-      "judge_score": 0.0,
+      "predicted": "Members of an outlaw gang referred to as \"Bad Bloods\" attacked Wilma Deering and the boy while they were on air patrol.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        259,
-        258,
-        257,
-        256,
-        255,
-        253,
-        254,
-        252
+        0,
+        43,
+        111,
+        40,
+        222,
+        116,
+        115,
+        38
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 891,
+      "prompt_tokens_estimated": 2013,
       "projected_cost_usd": 0.0
     },
     {
@@ -899,21 +899,21 @@
         "France was given as an example.",
         "France"
       ],
-      "predicted": "Germany",
-      "judge_score": 0.0,
+      "predicted": "France",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        324,
-        323,
-        322,
-        321,
-        320,
-        319,
-        317,
-        297
+        117,
+        271,
+        161,
+        196,
+        248,
+        253,
+        275,
+        78
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 645,
+      "prompt_tokens_estimated": 1801,
       "projected_cost_usd": 0.0
     },
     {
@@ -925,21 +925,21 @@
         "Mr Woodcourt",
         "Woodcourt"
       ],
-      "predicted": "The provided passages do not contain information about Esther's marriage at the end of the story.",
+      "predicted": "The provided passages do not contain information about who Esther ends up marrying.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        2000,
-        1999,
-        1998,
-        1997,
-        1996,
-        1993,
-        1995,
-        1992
+        314,
+        1030,
+        1900,
+        1754,
+        941,
+        639,
+        967,
+        1989
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1091,
+      "prompt_tokens_estimated": 1253,
       "projected_cost_usd": 0.0
     },
     {
@@ -951,21 +951,21 @@
         "The Democrats",
         "Democratic Party"
       ],
-      "predicted": "The relevant passages do not provide information about who controls the government at the beginning of Newton's experimentation.",
-      "judge_score": 0.0,
+      "predicted": "The government is controlled by the Democratic Party at the beginning of Newton's experimentation.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        963,
-        962,
-        960,
-        959,
-        958,
-        957,
-        956,
-        954
+        0,
+        777,
+        651,
+        880,
+        947,
+        898,
+        933,
+        948
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 855,
+      "prompt_tokens_estimated": 1501,
       "projected_cost_usd": 0.0
     },
     {
@@ -977,21 +977,21 @@
         "Purify themselves by bathing in a sacred spring",
         "unmask"
       ],
-      "predicted": "Diana tells the courtiers to \"go to your rest.\"",
-      "judge_score": 0.0,
+      "predicted": "Cynthia (Diana) sentences the courtiers to make reparation and to purify themselves by bathing in the spring at Mount Helicon.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        832,
-        831,
-        830,
-        829,
-        828,
-        827,
-        825,
-        826
+        507,
+        44,
+        499,
+        0,
+        340,
+        150,
+        245,
+        167
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 651,
+      "prompt_tokens_estimated": 1298,
       "projected_cost_usd": 0.0
     },
     {
@@ -1003,21 +1003,21 @@
         "Grosvenor Square in London, England.",
         "Grosvenor Square, London"
       ],
-      "predicted": "They live in London.",
+      "predicted": "The provided passages do not specify where Sir Robert and Lady Chiltern live.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        487,
-        486,
-        485,
-        484,
-        483,
-        482,
-        479,
-        480
+        465,
+        195,
+        200,
+        194,
+        368,
+        444,
+        23,
+        65
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 751,
+      "prompt_tokens_estimated": 1148,
       "projected_cost_usd": 0.0
     },
     {
@@ -1029,21 +1029,21 @@
         "Kentucky",
         "Kentucky"
       ],
-      "predicted": "The provided passages do not contain information regarding which state Newton first landed in.",
-      "judge_score": 0.0,
+      "predicted": "Kentucky",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        963,
-        962,
-        960,
-        959,
-        958,
-        957,
-        956,
-        954
+        0,
+        58,
+        864,
+        544,
+        173,
+        858,
+        663,
+        876
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 851,
+      "prompt_tokens_estimated": 1219,
       "projected_cost_usd": 0.0
     },
     {
@@ -1055,21 +1055,21 @@
         "Become emperor of Africa and Egypt.",
         "emperor of Egypt and Africa"
       ],
-      "predicted": "Orestes's main goal is not explicitly mentioned in the provided passages.",
+      "predicted": "Orestes's main goal is to rebel and attack Rome.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1539,
-        1538,
-        1537,
-        1536,
-        1535,
-        1534,
-        1533,
-        1532
+        925,
+        226,
+        1453,
+        91,
+        1123,
+        1466,
+        987,
+        1219
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 2084,
+      "prompt_tokens_estimated": 1032,
       "projected_cost_usd": 0.0
     },
     {
@@ -1081,21 +1081,21 @@
         "His wife.",
         "is his wife"
       ],
-      "predicted": "The provided passages do not contain information about who Debbie is to Steven.",
-      "judge_score": 0.0,
+      "predicted": "Debbie is Steven's wife.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        654,
-        653,
-        652,
-        651,
-        650,
-        649,
-        647,
-        648
+        37,
+        303,
+        28,
+        65,
+        130,
+        382,
+        644,
+        36
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1145,
+      "prompt_tokens_estimated": 653,
       "projected_cost_usd": 0.0
     },
     {
@@ -1107,21 +1107,21 @@
         "She jumps into the harbour.",
         "BY THROWING HERSELF IN THE HARBOUR"
       ],
-      "predicted": "The passages do not provide specific details on how Kate tries to kill herself.",
+      "predicted": "The provided passages do not contain any information about Kate trying to kill herself.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        2000,
-        1999,
-        1998,
-        1997,
-        1994,
-        1995,
-        1993,
-        1992
+        614,
+        742,
+        441,
+        1548,
+        880,
+        783,
+        737,
+        189
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 795,
+      "prompt_tokens_estimated": 766,
       "projected_cost_usd": 0.0
     },
     {
@@ -1133,21 +1133,21 @@
         "Italy.",
         "In Italy."
       ],
-      "predicted": "Pierce Armitage was found looking upon his dead child's face and laying flowers on her in her little coffin.",
-      "judge_score": 0.0,
+      "predicted": "Pierce Armitage was found in Italy, where he had removed himself and was known as Pietro Corri.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1221,
-        1220,
-        1219,
-        1218,
-        1216,
-        1215,
-        1214,
-        1212
+        907,
+        657,
+        783,
+        1085,
+        660,
+        1079,
+        946,
+        951
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1310,
+      "prompt_tokens_estimated": 1095,
       "projected_cost_usd": 0.0
     },
     {
@@ -1159,21 +1159,21 @@
         "Caddy Jellyby",
         "Caddy Jellyby."
       ],
-      "predicted": "Caddy.",
-      "judge_score": 0.5,
+      "predicted": "Prince Turveydrop is engaged to Miss Jellyby.",
+      "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        2000,
-        1999,
-        1998,
-        1996,
-        1997,
-        1995,
-        1992,
-        1993
+        1196,
+        659,
+        1549,
+        661,
+        666,
+        683,
+        1193,
+        669
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1087,
+      "prompt_tokens_estimated": 1492,
       "projected_cost_usd": 0.0
     },
     {
@@ -1189,17 +1189,17 @@
       "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        377,
-        376,
-        375,
-        374,
-        373,
-        371,
-        372,
-        369
+        0,
+        76,
+        7,
+        97,
+        36,
+        59,
+        74,
+        73
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 982,
+      "prompt_tokens_estimated": 3902,
       "projected_cost_usd": 0.0
     },
     {
@@ -1211,21 +1211,21 @@
         "Tom Brooker",
         "Tom Booker, the \"horse whisperer\""
       ],
-      "predicted": "Robert",
+      "predicted": "Annie has feelings for Tommy.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        744,
-        743,
-        742,
-        741,
-        740,
-        739,
-        738,
-        737
+        694,
+        374,
+        369,
+        563,
+        414,
+        70,
+        594,
+        21
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1177,
+      "prompt_tokens_estimated": 812,
       "projected_cost_usd": 0.0
     },
     {
@@ -1237,21 +1237,21 @@
         "Lord Goring and Mabel",
         "Lord Goring and Mabel"
       ],
-      "predicted": "Lady Chiltern and Sir Robert Chiltern are wed in the last act.",
+      "predicted": "Sir Robert Chiltern and Lady Chiltern are wed in the last act.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        487,
-        486,
-        485,
-        484,
-        483,
-        482,
-        480,
-        479
+        5,
+        382,
+        157,
+        148,
+        366,
+        6,
+        449,
+        95
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 749,
+      "prompt_tokens_estimated": 1015,
       "projected_cost_usd": 0.0
     },
     {
@@ -1267,17 +1267,17 @@
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1221,
-        1220,
-        1219,
-        1218,
-        1216,
-        1215,
-        1214,
-        1212
+        956,
+        799,
+        570,
+        113,
+        815,
+        217,
+        0,
+        551
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1310,
+      "prompt_tokens_estimated": 1530,
       "projected_cost_usd": 0.0
     },
     {
@@ -1289,21 +1289,21 @@
         "Scott",
         "Scott"
       ],
-      "predicted": "The passages do not provide the name of Jenny's husband.",
-      "judge_score": 0.0,
+      "predicted": "Scott",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        720,
-        719,
-        718,
-        717,
-        716,
-        715,
-        712,
-        711
+        1,
+        194,
+        525,
+        549,
+        247,
+        134,
+        213,
+        9
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1215,
+      "prompt_tokens_estimated": 983,
       "projected_cost_usd": 0.0
     },
     {
@@ -1315,21 +1315,21 @@
         "charity",
         "Charity"
       ],
-      "predicted": "Mary devotes much of her time to visiting the sick, supporting the old, and educating the young.",
-      "judge_score": 0.5,
+      "predicted": "Mary devotes much of her time to charity.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        168,
+        0,
         166,
-        165,
-        164,
-        162,
-        163,
-        161,
-        158
+        81,
+        42,
+        96,
+        84,
+        43,
+        122
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1214,
+      "prompt_tokens_estimated": 1947,
       "projected_cost_usd": 0.0
     },
     {
@@ -1341,21 +1341,21 @@
         "1927",
         "1927"
       ],
-      "predicted": "The provided passages do not contain information regarding the year Doyle submitted a list of best stories.",
-      "judge_score": 0.0,
+      "predicted": "1927",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1020,
-        1019,
-        1018,
-        1017,
-        1016,
-        1015,
-        1012,
-        1014
+        0,
+        399,
+        541,
+        1,
+        771,
+        112,
+        614,
+        245
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 973,
+      "prompt_tokens_estimated": 1096,
       "projected_cost_usd": 0.0
     },
     {
@@ -1367,21 +1367,21 @@
         "US Navy",
         "US Navy"
       ],
-      "predicted": "The provided context does not mention which armed forces Roberta's husband worked for.",
+      "predicted": "The provided passages do not contain information about which armed forces Roberta's husband worked for.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        741,
-        740,
-        739,
-        738,
-        736,
-        734,
-        731,
-        733
+        687,
+        479,
+        167,
+        558,
+        104,
+        559,
+        212,
+        440
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1140,
+      "prompt_tokens_estimated": 482,
       "projected_cost_usd": 0.0
     },
     {
@@ -1393,21 +1393,21 @@
         "Annette",
         "Annette"
       ],
-      "predicted": "Sebastian pushes Annette to safety, resulting in him being hit by a car.",
-      "judge_score": 0.0,
+      "predicted": "Annette",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        603,
-        602,
-        601,
-        600,
-        599,
-        597,
-        596,
-        595
+        0,
+        570,
+        575,
+        368,
+        567,
+        94,
+        357,
+        37
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1168,
+      "prompt_tokens_estimated": 1650,
       "projected_cost_usd": 0.0
     },
     {
@@ -1419,21 +1419,21 @@
         "They contract food poisoning.",
         "they get sick"
       ],
-      "predicted": "Many of the passengers fall ill after eating dinner, as they contract food poisoning from the fish.",
-      "judge_score": 1.0,
+      "predicted": "Many of the passengers fall ill due to food poisoning from the fish served for dinner.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        13,
         11,
-        10,
-        9,
         0,
-        7,
+        12,
+        1,
+        3,
+        8,
         6,
-        5
+        2
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 52735,
+      "prompt_tokens_estimated": 52527,
       "projected_cost_usd": 0.0
     },
     {
@@ -1449,17 +1449,17 @@
       "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        13,
+        0,
         11,
-        10,
-        9,
-        7,
-        6,
+        12,
+        8,
         5,
-        0
+        6,
+        7,
+        3
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 63047,
+      "prompt_tokens_estimated": 63381,
       "projected_cost_usd": 0.0
     },
     {
@@ -1471,21 +1471,21 @@
         "A view of the lle de la Cite.",
         "A screen scape of the Ile de la Cite."
       ],
-      "predicted": "The subject of the painting that Claude can't complete is not explicitly mentioned in the provided passages.",
+      "predicted": "Claude is unable to complete a painting featuring a big nude woman amid the quays.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1089,
-        1088,
-        1087,
-        1086,
-        1085,
-        1084,
-        1083,
-        1082
+        390,
+        120,
+        779,
+        317,
+        8,
+        1070,
+        122,
+        155
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 881,
+      "prompt_tokens_estimated": 2862,
       "projected_cost_usd": 0.0
     },
     {
@@ -1497,21 +1497,21 @@
         "The Republican Party",
         "Republican party"
       ],
-      "predicted": "The relevant passages do not provide information regarding which political party takes power after the Newtown scandal stories are released.",
-      "judge_score": 0.0,
+      "predicted": "The Republican Party takes power after stories of the Newton scandal are released.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        963,
-        962,
-        960,
-        959,
-        958,
-        956,
-        957,
-        954
+        0,
+        551,
+        462,
+        913,
+        753,
+        556,
+        605,
+        48
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 858,
+      "prompt_tokens_estimated": 1218,
       "projected_cost_usd": 0.0
     },
     {
@@ -1523,21 +1523,21 @@
         "Auld Lang Syne",
         "Auld Lang Syne"
       ],
-      "predicted": "The crowd outside sings \"The Power of Love.\"",
-      "judge_score": 0.0,
+      "predicted": "\"Auld Lang Syne\"",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        507,
-        506,
-        505,
-        504,
-        503,
-        502,
-        500,
-        501
+        30,
+        150,
+        433,
+        0,
+        373,
+        232,
+        217,
+        471
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1304,
+      "prompt_tokens_estimated": 1801,
       "projected_cost_usd": 0.0
     },
     {
@@ -1549,21 +1549,21 @@
         "Aunt Miranda and Aunt Jane Sawyer's house",
         "Riverboro"
       ],
-      "predicted": "Rebecca is moving to Riverboro.",
-      "judge_score": 0.5,
+      "predicted": "Rebecca is moving to a nice little house wherever her work is.",
+      "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        617,
-        616,
-        615,
-        612,
-        610,
-        609,
-        607,
-        608
+        601,
+        505,
+        106,
+        504,
+        351,
+        348,
+        443,
+        607
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1205,
+      "prompt_tokens_estimated": 1686,
       "projected_cost_usd": 0.0
     },
     {
@@ -1575,21 +1575,21 @@
         "She believes Jimmy molested her.",
         "she believes he molested her as a child"
       ],
-      "predicted": "The provided passages do not contain information regarding why Claudia is estranged from her father.",
-      "judge_score": 0.0,
+      "predicted": "Claudia believes her father, Jimmy Gator, molested her.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1163,
-        1162,
-        1161,
-        1160,
-        1159,
-        1158,
-        1156,
-        1155
+        643,
+        543,
+        28,
+        0,
+        572,
+        247,
+        719,
+        1160
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1333,
+      "prompt_tokens_estimated": 1754,
       "projected_cost_usd": 0.0
     },
     {
@@ -1601,21 +1601,21 @@
         "In Washington, D.C.",
         "Washington,D.C."
       ],
-      "predicted": "The flying saucer lands in a temporary structure that disintegrates, leaving the delegates and the ship out in the open Mall under a starry sky.",
-      "judge_score": 0.0,
+      "predicted": "Washington, D.C.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        576,
-        575,
-        574,
-        573,
-        572,
-        571,
-        569,
-        567
+        18,
+        0,
+        208,
+        432,
+        362,
+        197,
+        330,
+        274
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1256,
+      "prompt_tokens_estimated": 1641,
       "projected_cost_usd": 0.0
     },
     {
@@ -1627,21 +1627,21 @@
         "He has a paper route",
         "paper route"
       ],
-      "predicted": "The provided passages do not contain information about how Chris earns extra money.",
-      "judge_score": 0.0,
+      "predicted": "Chris earns extra money working on a paper route riding a moped.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        658,
-        657,
-        656,
-        655,
-        654,
-        653,
-        652,
-        651
+        356,
+        0,
+        540,
+        278,
+        463,
+        82,
+        224,
+        508
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1106,
+      "prompt_tokens_estimated": 915,
       "projected_cost_usd": 0.0
     },
     {
@@ -1653,21 +1653,21 @@
         "The Oxford Dictionary of National Biography",
         "The Oxford Dictionary of National Biography"
       ],
-      "predicted": "The Dictionary of Social Injustice.",
-      "judge_score": 0.0,
+      "predicted": "The Oxford Dictionary of National Biography.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1020,
-        1019,
-        1018,
-        1017,
-        1016,
-        1015,
-        1014,
-        1012
+        0,
+        789,
+        44,
+        887,
+        46,
+        124,
+        602,
+        398
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 978,
+      "prompt_tokens_estimated": 1442,
       "projected_cost_usd": 0.0
     },
     {
@@ -1679,21 +1679,21 @@
         "Balthus.",
         "Balthus"
       ],
-      "predicted": "The forester warns the women and children to flee.",
+      "predicted": "Balthus warns the women and children to flee.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        194,
-        193,
-        192,
-        190,
-        189,
-        186,
-        185,
-        184
+        0,
+        162,
+        13,
+        76,
+        191,
+        117,
+        43,
+        168
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1210,
+      "prompt_tokens_estimated": 2689,
       "projected_cost_usd": 0.0
     },
     {
@@ -1705,21 +1705,21 @@
         "Henry March.",
         "Henry March"
       ],
-      "predicted": "The relevant passages do not provide information about who came to the rescue with English reinforcements.",
-      "judge_score": 0.0,
+      "predicted": "March",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        1340,
-        1339,
-        1337,
-        1336,
-        1335,
-        1334,
-        1333,
-        1332
+        0,
+        252,
+        1225,
+        724,
+        182,
+        1323,
+        465,
+        403
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1831,
+      "prompt_tokens_estimated": 2631,
       "projected_cost_usd": 0.0
     },
     {
@@ -1731,21 +1731,21 @@
         "Australian Cattle Dog and rare functioning firearm- Sawn off shotgun",
         "A dog and a sawed-off shotgun."
       ],
-      "predicted": "The only companions of the Ex-Main Force Patrol officer are the Feral Kid and the Gyro Captain.",
-      "judge_score": 0.0,
+      "predicted": "His only companions are an Australian Cattle Dog and a rare functioning firearm \u2014 a sawn-off shotgun.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        246,
-        245,
-        244,
-        243,
-        242,
-        241,
-        240,
-        239
+        0,
+        42,
+        8,
+        185,
+        35,
+        183,
+        11,
+        118
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1698,
+      "prompt_tokens_estimated": 2432,
       "projected_cost_usd": 0.0
     },
     {
@@ -1757,21 +1757,21 @@
         "Hock bone from a mule",
         "mule hock bone"
       ],
-      "predicted": "The provided passages do not contain any information about Jim knocking out Dave or any related context.",
+      "predicted": "The provided passages do not contain information about Jim using anything to knock out Dave.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        248,
-        246,
-        245,
-        244,
-        243,
-        242,
-        241,
-        239
+        136,
+        188,
+        133,
+        175,
+        159,
+        105,
+        198,
+        51
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 737,
+      "prompt_tokens_estimated": 740,
       "projected_cost_usd": 0.0
     },
     {
@@ -1783,21 +1783,21 @@
         "To bed with her",
         "To her bedroom."
       ],
-      "predicted": "The relevant passages do not provide information about where Mrs. Inglethorpe took her document case.",
-      "judge_score": 0.0,
+      "predicted": "Mrs. Inglethorpe took her despatch-case to bed.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        912,
-        911,
-        910,
-        909,
-        908,
-        907,
-        906,
-        904
+        764,
+        414,
+        100,
+        236,
+        874,
+        219,
+        276,
+        94
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 814,
+      "prompt_tokens_estimated": 1056,
       "projected_cost_usd": 0.0
     },
     {
@@ -1809,21 +1809,21 @@
         "Annette",
         "Annette"
       ],
-      "predicted": "Annette gets Sebastian's Jaguar.",
-      "judge_score": 0.5,
+      "predicted": "Kathryn",
+      "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        603,
-        602,
-        601,
-        600,
-        599,
-        597,
-        595,
-        596
+        233,
+        219,
+        24,
+        527,
+        143,
+        449,
+        403,
+        393
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1160,
+      "prompt_tokens_estimated": 526,
       "projected_cost_usd": 0.0
     },
     {
@@ -1835,21 +1835,21 @@
         "Black oil.",
         "Black oil."
       ],
-      "predicted": "The relevant passages do not provide information about what seeps out of the skull Stevie finds in the hole.",
+      "predicted": "Milky, opaque substance.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        637,
-        636,
-        635,
-        634,
-        632,
-        631,
-        630,
-        626
+        25,
+        27,
+        38,
+        41,
+        29,
+        28,
+        39,
+        36
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1386,
+      "prompt_tokens_estimated": 1032,
       "projected_cost_usd": 0.0
     },
     {
@@ -1861,21 +1861,21 @@
         "1968",
         "1968"
       ],
-      "predicted": "The relevant passages do not provide a specific year for when the conflict began between Brian Clough and Leeds.",
+      "predicted": "The conflict began in 1974.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        548,
-        547,
-        546,
-        545,
-        544,
-        542,
-        540,
-        539
+        327,
+        517,
+        377,
+        426,
+        436,
+        55,
+        135,
+        509
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1314,
+      "prompt_tokens_estimated": 696,
       "projected_cost_usd": 0.0
     },
     {
@@ -1887,21 +1887,21 @@
         "at the Stratosphere Hotel and Casino",
         "Afghanistan"
       ],
-      "predicted": "The provided passages do not contain any information about Frances' dad shooting Bishop.",
+      "predicted": "Frances' dad shot Bishop in the kneecaps.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        612,
-        611,
-        610,
-        609,
-        608,
-        607,
-        606,
-        604
+        458,
+        428,
+        310,
+        464,
+        546,
+        402,
+        571,
+        281
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 668,
+      "prompt_tokens_estimated": 713,
       "projected_cost_usd": 0.0
     },
     {
@@ -1913,21 +1913,21 @@
         "Leena",
         "Leena Klammer"
       ],
-      "predicted": "Esther's real name is \"Gig.\"",
+      "predicted": "Veera Klammer",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        546,
-        545,
-        544,
-        542,
-        541,
-        539,
+        505,
         535,
-        538
+        59,
+        320,
+        1,
+        326,
+        150,
+        111
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1744,
+      "prompt_tokens_estimated": 998,
       "projected_cost_usd": 0.0
     },
     {
@@ -1939,21 +1939,21 @@
         "Abruzzo",
         "On his way to meet Clara."
       ],
-      "predicted": "The relevant passages do not provide information about where Jack meets Pavel.",
+      "predicted": "Jack meets Pavel in Rome.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        683,
-        682,
-        681,
-        680,
-        678,
-        677,
-        676,
-        675
+        417,
+        0,
+        452,
+        425,
+        638,
+        647,
+        38,
+        645
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1175,
+      "prompt_tokens_estimated": 1223,
       "projected_cost_usd": 0.0
     },
     {
@@ -1965,21 +1965,21 @@
         "Flecher Reed proved that the contract Samanth sign was void",
         "A technicality that Samantha had lied as a minor."
       ],
-      "predicted": "The provided passages do not contain information about how Fletcher Reede won the case for Samantha.",
-      "judge_score": 0.0,
+      "predicted": "Fletcher found a technicality that Samantha lied about being underage when she signed the prenup prior to her marriage, rendering it void and entitling her to half of Mr. Cole's estate.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        579,
-        578,
-        577,
-        576,
-        574,
-        573,
-        572,
-        570
+        485,
+        0,
+        213,
+        115,
+        116,
+        352,
+        138,
+        74
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1096,
+      "prompt_tokens_estimated": 1670,
       "projected_cost_usd": 0.0
     },
     {
@@ -1991,21 +1991,21 @@
         "Elizabeth and Howard",
         "Elizabeth and Howard"
       ],
-      "predicted": "Mary and Howard.",
-      "judge_score": 0.0,
+      "predicted": "Elizabeth and Howard",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        492,
-        491,
-        490,
-        489,
-        488,
-        487,
-        486,
-        485
+        363,
+        0,
+        167,
+        409,
+        118,
+        372,
+        461,
+        444
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1212,
+      "prompt_tokens_estimated": 1684,
       "projected_cost_usd": 0.0
     },
     {
@@ -2017,21 +2017,21 @@
         "Ermyntrude",
         "Erymntrude"
       ],
-      "predicted": "The Inca wants to marry Ermyntrude.",
-      "judge_score": 0.0,
+      "predicted": "Ermyntrude",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        114,
-        112,
-        111,
-        108,
-        107,
-        106,
         103,
-        104
+        79,
+        18,
+        0,
+        19,
+        73,
+        87,
+        88
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1121,
+      "prompt_tokens_estimated": 1649,
       "projected_cost_usd": 0.0
     },
     {
@@ -2043,21 +2043,21 @@
         "The Gyro Captain.",
         "Gyro Captain."
       ],
-      "predicted": "Pappagallo rescues Max.",
+      "predicted": "The Dog rescues Max.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        246,
-        245,
-        244,
-        243,
-        241,
-        242,
-        240,
-        235
+        16,
+        172,
+        160,
+        93,
+        31,
+        152,
+        84,
+        167
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1775,
+      "prompt_tokens_estimated": 1341,
       "projected_cost_usd": 0.0
     },
     {
@@ -2069,21 +2069,21 @@
         "Isabella",
         "Mary, Queen of Scots"
       ],
-      "predicted": "King Phillip intends to make Mary, Queen of Scots, the Queen of England.",
+      "predicted": "His daughter, Isabella.",
       "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        533,
-        532,
-        531,
-        530,
-        528,
-        526,
-        525,
-        523
+        405,
+        0,
+        246,
+        85,
+        19,
+        293,
+        189,
+        516
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1306,
+      "prompt_tokens_estimated": 2067,
       "projected_cost_usd": 0.0
     },
     {
@@ -2095,21 +2095,21 @@
         "When Gilbert accused her of loving Mr Lawrence.",
         "When he accuses here of loving Lawrence."
       ],
-      "predicted": "The relevant passages do not provide information about when Helen gave Gilbert her diaries.",
-      "judge_score": 0.0,
+      "predicted": "When Gilbert accused her of loving Lawrence.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1483,
-        1482,
-        1481,
-        1480,
-        1478,
-        1479,
-        1477,
-        1476
+        0,
+        1214,
+        384,
+        314,
+        268,
+        430,
+        339,
+        1208
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1599,
+      "prompt_tokens_estimated": 1868,
       "projected_cost_usd": 0.0
     },
     {
@@ -2121,21 +2121,21 @@
         "The US Government",
         "The US government."
       ],
-      "predicted": "Fox shoots the alien craft.",
-      "judge_score": 0.0,
+      "predicted": "The US government shoots it down.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        720,
-        719,
-        718,
         717,
-        716,
-        715,
-        709,
-        708
+        237,
+        287,
+        575,
+        0,
+        238,
+        400,
+        545
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1362,
+      "prompt_tokens_estimated": 1665,
       "projected_cost_usd": 0.0
     },
     {
@@ -2147,21 +2147,21 @@
         "She revealed the plan to Price.",
         "she revelaed the con to Price"
       ],
-      "predicted": "Lily dropped the gun and broke down in tears.",
-      "judge_score": 0.0,
+      "predicted": "Lily went straight to Morgan Price and revealed the entire con.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        136,
-        135,
-        133,
-        131,
-        129,
-        125,
+        43,
+        0,
+        95,
         123,
-        124
+        82,
+        45,
+        17,
+        79
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 2382,
+      "prompt_tokens_estimated": 3658,
       "projected_cost_usd": 0.0
     },
     {
@@ -2173,21 +2173,21 @@
         "Lily",
         "The King"
       ],
-      "predicted": "Jake",
-      "judge_score": 0.0,
+      "predicted": "Lily",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        136,
-        135,
-        133,
-        131,
-        129,
-        125,
-        122,
-        123
+        0,
+        94,
+        43,
+        74,
+        93,
+        1,
+        38,
+        40
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 2430,
+      "prompt_tokens_estimated": 3934,
       "projected_cost_usd": 0.0
     },
     {
@@ -2199,21 +2199,21 @@
         "Anthony Rogers has previous wartime and combatant experience.",
         "Because he fought in the first world war."
       ],
-      "predicted": "The bosses of Wilma's gang believe that Anthony Rogers will be useful to them because he has a belief that the American explosive rocket is a more efficient weapon than the disintegrator ray of the Hans, and he has confidence in their ability to overcome the Hans through effective barrage tactics.",
-      "judge_score": 0.0,
+      "predicted": "The bosses of Wilma's gang believe that Anthony Rogers will be useful to them in the current conflict because of his experience and knowledge gained from fighting in the First World War.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        259,
-        258,
-        257,
-        256,
-        255,
-        254,
-        253,
-        251
+        0,
+        63,
+        4,
+        251,
+        64,
+        215,
+        151,
+        92
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 874,
+      "prompt_tokens_estimated": 2071,
       "projected_cost_usd": 0.0
     },
     {
@@ -2225,21 +2225,21 @@
         "They are grifters.",
         "Conartists"
       ],
-      "predicted": "Lilly and Roy work in con artistry and grifting.",
+      "predicted": "Lilly and Roy work in the con artist business, engaging in various scams and grifts.",
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        14,
-        13,
         12,
-        11,
-        10,
-        9,
         0,
-        7
+        8,
+        1,
+        2,
+        3,
+        4,
+        5
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 53364,
+      "prompt_tokens_estimated": 54230,
       "projected_cost_usd": 0.0
     },
     {
@@ -2251,21 +2251,21 @@
         "Release to the public domain.",
         "They support the new will"
       ],
-      "predicted": "The Tolstoians support the side that favors the will.",
+      "predicted": "The Tolstoians support a new will that would place all of Tolstoy's copyrights into the public domain.",
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        577,
-        576,
-        575,
-        574,
-        573,
-        572,
-        571,
-        569
+        0,
+        470,
+        317,
+        530,
+        534,
+        52,
+        139,
+        368
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1159,
+      "prompt_tokens_estimated": 1014,
       "projected_cost_usd": 0.0
     },
     {
@@ -2277,21 +2277,21 @@
         "The mob blames Hypatia.",
         "Hypatia."
       ],
-      "predicted": "The Christian mob blames Hypatia for the unrest in the city.",
+      "predicted": "Hypatia",
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1539,
-        1538,
-        1537,
-        1536,
-        1535,
-        1534,
-        1533,
-        1532
+        372,
+        0,
+        766,
+        676,
+        1196,
+        257,
+        118,
+        133
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 2088,
+      "prompt_tokens_estimated": 1822,
       "projected_cost_usd": 0.0
     },
     {
@@ -2303,21 +2303,21 @@
         "That Bateman is attracted to Luis",
         "a sexual advance"
       ],
-      "predicted": "Luis thinks Bateman's attack means that Bateman is a \"fucking psycho.\"",
+      "predicted": "The provided passages do not contain any information regarding Luis's thoughts on Bateman's attack.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        457,
-        456,
-        455,
-        454,
-        453,
-        452,
-        451,
-        450
+        268,
+        261,
+        265,
+        367,
+        412,
+        282,
+        103,
+        422
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1279,
+      "prompt_tokens_estimated": 715,
       "projected_cost_usd": 0.0
     },
     {
@@ -2329,21 +2329,21 @@
         "He dumped her for Cecile.",
         "He dumped her for Cecile"
       ],
-      "predicted": "The provided passages do not contain information regarding why Kathryn wants to get revenge on Court.",
+      "predicted": "Kathryn wants to get revenge on Court because she feels she made huge sacrifices to keep him happy, and she intends to shatter his heart.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        603,
-        602,
-        601,
-        600,
-        597,
-        599,
-        595,
-        596
+        75,
+        479,
+        69,
+        76,
+        381,
+        413,
+        316,
+        160
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1162,
+      "prompt_tokens_estimated": 604,
       "projected_cost_usd": 0.0
     },
     {
@@ -2355,21 +2355,21 @@
         "Three.",
         "Three sections"
       ],
-      "predicted": "The Mark was divided into three sections: the Mid-mark, the Upper-mark, and the Nether-mark.",
+      "predicted": "The Mark was divided into three sections: the Upper-mark, the Mid-mark, and the Nether-mark.",
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        554,
-        553,
-        552,
-        550,
-        548,
-        546,
-        533,
-        544
+        0,
+        129,
+        107,
+        73,
+        72,
+        361,
+        315,
+        500
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1494,
+      "prompt_tokens_estimated": 2463,
       "projected_cost_usd": 0.0
     },
     {
@@ -2381,21 +2381,21 @@
         "Madame de Merret.",
         "Madame de Merret."
       ],
-      "predicted": "Monsieur de Merret",
-      "judge_score": 0.0,
+      "predicted": "Madame de Merret",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
+        24,
+        38,
         66,
-        65,
-        64,
-        63,
-        62,
-        61,
-        60,
-        59
+        1,
+        16,
+        21,
+        35,
+        0
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 847,
+      "prompt_tokens_estimated": 1878,
       "projected_cost_usd": 0.0
     },
     {
@@ -2407,21 +2407,21 @@
         "The sidelining of new artists in favor of popular ones for",
         "Because new artists are being sidelined in favor of established, traditional artists."
       ],
-      "predicted": "The outcry in the artistic community stems from feelings of powerlessness and despair, as they believe they are merely producing incomplete and untruthful work, leading to discussions about the futility of their efforts and the desire to end their struggles.",
-      "judge_score": 0.0,
+      "predicted": "The outcry in the artistic community is due to the sidelining of new artists in favor of popular, established, traditional artists at the annual Salon of the Acad\u00e9mie des Beaux-Arts.",
+      "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        1089,
-        1088,
-        1087,
-        1085,
-        1086,
-        1084,
-        1083,
-        1082
+        0,
+        9,
+        5,
+        1069,
+        776,
+        541,
+        181,
+        131
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 880,
+      "prompt_tokens_estimated": 2101,
       "projected_cost_usd": 0.0
     },
     {
@@ -2437,17 +2437,17 @@
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        654,
-        653,
-        652,
-        651,
-        650,
-        649,
-        648,
-        647
+        77,
+        28,
+        37,
+        300,
+        500,
+        574,
+        230,
+        641
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1145,
+      "prompt_tokens_estimated": 789,
       "projected_cost_usd": 0.0
     },
     {
@@ -2459,21 +2459,21 @@
         "By rewinding the tape",
         "He rewinds the course tape"
       ],
-      "predicted": "Renfry attempts to get the men back home by running the ship on autopilot.",
-      "judge_score": 0.0,
+      "predicted": "Renfry attempts to launch the ship by running its course in reverse, pausing on the desert planet and the refueling station, and bringing the four men back to Earth.",
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        63,
-        62,
-        61,
-        59,
+        0,
+        11,
+        17,
         58,
-        56,
-        54,
-        52
+        39,
+        42,
+        41,
+        13
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1008,
+      "prompt_tokens_estimated": 2071,
       "projected_cost_usd": 0.0
     },
     {
@@ -2489,17 +2489,17 @@
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        538,
-        537,
-        536,
-        535,
-        534,
-        532,
-        530,
-        524
+        170,
+        0,
+        49,
+        495,
+        460,
+        112,
+        445,
+        162
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 832,
+      "prompt_tokens_estimated": 1587,
       "projected_cost_usd": 0.0
     },
     {
@@ -2511,21 +2511,21 @@
         "By suffocating him with a pillow",
         "smothers him with a pillow"
       ],
-      "predicted": "Esther attempts to kill Daniel a second time by raising a gun and shooting at him.",
+      "predicted": "Esther attempts to kill Daniel a second time by causing the van to roll towards him.",
       "judge_score": 0.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        546,
-        545,
-        544,
-        542,
-        541,
-        539,
-        535,
-        533
+        115,
+        144,
+        382,
+        166,
+        180,
+        161,
+        232,
+        381
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1753,
+      "prompt_tokens_estimated": 1277,
       "projected_cost_usd": 0.0
     },
     {
@@ -2537,21 +2537,21 @@
         "Obsessive-Compulsive Disorder",
         "Obsessive-compulsive disorder"
       ],
-      "predicted": "Melvin suffers from obsessive-compulsive disorder (OCD).",
+      "predicted": "Obsessive compulsive disorder",
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        443,
-        442,
-        441,
-        440,
+        311,
+        149,
+        313,
         439,
-        438,
-        437,
-        434
+        193,
+        427,
+        388,
+        347
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1336,
+      "prompt_tokens_estimated": 888,
       "projected_cost_usd": 0.0
     },
     {
@@ -2567,17 +2567,17 @@
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        14,
-        13,
+        0,
         12,
-        11,
-        10,
-        9,
-        7,
-        0
+        13,
+        6,
+        3,
+        8,
+        5,
+        7
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 53369,
+      "prompt_tokens_estimated": 54451,
       "projected_cost_usd": 0.0
     },
     {
@@ -2590,20 +2590,20 @@
         "Silverware"
       ],
       "predicted": "Valjean steals silver from the Bishop of Digne.",
-      "judge_score": 0.0,
+      "judge_score": 0.5,
       "recall_at_k": null,
       "retrieved_steps": [
-        671,
-        670,
-        669,
-        667,
-        666,
-        664,
         659,
-        665
+        60,
+        37,
+        376,
+        59,
+        47,
+        57,
+        258
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1313,
+      "prompt_tokens_estimated": 1036,
       "projected_cost_usd": 0.0
     },
     {
@@ -2619,17 +2619,17 @@
       "judge_score": 1.0,
       "recall_at_k": null,
       "retrieved_steps": [
-        576,
-        575,
-        574,
-        573,
-        572,
-        571,
-        569,
-        567
+        1,
+        478,
+        69,
+        0,
+        222,
+        139,
+        9,
+        483
       ],
       "relevant_paragraphs": [],
-      "prompt_tokens_estimated": 1255,
+      "prompt_tokens_estimated": 2081,
       "projected_cost_usd": 0.0
     }
   ]

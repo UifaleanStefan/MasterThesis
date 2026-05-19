@@ -1,0 +1,127 @@
+{
+  "_manifest": {
+    "git_sha": "a19b5c1",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T21:41:43+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "theta_transfer_matrix",
+    "benchmarks": [
+      "qasper",
+      "cuad"
+    ],
+    "n_docs": 15,
+    "k": 8
+  },
+  "rows": [
+    "canonical",
+    "qasper-tuned",
+    "cuad-tuned",
+    "qasper-heldout",
+    "cuad-heldout"
+  ],
+  "row_sources": {
+    "canonical": "grid_world_baseline",
+    "qasper-tuned": "wide",
+    "cuad-tuned": "narrow",
+    "qasper-heldout": "heldout",
+    "cuad-heldout": "heldout"
+  },
+  "cols": [
+    "qasper",
+    "cuad"
+  ],
+  "matrix": {
+    "canonical": {
+      "qasper": {
+        "mean_recall": 0.20833333333333334,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 8.124762058258057
+      },
+      "cuad": {
+        "mean_recall": 0.3655913978494624,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 16.64317488670349
+      }
+    },
+    "qasper-tuned": {
+      "qasper": {
+        "mean_recall": 0.5625,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 0.2706735134124756
+      },
+      "cuad": {
+        "mean_recall": 0.5913978494623656,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 0.8592112064361572
+      }
+    },
+    "cuad-tuned": {
+      "qasper": {
+        "mean_recall": 0.5,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 0.22271227836608887
+      },
+      "cuad": {
+        "mean_recall": 0.6290322580645161,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 0.8717043399810791
+      }
+    },
+    "qasper-heldout": {
+      "qasper": {
+        "mean_recall": 0.5416666666666666,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 0.2630007266998291
+      },
+      "cuad": {
+        "mean_recall": 0.6075268817204301,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 0.7690765857696533
+      }
+    },
+    "cuad-heldout": {
+      "qasper": {
+        "mean_recall": 0.5416666666666666,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 0.25307416915893555
+      },
+      "cuad": {
+        "mean_recall": 0.6236559139784946,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 0.8830287456512451
+      }
+    }
+  },
+  "diagonal_avg": 0.5892137096774193,
+  "off_diagonal_avg": 0.5601478494623655,
+  "canonical_avg": 0.28696236559139787,
+  "diagonal_lift_vs_canonical": 0.3022513440860214,
+  "off_diagonal_lift_vs_canonical": 0.27318548387096764,
+  "interpretation": "Diagonal cells (matched theta) beat canonical by avg +0.302. Off-diagonal cells exceed canonical by avg +0.273 \u2014 some cross-task transfer DOES happen between the long-haystack benchmarks.",
+  "elapsed_s": 31.106560468673706
+}

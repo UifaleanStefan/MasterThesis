@@ -1,0 +1,106 @@
+{
+  "_manifest": {
+    "git_sha": "a19b5c1",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T21:42:55+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator_summary",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmarks": [
+      "cuad",
+      "financebench",
+      "hotpotqa",
+      "longmemeval",
+      "narrativeqa",
+      "qasper"
+    ],
+    "configs": [
+      "bm25"
+    ],
+    "n_questions": 100,
+    "k": 8
+  },
+  "config": {
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmarks": [
+      "cuad",
+      "financebench",
+      "hotpotqa",
+      "longmemeval",
+      "narrativeqa",
+      "qasper"
+    ],
+    "configs": [
+      "bm25"
+    ],
+    "n_questions": 100,
+    "k": 8
+  },
+  "total_projected_cost_usd": 0.30060149999999997,
+  "total_actual_cost_usd": 0.26090310000000005,
+  "total_prompt_tokens": 1644010,
+  "elapsed_s": 1234.681283712387,
+  "cells": [
+    {
+      "benchmark": "cuad",
+      "config": "bm25",
+      "mean_recall_at_k": 0.3,
+      "mean_judge_score": 0.31,
+      "total_prompt_tokens": 196901,
+      "projected_cost_usd": 0.03853515,
+      "actual_cost_usd": 0.034865400000000005
+    },
+    {
+      "benchmark": "financebench",
+      "config": "bm25",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.45399999999999996,
+      "total_prompt_tokens": 61120,
+      "projected_cost_usd": 0.018168,
+      "actual_cost_usd": 0.011091300000000005
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "bm25",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.698,
+      "total_prompt_tokens": 117144,
+      "projected_cost_usd": 0.026571599999999997,
+      "actual_cost_usd": 0.018851999999999997
+    },
+    {
+      "benchmark": "longmemeval",
+      "config": "bm25",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.4,
+      "total_prompt_tokens": 640184,
+      "projected_cost_usd": 0.10502759999999998,
+      "actual_cost_usd": 0.09794400000000002
+    },
+    {
+      "benchmark": "narrativeqa",
+      "config": "bm25",
+      "mean_recall_at_k": 0.0,
+      "mean_judge_score": 0.575,
+      "total_prompt_tokens": 514987,
+      "projected_cost_usd": 0.08624805,
+      "actual_cost_usd": 0.0788859
+    },
+    {
+      "benchmark": "qasper",
+      "config": "bm25",
+      "mean_recall_at_k": 0.7108433734939759,
+      "mean_judge_score": 0.255,
+      "total_prompt_tokens": 113674,
+      "projected_cost_usd": 0.026051099999999997,
+      "actual_cost_usd": 0.01926449999999999
+    }
+  ]
+}

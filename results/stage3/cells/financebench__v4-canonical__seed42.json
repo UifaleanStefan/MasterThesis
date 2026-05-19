@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "c4fa81c",
+    "git_sha": "c3e204c",
     "git_dirty": true,
-    "timestamp_utc": "2026-05-19T19:24:41+00:00",
+    "timestamp_utc": "2026-05-19T12:12:22+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -14,7 +14,7 @@
     "model": "gpt-4o-mini",
     "benchmark": "financebench",
     "config": "v4-canonical",
-    "k": 32,
+    "k": 8,
     "n_questions": 100
   },
   "ok": true,
@@ -25,12 +25,12 @@
   "n_with_gold": 100,
   "n_with_judge": 100,
   "mean_recall_at_k": 1.0,
-  "mean_judge_score": 0.42,
+  "mean_judge_score": 0.42200000000000004,
   "total_prompt_tokens": 49968,
   "total_completion_tokens_max": 15000,
   "projected_cost_usd": 0.0164952,
-  "actual_cost_usd": 0.009202950000000005,
-  "elapsed_seconds": 204.03292894363403,
+  "actual_cost_usd": 0.009244950000000005,
+  "elapsed_seconds": 212.18581700325012,
   "questions": [
     {
       "doc_idx": 0,
@@ -56,8 +56,8 @@
       "n_paragraphs": 1,
       "question": "Which debt securities are registered to trade on a national securities exchange under 3M's name as of Q2 of 2023?",
       "gold_answer": "Following debt securities registered under 3M's name are listed to trade on the New York Stock Exchange:\n-1.500% Notes due 2026 (Trading Symbol: MMM26)\n-1.750% Notes due 2030 (Trading Symbol: MMM30)\n-1.500% Notes due 2031 (Trading Symbol: MMM31)",
-      "predicted": "1.500% Notes due 2026, 1.750% Notes due 2030, 1.500% Notes due 2031",
-      "judge_score": 0.5,
+      "predicted": "1.500% Notes due 2026 (MMM26), 1.750% Notes due 2030 (MMM30), 1.500% Notes due 2031 (MMM31)",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         0
@@ -74,7 +74,7 @@
       "n_paragraphs": 2,
       "question": "Based on the information provided primarily in the balance sheet and the statement of income, what is FY2020 days payable outstanding (DPO) for Corning? DPO is defined as: 365 * (average accounts payable between FY2019 and FY2020) / (FY2020 COGS + change in inventory between FY2019 and FY2020). Round your answer to two decimal places.",
       "gold_answer": "63.86",
-      "predicted": "The information provided does not include the necessary data to calculate the days payable outstanding (DPO) for Corning, such as accounts payable and inventory figures. Therefore, the answer cannot be determined from the given context.",
+      "predicted": "The information provided does not include the necessary data for calculating the average accounts payable or the change in inventory between FY2019 and FY2020. Therefore, the FY2020 days payable outstanding (DPO) for Corning cannot be determined from the given context.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -183,7 +183,7 @@
       "n_paragraphs": 1,
       "question": "What was the key agenda of the AMCOR's 8k filing dated 1st July 2022?",
       "gold_answer": "Amcor Finance (USA), Inc. and Amcor Flexibles North America, Inc., entered into supplemental indentures relating to Guaranteed Senior Notes due 2026 and 2028. This involved the substitution of the Substitute Issuer (Amcor Flexibles North America) for the Former Issuer (Amcor Finance) and the assumption of covenants under the indentures. (In essence a novation agreement)",
-      "predicted": "The key agenda of Amcor's 8k filing dated July 1, 2022, was the entry into supplemental indentures regarding the substitution of Amcor Flexibles North America, Inc. as the Substitute Issuer for Amcor Finance (USA), Inc. and the assumption of covenants under the indentures governing the 3.625% and 4.500% Guaranteed Senior Notes due 2026 and 2028.",
+      "predicted": "The key agenda of Amcor's 8k filing dated July 1, 2022, was the entry into supplemental indentures regarding the substitution of Amcor Flexibles North America, Inc. as the Substitute Issuer for Amcor Finance (USA), Inc. and the assumption of covenants under the indentures for the 3.625% and 4.500% Guaranteed Senior Notes due 2026 and 2028.",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -223,7 +223,7 @@
       "n_paragraphs": 2,
       "question": "What is the FY2019 fixed asset turnover ratio for Activision Blizzard? Fixed asset turnover ratio is defined as: FY2019 revenue / (average PP&E between FY2018 and FY2019). Round your answer to two decimal places. Base your judgments on the information provided primarily in the statement of income and the statement of financial position.",
       "gold_answer": "24.26",
-      "predicted": "The fixed asset turnover ratio for FY2019 is 4.00.",
+      "predicted": "The fixed asset turnover ratio for FY2019 is 4.36.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -242,7 +242,7 @@
       "n_paragraphs": 1,
       "question": "Does 3M maintain a stable trend of dividend distribution?",
       "gold_answer": "Yes, not only they distribute the dividends on a routine basis, 3M has also been increasing the per share dividend for consecutive 65 years",
-      "predicted": "Yes, 3M maintains a stable trend of dividend distribution.",
+      "predicted": "Yes, 3M has maintained a stable trend of dividend distribution for 65 consecutive years.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -260,7 +260,7 @@
       "n_paragraphs": 1,
       "question": "Has AMCOR's quick ratio improved or declined between FY2023 and FY2022? If the quick ratio is not something that a financial analyst would ask about a company like this, then state that and explain why.",
       "gold_answer": "The quick ratio has slightly improved from 0.67 times to 0.69 times between FY 2023 and FY 2022.(3.4% jump)",
-      "predicted": "The quick ratio is not explicitly provided in the document, and it is typically calculated using current assets minus inventories divided by current liabilities. However, since the necessary data to calculate it is available, the quick ratio has declined between FY2023 and FY2022 due to a decrease in current assets and an increase in current liabilities.",
+      "predicted": "The quick ratio is not explicitly provided in the document, and it is typically calculated using current assets minus inventories divided by current liabilities. Since the necessary data to calculate the quick ratio is not fully available, it cannot be determined whether AMCOR's quick ratio improved or declined between FY2023 and FY2022.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -332,7 +332,7 @@
       "n_paragraphs": 1,
       "question": "Based on the information provided primarily in the statement of income, what is the FY2018 - FY2019 change in unadjusted operating income % margin for Walmart? Answer in units of percents and round to one decimal place.",
       "gold_answer": "0.2%",
-      "predicted": "-0.6%",
+      "predicted": "-0.5%",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -350,7 +350,7 @@
       "n_paragraphs": 1,
       "question": "Are Best Buy's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
       "gold_answer": "Yes, the margins have been consistent, there has been a minor decline of 1.1% in gross margins between FY2022 and FY2023.",
-      "predicted": "Best Buy's gross margins are not historically consistent, as they fluctuated from 22.4% in 2021 to 22.8% in 2022 and then to 21.4% in 2023, indicating a variation greater than 2% across the years.",
+      "predicted": "Best Buy's gross margins are not historically consistent, as they fluctuated from 22.4% in fiscal year 2021 to 19.8% in fiscal year 2023, indicating a change greater than 2%.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -566,7 +566,7 @@
       "n_paragraphs": 1,
       "question": "Does Verizon have a reasonably healthy liquidity profile based on its quick ratio for FY 2022? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
       "gold_answer": "No. The quick ratio was approximately 0.54 for Verizon. It indicated that Verizon does not have a healthy liquidity profile.",
-      "predicted": "The quick ratio is not provided in the relevant passages, and it is not possible to determine Verizon's liquidity profile based solely on the available information. The quick ratio typically requires current assets minus inventories divided by current liabilities, and the necessary data to calculate it is not fully presented.",
+      "predicted": "The quick ratio is not provided in the relevant passages, and it is not possible to determine Verizon's liquidity profile based solely on the available information. The quick ratio typically requires current assets minus inventories divided by current liabilities, and the necessary data to calculate it is incomplete.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -602,7 +602,7 @@
       "n_paragraphs": 1,
       "question": "What is the nature & purpose of AMCOR's restructuring liability as oF Q2 of FY2023 close?",
       "gold_answer": "87% of the total restructuring liability is related Employee liabilities.",
-      "predicted": "The nature of Amcor's restructuring liability as of Q2 of FY2023 close is related to costs associated with restructuring activities, including employee costs, fixed asset-related costs, and other costs. The purpose of this liability is to account for the anticipated expenses incurred during the restructuring process.",
+      "predicted": "The nature of Amcor's restructuring liability as of Q2 of FY2023 close is related to costs associated with restructuring efforts, including employee costs, fixed asset-related costs, and other costs. The purpose of this liability is to account for the anticipated expenses incurred during the restructuring process.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -656,7 +656,7 @@
       "n_paragraphs": 1,
       "question": "Does Adobe have an improving operating margin profile as of FY2022? If operating margin is not a useful metric for a company like this, then state that and explain why.",
       "gold_answer": "No the operating margins of Adobe have recently declined from 36.8% in FY 2021 to 34.6% in FY2022. A drop by 2.2% in a year.",
-      "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total revenue of $17,606 million, resulting in an operating margin of approximately 34.6%, which is an increase from previous years.",
+      "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total revenue of $17,606 million, resulting in a higher operating margin compared to previous years.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -675,7 +675,7 @@
       "question": "What is Adobe's year-over-year change in unadjusted operating income from FY2015 to FY2016 (in units of percents and round to one decimal place)? Give a solution to the question by using the income statement.",
       "gold_answer": "65.4%",
       "predicted": "65.3%",
-      "judge_score": 0.5,
+      "judge_score": 0.9,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         0
@@ -783,7 +783,7 @@
       "n_paragraphs": 3,
       "question": "Has CVS Health reported any materially important ongoing legal battles from 2022, 2021 and 2020?",
       "gold_answer": "Yes, CVS Health has been involved in multiple ongoing legal battles. Some notable legal dispute areas for CVS are: (1) usual and customary pricing litigation: where it's claimed that CVS\u00e2\u0080\u0099s retail pharmacies overcharged for prescription drugs; (2) PBM litigation and investigations: where it's claimed that that rebate agreements between the drug manufacturers and PBMs caused inflated prices for certain drug products; and (3) controlled substances litigation: legal matters around opioids for which CVS has agreed to pay up to $4.3 billion to claimants in remediation and $625 million to attorneys and fees",
-      "predicted": "Yes, CVS Health has reported ongoing legal battles from 2022, including a settlement agreement regarding opioid claims and lawsuits related to drug pricing and rebate arrangements.",
+      "predicted": "Yes, CVS Health is facing multiple lawsuits regarding drug pricing and rebate arrangements, as well as lawsuits alleging overcharging for prescription drugs.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -841,7 +841,7 @@
       "n_paragraphs": 1,
       "question": "Does 3M have a reasonably healthy liquidity profile based on its quick ratio for Q2 of FY2023? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
       "gold_answer": "No. The quick ratio for 3M was 0.96 by Jun'23 close, which needs a bit of an improvement to touch the 1x mark",
-      "predicted": "The quick ratio is not provided in the relevant passages, and without information on current liabilities excluding inventories and prepaid expenses, it cannot be calculated. Therefore, the quick ratio is not relevant to measure liquidity based on the provided context.",
+      "predicted": "The quick ratio is not provided in the relevant passages, and without information on liquid assets and current liabilities specifically for the quick ratio calculation, it cannot be determined if 3M has a reasonably healthy liquidity profile.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -968,7 +968,7 @@
       "n_paragraphs": 2,
       "question": "What is FY2018 days payable outstanding (DPO) for Walmart? DPO is defined as: 365 * (average accounts payable between FY2017 and FY2018) / (FY2018 COGS + change in inventory between FY2017 and FY2018). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the statement of financial position and the P&L statement.",
       "gold_answer": "42.69",
-      "predicted": "To calculate the FY2018 days payable outstanding (DPO) for Walmart, we need the average accounts payable, FY2018 cost of goods sold (COGS), and the change in inventory between FY2017 and FY2018. However, the provided passages do not include information on accounts payable or inventory changes. Therefore, we cannot compute the DPO based on the available data. \n\nThe answer is: Not enough information.",
+      "predicted": "To calculate the FY2018 days payable outstanding (DPO) for Walmart, we need the average accounts payable, cost of goods sold (COGS), and the change in inventory.\n\n1. **Cost of Goods Sold (COGS) for FY2018**: $373,396 million\n2. **Change in Inventory**: The inventory values are not provided in the passages, so we cannot calculate the change in inventory.\n3. **Average Accounts Payable**: The accounts payable values are also not provided in the passages.\n\nSince we do not have the necessary data for average accounts payable and change in inventory, we cannot compute the DPO.\n\nTherefore, the answer is: **Data insufficient to calculate DPO.**",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1023,8 +1023,8 @@
       "n_paragraphs": 1,
       "question": "Does Foot Locker's new CEO have previous CEO experience in a similar company to Footlocker?",
       "gold_answer": "Yes. She was previous CEO of Ulta Beauty which means she had to manage a large retail company that has brick and mortar + online business. So yes she was a CEO in a similar company to Foot Locker before this.",
-      "predicted": "Yes, Mary N. Dillon was the former Executive Chair and Chief Executive Officer of Ulta Beauty, Inc.",
-      "judge_score": 0.5,
+      "predicted": "Yes, Mary N. Dillon was the former Chief Executive Officer of Ulta Beauty, Inc., which is a retail company similar to Foot Locker.",
+      "judge_score": 0.8,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         0
@@ -1205,7 +1205,7 @@
       "n_paragraphs": 2,
       "question": "What is Kraft Heinz's FY2019 inventory turnover ratio? Inventory turnover ratio is defined as: (FY2019 COGS) / (average inventory between FY2018 and FY2019). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the balance sheet and the P&L statement.",
       "gold_answer": "6.25",
-      "predicted": "The inventory turnover ratio cannot be calculated with the provided information, as the average inventory for FY2018 and FY2019 is not included in the passages.",
+      "predicted": "The relevant information to calculate the inventory turnover ratio is not provided in the passages. Therefore, the inventory turnover ratio cannot be determined.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1224,7 +1224,7 @@
       "n_paragraphs": 2,
       "question": "Roughly how many times has JnJ sold its inventory in FY2022? Calculate inventory turnover ratio for FY2022; if conventional inventory management is not meaningful for the company then state that and explain why.",
       "gold_answer": "JnJ sold its inventory 2.7 times in FY2022.",
-      "predicted": "To calculate the inventory turnover ratio for FY2022, we need the cost of goods sold (COGS) and the average inventory. However, the provided passages do not include COGS. Therefore, conventional inventory management may not be meaningful for Johnson & Johnson due to the nature of its business, which includes a diverse range of products and services that may not align with typical inventory turnover metrics.",
+      "predicted": "To calculate the inventory turnover ratio for FY2022, we need the cost of goods sold (COGS) and the average inventory. However, the provided passages do not include COGS. Therefore, we cannot calculate the inventory turnover ratio for Johnson & Johnson for FY2022. Additionally, if conventional inventory management is not meaningful for the company, it may be due to the nature of its business, which includes pharmaceuticals and medical devices that may not have a typical retail inventory turnover.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1356,7 +1356,7 @@
       "n_paragraphs": 2,
       "question": "Does American Water Works have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
       "gold_answer": "No, American Water Works had negative working capital of -$1561M in FY 2022.",
-      "predicted": "Yes, American Water Works has positive working capital based on FY2022 data. Working capital is calculated as current assets minus current liabilities. The total current assets are $1,250 million, and since no current liabilities are provided, we can infer that working capital is positive.",
+      "predicted": "Yes, American Water Works has positive working capital based on FY2022 data. Working capital is calculated as current assets minus current liabilities. The total current assets are $1,250 million, and while current liabilities are not provided in the passage, the presence of significant current assets suggests that the company likely has positive working capital.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1486,7 +1486,7 @@
       "n_paragraphs": 1,
       "question": "Does AMD have a reasonably healthy liquidity profile based on its quick ratio for FY22? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
       "gold_answer": "Yes. The quick ratio is 1.57, calculated as (cash and cash equivalents+Short term investments+Accounts receivable, net+receivables from related parties)/ (current liabilities).",
-      "predicted": "The quick ratio is not provided in the context, and it is not possible to determine AMD's liquidity profile based solely on the available information. The quick ratio is calculated using current assets minus inventories divided by current liabilities, and without the specific quick ratio value, we cannot assess liquidity.",
+      "predicted": "The quick ratio is not provided in the context, and it is not possible to determine AMD's liquidity profile based solely on the available information.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1595,7 +1595,7 @@
       "n_paragraphs": 1,
       "question": "What drove gross margin change as of the FY2022 for American Express? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
       "gold_answer": "Performance is not measured through gross margin",
-      "predicted": "Gross margin is not a useful metric for American Express because the company primarily generates revenue from non-interest income and interest income rather than from the sale of goods, making gross margin less relevant for assessing its financial performance.",
+      "predicted": "Gross margin is not a useful metric for a company like American Express because it primarily operates in the financial services sector, where revenues are generated from fees and interest rather than the sale of physical goods.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1613,8 +1613,8 @@
       "n_paragraphs": 1,
       "question": "What drove the reduction in SG&A expense as a percent of net sales in FY2023?",
       "gold_answer": "Lower marketing expenses and leverage of incentive compensation due to higher sales. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
-      "predicted": "The reduction in SG&A expense as a percent of net sales in FY2023 was primarily due to lower marketing expenses and leverage of incentive compensation due to higher sales.",
-      "judge_score": 1.0,
+      "predicted": "The reduction in SG&A expense as a percent of net sales in FY2023 was primarily due to lower marketing expenses and leverage of incentive compensation due to higher sales, partially offset by deleverage of corporate overhead and store payroll and benefits due to wage investments.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         0
@@ -1631,7 +1631,7 @@
       "n_paragraphs": 1,
       "question": "Does Adobe have an improving Free cashflow conversion as of FY2022?",
       "gold_answer": "Yes, the FCF conversion (using net income as the denominator) for Adobe has improved by ~13% from 143% in 2021 to 156% in 2022",
-      "predicted": "The provided passages do not contain information about Free cash flow conversion for Adobe as of FY2022.",
+      "predicted": "The provided passages do not contain information about Adobe's Free cash flow conversion or its trend over time.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1706,8 +1706,8 @@
       "n_paragraphs": 2,
       "question": "What is Coca Cola's FY2022 dividend payout ratio (using total cash dividends paid and net income attributable to shareholders)? Round answer to two decimal places. Answer the question asked by assuming you only have access to information clearly displayed in the cash flow statement and the income statement.",
       "gold_answer": "0.8",
-      "predicted": "The dividend payout ratio for FY2022 is 0.00.",
-      "judge_score": 0.0,
+      "predicted": "The dividend payout ratio for FY2022 is 0.66.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         0
@@ -1781,8 +1781,8 @@
       "n_paragraphs": 1,
       "question": "According to the details clearly outlined within the balance sheet, how much total current assets did Nike have at the end of FY2019? Answer in USD millions.",
       "gold_answer": "$16525.00",
-      "predicted": "16,525",
-      "judge_score": 1.0,
+      "predicted": "16,525 million",
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         0

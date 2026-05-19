@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "c4fa81c",
+    "git_sha": "c3e204c",
     "git_dirty": true,
-    "timestamp_utc": "2026-05-19T19:17:18+00:00",
+    "timestamp_utc": "2026-05-19T12:32:46+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -14,7 +14,7 @@
     "model": "gpt-4o-mini",
     "benchmark": "longmemeval",
     "config": "v4-canonical",
-    "k": 32,
+    "k": 8,
     "n_questions": 100
   },
   "ok": true,
@@ -25,12 +25,12 @@
   "n_with_gold": 100,
   "n_with_judge": 100,
   "mean_recall_at_k": 1.0,
-  "mean_judge_score": 0.365,
+  "mean_judge_score": 0.385,
   "total_prompt_tokens": 602948,
   "total_completion_tokens_max": 15000,
   "projected_cost_usd": 0.0994422,
-  "actual_cost_usd": 0.09232440000000004,
-  "elapsed_seconds": 336.1851897239685,
+  "actual_cost_usd": 0.09231600000000001,
+  "elapsed_seconds": 282.23567485809326,
   "questions": [
     {
       "doc_idx": 0,
@@ -56,7 +56,7 @@
       "n_paragraphs": 2,
       "question": "How many days before I bought my iPad did I attend the Holiday Market?",
       "gold_answer": "The information provided is not enough. You mentioned getting the iPhone 13 Pro and attending the market, but you did not mention buying an iPad.",
-      "predicted": "You attended the Holiday Market a week before Black Friday, which is typically the last Friday in November. If you bought your iPad on Black Friday, that means you attended the market 7 days before your purchase.",
+      "predicted": "You attended the Holiday Market a week before Black Friday, which is typically the day after Thanksgiving in the U.S. If you bought your iPad on Black Friday, that means you attended the market 7 days before your purchase.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -76,8 +76,8 @@
       "n_paragraphs": 2,
       "question": "How many days had passed between the 'Walk for Hunger' event and the 'Coastal Cleanup' event?",
       "gold_answer": "14 days. 8 days (including the last day) is also acceptable.",
-      "predicted": "The 'Walk for Hunger' event took place on February 21st, and the 'Coastal Cleanup' event was on March 7th. There are 14 days between these two dates.",
-      "judge_score": 0.0,
+      "predicted": "The 'Walk for Hunger' event took place on February 21st, and the 'Coastal Cleanup' event was on March 7th. There are 14 days between these two events.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         1,
@@ -156,7 +156,7 @@
       "n_paragraphs": 3,
       "question": "How many total pieces of writing have I completed since I started writing again three weeks ago, including short stories, poems, and pieces for the writing challenge?",
       "gold_answer": "23",
-      "predicted": "You have completed a total of 22 pieces of writing since you started writing again three weeks ago, including 5 short stories and 17 poems.",
+      "predicted": "You have completed a total of 22 pieces of writing since you started writing again three weeks ago, including 5 short stories, 17 poems, and pieces for the writing challenge.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -254,7 +254,7 @@
       "n_paragraphs": 2,
       "question": "What is the total cost of my recently purchased headphones and the iPad?",
       "gold_answer": "The information provided is not enough. You mentioned purchasing a headphone, but you did not mention the iPad.",
-      "predicted": "The total cost of your recently purchased headphones (Sony WH-1000XM4) is $378, and the iPad cost is not provided in the context. Therefore, I cannot calculate the total cost without the iPad's price.",
+      "predicted": "The total cost of your recently purchased headphones (Sony WH-1000XM4) is $378, and the cost of the iPad is not provided in the context. Therefore, I cannot calculate the total cost without the iPad's price.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -352,7 +352,7 @@
       "n_paragraphs": 1,
       "question": "I was thinking about rearranging the furniture in my bedroom this weekend. Any tips?",
       "gold_answer": "The user would prefer responses that take into account their existing plans to replace the bedroom dresser and their interest in mid-century modern style, suggesting furniture layouts that accommodate the new dresser and incorporate elements of this design aesthetic. They might not prefer general furniture arrangement tips or suggestions that do not consider their specific design preferences.",
-      "predicted": "Here are some tips for rearranging your bedroom furniture effectively:\n\n1. **Measure Your Space**: Before moving anything, measure your room and the furniture to ensure everything will fit well in the new layout.\n\n2. **Create a Floor Plan**: Use graph paper or a room design app to sketch out different furniture arrangements. This helps visualize how the space will look.\n\n3. **Consider Functionality**: Think about how you use the space. Ensure that the arrangement allows for easy movement and access to essential items like the bed, closet, and nightstands.\n\n4. **Focus on Focal Points**: Identify a focal point in the room, such as a window, artwork, or the bed, and arrange furniture around it to create a",
+      "predicted": "When rearranging furniture in your bedroom, consider the following tips:\n\n1. **Measure Your Space**: Before moving anything, measure your room and the furniture to ensure everything will fit well in the new layout.\n\n2. **Create a Focal Point**: Decide on a focal point for the room, such as the bed or a piece of art, and arrange the furniture around it to create a cohesive look.\n\n3. **Consider Flow and Functionality**: Ensure there\u2019s enough space to move around comfortably. Leave pathways clear and consider how you use the space daily.\n\n4. **Balance the Layout**: Distribute larger pieces evenly throughout the room to create balance. Avoid clustering all heavy furniture on one side.\n\n5. **Experiment with Ang",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -551,7 +551,7 @@
       "n_paragraphs": 4,
       "question": "How much money did I raise for charity in total?",
       "gold_answer": "$3,750",
-      "predicted": "You raised a total of $2,250 for charity: $250 for the local food bank from the \"Run for Hunger\" event and $2,000 for the local animal shelter from the charity bake sale.",
+      "predicted": "You raised a total of $3,250 for charity: $2,000 for the local animal shelter and $1,250 for the local food bank from your charity run.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -575,7 +575,7 @@
       "n_paragraphs": 2,
       "question": "How many days passed between the day I started watering my herb garden and the day I harvested my first batch of fresh herbs?",
       "gold_answer": "24 days. 25 days (including the last day) is also acceptable.",
-      "predicted": "The information provided does not specify the number of days between starting to water the herb garden and harvesting the first batch of fresh herbs. Therefore, I cannot provide an answer to that question.",
+      "predicted": "The information provided does not specify the number of days between when you started watering your herb garden and when you harvested your first batch of fresh herbs.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -637,7 +637,7 @@
       "n_paragraphs": 2,
       "question": "What is the average GPA of my undergraduate and graduate studies?",
       "gold_answer": "3.83",
-      "predicted": "Your undergraduate GPA is 3.86 out of 4.0, and your graduate GPA is 3.8 out of 4.0. To find the average GPA of your undergraduate and graduate studies, you can add the two GPAs together and divide by 2:\n\n(3.86 + 3.8) / 2 = 3.83\n\nSo, the average GPA of your undergraduate and graduate studies is 3.83 out of 4.0.",
+      "predicted": "Your undergraduate GPA is 3.86 out of 4.0 from the University of Mumbai, and your graduate GPA is 3.8 out of 4.0 from the University of Illinois at Urbana-Champaign. The average GPA of your undergraduate and graduate studies is (3.86 + 3.8) / 2 = 3.83.",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -657,7 +657,7 @@
       "n_paragraphs": 1,
       "question": "I've been feeling like my chocolate chip cookies need something extra. Any advice?",
       "gold_answer": "The user would prefer responses that build upon their previous experimentation with turbinado sugar, suggesting ingredients or techniques that complement its richer flavor. They might not prefer generic cookie-making advice or suggestions that don't take into account their existing use of turbinado sugar.",
-      "predicted": "To enhance your chocolate chip cookies, consider adding the following ingredients:\n\n1. **Nuts:** Chopped walnuts or pecans can add a nice crunch and flavor.\n2. **Sea salt:** A sprinkle of flaky sea salt on top can enhance the sweetness and add depth.\n3. **Vanilla extract:** A splash of high-quality vanilla extract can elevate the flavor.\n4. **Espresso powder:** A small amount of espresso powder can intensify the chocolate flavor.\n5. **Cinnamon:** A pinch of cinnamon can add warmth and complexity.\n6. **Oats:** Adding rolled oats can provide a chewy texture and heartiness.\n7. **Coconut:** Shredded coconut can add a tropical twist and chewiness.\n8. **",
+      "predicted": "To enhance your chocolate chip cookies, consider adding the following ingredients:\n\n1. **Nuts:** Chopped walnuts or pecans can add a nice crunch and flavor.\n2. **Sea salt:** A sprinkle of flaky sea salt on top can enhance the sweetness and add depth.\n3. **Vanilla extract:** A splash of high-quality vanilla extract can elevate the flavor.\n4. **Espresso powder:** A small amount of espresso powder can intensify the chocolate flavor.\n5. **Cinnamon:** A pinch of cinnamon can add warmth and complexity.\n6. **Oats:** Adding rolled oats can give a chewy texture and a wholesome flavor.\n7. **Coconut:** Shredded coconut can add a tropical twist and extra sweetness.\n8.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -733,7 +733,7 @@
       "n_paragraphs": 2,
       "question": "How many MCU films did I watch in the last 3 months?",
       "gold_answer": "5",
-      "predicted": "You watched 4 MCU films in the last 3 months.",
+      "predicted": "Four MCU films.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -752,7 +752,7 @@
       "n_paragraphs": 2,
       "question": "What gardening-related activity did I do two weeks ago?",
       "gold_answer": "planting 12 new tomato saplings",
-      "predicted": "You attended a gardening workshop in your neighborhood.",
+      "predicted": "You attended a gardening workshop in your neighborhood where you learned about companion planting and crop rotation.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -856,8 +856,8 @@
       "n_paragraphs": 4,
       "question": "How many different cuisines have I learned to cook or tried out in the past few months?",
       "gold_answer": "4",
-      "predicted": "You have explored Indian cuisine by learning to make chicken tikka masala, naan bread, saag paneer, and injera, as well as trying Ethiopian cuisine at a restaurant.",
-      "judge_score": 0.0,
+      "predicted": "You have explored Indian cuisine by learning to make chicken tikka masala, naan bread, and misir wot, and you recently tried Ethiopian cuisine at a restaurant.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         3,
@@ -1049,7 +1049,7 @@
       "n_paragraphs": 2,
       "question": "How much have I made from selling eggs this month?",
       "gold_answer": "$120",
-      "predicted": "You have sold a total of 40 dozen eggs this month. If you are selling them for $3 per dozen, you have made $120 from selling eggs this month (40 dozen x $3/dozen = $120).",
+      "predicted": "You have sold a total of 40 dozen eggs this month. If you sell them for $3 per dozen, you have made $120 from selling eggs this month (40 dozen x $3/dozen = $120).",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1149,7 +1149,7 @@
       "n_paragraphs": 2,
       "question": "How many antique items did I inherit or acquire from my family members?",
       "gold_answer": "5",
-      "predicted": "You inherited or acquired three antique items: a vintage diamond necklace from your grandmother, an antique music box from your great-aunt, and a set of depression-era glassware from your mom.",
+      "predicted": "You inherited or acquired three antique items from your family members: a vintage diamond necklace from your grandmother, an antique music box from your great-aunt, and a set of depression-era glassware from your mom.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1328,8 +1328,8 @@
       "n_paragraphs": 3,
       "question": "How many days did I spend on camping trips in the United States this year?",
       "gold_answer": "8 days.",
-      "predicted": "You spent a total of 15 days on camping trips in the United States this year: 5 days in Yellowstone National Park and 3 days in Big Sur, plus the planned 10-day trek in New Zealand.",
-      "judge_score": 0.0,
+      "predicted": "You spent a total of 8 days on camping trips in the United States this year: 5 days in Yellowstone National Park and 3 days in Big Sur.",
+      "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         2,
@@ -1369,7 +1369,7 @@
       "n_paragraphs": 2,
       "question": "How many weeks have I been accepted into the exchange program when I started attending the pre-departure orientation sessions?",
       "gold_answer": "one week",
-      "predicted": "You have been accepted into the exchange program for approximately 5 weeks when you started attending the pre-departure orientation sessions.",
+      "predicted": "You have been accepted into the exchange program for approximately 4 weeks when you started attending the pre-departure orientation sessions on March 27th, and you got accepted on March 20th.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1389,7 +1389,7 @@
       "n_paragraphs": 1,
       "question": "I was looking back at our previous conversation about environmentally responsible supply chain practices, and I was wondering if you could remind me of the company you mentioned that's doing a great job with sustainability?",
       "gold_answer": "Patagonia",
-      "predicted": "Patagonia",
+      "predicted": "Patagonia.",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1522,8 +1522,8 @@
       "n_paragraphs": 3,
       "question": "How many projects have I been working on simultaneously, excluding my thesis?",
       "gold_answer": "2",
-      "predicted": "You have been working on one project simultaneously, which is the group project in your Data Mining course.",
-      "judge_score": 0.0,
+      "predicted": "You have been working on one group project in your Data Mining course simultaneously, excluding your thesis.",
+      "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         0
@@ -1620,7 +1620,7 @@
       "n_paragraphs": 4,
       "question": "How many times did I bake egg tarts in the past two weeks?",
       "gold_answer": "The information provided is not enough. You did not mention baking egg tarts.",
-      "predicted": "You did not mention baking egg tarts in the past two weeks.",
+      "predicted": "You haven't mentioned baking egg tarts in the past two weeks.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1644,7 +1644,7 @@
       "n_paragraphs": 1,
       "question": "How many weeks ago did I attend a bird watching workshop at the local Audubon society?",
       "gold_answer": "4",
-      "predicted": "You attended the bird watching workshop at the local Audubon society approximately six weeks ago.",
+      "predicted": "You attended the bird watching workshop at the local Audubon society approximately 6 weeks ago.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1702,7 +1702,7 @@
       "n_paragraphs": 2,
       "question": "What is the total number of views on my most popular videos on YouTube and TikTok?",
       "gold_answer": "1,998",
-      "predicted": "The total number of views on your most popular videos is 1,998 views (542 views on YouTube + 1,456 views on TikTok).",
+      "predicted": "The total number of views on your most popular videos is 1,998 views (542 views on YouTube and 1,456 views on TikTok).",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1818,7 +1818,7 @@
       "n_paragraphs": 2,
       "question": "How many women are on the team led by my former manager Rachel?",
       "gold_answer": "6",
-      "predicted": "There are 5 women on Rachel's team of 10 people.",
+      "predicted": "There are 5 women on the team led by Rachel, which consists of 10 people.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1900,7 +1900,7 @@
       "n_paragraphs": 2,
       "question": "How many days did I spend attending workshops, lectures, and conferences in April?",
       "gold_answer": "3 days",
-      "predicted": "You attended workshops, lectures, and conferences for a total of 4 days in April: 2 days for the workshop on the 17th and 18th, and 1 day for the lecture on sustainable development on the 10th, plus an additional day for the urban planning and sustainable development resources discussion.",
+      "predicted": "You attended workshops, lectures, and conferences for a total of 4 days in April: 2 days for the workshop on the 17th and 18th, and 1 day for the lecture on sustainable development on the 10th, plus an additional day for the earlier mentioned workshop.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1939,7 +1939,7 @@
       "question": "How many titles are currently on my to-watch list?",
       "gold_answer": "25",
       "predicted": "20 titles.",
-      "judge_score": 0.5,
+      "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
         1,
@@ -1978,7 +1978,7 @@
       "n_paragraphs": 1,
       "question": "What game did I finally beat last weekend?",
       "gold_answer": "Dark Souls 3 DLC",
-      "predicted": "Dark Souls 3.",
+      "predicted": "You finally beat the last boss in the Dark Souls 3 DLC.",
       "judge_score": 0.5,
       "recall_at_k": 1.0,
       "retrieved_steps": [
