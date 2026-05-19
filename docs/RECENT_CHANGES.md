@@ -1,7 +1,118 @@
 # Recent Changes — Session Log
 
 **Purpose:** Record of work done on the thesis codebase (analysis, fixes, dashboard, figures).
-**Last updated:** April 2026
+**Last updated:** May 2026
+
+---
+
+## -5. Stage 3 Phase 1 + 1.5 — adapters, adversarial tests, theta tuning, retrieval study, orchestrator (May 2026)
+
+Built the full Stage-3 evaluation stack on top of the six real-data
+adapters from entry -4: a 4-layer test pyramid (snapshot + schema +
+adversarial + retrieval smoke), CMA-ES per-benchmark θ tuning, a 12+1
+memory-system retrieval study on real data, and a Phase-4 orchestrator
+with a `--dry-run` cost projection mode.
+
+**Headline empirical result (real data, no LLM):**
+
+V4 with per-benchmark CMA-ES-tuned θ **beats every other memory system
+and beats V4-canonical by +0.26 to +0.36 recall** on the two long-haystack
+benchmarks:
+
+| Benchmark | V4-canonical | V4-tuned | Δ |
+|---|---:|---:|---:|
+| CUAD   | 0.366 | **0.629** | **+0.263** |
+| QASPER | 0.208 | **0.563** | **+0.355** |
+
+The other four benchmarks (HotpotQA, FinanceBench, LongMemEval, NarrativeQA)
+saturate at recall = 1.0 or have no paragraph-level gold — ceiling-bound
+for any reasonable retriever. This produces a clean two-cluster
+finding: **memory-system differentiation only emerges on long-haystack
+tasks; on short ones, k=8 saturates retrieval regardless of the system**.
+
+**Phase-4 cost projection (dry-run, tiktoken-measured):** ~$1.50 for the
+canonical 6 × 3 × 30-question sweep — vastly under the original $60-70
+plan estimate. Cap-and-retrieve keeps prompts compact.
+
+**Test pyramid: 117 → 146 pytest tests, all green; determinism audit
+green.** Added 29 adversarial tests (5 per adapter avg) that mock
+edge-case inputs: yes_no=False, FLOAT_TYPE_NONEVIDENCE evidence sentinel,
+answer_start in blank-line gaps, multi-byte unicode (ﬁ ligature, 中文),
+mismatched parallel arrays, paragraph-cap truncation marker, all-
+unanswerable papers, etc. Each test docstring names its specific edge
+case for fast diagnosis.
+
+**Frontend:** `web/src/sections/Stage3.tsx` updated to render the live
+13×6 retrieval table sorted by long-haystack performance, with
+V4-tuned highlighted and side-cards showing per-benchmark canonical →
+tuned improvement. Data file: `web/public/data/stage3_retrieval.json`,
+built by `scripts/build_stage3_frontend_data.py`.
+
+Full writeup: [docs/STAGE3_PHASE1.md](STAGE3_PHASE1.md).
+
+**Files added:** `tests/test_benchmark_adversarial.py`,
+`tuning/__init__.py`, `tuning/tune_v4_per_benchmark.py`,
+`evaluation/benchmark_memory_eval.py`,
+`scripts/run_stage3_retrieval.py`, `scripts/run_stage3_full.py`,
+`scripts/build_stage3_frontend_data.py`,
+`web/public/data/stage3_retrieval.json`,
+`results/stage3/` (tuned_theta_*.json, retrieval_*.json,
+retrieval_summary.json, stage3_runs.json, cost_projection.json, cells/).
+
+**Modified:** `web/src/sections/Stage3.tsx`.
+
+**Phase 4 (real API)** is now a one-line invocation against
+`scripts/run_stage3_full.py --mode full`. Awaits API key + budget.
+
+---
+
+## -4. Stage 3 data prep — six real long-context benchmarks fetched + verified (May 2026)
+
+The thesis pivots from synthetic environments (grid-world + hand-authored
+DocumentQA) to **real, published long-context benchmarks** for the
+LLM-agent stage. Six benchmarks chosen to span disjoint domains:
+NarrativeQA (fiction), QASPER (science), CUAD (law), HotpotQA
+(Wikipedia / multi-hop), FinanceBench (finance), LongMemEval
+(long-term dialogue memory).
+
+**Phase 0 — fetch + verify (PASS):** all 6 benchmarks downloaded to
+`data/benchmarks/` (36.9 GB on disk, gitignored). `scripts/prefetch_benchmarks.py`
+handles idempotent fetch with merging manifest; `scripts/verify_benchmarks.py`
+runs offline (`HF_DATASETS_OFFLINE=1`) and confirms every benchmark has
+non-empty `(question, answer, source content)` for sampled items, with
+length distributions reported. 6/6 OK.
+
+**Three problems hit and fixed mid-flight:**
+1. HF `datasets>=3` dropped loading-script support → QASPER and CUAD now
+   pulled from canonical archives (AI2 S3 / Zenodo) instead of HF.
+2. Original `xiaowu0162/longmemeval` HF repo deprecated → switched to
+   `xiaowu0162/longmemeval-cleaned`.
+3. `load_dataset` autoparse fails on longmemeval-cleaned (answer-column
+   type mismatch) → bypassed via `huggingface_hub.hf_hub_download`
+   directly on the raw JSON files.
+
+**Two gold-relevance signals confirmed:** HotpotQA `supporting_facts` and
+LongMemEval `answer_session_ids` both expose per-question gold relevance
+labels — directly compatible with the existing precision@k / recall@k
+metric path (same shape as `relevant_paragraph_indices` in synthetic
+DocumentQA).
+
+**Headline scale:** NarrativeQA documents reach **1,199,816 chars** on
+the largest sample (full books); CUAD contracts reach 338 K chars
+(p95 = 161 K); the other four are in 5 K–55 K range — the regime where
+selective memory is the lever.
+
+Full writeup: [docs/STAGE3_DATA_PREP.md](STAGE3_DATA_PREP.md).
+
+**Files added:** `scripts/prefetch_benchmarks.py`,
+`scripts/verify_benchmarks.py`, `data/benchmarks/manifest.json`,
+`data/benchmarks/verification.json`, `docs/STAGE3_DATA_PREP.md`.
+`requirements.txt` adds `datasets>=2.14`, `huggingface_hub>=0.20`.
+`.gitignore` excludes `data/benchmarks/`.
+
+Next phase: build six adapter modules in `environment/benchmarks/` that
+translate each benchmark's native shape into the `DocumentQA`-compatible
+`(title, paragraphs, qa_pairs)` contract.
 
 ---
 
