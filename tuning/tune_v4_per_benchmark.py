@@ -248,6 +248,11 @@ def main() -> int:
         "--out-dir", default="results/stage3",
         help="Output directory for per-benchmark tuning JSON files.",
     )
+    parser.add_argument(
+        "--out-suffix", default="",
+        help="Optional suffix for output filenames: tuned_theta_{suffix_}{bench}.json. "
+             "Use to preserve a prior narrow run while running a wider second pass.",
+    )
     args = parser.parse_args()
 
     if args.quick:
@@ -279,7 +284,8 @@ def main() -> int:
             result = {"name": name, "status": "error", "error": repr(e)}
 
         # Save per-benchmark file.
-        out_path = out_dir / f"tuned_theta_{name}.json"
+        suffix = f"{args.out_suffix}_" if args.out_suffix else ""
+        out_path = out_dir / f"tuned_theta_{suffix}{name}.json"
         result["_manifest"] = build_manifest(seed=args.seed, extra={
             "experiment": "stage3_theta_tuning",
             "benchmark": name,

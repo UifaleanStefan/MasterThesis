@@ -160,6 +160,70 @@
       "n_gold_questions": 28
     }
   },
+  "transfer_matrix": {
+    "rows": [
+      "canonical",
+      "qasper-tuned",
+      "cuad-tuned"
+    ],
+    "cols": [
+      "qasper",
+      "cuad"
+    ],
+    "matrix_means": {
+      "canonical": {
+        "qasper": 0.20833333333333334,
+        "cuad": 0.3655913978494624
+      },
+      "qasper-tuned": {
+        "qasper": 0.5625,
+        "cuad": 0.5913978494623656
+      },
+      "cuad-tuned": {
+        "qasper": 0.5,
+        "cuad": 0.6290322580645161
+      }
+    },
+    "diagonal_avg": 0.595766129032258,
+    "off_diagonal_avg": 0.5456989247311828,
+    "canonical_avg": 0.28696236559139787,
+    "diagonal_lift_vs_canonical": 0.30880376344086014,
+    "off_diagonal_lift_vs_canonical": 0.2587365591397849,
+    "interpretation": "Diagonal cells (matched theta) beat canonical by avg +0.309. Off-diagonal cells exceed canonical by avg +0.259 \u2014 some cross-task transfer DOES happen between the long-haystack benchmarks."
+  },
+  "width_comparison": {
+    "threshold": 0.02,
+    "results": {
+      "qasper": {
+        "status": "ok",
+        "canonical_recall": 0.10714285714285714,
+        "narrow_recall": 0.4642857142857143,
+        "wide_recall": 0.576271186440678,
+        "delta_narrow_vs_canonical": 0.35714285714285715,
+        "delta_wide_vs_canonical": 0.46912832929782083,
+        "delta_wide_vs_narrow": 0.11198547215496368,
+        "prefer_wide": true,
+        "narrow_n_docs": 8,
+        "narrow_n_generations": 10,
+        "wide_n_docs": 20,
+        "wide_n_generations": 30
+      },
+      "cuad": {
+        "status": "ok",
+        "canonical_recall": 0.4578313253012048,
+        "narrow_recall": 0.6867469879518072,
+        "wide_recall": 0.670995670995671,
+        "delta_narrow_vs_canonical": 0.22891566265060243,
+        "delta_wide_vs_canonical": 0.21316434569446624,
+        "delta_wide_vs_narrow": -0.015751316956136185,
+        "prefer_wide": false,
+        "narrow_n_docs": 8,
+        "narrow_n_generations": 10,
+        "wide_n_docs": 20,
+        "wide_n_generations": 30
+      }
+    }
+  },
   "manifest": {
     "git_sha": "96bfe7f",
     "git_dirty": true,

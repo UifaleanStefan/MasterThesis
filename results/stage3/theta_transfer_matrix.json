@@ -1,0 +1,91 @@
+{
+  "_manifest": {
+    "git_sha": "0e83892",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T10:35:55+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "theta_transfer_matrix",
+    "benchmarks": [
+      "qasper",
+      "cuad"
+    ],
+    "n_docs": 15,
+    "k": 8
+  },
+  "rows": [
+    "canonical",
+    "qasper-tuned",
+    "cuad-tuned"
+  ],
+  "row_sources": {
+    "canonical": "grid_world_baseline",
+    "qasper-tuned": "wide",
+    "cuad-tuned": "narrow"
+  },
+  "cols": [
+    "qasper",
+    "cuad"
+  ],
+  "matrix": {
+    "canonical": {
+      "qasper": {
+        "mean_recall": 0.20833333333333334,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 6.3678953647613525
+      },
+      "cuad": {
+        "mean_recall": 0.3655913978494624,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 11.899395227432251
+      }
+    },
+    "qasper-tuned": {
+      "qasper": {
+        "mean_recall": 0.5625,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 0.17761921882629395
+      },
+      "cuad": {
+        "mean_recall": 0.5913978494623656,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 0.665743350982666
+      }
+    },
+    "cuad-tuned": {
+      "qasper": {
+        "mean_recall": 0.5,
+        "n_questions_with_gold": 48,
+        "n_questions_total": 50,
+        "n_docs": 15,
+        "elapsed_s": 0.20401334762573242
+      },
+      "cuad": {
+        "mean_recall": 0.6290322580645161,
+        "n_questions_with_gold": 186,
+        "n_questions_total": 186,
+        "n_docs": 15,
+        "elapsed_s": 0.7260775566101074
+      }
+    }
+  },
+  "diagonal_avg": 0.595766129032258,
+  "off_diagonal_avg": 0.5456989247311828,
+  "canonical_avg": 0.28696236559139787,
+  "diagonal_lift_vs_canonical": 0.30880376344086014,
+  "off_diagonal_lift_vs_canonical": 0.2587365591397849,
+  "interpretation": "Diagonal cells (matched theta) beat canonical by avg +0.309. Off-diagonal cells exceed canonical by avg +0.259 \u2014 some cross-task transfer DOES happen between the long-haystack benchmarks.",
+  "elapsed_s": 20.932502031326294
+}

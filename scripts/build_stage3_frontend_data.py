@@ -74,11 +74,49 @@ def main() -> int:
             "n_gold_questions": tj.get("n_gold_questions"),
         }
 
+    # Cross-benchmark theta-transfer matrix (optional — present iff W3 ran).
+    transfer_payload: dict | None = None
+    transfer_path = TUNED_DIR / "theta_transfer_matrix.json"
+    if transfer_path.exists():
+        try:
+            tj = json.loads(transfer_path.read_text())
+            transfer_payload = {
+                "rows": tj.get("rows", []),
+                "cols": tj.get("cols", []),
+                "matrix_means": {
+                    row: {col: cell.get("mean_recall") for col, cell in row_data.items()}
+                    for row, row_data in tj.get("matrix", {}).items()
+                },
+                "diagonal_avg": tj.get("diagonal_avg"),
+                "off_diagonal_avg": tj.get("off_diagonal_avg"),
+                "canonical_avg": tj.get("canonical_avg"),
+                "diagonal_lift_vs_canonical": tj.get("diagonal_lift_vs_canonical"),
+                "off_diagonal_lift_vs_canonical": tj.get("off_diagonal_lift_vs_canonical"),
+                "interpretation": tj.get("interpretation"),
+            }
+        except Exception as e:
+            print(f"  [WARN] failed to load transfer matrix: {e!r}")
+
+    # Narrow vs wide tuning comparison (optional).
+    width_comparison: dict | None = None
+    width_path = TUNED_DIR / "theta_width_comparison.json"
+    if width_path.exists():
+        try:
+            wc = json.loads(width_path.read_text())
+            width_comparison = {
+                "threshold": wc.get("threshold"),
+                "results": wc.get("results", {}),
+            }
+        except Exception:
+            pass
+
     out = {
         "benchmarks": benchmarks,
         "systems": sorted(base_systems.keys()),
         "table": base_systems,
         "tuned_vs_canonical": tuned_vs_canonical,
+        "transfer_matrix": transfer_payload,
+        "width_comparison": width_comparison,
         "manifest": data.get("_manifest", {}),
     }
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -87,6 +125,10 @@ def main() -> int:
     print(f"  benchmarks: {benchmarks}")
     print(f"  systems:    {sorted(base_systems.keys())}")
     print(f"  tuned-v-canonical: {list(tuned_vs_canonical.keys())}")
+    if transfer_payload:
+        print(f"  transfer matrix: rows={transfer_payload['rows']}, cols={transfer_payload['cols']}")
+    if width_comparison:
+        print(f"  width comparison: {list(width_comparison['results'].keys())}")
     return 0
 
 

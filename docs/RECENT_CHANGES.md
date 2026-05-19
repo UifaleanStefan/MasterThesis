@@ -5,6 +5,65 @@
 
 ---
 
+## -6. Stage 3 Phase 1.6 — wider tuning, cross-benchmark theta transfer, thesis chapter draft (May 2026)
+
+Three short post-Phase-1.5 threads that compound the headline result.
+
+**Wider CMA-ES tuning** (`tuning/tune_v4_per_benchmark.py` gains `--out-suffix`):
+ran QASPER + CUAD with `n_docs=20, n_generations=30` (vs the narrow Phase-1.5 defaults of 8 and 10).
+QASPER lifted further: 0.464 -> **0.576** (+0.11 over narrow). CUAD marginally regressed: 0.687 -> 0.671
+(CMA-ES non-convexity; narrow's smaller eval ensemble happened to land a slightly better candidate).
+`scripts/compare_theta_widths.py` records the comparison in `theta_width_comparison.json` and flags
+which width is preferred per benchmark. The transfer experiment downstream uses the better of
+(narrow, wide) per benchmark — wide-QASPER + narrow-CUAD.
+
+**Cross-benchmark theta-transfer ablation** (`scripts/run_theta_transfer.py`) — and the empirical
+hypothesis got overruled. Built a 3 x 2 matrix to test whether QASPER-tuned theta and CUAD-tuned
+theta would FAIL to transfer across each other's benchmarks (the Stage-1 within-family
+transfer-failure hypothesis). Instead:
+
+| theta source -> | QASPER eval | CUAD eval |
+|---|---:|---:|
+| canonical (grid-world) | 0.208 | 0.366 |
+| QASPER-tuned (wide) | **0.563** | 0.591 |
+| CUAD-tuned (narrow) | 0.500 | **0.629** |
+
+Off-diagonal cells recover 84% of the diagonal lift over canonical (off-diag avg +0.259 vs
+diagonal avg +0.309). The honest finding is **task-tuned theta on long-haystack QA generalizes
+within the document-QA family. Grid-world theta is bad for document QA in general; any
+in-family tuned theta lifts retrieval substantially across the family.** Memory is task-dependent
+at the task-family granularity (grid-world != document-QA), not the within-family granularity
+(QASPER != CUAD within document-QA).
+
+**Thesis chapter draft** (`docs/THESIS_STAGE3_CHAPTER.md`, ~13 pages of prose) — full sections
+1 (Introduction), 2 (Related Work), 3 (Methodology), 4 (Experimental Setup), 6 (Discussion), and
+7 (Future Work). Section 5 (Results) ships with the live retrieval-quality table from Phase 1.5
+plus the new transfer matrix from Phase 1.6, with placeholders for Phase 4's LLM answer-quality
++ cost numbers. Style mirrors `docs/THESIS_STORY.md` (direct, claim-driven, with numbers).
+
+**Frontend**: `web/src/sections/Stage3.tsx` gains a `TransferMatrixPanel` rendering the 3 x 2
+matrix with the diagonal cells highlighted (★) and summary stats showing diagonal-vs-off-diagonal
+average lifts. The supporting `web/public/data/stage3_retrieval.json` now includes
+`transfer_matrix` and `width_comparison` blocks. TypeScript clean.
+
+**Regression**: 146/146 pytest tests still pass; determinism audit green.
+
+Full writeup: [docs/THESIS_STAGE3_CHAPTER.md](THESIS_STAGE3_CHAPTER.md).
+
+**Files added (Phase 1.6):** `scripts/compare_theta_widths.py`,
+`scripts/run_theta_transfer.py`, `docs/THESIS_STAGE3_CHAPTER.md`,
+`results/stage3/tuned_theta_wide_qasper.json`,
+`results/stage3/tuned_theta_wide_cuad.json`,
+`results/stage3/theta_width_comparison.json`,
+`results/stage3/theta_transfer_matrix.json`.
+
+**Modified:** `tuning/tune_v4_per_benchmark.py` (`--out-suffix`),
+`scripts/build_stage3_frontend_data.py` (transfer + width sections),
+`web/public/data/stage3_retrieval.json` (regenerated),
+`web/src/sections/Stage3.tsx` (TransferMatrixPanel component).
+
+---
+
 ## -5. Stage 3 Phase 1 + 1.5 — adapters, adversarial tests, theta tuning, retrieval study, orchestrator (May 2026)
 
 Built the full Stage-3 evaluation stack on top of the six real-data

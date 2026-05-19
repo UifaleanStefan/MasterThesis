@@ -15,11 +15,23 @@ type TunedRecord = {
     n_gold_questions: number;
   };
 };
+type TransferMatrix = {
+  rows: string[];
+  cols: string[];
+  matrix_means: { [row: string]: { [col: string]: number | null } };
+  diagonal_avg: number | null;
+  off_diagonal_avg: number | null;
+  canonical_avg: number | null;
+  diagonal_lift_vs_canonical: number | null;
+  off_diagonal_lift_vs_canonical: number | null;
+  interpretation: string | null;
+};
 type StageData = {
   benchmarks: string[];
   systems: string[];
   table: StageRecord;
   tuned_vs_canonical: TunedRecord;
+  transfer_matrix?: TransferMatrix | null;
 };
 
 const HEADLINE_BENCHMARKS = ["qasper", "cuad"];
@@ -61,7 +73,12 @@ export function Stage3() {
       {/* Headline result table */}
       <div className="mt-8">
         {data ? (
-          <RetrievalTable data={data} />
+          <>
+            <RetrievalTable data={data} />
+            {data.transfer_matrix ? (
+              <TransferMatrixPanel matrix={data.transfer_matrix} />
+            ) : null}
+          </>
         ) : (
           <div
             className="panel-rise p-8 text-center"
@@ -370,6 +387,177 @@ function RetrievalTable({ data }: { data: StageData }) {
           ))}
         </div>
       </div>
+    </motion.div>
+  );
+}
+
+function TransferMatrixPanel({ matrix }: { matrix: TransferMatrix }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: 0.1 }}
+      className="panel-rise p-6 mt-4"
+      style={{
+        background:
+          "linear-gradient(135deg, transparent 0%, var(--color-cyan-soft) 100%), var(--color-surface)",
+      }}
+    >
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <div>
+          <div
+            className="text-[0.65rem] uppercase tracking-[0.18em]"
+            style={{ color: "var(--color-muted)" }}
+          >
+            cross-benchmark theta transfer · 3 × 2 matrix · n_docs = 15
+          </div>
+          <h3 className="font-semibold text-lg mt-1">
+            Does task-specific θ generalize across long-haystack benchmarks?
+          </h3>
+        </div>
+      </div>
+
+      <table className="w-full text-xs font-mono">
+        <thead>
+          <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+            <th className="text-left py-2 pr-3 font-semibold">θ source ↓ / eval →</th>
+            {matrix.cols.map((col) => (
+              <th
+                key={col}
+                className="text-right py-2 px-2 font-semibold"
+                style={{ color: "var(--color-amber)" }}
+              >
+                {col}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {matrix.rows.map((row) => (
+            <tr
+              key={row}
+              style={{ borderBottom: "1px solid var(--color-border-soft)" }}
+            >
+              <td
+                className="py-2 pr-3"
+                style={{
+                  color:
+                    row === "canonical"
+                      ? "var(--color-muted)"
+                      : "var(--color-text)",
+                  fontWeight: row === "canonical" ? 400 : 500,
+                }}
+              >
+                {row}
+              </td>
+              {matrix.cols.map((col) => {
+                const v = matrix.matrix_means?.[row]?.[col];
+                const isDiagonal = row === `${col}-tuned`;
+                return (
+                  <td
+                    key={col}
+                    className="text-right py-2 px-2 tabular-nums"
+                    style={{
+                      color: isDiagonal
+                        ? "var(--color-emerald)"
+                        : typeof v === "number" && v > 0.4
+                        ? "var(--color-text)"
+                        : "var(--color-muted)",
+                      fontWeight: isDiagonal ? 700 : 400,
+                    }}
+                  >
+                    {typeof v === "number" ? v.toFixed(3) : "—"}
+                    {isDiagonal ? " ★" : ""}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Summary stats */}
+      <div className="grid sm:grid-cols-3 gap-3 mt-5">
+        <div className="text-center">
+          <div
+            className="text-[0.6rem] uppercase tracking-wider mb-1"
+            style={{ color: "var(--color-muted)" }}
+          >
+            canonical avg
+          </div>
+          <div
+            className="font-mono text-lg"
+            style={{ color: "var(--color-text-2)" }}
+          >
+            {matrix.canonical_avg !== null && matrix.canonical_avg !== undefined
+              ? matrix.canonical_avg.toFixed(3)
+              : "—"}
+          </div>
+        </div>
+        <div className="text-center">
+          <div
+            className="text-[0.6rem] uppercase tracking-wider mb-1"
+            style={{ color: "var(--color-muted)" }}
+          >
+            diagonal avg (matched θ)
+          </div>
+          <div
+            className="font-mono text-lg"
+            style={{ color: "var(--color-emerald)", fontWeight: 700 }}
+          >
+            {matrix.diagonal_avg !== null && matrix.diagonal_avg !== undefined
+              ? matrix.diagonal_avg.toFixed(3)
+              : "—"}
+            {matrix.diagonal_lift_vs_canonical !== null &&
+              matrix.diagonal_lift_vs_canonical !== undefined && (
+                <span
+                  className="text-xs ml-2"
+                  style={{ color: "var(--color-emerald)" }}
+                >
+                  {matrix.diagonal_lift_vs_canonical >= 0 ? "+" : ""}
+                  {matrix.diagonal_lift_vs_canonical.toFixed(3)}
+                </span>
+              )}
+          </div>
+        </div>
+        <div className="text-center">
+          <div
+            className="text-[0.6rem] uppercase tracking-wider mb-1"
+            style={{ color: "var(--color-muted)" }}
+          >
+            off-diagonal avg (mismatched θ)
+          </div>
+          <div
+            className="font-mono text-lg"
+            style={{ color: "var(--color-cyan)", fontWeight: 600 }}
+          >
+            {matrix.off_diagonal_avg !== null &&
+            matrix.off_diagonal_avg !== undefined
+              ? matrix.off_diagonal_avg.toFixed(3)
+              : "—"}
+            {matrix.off_diagonal_lift_vs_canonical !== null &&
+              matrix.off_diagonal_lift_vs_canonical !== undefined && (
+                <span
+                  className="text-xs ml-2"
+                  style={{ color: "var(--color-cyan)" }}
+                >
+                  {matrix.off_diagonal_lift_vs_canonical >= 0 ? "+" : ""}
+                  {matrix.off_diagonal_lift_vs_canonical.toFixed(3)}
+                </span>
+              )}
+          </div>
+        </div>
+      </div>
+
+      {matrix.interpretation ? (
+        <p
+          className="mt-5 text-sm leading-relaxed"
+          style={{ color: "var(--color-text-2)" }}
+        >
+          {matrix.interpretation}
+        </p>
+      ) : null}
     </motion.div>
   );
 }
