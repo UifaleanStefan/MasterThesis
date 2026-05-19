@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "a19b5c1",
+    "git_sha": "46baecf",
     "git_dirty": true,
-    "timestamp_utc": "2026-05-19T21:46:58+00:00",
+    "timestamp_utc": "2026-05-19T22:01:41+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -13,70 +13,70 @@
     "mode": "full",
     "model": "gpt-4o-mini",
     "benchmarks": [
-      "cuad",
-      "qasper"
+      "qasper",
+      "cuad"
     ],
     "configs": [
-      "bm25",
-      "attention-tuned"
+      "v4-canonical",
+      "v4-tuned"
     ],
     "n_questions": 100,
-    "k": 8
+    "k": 16
   },
   "config": {
     "mode": "full",
     "model": "gpt-4o-mini",
     "benchmarks": [
-      "cuad",
-      "qasper"
+      "qasper",
+      "cuad"
     ],
     "configs": [
-      "bm25",
-      "attention-tuned"
+      "v4-canonical",
+      "v4-tuned"
     ],
     "n_questions": 100,
-    "k": 8
+    "k": 16
   },
-  "total_projected_cost_usd": 0.11964254999999999,
-  "total_actual_cost_usd": 0.0,
-  "total_prompt_tokens": 557617,
-  "elapsed_s": 151.0460171699524,
+  "total_projected_cost_usd": 0.14396655,
+  "total_actual_cost_usd": 0.09614265000000004,
+  "total_prompt_tokens": 719777,
+  "elapsed_s": 1151.3210663795471,
   "cells": [
     {
-      "benchmark": "cuad",
-      "config": "bm25",
-      "mean_recall_at_k": 0.3,
-      "mean_judge_score": 0.18449999999999997,
-      "total_prompt_tokens": 222118,
-      "projected_cost_usd": 0.0423177,
-      "actual_cost_usd": 0.0
-    },
-    {
-      "benchmark": "cuad",
-      "config": "attention-tuned",
-      "mean_recall_at_k": 0.38,
-      "mean_judge_score": 0.32158333333333333,
-      "total_prompt_tokens": 151521,
-      "projected_cost_usd": 0.03172815,
-      "actual_cost_usd": 0.0
+      "benchmark": "qasper",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.6956521739130435,
+      "mean_judge_score": 0.215,
+      "total_prompt_tokens": 128385,
+      "projected_cost_usd": 0.02825775,
+      "actual_cost_usd": 0.017265900000000004
     },
     {
       "benchmark": "qasper",
-      "config": "bm25",
-      "mean_recall_at_k": 0.6739130434782609,
-      "mean_judge_score": 0.05785277202668507,
-      "total_prompt_tokens": 110373,
-      "projected_cost_usd": 0.02555595,
-      "actual_cost_usd": 0.0
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.7934782608695652,
+      "mean_judge_score": 0.245,
+      "total_prompt_tokens": 149976,
+      "projected_cost_usd": 0.0314964,
+      "actual_cost_usd": 0.01968195
     },
     {
-      "benchmark": "qasper",
-      "config": "attention-tuned",
-      "mean_recall_at_k": 0.6739130434782609,
-      "mean_judge_score": 0.10056084656084653,
-      "total_prompt_tokens": 73605,
-      "projected_cost_usd": 0.02004075,
-      "actual_cost_usd": 0.0
+      "benchmark": "cuad",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.33,
+      "mean_judge_score": 0.259,
+      "total_prompt_tokens": 193471,
+      "projected_cost_usd": 0.038020649999999996,
+      "actual_cost_usd": 0.02617950000000002
+    },
+    {
+      "benchmark": "cuad",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.44,
+      "mean_judge_score": 0.23399999999999999,
+      "total_prompt_tokens": 247945,
+      "projected_cost_usd": 0.04619175,
+      "actual_cost_usd": 0.03301530000000001
     }
   ]
 }

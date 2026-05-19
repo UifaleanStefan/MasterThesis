@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "96bfe7f",
+    "git_sha": "c3e204c",
     "git_dirty": true,
-    "timestamp_utc": "2026-05-19T09:22:13+00:00",
+    "timestamp_utc": "2026-05-19T11:27:51+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -20,7 +20,7 @@
       "narrativeqa",
       "qasper"
     ],
-    "has_api_key": false
+    "has_api_key": true
   },
   "experiment": "stage3_api_smoke",
   "config": {
@@ -35,9 +35,9 @@
       "qasper"
     ]
   },
-  "total_agent_cost_usd": 0.0,
-  "total_judge_cost_usd": 0.0,
-  "elapsed_s": 7.439300060272217,
+  "total_agent_cost_usd": 0.0022524,
+  "total_judge_cost_usd": 0.00017894999999999999,
+  "elapsed_s": 39.01606869697571,
   "results": [
     {
       "name": "cuad",
@@ -49,8 +49,8 @@
       "n_paragraphs": 122,
       "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
       "gold_answer": "DISTRIBUTOR AGREEMENT",
-      "predicted": "6.5      Entire Agreement.",
-      "judge_score": 0.5,
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include:\n\n1. Section 6.5 - Entire Agreement: This section states that the agreement supersedes all other agreements and can only be modified in writing, which is crucial for understanding the binding nature of the contract.\n\n2. Section 5.3 - Indemnification: This section outlines the indemnification obligations of both parties, which is important for liability considerations.\n\n3. Section 1.2 - License: This section details the rights granted to the Distributor regarding the use of the name \"Electric City of Illinois,\" including conditions for termination and sublicensing, which are significant for intellectual property rights.",
+      "judge_score": 0.0,
       "retrieved_steps": [
         108,
         83,
@@ -66,14 +66,14 @@
       ],
       "gold_in_topk": false,
       "n_events_stored": 122,
-      "reading_seconds": 0.9220000000204891,
-      "llm_seconds": 0.0,
-      "judge_seconds": 0.0,
-      "agent_cost_usd": 0.0,
-      "agent_prompt_tokens": 0,
-      "agent_completion_tokens": 0,
-      "judge_cost_usd_cumulative": 0.0,
-      "judge_calls_cumulative": 0
+      "reading_seconds": 1.047000000020489,
+      "llm_seconds": 6.233999999938533,
+      "judge_seconds": 0.6570000000065193,
+      "agent_cost_usd": 0.00021569999999999998,
+      "agent_prompt_tokens": 902,
+      "agent_completion_tokens": 134,
+      "judge_cost_usd_cumulative": 4.0799999999999996e-05,
+      "judge_calls_cumulative": 1
     },
     {
       "name": "financebench",
@@ -85,8 +85,8 @@
       "n_paragraphs": 1,
       "question": "What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
       "gold_answer": "$1577.00",
-      "predicted": "[Document: 3M 10k 2018]\nTable of Contents \n3M Company and Subsidiaries\nConsolidated Statement of Cash Flow s\nYears ended December 31\n \n(Millions)\n \n2018\n \n2017\n \n2016\n \nCash Flows from Operating Activ",
-      "judge_score": 0.0,
+      "predicted": "$1,577 million",
+      "judge_score": 0.5,
       "retrieved_steps": [
         0
       ],
@@ -95,14 +95,14 @@
       ],
       "gold_in_topk": true,
       "n_events_stored": 1,
-      "reading_seconds": 0.0,
-      "llm_seconds": 0.015999999945051968,
-      "judge_seconds": 0.0,
-      "agent_cost_usd": 0.0,
-      "agent_prompt_tokens": 0,
-      "agent_completion_tokens": 0,
-      "judge_cost_usd_cumulative": 0.0,
-      "judge_calls_cumulative": 0
+      "reading_seconds": 0.015999999945051968,
+      "llm_seconds": 0.6720000000204891,
+      "judge_seconds": 1.515999999945052,
+      "agent_cost_usd": 0.0001449,
+      "agent_prompt_tokens": 946,
+      "agent_completion_tokens": 5,
+      "judge_cost_usd_cumulative": 6.24e-05,
+      "judge_calls_cumulative": 2
     },
     {
       "name": "hotpotqa",
@@ -114,8 +114,8 @@
       "n_paragraphs": 10,
       "question": "Were Scott Derrickson and Ed Wood of the same nationality?",
       "gold_answer": "yes",
-      "predicted": "Ed Wood\nEdward Davis Wood Jr. (October 10, 1924 \u2013 December 10, 1978) was an American filmmaker, actor, writer, producer, and director.",
-      "judge_score": 0.0,
+      "predicted": "Yes, both Scott Derrickson and Ed Wood were American.",
+      "judge_score": 0.5,
       "retrieved_steps": [
         4,
         0,
@@ -133,13 +133,13 @@
       "gold_in_topk": true,
       "n_events_stored": 10,
       "reading_seconds": 0.06199999991804361,
-      "llm_seconds": 0.0,
-      "judge_seconds": 0.0,
-      "agent_cost_usd": 0.0,
-      "agent_prompt_tokens": 0,
-      "agent_completion_tokens": 0,
-      "judge_cost_usd_cumulative": 0.0,
-      "judge_calls_cumulative": 0
+      "llm_seconds": 1.077999999979511,
+      "judge_seconds": 0.625,
+      "agent_cost_usd": 0.00015824999999999997,
+      "agent_prompt_tokens": 1007,
+      "agent_completion_tokens": 12,
+      "judge_cost_usd_cumulative": 8.429999999999999e-05,
+      "judge_calls_cumulative": 3
     },
     {
       "name": "longmemeval",
@@ -151,8 +151,8 @@
       "n_paragraphs": 3,
       "question": "What was the first issue I had with my new car after its first service?",
       "gold_answer": "GPS system not functioning correctly",
-      "predicted": "[Document: LongMemEval gpt4_2655b836 (temporal-reasoning)]\n[Session answer_4be1b6b4_2 on 2023/04/10 (Mon) 17:50]\nuser: I'm thinking of getting my car detailed soon.",
-      "judge_score": 0.0,
+      "predicted": "The first issue you had with your new car after its first service was with the GPS system, which you had to take back to the dealership to get fixed.",
+      "judge_score": 0.5,
       "retrieved_steps": [
         0,
         2,
@@ -166,13 +166,13 @@
       "gold_in_topk": true,
       "n_events_stored": 3,
       "reading_seconds": 0.030999999959021807,
-      "llm_seconds": 0.0,
-      "judge_seconds": 0.0,
-      "agent_cost_usd": 0.0,
-      "agent_prompt_tokens": 0,
-      "agent_completion_tokens": 0,
-      "judge_cost_usd_cumulative": 0.0,
-      "judge_calls_cumulative": 0
+      "llm_seconds": 6.203000000095926,
+      "judge_seconds": 0.7339999999385327,
+      "agent_cost_usd": 0.0013384500000000001,
+      "agent_prompt_tokens": 8795,
+      "agent_completion_tokens": 32,
+      "judge_cost_usd_cumulative": 0.00010979999999999999,
+      "judge_calls_cumulative": 4
     },
     {
       "name": "narrativeqa",
@@ -187,7 +187,7 @@
         "THE ACTOR WEARING THE BLACK CLOAK",
         "The actor in the black cloak"
       ],
-      "predicted": "[Document: NarrativeQA gutenberg 00fb61fa7bee266ad995e52190ebb73606b60b70 #0]\nThe play begins with three pages disputing over the black cloak usually worn by the actor who delivers the prologue.",
+      "predicted": "The actor who wears the black cloak.",
       "judge_score": 1.0,
       "retrieved_steps": [
         489,
@@ -202,14 +202,14 @@
       "relevant_paragraphs": [],
       "gold_in_topk": null,
       "n_events_stored": 833,
-      "reading_seconds": 4.342999999993481,
-      "llm_seconds": 0.0,
-      "judge_seconds": 0.0,
-      "agent_cost_usd": 0.0,
-      "agent_prompt_tokens": 0,
-      "agent_completion_tokens": 0,
-      "judge_cost_usd_cumulative": 0.0,
-      "judge_calls_cumulative": 0
+      "reading_seconds": 4.5,
+      "llm_seconds": 0.7970000000204891,
+      "judge_seconds": 1.4070000000065193,
+      "agent_cost_usd": 0.00026339999999999995,
+      "agent_prompt_tokens": 1724,
+      "agent_completion_tokens": 8,
+      "judge_cost_usd_cumulative": 0.00015434999999999998,
+      "judge_calls_cumulative": 6
     },
     {
       "name": "qasper",
@@ -221,8 +221,8 @@
       "n_paragraphs": 84,
       "question": "What background knowledge do they leverage?",
       "gold_answer": "labeled features",
-      "predicted": "However, a crucial problem, which has rarely been addressed, is the bias in the prior knowledge that we supply to the learning model.",
-      "judge_score": 0.0,
+      "predicted": "They leverage prior knowledge to guide the learning process, which includes labeling unlabeled instances, constraining the model directly, and incorporating general domain knowledge.",
+      "judge_score": 0.5,
       "retrieved_steps": [
         4,
         3,
@@ -240,14 +240,14 @@
       ],
       "gold_in_topk": false,
       "n_events_stored": 84,
-      "reading_seconds": 0.3910000000614673,
-      "llm_seconds": 0.0,
-      "judge_seconds": 0.0,
-      "agent_cost_usd": 0.0,
-      "agent_prompt_tokens": 0,
-      "agent_completion_tokens": 0,
-      "judge_cost_usd_cumulative": 0.0,
-      "judge_calls_cumulative": 0
+      "reading_seconds": 0.5779999999795109,
+      "llm_seconds": 0.7650000000139698,
+      "judge_seconds": 0.5320000000065193,
+      "agent_cost_usd": 0.00013169999999999998,
+      "agent_prompt_tokens": 762,
+      "agent_completion_tokens": 29,
+      "judge_cost_usd_cumulative": 0.00017894999999999999,
+      "judge_calls_cumulative": 7
     }
   ]
 }
