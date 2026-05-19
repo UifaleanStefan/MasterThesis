@@ -8,6 +8,10 @@ openai>=1.0
 pyyaml>=6.0
 pytest>=7
 cma>=3.3
+# Stage 3 benchmarks — HuggingFace dataset loaders for NarrativeQA, QASPER,
+# CUAD, HotpotQA, FinanceBench (LongMemEval is fetched from GitHub directly).
+datasets>=2.14
+huggingface_hub>=0.20
 # NB: streamlit, pandas, plotly were removed when the Streamlit dashboard
 # was replaced by the web/ static site (April 2026). The web/ frontend uses
 # Vite + React + Tailwind and lives independently of Python deps.
