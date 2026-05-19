@@ -1,0 +1,163 @@
+{
+  "_manifest": {
+    "git_sha": "96bfe7f",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T09:50:52+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "dry-run",
+    "model": "gpt-4o-mini",
+    "benchmark": "qasper",
+    "config": "flat-50",
+    "k": 8,
+    "n_questions": 5
+  },
+  "ok": true,
+  "benchmark": "qasper",
+  "config": "flat-50",
+  "mode": "dry-run",
+  "n_questions": 5,
+  "n_with_gold": 5,
+  "n_with_judge": 5,
+  "mean_recall_at_k": 0.2,
+  "mean_judge_score": 0.2,
+  "total_prompt_tokens": 5175,
+  "total_completion_tokens_max": 750,
+  "projected_cost_usd": 0.00122625,
+  "actual_cost_usd": null,
+  "elapsed_seconds": 0.002088308334350586,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:6f50a33fea8778f6c462ead87b3f51c11428d7feb4fc9f410452d837f393e983",
+      "n_paragraphs": 84,
+      "question": "What background knowledge do they leverage?",
+      "gold_answer": "labeled features",
+      "predicted": "There are also some active learning methods trying to use prior knowledge. Raghavan et al.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "relevant_paragraphs": [
+        11,
+        41,
+        43
+      ],
+      "prompt_tokens_estimated": 766,
+      "projected_cost_usd": 0.00020489999999999997
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:963db5896af334749a452b4ba5074a672ee841f46fe23614ddf64ab6ec22e8f8",
+      "n_paragraphs": 213,
+      "question": "Do they report results only on English data?",
+      "gold_answer": "Yes",
+      "predicted": "To get an impression of the actual performance of the system on the data, we also provide the complete output of our best performing system in one PDF document together with the gold annotations in th",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212
+      ],
+      "relevant_paragraphs": [
+        75
+      ],
+      "prompt_tokens_estimated": 1112,
+      "projected_cost_usd": 0.00025679999999999995
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:3700bad361f4857822aa5f13b02e4b7f9f9523345dedec9f4fe10cb64522bb4b",
+      "n_paragraphs": 69,
+      "question": "What baseline model is used?",
+      "gold_answer": "same baseline as used by lang2011unsupervised",
+      "predicted": "As discussed in section SECREF24 , our work is closely related to the crosslingual unsupervised SRL work of titovcrosslingual.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68
+      ],
+      "relevant_paragraphs": [
+        38
+      ],
+      "prompt_tokens_estimated": 842,
+      "projected_cost_usd": 0.0002163
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:c6e94ef08aceb99ccd6458c35f76df5ebcce552668273cb9920428c61e1c5bf2",
+      "n_paragraphs": 80,
+      "question": "Is it valid to presume a bad medical wikipedia article should not contain much domain-specific jargon?",
+      "gold_answer": "(unanswerable per source)",
+      "predicted": "Automatic quality evaluation of Wikipedia articles has been addressed in previous works with both unsupervised and supervised learning approaches.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "relevant_paragraphs": [
+        27
+      ],
+      "prompt_tokens_estimated": 1622,
+      "projected_cost_usd": 0.00033329999999999997
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:301353b2e203745d0d73a1761a4e03130e33e4b826eabd133500ce0c90f02dd9",
+      "n_paragraphs": 46,
+      "question": "What is the size of the parallel corpus used to train the model constraints?",
+      "gold_answer": "1500 sentences",
+      "predicted": "A parser model was trained for Hindi using the MSTParser BIBREF2 by a part of the the Hindi Dependency Treebank data (18708 sentences) from IIIT-Hyderabad BIBREF3 .",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "relevant_paragraphs": [
+        39
+      ],
+      "prompt_tokens_estimated": 833,
+      "projected_cost_usd": 0.00021495
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "_manifest": {
+    "git_sha": "96bfe7f",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T09:50:52+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "dry-run",
+    "model": "gpt-4o-mini",
+    "benchmark": "qasper",
+    "config": "v4-canonical",
+    "k": 8,
+    "n_questions": 5
+  },
+  "ok": true,
+  "benchmark": "qasper",
+  "config": "v4-canonical",
+  "mode": "dry-run",
+  "n_questions": 5,
+  "n_with_gold": 5,
+  "n_with_judge": 5,
+  "mean_recall_at_k": 0.2,
+  "mean_judge_score": 0.0,
+  "total_prompt_tokens": 4902,
+  "total_completion_tokens_max": 750,
+  "projected_cost_usd": 0.0011853,
+  "actual_cost_usd": null,
+  "elapsed_seconds": 3.84100341796875,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:6f50a33fea8778f6c462ead87b3f51c11428d7feb4fc9f410452d837f393e983",
+      "n_paragraphs": 84,
+      "question": "What background knowledge do they leverage?",
+      "gold_answer": "labeled features",
+      "predicted": "The KL divergence performs much better on unbalanced corpora than other methods. The reason is that KL divergence utilizes the reference class distribution and doesn't make any assumptions.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        82,
+        81,
+        80,
+        78,
+        77,
+        76,
+        74,
+        72
+      ],
+      "relevant_paragraphs": [
+        11,
+        41,
+        43
+      ],
+      "prompt_tokens_estimated": 804,
+      "projected_cost_usd": 0.0002106
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:963db5896af334749a452b4ba5074a672ee841f46fe23614ddf64ab6ec22e8f8",
+      "n_paragraphs": 213,
+      "question": "Do they report results only on English data?",
+      "gold_answer": "Yes",
+      "predicted": "Third, there are aspects of online argumentation that lack their established theoretical counterparts, such as rhetorical questions, figurative language, narratives, and fallacies in general.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        211,
+        210,
+        209,
+        208,
+        206,
+        207,
+        205,
+        203
+      ],
+      "relevant_paragraphs": [
+        75
+      ],
+      "prompt_tokens_estimated": 1005,
+      "projected_cost_usd": 0.00024075
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:3700bad361f4857822aa5f13b02e4b7f9f9523345dedec9f4fe10cb64522bb4b",
+      "n_paragraphs": 69,
+      "question": "What baseline model is used?",
+      "gold_answer": "same baseline as used by lang2011unsupervised",
+      "predicted": "For monolingual unsupervised SRL, swier2004unsupervised presented the first work on a domain-general corpus, the British National Corpus, using 54 verbs taken from VerbNet.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        68,
+        67,
+        66,
+        64,
+        63,
+        37,
+        62,
+        61
+      ],
+      "relevant_paragraphs": [
+        38
+      ],
+      "prompt_tokens_estimated": 506,
+      "projected_cost_usd": 0.00016589999999999997
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:c6e94ef08aceb99ccd6458c35f76df5ebcce552668273cb9920428c61e1c5bf2",
+      "n_paragraphs": 80,
+      "question": "Is it valid to presume a bad medical wikipedia article should not contain much domain-specific jargon?",
+      "gold_answer": "(unanswerable per source)",
+      "predicted": "In this work, we aimed to provide a fine grained classification mechanism for all the quality classes of the articles of the Wikipedia Medical Portal.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        79,
+        78,
+        76,
+        77,
+        75,
+        74,
+        72,
+        66
+      ],
+      "relevant_paragraphs": [
+        27
+      ],
+      "prompt_tokens_estimated": 1681,
+      "projected_cost_usd": 0.00034215
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:301353b2e203745d0d73a1761a4e03130e33e4b826eabd133500ce0c90f02dd9",
+      "n_paragraphs": 46,
+      "question": "What is the size of the parallel corpus used to train the model constraints?",
+      "gold_answer": "1500 sentences",
+      "predicted": "In the event of lack of gold standard data for our experiments, we have used statistical POS taggers for POS tagging the data.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        44,
+        43,
+        42,
+        40,
+        41,
+        39,
+        33,
+        36
+      ],
+      "relevant_paragraphs": [
+        39
+      ],
+      "prompt_tokens_estimated": 906,
+      "projected_cost_usd": 0.00022590000000000002
+    }
+  ]
+}

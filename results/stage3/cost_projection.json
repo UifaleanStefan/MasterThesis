@@ -1,0 +1,121 @@
+{
+  "_manifest": {
+    "git_sha": "96bfe7f",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T09:50:53+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator_summary",
+    "mode": "dry-run",
+    "model": "gpt-4o-mini",
+    "benchmarks": [
+      "hotpotqa",
+      "qasper",
+      "financebench"
+    ],
+    "configs": [
+      "v4-canonical",
+      "v4-tuned",
+      "flat-50"
+    ],
+    "n_questions": 5,
+    "k": 8
+  },
+  "model": "gpt-4o-mini",
+  "n_questions": 5,
+  "n_benchmarks": 3,
+  "n_configs": 3,
+  "total_projected_cost_usd": 0.010039949999999997,
+  "total_prompt_tokens": 39933,
+  "per_cell": [
+    {
+      "benchmark": "hotpotqa",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.0,
+      "total_prompt_tokens": 5650,
+      "projected_cost_usd": 0.0012975,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.0,
+      "total_prompt_tokens": 5633,
+      "projected_cost_usd": 0.0012949499999999998,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "flat-50",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.4,
+      "total_prompt_tokens": 5596,
+      "projected_cost_usd": 0.0012894,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "qasper",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.2,
+      "mean_judge_score": 0.0,
+      "total_prompt_tokens": 4902,
+      "projected_cost_usd": 0.0011853,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "qasper",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.2,
+      "mean_judge_score": 0.26666666666666666,
+      "total_prompt_tokens": 5742,
+      "projected_cost_usd": 0.0013113,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "qasper",
+      "config": "flat-50",
+      "mean_recall_at_k": 0.2,
+      "mean_judge_score": 0.2,
+      "total_prompt_tokens": 5175,
+      "projected_cost_usd": 0.00122625,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "financebench",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.05,
+      "total_prompt_tokens": 2315,
+      "projected_cost_usd": 0.00079725,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "financebench",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.05,
+      "total_prompt_tokens": 2315,
+      "projected_cost_usd": 0.00079725,
+      "actual_cost_usd": null
+    },
+    {
+      "benchmark": "financebench",
+      "config": "flat-50",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.06,
+      "total_prompt_tokens": 2605,
+      "projected_cost_usd": 0.00084075,
+      "actual_cost_usd": null
+    }
+  ],
+  "pricing": {
+    "input": 0.15,
+    "output": 0.6
+  }
+}

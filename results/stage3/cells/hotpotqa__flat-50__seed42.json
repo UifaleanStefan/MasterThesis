@@ -1,0 +1,166 @@
+{
+  "_manifest": {
+    "git_sha": "96bfe7f",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T09:50:48+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "dry-run",
+    "model": "gpt-4o-mini",
+    "benchmark": "hotpotqa",
+    "config": "flat-50",
+    "k": 8,
+    "n_questions": 5
+  },
+  "ok": true,
+  "benchmark": "hotpotqa",
+  "config": "flat-50",
+  "mode": "dry-run",
+  "n_questions": 5,
+  "n_with_gold": 5,
+  "n_with_judge": 5,
+  "mean_recall_at_k": 1.0,
+  "mean_judge_score": 0.4,
+  "total_prompt_tokens": 5596,
+  "total_completion_tokens_max": 750,
+  "projected_cost_usd": 0.0012894,
+  "actual_cost_usd": null,
+  "elapsed_seconds": 0.0,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:e7e1aa339676b547d04bdd4607d81886b1af4ad81852641415d145ad63aada10",
+      "n_paragraphs": 10,
+      "question": "Were Scott Derrickson and Ed Wood of the same nationality?",
+      "gold_answer": "yes",
+      "predicted": "Woodson, Arkansas\nWoodson is a census-designated place (CDP) in Pulaski County, Arkansas, in the United States. Its population was 403 at the 2010 census.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 1050,
+      "projected_cost_usd": 0.0002475
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:cfba62f80f90f33de558ba341cb23a57c28e15daaf633cbb9742d940dd14b4e0",
+      "n_paragraphs": 10,
+      "question": "What government position was held by the woman who portrayed Corliss Archer in the film Kiss and Tell?",
+      "gold_answer": "Chief of Protocol",
+      "predicted": "Janet Waldo\nJanet Marie Waldo (February 4, 1920 \u2013 June 12, 2016) was an American radio and voice actress.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 1145,
+      "projected_cost_usd": 0.00026175
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:6e5280bcc9cd433a20d370619071f19dd3202c17fb3f6c140d90efb159e7bdeb",
+      "n_paragraphs": 10,
+      "question": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+      "gold_answer": "Animorphs",
+      "predicted": "The Hork-Bajir Chronicles\nThe Hork-Bajir Chronicles is the second companion book to the \"Animorphs\" series, written by K. A. Applegate.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1400,
+      "projected_cost_usd": 0.0003
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:2cb9d8f71db22c3d90fd7773124b3150be1b7eb9e9f8997deb228667eda548f6",
+      "n_paragraphs": 10,
+      "question": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+      "gold_answer": "no",
+      "predicted": "K\u00fc\u00e7\u00fck H\u00fcseyin Pasha\nK\u00fc\u00e7\u00fck H\u00fcseyin Pasha (1757 \u2013 7 December 1803), also known as Tayazade Damat K\u00fc\u00e7\u00fck H\u00fcseyin Pasha, was an Ottoman statesman and admiral who was Kapudan Pasha (Grand Admiral of the Ott",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 683,
+      "projected_cost_usd": 0.00019245
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:092e9ef9ab853bb38d76ced08fe80cc4a8a42fe3c8e318b9bd59438dd7d2e914",
+      "n_paragraphs": 10,
+      "question": "The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+      "gold_answer": "Greenwich Village, New York City",
+      "predicted": "Nola (film)\nNola is a 2003 American romantic comedy film written and directed by Alan Hruska.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        9
+      ],
+      "prompt_tokens_estimated": 1318,
+      "projected_cost_usd": 0.0002877
+    }
+  ]
+}

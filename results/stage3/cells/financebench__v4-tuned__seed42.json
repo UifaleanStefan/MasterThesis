@@ -1,0 +1,129 @@
+{
+  "_manifest": {
+    "git_sha": "96bfe7f",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T09:50:53+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "dry-run",
+    "model": "gpt-4o-mini",
+    "benchmark": "financebench",
+    "config": "v4-tuned",
+    "k": 8,
+    "n_questions": 5
+  },
+  "ok": true,
+  "benchmark": "financebench",
+  "config": "v4-tuned",
+  "mode": "dry-run",
+  "n_questions": 5,
+  "n_with_gold": 5,
+  "n_with_judge": 5,
+  "mean_recall_at_k": 1.0,
+  "mean_judge_score": 0.05,
+  "total_prompt_tokens": 2315,
+  "total_completion_tokens_max": 750,
+  "projected_cost_usd": 0.00079725,
+  "actual_cost_usd": null,
+  "elapsed_seconds": 0.0009381771087646484,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:00cff8be93e5f78588e134077f3a5d7d1eb3dee2b5b753869ba51fe560c512ca",
+      "n_paragraphs": 1,
+      "question": "What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
+      "gold_answer": "$1577.00",
+      "predicted": "[Document: 3M 10k 2018]\nTable of Contents \n3M Company and Subsidiaries\nConsolidated Statement of Cash Flow s\nYears ended December 31\n \n(Millions)\n \n2018\n \n2017\n \n2016\n \nCash Flows from Operating Activ",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 830,
+      "projected_cost_usd": 0.0002145
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:4b528dd73a2a240fc4a0db5c3587f37c1cf25f513cab4d3a7155f008d590e19f",
+      "n_paragraphs": 1,
+      "question": "Assume that you are a public equities analyst. Answer the following question by primarily using information that is shown in the balance sheet: what is the year end FY2018 net PPNE for 3M? Answer in USD billions.",
+      "gold_answer": "$8.70",
+      "predicted": "[Document: 3M 10k 2018]\nTable of Contents \n3M Company and Subsidiaries\nConsolidated Balance Shee t\nAt December 31\n \n \n \nDecember 31,\n \nDecember 31,\n \n(Dollars in millions, except per share amount)\n \n2",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 683,
+      "projected_cost_usd": 0.00019245
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:f9a0e4006683d0ca1220cf7f0104b7287ae17d9042b7e1b76f63cbdff21ff398",
+      "n_paragraphs": 3,
+      "question": "Is 3M a capital-intensive business based on FY2022 data?",
+      "gold_answer": "No, the company is managing its CAPEX and Fixed Assets pretty efficiently, which is evident from below key metrics:\nCAPEX/Revenue Ratio: 5.1%\nFixed assets/Total Assets: 20%\nReturn on Assets= 12.4%",
+      "predicted": "I do not know.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 340,
+      "projected_cost_usd": 0.000141
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:0c84cdd35a49ff00cd50175c7a1378b3d7c06e05ebbd39b8479f1e767162c12c",
+      "n_paragraphs": 1,
+      "question": "What drove operating margin change as of FY2022 for 3M? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
+      "gold_answer": "Operating Margin for 3M in FY2022 has decreased by 1.7% primarily due to: \n-Decrease in gross Margin\n-mostly one-off charges including Combat Arms Earplugs litigation, impairment related to exiting PFAS manufacturing, costs related to exiting Russia and divestiture-related restructuring\ncharges",
+      "predicted": "I do not know.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 285,
+      "projected_cost_usd": 0.00013275
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:58765039ef4438be2b280b7639216e7cc34652686098d13677a4994454d009e3",
+      "n_paragraphs": 1,
+      "question": "If we exclude the impact of M&A, which segment has dragged down 3M's overall growth in 2022?",
+      "gold_answer": "The consumer segment shrunk by 0.9% organically.",
+      "predicted": "[Document: 3M 10k 2022]\nWorldwide Sales Change \nBy Business Segment\nOrganic sales\nAcquisitions\nDivestitures\nTranslation\nTotal sales change\nSafety and Industrial\n1.0 %\n \n %\n %\n(4.2) %\n(3.",
+      "judge_score": 0.25,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 177,
+      "projected_cost_usd": 0.00011655
+    }
+  ]
+}

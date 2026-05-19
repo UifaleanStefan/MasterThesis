@@ -1,0 +1,163 @@
+{
+  "_manifest": {
+    "git_sha": "96bfe7f",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T09:50:52+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "dry-run",
+    "model": "gpt-4o-mini",
+    "benchmark": "qasper",
+    "config": "v4-tuned",
+    "k": 8,
+    "n_questions": 5
+  },
+  "ok": true,
+  "benchmark": "qasper",
+  "config": "v4-tuned",
+  "mode": "dry-run",
+  "n_questions": 5,
+  "n_with_gold": 5,
+  "n_with_judge": 5,
+  "mean_recall_at_k": 0.2,
+  "mean_judge_score": 0.26666666666666666,
+  "total_prompt_tokens": 5742,
+  "total_completion_tokens_max": 750,
+  "projected_cost_usd": 0.0013113,
+  "actual_cost_usd": null,
+  "elapsed_seconds": 0.11186337471008301,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:6f50a33fea8778f6c462ead87b3f51c11428d7feb4fc9f410452d837f393e983",
+      "n_paragraphs": 84,
+      "question": "What background knowledge do they leverage?",
+      "gold_answer": "labeled features",
+      "predicted": "However, the KL divergence term requires providing the true class distribution. Sometimes, we may have the exact knowledge about the true distribution, but sometimes we may not.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        83,
+        82,
+        4,
+        78,
+        3,
+        74,
+        72,
+        71
+      ],
+      "relevant_paragraphs": [
+        11,
+        41,
+        43
+      ],
+      "prompt_tokens_estimated": 1095,
+      "projected_cost_usd": 0.00025425
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:963db5896af334749a452b4ba5074a672ee841f46fe23614ddf64ab6ec22e8f8",
+      "n_paragraphs": 213,
+      "question": "Do they report results only on English data?",
+      "gold_answer": "Yes",
+      "predicted": "Since there is no one-size-fits-all argumentation theory to be applied to actual data on the Web, the argumentation model and an annotation scheme for argumentation mining is a function of the task re",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        212,
+        77,
+        159,
+        206,
+        191,
+        118,
+        106,
+        122
+      ],
+      "relevant_paragraphs": [
+        75
+      ],
+      "prompt_tokens_estimated": 955,
+      "projected_cost_usd": 0.00023325
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:3700bad361f4857822aa5f13b02e4b7f9f9523345dedec9f4fe10cb64522bb4b",
+      "n_paragraphs": 69,
+      "question": "What baseline model is used?",
+      "gold_answer": "same baseline as used by lang2011unsupervised",
+      "predicted": "Baseline",
+      "judge_score": 0.3333333333333333,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        37,
+        68,
+        55,
+        26,
+        66,
+        45,
+        44,
+        13
+      ],
+      "relevant_paragraphs": [
+        38
+      ],
+      "prompt_tokens_estimated": 316,
+      "projected_cost_usd": 0.0001374
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:c6e94ef08aceb99ccd6458c35f76df5ebcce552668273cb9920428c61e1c5bf2",
+      "n_paragraphs": 80,
+      "question": "Is it valid to presume a bad medical wikipedia article should not contain much domain-specific jargon?",
+      "gold_answer": "(unanswerable per source)",
+      "predicted": "In this work, we aimed to provide a fine grained classification mechanism for all the quality classes of the articles of the Wikipedia Medical Portal.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        78,
+        48,
+        32,
+        76,
+        12,
+        0,
+        53,
+        6
+      ],
+      "relevant_paragraphs": [
+        27
+      ],
+      "prompt_tokens_estimated": 2015,
+      "projected_cost_usd": 0.00039225
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:301353b2e203745d0d73a1761a4e03130e33e4b826eabd133500ce0c90f02dd9",
+      "n_paragraphs": 46,
+      "question": "What is the size of the parallel corpus used to train the model constraints?",
+      "gold_answer": "1500 sentences",
+      "predicted": "For testing, we created a corpus of 100 parallel sentences and their word alignments from the Hindi-English Tourism parallel corpus. We manually annotated the instances of pp-attachment ambiguity.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        40,
+        45,
+        30,
+        33,
+        27,
+        20,
+        21,
+        39
+      ],
+      "relevant_paragraphs": [
+        39
+      ],
+      "prompt_tokens_estimated": 1361,
+      "projected_cost_usd": 0.00029414999999999997
+    }
+  ]
+}
