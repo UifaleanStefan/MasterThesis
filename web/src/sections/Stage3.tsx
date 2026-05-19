@@ -34,16 +34,45 @@ type StageData = {
   transfer_matrix?: TransferMatrix | null;
 };
 
+type Phase4Cell = {
+  mean_judge: number | null;
+  mean_recall: number | null;
+  judge_95ci: [number, number] | null;
+  n_questions_pooled: number | null;
+};
+type PairedTest = {
+  n_pairs: number;
+  t: number | null;
+  p_two_sided: number | null;
+  mean_diff: number | null;
+  lift: number | null;
+  tuned_mean: number | null;
+  canonical_mean: number | null;
+};
+type Phase4Data = {
+  benchmarks: string[];
+  configs: string[];
+  seeds: number[];
+  summary: { [benchmark: string]: { [config: string]: Phase4Cell } };
+  paired_ttests: { [benchmark: string]: PairedTest };
+  total_cost_usd: number;
+};
+
 const HEADLINE_BENCHMARKS = ["qasper", "cuad"];
 
 export function Stage3() {
   const [data, setData] = useState<StageData | null>(null);
+  const [phase4, setPhase4] = useState<Phase4Data | null>(null);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/stage3_retrieval.json`)
       .then((r) => (r.ok ? r.json() : null))
       .then(setData)
       .catch(() => setData(null));
+    fetch(`${import.meta.env.BASE_URL}data/stage3_phase4.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setPhase4)
+      .catch(() => setPhase4(null));
   }, []);
 
   return (
@@ -78,6 +107,7 @@ export function Stage3() {
             {data.transfer_matrix ? (
               <TransferMatrixPanel matrix={data.transfer_matrix} />
             ) : null}
+            {phase4 ? <Phase4Panel data={phase4} /> : null}
           </>
         ) : (
           <div
@@ -558,6 +588,139 @@ function TransferMatrixPanel({ matrix }: { matrix: TransferMatrix }) {
           {matrix.interpretation}
         </p>
       ) : null}
+    </motion.div>
+  );
+}
+
+function Phase4Panel({ data }: { data: Phase4Data }) {
+  const sigMarker = (p: number | null): string =>
+    p === null ? "" : p < 0.001 ? "***" : p < 0.01 ? "**" : p < 0.05 ? "*" : "";
+  const winnersByBench: Record<string, string> = {};
+  data.benchmarks.forEach((b) => {
+    let best: { cfg: string; judge: number } | null = null;
+    data.configs.forEach((c) => {
+      const cell = data.summary[b]?.[c];
+      const j = cell?.mean_judge;
+      if (typeof j === "number" && (best === null || j > best.judge)) {
+        best = { cfg: c, judge: j };
+      }
+    });
+    if (best !== null) {
+      const w: { cfg: string; judge: number } = best;
+      winnersByBench[b] = w.cfg;
+    }
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: 0.2 }}
+      className="panel-rise p-6 mt-4"
+      style={{
+        background:
+          "linear-gradient(135deg, transparent 0%, var(--color-emerald-soft) 100%), var(--color-surface)",
+      }}
+    >
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <div>
+          <div
+            className="text-[0.65rem] uppercase tracking-[0.18em]"
+            style={{ color: "var(--color-muted)" }}
+          >
+            Phase 4 · LLM answer quality · gpt-4o-mini · {data.seeds.length} seed(s) × 100 questions × paired t-test
+          </div>
+          <h3 className="font-semibold text-lg mt-1">
+            LLM-Judge Score per Memory Configuration
+          </h3>
+        </div>
+        <div className="text-xs" style={{ color: "var(--color-text-2)" }}>
+          Total API spend: <span style={{ color: "var(--color-emerald)", fontWeight: 600 }}>${data.total_cost_usd.toFixed(4)}</span>
+        </div>
+      </div>
+
+      <table className="w-full text-xs font-mono">
+        <thead>
+          <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+            <th className="text-left py-2 pr-3 font-semibold">benchmark</th>
+            {data.configs.map((c) => (
+              <th
+                key={c}
+                className="text-right py-2 px-2 font-semibold"
+                style={{ color: "var(--color-text-2)" }}
+              >
+                {c}
+              </th>
+            ))}
+            <th className="text-right py-2 px-2 font-semibold" style={{ color: "var(--color-amber)" }}>
+              tuned-vs-canonical · paired-t
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.benchmarks.map((b) => {
+            const t = data.paired_ttests?.[b];
+            return (
+              <tr key={b} style={{ borderBottom: "1px solid var(--color-border-soft)" }}>
+                <td className="py-2 pr-3 font-medium">{b}</td>
+                {data.configs.map((c) => {
+                  const cell = data.summary[b]?.[c];
+                  const j = cell?.mean_judge;
+                  const ci = cell?.judge_95ci;
+                  const isWinner = winnersByBench[b] === c;
+                  return (
+                    <td
+                      key={c}
+                      className="text-right py-2 px-2 tabular-nums"
+                      style={{
+                        color: isWinner ? "var(--color-emerald)" : "var(--color-text)",
+                        fontWeight: isWinner ? 700 : 400,
+                      }}
+                    >
+                      {typeof j === "number" ? j.toFixed(3) : "—"}
+                      {ci ? (
+                        <div
+                          className="text-[0.6rem]"
+                          style={{ color: "var(--color-muted)", fontWeight: 400 }}
+                        >
+                          [{ci[0].toFixed(2)}, {ci[1].toFixed(2)}]
+                        </div>
+                      ) : null}
+                    </td>
+                  );
+                })}
+                <td className="text-right py-2 px-2 tabular-nums">
+                  {t && typeof t.lift === "number" ? (
+                    <>
+                      <span
+                        style={{
+                          color: t.lift > 0 ? "var(--color-emerald)" : t.lift < 0 ? "var(--color-rose)" : "var(--color-muted)",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {t.lift >= 0 ? "+" : ""}
+                        {t.lift.toFixed(3)} {sigMarker(t.p_two_sided)}
+                      </span>
+                      <div className="text-[0.6rem]" style={{ color: "var(--color-muted)" }}>
+                        t={t.t?.toFixed(2)}, p={t.p_two_sided?.toFixed(3)}
+                      </div>
+                    </>
+                  ) : (
+                    "—"
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
+      <p className="mt-4 text-xs" style={{ color: "var(--color-text-2)" }}>
+        Bold = best mean judge per benchmark. 95% CIs are bootstrap percentile over per-question
+        judge scores pooled across seeds. <code>*</code> p&lt;0.05, <code>**</code> p&lt;0.01, <code>***</code> p&lt;0.001
+        (paired t-test, V4-tuned − V4-canonical, per question matched by doc_idx).
+      </p>
     </motion.div>
   );
 }

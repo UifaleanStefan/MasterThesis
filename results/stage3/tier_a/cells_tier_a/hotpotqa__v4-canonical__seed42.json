@@ -1,0 +1,795 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T11:36:57+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "hotpotqa",
+    "config": "v4-canonical",
+    "k": 8,
+    "n_questions": 30
+  },
+  "ok": true,
+  "benchmark": "hotpotqa",
+  "config": "v4-canonical",
+  "mode": "full",
+  "n_questions": 30,
+  "n_with_gold": 30,
+  "n_with_judge": 30,
+  "mean_recall_at_k": 0.9666666666666667,
+  "mean_judge_score": 0.6666666666666666,
+  "total_prompt_tokens": 32402,
+  "total_completion_tokens_max": 4500,
+  "projected_cost_usd": 0.0075603,
+  "actual_cost_usd": 0.005305949999999999,
+  "elapsed_seconds": 56.00834918022156,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:e7e1aa339676b547d04bdd4607d81886b1af4ad81852641415d145ad63aada10",
+      "n_paragraphs": 10,
+      "question": "Were Scott Derrickson and Ed Wood of the same nationality?",
+      "gold_answer": "yes",
+      "predicted": "No, Scott Derrickson is American, and Ed Wood was also American.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        4,
+        5,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 971,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:cfba62f80f90f33de558ba341cb23a57c28e15daaf633cbb9742d940dd14b4e0",
+      "n_paragraphs": 10,
+      "question": "What government position was held by the woman who portrayed Corliss Archer in the film Kiss and Tell?",
+      "gold_answer": "Chief of Protocol",
+      "predicted": "Janet Waldo held the position of voice actress.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        7,
+        5,
+        3,
+        2,
+        4
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 1097,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:6e5280bcc9cd433a20d370619071f19dd3202c17fb3f6c140d90efb159e7bdeb",
+      "n_paragraphs": 10,
+      "question": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+      "gold_answer": "Animorphs",
+      "predicted": "Animorphs",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1274,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:2cb9d8f71db22c3d90fd7773124b3150be1b7eb9e9f8997deb228667eda548f6",
+      "n_paragraphs": 10,
+      "question": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+      "gold_answer": "no",
+      "predicted": "No, the Laleli Mosque is located in Laleli, Fatih, while the Esma Sultan Mansion is in the Ortak\u00f6y neighborhood.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        6,
+        5,
+        4,
+        1,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 832,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:092e9ef9ab853bb38d76ced08fe80cc4a8a42fe3c8e318b9bd59438dd7d2e914",
+      "n_paragraphs": 10,
+      "question": "The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+      "gold_answer": "Greenwich Village, New York City",
+      "predicted": "Greenwich Village, New York City.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        9
+      ],
+      "prompt_tokens_estimated": 1170,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:3ab4380f9c3f2f23c19ae067a7c7ea55d5a879c41ea1391de6e3316d6304c9b9",
+      "n_paragraphs": 10,
+      "question": "2014 S/S is the debut album of a South Korean boy group that was formed by who?",
+      "gold_answer": "YG Entertainment",
+      "predicted": "YG Entertainment",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        2,
+        5,
+        4,
+        3
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 968,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:0f360413ccacd04f35929e5c663eeb0fd68831203a3bf0f7849845fd9b48c367",
+      "n_paragraphs": 10,
+      "question": "Who was known by his stage name Aladin and helped organizations improve their performance as a consultant?",
+      "gold_answer": "Eenasul Fateh",
+      "predicted": "Eenasul Fateh",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        3,
+        5,
+        4,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        7
+      ],
+      "prompt_tokens_estimated": 1327,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:c87f13832c809231261d449fbeff5e3171eeef73d6929d376d0aae8faee74626",
+      "n_paragraphs": 10,
+      "question": "The arena where the Lewiston Maineiacs played their home games can seat how many people?",
+      "gold_answer": "3,677 seated",
+      "predicted": "The Androscoggin Bank Colis\u00e9e, where the Lewiston Maineiacs played their home games, has a capacity of 4,000 (3,677 seated).",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        6,
+        5,
+        4,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1309,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:4735c1d88b5fa0c4171be0a2835bf1888234d26e081942e19026f927ff2b79ec",
+      "n_paragraphs": 10,
+      "question": "Who is older, Annie Morton or Terry Richardson?",
+      "gold_answer": "Terry Richardson",
+      "predicted": "Terry Richardson is older than Annie Morton.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        4,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1152,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:9941c378f8502797bb5672cc6b76ff26148508c007e21a094e21b050dfda382a",
+      "n_paragraphs": 10,
+      "question": "Are Local H and For Against both from the United States?",
+      "gold_answer": "yes",
+      "predicted": "Yes.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        4,
+        5,
+        0,
+        3
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 1112,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:b3a1f235ac04cf98583bc595d44e4463eca7bc3d8ad4427bc6cb75c1efedd97e",
+      "n_paragraphs": 10,
+      "question": "What is the name of the fight song of the university whose main campus is in Lawrence, Kansas and whose branch campuses are in the Kansas City metropolitan area?",
+      "gold_answer": "Kansas Song",
+      "predicted": "Kansas Song (We\u2019re From Kansas)",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        4,
+        5,
+        2,
+        3,
+        1
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 1440,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:93675fd0a5a051769e18214021e6f1c197227e5d445092b5e95a2100ee481c8a",
+      "n_paragraphs": 10,
+      "question": "What screenwriter with credits for \"Evolution\" co-wrote a film starring Nicolas Cage and T\u00e9a Leoni?",
+      "gold_answer": "David Weissman",
+      "predicted": "David Weissman",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        4,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        9
+      ],
+      "prompt_tokens_estimated": 841,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:c6090f92d02c2e1b1dd156d19ad4574efffb7978128908795cec1e3624881054",
+      "n_paragraphs": 10,
+      "question": "What year did Guns N Roses perform a promo for a movie starring Arnold Schwarzenegger as a former New York Police detective?",
+      "gold_answer": "1999",
+      "predicted": "1999",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        1,
+        4
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 1190,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:6268cddbd4f817e444e72eb8937a66f65f3de79d36b973db286594408b970724",
+      "n_paragraphs": 10,
+      "question": "Are Random House Tower and 888 7th Avenue both used for real estate?",
+      "gold_answer": "no",
+      "predicted": "Yes, both Random House Tower and 888 7th Avenue are used for real estate.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        4,
+        6,
+        3,
+        5,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        4
+      ],
+      "prompt_tokens_estimated": 2466,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:317056dad0f89f2fa37e75c80a83fbbd57d087aec5825f9cd515558832920bb2",
+      "n_paragraphs": 10,
+      "question": "The football manager who recruited David Beckham managed Manchester United during what timeframe?",
+      "gold_answer": "from 1986 to 2013",
+      "predicted": "The football manager who recruited David Beckham, Sir Alex Ferguson, managed Manchester United from 1945 to 1969 and again for the second half of the 1970\u201371 season.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        5,
+        9
+      ],
+      "prompt_tokens_estimated": 827,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:b2fb396c64ed4def15745a268044a9b2744c9c2bda2b2bd53fb390e6c79adaab",
+      "n_paragraphs": 10,
+      "question": "Brown State Fishing Lake is in a country that has a population of how many inhabitants ?",
+      "gold_answer": "9,984",
+      "predicted": "9,984",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        2,
+        3,
+        4,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        9
+      ],
+      "prompt_tokens_estimated": 1256,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:230b94678ec9a48ef946c7755a3e423af9071e6e7457298ad2355e5ed31af489",
+      "n_paragraphs": 10,
+      "question": "The Vermont Catamounts men's soccer team currently competes in a conference that was formerly known as what from 1988 to 1996?",
+      "gold_answer": "the North Atlantic Conference",
+      "predicted": "North Atlantic Conference",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        3
+      ],
+      "relevant_paragraphs": [
+        3,
+        4
+      ],
+      "prompt_tokens_estimated": 275,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:77b486751ddb3f14a5cb9452497d72b2af2ca0d7ea156fe6cad64794a4f995fb",
+      "n_paragraphs": 10,
+      "question": "Are Giuseppe Verdi and Ambroise Thomas both Opera composers ?",
+      "gold_answer": "yes",
+      "predicted": "Yes.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 984,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:134d2ecc096d37cf123002bcbdd421490fbc2433ac912b8b7495d96457c44613",
+      "n_paragraphs": 10,
+      "question": "Roger O. Egeberg was Assistant Secretary for Health and Scientific Affairs during the administration of a president that served during what years?",
+      "gold_answer": "1969 until 1974",
+      "predicted": "Roger O. Egeberg was Assistant Secretary for Health and Scientific Affairs during the Nixon administration, which served from 1969 to 1974.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1407,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:5f0500eccdeb588479784f4889f527d3f4cd95d10e43f646e6887be04eb86fdb",
+      "n_paragraphs": 10,
+      "question": "Which writer was from England, Henry Roth or Robert Erskine Childers?",
+      "gold_answer": "Robert Erskine Childers DSC",
+      "predicted": "Robert Erskine Childers",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        6,
+        7,
+        5,
+        3,
+        1,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 823,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:dceb7bcae83cb9dd23cd7f9157a595c7061a744ca44952a526d88a18fcc0c2e8",
+      "n_paragraphs": 10,
+      "question": "Which other Mexican Formula One race car driver has held the podium besides the Force India driver born in 1990?",
+      "gold_answer": "Pedro Rodr\u00edguez",
+      "predicted": "Pedro Rodr\u00edguez",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        4,
+        5,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        8
+      ],
+      "prompt_tokens_estimated": 939,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:a44368a03c18e5709c5325b18fabe7b7983510037b133fb2c4e47cc2aa01e845",
+      "n_paragraphs": 10,
+      "question": "This singer of A Rather Blustery Day also voiced what hedgehog?",
+      "gold_answer": "Sonic",
+      "predicted": "Jim Cummings voiced Dr. Robotnik from \"Sonic the Hedgehog.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        5,
+        6,
+        3,
+        4,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 1332,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:fcf80876689b1516e2892e5ee2d8bdceed47ed982daf6e89edbe7ad1bdc8a58b",
+      "n_paragraphs": 10,
+      "question": "Aside from the Apple Remote, what other device can control the program Apple Remote was originally designed to interact with?",
+      "gold_answer": "keyboard function keys",
+      "predicted": "The Apple Remote was originally designed to interact with the Front Row media program, which can also be controlled by the keyboard function keys.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        2,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        2,
+        5
+      ],
+      "prompt_tokens_estimated": 1548,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:10c8a496988d6a5118fe1b9efa5d8701eb771454e9782ea42373b0c76801baf3",
+      "n_paragraphs": 10,
+      "question": "Which performance act has a higher instrument to person ratio, Badly Drawn Boy or Wolf Alice?",
+      "gold_answer": "Badly Drawn Boy",
+      "predicted": "Badly Drawn Boy",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        5,
+        4,
+        2,
+        3,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 931,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:822297333787b2cc0da68885e5f881a24c52439ab9fddfe6fb0702df07cbaf6c",
+      "n_paragraphs": 10,
+      "question": "What was the father of Kasper Schmeichel voted to be by the IFFHS in 1992?",
+      "gold_answer": "World's Best Goalkeeper",
+      "predicted": "Kasper Schmeichel's father, Peter Schmeichel, was voted the IFFHS World's Best Goalkeeper in 1992.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1076,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:753d3bbfd7986af515b0449df12d4b114b0b6aef91136d27eb16dba654eca108",
+      "n_paragraphs": 10,
+      "question": "Who was the writer of These Boots Are Made for Walkin' and who died in 2007?",
+      "gold_answer": "Barton Lee Hazlewood",
+      "predicted": "Lee Hazlewood was the writer of \"These Boots Are Made for Walkin'\" and he died in 2007.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        5,
+        4,
+        0,
+        3,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        7,
+        9
+      ],
+      "prompt_tokens_estimated": 941,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:9c108b1407288ee4da35ab0715992daac9ade996a991f769513b457b24fa2b13",
+      "n_paragraphs": 10,
+      "question": "The 2011\u201312 VCU Rams men's basketball team, led by third year head coach Shaka Smart, represented Virginia Commonwealth University which was founded in what year?",
+      "gold_answer": "1838",
+      "predicted": "1838",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        3
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 443,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:5a28985d3baafce2fa73468369d5c7c2f7af425da92b55427aaa306151128b77",
+      "n_paragraphs": 2,
+      "question": "Are both Dictyosperma, and Huernia described as a genus?",
+      "gold_answer": "yes",
+      "predicted": "Yes, both Dictyosperma and Huernia are described as a genus.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 438,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:1e4fc549c88ad312b7995d1839c517a22fc8be7e0c3f930bea27ee073a70bb92",
+      "n_paragraphs": 10,
+      "question": "Kaiser Ventures corporation was founded by an American industrialist who became known as the father of modern American shipbuilding?",
+      "gold_answer": "Henry J. Kaiser",
+      "predicted": "Henry J. Kaiser",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        4,
+        3,
+        2,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 942,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:4977186d882d1126f19e062ec50233ebbe46e884ab7181665d1990c70f696876",
+      "n_paragraphs": 10,
+      "question": "What is the name for the adventure in \"Tunnels and Trolls\", a game designed by Ken St. Andre?",
+      "gold_answer": "Arena of Khazan",
+      "predicted": "Arena of Khazan",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        4,
+        6,
+        5,
+        1,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 1091,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

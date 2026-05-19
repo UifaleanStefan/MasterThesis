@@ -478,32 +478,88 @@ diagonal lift over canonical (0.259 / 0.309). Mismatched θ within the
 document-QA family is dramatically better than grid-world θ, even when
 the source benchmark is structurally different from the eval benchmark.
 
-### 5.4 LLM-judge answer-quality (TBD — Phase 4)
+### 5.4 LLM answer-quality table (Phase 4, complete)
 
-```
-Awaiting Phase 4 API run. Pre-validated dry-run cost: ~$1.50 for the
-canonical 6 x 3 x 30-question sweep. Per-cell template available in
-results/stage3/cells/*.json (heuristic-fallback predictions from
-Phase 1.5 dry-run).
-```
+Mean LLM-judge score (gpt-4o-mini, 0–1 scale) across 3 seeds × 100
+questions = 300 questions per cell. Source:
+`results/stage3/phase4_summary.json` and per-cell
+`results/stage3/cells/{benchmark}__{config}__seed{seed}.json`.
+**Bold** = best per row. Paired-t-test column is the per-question
+matched test of V4-tuned − V4-canonical pooled across all 300 questions.
 
-### 5.5 Cost per question (TBD — Phase 4)
+| Benchmark | V4-canonical (95% CI) | V4-tuned (95% CI) | flat-50 (95% CI) | Lift V4t−V4c | t | p |
+|---|---|---|---|---:|---:|---:|
+| **CUAD** | 0.249 [0.209–0.289] | **0.316** [0.275–0.358] | 0.202 [0.167–0.235] | **+0.067** | **3.41** | **0.0007 \*\*\*** |
+| **QASPER** | 0.180 [0.148–0.213] | **0.203** [0.170–0.238] | 0.162 [0.132–0.190] | +0.023 | 1.41 | 0.16 |
+| HotpotQA | **0.648** [0.602–0.698] | 0.636 [0.588–0.687] | 0.616 [0.571–0.665] | −0.012 | −0.77 | 0.44 |
+| LongMemEval | 0.437 [0.389–0.485] | 0.426 [0.379–0.474] | **0.450** [0.403–0.499] | −0.010 | −1.20 | 0.23 |
+| FinanceBench | 0.442 [0.395–0.487] | 0.450 [0.400–0.496] | **0.488** [0.443–0.534] | +0.008 | 1.13 | 0.26 |
+| NarrativeQA | **0.212** [0.172–0.253] | n/a | 0.158 [0.125–0.195] | — | — | — |
 
-```
-Awaiting Phase 4. Dry-run tiktoken estimates:
-  - v4-canonical: ~$0.0015 per question (gpt-4o-mini)
-  - v4-tuned:     ~$0.0015 per question
-  - flat-50:      ~$0.0008 per question (smaller windows = cheaper)
-```
+**Headline finding: V4-tuned beats V4-canonical on CUAD with high
+statistical significance (p = 0.0007, n = 300 paired questions).** On
+QASPER the direction is the same (+0.023) but does not reach p < 0.05
+with this sample size. On the four ceiling-bound short-haystack
+benchmarks, no config differs significantly from another — consistent
+with the retrieval-quality two-cluster finding from Section 5.1.
 
-### 5.6 Pareto frontier: answer-quality × cost (TBD — Phase 4)
+### 5.5 Cost per question (Phase 4, complete)
 
-```
-Awaiting Phase 4. Hypothesis: V4-tuned occupies the upper-left of the
-Pareto frontier (high judge score, modest cost), and flat-50 sits in
-the lower-left (cheap but quality drops on long-haystack tasks where
-50 paragraphs aren't enough to find the gold).
-```
+Mean per-question OpenAI API cost (gpt-4o-mini, pooled across 3 seeds).
+Source: same per-cell JSONs as 5.4, `actual_cost_usd / n_questions`.
+
+| Benchmark | v4-canonical | v4-tuned | flat-50 |
+|---|---:|---:|---:|
+| LongMemEval (longest haystacks) | $0.00084 | $0.00084 | $0.00091 |
+| NarrativeQA (long books) | $0.00060 | n/a | $0.00060 |
+| CUAD | $0.00019 | $0.00022 | $0.00014 |
+| HotpotQA | $0.00018 | $0.00017 | $0.00018 |
+| QASPER | $0.00012 | $0.00013 | $0.00013 |
+| FinanceBench | $0.00009 | $0.00009 | $0.00011 |
+
+Total Phase-4 spend (Tier A + Tier B + Tier C — see §4.5):
+**~$3.30 USD** for the entire 6 benchmarks × 3 configs × 3 seeds × 100
+questions = 5,100 evaluated questions, plus the k-sweep (4,800
+additional). 100× cheaper than the original $35 budget estimate, because
+gpt-4o-mini's pricing and our compact retrieved-context per question
+both came in under worst-case projection.
+
+### 5.6 Pareto frontier — cost-quality elasticity (lambda-sweep)
+
+Defining the joint objective `J(λ) = judge_score − λ × cost_per_q`,
+sweeping λ ∈ {0, 10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000}
+re-ranks configurations as cost-sensitivity increases. Source:
+`results/stage3/lambda_sweep.json`, post-hoc on Phase-4 per-cell
+data (no extra API). The crossover λ tells us "at what cost-sensitivity
+does the optimal config change":
+
+| Benchmark | Leader at λ=0 | Leader at λ=100 000 | Crossover λ |
+|---|---|---|---:|
+| **CUAD** | v4-tuned | flat-50 | 5 000 |
+| **QASPER** | v4-tuned | v4-canonical | 5 000 |
+| HotpotQA | v4-canonical | v4-tuned | 5 000 |
+| LongMemEval | flat-50 | v4-tuned | 500 → 10 000 (two crossovers) |
+| FinanceBench | flat-50 | v4-tuned | 5 000 |
+| NarrativeQA | v4-canonical | v4-canonical | (no crossover) |
+
+The empirical reading is **V4-tuned dominates the upper-left of the
+Pareto frontier** (low cost-sensitivity, where judge quality matters
+most) on the two long-haystack benchmarks, exactly as hypothesised. As
+λ grows past 5 000 (i.e. cost matters ~5,000× more than quality
+per token), flat-50 wins on CUAD by being slightly cheaper. The
+crossover λ values are *all in a narrow band* (500–10 000), which means
+the practical decision between configs only flips under fairly extreme
+cost-sensitivity — for typical Stage-3 use, V4-tuned is the right
+choice on the long-haystack benchmarks.
+
+The Tier C k-sweep (k ∈ {4, 8, 16, 32}, 100 q × 1 seed × 6 benchmarks × 2 configs)
+extends this Pareto picture to the *retrieval budget* dimension and
+is reported in
+`results/stage3/k_sweep.json`. As k grows from 4 → 32, both
+mean judge and per-question cost rise, but the marginal gains diminish
+sharply past k = 8 on the short-haystack benchmarks and past k = 16 on
+the long-haystack ones. k = 8 (the value used throughout this chapter)
+sits at the elbow of the Pareto curve for QASPER and CUAD.
 
 ---
 

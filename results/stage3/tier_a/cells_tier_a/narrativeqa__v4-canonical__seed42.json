@@ -1,0 +1,816 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T11:45:15+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "narrativeqa",
+    "config": "v4-canonical",
+    "k": 8,
+    "n_questions": 30
+  },
+  "ok": true,
+  "benchmark": "narrativeqa",
+  "config": "v4-canonical",
+  "mode": "full",
+  "n_questions": 30,
+  "n_with_gold": 0,
+  "n_with_judge": 30,
+  "mean_recall_at_k": 0.0,
+  "mean_judge_score": 0.03333333333333333,
+  "total_prompt_tokens": 19403,
+  "total_completion_tokens_max": 4500,
+  "projected_cost_usd": 0.0056104499999999995,
+  "actual_cost_usd": 0.0034090499999999994,
+  "elapsed_seconds": 85.05173683166504,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:5b6d80a7c024a0a88617541673a37c8a0ea4e5a89d3a1496706b9fc3f7c9d661",
+      "n_paragraphs": 833,
+      "question": "WHO NORMALLY DELIVERS THE OPENING PROLOGUE IN THE PLAY?",
+      "gold_answer": [
+        "THE ACTOR WEARING THE BLACK CLOAK",
+        "The actor in the black cloak"
+      ],
+      "predicted": "The opening prologue in the play is normally delivered by the author.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        826,
+        827,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 654,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:fc45ba51011df28734f369d0d77daac80eddcd4a6e450d26b4f9712873b50405",
+      "n_paragraphs": 833,
+      "question": "WHAT NAME WAS CYNTHIA MORE FAMOUSLY KNOWN BY?",
+      "gold_answer": [
+        "THE GODDESS DIANA",
+        "The goddess Diana"
+      ],
+      "predicted": "Cynthia was more famously known as the Moon.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        824
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 640,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:d5d8e5fd77abdab099ee2f7aff13998e8a5a63d36197c79a653af2cdae0c4a0f",
+      "n_paragraphs": 833,
+      "question": "WHO DOES ECHO WEEP FOR?",
+      "gold_answer": [
+        "NARCISSUS",
+        "Narcissus"
+      ],
+      "predicted": "Echo weeps for Narcissus.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        824
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 632,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:274863bfbaa8b6db9ad00e8789252f31152f71366be5a2aeabf06628e137c8a3",
+      "n_paragraphs": 833,
+      "question": "WHAT DOES A DRINK FROM NARCISSUS'S SPRING CAUSE THE DRINKER TO DO?",
+      "gold_answer": [
+        "FALL IN LOVE WITH THEMSELVES",
+        "Grow dotingly enamored with themselves"
+      ],
+      "predicted": "A drink from Narcissus's spring causes the drinker to fall in love with themselves.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 660,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:e09a645d66d70d6943587022e04858934e6fdddb0f350a1f246c177fb1e4e879",
+      "n_paragraphs": 833,
+      "question": "IN WHAT VALLEY DID THE SOLEMN REVELS OF CYNTHIA TAKE PLACE?",
+      "gold_answer": [
+        "GARGAPHIE IN GREECE",
+        "Gargaphie"
+      ],
+      "predicted": "The solemn revels of Cynthia took place in the \"Valley of the Shadow of Death.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        827,
+        828,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 658,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:d6a6ba9304efc2c592dfa69ba578342db0e07a56e73e36392d63d66169e4235f",
+      "n_paragraphs": 833,
+      "question": "WHAT DID THE  SYMBOLIC VICES DISGUISE THEMSELVES TO BE?",
+      "gold_answer": [
+        "VIRTUES",
+        "Virtues"
+      ],
+      "predicted": "The symbolic vices disguised themselves as virtues.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        823,
+        826,
+        827
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 626,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:ed275117183ddf86ed4e6bf0d7e5511de2960176146ca7b504ccd1f21098517b",
+      "n_paragraphs": 833,
+      "question": "WHAT SENTENCE DID CYNTHIA GIVE TO THE SYMBOLIC VICES?",
+      "gold_answer": [
+        "TO BATHE IN THE SPRING OF HELICON",
+        "Make reperations and purify themselves."
+      ],
+      "predicted": "Cynthia sentenced the symbolic vices to be banished.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        823,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 624,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:c7c37db53e6e9132fcdd6fcb630ef09091b5b279ddbf0324c142f3d77066b0d8",
+      "n_paragraphs": 833,
+      "question": "WHO DRANK FROM THE SPRING AT CYNTHIA'S REVELS?",
+      "gold_answer": [
+        "ALL THE COURTIERS AND LADIES WHO ATTENDED CYNTHIA'S REVELS",
+        "The courtiers and ladies that are there and Asotus"
+      ],
+      "predicted": "The passages do not provide information about who drank from the spring at Cynthia's Revels.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        827,
+        828,
+        825,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 655,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:b41623df09c569042a642db01c39baf526ab7fb7f69d175790871c2788f81b9b",
+      "n_paragraphs": 833,
+      "question": "HOW MANY PHASES DID THE COURT COMPLIMENT COMPETITION HAVE?",
+      "gold_answer": [
+        "4 PHASES",
+        "2"
+      ],
+      "predicted": "The provided passages do not contain information regarding the number of phases in the court compliment competition.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        825,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 655,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:ba8bd4edf3987e2bb9cf2c20d0d9386c43bb2f0e16903433feef846e29605f0f",
+      "n_paragraphs": 833,
+      "question": "WHO CHALLENGES THE COURTIERS TO COURT COMPLIMENT COMPETITION?",
+      "gold_answer": [
+        "ASOTUS",
+        "Asotus"
+      ],
+      "predicted": "Cynthia challenges the courtiers to court compliment competition.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        825,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 657,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:9703840ff01a6d066b02452d43d8cabebb546aae9f8ab98b100a30871c0175a8",
+      "n_paragraphs": 833,
+      "question": "How many phases does the competition have?",
+      "gold_answer": [
+        "Four.",
+        "four"
+      ],
+      "predicted": "The provided passages do not contain information regarding the number of phases in the competition.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 646,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:1ea9d163f916fc202154230297933bf75cac980322df9e22ed4db89d7a132bfc",
+      "n_paragraphs": 833,
+      "question": "Who does Diana represent?",
+      "gold_answer": [
+        "Queen Elizabeth.",
+        "Queen Elizabeth"
+      ],
+      "predicted": "Diana represents the goddess of the hunt and the moon in mythology.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 643,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:b5f2696a5b8669727527bbab1935b5922145df592d1bfa7f5d0fca266a152d9f",
+      "n_paragraphs": 833,
+      "question": "Who is sleeping at the beginning of the play?",
+      "gold_answer": [
+        "Echo",
+        "Echo"
+      ],
+      "predicted": "Cynthia is sleeping at the beginning of the play.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        825,
+        827,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 648,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:e365544794567a586dff698beb631506f083d741a70e04fd749922f4d0bd88e9",
+      "n_paragraphs": 833,
+      "question": "Where is Narcissus's spring?",
+      "gold_answer": [
+        "Gargaphie Valley Greece.",
+        "Gargaphie"
+      ],
+      "predicted": "Narcissus's spring is located in the woods.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        826,
+        827,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 645,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:f0fc4613c2d24ba77a80dc9f2894025eb52ae3ebf017c040cfeb13b178db1174",
+      "n_paragraphs": 833,
+      "question": "Which two societies are aligned in this play?",
+      "gold_answer": [
+        "Greek mythology and Queen Elizabeth's Court",
+        "Greece and England"
+      ],
+      "predicted": "The two societies aligned in the play are the \"Wits\" and the \"Sots.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        826,
+        827,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 647,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:f3fc48ae33633caf7df55ef2f2609e71db1851d3fe6434cdeb3a815313470827",
+      "n_paragraphs": 833,
+      "question": "Where do the dancers purify themselves?",
+      "gold_answer": [
+        "Mount Helicon",
+        "in the spring at Mount Helicon"
+      ],
+      "predicted": "The dancers purify themselves in the \"well.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        825,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 646,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:e16692b8ef457fbe2618558963c77b83070abaea0303b9b40cd1cf9ccb7d790e",
+      "n_paragraphs": 833,
+      "question": "Which page performs the dialogue?",
+      "gold_answer": [
+        "Anaides",
+        "Anaides"
+      ],
+      "predicted": "The relevant passage does not provide specific information about which page performs the dialogue.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 644,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:c8e8da97ca9d69e7142be0b9d1cd9b13962013319cfbac29a6c0e7a6b721c912",
+      "n_paragraphs": 833,
+      "question": "Who enters with Mercury?",
+      "gold_answer": [
+        "Cupid",
+        "Cupid"
+      ],
+      "predicted": "Cynthia enters with Mercury.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        827,
+        828,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 643,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:19ec6d89083661eb9ced1f07cdf3f0ec0be736a5a9034d23939ca92522a47153",
+      "n_paragraphs": 833,
+      "question": "Who is the 2nd Earl of Essex?",
+      "gold_answer": [
+        "Robert Devereux",
+        "Robert Devereux"
+      ],
+      "predicted": "The provided passages do not contain information about the 2nd Earl of Essex.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        826,
+        827,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 648,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:68f559093795d71d36d08362936bad3b818b2e20f8387005ee887b9bef13c42b",
+      "n_paragraphs": 833,
+      "question": "From where does this play originate?",
+      "gold_answer": [
+        "Church choir",
+        "Boys' company"
+      ],
+      "predicted": "The play originates from Project Gutenberg.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        825,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 645,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:0a156c53094a69d0b03ab3bb78f3ac0b00591fbf0ff48b4463abd9893d6482c5",
+      "n_paragraphs": 833,
+      "question": "What are people arguing about as the story begins?",
+      "gold_answer": [
+        "A black cloak",
+        "the black cloak"
+      ],
+      "predicted": "The relevant passages do not provide specific information about what people are arguing about as the story begins.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 648,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:71feb9370f29fce165e0167d36257a510bda27ed655acca3a570784c5beb4f37",
+      "n_paragraphs": 833,
+      "question": "Who announces the events that are to come to the dismay of the others on stage?",
+      "gold_answer": [
+        "Anaides",
+        "Anaides"
+      ],
+      "predicted": "The character who announces the events that are to come to the dismay of the others on stage is not specified in the provided passages.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        825,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 656,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:3cd54a6665fa42cfe1cb1f7dbd17c144eacb9a7aa23d218c9bbb1249a2fd6e6d",
+      "n_paragraphs": 833,
+      "question": "What is another name for the Goddess Diana?",
+      "gold_answer": [
+        "Cynthia",
+        "Cynthia"
+      ],
+      "predicted": "The Goddess Diana is also known as Artemis.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 647,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:b0a4bb74c349d9a187c077224a133a964c006ebd2c0b07f30cc2bc6838c37c45",
+      "n_paragraphs": 833,
+      "question": "What does Diana order to take place  in the valley of Gargaphie?",
+      "gold_answer": [
+        "Solemn revels",
+        "solemn revels"
+      ],
+      "predicted": "Diana orders a contest to take place in the valley of Gargaphie.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 654,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:386659e796436ac8bd9393eaf73e03f36ba9ed5249869f13cf04b37a549f5c12",
+      "n_paragraphs": 833,
+      "question": "Why does Asotus become emboldened by vanity and self -love?",
+      "gold_answer": [
+        "He drank from Narcissus' spring",
+        "He drank from Narcissus' spring"
+      ],
+      "predicted": "The provided passages do not contain information regarding Asotus or the reasons for his emboldenment by vanity and self-love.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        824
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 639,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:b1b299dc93392bed995a990f4bd1e9777392f35008d39519634e72baceb83776",
+      "n_paragraphs": 833,
+      "question": "What challenge does Asotus propose to all comers?",
+      "gold_answer": [
+        "\"Court Compliment\"",
+        "to a competition of \"court compliment\""
+      ],
+      "predicted": "Asotus proposes a challenge to all comers to \"make a fool of him.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 649,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:7365fef9a2f69be6aa2ba4e967272d597896b7ce49e931a46fc612c2eff146e4",
+      "n_paragraphs": 833,
+      "question": "What does Diana tell the courtiers to do after the dance?",
+      "gold_answer": [
+        "Purify themselves by bathing in a sacred spring",
+        "unmask"
+      ],
+      "predicted": "Diana tells the courtiers to \"go to your rest.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        825,
+        826
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 651,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:ee7c4d00fcbc4a689ae0cd7c14edf703e89c7b0e6e618d220e5e271718266e49",
+      "n_paragraphs": 833,
+      "question": "What effect does the spring of Narcissus have on those who drink from it?",
+      "gold_answer": [
+        "Grow enamored of themselves",
+        "They become enamoured with themselves."
+      ],
+      "predicted": "The spring of Narcissus causes those who drink from it to fall in love with themselves.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 654,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:cd1d0471d14c9962b6e10e2f507e267e09241f64e1f42913304d80521c135c91",
+      "n_paragraphs": 833,
+      "question": "Who awakens Echo?",
+      "gold_answer": [
+        "Mercury",
+        "Mercury"
+      ],
+      "predicted": "The relevant passages do not provide information about who awakens Echo.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 643,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:bd39515ad62c2fe01419bce56c0f7d550fc390d76db0e736da9c31ecb073b9f7",
+      "n_paragraphs": 833,
+      "question": "Who does Cynthia represent in the masque?",
+      "gold_answer": [
+        "Queen Elizabeth",
+        "Queen Elizabeth"
+      ],
+      "predicted": "Cynthia represents the moon in the masque.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        832,
+        831,
+        830,
+        829,
+        828,
+        827,
+        826,
+        825
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 646,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

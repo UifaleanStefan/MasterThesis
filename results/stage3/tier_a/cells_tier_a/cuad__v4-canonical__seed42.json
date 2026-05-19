@@ -1,0 +1,775 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T11:30:39+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "cuad",
+    "config": "v4-canonical",
+    "k": 8,
+    "n_questions": 30
+  },
+  "ok": true,
+  "benchmark": "cuad",
+  "config": "v4-canonical",
+  "mode": "full",
+  "n_questions": 30,
+  "n_with_gold": 30,
+  "n_with_judge": 30,
+  "mean_recall_at_k": 0.23333333333333334,
+  "mean_judge_score": 0.36000000000000004,
+  "total_prompt_tokens": 40370,
+  "total_completion_tokens_max": 4500,
+  "projected_cost_usd": 0.0087555,
+  "actual_cost_usd": 0.007216650000000001,
+  "elapsed_seconds": 110.28057193756104,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:945ad53f40e1239e20f731f781dd05254e0b221d8b6499078b681e8a1a98646a",
+      "n_paragraphs": 122,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "DISTRIBUTOR AGREEMENT",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include:\n\n1. Section 7.1 - Right of Option: This outlines the Distributor's option to become the exclusive distributor of other products or devices.\n2. Section 7.2 - Exercise of Option: This details the process for the Distributor to exercise its option and the consequences of not doing so.\n3. Section 7.3 - Other Agreements: This specifies that terms for other products or devices will be determined by a separate agreement, which may require legal scrutiny.\n4. Section 6.9 - Governing Law: This indicates the jurisdiction under which the agreement is construed, which may have legal implications.\n5. Section 6.5 - Entire Agreement: This",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        120,
+        119,
+        118,
+        117,
+        115,
+        116,
+        113,
+        108
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "prompt_tokens_estimated": 638,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:1e67a0bef4fd1795cfd9cd076354cbe03f49bfddcf65e5d0525b3c6a67cb0ecf",
+      "n_paragraphs": 243,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "Promotion and Distribution Agreement",
+      "predicted": "The parts of the contract related to \"Document Name\" that should be reviewed by a lawyer include:\n\n1. The name of the Application, identifying you as the entity responsible for it (EPISODE step=191).\n2. Clear and conspicuous disclosure is required prior to download or install: what it is, what it does, and how it will be displayed to the end user (EPISODE step=221).\n3. Describe type, method, and use of personal information, if applicable. Point user to privacy policy (EPISODE step=222).\n4. The location of (i.e., a link to) the privacy policy that governs the collection, use and disclosure of the information (EPISODE step=200).\n5",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        221,
+        227,
+        222,
+        230,
+        145,
+        191,
+        147,
+        200
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 462,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:ee07477a18d83e0aaaf69f1db6ac36f1f50aaddc3b323f64fbf4e6c7069b3f7b",
+      "n_paragraphs": 17,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "SUPPLY CONTRACT",
+      "predicted": "The name of the contract is \"SUPPLY CONTRACT.\"",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        15,
+        13,
+        12,
+        9,
+        6,
+        0,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 2510,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:02fa965a86182c7b5faffe973d75a2badb76a4aa097d5077b4720a428768a067",
+      "n_paragraphs": 64,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "WEB SITE HOSTING AGREEMENT",
+      "predicted": "The contract name is \"Agreement.\"",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        63,
+        62,
+        61,
+        60,
+        59,
+        57,
+        58,
+        56
+      ],
+      "relevant_paragraphs": [
+        3
+      ],
+      "prompt_tokens_estimated": 370,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:b67c9b4cdb23880deef69adfcb5ab061f7646bee16559a9d9892a64c2eea3ef9",
+      "n_paragraphs": 8,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "JOINT FILING AGREEMENT",
+      "predicted": "The document name is \"JOINT FILING AGREEMENT.\"",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        7,
+        6,
+        5,
+        4,
+        2,
+        0,
+        3
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "prompt_tokens_estimated": 364,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:2262f9769faee8ca714c64644f192eb234cf48c53a99da1519497abd7982f1c6",
+      "n_paragraphs": 128,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "ENDORSEMENT AGREEMENT",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include the signatures and approval sections, specifically the approvals by Oliver G. (\"Chip\") Brewer III and Tom Watson, as well as the clauses regarding written notices to ADAMS GOLF, LTD. and the CONSULTANT.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        125,
+        124,
+        122,
+        123,
+        121,
+        118,
+        114,
+        117
+      ],
+      "relevant_paragraphs": [
+        7
+      ],
+      "prompt_tokens_estimated": 307,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:65885a97c283e8e5b33640bea62a19534ccfd8ba9519784bf17d44ef5256e292",
+      "n_paragraphs": 49,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "CONSULTING AGREEMENT",
+      "predicted": "The contract is titled \"EXHIBIT A\" and includes sections on \"Services\" and \"Compensation.\" These parts should be reviewed by a lawyer.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        48,
+        47,
+        46,
+        45,
+        41,
+        43,
+        42,
+        39
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "prompt_tokens_estimated": 442,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:ff19d248b2dd945e857a536f5efdd511a5f4d125ef09de8f54046d4ff8bed9e7",
+      "n_paragraphs": 41,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "AMENDMENT AND TERMINATION OF JOINT VENTURE AGREEMENT",
+      "predicted": "Amendment and Termination of Joint Venture Agreement",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        39,
+        38,
+        37,
+        34,
+        35,
+        33,
+        32,
+        31
+      ],
+      "relevant_paragraphs": [
+        4
+      ],
+      "prompt_tokens_estimated": 283,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:f052a2297edce5e46e9c5297735914efd80fd342fe1a226af4f8267dfb1539a3",
+      "n_paragraphs": 582,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "CO-PROMOTION AGREEMENT",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include the License Agreement dated August 15, 2005, between Astellas Pharma Inc. and AkaRx, Inc., and the Stock Purchase Agreement dated March 29, 2016, between PBM AKX Holdings, LLC and Eisai, Inc.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        581,
+        579,
+        578,
+        577,
+        576,
+        573,
+        572,
+        571
+      ],
+      "relevant_paragraphs": [
+        112
+      ],
+      "prompt_tokens_estimated": 256,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:d46a4718c4d564c03b1def1909d8c56440ff886ba0d1c8d87903dffd3752efef",
+      "n_paragraphs": 502,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "AMENDED AND RESTATED STRATEGIC LICENSING, DISTRIBUTION AND MARKETING AGREEMENT",
+      "predicted": "The relevant contract is the \"Amended and Restated Strategic Licensing, Distribution and Marketing Agreement.\"",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        501,
+        499,
+        497,
+        496,
+        495,
+        494,
+        492,
+        490
+      ],
+      "relevant_paragraphs": [
+        6
+      ],
+      "prompt_tokens_estimated": 579,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:b46b4739e2687046352ef46bbc9a420a59b046e40a754699db86a425e884894d",
+      "n_paragraphs": 210,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "Remarketing Agreement",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include the sections discussing government approval requirements under the Foreign Exchange Transaction Law, the registration status of the Series E Debentures under various laws (including the Financial Instruments and Exchange Act of Japan and the Securities and Futures Act of Singapore), and the conditions under which the Series E Debentures may be offered or sold in different jurisdictions (Singapore, Hong Kong, and the UK).",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        209,
+        207,
+        206,
+        205,
+        203,
+        201,
+        204,
+        199
+      ],
+      "relevant_paragraphs": [
+        8
+      ],
+      "prompt_tokens_estimated": 1306,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:55d4fafdb0c941332e0c6531a238572d238d25aa2473a84c1f0871115953f6ec",
+      "n_paragraphs": 30,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "STRATEGIC ALLIANCE AGREEMENT",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include:\n\n1. **Document Ownership and Confidentiality and Use of Information** (Section 35) - This section outlines the handling of confidential information, obligations of the parties, and the survival of these obligations after termination.\n\n2. **Choice of Law/Forum** (Section 25) - This section specifies the governing law and jurisdiction for disputes, which is crucial for understanding legal implications.\n\n3. **Texas Alternative Dispute Resolution** (Section 26) - This section details the process for resolving disputes, including mediation and arbitration, which may affect how disputes are handled.\n\n4. **Legal Jurisdiction/Venue** (Section 27) - This section confirms the exclusive venue for",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        28,
+        26,
+        20,
+        18,
+        14,
+        12,
+        16,
+        2
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 3649,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:1877f7e9cfc8f7d27477da7fbca4cafeb3745dd763ed2f9594b5700134b736e9",
+      "n_paragraphs": 27,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "SPONSORSHIP AGREEMENT",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include:\n\n1. The execution and delivery of the Agreement by the undersigned Trustee, indicating the obligations are binding only on the Trust estate and not on individual Trustees or shareholders.\n2. The governing law clause stating the Agreement is governed by the laws of the Commonwealth of Massachusetts.\n3. The notice provision detailing how notices should be delivered and the designated addresses for the parties.\n4. The severability clause, which addresses the validity of provisions in the Agreement.\n5. The amendment and termination clause, which outlines how the Agreement can be altered or terminated.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        24,
+        23,
+        22,
+        21,
+        20,
+        18,
+        15,
+        17
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "prompt_tokens_estimated": 631,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:8ac2447c45891c7a5eb78c85178bf54c80d45bc448bc6acca68e2e6e7b87fde7",
+      "n_paragraphs": 6,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "SAMPLE OF NON-DISCLOSURE AND NON-COMPETITION AGREEMENT",
+      "predicted": "The contract is titled \"Franchise Agreement.\"",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        4,
+        2,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 1510,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:887fda7ecfaf3f37ac98b56a8131c97ad2d927031ef429751e695a689d1cc03f",
+      "n_paragraphs": 211,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "INTELLECTUAL PROPERTY AGREEMENT, d",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include the signature pages, the interpretation section (Section 11.17), and the section regarding amendments (Section 11.16).",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        209,
+        208,
+        207,
+        206,
+        204,
+        203,
+        202,
+        197
+      ],
+      "relevant_paragraphs": [
+        35
+      ],
+      "prompt_tokens_estimated": 652,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:3eb137d7d54be79633c735cf055aab81a487685226d620e84e476e9dc634d93f",
+      "n_paragraphs": 46,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "ENDORSEMENT",
+      "predicted": "The Entire Contract consists of: 1) This contract including any attached riders, amendments, or endorsements; 2) The Application attached to this contract; and 3) The Articles of Incorporation and Bylaws of the Society and all amendments to them.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        44,
+        43,
+        42,
+        41,
+        39,
+        38,
+        28,
+        27
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "prompt_tokens_estimated": 287,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:c8200e1b4761aeca3f100ba21bac1d2929060346634cf6aa04a3a6bf82203ac9",
+      "n_paragraphs": 62,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "MASTER SUPPLY AGREEMENT",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include:\n\n1. Independent Contractors clause (j) - clarifies the relationship between the parties and their obligations.\n2. Non-Exclusive Supply Relationship clause (k) - outlines the nature of the supply relationship and obligations regarding product sales.\n3. Construction rules (l) - provides guidelines for interpreting the Agreement.\n4. Execution clause (m) - details how the Agreement may be executed and accepted.\n5. Notices clause (i) - specifies how notices should be provided and the effectiveness of such notices.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        60,
+        59,
+        58,
+        55,
+        49,
+        47,
+        48,
+        46
+      ],
+      "relevant_paragraphs": [
+        2
+      ],
+      "prompt_tokens_estimated": 1381,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:c98a49ddfa9b348b55e1e018f2a9aee49a8e5d21007f63b5681cc9c9d1acc3d1",
+      "n_paragraphs": 16,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "DISTRIBUTION AND SERVICES AGREEMENT",
+      "predicted": "DISTRIBUTION AND SERVICES AGREEMENT",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        14,
+        12,
+        10,
+        6,
+        4,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 3821,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:5d7d4fbb4a61c5435c8bbc371721fbd32d81140cc77cd87d57680d63833afb2a",
+      "n_paragraphs": 8,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "Intellectual Property Agreement",
+      "predicted": "The contract is titled \"INTELLECTUAL PROPERTY AGREEMENT.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        6,
+        5,
+        4,
+        3,
+        1,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 5010,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:a70fb6b765d0fa6b30cebdc8065135fd5a6d03411e60a21fc847e42f4f198e9a",
+      "n_paragraphs": 10,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "Strategic Alliance Agreement",
+      "predicted": "The contract is titled \"Strategic Alliance Agreement.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        4,
+        2,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 1827,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:ddc4a1053527d53449212de001c0b7bf8c69081ed0e6a85f5d30e449184ab5a8",
+      "n_paragraphs": 205,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "Strategic Alliance Agreement",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include the Existing License Agreements with various companies (AMERICA HEARS INC., VITASOUND AUDIO INC., SONOMAX HEARING HEALTH INC., GN RESOUND GROUP, INTERTON ELECTRONIC H\u00d6RGER\u00c4TE GMBH, RION CO. LTD., SONIC INNOVATIONS INC., AUDIO CONTROLE INC., EARLENS CORPORATION, AUSTRALIA HEARS PTY LTD) and the commercial negotiations with PANASONIC. Additionally, the sections detailing the Hearing Aid Designer Software, its components, and the obligations regarding software updates and revisions should also be reviewed.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        204,
+        202,
+        201,
+        200,
+        199,
+        198,
+        197,
+        196
+      ],
+      "relevant_paragraphs": [
+        3
+      ],
+      "prompt_tokens_estimated": 555,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:86547a8a3eb27fc1bc3b8918986305934dc1bd5c397e0a248e3623ea4fbebca9",
+      "n_paragraphs": 514,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "AGENCY AGREEMENT",
+      "predicted": "The relevant passages do not specify a \"Document Name\" that should be reviewed by a lawyer.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        513,
+        512,
+        510,
+        507,
+        508,
+        506,
+        502,
+        504
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "prompt_tokens_estimated": 348,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:decc083d75d09a5a1171130a5e294d739b5666012bd6a8e55c14afb0fa7b5a6a",
+      "n_paragraphs": 245,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "SUPPORT AND MAINTENANCE AGREEMENT",
+      "predicted": "The contract name is not explicitly mentioned in the provided passages.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        243,
+        242,
+        241,
+        225,
+        228,
+        224,
+        184,
+        93
+      ],
+      "relevant_paragraphs": [
+        3
+      ],
+      "prompt_tokens_estimated": 608,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:9dda0d1625e04cb79f6cdae70c56a299fcf950887596849bb73fcbf5289a3673",
+      "n_paragraphs": 24,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "Website Design, Development and Hosting Agreement",
+      "predicted": "Mitchell's Web Advance - Website Design, Development and Hosting Agreement",
+      "judge_score": 0.8,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        21,
+        20,
+        19,
+        18,
+        17,
+        14,
+        13,
+        6
+      ],
+      "relevant_paragraphs": [
+        2
+      ],
+      "prompt_tokens_estimated": 497,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:e04af356822670e1b16b6e6aac16aeb377db71db2b396414b113b0c054a37715",
+      "n_paragraphs": 7,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "Service Agreement",
+      "predicted": "The document name is \"SERVICE AGREEMENT.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        6,
+        5,
+        4,
+        3,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 3624,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:2a71411a94f46b472f4cf3c0b34d14c2d70afcfc5a99c27d8524340a05e041bb",
+      "n_paragraphs": 25,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "JOINT VENTURE AGREEMENT",
+      "predicted": "The contract should be reviewed by a lawyer for the following parts: \n\n1. **Miscellaneous (Section 60-67)** - Clarifications on the nature of the joint venture, liability, and the binding nature of the agreement.\n2. **Mediation and Arbitration (Section 55-56)** - Procedures for dispute resolution and arbitration.\n3. **Indemnification and Liability (Section 48-50)** - Terms regarding indemnification and liability of Members.\n4. **Dissociation of a Member (Section 31-35)** - Conditions under which a Member can be dissociated and the implications of such actions.\n5. **Dissolution of the Joint Venture (Section 36)** - Circumstances leading to the dissolution",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "prompt_tokens_estimated": 2891,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:8bf948a18324fe8f26f37d7eb4e51dde7b5ff40074c016b06d8b7b678056b3f7",
+      "n_paragraphs": 257,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "INTELLECTUAL PROPERTY AGREEMENT",
+      "predicted": "The relevant parts of the contract that should be reviewed by a lawyer include the signatures of the parties involved (Michael Annes and Anders Gustafsson), the execution clause (IN WITNESS WHEREOF), and Section 6.13 regarding the nature of the relationship between the parties (No Joint Venture).",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        256,
+        255,
+        254,
+        253,
+        252,
+        251,
+        249,
+        248
+      ],
+      "relevant_paragraphs": [
+        2
+      ],
+      "prompt_tokens_estimated": 461,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:f39c03fbf0b854aa4cc2095eba7b666d7576bba5180ceb5db9a772ca335e101b",
+      "n_paragraphs": 194,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "DOMAIN NAME AND CONTENT LICENSE AGREEMENT",
+      "predicted": "Shanghai SINA Leju Information Technology Co. Ltd.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        190,
+        189,
+        181,
+        180,
+        177,
+        184,
+        172,
+        170
+      ],
+      "relevant_paragraphs": [
+        2
+      ],
+      "prompt_tokens_estimated": 275,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:a49af9ccb5ed272b1b51ed1d9999a000fc6d938caab94d83e7a2b6c726e0c12f",
+      "n_paragraphs": 25,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "INTELLECTUAL PROPERTY AGREEMENT",
+      "predicted": "HERC RENTALS INC.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        24,
+        23,
+        22,
+        21,
+        20,
+        16,
+        11,
+        12
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 698,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:dc7d8d9ce896b40e041ae7085b79f476bfc2f9454f8a7f229514622dafab683a",
+      "n_paragraphs": 7,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "CONSULTING AGREEMENT",
+      "predicted": "The contract is titled \"Consulting Agreement.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 4128,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

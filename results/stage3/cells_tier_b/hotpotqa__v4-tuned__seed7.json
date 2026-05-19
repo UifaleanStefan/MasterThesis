@@ -1,0 +1,2574 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T13:51:59+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 7,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "hotpotqa",
+    "config": "v4-tuned",
+    "k": 8,
+    "n_questions": 100
+  },
+  "ok": true,
+  "benchmark": "hotpotqa",
+  "config": "v4-tuned",
+  "mode": "full",
+  "n_questions": 100,
+  "n_with_gold": 100,
+  "n_with_judge": 100,
+  "mean_recall_at_k": 0.95,
+  "mean_judge_score": 0.6,
+  "total_prompt_tokens": 103324,
+  "total_completion_tokens_max": 15000,
+  "projected_cost_usd": 0.0244986,
+  "actual_cost_usd": 0.016933499999999997,
+  "elapsed_seconds": 199.78059434890747,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:41f163b8c10202dba6eec63940f78e4dae2f65d1b9501e473bad5e40d0df9f2f",
+      "n_paragraphs": 10,
+      "question": "What was the estimated population of the city that Luis Villalta Aquino was from in 2012?",
+      "gold_answer": "102,984",
+      "predicted": "The estimated population of Pompano Beach, Florida in 2012 was 102,984.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 1096,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:9b3ae5f2aac3458f7d0b21b89e31e7ce5b80e0795ffb82f5c502ec655d76fe26",
+      "n_paragraphs": 10,
+      "question": "How many more singles titles did Kim Warwick win than Jorge Lozano?",
+      "gold_answer": "three singles titles",
+      "predicted": "Kim Warwick won three singles titles, while Jorge Lozano won none. Therefore, Kim Warwick won three more singles titles than Jorge Lozano.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        6,
+        5,
+        3,
+        2,
+        4,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 1164,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:1d1a3bb03d5d17c59fea674e40c034eb7f052fc3a7147067d8bf1a6de8167545",
+      "n_paragraphs": 10,
+      "question": "Which musician or band is from further north, Matthew Good or Modern Baseball?",
+      "gold_answer": "Matthew Good",
+      "predicted": "Matthew Good",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        7,
+        6,
+        4,
+        2,
+        3,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 733,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:0297c33b0e30ad26b2b1f33cd6f3671a7a2f001a50a636b62c58e13012d17ee8",
+      "n_paragraphs": 10,
+      "question": "Are Todd Haynes and Chris Columbus of the same nationality?",
+      "gold_answer": "yes",
+      "predicted": "No, Todd Haynes is American and Chris Columbus is also American.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        5,
+        4,
+        6,
+        1,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 1110,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:0c79517db47552735c218b4eebd8fc18c98f9bb261ddee5449ee6578e4a583ae",
+      "n_paragraphs": 10,
+      "question": "Which Grand Slam singles tournament have Francesca Schiavone and Olga Morozova both been finalists in?",
+      "gold_answer": "French Open",
+      "predicted": "They have both been finalists in the French Open.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 1780,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:08f1a10fb05c639db54c3686ec532a4caf1918e1ba23cb9408f77718973e5ca6",
+      "n_paragraphs": 10,
+      "question": "Which band has released the most studio albums, Blonde Redhead or Rob Zombie's band White Zombie?",
+      "gold_answer": "Blonde Redhead",
+      "predicted": "White Zombie",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        2,
+        3,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        6,
+        9
+      ],
+      "prompt_tokens_estimated": 826,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:c037d598774624f6980c3ff64f606439323d8841abede936fb422d53f5e1eef8",
+      "n_paragraphs": 10,
+      "question": "Where is the investment firm that acquired TI Automotive in 2015 headquartered?",
+      "gold_answer": "Boston, Massachusetts",
+      "predicted": "Bain Capital is headquartered in Boston, Massachusetts.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        3,
+        6,
+        5,
+        4,
+        2
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 1232,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:b3d047194d228aed0334491c8837fca83b0b50e6ed2558d532bd06f639964252",
+      "n_paragraphs": 10,
+      "question": "What service is an Amtrak flagship that includes BWI Rail Station as one of its Amtrak intercity services?",
+      "gold_answer": "Acela Express",
+      "predicted": "Acela Express",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 1022,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:8044eb0fe46aea520bab2d2b5840c3f97b7ac2345e250ec16ee55b241e8942b1",
+      "n_paragraphs": 10,
+      "question": "What is the name of this White House Cheif of Staff, born in 1950, who assumed the role at the same time as Elaine Duke became Secretary of Homeland Security?",
+      "gold_answer": "John Francis Kelly",
+      "predicted": "John F. Kelly",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        9,
+        7,
+        5,
+        2,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 1062,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:680d56e02eea269f18b0bb5daa15ebfa962b8a5906946f35a1d3429ab7e945d8",
+      "n_paragraphs": 10,
+      "question": "Students from approximately how many nations attend the University from which Shawn Ar\u00e9valo McCollough received his Masters of Education ?",
+      "gold_answer": "approximately 85 nations.",
+      "predicted": "More than 20 nations.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        5,
+        6,
+        4,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        5
+      ],
+      "prompt_tokens_estimated": 1710,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:2856e825c86cd49d66d38dec692900fa6ca4e3d0b1d071bb7d17a5c46e90b47c",
+      "n_paragraphs": 10,
+      "question": "Which breed of Dog was developed in Germany, The Large M\u00fcnsterl\u00e4nder or Bracco Italiano?",
+      "gold_answer": "The Large M\u00fcnsterl\u00e4nder",
+      "predicted": "The Large M\u00fcnsterl\u00e4nder",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        7,
+        5,
+        3,
+        1,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 1015,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:7602758e0dc0248fe05da9a1596c3149f1eb79c4a91f074f5e8e0be3dc82784b",
+      "n_paragraphs": 10,
+      "question": "Which American cable news and talk radio host was the former GOP representative",
+      "gold_answer": "Charles Joseph",
+      "predicted": "Joe Scarborough",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        4,
+        3,
+        1,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 922,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:f95eb4c73bd714cc5f4613be9201562bb70273af3a201d6bfa93388e54401a1f",
+      "n_paragraphs": 10,
+      "question": "The last Republic serial made about a superhero stars what actor in the title role?",
+      "gold_answer": "Richard Gerald \"Dick\" Purcell Jr.",
+      "predicted": "Dick Purcell",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        3,
+        0,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 983,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:cc64766d233ff4410c96a33f80a77f3382f137acd35359bd3d9246d83b9dab82",
+      "n_paragraphs": 10,
+      "question": "Jun Ji-hyun rose to fame after her as a girl in a film that's title means what?",
+      "gold_answer": "\"That Bizarre Girl\"",
+      "predicted": "The title means \"That Bizarre Girl.\"",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 887,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:231de970580ea1b2b7d0c54d5ca6e020a9cb945a62b5c03c9072611d9e0f81e8",
+      "n_paragraphs": 10,
+      "question": "What prolific English engineer, who died on 15 December 1857, contributed to the advent of the hot air engine by way of their open cycle devices?",
+      "gold_answer": "George Cayley",
+      "predicted": "Sir George Cayley",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        4,
+        2,
+        5,
+        3
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 822,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:4173f1a7c82d71fae4ac94f2045b6a9b200f938dfd4d24236aeab03a12b1ae7c",
+      "n_paragraphs": 10,
+      "question": "What date did the movement Hans Knirsch was an activist for officially gain traction?",
+      "gold_answer": "November 15, 1903",
+      "predicted": "The provided passages do not specify a date when the movement Hans Knirsch was an activist for officially gained traction.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        6,
+        2,
+        5,
+        4,
+        3,
+        1
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1118,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:017f688633e7df13d9bf8a1a8b92ec791615fbd6216c0588590dd190152a0533",
+      "n_paragraphs": 10,
+      "question": "Who died last Vladimir Arnold or Georg Cantor?",
+      "gold_answer": "Vladimir Igorevich Arnold",
+      "predicted": "Vladimir Arnold died last.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        4,
+        2,
+        1,
+        3
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 1025,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:f9bd967b9e39f506a2bfa2ceb69060c24dad7ad722b84816d02f03366b5353d2",
+      "n_paragraphs": 10,
+      "question": "Where is the headquarter of the American multinational chemical corporation who's part is Dow AgroSciences?",
+      "gold_answer": "Midland, Michigan, United States",
+      "predicted": "Midland, Michigan, United States",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        3,
+        5,
+        0,
+        4
+      ],
+      "relevant_paragraphs": [
+        1,
+        7
+      ],
+      "prompt_tokens_estimated": 995,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:82f1e96bb8fddf1404088a8518b6837532f92ecf8a62acadedd5b140c52cfbfc",
+      "n_paragraphs": 10,
+      "question": "Which author influenced the animated Easter television special \"The First Easter Rabbit\"?",
+      "gold_answer": "Margery Williams",
+      "predicted": "Margery Williams",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        4,
+        5,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 1073,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:fb3290d50d6116c00bb8853a8f14c5d962b3026ed70080e239690cd61e4843e8",
+      "n_paragraphs": 10,
+      "question": "Seal Harris was born in what county?",
+      "gold_answer": "Polk County",
+      "predicted": "Cedartown, Georgia",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        2,
+        3
+      ],
+      "relevant_paragraphs": [
+        3,
+        7
+      ],
+      "prompt_tokens_estimated": 995,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:f0bcd8dd65c555b2764383e1358016745a3d51f67e15c37a99e8a5a00e2ee29c",
+      "n_paragraphs": 10,
+      "question": "Who holds the world record for jumping over 6 buses and appeared on the British television series \"The Jump\"?",
+      "gold_answer": "Eddie \"The Eagle\" Edwards",
+      "predicted": "Eddie \"The Eagle\" Edwards",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        5,
+        4,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 1288,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:4a8f9fd39fdc251c713a28496722988ed6ab1e474c2ebdf8a871d551e326d1f1",
+      "n_paragraphs": 10,
+      "question": "What is the river that Sangin is found in the valley of the primary watershed for?",
+      "gold_answer": "Sistan Basin",
+      "predicted": "Helmand River",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        2,
+        4
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 1225,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:b4e5ee1b999556fbd459d76543e0ce7bca70626c29db0a0a3b24d37cb1806c09",
+      "n_paragraphs": 10,
+      "question": "Where was the 2015 MSA Formula Championship, a multi-event, Formula 4 open-wheel single seater motor racing championship held?",
+      "gold_answer": "England and Scotland",
+      "predicted": "The 2015 MSA Formula Championship was held across England and Scotland.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 437,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:9716af7ff0625ffdb0b2fb6aa2796e4beba6016e4b48046a1952308878e18804",
+      "n_paragraphs": 10,
+      "question": "The Detroit mayoral elections of 2009 took place to fill the vacancy created by a politician who was sentenced to what?",
+      "gold_answer": "four months in jail",
+      "predicted": "The vacancy was created by a politician who was sentenced to four months in jail.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        5,
+        6,
+        4,
+        3,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1127,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:1f365220574ec5244652a576bb4161fd78d9ba389473a230bb6b8c65c1cb9cf9",
+      "n_paragraphs": 10,
+      "question": "Arbutus and Aspidistra are what types of plants?",
+      "gold_answer": "flowering plants",
+      "predicted": "Arbutus is a genus of flowering plants in the family Ericaceae, while Aspidistra is a genus of flowering plants in the family Asparagaceae.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        0,
+        4,
+        3,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 1313,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:9c48fa426a90b37ee14cc4791bcc073c082e509fdfb5d59b389a96fca84e209b",
+      "n_paragraphs": 10,
+      "question": "What industry does Edgar Selwyn and Chantal Akerman work in?",
+      "gold_answer": "theater and film",
+      "predicted": "Film industry",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        5,
+        7,
+        6,
+        4,
+        0,
+        3
+      ],
+      "relevant_paragraphs": [
+        0,
+        5
+      ],
+      "prompt_tokens_estimated": 661,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:4f933d160255c41106f52f02e9e61bdf8c02854727364360fa8309b111006f4e",
+      "n_paragraphs": 10,
+      "question": "Which school with which Gabriela Lemus has been affiliated is a member school of the Thurgood Marshall College Fund?",
+      "gold_answer": "UDC",
+      "predicted": "University of the District of Columbia",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        5,
+        6,
+        4,
+        0,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 1056,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:45705ed0524aea141ce71b6a17eb87b93f35ad80dc8e4b31e8f1bfc4c3689805",
+      "n_paragraphs": 10,
+      "question": "Who was hung for assisting the attempted surrender of a defector from the American Continental Army to the British Army?",
+      "gold_answer": "John Andr\u00e9",
+      "predicted": "John Andr\u00e9",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        6,
+        5,
+        0,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1162,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:871ac36b23524252d686742aac779ca539a2889d5997d69da6c26c2dd6d630ab",
+      "n_paragraphs": 10,
+      "question": "What town did Moe Sedway have success in after Benjamin \"Bugsy\" Siegel's murder?",
+      "gold_answer": "Las Vegas",
+      "predicted": "Las Vegas",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 898,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:058a1b7ec9d60c848b0f76351c26ef860504ec6b6cd9e80527176d39f1b4c56d",
+      "n_paragraphs": 10,
+      "question": "Ara Berberian sand for which role an opera by Giuseppe Verdi?",
+      "gold_answer": "Sparafucile",
+      "predicted": "Sparafucile in Verdi's \"Rigoletto\".",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        6,
+        5,
+        3,
+        1,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 1095,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 30,
+      "doc_fingerprint": "sha256:d3e6f212ef2118cb49f543992c207ce980ea859e90104e9177abe9d54d1f93ff",
+      "n_paragraphs": 10,
+      "question": "Orange is the New Black, starring Annie Golden as Norma Romano, takes place in which minimum-security federal prison?",
+      "gold_answer": "FCI Danbury",
+      "predicted": "FCI Danbury",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        3,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 336,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 31,
+      "doc_fingerprint": "sha256:267cfbd846e4e80dcbf901ab0596f2949085da41b8199753946d732e5ab9e5da",
+      "n_paragraphs": 10,
+      "question": "Is Gasherbrum II or Nuptse closest to the tallest mountain in the world?",
+      "gold_answer": "It lies two kilometres WSW of Mount Everest.",
+      "predicted": "Nuptse is closest to the tallest mountain in the world (Mount Everest).",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        3,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 955,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 32,
+      "doc_fingerprint": "sha256:8e041ff1bd34222e2b5d9ace7a396c8ce42d8af5bf379ffd5fe63d856dbde64e",
+      "n_paragraphs": 10,
+      "question": "Which breed of dog was first recognized by their country's official kennel club, the American Hairless Terrier or the Saint-Usuge Spaniel?",
+      "gold_answer": "The American Hairless Terrier",
+      "predicted": "The Saint-Usuge Spaniel.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 1294,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 33,
+      "doc_fingerprint": "sha256:188add6b03048d64cde9ec89206036dc1ddc1a57f6b2ba1bdd5d16a441fd2978",
+      "n_paragraphs": 10,
+      "question": "Which of the starting pitchers for Team USA in the Baseball at the 2000 Summer Olympics was not born August 29, 1977?",
+      "gold_answer": "Ben Sheets",
+      "predicted": "Ben Sheets",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 944,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 34,
+      "doc_fingerprint": "sha256:1ba701aa2e71f0a4eca40460d37c88113788b3491571e8cbbb01ab41e458be5a",
+      "n_paragraphs": 10,
+      "question": "Who is older, Hampton Del Ruth or Ted Kotcheff?",
+      "gold_answer": "Hampton Del Ruth",
+      "predicted": "Hampton Del Ruth is older.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        5,
+        6,
+        3,
+        4,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 776,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 35,
+      "doc_fingerprint": "sha256:0428a8c08845af792562d0ae0bf938c02b77d3633856d3f515e9e706c0941136",
+      "n_paragraphs": 10,
+      "question": "Which magazine is older, Gallery or Dime Magazine?",
+      "gold_answer": "arose on the \"Playboy\" magazine pattern in the 1970s.",
+      "predicted": "Dime Magazine is older.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 1235,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 36,
+      "doc_fingerprint": "sha256:526de5dbcd884a29183a27ae118c07c9749536555487901be03c99b53e02a348",
+      "n_paragraphs": 10,
+      "question": "Which film was released first, Jawbreaker or Havenhurst?",
+      "gold_answer": "Jawbreaker",
+      "predicted": "Jawbreaker",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        4,
+        5,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 1432,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 37,
+      "doc_fingerprint": "sha256:fdb4465698f65264554605c448817e452249e308824bbf8466cb8d99cda31f5f",
+      "n_paragraphs": 10,
+      "question": "Who did the Doncaster Belles play in the 1994 FA Women's Cup Final held at Glanford Park?",
+      "gold_answer": "Knowsley United Women",
+      "predicted": "The Doncaster Belles played against the Arsenal Ladies in the 1994 FA Women's Cup Final held at Glanford Park.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        5,
+        2,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 400,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 38,
+      "doc_fingerprint": "sha256:59efbcadbab42af1bc8ff71125e70eb0954c9099bf0a97a123d8d3fad1598dca",
+      "n_paragraphs": 10,
+      "question": "Which species is the most numerous, Podocarpus or Osmunda?",
+      "gold_answer": "Podocarpus",
+      "predicted": "Podocarpus",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        4,
+        1,
+        2,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 722,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 39,
+      "doc_fingerprint": "sha256:2c220e6b26f6ae0ae1a8a932c5488831664148b30a29ab55c684057520d27be7",
+      "n_paragraphs": 10,
+      "question": "What division of Mexican football is the team that Jes\u00fas Daniel Garc\u00eda Esparza currently plays for?",
+      "gold_answer": "Liga MX",
+      "predicted": "Jes\u00fas Daniel Garc\u00eda Esparza currently plays for a team in the top division of Mexican football, Liga MX.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        6,
+        4,
+        2,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        5,
+        9
+      ],
+      "prompt_tokens_estimated": 436,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 40,
+      "doc_fingerprint": "sha256:6182bd711e88586a583e7ae8b6e354f726eb118053b7f8506b01600975ff3c53",
+      "n_paragraphs": 10,
+      "question": "From where was the award which has Matt James as a winner in 2012 has its name derived?",
+      "gold_answer": "EN World web site",
+      "predicted": "The award has its name derived from the EN World web site.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        5,
+        6,
+        1,
+        2,
+        4
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 1069,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 41,
+      "doc_fingerprint": "sha256:9fb33219dffbc94eb4c746b8ebabbcd0a76f34145db4ed70cb7872028d347cb3",
+      "n_paragraphs": 10,
+      "question": "Hobart Paving is a single by a band formed in which year ?",
+      "gold_answer": "1990",
+      "predicted": "Hobart Paving is a single by a band formed in 1990.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        0,
+        5,
+        3,
+        4
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 1022,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 42,
+      "doc_fingerprint": "sha256:25774d78eb281205c458ff2e25aae89bf0c1d28efcd92251726847d1dbd0ea67",
+      "n_paragraphs": 10,
+      "question": "Who wrote the film, other than The Good Shepherd, in which Leonard Logsdail appeared as a tailor ?",
+      "gold_answer": "Martin Scorsese",
+      "predicted": "Martin Scorsese",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        7,
+        5,
+        4,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1213,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 43,
+      "doc_fingerprint": "sha256:32cf8389e85dd5abf5d3f18ada9a05b5c253d34938df49e97fe8314fdbaf1f61",
+      "n_paragraphs": 10,
+      "question": "The 2015 Austrian thriller film Jack tells the story of a serial killer who died in what year?",
+      "gold_answer": "1994",
+      "predicted": "1994",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        3,
+        6,
+        5,
+        4,
+        0
+      ],
+      "relevant_paragraphs": [
+        3,
+        8
+      ],
+      "prompt_tokens_estimated": 925,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 44,
+      "doc_fingerprint": "sha256:48c9a9d384ddc55ee8ce43ee2652e8824719592fc761d281d047d1423d5e1506",
+      "n_paragraphs": 10,
+      "question": "What country of origin does Shawnee Trail and Great Indian Warpath have in common?",
+      "gold_answer": "American",
+      "predicted": "United States",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        3,
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1218,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 45,
+      "doc_fingerprint": "sha256:055c616f589e87ad9e8a6ca9473bb8ddfbfbfc3e8b4de99bea434ca6c3b99967",
+      "n_paragraphs": 10,
+      "question": "Who was the brother of the architect of Hook and Ladder No. 4 located in Albany, NY?",
+      "gold_answer": "Cuyler Reynolds",
+      "predicted": "Cuyler Reynolds",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        2,
+        4,
+        6,
+        0,
+        1,
+        3
+      ],
+      "relevant_paragraphs": [
+        2,
+        9
+      ],
+      "prompt_tokens_estimated": 1048,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 46,
+      "doc_fingerprint": "sha256:cc4cb941c7a1a8e7742a0005bb144763003a20f63dc427bcf40ad34c3e49ad87",
+      "n_paragraphs": 10,
+      "question": "Who is the sister of Princess Zein and the daughter of a British woman?",
+      "gold_answer": "Princess Aisha bint Hussein",
+      "predicted": "Princess Muna al-Hussein",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 800,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 47,
+      "doc_fingerprint": "sha256:38aa0ed74b50c1d43103c0f05efaba85734edfc3a9fc6894267c8a636beb8186",
+      "n_paragraphs": 10,
+      "question": "What term is the current chairman of Prince William County serving?",
+      "gold_answer": "fourth term",
+      "predicted": "Corey Stewart is currently serving his fourth term as At-Large Chairman of the Board of Supervisors of Prince William County.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        6,
+        7,
+        5,
+        3,
+        4,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 1135,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 48,
+      "doc_fingerprint": "sha256:604a7441ad191f1aa32d9ed1493008e52efcf0df1a1aa74869a3bdcd16cb4f2d",
+      "n_paragraphs": 10,
+      "question": "Who directed the 2014 American biographical survival drama film which Laura Elizabeth Dern was nominated for the Academy Award for Best Supporting Actress in",
+      "gold_answer": "Jean-Marc Vall\u00e9e",
+      "predicted": "Jean-Marc Vall\u00e9e",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        5,
+        6,
+        0,
+        3,
+        4
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1390,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 49,
+      "doc_fingerprint": "sha256:835967da2992ec832d0c3d440afde7697df0bd374b69975782010bae6d71b8ec",
+      "n_paragraphs": 10,
+      "question": "Chun Woo-hee's notable films include a South Korean horror film about  a policeman who investigates a series of mysterious killings and what?",
+      "gold_answer": "illnesses",
+      "predicted": "A South Korean period drama film about best friends who are gisaeng during the Imperial Japanese occupation of Korea.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        6,
+        4,
+        5,
+        3,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        6,
+        9
+      ],
+      "prompt_tokens_estimated": 936,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 50,
+      "doc_fingerprint": "sha256:7d8d385d391dfcb030f80fa486a68e636585719ae92baeebcdc4e0782878d118",
+      "n_paragraphs": 10,
+      "question": "What fellow Turkish footballer did Darko Kova\u010devi\u0107 form an offensive partnership with during his tenure at Real Sociedad?",
+      "gold_answer": "Nihat Kahveci",
+      "predicted": "Nihat Kahveci",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        4,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 931,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 51,
+      "doc_fingerprint": "sha256:085d6423dcb5faf67483b4235e094b572cbf61742f25b1df2c22f94891e67dd7",
+      "n_paragraphs": 10,
+      "question": "What is special about the wristwatches that Favre-Leuba manufactures?",
+      "gold_answer": "Swiss made",
+      "predicted": "Favre-Leuba is a pioneer in watch design, manufacturing, and distribution, contributing immensely to the Swiss watchmaking industry.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        3,
+        7,
+        5,
+        4,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        9
+      ],
+      "prompt_tokens_estimated": 820,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 52,
+      "doc_fingerprint": "sha256:49a221479685d232882724625bbd3de20fecaeced98dcf7d9be1b015b33dc373",
+      "n_paragraphs": 10,
+      "question": "What song written by Jimmy Webb inspired the name of a supergroup including Johnny Cash?",
+      "gold_answer": "Highwayman",
+      "predicted": "\"The Highwayman\"",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        4,
+        3,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1328,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 53,
+      "doc_fingerprint": "sha256:c7d3015bd9f5e68223b95939210d3cdc75dd08d0234957f880bcb1d861e61013",
+      "n_paragraphs": 10,
+      "question": "When was the father of the professional ice hockey player with the middle name \"Fosgaard\" born?",
+      "gold_answer": "June 13, 1960",
+      "predicted": "Lars Fosgaard Eller, the professional ice hockey player with the middle name \"Fosgaard,\" was born on May 8, 1989. Therefore, his father, Mike Eaves, was born before that date, but the specific birth date of Mike Eaves is not provided in the passages.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        5,
+        6,
+        4,
+        3,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 1058,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 54,
+      "doc_fingerprint": "sha256:c46d2328ff194b9751b45cb18a8156f2a829583cc47aaf30ff2ed37dc400234d",
+      "n_paragraphs": 10,
+      "question": "Is Northeast Florida Regional Airport farther from St. Augustine than Glacier Park International Airport is to Kalispell?",
+      "gold_answer": "no",
+      "predicted": "No, Northeast Florida Regional Airport is closer to St. Augustine than Glacier Park International Airport is to Kalispell.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        3,
+        0,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 988,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 55,
+      "doc_fingerprint": "sha256:3cc2b889304b57707b5f26db0e45a7ef736e364381d2c253e9ddefeec43d10ae",
+      "n_paragraphs": 10,
+      "question": "What is the name of the pop artist that belongs on the Pledis Entertainment label and has 13 members?",
+      "gold_answer": "Seventeen",
+      "predicted": "Seventeen",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        7,
+        3,
+        5,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        3,
+        9
+      ],
+      "prompt_tokens_estimated": 1107,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 56,
+      "doc_fingerprint": "sha256:107546d05a2b11c79bd26780f5eb717531623ec525ef1b1ffe7c088e07803e34",
+      "n_paragraphs": 10,
+      "question": "What team plays within the Big 12 Conference and has Kevin Bookout playing for them?",
+      "gold_answer": "Oklahoma Sooners men's basketball",
+      "predicted": "Oklahoma Sooners men's basketball",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        5,
+        2,
+        4,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        5
+      ],
+      "prompt_tokens_estimated": 874,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 57,
+      "doc_fingerprint": "sha256:cd4c99f62b7d7692906e84a233e907d0e418e13bcb28fd1d6fdfb1e8085b3256",
+      "n_paragraphs": 10,
+      "question": "Who directed more films, Leslie Goodwins or Kenneth Webb?",
+      "gold_answer": "Leslie Goodwins",
+      "predicted": "Leslie Goodwins directed nearly 100 films, while Kenneth Webb directed a number of films in the early age of the American film industry, but the exact number is not specified. Therefore, Leslie Goodwins directed more films.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        6,
+        4,
+        5,
+        3,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 804,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 58,
+      "doc_fingerprint": "sha256:7dade69478969618deac1c15d383d9d49a495ef081c21607b68cdc26e105cdcb",
+      "n_paragraphs": 10,
+      "question": "Which band has more members, Lawson or American Music Club?",
+      "gold_answer": "Lawson",
+      "predicted": "American Music Club has more members.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        4,
+        3,
+        6,
+        5,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        4
+      ],
+      "prompt_tokens_estimated": 1200,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 59,
+      "doc_fingerprint": "sha256:aa5b50050bc5407f7d0f1c897b0d3ed5bc7599ae829f4d77bff5c6d450c7236b",
+      "n_paragraphs": 10,
+      "question": "Who selected the quarterback in the 1999 NFL draft, two spots after All American Tim Couch?",
+      "gold_answer": "Cincinnati Bengals",
+      "predicted": "The Cincinnati Bengals selected Akili Smith two spots after All-American Tim Couch in the 1999 NFL Draft.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        6,
+        5,
+        4,
+        3,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 1012,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 60,
+      "doc_fingerprint": "sha256:ba70169a9e11720d96363dba9929c893ad4eff47e1a6a401d28c198dddc922c2",
+      "n_paragraphs": 10,
+      "question": "In what order does Three Colours: Blue appear in the Three Colours trilogy?",
+      "gold_answer": "first",
+      "predicted": "Third",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        5,
+        0,
+        3,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 1000,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 61,
+      "doc_fingerprint": "sha256:9c235d309c82edec8c105ce41a5e517f20850c20c762196e7b8bc5f2f21a33b5",
+      "n_paragraphs": 10,
+      "question": "What number album is the first W.A.S.P. album to feature Steven Edward Duren playing guitar?",
+      "gold_answer": "third",
+      "predicted": "The first W.A.S.P. album to feature Steven Edward Duren playing guitar is the third studio album, \"Inside the Electric Circus.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        4,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 956,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 62,
+      "doc_fingerprint": "sha256:b10067a7b9a9698f30be84ce225ea5890840bcfea4e6afc0f5cae8d61c8febc7",
+      "n_paragraphs": 10,
+      "question": "Figure 2 Ranch Airport supports launch operations of what aerospace manufacturer and space flight services company?",
+      "gold_answer": "Blue Origin",
+      "predicted": "Space Vector Corporation",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        5,
+        6,
+        3,
+        2,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        3,
+        8
+      ],
+      "prompt_tokens_estimated": 1276,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 63,
+      "doc_fingerprint": "sha256:e70215c4d2efc097603fb40fe9c19f59e06146d87b0b2706e6efbcccabab2c1a",
+      "n_paragraphs": 10,
+      "question": "What produces the hormone that promotes sodium retention in the distal nephron?",
+      "gold_answer": "zona glomerulosa",
+      "predicted": "Aldosterone",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        6,
+        3,
+        2,
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        5,
+        9
+      ],
+      "prompt_tokens_estimated": 1300,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 64,
+      "doc_fingerprint": "sha256:6cb91024c95c626ac4a757bc88b875c9e489aec9bcc14ac730f944b3d1af738c",
+      "n_paragraphs": 10,
+      "question": "Which Canadian heavy metal band is Safe  the second EP by",
+      "gold_answer": "Kittie",
+      "predicted": "Kittie",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        2,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 842,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 65,
+      "doc_fingerprint": "sha256:28d22764ec4934b719504403f3b4a9a5d7957e885badf229069d80eced7c5c15",
+      "n_paragraphs": 10,
+      "question": "Piano Concerto No. 6 in D major, Hess 15 is an unfinished piano concerto by a composer who passed away in which year ?",
+      "gold_answer": "1827",
+      "predicted": "1827",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        8,
+        7,
+        3,
+        6,
+        4,
+        5,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 1303,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 66,
+      "doc_fingerprint": "sha256:0f72e531d37e57e53c6cc3665b513c42baa850c273e127fdb2fcba76cf264b13",
+      "n_paragraphs": 10,
+      "question": "What soldier and statesman was also a brother to James FitzJames mother?",
+      "gold_answer": "John Churchill, 1st Duke of Marlborough",
+      "predicted": "John Churchill, 1st Duke of Marlborough",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        6,
+        5,
+        3,
+        1,
+        4,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 765,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 67,
+      "doc_fingerprint": "sha256:9e766f51e1071b96af9d7fe96b383168e40ab582b325a924614ad5b910e3832f",
+      "n_paragraphs": 10,
+      "question": "When was the improvisational troupe, which trained Amy Sedaris, Paul Dinello, and Stephen Colber, founded?",
+      "gold_answer": "1959",
+      "predicted": "The improvisational troupe, The Second City, was founded on December 16, 1959.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        2,
+        5,
+        4,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        1,
+        9
+      ],
+      "prompt_tokens_estimated": 974,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 68,
+      "doc_fingerprint": "sha256:cda9b7b63a7a7c7a5988736452fcbfafa17a48cbca9cff0718b563b9b8b5e712",
+      "n_paragraphs": 10,
+      "question": "What role is played by John Travolta in the film that greatly influenced the two dances, the disco fox and the hustle?",
+      "gold_answer": "Tony Manero",
+      "predicted": "Tony Manero",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        1,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        1,
+        5
+      ],
+      "prompt_tokens_estimated": 1216,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 69,
+      "doc_fingerprint": "sha256:3592afbd6dc63049f8e1023586abe5fcb315d99c4dc7ac6520164c84f19d4576",
+      "n_paragraphs": 10,
+      "question": "Name a movie that David Thewlis has performed in after the premiere of Fargo?",
+      "gold_answer": "Anomalisa",
+      "predicted": "Regression",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        3,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        3,
+        8
+      ],
+      "prompt_tokens_estimated": 1283,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 70,
+      "doc_fingerprint": "sha256:cecb32a297f356c8eb5daf7f7e21aff499215866615690daaf934bf1c1c98ff8",
+      "n_paragraphs": 10,
+      "question": "Are Ari Up and Boz Burrell both guitarists?",
+      "gold_answer": "no",
+      "predicted": "No, Ari Up was a vocalist, while Boz Burrell was primarily known for his bass playing.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        5,
+        6,
+        2,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1030,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 71,
+      "doc_fingerprint": "sha256:f24e2ec598b5a915dbc13b9b4c7a9e7c285697b895893de32ff95ccb84472ce2",
+      "n_paragraphs": 10,
+      "question": "The Lewis and Clark Memorial Column is dedicated to Meriwether Lewis, best known for his role as the leader of which Lewis and Clark Expedition?",
+      "gold_answer": "Corps of Discovery",
+      "predicted": "The Corps of Discovery.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        5,
+        3,
+        1,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 747,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 72,
+      "doc_fingerprint": "sha256:6cac77d3be3b0671dd992a74e62e19204551b4725aa1feb9d2647492399473bb",
+      "n_paragraphs": 10,
+      "question": "Who is an Australian philosopher that inspired Living High and Letting Die?",
+      "gold_answer": "Peter Singer",
+      "predicted": "Peter Singer",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 954,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 73,
+      "doc_fingerprint": "sha256:47af4776392e90e6524f10d93208b8b75bd95b1ef70cbf93ee3d8d4bc606accd",
+      "n_paragraphs": 10,
+      "question": "Which plant genus is part of a family with a longer name, Morning glory or Rothmannia?",
+      "gold_answer": "Morning glory",
+      "predicted": "Rothmannia",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        4,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 713,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 74,
+      "doc_fingerprint": "sha256:3bf6c3fe6fe0f43efa21d9d325129480b199d273173575ea05ce9acc73d8bb6e",
+      "n_paragraphs": 10,
+      "question": "How big is the campus of the University that Ben Bahan is a professor at ?",
+      "gold_answer": "99 acre campus",
+      "predicted": "The relevant passages do not provide information about the size of the campus of the University that Ben Bahan is a professor at.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        7,
+        5,
+        3,
+        1,
+        4
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1747,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 75,
+      "doc_fingerprint": "sha256:b01db4409d47c18643da922828f6377b5f17e55fbf8a18c54b9f09359f7d2365",
+      "n_paragraphs": 10,
+      "question": "What type of television show did Dylan Everett star in, in 2015?",
+      "gold_answer": "American-Canadian mystery-drama",
+      "predicted": "Dylan Everett starred in a mystery-drama television series in 2015 called \"Open Heart.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        5,
+        7,
+        6,
+        4,
+        3,
+        1
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 952,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 76,
+      "doc_fingerprint": "sha256:097e067fc3346c8238b8b9806bc376b98951b056937fdcea5b78de74de71d39f",
+      "n_paragraphs": 10,
+      "question": "Are Jeff Ragsdale and Millard Webb both authors?",
+      "gold_answer": "no",
+      "predicted": "No, only Jeff Ragsdale is an author. Millard Webb was a screenwriter and director.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        6,
+        3,
+        5,
+        4,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 976,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 77,
+      "doc_fingerprint": "sha256:3717a98cfa180aed2a127ad229529381ba7dedcfdd5cd1a2aa241b2ccaa7ba20",
+      "n_paragraphs": 10,
+      "question": "San Jose Secondary Educational Center, is located on the cost of what sea?",
+      "gold_answer": "Mediterranean",
+      "predicted": "Mediterranean Sea",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        5,
+        2,
+        6,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 1083,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 78,
+      "doc_fingerprint": "sha256:d3536bbae72872f809915b56d4a67bf1bf1f580d49feec1259b1ef4f5a5ab0ce",
+      "n_paragraphs": 10,
+      "question": "The Sports Museum is a non-profit museum currently located in what multi-purpose arena that opened in 1995?",
+      "gold_answer": "TD Garden",
+      "predicted": "TD Garden",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        4,
+        3,
+        5,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 1073,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 79,
+      "doc_fingerprint": "sha256:ad5d67b94e7de39378cb6d0884bb65310cd507e39971c38d2f526db5aec4f9e1",
+      "n_paragraphs": 10,
+      "question": "Which airline hub does Japan Air Commuter and Japan Airlines share in common?",
+      "gold_answer": "Osaka International Airport",
+      "predicted": "Nagoya Airfield",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        5,
+        2,
+        0
+      ],
+      "relevant_paragraphs": [
+        6,
+        7
+      ],
+      "prompt_tokens_estimated": 421,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 80,
+      "doc_fingerprint": "sha256:ee9ca74feed3dd9361b668f73b207cec6fba8b74c49ab4ff619053399e439058",
+      "n_paragraphs": 10,
+      "question": "Underwater! is a 1955 adventure film starring an American film actress who was a leading sex symbol in what decades?",
+      "gold_answer": "1940s and 1950s",
+      "predicted": "Underwater! stars Jane Russell, who was a leading sex symbol in the 1940s and 1950s.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        7,
+        5,
+        3,
+        4,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 913,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 81,
+      "doc_fingerprint": "sha256:ce7d9bc274932ba1d221d3fd43c4b341346bc5e64e15f93940655feaef7fad0b",
+      "n_paragraphs": 10,
+      "question": "Are both Pomeranian and Sporting Lucas Terrier named after a particular person?",
+      "gold_answer": "no",
+      "predicted": "No, only the Sporting Lucas Terrier is named after a particular person (Jocelyn Lucas). The Pomeranian is named after a region (Pomerania).",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        3,
+        5,
+        2,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 1038,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 82,
+      "doc_fingerprint": "sha256:03cf325708b4bf47a6bee98dfef0666064180744364942d02d68569a3b5d6cbd",
+      "n_paragraphs": 10,
+      "question": "What American corporation owns Claim Jumper?",
+      "gold_answer": "Landry's",
+      "predicted": "Landry's, Inc.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        0,
+        3
+      ],
+      "relevant_paragraphs": [
+        5,
+        9
+      ],
+      "prompt_tokens_estimated": 805,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 83,
+      "doc_fingerprint": "sha256:499a52b183d118ac0c7aa5e356f83deab6a6128aac4157f7d02b393986a26761",
+      "n_paragraphs": 10,
+      "question": "What year was a joint venture between RLJ Companies and this film studio founded in 2005, founded?",
+      "gold_answer": "2006",
+      "predicted": "2006",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        1,
+        2,
+        3
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 1029,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 84,
+      "doc_fingerprint": "sha256:a6533391127db94069cffdb66e113349688be79a697d3706d6bda299a79b8bfa",
+      "n_paragraphs": 10,
+      "question": "Of these two publication--B\u00e1iki and Sick--what type of publication is the one that was published most frequently?",
+      "gold_answer": "satirical-humor magazine",
+      "predicted": "Sick was published most frequently as it lasted 134 issues from 1960 to 1980.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        7,
+        9
+      ],
+      "prompt_tokens_estimated": 1346,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 85,
+      "doc_fingerprint": "sha256:dfc99d91ce01f76229ccf68175943c8f75b40654cbd9d89cdef7000df1fcaa88",
+      "n_paragraphs": 10,
+      "question": "What's the familiar short name of Polyethylene terephthalate, a material used by bottle makers such as Ecopack of Pakistan?",
+      "gold_answer": "PET",
+      "predicted": "PET",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        6,
+        5,
+        4,
+        2,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 742,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 86,
+      "doc_fingerprint": "sha256:9b473cbf9d5053fece5a04d253e48e6d882143f9fd5d7298506fc1cb24037528",
+      "n_paragraphs": 10,
+      "question": "St Anne's Academy is an 11\u201318 mixed comprehensive academy is located in a town that had how many inhabitants in 2011 ?",
+      "gold_answer": "42,972",
+      "predicted": "42,972",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        5,
+        7,
+        6,
+        4,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        5,
+        9
+      ],
+      "prompt_tokens_estimated": 743,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 87,
+      "doc_fingerprint": "sha256:33d47166aa69dadceae880920594d964dbb67bac67fe868c117032caeb7501e1",
+      "n_paragraphs": 10,
+      "question": "In what year was the Moldavian, later Romanian writer, known for his work \"The Goat and Her Three Kids\" born?",
+      "gold_answer": "1837",
+      "predicted": "Ion Creang\u0103 was born in 1837.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        7,
+        6,
+        5,
+        4,
+        1,
+        2,
+        3
+      ],
+      "relevant_paragraphs": [
+        4,
+        8
+      ],
+      "prompt_tokens_estimated": 1676,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 88,
+      "doc_fingerprint": "sha256:7308c749bfc5ce6cf8355895f4b9e1817d652877d0afb23d61ddbf34f4a026b3",
+      "n_paragraphs": 10,
+      "question": "What kind of ships have been named after the King of Norway who ascended the throne in 1991?",
+      "gold_answer": "motor ships",
+      "predicted": "The ships named after Harald V of Norway are \"Harald V-class\" ships.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        2,
+        5,
+        4,
+        1
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 2024,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 89,
+      "doc_fingerprint": "sha256:30f4f1b6a381981985a6b977b7327f655c02f25c887262d6cb6ba291065dc4f3",
+      "n_paragraphs": 10,
+      "question": "In what event was Harold Davis a former record holder, but now is held by Usain Bolt?",
+      "gold_answer": "100 metres",
+      "predicted": "The 100 meters event.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        4,
+        2,
+        1,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        2,
+        5
+      ],
+      "prompt_tokens_estimated": 1072,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 90,
+      "doc_fingerprint": "sha256:378fd50a7b62f348233f748a0f2020d1ea81949af5a7f892f603aeb23388a328",
+      "n_paragraphs": 10,
+      "question": "Ist das Ihr Fahrrad Mr O\u2019Brien? is a German biographical radio play about life, works and legacy of an Irish novelist whose many satrical columns were written under what name?",
+      "gold_answer": "Myles na gCopaleen",
+      "predicted": "Myles na gCopaleen",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        0,
+        3,
+        5,
+        4
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 887,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 91,
+      "doc_fingerprint": "sha256:4107fba3d8e92e8ad6188cec6499a1795b4a39d486d72fc2259d5731794f57db",
+      "n_paragraphs": 10,
+      "question": "The Westchester Knicks are a basketball team in a minor league basketball organization that was known as what from 2001 to 2005?",
+      "gold_answer": "National Basketball Development League",
+      "predicted": "NBA Development League (NBA D-League)",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        7,
+        4,
+        5,
+        3,
+        0
+      ],
+      "relevant_paragraphs": [
+        6,
+        7
+      ],
+      "prompt_tokens_estimated": 789,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 92,
+      "doc_fingerprint": "sha256:6a5c9f1bbe41eeb79b6cdf1003b8bfb33fb9b46eec27a07e3da9f3606607540c",
+      "n_paragraphs": 10,
+      "question": "Which PGA championship did Mark Brooks win?",
+      "gold_answer": "The 1996 PGA Championship",
+      "predicted": "The relevant passages do not provide information about Mark Brooks winning any PGA championship.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        3,
+        2,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 773,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 93,
+      "doc_fingerprint": "sha256:56b0be88ad268ae0907c6399a6204fcd69683ebcc4c0b26d1b6b9efbb6c2a92e",
+      "n_paragraphs": 10,
+      "question": "Who composed the theme music in 1989 of an animated television series which has the current arrangement by a person who  has scored or orchestrated music for more than 30 films and television shows?",
+      "gold_answer": "Danny Elfman",
+      "predicted": "Danny Elfman composed the theme music in 1989, and the current arrangement is by Alf Clausen.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "relevant_paragraphs": [
+        4,
+        8
+      ],
+      "prompt_tokens_estimated": 1807,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 94,
+      "doc_fingerprint": "sha256:6e0fa2ec02c3504ac630580be28f05a28d3b1768ecf53b857dd04e601e35cce3",
+      "n_paragraphs": 10,
+      "question": "When was the American actor, film director which  Dana Brunetti is the president of his company born",
+      "gold_answer": "July 26, 1959",
+      "predicted": "Kevin Spacey was born on July 26, 1959.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        4,
+        5,
+        3,
+        1,
+        0
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 801,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 95,
+      "doc_fingerprint": "sha256:bd88260f32693b7e8cf24aae94f8f1e0735179db4674bf65509f46f06f31c838",
+      "n_paragraphs": 10,
+      "question": "How is the namesake of The Mountbatten Institute related to Elizabeth II?",
+      "gold_answer": "second cousin once removed",
+      "predicted": "The namesake of The Mountbatten Institute, Louis Mountbatten, 1st Earl Mountbatten of Burma, is a second cousin once removed of Elizabeth II.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        4,
+        1,
+        2,
+        3
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 1106,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 96,
+      "doc_fingerprint": "sha256:8b5978dcbaa0eeae198b635bf0a91fb0888e989b2a208377f9a668927ca6794d",
+      "n_paragraphs": 10,
+      "question": "Ferrari 360 was replaced by the sports car that debuted at what event?",
+      "gold_answer": "2004 Paris Motor Show",
+      "predicted": "The Ferrari 360 was replaced by the Ferrari F430, which debuted at the 2004 Paris Motor Show.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        4,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 749,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 97,
+      "doc_fingerprint": "sha256:644e2b6fdcec6d98362e12b56d9938f43dc466182b74847643fdb1d2b5f03b4d",
+      "n_paragraphs": 10,
+      "question": "What is the city where Orville Siegfried went to college and that is located in Jackson county?",
+      "gold_answer": "Lee's Summit, Missouri",
+      "predicted": "Jackson College",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        5,
+        0,
+        4,
+        3
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 1471,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 98,
+      "doc_fingerprint": "sha256:617dbb319e9c923833f56832b6c77e5eda0382671c52fb8479c14e811afbbdee",
+      "n_paragraphs": 10,
+      "question": "Are Black and New Found Glory from the same country?",
+      "gold_answer": "no",
+      "predicted": "No, Black is from Bangladesh and New Found Glory is from the United States.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        6,
+        5,
+        3,
+        0,
+        2
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 1106,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 99,
+      "doc_fingerprint": "sha256:98e890fdd7364963e1a476646583cd695de10bc701db11bb12b7faefad79af24",
+      "n_paragraphs": 10,
+      "question": "Which season of Alias does the English actor, who was born 25 June 1961, appear?",
+      "gold_answer": "three",
+      "predicted": "Season 3",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        9,
+        8,
+        7,
+        6,
+        2,
+        5,
+        3,
+        4
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 596,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

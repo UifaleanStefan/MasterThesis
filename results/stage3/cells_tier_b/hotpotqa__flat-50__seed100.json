@@ -1,0 +1,2627 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T15:20:31+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 100,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "hotpotqa",
+    "config": "flat-50",
+    "k": 8,
+    "n_questions": 100
+  },
+  "ok": true,
+  "benchmark": "hotpotqa",
+  "config": "flat-50",
+  "mode": "full",
+  "n_questions": 100,
+  "n_with_gold": 100,
+  "n_with_judge": 100,
+  "mean_recall_at_k": 0.98,
+  "mean_judge_score": 0.62,
+  "total_prompt_tokens": 117115,
+  "total_completion_tokens_max": 15000,
+  "projected_cost_usd": 0.02656725,
+  "actual_cost_usd": 0.018911099999999997,
+  "elapsed_seconds": 199.16677451133728,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:608d3d7cc5167455c581140d406e89d186c2eabb03d05e475672ee83fdc85435",
+      "n_paragraphs": 10,
+      "question": "\"wild combination\" was a film about a man who was an American cellist, composer, producer and singer, who is he?",
+      "gold_answer": "Arthur Russell",
+      "predicted": "Arthur Russell",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        8
+      ],
+      "prompt_tokens_estimated": 1001,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:e38b7515cdc1bfa53d20578c8f073c21181e33fb3bca9e29cecb1c7a18d664ba",
+      "n_paragraphs": 10,
+      "question": "Which region of Austria means 'Estate of the Salt Chamber' and covers the village of Obertraun, a popular destination for skiing and snowboarding in the winter?",
+      "gold_answer": "Salzkammergut",
+      "predicted": "Salzkammergut",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 1643,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:d19ab4f357cc546bf59ef49ccd736e060bef98249bad09cbb3b6f462bf1072b0",
+      "n_paragraphs": 5,
+      "question": "What is the nationality of the illustrator of Chaos Marauders?",
+      "gold_answer": "British",
+      "predicted": "British",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "relevant_paragraphs": [
+        1,
+        3
+      ],
+      "prompt_tokens_estimated": 515,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:6c0d3af0fbcac8af4329d0a4c13449d6b0348f21cad349a47a08bb5ba250965c",
+      "n_paragraphs": 10,
+      "question": "The Trans-Tasman Challenge winning car was based off which second generation North american Ford compact car?",
+      "gold_answer": "Ford Falcon",
+      "predicted": "Ford Mustang",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 1241,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:698a9f946420bca014d86d761503e820fba0da5cb7d9ce013e5955c823a6d6c9",
+      "n_paragraphs": 10,
+      "question": "What English nursery rhyme which dates from 1731 appears on Teletubbies say \"Eh-oh!\"?",
+      "gold_answer": "\"Baa, Baa, Black Sheep\"",
+      "predicted": "\"Baa, Baa, Black Sheep\"",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        8
+      ],
+      "prompt_tokens_estimated": 1082,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:2f549933eab057433f666ac6ac5d2fbf6d17298242d12058aeb2f88f45848f34",
+      "n_paragraphs": 10,
+      "question": "Who was the creator of the American political satire comedy television series in which Sufe Bradshaw plays an acerbic secretary named Sue?",
+      "gold_answer": "Armando Iannucci",
+      "predicted": "Armando Iannucci",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 1062,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:c87c76b834cca7c07f3c3c426d25c114f334674cabb1743b8994844450db1b2f",
+      "n_paragraphs": 10,
+      "question": "Matt McKenzie had a role on the television show that focused on the lives of teenage friends from what Wisconsin town?",
+      "gold_answer": "Point Place",
+      "predicted": "Point Place",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1634,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:ae4dce86fadac1309782c819fb301ed7012613a5bae9cf422dff79dd52c0dd59",
+      "n_paragraphs": 10,
+      "question": "Which writer also enjoyed boxing, Amy Tan or Norman Lindsay?",
+      "gold_answer": "Norman Alfred William Lindsay",
+      "predicted": "Norman Lindsay",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 684,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:344ca26ff532ebfb151d26e6141c70e72bb5b6af92e37f9766298c1fdd025c1c",
+      "n_paragraphs": 10,
+      "question": "Erik Marcisak was named one of Top Ten \"Comedy Best Bets\" by a brand with special focus on what ?",
+      "gold_answer": "casting, job opportunities, and career advice",
+      "predicted": "Erik Marcisak was named one of Top Ten \"Comedy Best Bets\" by Backstage, a brand with special focus on casting, job opportunities, and career advice in the entertainment industry.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 1275,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:1d9ffa52b9e737dc3b1c8561ccde6e8a768b4505070ff41f39c07a8d92f918df",
+      "n_paragraphs": 10,
+      "question": "From what island has Chryseobacterium frigidum isolated?",
+      "gold_answer": "island of Spitsbergen",
+      "predicted": "Chryseobacterium frigidum has been isolated from high Arctic tundra soil near Ny-\u00c5lesund in Norway.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 1066,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:628b358ef985841305fe5c0e71dc126f2e204783491518a15a2cd8b91ad0d8a2",
+      "n_paragraphs": 10,
+      "question": "In which part of New York was the singer who released the song No Problem raised ?",
+      "gold_answer": "Harlem",
+      "predicted": "The singer who released the song \"No Problem\" is Sam Shaber, and she was raised in New York City.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 1409,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:e2c01c6933dd69e8a536546104c76588f83caf9c4caf4802716c0549e502e166",
+      "n_paragraphs": 10,
+      "question": "Which client of Lindka Cierach played Queen Elizabeth II in \"The Queen\"?",
+      "gold_answer": "Helen Mirren",
+      "predicted": "Helen Mirren",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1305,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:ee326861316f65f072afa8c099e27b13259977c160f520cd98803a9e24e7a605",
+      "n_paragraphs": 10,
+      "question": "Who was a more acclaimed guitarist Stephen Christian or Joe Gooch?",
+      "gold_answer": "and lead guitarist",
+      "predicted": "The provided passages do not contain any information about Joe Gooch, so a comparison cannot be made.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 1055,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:2ca5032cad96aa1ec495d548fa046601500307901f3f18ce0fafa505637b7d76",
+      "n_paragraphs": 10,
+      "question": "Whose writing covered more topics, Alan Dean Foster or Samuel R. Delany?",
+      "gold_answer": "Samuel Ray Delany Jr.",
+      "predicted": "Alan Dean Foster",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 633,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:780567588bf1b014942e75717f59993e210c778015d7e25609402cfbbe6b5cc7",
+      "n_paragraphs": 10,
+      "question": "What NFL team did the 2017 ESPN College Football Friday Primetime host who played at Oklahoma in college play for?",
+      "gold_answer": "the Bears",
+      "predicted": "Chicago Bears",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1059,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:de88ec428fc9c47641c05b162996402e7bf0daca095420137283e89901896817",
+      "n_paragraphs": 10,
+      "question": "What former nose tackle announced ESPN College Football Friday Primetime in 2017?",
+      "gold_answer": "Dusty Dvoracek",
+      "predicted": "Adam Amin and Dusty Dvoracek",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        9
+      ],
+      "prompt_tokens_estimated": 479,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:d069cdfc95f72177315bfb295d82b7c082847bb0f6beeff2082cb64fef47d5dc",
+      "n_paragraphs": 10,
+      "question": "Are the writing from Maurice Level and Alice Hoffman focused on different audieces?",
+      "gold_answer": "yes",
+      "predicted": "Yes, Maurice Level's writing focuses on macabre short stories, while Alice Hoffman's works are primarily aimed at young adults and children.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 657,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:c0b3764eba0902f881e5f62102c540fe2130c14e3547f3821728a4185f18e10c",
+      "n_paragraphs": 10,
+      "question": "Where did the free agent quarterback acquired for the 2015 Buffalo Bills season play college football at?",
+      "gold_answer": "Virginia Tech",
+      "predicted": "Virginia Tech",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 1737,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:ec1b0ea17e33c1bad99afb76d4d4385f162cee8cc780da3c4644b79c7bcdaf9c",
+      "n_paragraphs": 10,
+      "question": "At what university can the building that served as the fictional household that includes Gomez and Morticia be found?",
+      "gold_answer": "Syracuse University",
+      "predicted": "Syracuse University",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 1443,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:33665406feac0578bd7ae39d7a182e262ab202bec82af2730442f2cc4918342c",
+      "n_paragraphs": 10,
+      "question": "What kind of movie directed by F. Javier gutierrez did an Italian model and actress star in?",
+      "gold_answer": "American supernatural psychological horror film",
+      "predicted": "A supernatural psychological horror film.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        8
+      ],
+      "prompt_tokens_estimated": 912,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:b01cc0ea214cb74cdae2a3ebfdf1a0f42e44934c4c67a3be295c2a5abc4d867f",
+      "n_paragraphs": 10,
+      "question": "Peter Shand Kydd was related to which early member of the Clermont Club?",
+      "gold_answer": "John Bingham, 7th Earl of Lucan",
+      "predicted": "Peter Shand Kydd was the father of John Shand Kydd, who is the stepbrother to Diana, Princess of Wales, and thus related to the Clermont Club through familial connections.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 884,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:cc3d951957b8ad67c481addd307e504b11b1146f6d0ed3fcda92910ee84f046d",
+      "n_paragraphs": 10,
+      "question": "What college did the English conductor, organist and composer widely regarded as Britain's leading conductor of choral works teach at?",
+      "gold_answer": "Royal College of Music",
+      "predicted": "Royal College of Music",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 1469,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:74f1cd4f8f91c418189fa67a3771557e42193451591e8931b73956acb2e04da6",
+      "n_paragraphs": 10,
+      "question": "The county that the community of Milltown, Montana is part of was founded in which year?",
+      "gold_answer": "1860",
+      "predicted": "1860",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        4
+      ],
+      "prompt_tokens_estimated": 1666,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:11ca0e6f92f603878145e8c772dad4aec51021f2edca72ad75d6c742d9e9c76e",
+      "n_paragraphs": 10,
+      "question": "Which director has had the greater impact on French culture, Jean Vigo or Sri Lankabhimanya Lester James Peries?",
+      "gold_answer": "Sri Lankabhimanya Lester James Peries",
+      "predicted": "Jean Vigo",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 1162,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:a8db104a28ae9a29728b0cb8b7075fbbd9b56d0bbd3467ac3e0562c8eb4e8800",
+      "n_paragraphs": 10,
+      "question": "The king of the Molossians and Epirus encamped between what two cities?",
+      "gold_answer": "Pandosia and Heraclea",
+      "predicted": "Pandosia and Heraclea.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        3
+      ],
+      "prompt_tokens_estimated": 1408,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:1bebb4386fd1a28dcc062997da3eb1dc6721f4d1ef91e0cd46a1b1da8a26d615",
+      "n_paragraphs": 10,
+      "question": "Creed features the boxer who held what WBC title from 2016 to 2017?",
+      "gold_answer": "cruiserweight",
+      "predicted": "Shinsuke Yamanaka held the WBC title from 2011 to 2017.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 1349,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:51969c9d20f9bc8c82f5cf1c163e78c78b9c58de949f2fb3a39e3b6e2cf9430d",
+      "n_paragraphs": 10,
+      "question": "What speech by Abraham Lincoln was part of Richard Heffner's A Documentary History of the United States?",
+      "gold_answer": "Gettysburg Address",
+      "predicted": "The Gettysburg Address",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        3
+      ],
+      "prompt_tokens_estimated": 1670,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:b64ffa5de9c4d9cf811d053debbe33b37002ab81ef9969725779df9c042f6b94",
+      "n_paragraphs": 10,
+      "question": "Are Water dropwort and Costus both in the family Apiaceae?",
+      "gold_answer": "no",
+      "predicted": "No, only Water dropwort is in the family Apiaceae; Costus is in the family Costaceae.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 761,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:d58cb0727a050d7225022a46961d5095405c9ea6c70facd513779c5c6f7fe8d6",
+      "n_paragraphs": 10,
+      "question": "Stephen Joseph Bercik was mayer of a city that had a population of 124,969 as of the 2010 United States Census, and that has an estimated population of what for 2015?",
+      "gold_answer": "129,007",
+      "predicted": "129,007",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 1005,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:ed41bf22a446db9d240b24300401ceab8315d4a0d77d0a5034b96786af121b40",
+      "n_paragraphs": 10,
+      "question": "What is the capacity of the stadium that hosts games of the team that was coached by Barry Switzer in 1981?",
+      "gold_answer": "86,112",
+      "predicted": "The official seating capacity of the stadium is 86,112.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 1241,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 30,
+      "doc_fingerprint": "sha256:b1955ebf4a783b902f164f97251c98e0e1feaa00c9e39f4b4701ccce328228b5",
+      "n_paragraphs": 10,
+      "question": "Which railway is a part of Summerseat and also runs between Heywood and Rawtenstall?",
+      "gold_answer": "East Lancashire Railway",
+      "predicted": "East Lancashire Railway",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 1166,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 31,
+      "doc_fingerprint": "sha256:e8ed007e59c7edbe1aad12fb830f175ebbad8b787ff453a23e39877a350a1465",
+      "n_paragraphs": 10,
+      "question": "What baseball team, part of the ten-school collegiate athletic conference headquartered in Irving, Texas, was coached by Randy Mazey in 2016?",
+      "gold_answer": "West Virginia Mountaineers",
+      "predicted": "West Virginia Mountaineers baseball team",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        9
+      ],
+      "prompt_tokens_estimated": 981,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 32,
+      "doc_fingerprint": "sha256:43dd32d6aff0f99e0ebd7ebc3f1899939aaed666b481bd26412b07fdeef31280",
+      "n_paragraphs": 10,
+      "question": "what city was the chapel that Princess Anne got married in located?",
+      "gold_answer": "City of Westminster",
+      "predicted": "London",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        9
+      ],
+      "prompt_tokens_estimated": 949,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 33,
+      "doc_fingerprint": "sha256:4faf7f6d3d23d261c91931c09cb2123331abe00062d7e7d6567c457b5ef518c5",
+      "n_paragraphs": 10,
+      "question": "What is the name of the range of characteristics pertaining to, and differentiating between, masculinity and femininity which Mary Karooro Okurut was appointed to in 2012 as Minister of?",
+      "gold_answer": "Gender and Social Issues",
+      "predicted": "Gender",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 1294,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 34,
+      "doc_fingerprint": "sha256:d77099b6e4a8a1bed8df1b3159b39e43d7b1d802a08d356c14464c82bd22c91c",
+      "n_paragraphs": 2,
+      "question": "Is the Virgilia found in Africa? And is Koeleria found all over?",
+      "gold_answer": "yes",
+      "predicted": "Yes, Virgilia is found in Africa. Yes, Koeleria is found all over except Antarctica.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 313,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 35,
+      "doc_fingerprint": "sha256:b843fc81cb458a4ad1932e06b310ca7ca7b1385d2e592b4c28fe05628292730e",
+      "n_paragraphs": 10,
+      "question": "Which is farther west, Sheridan County, Montana or Chandra Taal?",
+      "gold_answer": "Sheridan County",
+      "predicted": "Sheridan County, Montana",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1138,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 36,
+      "doc_fingerprint": "sha256:8f68c0f618ef41dc43bb4fe1bc73bb94e2a3d5138bde9b4e689b8fd0090c5748",
+      "n_paragraphs": 10,
+      "question": "Between two scientists Ernst Messerschmid and Philippe Perrin, who is older?",
+      "gold_answer": "Ernst Willi Messerschmid",
+      "predicted": "Philippe Perrin is older.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        7
+      ],
+      "prompt_tokens_estimated": 993,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 37,
+      "doc_fingerprint": "sha256:d9a7ee35bd81741b9404a79c5ebbf75dc5440ed319a6273a5e6e7ca06e27bbcc",
+      "n_paragraphs": 10,
+      "question": "Are Grant Nicholas and Danny Shirley both American singers?",
+      "gold_answer": "no",
+      "predicted": "No, Grant Nicholas is Welsh, while Danny Shirley is American.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 978,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 38,
+      "doc_fingerprint": "sha256:9efacb9766afca0a297525282ddc9fb679604bdbad163c9c477e7db67c13fe9c",
+      "n_paragraphs": 10,
+      "question": "What movement is this music seen as that released Facta Loquuntur as their first full length album?",
+      "gold_answer": "neo-v\u00f6lkisch",
+      "predicted": "National Socialist black metal (NSBM) movement.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1453,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 39,
+      "doc_fingerprint": "sha256:603eaa150a1f31d159f720c93e6653896c93c135eb288c67e8af53e4afcbaa2e",
+      "n_paragraphs": 10,
+      "question": "which  American conglomerate company is  a subsidiary of Trump Entertainment Resorts",
+      "gold_answer": "Icahn Enterprises L.P.",
+      "predicted": "Trump Plaza Hotel and Casino",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 776,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 40,
+      "doc_fingerprint": "sha256:c117ded19408c1456bcbe98a30b0a8f8ae3d607ae404c9560896e0619d8977c5",
+      "n_paragraphs": 10,
+      "question": "Who stared as the \"father of the atomic bomb\" in a 1980 television miniseries?",
+      "gold_answer": "Sam Waterston",
+      "predicted": "Sam Waterston",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        9
+      ],
+      "prompt_tokens_estimated": 1273,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 41,
+      "doc_fingerprint": "sha256:8d7638a400dc38d02ff267cb2da353432aaf3ade61aa4b44a4e79bee02e5106d",
+      "n_paragraphs": 10,
+      "question": "Are Myles Kennedy and SafetySuit both associated with rock bands?",
+      "gold_answer": "yes",
+      "predicted": "Yes.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        9
+      ],
+      "prompt_tokens_estimated": 1223,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 42,
+      "doc_fingerprint": "sha256:78158613cc4947280a737c435479f87cd7ccb9df139ee0892d21da9d4684121d",
+      "n_paragraphs": 10,
+      "question": "Black Star is the debut fragrance by a singer-songwriter that has sold approximately how many albums worldwide?",
+      "gold_answer": "40 million",
+      "predicted": "Approximately 70 million albums worldwide.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 1102,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 43,
+      "doc_fingerprint": "sha256:a9adc44c2e86037e63180a2455c7f4ea84f6401a1a72da76389f309720fa8f89",
+      "n_paragraphs": 10,
+      "question": "What is the magazine that listed \"Jump Around\" by House of Pain at 325 out of \"500 greatest songs since you were born\", known for?",
+      "gold_answer": "steamy pictorials of celebrities",
+      "predicted": "Blender was known for compiling lists of albums, artists, and songs, including both \"best of\" and \"worst of\" lists, and for its reviews of artists' entire discographies.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        7
+      ],
+      "prompt_tokens_estimated": 1210,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 44,
+      "doc_fingerprint": "sha256:dbe12c8c9545d75852043defbcf463322b28f7532d7cdae2aff55155925beb39",
+      "n_paragraphs": 10,
+      "question": "Who was an American cartoonist and publisher who had Fred Carter working for him?",
+      "gold_answer": "Jack Chick",
+      "predicted": "Jack Chick",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 756,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 45,
+      "doc_fingerprint": "sha256:12967aee2c696bf142cd2a21ea1b680cb71c60440a71254ce497c259344a7fd6",
+      "n_paragraphs": 10,
+      "question": "Which Beatles movie did the John's Children's  studio album Orgasm dub audience screams from?",
+      "gold_answer": "A Hard Day's Night",
+      "predicted": "A Hard Day's Night",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        9
+      ],
+      "prompt_tokens_estimated": 1260,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 46,
+      "doc_fingerprint": "sha256:946e48b0377a245a1439cd317ab7084b16711ccb5525b75372224fcf606306ed",
+      "n_paragraphs": 10,
+      "question": "How did the chairman of the Luthuanian Union of Actors discribe the star of the film Redirected?",
+      "gold_answer": "one of Lithuania's most talented actors",
+      "predicted": "He described Vytautas \u0160apranauskas as one of Lithuania's most talented actors, both in comedy and drama.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1419,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 47,
+      "doc_fingerprint": "sha256:5506575992a599f0703d587121fe618b3950479206b51fbf20b055cf1b61f3a8",
+      "n_paragraphs": 10,
+      "question": "Which is a comedy film, The Million Dollar Duck or Don Quixote?",
+      "gold_answer": "The Million Dollar Duck",
+      "predicted": "The Million Dollar Duck",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 787,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 48,
+      "doc_fingerprint": "sha256:34df0a4fea08d1f2c136335191095f30ed3315e208f5c505699086c198b3325d",
+      "n_paragraphs": 10,
+      "question": "Human Shadow Etched in Stone is an exhibition to showcase which bombing that killed 129,000 people in 1945?",
+      "gold_answer": "Hiroshima and Nagasaki",
+      "predicted": "Atomic bombings of Hiroshima and Nagasaki",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 1739,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 49,
+      "doc_fingerprint": "sha256:bd3d4a6780a5581616e1716d0dec37eeb9643ba56752fb1da584462d5975c100",
+      "n_paragraphs": 10,
+      "question": "The 2013 Oregon Ducks football team was led by which former American football coach who is currently a college football analyst for Fox Sports?",
+      "gold_answer": "Mark August Helfrich",
+      "predicted": "Mark Helfrich",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 960,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 50,
+      "doc_fingerprint": "sha256:a2ae389ba939ae839af3b54eaa848dc704573ad8e9e2f52b6642b2a56c26d1b9",
+      "n_paragraphs": 10,
+      "question": "About whose assassination is the French novel HHhH based?",
+      "gold_answer": "Reinhard Heydrich",
+      "predicted": "The assassination of Nazi leader Reinhard Heydrich.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 753,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 51,
+      "doc_fingerprint": "sha256:150ecd681a2ce92c5abbeb593a2601d685dcdf228251fd7474629c86aeaccbf5",
+      "n_paragraphs": 10,
+      "question": "Which company is based in Kentucky, Vocelli Pizza or Fazoli's?",
+      "gold_answer": "Fazoli's",
+      "predicted": "Fazoli's",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 872,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 52,
+      "doc_fingerprint": "sha256:300c5e92e07d251e7cceeb38a8340ef770939d08c67deb2ca0f7e9040ad0ae15",
+      "n_paragraphs": 10,
+      "question": "Who is the writer of this song that was inspired by words on a tombstone and was the first track on the box set Back to Mono?",
+      "gold_answer": "Phil Spector",
+      "predicted": "Phil Spector",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1844,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 53,
+      "doc_fingerprint": "sha256:96ca32687da6eea5c3f0d6db49c06147a07098a98612ed1ea54954197a67e2b4",
+      "n_paragraphs": 10,
+      "question": "When was the American film, television and theater actress born who was a star in the film the Matchmaker and also received the 40th AFI Life Achievement Award?",
+      "gold_answer": "April 24, 1934",
+      "predicted": "Shirley MacLaine was born on April 24, 1934.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 1086,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 54,
+      "doc_fingerprint": "sha256:456347393f2deab974bffcff7b235e6d9eebcfa4ebefea7b597098fd836e8438",
+      "n_paragraphs": 10,
+      "question": "Geoffrey Serle wrote a biography about which Australian military commander who planned the Allied attack at the Battle of Amiens in 1918?",
+      "gold_answer": "John Monash",
+      "predicted": "John Monash",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 1286,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 55,
+      "doc_fingerprint": "sha256:a76f55085a59dc6e7b490771ee3748e5323e579f69f4145d72735ba72b0de9d5",
+      "n_paragraphs": 10,
+      "question": "The Canadian Hot 100 is a music industry record chart in Canada for for a song that is released separately from what?",
+      "gold_answer": "an album",
+      "predicted": "An album.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1546,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 56,
+      "doc_fingerprint": "sha256:c5d66d8ea352129172e3f10d90468501b682b04ca3e8457a9dc0507019de296d",
+      "n_paragraphs": 10,
+      "question": "What was another title published by the owner of the pseudonym Frank Talk?",
+      "gold_answer": "I Write What I Like",
+      "predicted": "Tufty",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 1213,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 57,
+      "doc_fingerprint": "sha256:d5a4699fad8ef331cb49086d6b788290a94fb797a560ba30eae06c5e08609d59",
+      "n_paragraphs": 10,
+      "question": "Les Patterson Saves the World was a comedy film starring the author of which autobiography?",
+      "gold_answer": "My Gorgeous Life",
+      "predicted": "My Gorgeous Life",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 1111,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 58,
+      "doc_fingerprint": "sha256:aab36e370ffdde5dcaabc52687c53a0314dcca8026df34a0dd105961ca982d5c",
+      "n_paragraphs": 10,
+      "question": "Beyond the Hoax: Science, Philosophy, and Culture, is by what professor of mathematics at University College London?",
+      "gold_answer": "Alan David Sokal",
+      "predicted": "Alan Sokal",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        5
+      ],
+      "prompt_tokens_estimated": 1093,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 59,
+      "doc_fingerprint": "sha256:62ae58342e9401258ea37d9219c98013184902e4698aa38ffeac95450e63aafb",
+      "n_paragraphs": 10,
+      "question": "Who was born first, Johan Leysen or George Clooney?",
+      "gold_answer": "Johan Leysen",
+      "predicted": "Johan Leysen was born first.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 837,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 60,
+      "doc_fingerprint": "sha256:2d89ada57cffd7c3aaecd1a6f5cd853743221f0719381c6627672377b705586d",
+      "n_paragraphs": 10,
+      "question": "\"Angry Dad: The Movie\" is the fourteenth episode of a simpson's season that began airing on which date ?",
+      "gold_answer": "September 26, 2010",
+      "predicted": "February 20, 2011",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        7
+      ],
+      "prompt_tokens_estimated": 1383,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 61,
+      "doc_fingerprint": "sha256:d40e91183f63553d107efbf9189d4bcc3b8a40445ee47d793cd4458c74a6456a",
+      "n_paragraphs": 10,
+      "question": "Giuseppe Tornatore, an italian film director and screenwriter, wrote and directed his film \"The Best Offer\" in what language?",
+      "gold_answer": "English-language",
+      "predicted": "English",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 809,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 62,
+      "doc_fingerprint": "sha256:ab2ec55f0e3247583af968391ec70f40de478010888cc69cc83fc565978f6e11",
+      "n_paragraphs": 10,
+      "question": "What park is just south of the location where the New York Jets played prior to moving to Shea Stadium?",
+      "gold_answer": "Central Park",
+      "predicted": "Central Park",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        7
+      ],
+      "prompt_tokens_estimated": 1545,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 63,
+      "doc_fingerprint": "sha256:17fbfcdc0822f2c5443a8d0b87d613c15c4c7f57cdebf8890a85a8654fde26e7",
+      "n_paragraphs": 10,
+      "question": "Who was born first, Arthur Conan Doyle or Penelope Lively?",
+      "gold_answer": "Arthur Ignatius Conan Doyle",
+      "predicted": "Arthur Conan Doyle was born first.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1039,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 64,
+      "doc_fingerprint": "sha256:8134e199af2e44ddb20bbb0d40ea01f62a51e74a4e350ccd80192d74ec23bb4a",
+      "n_paragraphs": 10,
+      "question": "Where did the host of the 2014 edition of the MTV Africa Music Awards begin their career?",
+      "gold_answer": "\"I'm Gonna Git You Sucka\"",
+      "predicted": "Marlon Wayans began his career with his role as a pedestrian in \"I'm Gonna Git You Sucka\" in 1988.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 1259,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 65,
+      "doc_fingerprint": "sha256:5eb2bccec94c4f764967a14123d8f549f533d9820eaa5767c254f2d13a21cc59",
+      "n_paragraphs": 10,
+      "question": "Who was the son and heir of Henry Beauclerc?",
+      "gold_answer": "William Adelin",
+      "predicted": "William Adelin",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        7
+      ],
+      "prompt_tokens_estimated": 1795,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 66,
+      "doc_fingerprint": "sha256:a0bf0028632845fbe1b44ca2534ec6f6b4e276660372c9f102c5db393b943e13",
+      "n_paragraphs": 10,
+      "question": "When was the judge born who made notable contributions to the trial of the man who tortured, raped, and murdered eight student nurses from South Chicago Community Hospital on the night of July 13-14, 1966?",
+      "gold_answer": "June 4, 1931",
+      "predicted": "June 4, 1931",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1135,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 67,
+      "doc_fingerprint": "sha256:39d66045547dbf145f82f6aac5c55918bcbb55143998fbb199524dd86cef0486",
+      "n_paragraphs": 10,
+      "question": "C. Bernard Jackson founded the center that started the career of which actor, who played the part of Marty Castillo in \"Miami Vice\"?",
+      "gold_answer": "Edward James Olmos",
+      "predicted": "Edward James Olmos",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        5
+      ],
+      "prompt_tokens_estimated": 1210,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 68,
+      "doc_fingerprint": "sha256:5f947087012e85b69d0c02224cf47d4a385733926cd4338b594f04dcf6da44e0",
+      "n_paragraphs": 10,
+      "question": "Hatyapuri was a novel by the filmmaker of what nationality?",
+      "gold_answer": "Indian",
+      "predicted": "The nationality of the filmmaker who wrote Hatyapuri is not provided in the relevant passages.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1089,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 69,
+      "doc_fingerprint": "sha256:e1ebed77b12d6e22e5ae618a159163e36c5bd3dcbb52efa4ad5198291f471322",
+      "n_paragraphs": 10,
+      "question": "The title Grigory Drozd lost in May 2016 was won by a boxer who made his acting debut in what film?",
+      "gold_answer": "\"Creed\"",
+      "predicted": "\"Furious 7\" (2015)",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        9
+      ],
+      "prompt_tokens_estimated": 1390,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 70,
+      "doc_fingerprint": "sha256:70440f7dcb715857e414cea06fac6c8e329d2563381d8881c6bf39df4a76e2a1",
+      "n_paragraphs": 10,
+      "question": "William McGrath was a loyalist from Northern Ireland, and was known for opposing what?",
+      "gold_answer": "united Ireland",
+      "predicted": "William McGrath was known for opposing a united Ireland.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 1354,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 71,
+      "doc_fingerprint": "sha256:6ed46601c6fc78a3a019132ef9a55a31ebdbe15ec62e64d9b977a8e1c48849c4",
+      "n_paragraphs": 10,
+      "question": "What novel imagines the true story of a character based on a novel by Mark Twain first published in 1884?",
+      "gold_answer": "Shohola Falls",
+      "predicted": "Shohola Falls",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 1108,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 72,
+      "doc_fingerprint": "sha256:f0560c76103b9c1d818d684bb4bc81a31c2926e8e06bd1f10c01cd67b471c394",
+      "n_paragraphs": 10,
+      "question": "Which name adopted by African-American activist Allen Donaldson co-found Black Power movement of the 1960s and 1970s",
+      "gold_answer": "Hakim Abdullah Jamal",
+      "predicted": "Hakim Abdullah Jamal",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1191,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 73,
+      "doc_fingerprint": "sha256:c996d2883c71d29fe772ae8b707d715cda81d7b3728e0702bb34c9349faf86ab",
+      "n_paragraphs": 10,
+      "question": "Which breed of dog has origins outside of the United States, Old German Shepherd Dog or Black Mouth Cur?",
+      "gold_answer": "Old German Shepherd Dog",
+      "predicted": "Old German Shepherd Dog",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 806,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 74,
+      "doc_fingerprint": "sha256:cb46edbb04c1ccb31ddcf63c604dfe378330a16cea5be1edf5e1e7dd0c2ac21d",
+      "n_paragraphs": 10,
+      "question": "Season 2 of Rick and Morty began with the episode directed by whom?",
+      "gold_answer": "Wes Archer",
+      "predicted": "Wes Archer",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 1320,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 75,
+      "doc_fingerprint": "sha256:bf1e70427abb824d340998ca10afb2557a8b3d0e86cc8146f6cae0a4d5a67898",
+      "n_paragraphs": 10,
+      "question": "What university in India hosts a literary festival which has had as a previous invitee the former Union Minister of Panchayati Raj?",
+      "gold_answer": "Central University of India",
+      "predicted": "Aligarh Muslim University",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1302,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 76,
+      "doc_fingerprint": "sha256:55857e4b60f0084e2bb61cbf3e33a19bb3abf3a2b39542408d69d8a5ab80ecbe",
+      "n_paragraphs": 10,
+      "question": "In what town does the one-time star of \"And There's More\" now live?",
+      "gold_answer": "Rochdale",
+      "predicted": "The provided passages do not contain information about the current town where the one-time star of \"And There's More\" lives.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1256,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 77,
+      "doc_fingerprint": "sha256:9e7ba4aadbcc430e47ba5d297a99bed89f600d971dae50276044548f80802b0e",
+      "n_paragraphs": 10,
+      "question": "Dichroa and Lathyrus, both native to Europe?",
+      "gold_answer": "no",
+      "predicted": "No, only Lathyrus is native to Europe; Dichroa is native to eastern and southeastern Asia.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 766,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 78,
+      "doc_fingerprint": "sha256:04c4557b5284cf3d05196ae87c05606c824ed5295a4c3532a0a344cff95361c2",
+      "n_paragraphs": 10,
+      "question": "When did the coach of the 1963 Oklahoma Sooners football team die ?",
+      "gold_answer": "February 9, 1994",
+      "predicted": "Bud Wilkinson died on February 9, 1994.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 1431,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 79,
+      "doc_fingerprint": "sha256:13fd63eefb0af20672f2af459fd11e238ee0b972687c3c33c0de14c0202fd613",
+      "n_paragraphs": 10,
+      "question": "Lady Elizabeth Delm\u00e9 and Her Children (1779) is a portrait given to the National Gallery of Art in 1937, which is located in which state?",
+      "gold_answer": "Washington, D.C.",
+      "predicted": "Washington, D.C.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 1658,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 80,
+      "doc_fingerprint": "sha256:45eb4141b9e85becc706c1cb55e9753150ed6fc0b2be451d4cd227adae37dcd8",
+      "n_paragraphs": 10,
+      "question": "3TEETH was the debut album for the opening act for the2016 tour with a headlining band that was formed in which California city?",
+      "gold_answer": "Los Angeles",
+      "predicted": "Los Angeles",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 1705,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 81,
+      "doc_fingerprint": "sha256:d841ea5f75dd69808aeb1fbafacbe32c650b77739d7113a808d4ab8d3785b580",
+      "n_paragraphs": 10,
+      "question": "Are Mick Jagger and Brett Scallions both musicians?",
+      "gold_answer": "yes",
+      "predicted": "Yes.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 1143,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 82,
+      "doc_fingerprint": "sha256:d701e7eb0ca6ff2bf88c41030cb7c5d395b3ae3ab679694eb72df600b8b9f533",
+      "n_paragraphs": 10,
+      "question": "Which composer lived longer, Maurice Ravel or Paul Hindemith?",
+      "gold_answer": "Paul Hindemith",
+      "predicted": "Paul Hindemith lived longer than Maurice Ravel.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 1184,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 83,
+      "doc_fingerprint": "sha256:347c01e09f6b26e4cb137fd00efbb344410183d9973da885bf85656cc0945aef",
+      "n_paragraphs": 10,
+      "question": "McLaren MP4/11 was driven by what Finnish former professional racing driver",
+      "gold_answer": "Mika H\u00e4kkinen",
+      "predicted": "Mika H\u00e4kkinen",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        5
+      ],
+      "prompt_tokens_estimated": 902,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 84,
+      "doc_fingerprint": "sha256:1bc47f287bce72b66805fc57ae7d9e8730cbfa7fff1c097094a3c998a32ee0ff",
+      "n_paragraphs": 10,
+      "question": "Alternative facts is a phrase use by this U.S. Counselor to the President born in what year?",
+      "gold_answer": "1967",
+      "predicted": "1967",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 1204,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 85,
+      "doc_fingerprint": "sha256:8f19a659e564ba9612f642abb8c6ab8599f7a53025d167e26f735253a766e400",
+      "n_paragraphs": 10,
+      "question": "Nostie lies a short distance from one of Scotland's popular tourist attractions a small tidal island dominated by a picturesque castle that frequently apperas in what?",
+      "gold_answer": "photographs, film and television",
+      "predicted": "Photographs, film and television.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 858,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 86,
+      "doc_fingerprint": "sha256:19845e86803f317d11495a113e3c41f4765815856736ea38feac1d42a55d65b3",
+      "n_paragraphs": 10,
+      "question": "John Valliant\u2019s work has appeared in which outdoor-focused magazine whose first issue was published in September 1977?",
+      "gold_answer": "Outside",
+      "predicted": "Outside",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 1713,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 87,
+      "doc_fingerprint": "sha256:12ee14715ce35edffc6a4e76acd23622742fdf5146bf728b98823deb14faadfc",
+      "n_paragraphs": 10,
+      "question": "Jimmy Garcia lost by unanimous decision to a professional boxer that challenged for what title in 1995?",
+      "gold_answer": "WBO lightweight title",
+      "predicted": "WBO lightweight title",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 1438,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 88,
+      "doc_fingerprint": "sha256:b021034fb7738851d05cc4df916d5e606382c3cde69101bb9e410208a0a1dbfa",
+      "n_paragraphs": 10,
+      "question": "What product by FLEXcon represents data by geometric patterns?",
+      "gold_answer": "Barcodes",
+      "predicted": "Bar coded labels.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 1195,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 89,
+      "doc_fingerprint": "sha256:db372475c79c1dcf3c0223b800580d121dbfbbebb8d6a4a51024a3450dfaf4cd",
+      "n_paragraphs": 10,
+      "question": "Which song reached number 3 on the \"Billboard\" Hot 100 that featured guest vocals fron Allessia Cara And Khalid?",
+      "gold_answer": "1-800-273-8255",
+      "predicted": "\"1-800-273-8255\"",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 1496,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 90,
+      "doc_fingerprint": "sha256:03d275ff474aa0abb31e03ca674cb46110ab4fabc870ff6c59ec600fbbb0b03c",
+      "n_paragraphs": 10,
+      "question": "Which magazine produces more print editions yearly, Nautilus or TV Guide?",
+      "gold_answer": "TV Guide",
+      "predicted": "The provided context does not contain information about the number of print editions produced yearly by Nautilus or TV Guide.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        7
+      ],
+      "prompt_tokens_estimated": 1099,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 91,
+      "doc_fingerprint": "sha256:0cd214810c44b94135e426fd7e4715de6072e948d002082835ea24eb1cb659e5",
+      "n_paragraphs": 10,
+      "question": "In what 2 countries did both X-Large and A Bathing Ape have stores?",
+      "gold_answer": "Japan and Hong Kong",
+      "predicted": "Japan and Hong Kong",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 777,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 92,
+      "doc_fingerprint": "sha256:f40aa544bba4be1976ce66ccc27707aa077a9cc5bf2b72269ee0d1e16032b7a5",
+      "n_paragraphs": 10,
+      "question": "How many Major League Baseball teams usually attend the meeting where the John H. Johnson President's Award is awarded?",
+      "gold_answer": "30 Major League Baseball teams",
+      "predicted": "All 30 Major League Baseball teams usually attend the meeting where the John H. Johnson President's Award is awarded.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        8
+      ],
+      "prompt_tokens_estimated": 1285,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 93,
+      "doc_fingerprint": "sha256:e981ce66cb4e3c3b1336250ceb4581b693422f9bf6c263bec20b9644e1dd191e",
+      "n_paragraphs": 10,
+      "question": "The man who currently serves as the wide receivers coach for the Dallas Cowboys used to coach at what college?",
+      "gold_answer": "Louisiana Tech",
+      "predicted": "Jimmy Robinson used to coach at Georgia Tech.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 1128,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 94,
+      "doc_fingerprint": "sha256:d8f7721ecd986810383ee993c8d2d36cee9f99e6d1b735819c65ff0428ddcdaf",
+      "n_paragraphs": 10,
+      "question": "Who created the show with Wendy Schaal doing the voice of Francine?",
+      "gold_answer": "Seth MacFarlane",
+      "predicted": "Seth MacFarlane, Mike Barker, and Matt Weitzman created \"American Dad!\" where Wendy Schaal voices Francine Smith.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 985,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 95,
+      "doc_fingerprint": "sha256:5c160c0dacc139c3e08018eee1c42a5c6050b2c4d5b351eae4e80732f48f80d6",
+      "n_paragraphs": 10,
+      "question": "Which constituent college of the University of Oxford endows four professorial fellowships for sciences including chemistry and pure mathematics?",
+      "gold_answer": "Magdalen College",
+      "predicted": "Magdalen College",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        4
+      ],
+      "prompt_tokens_estimated": 1354,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 96,
+      "doc_fingerprint": "sha256:dee4647600ca3fe05e97ca9dd3b9ee1eea6d578363b9cf1bf114b84da61f1f98",
+      "n_paragraphs": 10,
+      "question": "Ivan Simson was under the command of the officer who was most noted for a defeat at what WWII battle?",
+      "gold_answer": "Battle of Singapore",
+      "predicted": "Ivan Simson was under the command of Arthur Percival, who was most noted for a defeat at the Battle of Singapore.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 1556,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 97,
+      "doc_fingerprint": "sha256:d5099e250eade593396616a3968f00c7a153bb0833e93b9180ed73937f5fcd37",
+      "n_paragraphs": 10,
+      "question": "Cheek to cheek tour played shows at what place that is located on the Las Vegas strip that began their tour?",
+      "gold_answer": "Cosmopolitan of Las Vegas",
+      "predicted": "The Colosseum at Caesars Palace",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 1077,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 98,
+      "doc_fingerprint": "sha256:0323996fd9a2c2b20e8a30b5dfede233b9eaf1509461adee5b26321159164e74",
+      "n_paragraphs": 10,
+      "question": "Evan Buliung played the character Aragon who is based on a character in a book series written by which author?",
+      "gold_answer": "J. R. R. Tolkien",
+      "predicted": "J.R.R. Tolkien",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1041,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 99,
+      "doc_fingerprint": "sha256:efbd9c763564dc2a4f3058ab8af331efa327aa012935c9eb0b5040f92d68f6f0",
+      "n_paragraphs": 10,
+      "question": "Who was attempting to regain the British throne until the Raids on Lachaber and Shiramore shut down his operations?",
+      "gold_answer": "Charles Edward Stuart",
+      "predicted": "Charles Edward Stuart",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 1211,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

@@ -203,7 +203,10 @@ def run_cell(
     Returns a dict with per-question results + aggregates.
     """
     adapter = get_adapter(benchmark_name)
-    docs = list(adapter.iter_documents(limit=n_questions))  # 1 question per doc (most adapters)
+    # Pass seed + shuffle so different runs sample DIFFERENT document subsets per benchmark.
+    # Without shuffle=True, every seed would see identical docs and give identical results
+    # under temperature=0 — defeating the multi-seed variance estimation.
+    docs = list(adapter.iter_documents(limit=n_questions, seed=seed, shuffle=True))
     if not docs:
         return {"ok": False, "reason": "no docs"}
 

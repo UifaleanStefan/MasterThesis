@@ -1,0 +1,1892 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T15:09:13+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 100,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "financebench",
+    "config": "flat-50",
+    "k": 8,
+    "n_questions": 100
+  },
+  "ok": true,
+  "benchmark": "financebench",
+  "config": "flat-50",
+  "mode": "full",
+  "n_questions": 100,
+  "n_with_gold": 100,
+  "n_with_judge": 100,
+  "mean_recall_at_k": 1.0,
+  "mean_judge_score": 0.512,
+  "total_prompt_tokens": 64612,
+  "total_completion_tokens_max": 15000,
+  "projected_cost_usd": 0.018691799999999998,
+  "actual_cost_usd": 0.011495400000000001,
+  "elapsed_seconds": 262.04688262939453,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:f76f123a4635382e970363993bea9506e561aede90c860d49f14835b7686b28b",
+      "n_paragraphs": 1,
+      "question": "Did AMD report customer concentration in FY22?",
+      "gold_answer": "Yes, one customer accounted for 16% of consolidated net revenue",
+      "predicted": "Yes, AMD reported customer concentration in FY22, with one customer accounting for 16% of their consolidated net revenue.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 126,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:785db8646b595ccb12706d8915024c2a0afbabb8f8375dbfa6c41f26416a9a2a",
+      "n_paragraphs": 1,
+      "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Nike in FY2023?",
+      "gold_answer": "Among the three, cash flow from operations was the highest for Nike in FY2023.",
+      "predicted": "Cash provided (used) by operations brought in the most cash flow for Nike in FY2023, totaling $5,841 million.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 762,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:1d5d19a9891f223a15fc6a8ee9ed116df331891dcc05f850d616e1d2ce486acb",
+      "n_paragraphs": 2,
+      "question": "When primarily referencing the income statement and the statement of financial position, what is the FY2021 inventory turnover ratio for Nike? Inventory turnover ratio is defined as: (FY2021 COGS) / (average inventory between FY2020 and FY2021). Round your answer to two decimal places.",
+      "gold_answer": "3.46",
+      "predicted": "3.59",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 932,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:3e6cada5d43220a9fb4dfd95ff0cbfa6e08597539f8389a468bed142d87032da",
+      "n_paragraphs": 1,
+      "question": "Was American Express able to retain card members during 2022?",
+      "gold_answer": "Yes",
+      "predicted": "Yes, American Express was able to retain card members during 2022.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 122,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:8f1df9dcab88a23a892eb9e112b981170ba4473e753c9d1f96d11aec5d4d9bb4",
+      "n_paragraphs": 2,
+      "question": "We need to calculate a reasonable approximation (or exact number if possible) of a financial metric. Basing your judgment by information plainly provided in the balance sheet and the P&L statement, what is Lockheed Martin's FY2020 asset turnover ratio? Asset turnover ratio is defined as: FY2020 revenue / (average total assets between FY2019 and FY2020). Round your answer to two decimal places.",
+      "gold_answer": "1.33",
+      "predicted": "1.29",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1066,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:ab8daf341f4deadd8e427a0462c03314897e2f2628970251ed7334c2e501fbe2",
+      "n_paragraphs": 1,
+      "question": "How did JnJ's US sales growth compare to international sales growth in FY2022?",
+      "gold_answer": "US sales increased 3.0% vs international sales decline of 0.6%.",
+      "predicted": "JnJ's US sales growth was 3.0%, while international sales growth was (0.6)%.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 348,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:39f034b61fef655e3f8ba4e72e86401693f59d773ca763ad749057d5e825d8f4",
+      "n_paragraphs": 1,
+      "question": "What is the FY2016 COGS for Microsoft? Please state answer in USD millions. Provide a response to the question by primarily using the statement of income.",
+      "gold_answer": "$32780.00",
+      "predicted": "$32,780 million",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 571,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:cb60c41fd4d4c7c62ff62af07a801b98d925cfd288633920b8454c434fe630ed",
+      "n_paragraphs": 1,
+      "question": "As of FY2023Q1, by how many percentage points did Pepsico raise full year guidance in respect of core constant currency EPS growth?",
+      "gold_answer": "Pepsico raised full year guidance in respect of core constant currency EPS growth by 1 percentage point.",
+      "predicted": "PepsiCo raised full year guidance for core constant currency EPS growth by 1 percentage point.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 175,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:6549c843251932d0c57683749d19e9ea0729390eafdb615677038824de0393cd",
+      "n_paragraphs": 1,
+      "question": "What Was AMCOR's Adjusted Non GAAP EBITDA for FY 2023",
+      "gold_answer": "AMCOR's Adj. EBITDA was $2,018mn in FY 2023",
+      "predicted": "2,018 million",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 571,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:838cfdd203edc64f3ef91fa9289d5d2fbac0a7e1d01d7681a1c7598f50ac228d",
+      "n_paragraphs": 1,
+      "question": "Which debt securities are registered to trade on a national securities exchange under Ulta Beauty's name as of FY2023?",
+      "gold_answer": "There are none",
+      "predicted": "None",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 360,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:606c87a4f6273940e45340647dedb4a158522d859e57ff2f9cb84e424a64d524",
+      "n_paragraphs": 1,
+      "question": "Does AMD have a reasonably healthy liquidity profile based on its quick ratio for FY22? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
+      "gold_answer": "Yes. The quick ratio is 1.57, calculated as (cash and cash equivalents+Short term investments+Accounts receivable, net+receivables from related parties)/ (current liabilities).",
+      "predicted": "The quick ratio is not provided in the context, and it is not possible to determine AMD's liquidity profile based solely on the available information. The quick ratio is calculated using current assets minus inventories divided by current liabilities, but specific details on current liabilities and the exact calculation are not included.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 599,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:90d623a14feed42a103ac7b03824f9f195351d45ab6e7fcf124702625268d661",
+      "n_paragraphs": 1,
+      "question": "By drawing conclusions from the information stated only in the income statement, what is Amazon's FY2019 net income attributable to shareholders (in USD millions)?",
+      "gold_answer": "$11588.00",
+      "predicted": "11,588",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 528,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:fd0dab1c7cb4817269e4e007b33c0c847db071bdf9f0a967b4c7b4d38cbce7d0",
+      "n_paragraphs": 2,
+      "question": "What is FY2018 days payable outstanding (DPO) for Walmart? DPO is defined as: 365 * (average accounts payable between FY2017 and FY2018) / (FY2018 COGS + change in inventory between FY2017 and FY2018). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the statement of financial position and the P&L statement.",
+      "gold_answer": "42.69",
+      "predicted": "DPO = 365 * (average accounts payable) / (COGS + change in inventory)\n\nAverage accounts payable = (Accounts payable FY2017 + Accounts payable FY2018) / 2\n= (41,433 + 46,092) / 2\n= 43,762.5 million\n\nCOGS FY2018 = 373,396 million\nChange in inventory = Inventory FY2018 - Inventory FY2017\n= 43,783 - 43,046\n= 737 million\n\nDPO = 365 * (43,762.5) / (373,396 + 737)\n= 365 * (43,762.5) / (374,133)\n= 365 *",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1119,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:b66d9bb21e85964574ca32bd5c54bfed6411e4c8cd0b9442093b0ba5450bacf5",
+      "n_paragraphs": 2,
+      "question": "What is the FY2017 return on assets (ROA) for Coca Cola? ROA is defined as: FY2017 net income / (average total assets between FY2016 and FY2017). Round your answer to two decimal places. Give a response to the question by relying on the details shown in the balance sheet and the P&L statement.",
+      "gold_answer": "0.01",
+      "predicted": "0.01",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1465,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:38f177c1413aac2356964aa64c3dec837ab0acaa0de78bf8531802bdc0416024",
+      "n_paragraphs": 2,
+      "question": "What is the FY2017 operating cash flow ratio for Adobe? Operating cash flow ratio is defined as: cash from operations / total current liabilities. Round your answer to two decimal places. Please utilize information provided primarily within the balance sheet and the cash flow statement.",
+      "gold_answer": "0.83",
+      "predicted": "0.83",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1706,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:88d42b47b648d431dfec90b1c2201ee40a338054efe25dfa71367b7215bd3e39",
+      "n_paragraphs": 1,
+      "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Best Buy in FY2023?",
+      "gold_answer": "Best Buy generated the most cash flow from operating activities in FY 2023 ($1.8 bn)",
+      "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 821,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:1bae09966e127f8760f9a6246edd967527546c4df81ce21b3dfae9a83fb667b5",
+      "n_paragraphs": 1,
+      "question": "Are JnJ's FY2022 financials that of a high growth company?",
+      "gold_answer": "No, JnJ's FY2022 financials are not of a high growth company as sales grew by 1.3% in FY2022.",
+      "predicted": "No, JnJ's FY2022 financials do not reflect that of a high growth company, as sales increased only 1.3% compared to a 13.6% increase in 2021.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 256,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:cdd0eca66c4e490816e1f70529bef2bceaaa9fae7817dbd1a456e072d9b28edf",
+      "n_paragraphs": 1,
+      "question": "Using the cash flow statement, answer the following question to the best of your abilities: how much did Block (formerly known as Square) generate in cash flow from operating activities in FY2020? Answer in USD millions.",
+      "gold_answer": "$382.00",
+      "predicted": "$381.6 million",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 1210,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:80d7fed239da52ec2d02c57f36f0e7366f5e93064db2aee8880ddd5a7f04f3db",
+      "n_paragraphs": 1,
+      "question": "Does Foot Locker's new CEO have previous CEO experience in a similar company to Footlocker?",
+      "gold_answer": "Yes. She was previous CEO of Ulta Beauty which means she had to manage a large retail company that has brick and mortar + online business. So yes she was a CEO in a similar company to Foot Locker before this.",
+      "predicted": "Yes, Mary N. Dillon was the former Executive Chair and Chief Executive Officer of Ulta Beauty, Inc.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 228,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:f4be9c28d9bbe8905899547d6697ee9f18195c2c234b3a940a7ba06d4113b420",
+      "n_paragraphs": 1,
+      "question": "For Pfizer, which geographic region had the biggest drop in Q22023 year over year revenues (on a percentage basis)?",
+      "gold_answer": "Developed Rest of the World",
+      "predicted": "Developed Rest of World",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 282,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:38cffb2fad05e3bcebf45fe13dab433839b6185f81313d23e85f92e3cd26b8a9",
+      "n_paragraphs": 1,
+      "question": "How much (in USD billions) did American Water Works pay out in cash dividends for FY2020? Compute or extract the answer by primarily using the details outlined in the statement of cash flows.",
+      "gold_answer": "$0.40",
+      "predicted": "0.389 billion",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 918,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:aa52577ce5cad5564579495a90c9fbbedc80e79ade3044e3d3f4f1dd9485d213",
+      "n_paragraphs": 1,
+      "question": "From FY21 to FY22, excluding Embedded, in which AMD reporting segment did sales proportionally increase the most?",
+      "gold_answer": "Data Center",
+      "predicted": "Gaming",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 232,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:9cd88fcf7e119690baa074f469b92d4d165753fa028b6d621e449c640c7cfa8a",
+      "n_paragraphs": 1,
+      "question": "In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
+      "gold_answer": "2.8%",
+      "predicted": "3.1%",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 681,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:275ea8884628bbe3ce6422e0b65497423d03c7fd0b1e923b4a881aa90f683149",
+      "n_paragraphs": 1,
+      "question": "We need to calculate a reasonable approximation (or exact number if possible) of a financial metric. Basing your judgment by information plainly provided in the statement of income, what is Nike's three year average of cost of goods sold as a % of revenue from FY2016 to FY2018? Answer in units of percents and round to one decimal place.",
+      "gold_answer": "55.1%",
+      "predicted": "56.3%",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 436,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:f186fd82746bd015fb449de671c4a7a6092b38c63f32bc180972b7816dcb9858",
+      "n_paragraphs": 1,
+      "question": "Has Verizon increased its debt on balance sheet between 2022 and the 2021 fiscal period?",
+      "gold_answer": "No. Verizon's debt decreased by $229 million.",
+      "predicted": "No, Verizon has decreased its debt on the balance sheet from $150,868 in 2021 to $150,639 in 2022.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 549,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:2920fe8de9433e80899f5fc4326c5703273a8a0c25e455115d884b077077e026",
+      "n_paragraphs": 2,
+      "question": "Does American Water Works have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
+      "gold_answer": "No, American Water Works had negative working capital of -$1561M in FY 2022.",
+      "predicted": "Yes, American Water Works has positive working capital based on FY2022 data. Working capital is calculated as current assets minus current liabilities. For FY2022, current assets are $1,250 million and current liabilities are $2,811 million, resulting in negative working capital. However, the question asks for positive working capital, which is not applicable in this case.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 611,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:a92620639040664e7f6eaaf23cce27f0aa8db15235586e2a4bf2374136ea6a93",
+      "n_paragraphs": 1,
+      "question": "Were there any board member nominees who had substantially more votes against joining than the other nominees?",
+      "gold_answer": "Yes, his name is Richard A. Johnson",
+      "predicted": "Yes, Richard A. Johnson had substantially more votes against joining, with 16,105,005 votes against.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 472,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:5bd3c359d02a74c3dc74b7208f9a2bf40ee07ac2d7ea2ad5b59e19dcacdb0efd",
+      "n_paragraphs": 1,
+      "question": "Did Pfizer grow its PPNE between FY20 and FY21?",
+      "gold_answer": "Yes, change in PPNE was positive year over year",
+      "predicted": "Yes, Pfizer grew its Property, Plant, and Equipment (PPNE) from $13,745 million in FY20 to $14,882 million in FY21.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 245,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:c12b57a5c2efd4d690f6a8d41adaa32f05211b9e046e948e1bd66e14688a6ade",
+      "n_paragraphs": 1,
+      "question": "Which region had the Highest EBITDAR Contribution for MGM during FY2022?",
+      "gold_answer": "Las Vegas resorts contributed ~90% of company level EBITDAR during FY2022.",
+      "predicted": "Las Vegas Strip Resorts",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 327,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:6c87cefcd2f2fb5849eb75f924db772fb47dba9db833c354bab4f75d11435df6",
+      "n_paragraphs": 1,
+      "question": "Does AMCOR have an improving gross margin profile as of FY2023? If gross margin is not a useful metric for a company like this, then state that and explain why.",
+      "gold_answer": "No. For AMCOR there has been a slight decline in gross margins by 0.8%.",
+      "predicted": "No, Amcor does not have an improving gross margin profile as of FY2023, as the gross profit decreased from $2,820 million in FY2022 to $2,725 million in FY2023, indicating a decline in gross margin.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 193,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 30,
+      "doc_fingerprint": "sha256:d930addaf68e9e30d503b13b5ee7fc2acfc1fc194ed7fe6555ec552fef88b027",
+      "n_paragraphs": 1,
+      "question": "What are major acquisitions that Best Buy has done in FY2023, FY2022 and FY2021?",
+      "gold_answer": "Best Buy closed two acquisitions, both these companies were already partially owned by Best Buy, but Best Buy acquired all outstanding shares of these two companies during FY 2022: (1) Current Health Ltd and (2) Two Peaks, LLC d/b/a Yardbird Furniture",
+      "predicted": "In FY2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 392,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 31,
+      "doc_fingerprint": "sha256:037d26022ba559f36fe5c6a8c0eed1167e8b49fd47fcf9beab66e43d98f97537",
+      "n_paragraphs": 1,
+      "question": "We need to calculate a financial metric by using information only provided within the balance sheet. Please answer the following question: what is Boeing's year end FY2018 net property, plant, and equipment (in USD millions)?",
+      "gold_answer": "$12645.00",
+      "predicted": "12,645",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 677,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 32,
+      "doc_fingerprint": "sha256:c4848f1613893edece60c174f140864074a1376b9b7352cbe8e031674460c67b",
+      "n_paragraphs": 1,
+      "question": "Taking into account the information outlined in the income statement, what is the FY2019 - FY2021 3 year average unadjusted operating income % margin for Corning? Answer in units of percents and round to one decimal place.",
+      "gold_answer": "10.3%",
+      "predicted": "14.0%",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 665,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 33,
+      "doc_fingerprint": "sha256:3218a7ebf3d0d449b9d7a087e3b7bcd1242b1246d670fb5578c65c42f9417c8e",
+      "n_paragraphs": 1,
+      "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for AMD in FY22?",
+      "gold_answer": "In 2022, AMD brought in the most cashflow from Operations",
+      "predicted": "Cash flows from operating activities brought in the most cash flow for AMD in FY22, with a net cash provided of $3,565 million.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 743,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 34,
+      "doc_fingerprint": "sha256:e8ac8efd994b65588714ae4ee6b7262f8584606e0dec76d0001e68dda58f10f3",
+      "n_paragraphs": 1,
+      "question": "According to the details clearly outlined within the balance sheet, how much total current assets did Nike have at the end of FY2019? Answer in USD millions.",
+      "gold_answer": "$16525.00",
+      "predicted": "16,525",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 540,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 35,
+      "doc_fingerprint": "sha256:29bb06a6769ed67eedba5acf67bafd72e1e0835675188d2a085eb97e0b7b2b45",
+      "n_paragraphs": 1,
+      "question": "What is Lockheed Martin's FY2021 net working capital? Define net working capital as total current assets less total current liabilities. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the balance sheet.",
+      "gold_answer": "$5818.00",
+      "predicted": "$5,818 million",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 561,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 36,
+      "doc_fingerprint": "sha256:b9fdc49f369c4d8c60fe6472f985892ea187eb58aae33e53954e07d8ce265980",
+      "n_paragraphs": 2,
+      "question": "What is the FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts? Answer in units of percents and round to one decimal place. Please utilize information provided primarily within the statement of cash flows and the statement of income.",
+      "gold_answer": "7.9%",
+      "predicted": "-3.5%",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 2191,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 37,
+      "doc_fingerprint": "sha256:905085d4e4453cf9ea58c195254c2940f9e1587696a6af342c23c07300f9054a",
+      "n_paragraphs": 1,
+      "question": "As of May 26, 2023, what is the total amount Pepsico may borrow under its unsecured revolving credit agreements?",
+      "gold_answer": "Total amount Pepsico may borrow under unsecured revolving credit agreements = $8,400,000,000.",
+      "predicted": "PepsiCo may borrow up to $8,400,000,000 under its unsecured revolving credit agreements as of May 26, 2023.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 1105,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 38,
+      "doc_fingerprint": "sha256:091e1a0555e281bea6febbd5b34d373fa15bdc67663824e652e1c6a40d38566d",
+      "n_paragraphs": 1,
+      "question": "What drove the reduction in SG&A expense as a percent of net sales in FY2023?",
+      "gold_answer": "Lower marketing expenses and leverage of incentive compensation due to higher sales. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
+      "predicted": "The reduction in SG&A expense as a percent of net sales in FY2023 was primarily due to lower marketing expenses and leverage of incentive compensation due to higher sales.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 413,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 39,
+      "doc_fingerprint": "sha256:dfb8d33ae23703c9c1920b140723d0bbe6741b9831cb9b8d8b015c708c2655cc",
+      "n_paragraphs": 1,
+      "question": "Which type of debt received the largest investment among the short term investments for MGM in H1 FY2023?",
+      "gold_answer": "the biggest short term investment is in corporate bonds (almost 82% of the total investment)",
+      "predicted": "Corporate bonds",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 260,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 40,
+      "doc_fingerprint": "sha256:cff01f36d927224942f2198235c985266718921d141685eb9ef3de898c27a863",
+      "n_paragraphs": 1,
+      "question": "According to the information provided in the statement of cash flows, what is the FY2020 free cash flow (FCF) for General Mills? FCF here is defined as: (cash from operations - capex). Answer in USD millions.",
+      "gold_answer": "$3215.00",
+      "predicted": "$3,215.4 million",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 1165,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 41,
+      "doc_fingerprint": "sha256:d017052fc2905b6ba64afb9286bd14d3110646665e18838212d545bf81b60315",
+      "n_paragraphs": 2,
+      "question": "What is the FY2019 cash conversion cycle (CCC) for General Mills? CCC is defined as: DIO + DSO - DPO. DIO is defined as: 365 * (average inventory between FY2018 and FY2019) / (FY2019 COGS). DSO is defined as: 365 * (average accounts receivable between FY2018 and FY2019) / (FY2019 Revenue). DPO is defined as: 365 * (average accounts payable between FY2018 and FY2019) / (FY2019 COGS + change in inventory between FY2018 and FY2019). Round your answer to two decimal places. Address the question by using the line items and information shown within the income statement and the balance sheet.",
+      "gold_answer": "-3.7",
+      "predicted": "The FY2019 cash conversion cycle (CCC) for General Mills is 66.73 days.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1387,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 42,
+      "doc_fingerprint": "sha256:bbd8239a6002e84d13307c4f28cf6d17d0ca8ec4b4d25130747360748f7e19c8",
+      "n_paragraphs": 1,
+      "question": "What is the quantity of restructuring costs directly outlined in AES Corporation's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
+      "gold_answer": "0",
+      "predicted": "0",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 598,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 43,
+      "doc_fingerprint": "sha256:5eb3fc216f79cccaf9d752f498a0891737d752929ffd66c40b0005c31556f3e5",
+      "n_paragraphs": 1,
+      "question": "Has AMCOR's quick ratio improved or declined between FY2023 and FY2022? If the quick ratio is not something that a financial analyst would ask about a company like this, then state that and explain why.",
+      "gold_answer": "The quick ratio has slightly improved from 0.67 times to 0.69 times between FY 2023 and FY 2022.(3.4% jump)",
+      "predicted": "The quick ratio is not explicitly provided in the passages, and it is typically calculated using current assets minus inventories divided by current liabilities. However, since the necessary data to calculate it is not fully available, it cannot be determined whether AMCOR's quick ratio has improved or declined between FY2023 and FY2022.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 696,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 44,
+      "doc_fingerprint": "sha256:00cff8be93e5f78588e134077f3a5d7d1eb3dee2b5b753869ba51fe560c512ca",
+      "n_paragraphs": 1,
+      "question": "What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
+      "gold_answer": "$1577.00",
+      "predicted": "$1,577 million",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 927,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 45,
+      "doc_fingerprint": "sha256:173842b9b0878a73a1d7e04781cbfb8da00099b4fe94757a93badb0e95495ef1",
+      "n_paragraphs": 3,
+      "question": "Has CVS Health reported any materially important ongoing legal battles from 2022, 2021 and 2020?",
+      "gold_answer": "Yes, CVS Health has been involved in multiple ongoing legal battles. Some notable legal dispute areas for CVS are: (1) usual and customary pricing litigation: where it's claimed that CVS\u00e2\u0080\u0099s retail pharmacies overcharged for prescription drugs; (2) PBM litigation and investigations: where it's claimed that that rebate agreements between the drug manufacturers and PBMs caused inflated prices for certain drug products; and (3) controlled substances litigation: legal matters around opioids for which CVS has agreed to pay up to $4.3 billion to claimants in remediation and $625 million to attorneys and fees",
+      "predicted": "Yes, CVS Health is facing multiple lawsuits regarding drug pricing and rebate arrangements, as well as litigation alleging overcharging for prescription drugs.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 362,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 46,
+      "doc_fingerprint": "sha256:271ca68ddf1ce33ee9bb630f86483d1cebd6c0d72fbae7b6ebf337186c438ede",
+      "n_paragraphs": 1,
+      "question": "Are Best Buy's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
+      "gold_answer": "Yes, the margins have been consistent, there has been a minor decline of 1.1% in gross margins between FY2022 and FY2023.",
+      "predicted": "Best Buy's gross margins are not historically consistent, as they fluctuated from 22.4% in fiscal year 2021 to 19.8% in fiscal year 2023, which is a change of more than 2%.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 409,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 47,
+      "doc_fingerprint": "sha256:554d12040089a3700f25eefc8d91a4d39ce2b34df11062489e0ad45d20749826",
+      "n_paragraphs": 2,
+      "question": "What is Amazon's FY2017 days payable outstanding (DPO)? DPO is defined as: 365 * (average accounts payable between FY2016 and FY2017) / (FY2017 COGS + change in inventory between FY2016 and FY2017). Round your answer to two decimal places. Address the question by using the line items and information shown within the balance sheet and the P&L statement.",
+      "gold_answer": "93.86",
+      "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 36.45.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1007,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 48,
+      "doc_fingerprint": "sha256:89c1037631a122a86f8ddfa0fc829255858a1864872e4997cf434932702595b8",
+      "n_paragraphs": 2,
+      "question": "What is Kraft Heinz's FY2019 inventory turnover ratio? Inventory turnover ratio is defined as: (FY2019 COGS) / (average inventory between FY2018 and FY2019). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the balance sheet and the P&L statement.",
+      "gold_answer": "6.25",
+      "predicted": "6.19",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1136,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 49,
+      "doc_fingerprint": "sha256:0ad57f00c57dbf395caf922a6f8b222c1a255ce6b9ec87583893951403b5f4c0",
+      "n_paragraphs": 1,
+      "question": "How much has the effective tax rate of Corning changed between FY2021 and FY2022?",
+      "gold_answer": "The effective tax rate of Corning has changed from 20% in FY2021 to 23% in FY 2022.",
+      "predicted": "The effective tax rate of Corning changed from 20% in FY2021 to 23% in FY2022.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 397,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 50,
+      "doc_fingerprint": "sha256:6a1b5d2a4c90f2520ef362975c2a930dace1d4debf45892f569d744518edac06",
+      "n_paragraphs": 1,
+      "question": "Has Microsoft increased its debt on balance sheet between FY2023 and the FY2022 period?",
+      "gold_answer": "No. Microsoft decreased its debt by $2.5bn in FY 2023 vs FY 2022.",
+      "predicted": "Yes, Microsoft has increased its debt on the balance sheet between FY2023 and FY2022.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 672,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 51,
+      "doc_fingerprint": "sha256:d43197a1d5ec4ad6e3cab4db07d514fcb10be3e71109076052e1ecb848bd69de",
+      "n_paragraphs": 1,
+      "question": "What are major acquisitions that AMCOR has done in FY2023, FY2022 and FY2021?",
+      "gold_answer": "Amcor completed these acquisitions during FY2023:\n-100% equity interest of a flexibles manufacturing company in the Czech Republic\n- 100% equity interest in a medical device packaging manufacturing site in\nShanghai, China.\n-acquisition of a New Zealand-based leading manufacturer of state-of-the-art, automated protein\npackaging machines.",
+      "predicted": "In FY2023, Amcor acquired a medical device packaging manufacturing site in Shanghai, China for $60 million and a New Zealand based manufacturer of automated protein packaging machines for $45 million. In FY2022, Amcor acquired a Czech Republic company operating a flexible packaging manufacturing plant for $59 million. There are no acquisitions mentioned for FY2021 in the provided context.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 626,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 52,
+      "doc_fingerprint": "sha256:708c3920224038fdca7dec8bedbe90fc85bd68d75c1c650ab38bfa852be30968",
+      "n_paragraphs": 1,
+      "question": "What is Amcor's year end FY2020 net AR (in USD millions)? Address the question by adopting the perspective of a financial analyst who can only use the details shown within the balance sheet.",
+      "gold_answer": "$1616.00",
+      "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 813,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 53,
+      "doc_fingerprint": "sha256:0c84cdd35a49ff00cd50175c7a1378b3d7c06e05ebbd39b8479f1e767162c12c",
+      "n_paragraphs": 1,
+      "question": "What drove operating margin change as of FY2022 for 3M? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
+      "gold_answer": "Operating Margin for 3M in FY2022 has decreased by 1.7% primarily due to: \n-Decrease in gross Margin\n-mostly one-off charges including Combat Arms Earplugs litigation, impairment related to exiting PFAS manufacturing, costs related to exiting Russia and divestiture-related restructuring\ncharges",
+      "predicted": "The operating margin change for 3M in FY2022 was driven by increased SG&A costs due to special item costs related to litigation, impairment costs from exiting PFAS manufacturing, costs from exiting Russia, divestiture-related restructuring charges, and continued investment in growth initiatives, which were partially offset by restructuring benefits and cost management.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 246,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 54,
+      "doc_fingerprint": "sha256:1c9bc9b5ccfcc76ca38c0040d135e49a7f1aadb726775c448b3ef1b4abec2047",
+      "n_paragraphs": 1,
+      "question": "How much does Pfizer expect to pay to spin off Upjohn in the future in USD million?",
+      "gold_answer": "77.78",
+      "predicted": "Pfizer expects to incur costs of approximately $700 million to spin off Upjohn.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 137,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 55,
+      "doc_fingerprint": "sha256:6ba598502a606b233f67467432a235f792e04a41d783df7171a026a574f90052",
+      "n_paragraphs": 2,
+      "question": "Answer the following question as if you are an equity research analyst and have lost internet connection so you do not have access to financial metric providers. According to the details clearly outlined within the P&L statement and the statement of cash flows, what is the FY2015 depreciation and amortization (D&A from cash flow statement) % margin for AMD?",
+      "gold_answer": "4.2%",
+      "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million. The net revenue for FY2015 is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = (167 / 3991) * 100 = 4.18%.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1083,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 56,
+      "doc_fingerprint": "sha256:acdde57fab013afb443d6eb18bb4e511afcf94ff7e73cb4adc08f24da604332a",
+      "n_paragraphs": 1,
+      "question": "What is the FY2019 - FY2020 total revenue growth rate for Block (formerly known as Square)? Answer in units of percents and round to one decimal place. Approach the question asked by assuming the standpoint of an investment banking analyst who only has access to the statement of income.",
+      "gold_answer": "101.5%",
+      "predicted": "101.7%",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 764,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 57,
+      "doc_fingerprint": "sha256:36f938b439f7009bab5c21c9a4f034277cc868171f07d291e0b3c7d9b7303fc8",
+      "n_paragraphs": 3,
+      "question": "Which region had the worst topline performance for MGM during FY2022?",
+      "gold_answer": "MGM China experienced the worst topline performance amongst the other regions presented. Its revenue declined 44% in FY2022 whereas the other regions presented increased their revenues.",
+      "predicted": "MGM China",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 192,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 58,
+      "doc_fingerprint": "sha256:7140cabe8c653be492008ce05185dac1d482cfa6104d71f07d7e11560f8b8ca7",
+      "n_paragraphs": 1,
+      "question": "What is the year end FY2019 total amount of inventories for Best Buy? Answer in USD millions. Base your judgments on the information provided primarily in the balance sheet.",
+      "gold_answer": "$5409.00",
+      "predicted": "5,409",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 607,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 59,
+      "doc_fingerprint": "sha256:c1b19791b0eaa5a105500b146d03433e40f6b6219202efbd7164109ae433cc5d",
+      "n_paragraphs": 2,
+      "question": "Roughly how many times has AES Corporation sold its inventory in FY2022? Calculate inventory turnover ratio for the FY2022; if conventional inventory management is not meaningful for the company then state that and explain why.",
+      "gold_answer": "AES has converted inventory 9.5 times in FY 2022.",
+      "predicted": "The inventory turnover ratio for FY2022 is approximately 9.55 times. This is calculated by dividing the cost of sales ($10,069 million) by the average inventory (($1,055 million + $604 million) / 2). However, if conventional inventory management is not meaningful for AES Corporation, it may be due to the nature of its business, which involves significant regulated and non-regulated operations that may not rely on traditional inventory turnover metrics.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 369,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 60,
+      "doc_fingerprint": "sha256:76480986f5c5dd7151219bcd4235e3fc0705e6776bd87f95ebaff92c5643d68f",
+      "n_paragraphs": 1,
+      "question": "Were there any potential events that are not in Pfizer's standard business operations that substantially increased net income in 2019?",
+      "gold_answer": "Yes, the gain on completion of Consumer Healthcare JV Transaction",
+      "predicted": "No, there were no potential events outside of Pfizer's standard business operations that substantially increased net income in 2019.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 408,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 61,
+      "doc_fingerprint": "sha256:6ee1b817d8b787a5c77e47f3f5240bc600ec1e749ca4056c0a1be77b66483b01",
+      "n_paragraphs": 2,
+      "question": "Based on the information provided primarily in the balance sheet and the statement of income, what is FY2020 days payable outstanding (DPO) for Corning? DPO is defined as: 365 * (average accounts payable between FY2019 and FY2020) / (FY2020 COGS + change in inventory between FY2019 and FY2020). Round your answer to two decimal places.",
+      "gold_answer": "63.86",
+      "predicted": "DPO = 365 * (average accounts payable) / (COGS + change in inventory)  \nAverage accounts payable = (1,587 + 1,174) / 2 = 1,380.50  \nCOGS for FY2020 = 7,772  \nChange in inventory = 2,438 - 2,320 = 118  \nDPO = 365 * (1,380.50) / (7,772 + 118)  \nDPO = 365 * (1,380.50) / (7,890)  \nDPO = 365 * 0.174 = 63.49  \n\nAnswer: 63.49",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1213,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 62,
+      "doc_fingerprint": "sha256:3039eb0f91cbb7d26d7ae0758b9be7a47015c56f805972db4dd9b138a4aa6a0a",
+      "n_paragraphs": 1,
+      "question": "Which debt securities are registered to trade on a national securities exchange under 3M's name as of Q2 of 2023?",
+      "gold_answer": "Following debt securities registered under 3M's name are listed to trade on the New York Stock Exchange:\n-1.500% Notes due 2026 (Trading Symbol: MMM26)\n-1.750% Notes due 2030 (Trading Symbol: MMM30)\n-1.500% Notes due 2031 (Trading Symbol: MMM31)",
+      "predicted": "1.500% Notes due 2026 (MMM26), 1.750% Notes due 2030 (MMM30), 1.500% Notes due 2031 (MMM31)",
+      "judge_score": 0.8,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 188,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 63,
+      "doc_fingerprint": "sha256:cd84adb4820383859b3f87050bc31c1caf08e9c92ebbec5743bda223f1ff309a",
+      "n_paragraphs": 1,
+      "question": "What is Netflix's year end FY2017 total current liabilities (in USD millions)? Base your judgments on the information provided primarily in the balance sheet.",
+      "gold_answer": "$5466.00",
+      "predicted": "5,466.3 million",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 653,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 64,
+      "doc_fingerprint": "sha256:bab72d807d27e9dacabb1a6c64771b1d8de010deedf484d3d07a5e8ce39b359d",
+      "n_paragraphs": 1,
+      "question": "What drove the increase in Ulta Beauty's merchandise inventories balance at end of FY2023?",
+      "gold_answer": "Increase in Merchandise inventories balance was driven by the opening of 47 new stores. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
+      "predicted": "The increase in Ulta Beauty's merchandise inventories balance at the end of FY2023 was primarily due to the opening of 47 new stores, inventory to support new brand launches and brand expansions, and inventory cost increases.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 200,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 65,
+      "doc_fingerprint": "sha256:82a17de037cedacfe8a73953c2cfe8c59ed3e85a96780d27675bac8e45ae5967",
+      "n_paragraphs": 1,
+      "question": "Does Verizon have a reasonably healthy liquidity profile based on its quick ratio for FY 2022? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
+      "gold_answer": "No. The quick ratio was approximately 0.54 for Verizon. It indicated that Verizon does not have a healthy liquidity profile.",
+      "predicted": "The quick ratio is not provided in the relevant passages, and it is not possible to determine Verizon's liquidity profile based solely on the information given. The quick ratio typically requires current assets minus inventories divided by current liabilities, and the necessary data to calculate it is incomplete.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 455,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 66,
+      "doc_fingerprint": "sha256:b6cf2851191e81623fed3c25aa87531b699b7438a9b21b08ebc63b12ca7dd9ff",
+      "n_paragraphs": 1,
+      "question": "Is Boeing's business subject to cyclicality?",
+      "gold_answer": "Yes, Boeing's business is subject to cyclicality due to its exposure to the airline industry which is a cyclical industry.",
+      "predicted": "Yes, Boeing's business is subject to cyclicality.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 103,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 67,
+      "doc_fingerprint": "sha256:46d70ea7ef425d8e739e55a98f41169ee6c49014e738a2ab36e3e1691c943839",
+      "n_paragraphs": 2,
+      "question": "What is the FY2018 - FY2020 3 year average unadjusted EBITDA % margin for Walmart? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization from the cash flow statement. Answer in units of percents and round to one decimal place. Calculate what was asked by utilizing the line items clearly shown in the P&L statement and the cash flow statement.",
+      "gold_answer": "6.2%",
+      "predicted": "3.9%",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1399,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 68,
+      "doc_fingerprint": "sha256:6ff5d66e331742a0ac003102f29c6671d0394c7c0af7c7cd94c46808c00b0ec5",
+      "n_paragraphs": 2,
+      "question": "What is the FY2018 fixed asset turnover ratio for CVS Health? Fixed asset turnover ratio is defined as: FY2018 revenue / (average PP&E between FY2017 and FY2018). Round your answer to two decimal places. Calculate what was asked by utilizing the line items clearly shown in the P&L statement and the balance sheet.",
+      "gold_answer": "17.98",
+      "predicted": "14.14",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1417,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 69,
+      "doc_fingerprint": "sha256:c46188c37ddb9ebf61bc7747d4428f833af7b25cf4af2d3adaf7542d5b5d329b",
+      "n_paragraphs": 1,
+      "question": "What was the largest liability in American Express's Balance Sheet in 2022?",
+      "gold_answer": "Customer deposits",
+      "predicted": "Customer deposits",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 787,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 70,
+      "doc_fingerprint": "sha256:2c6ad2e9e56413ec3b384d62eca1626ac9ad3ee07dc9dbf33e53d5afbc72e30f",
+      "n_paragraphs": 1,
+      "question": "What percent of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023?",
+      "gold_answer": "36%. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
+      "predicted": "0%",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 198,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 71,
+      "doc_fingerprint": "sha256:82b7be585e46fcd2c0ab13161a360f6b5025187eb7dd87dc2d555a9af73cfee8",
+      "n_paragraphs": 2,
+      "question": "What is the FY2022 unadjusted EBITDA less capex for PepsiCo? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization [from cash flow statement]. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows and the income statement.",
+      "gold_answer": "$9068.00",
+      "predicted": "$12,275 million",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1144,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 72,
+      "doc_fingerprint": "sha256:26f1e2c67d08d5eaf9651a53ae73cad78edfb881f5105022f7d1a50837784d9f",
+      "n_paragraphs": 2,
+      "question": "What is Coca Cola's FY2022 dividend payout ratio (using total cash dividends paid and net income attributable to shareholders)? Round answer to two decimal places. Answer the question asked by assuming you only have access to information clearly displayed in the cash flow statement and the income statement.",
+      "gold_answer": "0.8",
+      "predicted": "0.80",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1268,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 73,
+      "doc_fingerprint": "sha256:e871971fe6336e162b41e877368b945ae7fd899d1a8312e7c340e7aaa1e6854d",
+      "n_paragraphs": 2,
+      "question": "Basing your judgments off of the cash flow statement and the income statement, what is American Water Works's FY2021 unadjusted operating income + depreciation and amortization from the cash flow statement (unadjusted EBITDA) in USD millions?",
+      "gold_answer": "$1832.00",
+      "predicted": "1,832",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1357,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 74,
+      "doc_fingerprint": "sha256:036a29cc5829efb3d2c154bb36f361bfcaeef6b552ea01743a8178f34396632f",
+      "n_paragraphs": 1,
+      "question": "Has Boeing reported any materially important ongoing legal battles from FY2022?",
+      "gold_answer": "Yes. Multiple lawsuits have been filed against Boeing resulting from a 2018 Lion Air crash and a 2019 Ethiopian Airlines crash.",
+      "predicted": "Yes, Boeing has reported multiple legal actions related to the accidents of Lion Air Flight 610 and Ethiopian Airlines Flight 302.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 123,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 75,
+      "doc_fingerprint": "sha256:d47fe3bc4525688f4b7143160ff49b29d17ecffa7cb083630ec53ff85ac07a94",
+      "n_paragraphs": 1,
+      "question": "What is the FY2021 capital expenditure amount (in USD billions) for PepsiCo? Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows.",
+      "gold_answer": "$4.60",
+      "predicted": "4.625 billion USD",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 674,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 76,
+      "doc_fingerprint": "sha256:328de118973a803f138a5e9f547eece93381c689567d920ed7996eeab77937d2",
+      "n_paragraphs": 1,
+      "question": "Does 3M maintain a stable trend of dividend distribution?",
+      "gold_answer": "Yes, not only they distribute the dividends on a routine basis, 3M has also been increasing the per share dividend for consecutive 65 years",
+      "predicted": "Yes, 3M has maintained a stable trend of dividend distribution for 65 consecutive years.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 94,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 77,
+      "doc_fingerprint": "sha256:e061b304cb75ab6e1c8900135d06104fa75da5504fb91579a8a94b1673233f5c",
+      "n_paragraphs": 1,
+      "question": "As of Q2'2023, is Pfizer spinning off any large business segments?",
+      "gold_answer": "Yes, it's spinning off Upjohn.",
+      "predicted": "Yes, Pfizer is separating Upjohn as a large business segment.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 135,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 78,
+      "doc_fingerprint": "sha256:98800ce56f9aa1331476cfa0177a6efad6504af4554e376740f4878539c1efcd",
+      "n_paragraphs": 1,
+      "question": "Which debt securities are registered to trade on a national securities exchange under American Express' name as of 2022?",
+      "gold_answer": "There are none",
+      "predicted": "None",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 172,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 79,
+      "doc_fingerprint": "sha256:bbb81b973417c59324ce5ad63d2217d3ae5641f180e55b320c59a6cc777fcb67",
+      "n_paragraphs": 1,
+      "question": "Which Best Buy product category performed the best (by top line) in the domestic (USA) Market during Q2 of FY2024?",
+      "gold_answer": "The entertainment segment experienced the highest growth of 9% during Q2 FY2024, primarily from gaming division.",
+      "predicted": "Entertainment",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 226,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 80,
+      "doc_fingerprint": "sha256:71bace83182a6b768a9501cb58045735f8d4b4d2fc4e9826167cac61d6fcdae3",
+      "n_paragraphs": 1,
+      "question": "What are the major products and services that AMD sells as of FY22?",
+      "gold_answer": "AMD sells server microprocessors (CPUs) and graphics processing units (GPUs), data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), and Adaptive System-on-Chip (SoC) products for data centers; CPUs, accelerated processing units (APUs) that integrate CPUs and GPUs, and chipsets for desktop and notebook personal computers; discrete GPUs, and semi-custom SoC products and development services; and embedded CPUs, GPUs, APUs, FPGAs, and Adaptive SoC products.",
+      "predicted": "AMD sells server microprocessors (CPUs), graphics processing units (GPUs), data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), Adaptive System-on-Chip (SoC) products, accelerated processing units (APUs), chipsets for personal computers, discrete GPUs, semi-custom SoC products, development services, and embedded CPUs, GPUs, APUs, FPGAs, and Adaptive SoC products.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 218,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 81,
+      "doc_fingerprint": "sha256:2fa6b7a8463e974da84a6f1ec68d2167b42515e2a9a2a1d697943ddc11ffb3ca",
+      "n_paragraphs": 1,
+      "question": "Which of JPM's business segments had the lowest net revenue in 2021 Q1?",
+      "gold_answer": "Corporate. Its net revenue was -$473 million.",
+      "predicted": "Consumer & Community Banking",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 625,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 82,
+      "doc_fingerprint": "sha256:dd553017fe7f379ccac01b894fb2184f8e5d63a1f8e67fd800208455b6a7a782",
+      "n_paragraphs": 1,
+      "question": "Is growth in JnJ's adjusted EPS expected to accelerate in FY2023?",
+      "gold_answer": "No, rate of growth in adjusted EPS is expected to decelerate slightly from 3.6% in FY2022 to 3.5% in FY2023.",
+      "predicted": "Yes, growth in JnJ's adjusted EPS is expected to accelerate in FY2023, with a projected adjusted operational EPS of $10.50, reflecting growth of 3.5%.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 314,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 83,
+      "doc_fingerprint": "sha256:98634805bcf038c21f9b96d8757b56d093411209a4be7adb37b957f85e4dcf80",
+      "n_paragraphs": 1,
+      "question": "What production rate changes is Boeing forecasting for FY2023?",
+      "gold_answer": "Boeing forecasts an increase in the production rates for the 737, 777X and 787 aircrafts in 2023.",
+      "predicted": "Boeing expects to gradually increase the 787 production rate to 5 per month and plans to gradually increase 737 production rates based on market demand and supply chain capacity.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 207,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 84,
+      "doc_fingerprint": "sha256:d773d678cc2a1bc31a74951246de88ba6c69dc2127c7cfae3a6ff910713a56ef",
+      "n_paragraphs": 3,
+      "question": "Who are the primary customers of Boeing as of FY2022?",
+      "gold_answer": "Boeing's primary customers as of FY2022 are a limited number of commercial airlines and the US government. The US government accounted for 40% of Boeing's total revenues in FY2022.",
+      "predicted": "The primary customers of Boeing as of FY2022 are the U.S. government and a limited number of commercial airlines.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 136,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 85,
+      "doc_fingerprint": "sha256:53fd3384f7ae89c523d53e8f431b0250c35e941dd1852e07e5dacea43ba16d8d",
+      "n_paragraphs": 1,
+      "question": "What drove gross margin change as of FY2022 for JnJ? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
+      "gold_answer": "For FY22, JnJ had changes in gross margin due to: One-time COVID-19 vaccine manufacturing exit related costs, Currency impacts in the Pharmaceutical segment, Commodity inflation in the MedTech and Consumer Health segments, partially offset by Supply chain benefits in the Consumer Health segment.",
+      "predicted": "The gross margin change for Johnson & Johnson in FY2022 was driven by one-time COVID-19 vaccine manufacturing exit related costs, currency impacts in the Pharmaceutical segment, and commodity inflation in the MedTech and Consumer Health segments, partially offset by supply chain benefits in the Consumer Health segment.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 328,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 86,
+      "doc_fingerprint": "sha256:1884c2fc8e61a56c7944b32035f86a5b6e87a935fcd3b2fee5b140ea7c92a807",
+      "n_paragraphs": 1,
+      "question": "What is Lockheed Martin's 2 year total revenue CAGR from FY2020 to FY2022 (in units of percents and round to one decimal place)? Provide a response to the question by primarily using the statement of income.",
+      "gold_answer": "0.4%",
+      "predicted": "The 2 year total revenue CAGR from FY2020 to FY2022 is 0.4%.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 636,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 87,
+      "doc_fingerprint": "sha256:d9a9285e1c4ab85b692d8e7b947a7b4f83eab3e0642b73fc90b0d973a9a83f88",
+      "n_paragraphs": 1,
+      "question": "Are JPM's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
+      "gold_answer": "Since JPM is a financial institution, gross margin is not a relevant metric.",
+      "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan Chase, as they primarily operate in investment banking, commercial banking, and asset management, where profitability is typically assessed through metrics like return on equity, net interest margin, and overall asset management performance rather than gross margins.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 278,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 88,
+      "doc_fingerprint": "sha256:f495af5e7fec246014b8972446c5a86f820e09c0f171ca460382a62d1ad2f967",
+      "n_paragraphs": 1,
+      "question": "Has CVS Health paid dividends to common shareholders in Q2 of FY2022?",
+      "gold_answer": "Yes, CVS paid a $ 0.55 dividend per share every quarter in FY2022",
+      "predicted": "Yes, CVS Health paid dividends to common shareholders in Q2 of FY2022.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 121,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 89,
+      "doc_fingerprint": "sha256:57e2ed8f098f971ee8b07115374c4ffbc4a49db5e770551a7ef2b05b4327dbfa",
+      "n_paragraphs": 1,
+      "question": "By drawing conclusions from the information stated only in the statement of financial position, what is General Mills's FY2020 working capital ratio? Define working capital ratio as total current assets divided by total current liabilities. Round your answer to two decimal places.",
+      "gold_answer": "0.68",
+      "predicted": "0.68",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 701,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 90,
+      "doc_fingerprint": "sha256:495eb12c51cb9c4e9de903a865dc92f78a95037cf8f511a71c97e3f3eb58d3bb",
+      "n_paragraphs": 2,
+      "question": "We want to calculate a financial metric. Please help us compute it by basing your answers off of the cash flow statement and the income statement. Here's the question: what is the FY2022 retention ratio (using total cash dividends paid and net income attributable to shareholders) for General Mills? Round answer to two decimal places.",
+      "gold_answer": "0.54",
+      "predicted": "0.25",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1573,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 91,
+      "doc_fingerprint": "sha256:c61b9f45ab1ba42ae9295bcadb34f65f4aaea0fba0af3cc56c9aaae68b0947b4",
+      "n_paragraphs": 1,
+      "question": "By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
+      "gold_answer": "$400,000,000 increase.",
+      "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000 on May 26, 2023.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 579,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 92,
+      "doc_fingerprint": "sha256:76c6842db3b8a70c931966bbfcda7e1263ef62a5d51252d428ee5c6815e2afaf",
+      "n_paragraphs": 2,
+      "question": "You are an investment banker and your only resource(s) to answer the following question is (are): the statement of financial position and the cash flow statement. Here's the question: what is the FY2015 operating cash flow ratio for Adobe? Operating cash flow ratio is defined as: cash from operations / total current liabilities. Round your answer to two decimal places.",
+      "gold_answer": "0.66",
+      "predicted": "0.66",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1993,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 93,
+      "doc_fingerprint": "sha256:caacec40f292109e3c717c4fd61843dd71e9745427a4bebada21dcfb503ded86",
+      "n_paragraphs": 1,
+      "question": "Does Boeing have an improving gross margin profile as of FY2022? If gross margin is not a useful metric for a company like this, then state that and explain why.",
+      "gold_answer": "Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.",
+      "predicted": "Boeing does not have an improving gross margin profile as of FY2022, as the cost of products and services has increased relative to sales, leading to a lower gross margin compared to previous years.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 277,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 94,
+      "doc_fingerprint": "sha256:773b228e606020aab224322a72601b78a7e805f12349d14a167e2d53e7a563cd",
+      "n_paragraphs": 2,
+      "question": "We want to calculate a financial metric. Please help us compute it by basing your answers off of the statement of income and the statement of cash flows. Here's the question: what is the FY2015 unadjusted EBITDA % margin for Netflix? Calculate unadjusted EBITDA using unadjusted operating income and D&A (from cash flow statement).",
+      "gold_answer": "5.4%",
+      "predicted": "The FY2015 unadjusted EBITDA is calculated as follows:\n\nUnadjusted EBITDA = Operating Income + Depreciation and Amortization  \n= $305,826 + $62,283  \n= $368,109\n\nTo find the unadjusted EBITDA % margin:\n\nUnadjusted EBITDA % Margin = (Unadjusted EBITDA / Revenues) * 100  \n= ($368,109 / $6,779,511) * 100  \n\u2248 5.43%\n\nTherefore, the FY2015 unadjusted EBITDA % margin for Netflix is approximately 5.43%.",
+      "judge_score": 0.9,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1387,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 95,
+      "doc_fingerprint": "sha256:f8e21add4cc8c28ee68dd9b6eeb32a1c29717ee551fce71b31c44d91fff6f1b8",
+      "n_paragraphs": 2,
+      "question": "Based on the information provided primarily in the statement of financial position and the statement of income, what is AES's FY2022 return on assets (ROA)? ROA is defined as: FY2022 net income / (average total assets between FY2021 and FY2022). Round your answer to two decimal places.",
+      "gold_answer": "-0.02",
+      "predicted": "-1.42%",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1859,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 96,
+      "doc_fingerprint": "sha256:316ae384e1032930952510f98239354e6d946ed4739cb789fde445bcea22ac62",
+      "n_paragraphs": 1,
+      "question": "Among all of the derivative instruments that Verizon used to manage the exposure to fluctuations of foreign currencies exchange rates or interest rates, which one had the highest notional value in FY 2021?",
+      "gold_answer": "Cross currency swaps. Its notional value was $32,502 million.",
+      "predicted": "Cross currency swaps",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 272,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 97,
+      "doc_fingerprint": "sha256:37f47e82379a932faa7b47eb3382f1a2be44f0600f0c971f8cdca7852e75e288",
+      "n_paragraphs": 1,
+      "question": "At the Pepsico AGM held on May 3, 2023, what was the outcome of the shareholder vote on the shareholder proposal for a congruency report by Pepsico on net-zero emissions policies?",
+      "gold_answer": "The shareholder proposal for a congruency report by Pepsico on net-zero emissions policies was defeated.",
+      "predicted": "The shareholder proposal for a congruency report on net-zero emissions policies was defeated.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 144,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 98,
+      "doc_fingerprint": "sha256:395cad08bf0e4ee12fddf940b7807f3258847b0e4a322c739ee3e527dd1c6d23",
+      "n_paragraphs": 1,
+      "question": "Does Corning have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
+      "gold_answer": "Yes. Corning had a positive working capital amount of $831 million by FY 2022 close. This answer considers only operating current assets and current liabilities that were clearly shown in the balance sheet.",
+      "predicted": "Yes, Corning has positive working capital based on FY2022 data. Working capital is calculated as current assets minus current liabilities. For FY2022, current assets are $7,453 million and current liabilities are $5,175 million, resulting in a working capital of $2,278 million.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 504,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 99,
+      "doc_fingerprint": "sha256:24e27428ecbfad0784748fe46742bd45783603cc1f19d82cb7bcaaec1ef1d1a9",
+      "n_paragraphs": 1,
+      "question": "Was there any drop in Cash & Cash equivalents between FY 2023 and Q2 of FY2024?",
+      "gold_answer": "Yes, there was a decline of ~42% between FY2023 and Q2 of FY 2024.",
+      "predicted": "Yes, there was a drop in Cash & Cash equivalents from $1,874 million on January 28, 2023, to $1,093 million on July 29, 2023.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "prompt_tokens_estimated": 1195,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

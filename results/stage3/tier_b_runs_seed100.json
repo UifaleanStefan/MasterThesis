@@ -1,0 +1,209 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T16:04:36+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 100,
+    "experiment": "stage3_orchestrator_summary",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmarks": [
+      "cuad",
+      "financebench",
+      "hotpotqa",
+      "longmemeval",
+      "narrativeqa",
+      "qasper"
+    ],
+    "configs": [
+      "v4-canonical",
+      "v4-tuned",
+      "flat-50"
+    ],
+    "n_questions": 100,
+    "k": 8
+  },
+  "config": {
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmarks": [
+      "cuad",
+      "financebench",
+      "hotpotqa",
+      "longmemeval",
+      "narrativeqa",
+      "qasper"
+    ],
+    "configs": [
+      "v4-canonical",
+      "v4-tuned",
+      "flat-50"
+    ],
+    "n_questions": 100,
+    "k": 8
+  },
+  "total_projected_cost_usd": 0.66938535,
+  "total_actual_cost_usd": 0.5524233000000001,
+  "total_prompt_tokens": 3442569,
+  "elapsed_s": 5032.344108104706,
+  "cells": [
+    {
+      "benchmark": "cuad",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.16,
+      "mean_judge_score": 0.259,
+      "total_prompt_tokens": 108791,
+      "projected_cost_usd": 0.02531865,
+      "actual_cost_usd": 0.019691999999999998
+    },
+    {
+      "benchmark": "cuad",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.27,
+      "mean_judge_score": 0.289,
+      "total_prompt_tokens": 131223,
+      "projected_cost_usd": 0.02868345,
+      "actual_cost_usd": 0.023183699999999998
+    },
+    {
+      "benchmark": "cuad",
+      "config": "flat-50",
+      "mean_recall_at_k": 0.13,
+      "mean_judge_score": 0.22,
+      "total_prompt_tokens": 81069,
+      "projected_cost_usd": 0.021160349999999998,
+      "actual_cost_usd": 0.015233700000000003
+    },
+    {
+      "benchmark": "financebench",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.45299999999999996,
+      "total_prompt_tokens": 50902,
+      "projected_cost_usd": 0.0166353,
+      "actual_cost_usd": 0.009477300000000003
+    },
+    {
+      "benchmark": "financebench",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.455,
+      "total_prompt_tokens": 50902,
+      "projected_cost_usd": 0.0166353,
+      "actual_cost_usd": 0.009410700000000003
+    },
+    {
+      "benchmark": "financebench",
+      "config": "flat-50",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.512,
+      "total_prompt_tokens": 64612,
+      "projected_cost_usd": 0.018691799999999998,
+      "actual_cost_usd": 0.011495400000000001
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.98,
+      "mean_judge_score": 0.655,
+      "total_prompt_tokens": 113897,
+      "projected_cost_usd": 0.026084549999999998,
+      "actual_cost_usd": 0.01840665000000001
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.96,
+      "mean_judge_score": 0.64,
+      "total_prompt_tokens": 111281,
+      "projected_cost_usd": 0.025692149999999997,
+      "actual_cost_usd": 0.018053100000000006
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "flat-50",
+      "mean_recall_at_k": 0.98,
+      "mean_judge_score": 0.62,
+      "total_prompt_tokens": 117115,
+      "projected_cost_usd": 0.02656725,
+      "actual_cost_usd": 0.018911099999999997
+    },
+    {
+      "benchmark": "longmemeval",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.43200000000000005,
+      "total_prompt_tokens": 549675,
+      "projected_cost_usd": 0.09145125,
+      "actual_cost_usd": 0.08462130000000001
+    },
+    {
+      "benchmark": "longmemeval",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.414,
+      "total_prompt_tokens": 545565,
+      "projected_cost_usd": 0.09083475,
+      "actual_cost_usd": 0.08404785000000004
+    },
+    {
+      "benchmark": "longmemeval",
+      "config": "flat-50",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.44799999999999995,
+      "total_prompt_tokens": 600581,
+      "projected_cost_usd": 0.09908715,
+      "actual_cost_usd": 0.09232020000000002
+    },
+    {
+      "benchmark": "narrativeqa",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.0,
+      "mean_judge_score": 0.215,
+      "total_prompt_tokens": 352767,
+      "projected_cost_usd": 0.06191504999999999,
+      "actual_cost_usd": 0.054679050000000014
+    },
+    {
+      "benchmark": "narrativeqa",
+      "config": "flat-50",
+      "mean_recall_at_k": 0.0,
+      "mean_judge_score": 0.135,
+      "total_prompt_tokens": 353528,
+      "projected_cost_usd": 0.0620292,
+      "actual_cost_usd": 0.054860400000000004
+    },
+    {
+      "benchmark": "qasper",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.4673913043478261,
+      "mean_judge_score": 0.1825,
+      "total_prompt_tokens": 65031,
+      "projected_cost_usd": 0.01875465,
+      "actual_cost_usd": 0.011856150000000005
+    },
+    {
+      "benchmark": "qasper",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.5978260869565217,
+      "mean_judge_score": 0.185,
+      "total_prompt_tokens": 74223,
+      "projected_cost_usd": 0.020133449999999997,
+      "actual_cost_usd": 0.013307850000000003
+    },
+    {
+      "benchmark": "qasper",
+      "config": "flat-50",
+      "mean_recall_at_k": 0.391304347826087,
+      "mean_judge_score": 0.15,
+      "total_prompt_tokens": 71407,
+      "projected_cost_usd": 0.01971105,
+      "actual_cost_usd": 0.012866849999999996
+    }
+  ]
+}

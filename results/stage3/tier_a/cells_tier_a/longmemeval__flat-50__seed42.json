@@ -1,0 +1,656 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T11:43:47+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "longmemeval",
+    "config": "flat-50",
+    "k": 8,
+    "n_questions": 30
+  },
+  "ok": true,
+  "benchmark": "longmemeval",
+  "config": "flat-50",
+  "mode": "full",
+  "n_questions": 30,
+  "n_with_gold": 30,
+  "n_with_judge": 30,
+  "mean_recall_at_k": 1.0,
+  "mean_judge_score": 0.25,
+  "total_prompt_tokens": 216523,
+  "total_completion_tokens_max": 4500,
+  "projected_cost_usd": 0.03517845,
+  "actual_cost_usd": 0.032977349999999996,
+  "elapsed_seconds": 96.37121987342834,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:02881ff5e05cd81e12634ffd9fe782bdc559f6e9b243a577dfa4ce28cb716180",
+      "n_paragraphs": 3,
+      "question": "What was the first issue I had with my new car after its first service?",
+      "gold_answer": "GPS system not functioning correctly",
+      "predicted": "The first issue you had with your new car after its first service was with the GPS system, which you had to take back to the dealership to get fixed.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 8766,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:60e50a848f4c1452b1290bcc77ed2c9986dd68be2ebaa019503d9f7e28a0f753",
+      "n_paragraphs": 2,
+      "question": "Which event did I attend first, the 'Effective Time Management' workshop or the 'Data Analysis using Python' webinar?",
+      "gold_answer": "'Data Analysis using Python' webinar",
+      "predicted": "You attended the 'Effective Time Management' workshop first.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 7045,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:6c66b402b8ad56365a35bda16b57a807cc09d90ce11e05657ef034d25bb1d435",
+      "n_paragraphs": 2,
+      "question": "Which vehicle did I take care of first in February, the bike or the car?",
+      "gold_answer": "bike",
+      "predicted": "You took care of your bike first in mid-February when you had to take it in for repairs.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 5470,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:d3c2437e823c6d52a1667f680fd30e216d468fe3a98f9cf402680603d3b1a9ad",
+      "n_paragraphs": 2,
+      "question": "Which device did I got first, the Samsung Galaxy S22 or the Dell XPS 13?",
+      "gold_answer": "Samsung Galaxy S22",
+      "predicted": "You got the Samsung Galaxy S22 first, on February 20th, before receiving the Dell XPS 13 on February 25th.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 5832,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:ee0098adf8285e1103fc4da3f9646368099d24b44a63ef629d7f2a61fbd418b6",
+      "n_paragraphs": 2,
+      "question": "How many days before the team meeting I was preparing for did I attend the workshop on 'Effective Communication in the Workplace'?",
+      "gold_answer": "7 days. 8 days (including the last day) is also acceptable.",
+      "predicted": "You attended the workshop on \"Effective Communication in the Workplace\" on January 10th, and your team meeting is on January 17th, which is 7 days before the meeting.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 7462,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:c8b851d11c390c6fcfcbde37c1b114bee9f4d13d7d30b022a93a884a694c6ce3",
+      "n_paragraphs": 2,
+      "question": "How many days had passed between the Sunday mass at St. Mary's Church and the Ash Wednesday service at the cathedral?",
+      "gold_answer": "30 days. 31 days (including the last day) is also acceptable.",
+      "predicted": "33 days.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6431,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:50d10dfd9a8f9aa44393abee5c2a1d1ad61d709abf7122ff2258dc6141b74e76",
+      "n_paragraphs": 2,
+      "question": "How many days did it take for me to find a house I loved after starting to work with Rachel?",
+      "gold_answer": "14 days. 15 days (including the last day) is also acceptable.",
+      "predicted": "You found a house you loved on March 1st, after starting to work with Rachel on February 15th, which is 14 days later.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 5566,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:9bd06bb29c03d8e275da275ea4505fbf89397ff67722e640ba5da68d32a31d3a",
+      "n_paragraphs": 2,
+      "question": "Which seeds were started first, the tomatoes or the marigolds?",
+      "gold_answer": "Tomatoes",
+      "predicted": "The marigold seeds were started on March 3rd, while the tomatoes were started indoors on February 20th. Therefore, the tomatoes were started first.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 4634,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:34583779d9c3745369d7dc30c4033791ebbdd4ddb3265488ef4948a077f522df",
+      "n_paragraphs": 2,
+      "question": "How many days had passed between the Hindu festival of Holi and the Sunday mass at St. Mary's Church?",
+      "gold_answer": "21 days. 22 days (including the last day) is also acceptable.",
+      "predicted": "The Hindu festival of Holi was celebrated on February 26th, and the Sunday mass at St. Mary's Church was on March 19th. Therefore, 21 days had passed between the two events.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6127,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:2bdc7983d7e97f312a48662ec352eb8bf955e22bade2f5fb1e7112d0c7d06277",
+      "n_paragraphs": 2,
+      "question": "How many days before the 'Rack Fest' did I participate in the 'Turbocharged Tuesdays' event?",
+      "gold_answer": "4 days.",
+      "predicted": "You participated in the \"Turbocharged Tuesdays\" event on June 14th and the \"Rack Fest\" event on June 18th, which is 4 days before.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6019,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:ba071015fa616ca5e234f013c61aedc048b45d80a544475fadbfbed2a0a827b2",
+      "n_paragraphs": 5,
+      "question": "Which pair of shoes did I clean last month?",
+      "gold_answer": "white Adidas sneakers",
+      "predicted": "You cleaned your white Adidas sneakers last month.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "prompt_tokens_estimated": 13302,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:28dd55f5642e8c70698144a7154f3c8b18da7ca11490498e87f8382ec7c3e28e",
+      "n_paragraphs": 2,
+      "question": "Which event happened first, the purchase of the coffee maker or the malfunction of the stand mixer?",
+      "gold_answer": "The malfunction of the stand mixer",
+      "predicted": "The purchase of the coffee maker happened first.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6776,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:9bd91ff66312ce2a436e75ce0d4bf98592daa62d0b68a13f62029e17f4392547",
+      "n_paragraphs": 2,
+      "question": "How many days had passed between the 'Walk for Hunger' event and the 'Coastal Cleanup' event?",
+      "gold_answer": "14 days. 8 days (including the last day) is also acceptable.",
+      "predicted": "The 'Walk for Hunger' event took place on February 21st, and the 'Coastal Cleanup' event was on March 7th. There are 14 days between these two dates.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6987,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:af1ff649ea10627e88a576da56e5a9fb28a17340e9144fe8c7aa034af56747ab",
+      "n_paragraphs": 2,
+      "question": "Which item did I purchase first, the dog bed for Max or the training pads for Luna?",
+      "gold_answer": "Training pads for Luna",
+      "predicted": "You purchased the training pads for Luna first.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6769,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:6893e195885b499384d1eb404e8d13029a34b92bb660bd96ff4286f14faec2f8",
+      "n_paragraphs": 2,
+      "question": "Which task did I complete first, fixing the fence or trimming the goats' hooves?",
+      "gold_answer": "Fixing the fence",
+      "predicted": "You fixed the fence first, three weeks ago, before trimming the goats' hooves two weeks ago.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 7173,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:204c4c432fffcae4c4ade8d2ca93a66b6b92ed1cf2655ce55ea9bfe7abf20755",
+      "n_paragraphs": 6,
+      "question": "How many charity events did I participate in before the 'Run for the Cure' event?",
+      "gold_answer": "4",
+      "predicted": "You participated in the \"Dance for a Cause\" event on May 1st before the \"Run for the Cure\" event on October 15th.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 17804,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:ffe8d7aad99db0964f3d97f9e8ac76ec2d6c35ceea6481e2fd651ad59d7d71e4",
+      "n_paragraphs": 2,
+      "question": "How long have I been working before I started my current job at NovaTech?",
+      "gold_answer": "4 years and 9 months",
+      "predicted": "You have been working professionally for 9 years before starting your current job at NovaTech.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6807,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:948ec3498a9fdd25eb8eb5580040e0b3e9ccaebb2d9a6dcc15968e555832acf6",
+      "n_paragraphs": 2,
+      "question": "Which book did I finish reading first, 'The Hate U Give' or 'The Nightingale'?",
+      "gold_answer": "'The Hate U Give'",
+      "predicted": "You finished reading \"The Hate U Give\" first.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 7376,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:383c5dcb2aad81da65113af2a7407f13ec0bd520e53ce923f0f0d66ae206ead5",
+      "n_paragraphs": 2,
+      "question": "Which device did I set up first, the smart thermostat or the mesh network system?",
+      "gold_answer": "Smart thermostat",
+      "predicted": "You set up the smart thermostat first.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6939,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:7583993d95c6ee5f652706c6f59dddc03b930ed8fbd0eafe2f389b490318da86",
+      "n_paragraphs": 2,
+      "question": "How many months ago did I book the Airbnb in San Francisco?",
+      "gold_answer": "Five months ago",
+      "predicted": "You booked the Airbnb in San Francisco two months ago.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 5956,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:81f8a8fa9f0f2813745d0009eb61f5f75a983cb7d7f161ea97765341788f0876",
+      "n_paragraphs": 3,
+      "question": "How long did I take to finish 'The Seven Husbands of Evelyn Hugo' and 'The Nightingale' combined?",
+      "gold_answer": "5.5 weeks",
+      "predicted": "You took about six and a half weeks to finish \"The Seven Husbands of Evelyn Hugo\" (two and a half weeks) and \"The Nightingale\" (three weeks) combined.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 8057,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:411be363e48b38cf54e9b53f41ddf578067ae37b22442e313d0f40c72293a5c9",
+      "n_paragraphs": 2,
+      "question": "What was the date on which I attended the first BBQ event in June?",
+      "gold_answer": "June 3rd",
+      "predicted": "The date on which you attended the first BBQ event in June was the 3rd of June.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6750,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:73b034f4e9b5516c64f201e319883b4f7f393c1127b4c7b1356926ed217e7415",
+      "n_paragraphs": 2,
+      "question": "How many days before I bought the iPhone 13 Pro did I attend the Holiday Market?",
+      "gold_answer": "7 days. 8 days (including the last day) is also acceptable.",
+      "predicted": "You attended the Holiday Market a week before Black Friday, and you bought the iPhone 13 Pro on Black Friday. Therefore, you attended the Holiday Market 7 days before purchasing the iPhone 13 Pro.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6205,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:b8428a606d2fd0e90cce62b8579b5e69d1eb4be5808275fbdd59b6e21a240d46",
+      "n_paragraphs": 2,
+      "question": "Which show did I start watching first, 'The Crown' or 'Game of Thrones'?",
+      "gold_answer": "'Game of Thrones'",
+      "predicted": "You started watching \"Game of Thrones\" first.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6387,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:3d7be03ecf53cd73cde8d7c794b3592261ddecd3f203239407cb590fa5a8146a",
+      "n_paragraphs": 2,
+      "question": "How long had I been a member of 'Book Lovers Unite' when I attended the meetup?",
+      "gold_answer": "Two weeks",
+      "predicted": "You had been a member of \"Book Lovers Unite\" for three weeks when you attended the meetup.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6046,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:a0c81d8dea94ff29c6c8ee7f7c00f4c4812a5d2c08f27b2b82e90df6ade24951",
+      "n_paragraphs": 2,
+      "question": "How long had I been watching stand-up comedy specials regularly when I attended the open mic night at the local comedy club?",
+      "gold_answer": "2 months",
+      "predicted": "You had been watching stand-up comedy specials regularly for about 3 months when you attended the open mic night at the local comedy club.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6750,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:d4456a7a1f07f476d09a9e1aab2677cf70ecd419ca1650eb46590d4ebab419b2",
+      "n_paragraphs": 2,
+      "question": "What time do I wake up on Tuesdays and Thursdays?",
+      "gold_answer": "6:45 AM",
+      "predicted": "You wake up at 7:00 AM on Tuesdays and Thursdays.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6745,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:99bb10b0a7d6b48abc5c3096cd5956e544e85add9023f906bb535aaa38f133db",
+      "n_paragraphs": 2,
+      "question": "How many days had passed since I bought my Adidas running shoes when I realized one of the shoelaces on my old Converse sneakers had broken?",
+      "gold_answer": "14 days. 15 days (including the last day) is also acceptable.",
+      "predicted": "24 days.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 5566,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:9ffe9cf80c8490cfae8aa847a4239c8bbd9dab67be10bce8a5c0a88fc9c553c9",
+      "n_paragraphs": 2,
+      "question": "Which event happened first, the road trip to the coast or the arrival of the new prime lens?",
+      "gold_answer": "The arrival of the new prime lens",
+      "predicted": "The arrival of the new prime lens happened first.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 6996,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:f1ae1bdae5631a482e8e4fc24db1d3c3d6f92ed873fa5edef245d1a9677286e1",
+      "n_paragraphs": 3,
+      "question": "Which airline did I fly with the most in March and April?",
+      "gold_answer": "United Airlines",
+      "predicted": "You flew with United Airlines the most in March and April.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        0,
+        1,
+        2
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 7780,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

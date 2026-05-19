@@ -1,0 +1,2636 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T12:28:04+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "hotpotqa",
+    "config": "flat-50",
+    "k": 8,
+    "n_questions": 100
+  },
+  "ok": true,
+  "benchmark": "hotpotqa",
+  "config": "flat-50",
+  "mode": "full",
+  "n_questions": 100,
+  "n_with_gold": 100,
+  "n_with_judge": 100,
+  "mean_recall_at_k": 0.98,
+  "mean_judge_score": 0.622,
+  "total_prompt_tokens": 113461,
+  "total_completion_tokens_max": 15000,
+  "projected_cost_usd": 0.026019149999999998,
+  "actual_cost_usd": 0.018324750000000004,
+  "elapsed_seconds": 166.27258157730103,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:ddd3b3fb74ea7b102a0a74608006f3d0e7c6c2e97a77412bef957e5e3af5beec",
+      "n_paragraphs": 10,
+      "question": "In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?",
+      "gold_answer": "1755",
+      "predicted": "Moscow State University was founded in 1755.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 723,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:a51ddc7a9289a3990f70283f28bc6ff95c2587a40dc5eee1d073a8b3c645b143",
+      "n_paragraphs": 10,
+      "question": "Black Book starred the actress and writer of what heritage?",
+      "gold_answer": "Dutch",
+      "predicted": "Dutch",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 1009,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:64181e74afc0611b9554737d4e674f76d0eddbd638329e4ccfe69e679ebf64df",
+      "n_paragraphs": 10,
+      "question": "Which actor does American Beauty and American Beauty have in common?",
+      "gold_answer": "Kevin Spacey",
+      "predicted": "Kevin Spacey",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 1132,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:1cb9be6e69bc2f2baefd44dac8d9328ead7e8d025cdd1cd059991eceb367101d",
+      "n_paragraphs": 10,
+      "question": "Ken Pruitt  was a Republican member of an upper house of the legislature with how many members ?",
+      "gold_answer": "40 members",
+      "predicted": "40 members",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1178,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:42101ad120ccf43590ede87d0d064340e9c4d29dfc24863afb7c7539ea648bbf",
+      "n_paragraphs": 10,
+      "question": "Between Greyia and Calibanus, which genus contains more species?",
+      "gold_answer": "Greyia",
+      "predicted": "Calibanus contains more species.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 1417,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:fc28add9683925a054c9f46ef105019b352cafa47d16f56843cedf12ad303ddc",
+      "n_paragraphs": 10,
+      "question": "Did John Updike and Tom Clancy both publish more than 15 bestselling novels?",
+      "gold_answer": "yes",
+      "predicted": "No, only Tom Clancy published more than 15 bestselling novels.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 769,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:45705ed0524aea141ce71b6a17eb87b93f35ad80dc8e4b31e8f1bfc4c3689805",
+      "n_paragraphs": 10,
+      "question": "Who was hung for assisting the attempted surrender of a defector from the American Continental Army to the British Army?",
+      "gold_answer": "John Andr\u00e9",
+      "predicted": "John Andr\u00e9",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1147,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:04a488b3e96e98cbe6d7cc26b98562873f4e6a9011307a3ae03eda9dbb324bb7",
+      "n_paragraphs": 10,
+      "question": "which Mexican and American film actress is Ethel Houbiers  French voice of",
+      "gold_answer": "Salma Hayek Pinault",
+      "predicted": "Salma Hayek",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 764,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:7b80592ed9f57534412962d65a60394109cf8ef1347f89dbc5dcc62c554ef1a6",
+      "n_paragraphs": 10,
+      "question": "Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?",
+      "gold_answer": "Gatwick Airport",
+      "predicted": "Heathrow Airport",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        5
+      ],
+      "prompt_tokens_estimated": 1416,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:c13b9e551759d65790a5a02a958bd2257267539f7d6cb9331c48850b8e8bdf21",
+      "n_paragraphs": 10,
+      "question": "Isabella Kelly was born at a ruined castle characterized as one of the most isolated fortifications in Britain by who?",
+      "gold_answer": "The Changing Scottish Landscape",
+      "predicted": "1991's \"The Changing Scottish Landscape\"",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 950,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:267337312af6ef1ec4e1e5e2a093b2ebe73991b5835a595208349ce1995ceceb",
+      "n_paragraphs": 10,
+      "question": "The facility where Robert Croft worked as a navy instructor was also known as?",
+      "gold_answer": "\"Home of the Submarine Force\"",
+      "predicted": "The submarine escape training tank.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 1339,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:5f34e9b24100f943bef140c33f2380676c8dd841a0d10b27a8a76c085e7a733a",
+      "n_paragraphs": 10,
+      "question": "Who released the song \"With or Without You\" first, Jai McDowall or U2?",
+      "gold_answer": "U2",
+      "predicted": "U2",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        7
+      ],
+      "prompt_tokens_estimated": 983,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:9887863a61bb851ebcf48f588cac5c2323752011fba49e6f8f13bcd41d4b2ac2",
+      "n_paragraphs": 10,
+      "question": "Which \"Roseanne\" star is in Scream 2?",
+      "gold_answer": "Laurie Metcalf",
+      "predicted": "Laurie Metcalf",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1444,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:529fc2c6adf56b6a93550d0c0600a8fd28777eafecca6e16b8cb8615e060f999",
+      "n_paragraphs": 10,
+      "question": "In what city is the company that Fastjet Tanzania was originally founded as a part of prior to rebranding based?",
+      "gold_answer": "Nairobi, Kenya",
+      "predicted": "Dar es Salaam",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1000,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:1168b49b09e6d6a829fbd90d096d297ab448df99a180d433d3425dee0fd9877f",
+      "n_paragraphs": 10,
+      "question": "What is the name of the Australian specialist electronic music magazine that features avant-rock, experimental sound art, and experimental hip hop?",
+      "gold_answer": "Cyclic Defrost",
+      "predicted": "Cyclic Defrost",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        6
+      ],
+      "prompt_tokens_estimated": 1164,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:5b043d97c5c1f1bedb61f65af0dbb6dd5fdd68832d682a244cff24df0a580e55",
+      "n_paragraphs": 10,
+      "question": "What is the population of the city that Munsonville is in the northwest corner of?",
+      "gold_answer": "729 at the 2010 census",
+      "predicted": "729",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 1648,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:b8e8c31caddba07fe0eb36cb1c463c4e86df8074dfdc353141bbdc27d90aa18c",
+      "n_paragraphs": 10,
+      "question": "A Pair of Brown Eyes and Wild Mountain Thyme is based from what artists song?",
+      "gold_answer": "Francis McPeake",
+      "predicted": "The song \"Wild Mountain Thyme\" is often credited as traditional, but was written by The McPeakes.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1400,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:763902608036579b8f3a193755742b62d286b6521f690535edba6cd10faaf9c3",
+      "n_paragraphs": 10,
+      "question": "Armageddon in Retrospect was written by the author who was best known for what 1969 satire novel?",
+      "gold_answer": "Slaughterhouse-Five",
+      "predicted": "The Magic Christian",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        9
+      ],
+      "prompt_tokens_estimated": 1087,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:fa34de6a506ef65d0c6fa5b568f112fe7027a116cdbcc272cd31a4649b0b741e",
+      "n_paragraphs": 10,
+      "question": "What class of instrument does Apatim Majumdar play?",
+      "gold_answer": "strings",
+      "predicted": "The provided passages do not contain information about Apatim Majumdar or the class of instrument he plays.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        1
+      ],
+      "prompt_tokens_estimated": 1364,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:efba64aafa6e760eba230d2d8fd5b9614e861f70b217315db1288b3736740420",
+      "n_paragraphs": 10,
+      "question": "Which movie did Disney produce first,  The Many Adventures of Winnie the Pooh or Ride a Wild Pony?",
+      "gold_answer": "Ride a Wild Pony",
+      "predicted": "The Many Adventures of Winnie the Pooh",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 1258,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:1d101712ccd27e46593620a24076b69fe149dd941616d6a9fea3e03f1d9bdfeb",
+      "n_paragraphs": 10,
+      "question": "Pandikona and Berger Blanc Suisse are both what kinds of animals?",
+      "gold_answer": "dogs",
+      "predicted": "Both Pandikona and Berger Blanc Suisse are breeds of dogs.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 1114,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:61410ba19428268eedf30602f0746b565515d7ab4279c26327b15dd75003cc45",
+      "n_paragraphs": 10,
+      "question": "The Prussian General Carl von Clausewitz is associated with what type of realism?",
+      "gold_answer": "Modern thinkers associated with classical realism are Carl von Clausewitz",
+      "predicted": "Political realism",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 1314,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:880c3e0f1ea2397c7c18323961362a485fb614343ee0fb0fcc7a5ce29a977146",
+      "n_paragraphs": 10,
+      "question": "What where both Hawker Hurricane and No. 1455 Flight apart of?",
+      "gold_answer": "Royal Air Force",
+      "predicted": "Both the Hawker Hurricane and No. 1455 Flight were part of the Royal Air Force (RAF).",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 859,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:3590a0ade5ad96bef49f12cd0ef391aac4bc972e97a02825e07f7f33e16847bc",
+      "n_paragraphs": 10,
+      "question": "what language did the ethnic group which Torstein Ellingsen was its drumer  speaks",
+      "gold_answer": "Norwegian language",
+      "predicted": "The relevant passage does not provide information about the language spoken by the ethnic group associated with Torstein Ellingsen.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        9
+      ],
+      "prompt_tokens_estimated": 1666,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:2530ae80edee632e0107aadac40542f770415be67ae9a02902c629ecb7b275ea",
+      "n_paragraphs": 10,
+      "question": "From March 631 to April 631, Farrukhzad Khosrau V was the king of an empire that succeeded which empire?",
+      "gold_answer": "the Parthian Empire",
+      "predicted": "The Parthian Empire.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 873,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:d7a3ed63ba60404cc59de60c9db07636f9715fa558b791b8a25f6b6c22f36002",
+      "n_paragraphs": 10,
+      "question": "Beer Wars covers the differences between large corporate breweries, and small breweries, such as what brewery that is headquartered in Escondido, california?",
+      "gold_answer": "Stone Brewing",
+      "predicted": "Stone Brewing Co.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 944,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:96ad78944e054ff579d5b5cc3080a1ee4f3a79b8f5ef2cb7bc863035a80bbb54",
+      "n_paragraphs": 10,
+      "question": "Which head coach has led their team for a longer period of time, Tim Cluess or Steve Prohm?",
+      "gold_answer": "Tim Cluess",
+      "predicted": "Tim Cluess",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        3
+      ],
+      "prompt_tokens_estimated": 1188,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:1552786d811469bb00b89e15284ea62d46d7518c1cc380d000c83ae823b6dadf",
+      "n_paragraphs": 10,
+      "question": "During what war were the Russia-United Kingdom relations in a state of rivalry after the abdication of Emperor Nicholas II?",
+      "gold_answer": "the Cold War (1947\u201391)",
+      "predicted": "The rivalry occurred during the Crimean War of the 1850s.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        8
+      ],
+      "prompt_tokens_estimated": 1351,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:196fb2dd7f82c49505041f403797f08eb5c67799dce3ce4b829fb2e9568ba286",
+      "n_paragraphs": 10,
+      "question": "How far from Sacramento is the flight school in Atwater?",
+      "gold_answer": "about 115 miles (185 km)",
+      "predicted": "The distance from Sacramento to Atwater is not provided in the relevant passages.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 1119,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:18ff7fb16da8e0c58fae9678c2a85a3088d563798266467e6e76cb57fb1a467f",
+      "n_paragraphs": 10,
+      "question": "Baraki Barak District is situated in the western part of a province whose capital is what?",
+      "gold_answer": "Puli Alam",
+      "predicted": "Puli Alam",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 1329,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 30,
+      "doc_fingerprint": "sha256:ae9f124f8b3f2cb3ccdf606caff7f9d0e712fe83fd28d2256c070c23728cda98",
+      "n_paragraphs": 10,
+      "question": "What was the 2010 population of the town where Black Crescent Mountain was located?",
+      "gold_answer": "310",
+      "predicted": "310",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        7
+      ],
+      "prompt_tokens_estimated": 1232,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 31,
+      "doc_fingerprint": "sha256:43486309f11bb6823db2fcd16823a5078d1ac70108ef1d54ddf2450bfe5e4e68",
+      "n_paragraphs": 10,
+      "question": "In the NASA mission where Moon trees were taken into space, what was the nickname of the Command Module?",
+      "gold_answer": "\"Kitty Hawk\"",
+      "predicted": "Kitty Hawk",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 1220,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 32,
+      "doc_fingerprint": "sha256:573c0747664af5bd73032829926738365441079f2e4ab223fe95e847dec7f5b2",
+      "n_paragraphs": 10,
+      "question": "Which comic series involves characters such as Nick Fury and Baron von Strucker?",
+      "gold_answer": "Marvel",
+      "predicted": "Fenris (comics)",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 881,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 33,
+      "doc_fingerprint": "sha256:c34511b1c842192740f8fe6f8dfafab4fe1c18d21cd6c5ef44378152e01dd6b2",
+      "n_paragraphs": 10,
+      "question": "College Humor is a 1933 American pre-Code musical comedy film that starred what American singer and actor who has a trademark warm bass-baritone voice?",
+      "gold_answer": "Harry Lillis \"Bing\" Crosby Jr.",
+      "predicted": "Bing Crosby",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        9
+      ],
+      "prompt_tokens_estimated": 676,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 34,
+      "doc_fingerprint": "sha256:8ca87e6544d392bd1b7f81a579f1a3c6996c873d328b2a289de147b363730ecb",
+      "n_paragraphs": 10,
+      "question": "Who is writing a book about the Koch family who control the second-largest privately owned company in the United States?",
+      "gold_answer": "Jane Mayer",
+      "predicted": "Jane Mayer",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        6
+      ],
+      "prompt_tokens_estimated": 1016,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 35,
+      "doc_fingerprint": "sha256:da59dee0b0c20da014e8a7a46410be2a3b2b4cd0b43fbe435e079f6947396827",
+      "n_paragraphs": 10,
+      "question": "New York State Route 9R rejoins its parent in a hamlet located  in what New York County?",
+      "gold_answer": "Albany",
+      "predicted": "Albany County",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 1432,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 36,
+      "doc_fingerprint": "sha256:6ad1359be13df09bd78ecf27def4c21464151343c192c85201a32121c46f96c6",
+      "n_paragraphs": 10,
+      "question": "12 Years a Slave starred what British actor born 10 July 1977)",
+      "gold_answer": "Chiwetel Ejiofor",
+      "predicted": "Chiwetel Ejiofor",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 793,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 37,
+      "doc_fingerprint": "sha256:587a49ba48b19db2a0e9373d0b546857e2cf7ebe492938eb42e6d35ea7a01186",
+      "n_paragraphs": 10,
+      "question": "What was the capital of India when the Taj Mahal was commissioned?",
+      "gold_answer": "Agra",
+      "predicted": "Agra",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        5
+      ],
+      "prompt_tokens_estimated": 922,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 38,
+      "doc_fingerprint": "sha256:5075626d1602c18987fb4754b42d4a2b98955ca7c04b6cd177e016b6a6bdb68a",
+      "n_paragraphs": 10,
+      "question": "In what city did the \"Prince of tenors\" star in a film based on an opera by Giacomo Puccini?",
+      "gold_answer": "Rome",
+      "predicted": "Rome",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1120,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 39,
+      "doc_fingerprint": "sha256:a3b4dd279a692b295463c4be88cabe4eca0c8313bbf3baedf32c73851827695a",
+      "n_paragraphs": 10,
+      "question": "What river can a  large African bovine be seen bathing in in the Mwabvi Wildlife Reserve?",
+      "gold_answer": "Buffalo",
+      "predicted": "Mwabvi river",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 1056,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 40,
+      "doc_fingerprint": "sha256:2dcc6622542d372012d5f56a843b692a4beb1c74a689e9fa237c09cf2a73276a",
+      "n_paragraphs": 10,
+      "question": "Jalen Jones plays basketball for an NBA team that plays their home games in what arena?",
+      "gold_answer": "Smoothie King Center",
+      "predicted": "Smoothie King Center",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        8
+      ],
+      "prompt_tokens_estimated": 990,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 41,
+      "doc_fingerprint": "sha256:f470488b3b62a5f0d2c386d6245d9451b9de5f6da1864113d308ba2e10f2f6b6",
+      "n_paragraphs": 10,
+      "question": "The On Tour Forever album gave Blues Traveler the opportunity to display what musical trademark?",
+      "gold_answer": "extensive use of segues",
+      "predicted": "The On Tour Forever album gave Blues Traveler the opportunity to display their live performance trademark.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        4
+      ],
+      "prompt_tokens_estimated": 859,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 42,
+      "doc_fingerprint": "sha256:610ee0be7ad5f6551fe5e4af99656835844f96909f6a37a4e1c6ba06ff932895",
+      "n_paragraphs": 10,
+      "question": "Which Victorian poet was born in a 15th-century castle home to the Earl of Southesk?",
+      "gold_answer": "Charlotte Carnegie",
+      "predicted": "Lady Charlotte Elliot",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        7
+      ],
+      "prompt_tokens_estimated": 720,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 43,
+      "doc_fingerprint": "sha256:0799fe7bf471ae5f822fe2f4b426d4465c54659708d674ce03ea32d51878024f",
+      "n_paragraphs": 10,
+      "question": "Alexander Petrovich Nikolayev received the title Hero of the Soviet Union and the Order of Lenin for his actions during the   the final major offensive of the European theatre of what war?",
+      "gold_answer": "World War II",
+      "predicted": "World War II",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 1481,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 44,
+      "doc_fingerprint": "sha256:768099716d86d9ab790b12fecec28f3aed4059b0803d38b638c8655c6ce25bbf",
+      "n_paragraphs": 10,
+      "question": "Where did Cale Gundy's brother play football in college?",
+      "gold_answer": "Oklahoma State University",
+      "predicted": "Oklahoma State University",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 1502,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 45,
+      "doc_fingerprint": "sha256:2084e46affea63e674798f57c5fdba49444a4d22345ef80a4e5c145474b7d79d",
+      "n_paragraphs": 10,
+      "question": "Who has released more solo albums, Nick Carter or Brady Seals?",
+      "gold_answer": "Brady Seals",
+      "predicted": "Nick Carter has released more solo albums.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 936,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 46,
+      "doc_fingerprint": "sha256:de3b09b2927c2cae70a9af27535b4ee050a30149a49c9d4da801487a3b8bd120",
+      "n_paragraphs": 10,
+      "question": "Which Istanbul mosque is unique for retaining a Baroque style of architecture, the Bayezid II Mosque or the Nusretiye Mosque?",
+      "gold_answer": "Nusretiye Mosque",
+      "predicted": "Nusretiye Mosque",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        7
+      ],
+      "prompt_tokens_estimated": 1039,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 47,
+      "doc_fingerprint": "sha256:1b9948fbdb3c33490cb5db7d91a773376d82382fd3877609b6e8494918b18d06",
+      "n_paragraphs": 10,
+      "question": "What university did the last Detroit Pistons player to wear the number retired in honor of a player nicknamed \"The Worm\" attend?",
+      "gold_answer": "Georgetown University",
+      "predicted": "Georgetown University",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 1400,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 48,
+      "doc_fingerprint": "sha256:d1b491761de76e7e69815ee5e355255e35331f81d9774ee839bb976be716e939",
+      "n_paragraphs": 10,
+      "question": "The Atik Valide Mosque and Valens Aqueduct are found in what country?",
+      "gold_answer": "Turkey",
+      "predicted": "Turkey",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 973,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 49,
+      "doc_fingerprint": "sha256:c2507825e9459064ea0e8b49f2755b87589f6ffb31d97f2ccc35c4cf76b647d8",
+      "n_paragraphs": 10,
+      "question": "Which of the four US Presidents who have been assinated was shot on the grounds of the Pan-American Exposition at the Temple of Music in Buffalo, New York?",
+      "gold_answer": "William McKinley",
+      "predicted": "William McKinley",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        9
+      ],
+      "prompt_tokens_estimated": 1163,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 50,
+      "doc_fingerprint": "sha256:887e9090aa29ec65a3add3dfd3202bfb4bd8bf1a5a05362f79700a584d26a6ac",
+      "n_paragraphs": 10,
+      "question": "Who created the NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson?",
+      "gold_answer": "Justin Spitzer",
+      "predicted": "The NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson is \"Superstore,\" created by Justin Spitzer.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1302,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 51,
+      "doc_fingerprint": "sha256:0fcc5eb9f48bcb4653fdde302b3c8c2bc071f388768eedffb811c121a6bb78d0",
+      "n_paragraphs": 10,
+      "question": "Were Halld\u00f3r Laxness and Timothy Leary from the same country?",
+      "gold_answer": "no",
+      "predicted": "No, Halld\u00f3r Laxness was from Iceland and Timothy Leary was from the United States.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 765,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 52,
+      "doc_fingerprint": "sha256:c28ed93b32bb8068f67bfb55881663bc3bfc48abc065e262b1936dbe64c843c2",
+      "n_paragraphs": 10,
+      "question": "Do both Korematsu v. United States and Chaplinsky v. New Hampshire cases regard the rights of U. S. citizens?",
+      "gold_answer": "yes",
+      "predicted": "Yes, both Korematsu v. United States and Chaplinsky v. New Hampshire regard the rights of U.S. citizens.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 1482,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 53,
+      "doc_fingerprint": "sha256:d8f13396faf0c4e39e177ade49dd9dd6b3a8015568ccaeb7c7aaeac4a5d6483f",
+      "n_paragraphs": 10,
+      "question": "What is the title of the memoir written by the honoree of the Black and White Ball?",
+      "gold_answer": "Personal History",
+      "predicted": "The title of the memoir written by the honoree of the Black and White Ball is \"Personal History.\"",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 854,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 54,
+      "doc_fingerprint": "sha256:9a7572144654fca23d297a24f34943949b5953b3841a44c2e17fdd8befac5e38",
+      "n_paragraphs": 10,
+      "question": "What country is the theme park served by the Huis Ten Bosch train service themed on?",
+      "gold_answer": "Netherlands",
+      "predicted": "The Netherlands.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 857,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 55,
+      "doc_fingerprint": "sha256:ebee83716c3bbbc25e4f2d4285a91e888c75bc8cc5126ef7babe96b9483e4067",
+      "n_paragraphs": 10,
+      "question": "The Distribution of Industry act was passed by a man who was prime minister when?",
+      "gold_answer": "1945 to 1951",
+      "predicted": "The Distribution of Industry Act 1950 was passed by a man who was Prime Minister from 1945 to 1951.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 1389,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 56,
+      "doc_fingerprint": "sha256:d1e9a33a7c299facea53de7e03129d2a8f3df48db6969f8ead1ca3ca515b3f88",
+      "n_paragraphs": 10,
+      "question": "What Cantonese slang term can mean both \"ghost man\" and to refer to Westerners?",
+      "gold_answer": "Gweilo",
+      "predicted": "Gweilo",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 826,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 57,
+      "doc_fingerprint": "sha256:1c05283529476c19438b7de99099e4ea4c79912eeefbb2f404c9febc17cd910f",
+      "n_paragraphs": 10,
+      "question": "In what year was the most famous statute at Po Lin Monastery built?",
+      "gold_answer": "Tian Tan Buddha",
+      "predicted": "1993",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        5
+      ],
+      "prompt_tokens_estimated": 1202,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 58,
+      "doc_fingerprint": "sha256:39e827df41ae743aecaa7bafbb975f3ae1e47fd2b4e9802cf8ffb43e3b253754",
+      "n_paragraphs": 10,
+      "question": "The Nike Hoop Summit has had many current NBA players as former participants, including what German player from the Dallas Mavericks?",
+      "gold_answer": "Dirk Werner Nowitzki",
+      "predicted": "Dirk Nowitzki",
+      "judge_score": 0.9,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        9
+      ],
+      "prompt_tokens_estimated": 1671,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 59,
+      "doc_fingerprint": "sha256:89a98a2daf07694150afbf0efdcd5f4eb65e405de45f053e15bae4f04bc5e9c0",
+      "n_paragraphs": 10,
+      "question": "Which actor from the South Korean-Thai drama film Final Recipe debuted as a member of Super Junior-M in 2008?",
+      "gold_answer": "Henry Lau",
+      "predicted": "Henry Lau",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        5
+      ],
+      "prompt_tokens_estimated": 897,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 60,
+      "doc_fingerprint": "sha256:7c5491618d8c20fb188e2e08450981c77a9ba9ab2de0dd2a713487d75b3aa633",
+      "n_paragraphs": 10,
+      "question": "Are Phlebodium and Pieris both species of ferns?",
+      "gold_answer": "no",
+      "predicted": "No, Phlebodium is a genus of ferns, while Pieris is a genus of shrubs.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 1325,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 61,
+      "doc_fingerprint": "sha256:246383848039f2dc73e208afb87a7c571c8f8acbb9dc5a03eb893ee388e3d2b4",
+      "n_paragraphs": 10,
+      "question": "Who was the great grandfather of Franklin Seaver Pratt's wife?",
+      "gold_answer": "Kalokuokamaile",
+      "predicted": "Kamehameha I",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        8
+      ],
+      "prompt_tokens_estimated": 1360,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 62,
+      "doc_fingerprint": "sha256:d2eed9728ed880a0af1abc849e327e9f9fae0622b129b92836d0721cbfcacaa4",
+      "n_paragraphs": 10,
+      "question": "At what age did Cieli di Toscana's singer become blind?",
+      "gold_answer": "Bocelli became completely blind at the age of 12",
+      "predicted": "The provided passages do not contain information about the age at which Cieli di Toscana's singer, Andrea Bocelli, became blind.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 719,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 63,
+      "doc_fingerprint": "sha256:d430bb09bd74dbc8b232493987b896d04dc9cb216cf77205b21b8a0da558a341",
+      "n_paragraphs": 10,
+      "question": "Which late 1980s and 1990s English super model was featured in the song nasty girl by The Notorious B.I.G.?",
+      "gold_answer": "Naomi Elaine Campbell",
+      "predicted": "Naomi Campbell",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1723,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 64,
+      "doc_fingerprint": "sha256:de59048524c1174b7e8b5fb5de9cf00844dd4b80ed9b009b4dbe000ec42ec4df",
+      "n_paragraphs": 10,
+      "question": "What is the name of the film directed by Alex Cox  adapted from a 1606 play starring Diana Quick as the Dutchess?",
+      "gold_answer": "Revengers Tragedy",
+      "predicted": "The Honey Pot",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 905,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 65,
+      "doc_fingerprint": "sha256:476e732bf9ff370e8344bb7d4984c8c3611943a784a42066eaab761f9500f100",
+      "n_paragraphs": 10,
+      "question": "Josh Trank and Mike Valerio both work in what industry?",
+      "gold_answer": "entertainment",
+      "predicted": "Entertainment industry",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        9
+      ],
+      "prompt_tokens_estimated": 1034,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 66,
+      "doc_fingerprint": "sha256:abbb191051eae6e85be996f26789c068a614167b277e9df9fa3dcda2c9ef050f",
+      "n_paragraphs": 10,
+      "question": "Which American comedian born on March 21, 1962, appeared in the movie \"Sleepless in Seattle?\"",
+      "gold_answer": "Rosie O'Donnell",
+      "predicted": "Rosie O'Donnell",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 870,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 67,
+      "doc_fingerprint": "sha256:ae97ba9a11df2618b48fa7150b38dba2e6d4baa8992eee7ea287a0c5379f5884",
+      "n_paragraphs": 10,
+      "question": "Any Questions for Ben? was directed by which Australian producer and actor?",
+      "gold_answer": "Robert Ian \"Rob\" Sitch",
+      "predicted": "Rob Sitch",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 1113,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 68,
+      "doc_fingerprint": "sha256:e16ccf04b6a27f08fd273c5d63eceda5fbe343c921e58a6c96a240cf84e6234f",
+      "n_paragraphs": 10,
+      "question": "What American indie rock group first had Jesse Sandoval as the drummer and now has Jon Sortland on drums?",
+      "gold_answer": "The Shins",
+      "predicted": "The Shins",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 1280,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 69,
+      "doc_fingerprint": "sha256:dde055a3f516b0f8e155a3bbb7ec29fb8383eb6b690bf094e6f918a7727d01c5",
+      "n_paragraphs": 10,
+      "question": "What 3 countries are part of the legal name of the airline that merged with Braathens in 2004?",
+      "gold_answer": "Denmark\u2013Norway\u2013Sweden",
+      "predicted": "Denmark, Norway, Sweden",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        8
+      ],
+      "prompt_tokens_estimated": 1109,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 70,
+      "doc_fingerprint": "sha256:ee107f2ea86b49ad031aca49398477e8b1cf95ad1fa1a3531c3967d1d9f19fe6",
+      "n_paragraphs": 10,
+      "question": "What is the ratio of flow velocity past a boundary to the local speed of sound for a Saab JAS 39 Gripen?",
+      "gold_answer": "2",
+      "predicted": "The Mach number for a Saab JAS 39 Gripen is 2.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        9
+      ],
+      "prompt_tokens_estimated": 991,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 71,
+      "doc_fingerprint": "sha256:42de577c65f7fb582600327980e9d244cbac32ab50e8e7fceb72cbe9720b610b",
+      "n_paragraphs": 10,
+      "question": "SWX Right Now airs on the station that broadcasts on what channel in Billings, Montana?",
+      "gold_answer": "8",
+      "predicted": "SWX Right Now airs on KULR-TV, which broadcasts on virtual channel 8 in Billings, Montana.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        9
+      ],
+      "prompt_tokens_estimated": 1261,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 72,
+      "doc_fingerprint": "sha256:6a452b21998237cc61febd12a6baed01b58c708f29e4d3fbfd50ea46ffc837a4",
+      "n_paragraphs": 10,
+      "question": "Which player, who also played for the New Jersey Nets and the Golden State Warriors, finished third in the league with 231 three-point field goals during the 1995-96 Atlanta Hawks season?",
+      "gold_answer": "Mookie Blaylock",
+      "predicted": "Mookie Blaylock",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        3
+      ],
+      "prompt_tokens_estimated": 1440,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 73,
+      "doc_fingerprint": "sha256:5af6cbea1ac7f2d7be3584939d57dc48e3d940885fdea7c5671d22caa7bf9d12",
+      "n_paragraphs": 10,
+      "question": "Saltillo Engine is an engine plant in Ramos Arizpe that belongs to the American subsidiary of what company?",
+      "gold_answer": "Fiat Chrysler Automobiles N.V.",
+      "predicted": "Chrysler",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        2
+      ],
+      "prompt_tokens_estimated": 943,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 74,
+      "doc_fingerprint": "sha256:b01db4409d47c18643da922828f6377b5f17e55fbf8a18c54b9f09359f7d2365",
+      "n_paragraphs": 10,
+      "question": "What type of television show did Dylan Everett star in, in 2015?",
+      "gold_answer": "American-Canadian mystery-drama",
+      "predicted": "Dylan Everett starred in a mystery-drama television series in 2015 called \"Open Heart.\"",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        8
+      ],
+      "prompt_tokens_estimated": 957,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 75,
+      "doc_fingerprint": "sha256:5611bae57a4afd7eb8753de38c1316ab542dca70d1d9de906c369af5dcbf706d",
+      "n_paragraphs": 10,
+      "question": "Which plant, the Chaerophyllum or the Cryptanthus, can be found in various places across the world?",
+      "gold_answer": "Chaerophyllum",
+      "predicted": "Cryptanthus",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 1491,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 76,
+      "doc_fingerprint": "sha256:5dfbddb3b8c528fe015036f7930d04e0d9c11476ce5b50c2b3aad02d52453c81",
+      "n_paragraphs": 10,
+      "question": "Johnny Mathis: Wonderful Wonderful aired at what luxury hotel, casino and spa resort located in Atlantic City, New Jersey?",
+      "gold_answer": "Tropicana Casino & Resort",
+      "predicted": "Caesars Atlantic City",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        5
+      ],
+      "prompt_tokens_estimated": 1001,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 77,
+      "doc_fingerprint": "sha256:9ee591ff02f13332488442e740cb7cbe9f9af25b7dee1ac0b5ffef4849bc41bf",
+      "n_paragraphs": 10,
+      "question": "Who wrote the lyrics for Linda Eder's Broadway debut?",
+      "gold_answer": "Wildhorn, Bricusse and Cuden",
+      "predicted": "The lyrics for Linda Eder's Broadway debut in \"Jekyll and Hyde\" were written by Frank Wildhorn, Leslie Bricusse, and Steve Cuden.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        7
+      ],
+      "prompt_tokens_estimated": 1051,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 78,
+      "doc_fingerprint": "sha256:021c144d3656554fe0d8da2bc0afe5fb35a376bc15c435d0957eec47598ca960",
+      "n_paragraphs": 10,
+      "question": "The Company They Keep is a book written by Diana Pavlac Glyer, who is a professor at a university in Azusa, California, that was founded in 1899, and is under the auspices of what religion?",
+      "gold_answer": "evangelical Christian",
+      "predicted": "The university is under the auspices of evangelical Christianity.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        5
+      ],
+      "prompt_tokens_estimated": 1601,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 79,
+      "doc_fingerprint": "sha256:d006559d016053505814ab70a9146af0698b8839edca4cb02cb082b1b51e8e0e",
+      "n_paragraphs": 10,
+      "question": "For One Night Only was hosted by the man most well-known for hosting what show from 1962 until 1999?",
+      "gold_answer": "The Late Late Show",
+      "predicted": "The Late Late Show",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        2
+      ],
+      "prompt_tokens_estimated": 1127,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 80,
+      "doc_fingerprint": "sha256:50eafc71be0d134fc5a06fd91c608476040beb8f8995140cd8b7186591403630",
+      "n_paragraphs": 10,
+      "question": "What was the slogan  that came about from the idea of Lebensraum which had its most extreme form supported by the Nazi Party until the end of World War II?",
+      "gold_answer": "Blood and soil",
+      "predicted": "Blood and soil (German: \"Blut und Boden\")",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        6
+      ],
+      "prompt_tokens_estimated": 1282,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 81,
+      "doc_fingerprint": "sha256:0b2a02284f2774290424ec10f7798c157c2fae1dde4acf874b374efd3d142399",
+      "n_paragraphs": 10,
+      "question": "Olivia DeJonge starred in an American horror film directed by Shyamalan called what",
+      "gold_answer": "The Visit",
+      "predicted": "The Visit",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        8
+      ],
+      "prompt_tokens_estimated": 970,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 82,
+      "doc_fingerprint": "sha256:002414a8d14d40d0f8165aa35326d86b698cdad06a18efe57f517adcdca6144f",
+      "n_paragraphs": 10,
+      "question": "Who conducted the negotiations  with the owners and the longest serving commandant of Auschwitz concentration and extermination camp?",
+      "gold_answer": "Rudolf H\u00f6ss",
+      "predicted": "Carl Clauberg conducted the negotiations with the owners and Rudolf H\u00f6ss was the longest-serving commandant of Auschwitz concentration and extermination camp.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 1179,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 83,
+      "doc_fingerprint": "sha256:ce49569b7b2794035c33db90797a5799aa7d3e5fd67f2fb8c7a06763a380b80c",
+      "n_paragraphs": 10,
+      "question": "What genre is the novel from which the fast-food restaurant specializing in seafood derives its name?",
+      "gold_answer": "an adventure novel",
+      "predicted": "Adventure",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        6,
+        8
+      ],
+      "prompt_tokens_estimated": 846,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 84,
+      "doc_fingerprint": "sha256:64d229d2a2137e8fdf5a1c05a4a88e62207920c427aa38b605e1e60007304d49",
+      "n_paragraphs": 10,
+      "question": "What kind of musicians are Mark Gaudet and Jan Axel Blomberg?",
+      "gold_answer": "drummer",
+      "predicted": "Mark Gaudet is a drummer, and Jan Axel Blomberg is a heavy metal drummer.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        8
+      ],
+      "prompt_tokens_estimated": 833,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 85,
+      "doc_fingerprint": "sha256:6116e71f24632847706ffe2c92724be6790eeec1b1287f80f2507ff7e98a4386",
+      "n_paragraphs": 10,
+      "question": "A Wind in the Door is part of a series written by who?",
+      "gold_answer": "Madeleine L'Engle",
+      "predicted": "Madeleine L'Engle",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        6
+      ],
+      "prompt_tokens_estimated": 945,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 86,
+      "doc_fingerprint": "sha256:4744e586737750118951464fe054a8d801658fb7e8b5ad5dfe7a08ee6dd5ae97",
+      "n_paragraphs": 10,
+      "question": "The Airport located next to the A13 handled how many passengers in 2016 ?",
+      "gold_answer": "1.6 million passengers",
+      "predicted": "The airport located next to the A13, Rotterdam The Hague Airport, handled over 1.6 million passengers in 2016.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        8,
+        9
+      ],
+      "prompt_tokens_estimated": 1236,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 87,
+      "doc_fingerprint": "sha256:5826593982ab87c2b5f35d0adfd050b976f53bbcec04f0c90502d6c821f67d4c",
+      "n_paragraphs": 10,
+      "question": "The town of Sinclair, West Virginia, is named after the founder of the local oil drilling company. What is on Sinclair Oil's famous logo?",
+      "gold_answer": "dinosaur",
+      "predicted": "The logo features the silhouette of a large green dinosaur.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        5
+      ],
+      "prompt_tokens_estimated": 1195,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 88,
+      "doc_fingerprint": "sha256:1314e70a9c6305b7068085e63ae7adc73deb788faa8a50fe4e5b80468fce76fd",
+      "n_paragraphs": 10,
+      "question": "Jihad: A Story of the Others is a documentary by the director who is of what descent?",
+      "gold_answer": "Punjabi/Pashtun",
+      "predicted": "Punjabi/Pashtun descent.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        6
+      ],
+      "prompt_tokens_estimated": 1215,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 89,
+      "doc_fingerprint": "sha256:676acb78b5d406ea0bf6c755f2982c1eef6a34ea003041e67952f3099bac5483",
+      "n_paragraphs": 10,
+      "question": "Minor league baseball games that were played between the rivalling teams of the Sooners and the Cowboys were played at the stadium formerly known as what?",
+      "gold_answer": "Drillers Stadium",
+      "predicted": "Drillers Stadium",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        3,
+        4
+      ],
+      "prompt_tokens_estimated": 1248,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 90,
+      "doc_fingerprint": "sha256:50664006cd8dc98b068b1adabf58e3b1fedd03b8851b4fbff065a217e46fd519",
+      "n_paragraphs": 10,
+      "question": "Cooperative Living Organization is located in a city that is the county seat of what county in Florida?",
+      "gold_answer": "Alachua",
+      "predicted": "Alachua County",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "prompt_tokens_estimated": 1333,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 91,
+      "doc_fingerprint": "sha256:383b47c5d62ec8051831a2957bfd91c7e10d5f86379c57d26851c2260803eb05",
+      "n_paragraphs": 10,
+      "question": "What is the pen name of author Carolyn Janice Cherry, who wrote the Fortress Series?",
+      "gold_answer": "Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",
+      "predicted": "C. J. Cherryh",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        8
+      ],
+      "prompt_tokens_estimated": 992,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 92,
+      "doc_fingerprint": "sha256:f95e444fb84beb21526f72a43c9390ba717bfccef503998100c8a4b23f219d49",
+      "n_paragraphs": 10,
+      "question": "Which dog is believed to dispel ghosts and evil spirits, Segugio Italiano or Sapsali?",
+      "gold_answer": "Sapsali",
+      "predicted": "Sapsali",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 1527,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 93,
+      "doc_fingerprint": "sha256:d7304712853c162a2d75f9a1e523bb4bb206dd6e2181674960a426f586a90ff5",
+      "n_paragraphs": 10,
+      "question": "Which French aristocrat and military officer who fought in the American Revolutionary War visited this historic home located at Enfield, Halifax County, North Carolina, known as The Cellar?",
+      "gold_answer": "Marquis de Lafayette",
+      "predicted": "The Marquis de Lafayette",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 1088,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 94,
+      "doc_fingerprint": "sha256:716b372970c8ba3da4d6db7cc6e6dbe2ee15019b8396bdf8c344da9364e4cf83",
+      "n_paragraphs": 10,
+      "question": "What sports team included both of the brothers Case McCoy and Colt McCoy during different years?",
+      "gold_answer": "University of Texas Longhorns",
+      "predicted": "University of Texas Longhorns football team",
+      "judge_score": 0.8,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        1,
+        5
+      ],
+      "prompt_tokens_estimated": 1197,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 95,
+      "doc_fingerprint": "sha256:9ed241e9fb08961d1557d107170d606dd73cf3436b4db3d1bb42e1806b02e4a0",
+      "n_paragraphs": 10,
+      "question": "Which member of The New Russian School was both a doctor and a chemist besides being a composer?",
+      "gold_answer": "Alexander Porfiryevich Borodin",
+      "predicted": "Alexander Borodin",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        4,
+        5
+      ],
+      "prompt_tokens_estimated": 982,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 96,
+      "doc_fingerprint": "sha256:b8d202a226c03a3d56f342f5448d491c04ffbb68963d770559bc72360a5c1520",
+      "n_paragraphs": 10,
+      "question": "Susanna Thompson appeared in the courtroom drama film Ghosts of Mississippi, directed by who?",
+      "gold_answer": "Rob Reiner",
+      "predicted": "Rob Reiner",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        7,
+        9
+      ],
+      "prompt_tokens_estimated": 1006,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 97,
+      "doc_fingerprint": "sha256:c24b67cd3c6091052b20ffa9502c4e1e732c5f8bc4dfd0610d46f1e8853284fe",
+      "n_paragraphs": 10,
+      "question": "Live Wire Radio will possibly be considered as a replacement for a variety show created in what year?",
+      "gold_answer": "1974",
+      "predicted": "1974",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 978,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 98,
+      "doc_fingerprint": "sha256:ca42cfee942c4eace7ae53a1df39d75075e56fe0e914f1178b5ce6345f8087b1",
+      "n_paragraphs": 10,
+      "question": "Luke Rockhold defeated the MMA fighter who was the first to earn a win against which champion in the UFC?",
+      "gold_answer": "Anderson Silva",
+      "predicted": "Anderson Silva",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        2,
+        4
+      ],
+      "prompt_tokens_estimated": 1374,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 99,
+      "doc_fingerprint": "sha256:183d2bc84136a4f33a4793fdc39fc6d87070734b080af7327e489cfd94a95b7e",
+      "n_paragraphs": 10,
+      "question": "What type of art does The Consul and Arlecchino have in common?",
+      "gold_answer": "music",
+      "predicted": "Both The Consul and Arlecchino are operas.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "relevant_paragraphs": [
+        0,
+        9
+      ],
+      "prompt_tokens_estimated": 1129,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}

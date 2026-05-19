@@ -1,0 +1,875 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T11:48:47+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "qasper",
+    "config": "v4-tuned",
+    "k": 8,
+    "n_questions": 30
+  },
+  "ok": true,
+  "benchmark": "qasper",
+  "config": "v4-tuned",
+  "mode": "full",
+  "n_questions": 30,
+  "n_with_gold": 28,
+  "n_with_judge": 30,
+  "mean_recall_at_k": 0.5,
+  "mean_judge_score": 0.31666666666666665,
+  "total_prompt_tokens": 22815,
+  "total_completion_tokens_max": 4500,
+  "projected_cost_usd": 0.00612225,
+  "actual_cost_usd": 0.00407865,
+  "elapsed_seconds": 56.81473636627197,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:6f50a33fea8778f6c462ead87b3f51c11428d7feb4fc9f410452d837f393e983",
+      "n_paragraphs": 84,
+      "question": "What background knowledge do they leverage?",
+      "gold_answer": "labeled features",
+      "predicted": "They leverage prior knowledge to guide the learning process, which can include labeling unlabeled instances, constraining the model directly, and incorporating domain expertise to estimate true class distributions.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        83,
+        82,
+        78,
+        4,
+        3,
+        74,
+        72,
+        71
+      ],
+      "relevant_paragraphs": [
+        11,
+        41,
+        43
+      ],
+      "prompt_tokens_estimated": 856,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:963db5896af334749a452b4ba5074a672ee841f46fe23614ddf64ab6ec22e8f8",
+      "n_paragraphs": 213,
+      "question": "Do they report results only on English data?",
+      "gold_answer": "Yes",
+      "predicted": "No, they do not report results only on English data.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        212,
+        77,
+        159,
+        206,
+        191,
+        118,
+        211,
+        122
+      ],
+      "relevant_paragraphs": [
+        75
+      ],
+      "prompt_tokens_estimated": 876,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:3700bad361f4857822aa5f13b02e4b7f9f9523345dedec9f4fe10cb64522bb4b",
+      "n_paragraphs": 69,
+      "question": "What baseline model is used?",
+      "gold_answer": "same baseline as used by lang2011unsupervised",
+      "predicted": "The standard baseline is used for unseen predicates.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        37,
+        68,
+        66,
+        55,
+        26,
+        45,
+        44,
+        13
+      ],
+      "relevant_paragraphs": [
+        38
+      ],
+      "prompt_tokens_estimated": 293,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:c6e94ef08aceb99ccd6458c35f76df5ebcce552668273cb9920428c61e1c5bf2",
+      "n_paragraphs": 80,
+      "question": "Is it valid to presume a bad medical wikipedia article should not contain much domain-specific jargon?",
+      "gold_answer": "(unanswerable per source)",
+      "predicted": "Yes, it is valid to presume that a bad medical Wikipedia article should not contain much domain-specific jargon, as the quality of content is affected by features related to the specific domain, including the usage of a specific vocabulary.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        78,
+        48,
+        76,
+        32,
+        12,
+        53,
+        0,
+        6
+      ],
+      "relevant_paragraphs": [
+        27
+      ],
+      "prompt_tokens_estimated": 1476,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:301353b2e203745d0d73a1761a4e03130e33e4b826eabd133500ce0c90f02dd9",
+      "n_paragraphs": 46,
+      "question": "What is the size of the parallel corpus used to train the model constraints?",
+      "gold_answer": "1500 sentences",
+      "predicted": "The size of the parallel corpus used to train the model constraints is 1500 sentences.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        45,
+        40,
+        30,
+        33,
+        27,
+        39,
+        20,
+        21
+      ],
+      "relevant_paragraphs": [
+        39
+      ],
+      "prompt_tokens_estimated": 1124,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:a3924be3c2a30d3df6295fe89accc96b2bce38e725fcaea6660dde850ef6e49c",
+      "n_paragraphs": 68,
+      "question": "How was this data collected?",
+      "gold_answer": "CrowdFlower",
+      "predicted": "The data was collected using the crowdsourcing platform CrowdFlower (CF).",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        20,
+        10,
+        67,
+        43,
+        66,
+        22,
+        62,
+        41
+      ],
+      "relevant_paragraphs": [
+        22,
+        23,
+        47
+      ],
+      "prompt_tokens_estimated": 368,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:c6956c7d0a63e57e3ea696171ca26e27f85fa8c8c8a26ac57c2157cccbd6ba15",
+      "n_paragraphs": 84,
+      "question": "Do the authors report results only on English data?",
+      "gold_answer": "Yes",
+      "predicted": "The provided passages do not specify whether the authors report results only on English data.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        81,
+        83,
+        78,
+        61,
+        73,
+        59,
+        49,
+        63
+      ],
+      "relevant_paragraphs": [
+        35,
+        38,
+        39
+      ],
+      "prompt_tokens_estimated": 894,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:be7f9109bc3f322ac3e679f5597cc3a62295488c4b559f335ba3e7f26875d016",
+      "n_paragraphs": 71,
+      "question": "Do the authors also try the model on other datasets?",
+      "gold_answer": "No",
+      "predicted": "The provided passages do not mention the authors trying the model on other datasets.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        48,
+        68,
+        70,
+        65,
+        15,
+        59,
+        54,
+        58
+      ],
+      "relevant_paragraphs": [
+        50
+      ],
+      "prompt_tokens_estimated": 851,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:19223b74f748c88bcf6e533c984727450109f3bfa16e609f254c9ba81d9ea3fd",
+      "n_paragraphs": 39,
+      "question": "what aspects of conversation flow do they look at?",
+      "gold_answer": "The time devoted to self-coverage, opponent-coverage, and the number of adopted discussion points.",
+      "predicted": "They look at the number of discussion points adopted, the recall of talking points during the discussion, and the drop in usage of own talking points from introduction to discussion.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        37,
+        36,
+        35,
+        29,
+        28,
+        33,
+        24,
+        31
+      ],
+      "relevant_paragraphs": [
+        3,
+        16,
+        24
+      ],
+      "prompt_tokens_estimated": 972,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:f2e14efb6ce9b626e593e87883d181348e2f216f59151279d94001e197bb23b5",
+      "n_paragraphs": 38,
+      "question": "What evaluation metric do they use?",
+      "gold_answer": "Accuracy",
+      "predicted": "The ratio of correct 'translations' (matches) was used as an evaluation measure.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        37,
+        36,
+        35,
+        19,
+        16,
+        7,
+        31,
+        24
+      ],
+      "relevant_paragraphs": [
+        36
+      ],
+      "prompt_tokens_estimated": 1188,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:d0fd528ac7161b3ddc7d72fd7d0ce92593829e70966c4bf64687d591af316138",
+      "n_paragraphs": 44,
+      "question": "LDA is an unsupervised method; is this paper introducing an unsupervised approach to spam detection?",
+      "gold_answer": "No",
+      "predicted": "Yes, the paper introduces an unsupervised approach to spam detection using Latent Dirichlet Allocation (LDA).",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        0,
+        43,
+        39,
+        17,
+        32,
+        9,
+        3,
+        18
+      ],
+      "relevant_paragraphs": [
+        37
+      ],
+      "prompt_tokens_estimated": 1126,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:76f96451238a12bbc1e94cb359a6eea9b80c52c898c922bfa238a46379e0ce72",
+      "n_paragraphs": 40,
+      "question": "Does the paper clearly establish that the challenges listed here exist in this dataset and task?",
+      "gold_answer": "Yes",
+      "predicted": "Yes, the paper establishes that the challenges exist in the dataset and task.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        39,
+        38,
+        34,
+        36,
+        35,
+        31,
+        32,
+        26
+      ],
+      "relevant_paragraphs": [
+        4
+      ],
+      "prompt_tokens_estimated": 522,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:e91158c69653ba7ebb6905888dde8060ed71309f3ddb4677808fb701e4c6aa1c",
+      "n_paragraphs": 41,
+      "question": "What evaluations methods do they take?",
+      "gold_answer": "(unanswerable per source)",
+      "predicted": "The passage outlines methods to manually detect stereotypes, biases, and odd phrases, but does not specify particular evaluation methods.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        32,
+        40,
+        36,
+        38,
+        39,
+        35,
+        1,
+        22
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 501,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:e002f0f9d107f7d3091169c1f37cac5b4fcc7ca019079ea59c397c3335636779",
+      "n_paragraphs": 54,
+      "question": "By how much does their best model outperform the state-of-the-art?",
+      "gold_answer": "0.8% F1 better than the best state-of-the-art",
+      "predicted": "The provided passages do not specify the exact amount by which their best model outperforms the state-of-the-art.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        47,
+        53,
+        36,
+        37,
+        40,
+        31,
+        44,
+        52
+      ],
+      "relevant_paragraphs": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        14,
+        18,
+        20,
+        22,
+        28,
+        29,
+        32,
+        34,
+        35,
+        36,
+        38,
+        39,
+        41,
+        42,
+        44,
+        46,
+        48,
+        50
+      ],
+      "prompt_tokens_estimated": 282,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:971b6c6dd71fe87b3b4acd865cae1f54a688830e43f8ac6ed71a808ea7b79e1f",
+      "n_paragraphs": 47,
+      "question": "what are the baseline systems?",
+      "gold_answer": "attentional encoder-decoder networks BIBREF0",
+      "predicted": "The relevant passages do not provide information about the baseline systems.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        3,
+        46,
+        41,
+        36,
+        42,
+        43,
+        10,
+        34
+      ],
+      "relevant_paragraphs": [
+        4,
+        5,
+        6
+      ],
+      "prompt_tokens_estimated": 518,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:ec953041fbe862ae29726ffae001ba3fa6226747112fcd41e9de322fc0ced62e",
+      "n_paragraphs": 33,
+      "question": "which datasets did they experiment with?",
+      "gold_answer": "Universal Dependencies v1.2 treebanks for the following 16 languages: Bulgarian, Croatian, Czech, Danish, English, French, German,\nIndonesian, Italian, Norwegian, Persian, Polish, Portuguese, Slovenian, Spanish, and Swedish",
+      "predicted": "The datasets mentioned are Czech, French, Italian, English, and Danish.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        32,
+        23,
+        14,
+        26,
+        18,
+        25,
+        10,
+        27
+      ],
+      "relevant_paragraphs": [
+        16,
+        17
+      ],
+      "prompt_tokens_estimated": 942,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:d470b866af33949d3aa620f088628081b686f510ef1696af929e5299cc856580",
+      "n_paragraphs": 79,
+      "question": "Did they only experiment with one language pair?",
+      "gold_answer": "Yes",
+      "predicted": "No, they built a Chinese-to-English SMT system, indicating experimentation with at least one language pair.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        78,
+        6,
+        51,
+        53,
+        20,
+        10,
+        49,
+        35
+      ],
+      "relevant_paragraphs": [
+        49
+      ],
+      "prompt_tokens_estimated": 910,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:8b25d7db725aa710cef917c2e91031c4e7588e201b3094c1833d64cd7c0efbd1",
+      "n_paragraphs": 44,
+      "question": "Do the authors conduct experiments on the tasks mentioned?",
+      "gold_answer": "Yes",
+      "predicted": "Yes, the authors conduct experiments on the tasks mentioned, specifically in the context of the Winograd Schema Challenge.",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        43,
+        42,
+        39,
+        38,
+        40,
+        25,
+        5,
+        8
+      ],
+      "relevant_paragraphs": [
+        21
+      ],
+      "prompt_tokens_estimated": 444,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:15e922fefa45fcf0e36d2b3bb44625594d2c20f0ec44aa6c0d13d91a65e363ac",
+      "n_paragraphs": 55,
+      "question": "what is the state of the art?",
+      "gold_answer": "Babelfy, DBpedia Spotlight, Entityclassifier.eu, FOX, LingPipe MUC-7, NERD-ML, Stanford NER, TagMe 2",
+      "predicted": "The state of the art in named entity recognition (NER) involves achieving F1 scores between 84\u201394% using bidirectional multi-layered LSTMs, letter-trigram word hashing, and surface form features, but it often suffers from poor recall and is typically trained on fixed datasets in a batch mode.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        54,
+        53,
+        25,
+        1,
+        51,
+        52,
+        43,
+        34
+      ],
+      "relevant_paragraphs": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        15,
+        26,
+        28,
+        29,
+        30,
+        32,
+        33,
+        35,
+        36,
+        39,
+        40,
+        41,
+        42,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        52,
+        54
+      ],
+      "prompt_tokens_estimated": 358,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:649f2daa150a3d963ce3c37567b82402b9fdc0bf902188ecf055511423e22f04",
+      "n_paragraphs": 57,
+      "question": "What is the model architecture used?",
+      "gold_answer": "LSTM to encode the question, VGG16 to extract visual features. The outputs of LSTM and VGG16 are multiplied element-wise and sent to a softmax layer.",
+      "predicted": "The provided passages do not contain information about the model architecture used.",
+      "judge_score": 0.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        8,
+        14,
+        56,
+        1,
+        37,
+        47,
+        53,
+        45
+      ],
+      "relevant_paragraphs": [
+        20,
+        21
+      ],
+      "prompt_tokens_estimated": 231,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:96d52ff5fcc96426bff41791f2fef4ebfe4beff27491ca05788fea57773e96ee",
+      "n_paragraphs": 75,
+      "question": "what are the topics pulled from Reddit?",
+      "gold_answer": "politics, business, science, and AskReddit, and 1000 additional posts from the Reddit frontpage.",
+      "predicted": "The topics pulled from Reddit include Libertarianism, Anarcho_Capitalism, ronpaul, ukpolitics, guns, economy, Bitcoin, socialism, technology, and discussions on fights in the SubredditDrama community.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        73,
+        9,
+        57,
+        74,
+        13,
+        14,
+        6,
+        53
+      ],
+      "relevant_paragraphs": [
+        14,
+        48
+      ],
+      "prompt_tokens_estimated": 753,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:4557d18a604fbcf61a56e51b673e8b782a28346f4df872afa18b17985d503b05",
+      "n_paragraphs": 73,
+      "question": "What is a second order co-ocurrence matrix?",
+      "gold_answer": "frequencies of the other words which occur with both of them (i.e., second order co\u2013occurrences)",
+      "predicted": "A second-order co-occurrence matrix is constructed by creating a co-occurrence vector for each term that incorporates contextual information and pairwise semantic similarity scores derived from a taxonomy, allowing for the measurement of relatedness between concepts.",
+      "judge_score": 0.5,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        45,
+        37,
+        43,
+        72,
+        5,
+        70,
+        34,
+        36
+      ],
+      "relevant_paragraphs": [
+        4
+      ],
+      "prompt_tokens_estimated": 741,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:35761b80f3f3993dd50aaa8dea2c48da3efa8f410457ed649957efd48ab7331e",
+      "n_paragraphs": 85,
+      "question": "How does their ensemble method work?",
+      "gold_answer": "simply averaging the predictions from the constituent single models",
+      "predicted": "The ensemble method works by starting with the best performing model according to validation performance and then gradually adding the best performing models that have not been previously tried. Each model is kept in the ensemble if it improves validation performance; otherwise, it is discarded. The final ensemble consists of the selected models averaged together to make predictions.",
+      "judge_score": 0.5,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        84,
+        82,
+        51,
+        83,
+        71,
+        28,
+        77,
+        54
+      ],
+      "relevant_paragraphs": [
+        82
+      ],
+      "prompt_tokens_estimated": 489,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:a9285cf0260eff3df9f64ba6098919790277dae126faebc4a27af8c405e68f44",
+      "n_paragraphs": 32,
+      "question": "what levels of document preprocessing are looked at?",
+      "gold_answer": "raw text",
+      "predicted": "The four levels of preprocessing are looked at.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        31,
+        24,
+        22,
+        9,
+        26,
+        19,
+        18,
+        5
+      ],
+      "relevant_paragraphs": [
+        0,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        30,
+        31
+      ],
+      "prompt_tokens_estimated": 655,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:281fe5fa7486f19e6944ae6f1c2fa91184541b4bdfd82e202bc5b6fb204a9362",
+      "n_paragraphs": 69,
+      "question": "What are the state of the art models?",
+      "gold_answer": "BIBREF9",
+      "predicted": "The state-of-the-art models referenced are those by BIBREF9 and BIBREF8.",
+      "judge_score": 1.0,
+      "recall_at_k": 0.0,
+      "retrieved_steps": [
+        60,
+        18,
+        59,
+        67,
+        65,
+        63,
+        1,
+        47
+      ],
+      "relevant_paragraphs": [
+        52,
+        61
+      ],
+      "prompt_tokens_estimated": 401,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:8636c67c36290a4736bf1e251a2f42a93c7f04c95a318364e97e1778e179654d",
+      "n_paragraphs": 41,
+      "question": "Do they remove seasonality from the time series?",
+      "gold_answer": "(unanswerable per source)",
+      "predicted": "The provided passages do not mention the removal of seasonality from the time series.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        40,
+        2,
+        12,
+        39,
+        32,
+        37,
+        5,
+        10
+      ],
+      "relevant_paragraphs": [
+        11,
+        12
+      ],
+      "prompt_tokens_estimated": 886,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:94f55a04ff0df7c09fb3c7a658461fdfe472e84319aaa0c145c8659161802493",
+      "n_paragraphs": 59,
+      "question": "What languages pairs are used in machine translation?",
+      "gold_answer": "German\u2013English",
+      "predicted": "German\u2013English",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        55,
+        44,
+        43,
+        35,
+        50,
+        49,
+        36,
+        2
+      ],
+      "relevant_paragraphs": [
+        44
+      ],
+      "prompt_tokens_estimated": 715,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:894ba917afa895b987e996a2b7c64d003821e89be031615c075ae62399c7834d",
+      "n_paragraphs": 52,
+      "question": "What was their performance on emotion detection?",
+      "gold_answer": "Answer with content missing: (Table 3) Best author's model B-M average micro f-score is 0.409, 0.459, 0.411 on Affective, Fairy Tales and ISEAR datasets respectively.",
+      "predicted": "Their models achieved competitive results on standard benchmarks for emotion classification, especially when enhanced with continuous vector representations.",
+      "judge_score": 0.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        14,
+        13,
+        43,
+        16,
+        48,
+        46,
+        49,
+        47
+      ],
+      "relevant_paragraphs": [
+        43
+      ],
+      "prompt_tokens_estimated": 1127,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:0991f04c3807d361d1126274123c94a503d24a819ffea301c249fbe9e8ca1c33",
+      "n_paragraphs": 52,
+      "question": "What topic is covered in the Chinese Facebook data?",
+      "gold_answer": "anti-nuclear-power",
+      "predicted": "The topic covered in the Chinese Facebook data is anti-nuclear power.",
+      "judge_score": 1.0,
+      "recall_at_k": 1.0,
+      "retrieved_steps": [
+        26,
+        51,
+        27,
+        47,
+        33,
+        29,
+        43,
+        0
+      ],
+      "relevant_paragraphs": [
+        27
+      ],
+      "prompt_tokens_estimated": 1382,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:866f56e9e07f5616bfbe65d352ff356be30f74a1d527c5ac6cfe2476fcf0e3dd",
+      "n_paragraphs": 56,
+      "question": "Does their framework automatically optimize for hyperparameters?",
+      "gold_answer": "(unanswerable per source)",
+      "predicted": "No, the framework does not automatically optimize for hyperparameters.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        55,
+        14,
+        51,
+        50,
+        52,
+        48,
+        44,
+        34
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 934,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}
