@@ -30,6 +30,7 @@ from typing import Any
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))  # so `evaluation.statistics` resolves
 STAGE3_DIR = ROOT / "results" / "stage3"
 CELLS_DIR = STAGE3_DIR / "cells"
 
@@ -157,11 +158,24 @@ def aggregate_cells(
                              for s in per_seed],
             }
 
-    # Per-benchmark paired t-tests: V4-tuned vs V4-canonical on pooled per-question judge.
+    # Per-benchmark paired tests + Cohen's d: V4-tuned vs V4-canonical on
+    # pooled per-question judge scores. Now also runs Wilcoxon signed-rank
+    # (more appropriate than t-test for the discrete bounded judge
+    # distribution) and Holm-Bonferroni correction across benchmarks.
+    from evaluation.statistics import (
+        cluster_bootstrap_ci,
+        cohens_d,
+        holm_bonferroni,
+        wilcoxon_signed_rank,
+    )
+
     paired_tests: dict[str, dict] = {}
+    raw_pvalues_ttest: list[tuple[str, float]] = []
+    raw_pvalues_wilcoxon: list[tuple[str, float]] = []
     for bench in benchmarks:
         canonical_qs: list[float] = []
         tuned_qs: list[float] = []
+        cluster_ids: list[int] = []  # doc_idx for cluster-bootstrap
         for seed in seeds:
             c_cell = _load_cell(bench, "v4-canonical", seed)
             t_cell = _load_cell(bench, "v4-tuned", seed)
@@ -177,14 +191,42 @@ def aggregate_cells(
                 if doc_idx in c_map:
                     canonical_qs.append(c_map[doc_idx])
                     tuned_qs.append(t_score)
+                    # Cluster ID = (seed, doc_idx) to avoid spurious cross-seed clustering.
+                    cluster_ids.append((seed, doc_idx))
         diffs = [t - c for c, t in zip(canonical_qs, tuned_qs)]
+        paired_t = _paired_ttest(diffs)
+        wilcoxon = wilcoxon_signed_rank(canonical_qs, tuned_qs) if canonical_qs else None
+        d_stat = cohens_d(canonical_qs, tuned_qs) if len(canonical_qs) >= 2 else None
+        diff_ci = (
+            cluster_bootstrap_ci(diffs, cluster_ids, n_resamples=1000, seed=42)
+            if diffs and len(set(cluster_ids)) >= 2 else None
+        )
         paired_tests[bench] = {
             "n_pairs": len(diffs),
-            **_paired_ttest(diffs),
+            **paired_t,
+            "wilcoxon": wilcoxon,
+            "cohens_d": d_stat,
+            "lift_cluster_ci": diff_ci,
             "canonical_mean": float(np.mean(canonical_qs)) if canonical_qs else None,
             "tuned_mean": float(np.mean(tuned_qs)) if tuned_qs else None,
             "lift": float(np.mean(diffs)) if diffs else None,
         }
+        if paired_t.get("p_two_sided") is not None:
+            raw_pvalues_ttest.append((bench, paired_t["p_two_sided"]))
+        if wilcoxon and wilcoxon.get("p_two_sided") is not None:
+            raw_pvalues_wilcoxon.append((bench, wilcoxon["p_two_sided"]))
+
+    # Holm-Bonferroni correction across the benchmarks tested.
+    if raw_pvalues_ttest:
+        adjusted_t = holm_bonferroni([p for _, p in raw_pvalues_ttest], alpha=0.05)
+        for (bench, _), adj in zip(raw_pvalues_ttest, adjusted_t):
+            paired_tests[bench]["p_holm_t"] = adj["p_adjusted"]
+            paired_tests[bench]["significant_holm_t"] = adj["significant"]
+    if raw_pvalues_wilcoxon:
+        adjusted_w = holm_bonferroni([p for _, p in raw_pvalues_wilcoxon], alpha=0.05)
+        for (bench, _), adj in zip(raw_pvalues_wilcoxon, adjusted_w):
+            paired_tests[bench]["p_holm_wilcoxon"] = adj["p_adjusted"]
+            paired_tests[bench]["significant_holm_wilcoxon"] = adj["significant"]
 
     # Rank-order configs per benchmark by mean judge score.
     rankings: dict[str, list[tuple[str, float]]] = {}
@@ -262,27 +304,50 @@ def main() -> int:
                 f"| {d['n_seeds']:>8} | {d['n_questions_pooled']:>11}"
             )
 
-    # Paired t-tests
+    # Paired tests with Holm-Bonferroni correction + Wilcoxon + Cohen's d.
     print()
-    print("=" * 100)
-    print("  Paired t-test: V4-tuned vs V4-canonical (per-benchmark, pooled across seeds)")
-    print("=" * 100)
+    print("=" * 116)
+    print("  Paired tests: V4-tuned vs V4-canonical (per-benchmark, pooled across seeds + Holm-corrected)")
+    print("=" * 116)
     print()
-    print(f"  {'benchmark':<14} | {'n_pairs':>8} | {'tuned':>8} | {'canonical':>10} | {'lift':>8} | {'t':>8} | {'p_two':>10}")
+    print(f"  {'benchmark':<14} | {'n':>5} | {'tuned':>7} | {'canon':>7} | {'lift':>7} | "
+          f"{'p_t':>7} | {'p_holm_t':>9} | {'p_wilcox':>9} | {'p_holm_w':>9} | {'d':>6}")
+    print("  " + "-" * 110)
     for bench, t in result["paired_ttests_judge"].items():
         if t.get("n_pairs", 0) == 0:
             continue
         n = t["n_pairs"]
-        tuned = t.get("tuned_mean")
-        canonical = t.get("canonical_mean")
-        lift = t.get("lift")
-        t_stat = t.get("t")
-        p = t.get("p_two_sided")
-        sig = "***" if p is not None and p < 0.001 else "**" if p is not None and p < 0.01 else "*" if p is not None and p < 0.05 else " "
+        tuned = t.get("tuned_mean", 0.0)
+        canonical = t.get("canonical_mean", 0.0)
+        lift = t.get("lift", 0.0)
+        p_t = t.get("p_two_sided")
+        p_holm_t = t.get("p_holm_t")
+        wlc = t.get("wilcoxon") or {}
+        p_w = wlc.get("p_two_sided")
+        p_holm_w = t.get("p_holm_wilcoxon")
+        d_block = t.get("cohens_d") or {}
+        d_val = d_block.get("d")
+
+        def fmt_p(v):
+            return f"{v:7.4f}" if isinstance(v, (int, float)) else "    n/a"
+
+        def sig_marker(v):
+            if v is None: return " "
+            if v < 0.001: return "***"
+            if v < 0.01: return "**"
+            if v < 0.05: return "*"
+            return " "
+
         print(
-            f"  {bench:<14} | {n:>8} | {tuned:>8.3f} | {canonical:>10.3f} | {lift:>+8.3f} "
-            f"| {t_stat:>8.2f} | {p:>10.4f} {sig}"
+            f"  {bench:<14} | {n:>5} | {tuned:>7.3f} | {canonical:>7.3f} | {lift:>+7.3f} | "
+            f"{fmt_p(p_t)} | {fmt_p(p_holm_t)}{sig_marker(p_holm_t):<2}| {fmt_p(p_w)} | "
+            f"{fmt_p(p_holm_w)}{sig_marker(p_holm_w):<2}| "
+            f"{(d_val if isinstance(d_val, (int, float)) else 0):>+6.3f}"
         )
+
+    print()
+    print("  Significance markers apply to Holm-Bonferroni-CORRECTED p-values (the honest column).")
+    print("  *** p_adj<0.001  ** p_adj<0.01  * p_adj<0.05")
 
     print(f"\n  Total cost (sum of all cells): ${result['total_cost_usd']:.4f}")
 

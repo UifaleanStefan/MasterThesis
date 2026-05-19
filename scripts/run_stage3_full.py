@@ -112,8 +112,20 @@ def _build_v4_tuned_factory(theta_vec: list[float]) -> Callable[[], GraphMemoryV
     return lambda: GraphMemoryV4(params)
 
 
-def _load_tuned_thetas(out_dir: Path) -> dict[str, list[float]]:
-    tuned: dict[str, list[float]] = {}
+def _load_tuned_thetas(out_dir: Path) -> dict[str, dict[str, list[float]]]:
+    """Discover all tuned-theta JSONs under `out_dir` keyed by variant + benchmark.
+
+    Filename pattern: tuned_theta_[variant_]<benchmark>.json
+    Known variants (suffix before benchmark):
+      ""        — default (Phase 1.5 narrow run)
+      "wide_"   — Phase 1.6 wider CMA-ES run
+      "heldout_" — Phase 1.7 held-out tune (TRAIN half only)
+      "attention_<bench>" — Phase 1.7 AttentionMemory temperature tune
+
+    Returns: {variant_key: {benchmark_name: vec}}.
+    "default" is the bucket for the no-prefix files.
+    """
+    by_variant: dict[str, dict[str, list[float]]] = {}
     for path in out_dir.glob("tuned_theta_*.json"):
         try:
             data = json.loads(path.read_text())
@@ -121,23 +133,71 @@ def _load_tuned_thetas(out_dir: Path) -> dict[str, list[float]]:
                 continue
             vec = data.get("tuned_theta_vec")
             name = data.get("name")
-            if name and isinstance(vec, list) and len(vec) == 10:
-                tuned[name] = vec
+            if not (name and isinstance(vec, list) and len(vec) == 10):
+                continue
         except Exception:
-            pass
-    return tuned
+            continue
+        # Parse filename for variant.
+        stem = path.stem  # e.g. "tuned_theta_wide_cuad"
+        rest = stem[len("tuned_theta_"):]  # "wide_cuad" or "cuad"
+        if rest.startswith("wide_"):
+            variant = "wide"
+        elif rest.startswith("heldout_"):
+            variant = "heldout"
+        else:
+            variant = "default"
+        by_variant.setdefault(variant, {})[name] = vec
+    return by_variant
+
+
+def _load_tuned_attention_temps(out_dir: Path) -> dict[str, float]:
+    """Discover per-benchmark tuned AttentionMemory temperatures (Phase 1.7)."""
+    out: dict[str, float] = {}
+    for path in out_dir.glob("tuned_temperature_*.json"):
+        try:
+            data = json.loads(path.read_text())
+            if data.get("status") != "ok":
+                continue
+            t = data.get("tuned_temperature")
+            name = data.get("name")
+            if name and isinstance(t, (int, float)):
+                out[name] = float(t)
+        except Exception:
+            continue
+    return out
 
 
 def build_config_factories(
-    benchmark_name: str, tuned_thetas: dict[str, list[float]],
+    benchmark_name: str,
+    tuned_thetas: dict[str, dict[str, list[float]]],
+    tuned_temps: dict[str, float] | None = None,
 ) -> dict[str, Callable[[], Any]]:
     """Return ``{config_name: memory_factory}`` for the Phase-4 configs."""
+    default = tuned_thetas.get("default", {})
+    heldout = tuned_thetas.get("heldout", {})
+
     factories: dict[str, Callable[[], Any]] = {
         "v4-canonical": lambda: GraphMemoryV4(_CANONICAL_V4_PARAMS),
         "flat-50":      lambda: FlatMemory(window_size=50),
     }
-    if benchmark_name in tuned_thetas:
-        factories["v4-tuned"] = _build_v4_tuned_factory(tuned_thetas[benchmark_name])
+    if benchmark_name in default:
+        factories["v4-tuned"] = _build_v4_tuned_factory(default[benchmark_name])
+    if benchmark_name in heldout:
+        factories["v4-tuned-heldout"] = _build_v4_tuned_factory(heldout[benchmark_name])
+
+    # BM25 baseline (Phase 1.7 — strongest sparse retriever; SOTA-ish reference).
+    try:
+        from memory.bm25_memory import BM25Memory
+        factories["bm25"] = lambda: BM25Memory()
+    except ImportError:
+        pass  # rank-bm25 not installed yet
+
+    # Per-benchmark tuned AttentionMemory baseline (Phase 1.7 — fair-tune comparison).
+    if tuned_temps and benchmark_name in tuned_temps:
+        tau = tuned_temps[benchmark_name]
+        from memory.attention_memory import AttentionMemory
+        factories["attention-tuned"] = lambda: AttentionMemory(temperature=tau)
+
     return factories
 
 
@@ -206,7 +266,25 @@ def run_cell(
     # Pass seed + shuffle so different runs sample DIFFERENT document subsets per benchmark.
     # Without shuffle=True, every seed would see identical docs and give identical results
     # under temperature=0 — defeating the multi-seed variance estimation.
-    docs = list(adapter.iter_documents(limit=n_questions, seed=seed, shuffle=True))
+    #
+    # Held-out-tuned eval semantics (Phase 1.7): when config is
+    # "v4-tuned-heldout", the docs MUST come from the TEST half of the
+    # split — disjoint from the docs the tuner saw. The tuner used seed
+    # 42 (default split_seed) and pulled the first n_docs from a
+    # 2*n_docs shuffled sample. For honest eval, we pull 2*n_questions
+    # at the same split_seed=42 and use positions [n_questions:2*n_questions].
+    if config_name == "v4-tuned-heldout":
+        # The held-out tuner uses split_seed=42 by default. The orchestrator's
+        # `seed` here is for memory/agent RNG, not the doc split.
+        split_seed = 42
+        full = list(adapter.iter_documents(
+            limit=2 * n_questions, seed=split_seed, shuffle=True,
+        ))
+        docs = full[n_questions:2 * n_questions]
+        if len(docs) < n_questions:
+            return {"ok": False, "reason": f"need 2*{n_questions} docs for held-out test split; got {len(full)}"}
+    else:
+        docs = list(adapter.iter_documents(limit=n_questions, seed=seed, shuffle=True))
     if not docs:
         return {"ok": False, "reason": "no docs"}
 
@@ -354,8 +432,15 @@ def main() -> int:
     cells_dir.mkdir(parents=True, exist_ok=True)
 
     tuned_thetas = _load_tuned_thetas(out_dir)
+    tuned_temps = _load_tuned_attention_temps(out_dir)
     if "v4-tuned" in args.configs:
-        print(f"[tuned thetas] loaded for: {sorted(tuned_thetas.keys())}")
+        print(f"[tuned thetas — default variant] loaded for: "
+              f"{sorted(tuned_thetas.get('default', {}).keys())}")
+    if "v4-tuned-heldout" in args.configs:
+        print(f"[tuned thetas — heldout variant] loaded for: "
+              f"{sorted(tuned_thetas.get('heldout', {}).keys())}")
+    if "attention-tuned" in args.configs:
+        print(f"[tuned attention temperatures] loaded for: {sorted(tuned_temps.keys())}")
 
     token_count = _get_token_counter(args.model)
     if args.mode == "full":
@@ -377,7 +462,7 @@ def main() -> int:
         if benchmark not in ADAPTERS:
             print(f"  [SKIP] unknown benchmark: {benchmark!r}")
             continue
-        factories = build_config_factories(benchmark, tuned_thetas)
+        factories = build_config_factories(benchmark, tuned_thetas, tuned_temps)
         for config in args.configs:
             if config not in factories:
                 if config == "v4-tuned":

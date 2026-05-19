@@ -85,7 +85,13 @@ def vec_to_params(v: np.ndarray) -> MemoryParamsV4:
     )
 
 
-def make_eval_fn(adapter_name: str, n_docs: int, k: int = 8):
+def make_eval_fn(
+    adapter_name: str,
+    n_docs: int,
+    k: int = 8,
+    split_seed: int = 42,
+    held_out_split: bool = False,
+):
     """Build the CMA-ES objective: mean recall@k across n_docs from this benchmark.
 
     Higher is better. Returns 0.0 when zero qa_pairs have gold (NarrativeQA
@@ -94,10 +100,25 @@ def make_eval_fn(adapter_name: str, n_docs: int, k: int = 8):
     The doc set is pulled ONCE per make_eval_fn call (cached) so that every
     candidate evaluates on the same docs. This means the only thing changing
     between candidates is theta, which is what makes the search well-posed.
+
+    held_out_split semantics: when True, splits the adapter's documents
+    into TRAIN (first n_docs after a deterministic shuffle) and TEST
+    (next n_docs, disjoint). Only TRAIN is used for tuning. Use
+    `split_seed` to make the partition reproducible.
     """
     adapter = get_adapter(adapter_name)
-    # Materialize the docs once — cache across all evaluations.
-    docs = list(adapter.iter_documents(limit=n_docs))
+    if held_out_split:
+        # Pull 2*n_docs shuffled docs, take first half as TRAIN.
+        all_docs = list(adapter.iter_documents(limit=2 * n_docs, seed=split_seed, shuffle=True))
+        docs = all_docs[:n_docs]
+        if len(docs) < n_docs:
+            raise RuntimeError(
+                f"Adapter {adapter_name!r} only has {len(all_docs)} docs; "
+                f"need at least 2*{n_docs}={2*n_docs} for held-out split"
+            )
+    else:
+        # Original behaviour — first n_docs in adapter order.
+        docs = list(adapter.iter_documents(limit=n_docs))
     if not docs:
         raise RuntimeError(f"Adapter {adapter_name!r} yielded no docs")
 
@@ -143,14 +164,20 @@ def tune_one_benchmark(
     sigma: float,
     seed: int,
     k: int = 8,
+    split_seed: int = 42,
+    held_out_split: bool = False,
 ) -> dict:
     """Run CMA-ES on one benchmark; return result dict."""
     print()
     print("=" * 78)
     print(f"  Tuning V4 theta for {name!r}")
-    print(f"  n_docs={n_docs}  n_generations={n_generations}  sigma={sigma}  seed={seed}")
+    print(f"  n_docs={n_docs}  n_generations={n_generations}  sigma={sigma}  seed={seed}"
+          f"{'  held_out=True split_seed=' + str(split_seed) if held_out_split else ''}")
     print("=" * 78)
-    eval_fn, n_gold_qs = make_eval_fn(name, n_docs=n_docs, k=k)
+    eval_fn, n_gold_qs = make_eval_fn(
+        name, n_docs=n_docs, k=k,
+        split_seed=split_seed, held_out_split=held_out_split,
+    )
     if n_gold_qs == 0:
         print(f"  [SKIP] {name}: 0 qa_pairs with gold relevance — cannot tune retrieval.")
         return {
@@ -249,6 +276,17 @@ def main() -> int:
         help="Output directory for per-benchmark tuning JSON files.",
     )
     parser.add_argument(
+        "--held-out-split", action="store_true",
+        help="Tune on first n_docs of a 2*n_docs shuffled sample (the TRAIN half). "
+             "The TEST half (next n_docs) is reserved for held-out evaluation by "
+             "scripts/run_stage3_full.py with --configs v4-tuned-heldout. "
+             "Use --split-seed to control the shuffle.",
+    )
+    parser.add_argument(
+        "--split-seed", type=int, default=42,
+        help="Seed for the train/test shuffle when --held-out-split is on.",
+    )
+    parser.add_argument(
         "--out-suffix", default="",
         help="Optional suffix for output filenames: tuned_theta_{suffix_}{bench}.json. "
              "Use to preserve a prior narrow run while running a wider second pass.",
@@ -277,6 +315,8 @@ def main() -> int:
                 sigma=args.sigma,
                 seed=args.seed,
                 k=args.k,
+                split_seed=args.split_seed,
+                held_out_split=args.held_out_split,
             )
         except Exception as e:
             import traceback

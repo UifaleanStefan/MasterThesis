@@ -57,6 +57,33 @@ from tuning.tune_v4_per_benchmark import CANONICAL_THETA_VEC, vec_to_params
 TUNED_DIR = ROOT / "results" / "stage3"
 
 
+def _load_theta_vec_named(bench: str, variant: str) -> tuple[list[float], str] | None:
+    """Load a specific variant's theta for `bench`.
+
+    Variants: "default" (narrow Phase 1.5), "wide" (Phase 1.6), "heldout" (Phase 1.7).
+    """
+    if variant == "default":
+        path = TUNED_DIR / f"tuned_theta_{bench}.json"
+    elif variant == "wide":
+        path = TUNED_DIR / f"tuned_theta_wide_{bench}.json"
+    elif variant == "heldout":
+        path = TUNED_DIR / f"tuned_theta_heldout_{bench}.json"
+    else:
+        return None
+    if not path.exists():
+        return None
+    try:
+        data = json.loads(path.read_text())
+    except Exception:
+        return None
+    if data.get("status") != "ok":
+        return None
+    vec = data.get("tuned_theta_vec")
+    if isinstance(vec, list) and len(vec) == 10:
+        return vec, variant
+    return None
+
+
 def _load_theta_vec_for(bench: str) -> tuple[list[float], str] | None:
     """Pick the BEST tuned theta for `bench`.
 
@@ -163,27 +190,37 @@ def main() -> int:
             print(f"  [FAIL] unknown benchmark: {b!r}")
             return 1
 
-    # Load tuned thetas for the benchmarks (these are the row labels above canonical).
+    # Load tuned thetas: both the default-variant tuned (Phase 1.5 narrow / 1.6 wide)
+    # AND the held-out-tuned variants (Phase 1.7), if available. Heldout tuners
+    # use 25 disjoint docs and are the honest source of cross-task generalization
+    # evidence — adding them roughly doubles the transfer matrix rows.
     tuned: dict[str, tuple[list[float], str]] = {}
+    heldout: dict[str, tuple[list[float], str]] = {}
     for b in args.benchmarks:
         loaded = _load_theta_vec_for(b)
         if loaded is None:
-            print(f"  [WARN] no tuned theta for {b}; that row will be omitted")
-            continue
-        tuned[b] = loaded
+            print(f"  [WARN] no default-tuned theta for {b}")
+        else:
+            tuned[b] = loaded
+        # Add heldout variant if Phase 1.7 generated one.
+        ho = _load_theta_vec_named(b, "heldout")
+        if ho is not None:
+            heldout[b] = ho
 
-    if not tuned:
-        print("  [FAIL] no tuned thetas found — run tuning/tune_v4_per_benchmark first")
+    if not tuned and not heldout:
+        print("  [FAIL] no tuned thetas found anywhere — run tuners first")
         return 1
 
     # Build the matrix:
     #   rows: canonical + [<bench>-tuned for bench in tuned]
-    #   cols: args.benchmarks
+    #                  + [<bench>-heldout for bench in heldout]
     rows: list[tuple[str, list[float], str]] = [
         ("canonical", CANONICAL_THETA_VEC.tolist(), "grid_world_baseline")
     ]
     for b, (vec, label) in tuned.items():
         rows.append((f"{b}-tuned", vec, label))
+    for b, (vec, label) in heldout.items():
+        rows.append((f"{b}-heldout", vec, label))
 
     print()
     print("=" * 78)

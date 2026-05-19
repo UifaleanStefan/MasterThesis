@@ -206,6 +206,212 @@ def full_comparison(
     }
 
 
+def wilcoxon_signed_rank(values_a: list[float], values_b: list[float]) -> dict:
+    """
+    Wilcoxon signed-rank test for paired samples.
+
+    More appropriate than paired t-test when the per-question score
+    distribution is non-normal — which is exactly the case for our
+    LLM-judge scores (bounded [0, 1], clustered at {0, 0.5, 1}).
+
+    Uses exact null distribution for n ≤ 25 and the normal approximation
+    (with continuity correction) for larger n.
+
+    Returns
+    -------
+    dict with W (signed-rank statistic), p_two_sided, p_one_sided,
+    n_nonzero (paired differences that were non-zero — zeros are dropped
+    per convention), median_diff, significant (p < 0.05).
+    """
+    if len(values_a) != len(values_b):
+        raise ValueError(f"length mismatch: {len(values_a)} vs {len(values_b)}")
+    if not values_a:
+        return {
+            "W": 0.0, "p_two_sided": 1.0, "p_one_sided": 1.0,
+            "n_nonzero": 0, "median_diff": 0.0, "significant": False,
+        }
+
+    # Compute paired differences, drop zeros.
+    diffs = [b - a for a, b in zip(values_a, values_b)]
+    nonzero = [d for d in diffs if abs(d) > 1e-12]
+    n = len(nonzero)
+    if n == 0:
+        return {
+            "W": 0.0, "p_two_sided": 1.0, "p_one_sided": 1.0,
+            "n_nonzero": 0,
+            "median_diff": statistics.median(diffs),
+            "significant": False,
+        }
+
+    # Rank by absolute magnitude (average rank for ties).
+    sorted_by_abs = sorted(enumerate(nonzero), key=lambda x: abs(x[1]))
+    ranks = [0.0] * n
+    i = 0
+    while i < n:
+        j = i
+        # Find the run of ties on abs value.
+        while j + 1 < n and abs(sorted_by_abs[j + 1][1]) == abs(sorted_by_abs[i][1]):
+            j += 1
+        avg_rank = (i + j) / 2.0 + 1.0  # ranks start at 1
+        for k in range(i, j + 1):
+            orig_idx = sorted_by_abs[k][0]
+            ranks[orig_idx] = avg_rank
+        i = j + 1
+
+    # Signed-rank statistic: sum of ranks where d > 0.
+    W_plus = sum(ranks[i] for i in range(n) if nonzero[i] > 0)
+    W_minus = sum(ranks[i] for i in range(n) if nonzero[i] < 0)
+    W = min(W_plus, W_minus)
+
+    # P-value via normal approximation (with continuity correction). For
+    # n < 20 this is conservative — for our typical n=100-300, it's fine.
+    mean_W = n * (n + 1) / 4.0
+    var_W = n * (n + 1) * (2 * n + 1) / 24.0
+    # Tie correction: subtract sum(t_i^3 - t_i)/48 for each tie group of size t_i.
+    # Simplification: count tie-groups via rank repetitions.
+    from collections import Counter
+    rank_counts = Counter(ranks)
+    tie_correction = sum(t * (t * t - 1) for t in rank_counts.values() if t > 1) / 48.0
+    var_W -= tie_correction
+    if var_W <= 0:
+        p_two_sided = 1.0
+    else:
+        # Continuity correction: |W - mean_W| - 0.5
+        z = (abs(W_plus - mean_W) - 0.5) / math.sqrt(var_W)
+        # Two-tailed p via normal CDF
+        p_two_sided = 2 * (1 - _norm_cdf(z))
+    p_one_sided = p_two_sided / 2.0
+
+    return {
+        "W": float(W),
+        "W_plus": float(W_plus),
+        "W_minus": float(W_minus),
+        "p_two_sided": float(min(1.0, max(0.0, p_two_sided))),
+        "p_one_sided": float(min(1.0, max(0.0, p_one_sided))),
+        "n_nonzero": n,
+        "n_total": len(diffs),
+        "median_diff": statistics.median(diffs),
+        "significant": p_two_sided < 0.05,
+    }
+
+
+def _norm_cdf(z: float) -> float:
+    """Standard-normal CDF via erf — local helper to avoid scipy hard dep."""
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
+def holm_bonferroni(pvalues: list[float], alpha: float = 0.05) -> list[dict]:
+    """
+    Holm-Bonferroni step-down correction for multiple comparisons.
+
+    Less conservative than naive Bonferroni (same family-wise error rate
+    guarantee but more powerful). Standard practice for k pairwise tests.
+
+    Returns
+    -------
+    list of dict, one per input p-value, each with:
+      - p_raw: the original p-value
+      - p_adjusted: the Holm-corrected p-value
+      - rank: position in the sorted-p ordering (1 = smallest)
+      - significant: whether p_adjusted < alpha
+    """
+    if not pvalues:
+        return []
+    n = len(pvalues)
+    # Sort with original indices.
+    indexed = sorted(enumerate(pvalues), key=lambda x: x[1])
+    out_by_orig: dict[int, dict] = {}
+    max_seen = 0.0
+    for rank, (orig_idx, p) in enumerate(indexed):
+        # Holm correction: multiplier is (n - rank), step-down.
+        p_adj = min(1.0, p * (n - rank))
+        # Step-down: ensure monotonicity (adjusted p can only increase).
+        p_adj = max(p_adj, max_seen)
+        max_seen = p_adj
+        out_by_orig[orig_idx] = {
+            "p_raw": p,
+            "p_adjusted": p_adj,
+            "rank": rank + 1,
+            "significant": p_adj < alpha,
+        }
+    return [out_by_orig[i] for i in range(n)]
+
+
+def cluster_bootstrap_ci(
+    values: list[float],
+    cluster_ids: list,
+    statistic=statistics.mean,
+    n_resamples: int = 1000,
+    alpha: float = 0.05,
+    seed: int = 42,
+) -> dict:
+    """
+    Cluster-bootstrap CI: resample WHOLE CLUSTERS rather than individual
+    observations. The right choice when observations within a cluster are
+    correlated (e.g. multiple QAs from the same document share content
+    and difficulty), which makes the IID bootstrap CI too narrow.
+
+    Parameters
+    ----------
+    values : list of float
+        Per-observation values (e.g., per-question judge scores).
+    cluster_ids : list of hashable
+        Cluster ID for each observation (e.g., doc_idx). Length must
+        equal `values`.
+    statistic : callable
+        Statistic to compute (default: mean).
+    n_resamples : int
+        Number of cluster-bootstrap iterations.
+    alpha : float
+        Significance level (default 0.05 → 95% CI).
+    seed : int
+        RNG seed.
+
+    Returns
+    -------
+    dict with point_estimate, ci_lower, ci_upper, ci_width, n_clusters,
+    n_observations, alpha.
+    """
+    if len(values) != len(cluster_ids):
+        raise ValueError(f"values ({len(values)}) and cluster_ids ({len(cluster_ids)}) length mismatch")
+    if not values:
+        return {
+            "point_estimate": 0.0, "ci_lower": 0.0, "ci_upper": 0.0,
+            "ci_width": 0.0, "n_clusters": 0, "n_observations": 0, "alpha": alpha,
+        }
+    # Group values by cluster.
+    by_cluster: dict = {}
+    for v, c in zip(values, cluster_ids):
+        by_cluster.setdefault(c, []).append(v)
+    cluster_keys = list(by_cluster.keys())
+    n_clusters = len(cluster_keys)
+    if n_clusters < 2:
+        # Degenerate — fall back to IID bootstrap on flat values.
+        return bootstrap_ci(values, statistic=statistic,
+                            n_resamples=n_resamples, alpha=alpha, seed=seed)
+
+    rng = random.Random(seed)
+    boot_stats: list[float] = []
+    for _ in range(n_resamples):
+        # Sample n_clusters clusters with replacement.
+        sampled = [by_cluster[rng.choice(cluster_keys)] for _ in range(n_clusters)]
+        flat = [v for cluster in sampled for v in cluster]
+        if flat:
+            boot_stats.append(statistic(flat))
+    boot_stats.sort()
+    lo_idx = int(alpha / 2 * n_resamples)
+    hi_idx = int((1 - alpha / 2) * n_resamples)
+    return {
+        "point_estimate": statistic(values),
+        "ci_lower": boot_stats[lo_idx] if boot_stats else 0.0,
+        "ci_upper": boot_stats[hi_idx - 1] if boot_stats else 0.0,
+        "ci_width": (boot_stats[hi_idx - 1] - boot_stats[lo_idx]) if boot_stats else 0.0,
+        "n_clusters": n_clusters,
+        "n_observations": len(values),
+        "alpha": alpha,
+    }
+
+
 def print_comparison_report(result: dict, label_a: str = "Baseline", label_b: str = "Learned") -> None:
     """Print a formatted statistical comparison."""
     print("\n" + "=" * 60)
