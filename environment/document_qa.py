@@ -457,29 +457,59 @@ class DocumentQA:
 
     def __init__(
         self,
-        document_name: str = "fantasy_lore",
+        document_name: str | None = "fantasy_lore",
         seed: int = 0,
-        question_shuffle: bool = True,
+        question_shuffle: bool | None = None,
         score_fn=None,
+        document: dict | None = None,
     ) -> None:
         """
         Parameters
         ----------
-        score_fn : callable(predicted: str, ground_truth: str) -> float, optional
+        document_name : str, optional
+            Key into the built-in ``_DOCUMENTS`` registry. Used as a free-form
+            label when ``document`` is provided directly.
+        document : dict, optional
+            Directly-injected document dict of shape
+            ``{"title": str, "paragraphs": list[str], "qa_pairs": list[dict]}``.
+            When provided, bypasses the ``_DOCUMENTS`` registry lookup —
+            this is the integration point for Stage 3 benchmark adapters in
+            ``environment/benchmarks/``. ``question_shuffle`` defaults to
+            ``False`` in this case to preserve the adapter's question order
+            (snapshot tests + reproducibility hooks rely on stable order).
+        question_shuffle : bool, optional
+            When ``None`` (default), auto-selects ``True`` for registry-based
+            usage (preserves legacy behaviour) and ``False`` when a
+            ``document`` dict is injected directly.
+        score_fn : callable(predicted: str, ground_truth) -> float, optional
             Custom scorer overriding the default keyword-overlap heuristic.
+            ``ground_truth`` can be a ``str`` or a ``list[str]`` (multi-ref);
+            the scorer is invoked once with the raw value, so list-aware
+            scorers like ``llm_judge_score_multi_ref`` should be used when
+            QA pairs carry list-typed answers (NarrativeQA, etc).
             Use ``evaluation.document_qa_llm_judge.llm_judge_score`` to grade
             answers with GPT-4o-mini (gracefully falls back to the heuristic
             when ``OPENAI_API_KEY`` is unset, so this can be wired in
             production code without forcing API calls in CI).
         """
-        if document_name not in _DOCUMENTS:
-            raise ValueError(f"Unknown document: {document_name}. Choose from {list(_DOCUMENTS)}")
+        if document is not None:
+            doc = document
+            # Use document_name as a free-form label if provided, else the dict's title.
+            self._title = doc.get("title", document_name or "(untitled)")
+        else:
+            if document_name not in _DOCUMENTS:
+                raise ValueError(f"Unknown document: {document_name}. Choose from {list(_DOCUMENTS)}")
+            doc = _DOCUMENTS[document_name]
+            self._title = doc["title"]
 
-        doc = _DOCUMENTS[document_name]
-        self._title = doc["title"]
         self._paragraphs: list[str] = doc["paragraphs"]
         self._qa_pairs: list[dict] = doc["qa_pairs"]
         self._score_fn = score_fn
+
+        # Auto-select question_shuffle based on origin: registry → shuffle (legacy),
+        # injected dict → preserve order (benchmark adapter contract).
+        if question_shuffle is None:
+            question_shuffle = (document is None)
 
         self._rng = random.Random(seed)
         if question_shuffle:
@@ -587,13 +617,19 @@ class DocumentQA:
 
         Default: substring matching on 4+ letter nouns from the ground truth.
         Override via ``score_fn`` constructor parameter (e.g. LLM-judge).
+
+        When ``ground_truth`` is a list (e.g. NarrativeQA's two reference
+        answers per question), score against each reference and return the
+        maximum. The custom ``score_fn`` receives the raw list (so list-aware
+        scorers like ``llm_judge_score_multi_ref`` should be used), while the
+        keyword-overlap fallback iterates references locally.
         """
         if qa_idx >= len(self._qa_pairs):
             return 0.0
         ground_truth_raw = self._qa_pairs[qa_idx]["answer"]
 
         # When a custom score_fn was supplied, delegate to it (with the
-        # original-case strings, in case the scorer is sensitive to casing).
+        # original raw value, so list-aware scorers can pick max-over-refs).
         if self._score_fn is not None:
             try:
                 score = self._score_fn(predicted, ground_truth_raw)
@@ -602,6 +638,17 @@ class DocumentQA:
                 # Never let a scorer error tear down the episode loop.
                 print(f"[DocumentQA] custom score_fn failed: {exc} — keyword fallback")
 
+        # Normalize to a list of reference strings, score each, take max.
+        if isinstance(ground_truth_raw, list):
+            refs = [str(r) for r in ground_truth_raw if str(r).strip()]
+        else:
+            refs = [str(ground_truth_raw)]
+        if not refs:
+            return 0.0
+        return max(self._score_single_ref(predicted, r) for r in refs)
+
+    def _score_single_ref(self, predicted: str, ground_truth_raw: str) -> float:
+        """Keyword-overlap heuristic against a single reference string."""
         ground_truth = ground_truth_raw.lower()
         predicted = predicted.lower()
 

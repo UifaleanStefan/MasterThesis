@@ -156,3 +156,31 @@ def llm_judge_score(
     except ValueError:
         return _heuristic_score(predicted, ground_truth)
     return max(0.0, min(1.0, score))
+
+
+def llm_judge_score_multi_ref(
+    predicted: str,
+    ground_truth,
+    **kwargs,
+) -> float:
+    """
+    Multi-reference variant of ``llm_judge_score``.
+
+    Accepts either a single ground-truth string OR a list of reference
+    strings (NarrativeQA-style). When given a list, scores against each
+    reference and returns the maximum — the answer is "correct enough"
+    if it matches any one of the human-provided references.
+
+    Empty references (or empty-after-strip) are filtered. If the list is
+    empty or only blanks, returns 0.0.
+
+    All keyword arguments are forwarded to ``llm_judge_score`` for each
+    individual reference call (model, seed, max_tokens).
+    """
+    if isinstance(ground_truth, list):
+        refs = [str(r) for r in ground_truth if str(r).strip()]
+    else:
+        refs = [str(ground_truth)] if str(ground_truth).strip() else []
+    if not refs:
+        return 0.0
+    return max(llm_judge_score(predicted, r, **kwargs) for r in refs)

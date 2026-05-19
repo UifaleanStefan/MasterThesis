@@ -1,0 +1,253 @@
+{
+  "_manifest": {
+    "git_sha": "96bfe7f",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T09:22:13+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_api_smoke",
+    "model": "gpt-4o-mini",
+    "k": 8,
+    "benchmarks": [
+      "cuad",
+      "financebench",
+      "hotpotqa",
+      "longmemeval",
+      "narrativeqa",
+      "qasper"
+    ],
+    "has_api_key": false
+  },
+  "experiment": "stage3_api_smoke",
+  "config": {
+    "model": "gpt-4o-mini",
+    "k": 8,
+    "benchmarks": [
+      "cuad",
+      "financebench",
+      "hotpotqa",
+      "longmemeval",
+      "narrativeqa",
+      "qasper"
+    ]
+  },
+  "total_agent_cost_usd": 0.0,
+  "total_judge_cost_usd": 0.0,
+  "elapsed_s": 7.439300060272217,
+  "results": [
+    {
+      "name": "cuad",
+      "ok": true,
+      "schema_version": "cuad-v1",
+      "dataset_fingerprint": "sha256:ed0b77d85bdf4014d7495800e8e4a70565b48ee6f8a2e5dca9cf8655dbf10eae",
+      "document_fingerprint": "sha256:945ad53f40e1239e20f731f781dd05254e0b221d8b6499078b681e8a1a98646a",
+      "title": "CUAD: LIMEENERGYCO_09_09_1999-EX-10-DISTRIBUTOR AGREEMENT",
+      "n_paragraphs": 122,
+      "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+      "gold_answer": "DISTRIBUTOR AGREEMENT",
+      "predicted": "6.5      Entire Agreement.",
+      "judge_score": 0.5,
+      "retrieved_steps": [
+        108,
+        83,
+        62,
+        76,
+        84,
+        117,
+        94,
+        10
+      ],
+      "relevant_paragraphs": [
+        1
+      ],
+      "gold_in_topk": false,
+      "n_events_stored": 122,
+      "reading_seconds": 0.9220000000204891,
+      "llm_seconds": 0.0,
+      "judge_seconds": 0.0,
+      "agent_cost_usd": 0.0,
+      "agent_prompt_tokens": 0,
+      "agent_completion_tokens": 0,
+      "judge_cost_usd_cumulative": 0.0,
+      "judge_calls_cumulative": 0
+    },
+    {
+      "name": "financebench",
+      "ok": true,
+      "schema_version": "financebench-v1",
+      "dataset_fingerprint": "sha256:18b3c1861613e4fd03b5ab8aac38cf9eb7111bcc72fdb0477196e4c843d39cd4",
+      "document_fingerprint": "sha256:00cff8be93e5f78588e134077f3a5d7d1eb3dee2b5b753869ba51fe560c512ca",
+      "title": "3M 10k 2018",
+      "n_paragraphs": 1,
+      "question": "What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
+      "gold_answer": "$1577.00",
+      "predicted": "[Document: 3M 10k 2018]\nTable of Contents \n3M Company and Subsidiaries\nConsolidated Statement of Cash Flow s\nYears ended December 31\n \n(Millions)\n \n2018\n \n2017\n \n2016\n \nCash Flows from Operating Activ",
+      "judge_score": 0.0,
+      "retrieved_steps": [
+        0
+      ],
+      "relevant_paragraphs": [
+        0
+      ],
+      "gold_in_topk": true,
+      "n_events_stored": 1,
+      "reading_seconds": 0.0,
+      "llm_seconds": 0.015999999945051968,
+      "judge_seconds": 0.0,
+      "agent_cost_usd": 0.0,
+      "agent_prompt_tokens": 0,
+      "agent_completion_tokens": 0,
+      "judge_cost_usd_cumulative": 0.0,
+      "judge_calls_cumulative": 0
+    },
+    {
+      "name": "hotpotqa",
+      "ok": true,
+      "schema_version": "hotpotqa-v1",
+      "dataset_fingerprint": "sha256:7dd071afa03f403ce338fb67828ebfe2ed0a68458a65f167869b33866eb61bde",
+      "document_fingerprint": "sha256:e7e1aa339676b547d04bdd4607d81886b1af4ad81852641415d145ad63aada10",
+      "title": "HotpotQA dev #0: 5a8b57f25542995d1e6f1371",
+      "n_paragraphs": 10,
+      "question": "Were Scott Derrickson and Ed Wood of the same nationality?",
+      "gold_answer": "yes",
+      "predicted": "Ed Wood\nEdward Davis Wood Jr. (October 10, 1924 \u2013 December 10, 1978) was an American filmmaker, actor, writer, producer, and director.",
+      "judge_score": 0.0,
+      "retrieved_steps": [
+        4,
+        0,
+        6,
+        2,
+        8,
+        1,
+        3,
+        7
+      ],
+      "relevant_paragraphs": [
+        1,
+        4
+      ],
+      "gold_in_topk": true,
+      "n_events_stored": 10,
+      "reading_seconds": 0.06199999991804361,
+      "llm_seconds": 0.0,
+      "judge_seconds": 0.0,
+      "agent_cost_usd": 0.0,
+      "agent_prompt_tokens": 0,
+      "agent_completion_tokens": 0,
+      "judge_cost_usd_cumulative": 0.0,
+      "judge_calls_cumulative": 0
+    },
+    {
+      "name": "longmemeval",
+      "ok": true,
+      "schema_version": "longmemeval-v1",
+      "dataset_fingerprint": "sha256:821a2034d219ab45846873dd14c14f12cfe7776e73527a483f9dac095d38620c",
+      "document_fingerprint": "sha256:02881ff5e05cd81e12634ffd9fe782bdc559f6e9b243a577dfa4ce28cb716180",
+      "title": "LongMemEval gpt4_2655b836 (temporal-reasoning)",
+      "n_paragraphs": 3,
+      "question": "What was the first issue I had with my new car after its first service?",
+      "gold_answer": "GPS system not functioning correctly",
+      "predicted": "[Document: LongMemEval gpt4_2655b836 (temporal-reasoning)]\n[Session answer_4be1b6b4_2 on 2023/04/10 (Mon) 17:50]\nuser: I'm thinking of getting my car detailed soon.",
+      "judge_score": 0.0,
+      "retrieved_steps": [
+        0,
+        2,
+        1
+      ],
+      "relevant_paragraphs": [
+        0,
+        1,
+        2
+      ],
+      "gold_in_topk": true,
+      "n_events_stored": 3,
+      "reading_seconds": 0.030999999959021807,
+      "llm_seconds": 0.0,
+      "judge_seconds": 0.0,
+      "agent_cost_usd": 0.0,
+      "agent_prompt_tokens": 0,
+      "agent_completion_tokens": 0,
+      "judge_cost_usd_cumulative": 0.0,
+      "judge_calls_cumulative": 0
+    },
+    {
+      "name": "narrativeqa",
+      "ok": true,
+      "schema_version": "narrativeqa-v1",
+      "dataset_fingerprint": "sha256:4157507c494c19d2f080dac4bf7625cb9f397245b3a8e81e350e08ab76423f3f",
+      "document_fingerprint": "sha256:5b6d80a7c024a0a88617541673a37c8a0ea4e5a89d3a1496706b9fc3f7c9d661",
+      "title": "NarrativeQA gutenberg 00fb61fa7bee266ad995e52190ebb73606b60b70 #0",
+      "n_paragraphs": 833,
+      "question": "WHO NORMALLY DELIVERS THE OPENING PROLOGUE IN THE PLAY?",
+      "gold_answer": [
+        "THE ACTOR WEARING THE BLACK CLOAK",
+        "The actor in the black cloak"
+      ],
+      "predicted": "[Document: NarrativeQA gutenberg 00fb61fa7bee266ad995e52190ebb73606b60b70 #0]\nThe play begins with three pages disputing over the black cloak usually worn by the actor who delivers the prologue.",
+      "judge_score": 1.0,
+      "retrieved_steps": [
+        489,
+        0,
+        366,
+        282,
+        45,
+        21,
+        52,
+        1
+      ],
+      "relevant_paragraphs": [],
+      "gold_in_topk": null,
+      "n_events_stored": 833,
+      "reading_seconds": 4.342999999993481,
+      "llm_seconds": 0.0,
+      "judge_seconds": 0.0,
+      "agent_cost_usd": 0.0,
+      "agent_prompt_tokens": 0,
+      "agent_completion_tokens": 0,
+      "judge_cost_usd_cumulative": 0.0,
+      "judge_calls_cumulative": 0
+    },
+    {
+      "name": "qasper",
+      "ok": true,
+      "schema_version": "qasper-v1",
+      "dataset_fingerprint": "sha256:2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+      "document_fingerprint": "sha256:6f50a33fea8778f6c462ead87b3f51c11428d7feb4fc9f410452d837f393e983",
+      "title": "QASPER: Robustly Leveraging Prior Knowledge in Text Classification",
+      "n_paragraphs": 84,
+      "question": "What background knowledge do they leverage?",
+      "gold_answer": "labeled features",
+      "predicted": "However, a crucial problem, which has rarely been addressed, is the bias in the prior knowledge that we supply to the learning model.",
+      "judge_score": 0.0,
+      "retrieved_steps": [
+        4,
+        3,
+        1,
+        78,
+        72,
+        74,
+        71,
+        47
+      ],
+      "relevant_paragraphs": [
+        11,
+        41,
+        43
+      ],
+      "gold_in_topk": false,
+      "n_events_stored": 84,
+      "reading_seconds": 0.3910000000614673,
+      "llm_seconds": 0.0,
+      "judge_seconds": 0.0,
+      "agent_cost_usd": 0.0,
+      "agent_prompt_tokens": 0,
+      "agent_completion_tokens": 0,
+      "judge_cost_usd_cumulative": 0.0,
+      "judge_calls_cumulative": 0
+    }
+  ]
+}
