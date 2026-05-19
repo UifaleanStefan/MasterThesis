@@ -1,0 +1,153 @@
+{
+  "_manifest": {
+    "git_sha": "c4fa81c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T18:46:39+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator_summary",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmarks": [
+      "cuad",
+      "qasper",
+      "hotpotqa",
+      "longmemeval",
+      "financebench",
+      "narrativeqa"
+    ],
+    "configs": [
+      "v4-canonical",
+      "v4-tuned"
+    ],
+    "n_questions": 100,
+    "k": 16
+  },
+  "config": {
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmarks": [
+      "cuad",
+      "qasper",
+      "hotpotqa",
+      "longmemeval",
+      "financebench",
+      "narrativeqa"
+    ],
+    "configs": [
+      "v4-canonical",
+      "v4-tuned"
+    ],
+    "n_questions": 100,
+    "k": 16
+  },
+  "total_projected_cost_usd": 0.52208145,
+  "total_actual_cost_usd": 0.4150806000000001,
+  "total_prompt_tokens": 2820543,
+  "elapsed_s": 3193.6070280075073,
+  "cells": [
+    {
+      "benchmark": "cuad",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.39,
+      "mean_judge_score": 0.205,
+      "total_prompt_tokens": 178561,
+      "projected_cost_usd": 0.035784149999999994,
+      "actual_cost_usd": 0.024020100000000003
+    },
+    {
+      "benchmark": "cuad",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.52,
+      "mean_judge_score": 0.258,
+      "total_prompt_tokens": 210180,
+      "projected_cost_usd": 0.040527,
+      "actual_cost_usd": 0.02782139999999999
+    },
+    {
+      "benchmark": "qasper",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.6867469879518072,
+      "mean_judge_score": 0.2,
+      "total_prompt_tokens": 134102,
+      "projected_cost_usd": 0.0291153,
+      "actual_cost_usd": 0.018214200000000003
+    },
+    {
+      "benchmark": "qasper",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.7710843373493976,
+      "mean_judge_score": 0.23,
+      "total_prompt_tokens": 150825,
+      "projected_cost_usd": 0.03162375,
+      "actual_cost_usd": 0.0196515
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.7190000000000001,
+      "total_prompt_tokens": 130803,
+      "projected_cost_usd": 0.028620450000000002,
+      "actual_cost_usd": 0.020998199999999998
+    },
+    {
+      "benchmark": "hotpotqa",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 0.98,
+      "mean_judge_score": 0.669,
+      "total_prompt_tokens": 121926,
+      "projected_cost_usd": 0.027288899999999998,
+      "actual_cost_usd": 0.01966905
+    },
+    {
+      "benchmark": "longmemeval",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.375,
+      "total_prompt_tokens": 602948,
+      "projected_cost_usd": 0.0994422,
+      "actual_cost_usd": 0.09232320000000002
+    },
+    {
+      "benchmark": "longmemeval",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.385,
+      "total_prompt_tokens": 602948,
+      "projected_cost_usd": 0.0994422,
+      "actual_cost_usd": 0.09233460000000003
+    },
+    {
+      "benchmark": "financebench",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.408,
+      "total_prompt_tokens": 49968,
+      "projected_cost_usd": 0.0164952,
+      "actual_cost_usd": 0.009201750000000007
+    },
+    {
+      "benchmark": "financebench",
+      "config": "v4-tuned",
+      "mean_recall_at_k": 1.0,
+      "mean_judge_score": 0.418,
+      "total_prompt_tokens": 49968,
+      "projected_cost_usd": 0.0164952,
+      "actual_cost_usd": 0.009220350000000006
+    },
+    {
+      "benchmark": "narrativeqa",
+      "config": "v4-canonical",
+      "mean_recall_at_k": 0.0,
+      "mean_judge_score": 0.18,
+      "total_prompt_tokens": 588314,
+      "projected_cost_usd": 0.09724709999999999,
+      "actual_cost_usd": 0.08162625000000001
+    }
+  ]
+}

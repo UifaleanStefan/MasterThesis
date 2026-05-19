@@ -1,0 +1,2636 @@
+{
+  "_manifest": {
+    "git_sha": "c3e204c",
+    "git_dirty": true,
+    "timestamp_utc": "2026-05-19T12:56:34+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_orchestrator",
+    "mode": "full",
+    "model": "gpt-4o-mini",
+    "benchmark": "narrativeqa",
+    "config": "flat-50",
+    "k": 8,
+    "n_questions": 100
+  },
+  "ok": true,
+  "benchmark": "narrativeqa",
+  "config": "flat-50",
+  "mode": "full",
+  "n_questions": 100,
+  "n_with_gold": 0,
+  "n_with_judge": 100,
+  "mean_recall_at_k": 0.0,
+  "mean_judge_score": 0.185,
+  "total_prompt_tokens": 473389,
+  "total_completion_tokens_max": 15000,
+  "projected_cost_usd": 0.08000834999999999,
+  "actual_cost_usd": 0.07279035000000002,
+  "elapsed_seconds": 291.82310700416565,
+  "questions": [
+    {
+      "doc_idx": 0,
+      "doc_fingerprint": "sha256:0d5b299a7190a79edde8ab8ca517e243299b86d20c14d571d10ed23fd3bbea65",
+      "n_paragraphs": 445,
+      "question": "Who does Wendy get naked with in bed?",
+      "gold_answer": [
+        "Sandy.",
+        "Sandy"
+      ],
+      "predicted": "The provided passages do not contain any information regarding Wendy getting naked with anyone in bed.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1053,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 1,
+      "doc_fingerprint": "sha256:7f674b7402d86595c1fb10f839d4b8a84ad626ee6df55fc7ab4344686d57b4fa",
+      "n_paragraphs": 431,
+      "question": "What form of work did Ratso learn from his father?",
+      "gold_answer": [
+        "shoe shining",
+        "Shoe-shiner."
+      ],
+      "predicted": "Ratso learned the trade of a butcher from his father.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1132,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 2,
+      "doc_fingerprint": "sha256:4bed6f9293812e1f4541e7b8a7c60e8ac13b608b9474b572ef0e0b869ecce80f",
+      "n_paragraphs": 822,
+      "question": "What did Percy fail to do which resulted in Del's painful death?",
+      "gold_answer": [
+        "He failed to soak the sponge that would've conducted electricity to Del's head.",
+        "Soak the sponge."
+      ],
+      "predicted": "Percy failed to wet the sponge before the execution, which resulted in Del's painful death.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        814,
+        815,
+        816,
+        817,
+        818,
+        819,
+        820,
+        821
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1155,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 3,
+      "doc_fingerprint": "sha256:8b7c5909893fdf999126a4f24fcf558dad2f555ba158b6dd8f9d5d915dbce242",
+      "n_paragraphs": 464,
+      "question": "Why did Mr.Royall marry Charity?",
+      "gold_answer": [
+        "To protect her because he knew she was pregnant.",
+        "To protect her"
+      ],
+      "predicted": "Mr. Royall married Charity because he wanted her to go back looking stylisher than anyone else, indicating his desire to provide for her and perhaps to secure her in a relationship.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1131,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 4,
+      "doc_fingerprint": "sha256:6a8eb0f7da2d790706e270df44a064b6c0e0ed71de738ffd26a10d6b78a31997",
+      "n_paragraphs": 2001,
+      "question": "After Jarndyce cancels his engagement, who did Esther become engaged to?",
+      "gold_answer": [
+        "Mr. Woodcourt",
+        "Mr. Woodcourt"
+      ],
+      "predicted": "Esther became engaged to Mr. Jarndyce.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 939,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 5,
+      "doc_fingerprint": "sha256:dfbc224d132260b23d15ab78877f2c5a40ce92dcd553d91433cf740f6d0259a3",
+      "n_paragraphs": 211,
+      "question": "Why didn't Sylvia and Mary go to London?",
+      "gold_answer": [
+        "She didn't want to raise Mary alone.",
+        "She can't raise Mary alone"
+      ],
+      "predicted": "Sylvia didn't go to London because she has her own life to live and likely wouldn't want to move there.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2856,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 6,
+      "doc_fingerprint": "sha256:f3a30bca9f8e7f3e2c5dee5231b88314e8983c135f51981d007bdf1bec7f3622",
+      "n_paragraphs": 493,
+      "question": "Whom does Mary Horowitz believe is her only friend?",
+      "gold_answer": [
+        "Pet hamster",
+        "a hamster"
+      ],
+      "predicted": "Mary Horowitz believes that Howard is her only friend.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1206,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 7,
+      "doc_fingerprint": "sha256:ad21c174cd34c2d71d928a0ec698f0df51d23e6995150a755efe802f3e14b8a7",
+      "n_paragraphs": 623,
+      "question": "Who does Brewster inherit the money from?",
+      "gold_answer": [
+        "His grandfather",
+        "his grandfather"
+      ],
+      "predicted": "Brewster inherits the money from Jim Sedgwick.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        615,
+        616,
+        617,
+        618,
+        619,
+        620,
+        621,
+        622
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1382,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 8,
+      "doc_fingerprint": "sha256:48d7c8ce290f6dee1afb2eb189aff5d8edffa75d1adbb6d9522f425134e70424",
+      "n_paragraphs": 618,
+      "question": "What does Rebecca compose for her brothers and sisters?",
+      "gold_answer": [
+        "Poems",
+        "Poems and songs that express her feelings"
+      ],
+      "predicted": "Rebecca composes a message to warm her heart for her brothers and sisters.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        610,
+        611,
+        612,
+        613,
+        614,
+        615,
+        616,
+        617
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1182,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 9,
+      "doc_fingerprint": "sha256:07a13f33f2834cc9104f62bf33c9e40da79ad2902331f10553ba07d39c88f795",
+      "n_paragraphs": 721,
+      "question": "How Jenny's wounds healed after the car crash?",
+      "gold_answer": [
+        "Starman uses Silver Sphere to heal Jenny",
+        "a silver sphere"
+      ],
+      "predicted": "The provided passages do not contain information about how Jenny's wounds healed after the car crash.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        713,
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        720
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1197,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 10,
+      "doc_fingerprint": "sha256:1e008e4e15c5c54d9c37fa137e559f0ab3a56162e1c49dfbb386d9b17aa73fc3",
+      "n_paragraphs": 1824,
+      "question": "Where is Aryton left at when they find Captain Grant?",
+      "gold_answer": [
+        "Tabor Island",
+        "A desert island."
+      ],
+      "predicted": "Aryton is left at the island of Tabor.",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1816,
+        1817,
+        1818,
+        1819,
+        1820,
+        1821,
+        1822,
+        1823
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2473,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 11,
+      "doc_fingerprint": "sha256:071b04a4b095f9bca925f587921374f33501ca35a71593f0a0d6f609bb8cc0ee",
+      "n_paragraphs": 464,
+      "question": "When did Harney and Charity kiss for the first time?",
+      "gold_answer": [
+        "On the trip to Nettleton.",
+        "On a trip to Nettleton"
+      ],
+      "predicted": "The provided passages do not contain information about when Harney and Charity kissed for the first time.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1134,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 12,
+      "doc_fingerprint": "sha256:35c9ec413096eb0c943b8137fdd797988a46757a88868aefe44d319d3e67bfe9",
+      "n_paragraphs": 575,
+      "question": "What happens when Lizzie returns home to Laura from the goblin market?",
+      "gold_answer": [
+        "Lizzie feeds Laura the pulp and fruit from her body.",
+        "She is in a trance"
+      ],
+      "predicted": "Lizzie returns home to Laura from the goblin market and finds Laura in a weakened state, suffering from the effects of the goblin fruit. Lizzie bravely confronts the goblins to protect Laura and ultimately brings her back to health by sharing the juice from the goblin fruit, which revives Laura and restores their bond.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 785,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 13,
+      "doc_fingerprint": "sha256:50c825e27f05ec5bf3ba63b33e6379cfcc095680c6f0686b5e6455fd430bb38c",
+      "n_paragraphs": 170,
+      "question": "Why did Mary pay off the debt for Ann's family?",
+      "gold_answer": [
+        "Mary was in love with Ann.",
+        "Because she had control of the money to do so and her family was going to lose their home."
+      ],
+      "predicted": "The provided passages do not contain information regarding why Mary paid off the debt for Ann's family.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1292,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 14,
+      "doc_fingerprint": "sha256:b646c74791f44b283fbe9cd4214b6ec5f24a8b51813dc66b90e02a1471bcd18c",
+      "n_paragraphs": 325,
+      "question": "Why did Herzl want legal sanction from the Ottoman authorities?",
+      "gold_answer": [
+        "So the Jews could immigrate without persecution.",
+        "To stop the influx of Jews into Palestine"
+      ],
+      "predicted": "Herzl wanted legal sanction from the Ottoman authorities to facilitate the establishment of a Jewish homeland in Palestine.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 599,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 15,
+      "doc_fingerprint": "sha256:6128375eb434a71a6a68b919a11c20dc8a0f9eedf75a063824b211d046199d90",
+      "n_paragraphs": 2001,
+      "question": "What does Pete do to cover up Kate's disappearance?",
+      "gold_answer": [
+        "He creates fake letters to and from Kate.",
+        "FABRICATES AN UNCLE THAT SHE IS VISITING"
+      ],
+      "predicted": "Pete removes her in custody and ensures she is well cared for.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 817,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 16,
+      "doc_fingerprint": "sha256:49c9b6544bf87f10aa92e5cd50a48395535847aca4d9fc470a17734c67e1b0ef",
+      "n_paragraphs": 16,
+      "question": "To Where does Elise board the train?",
+      "gold_answer": [
+        "Venice",
+        "Probably in Paris. The train heads to Venice."
+      ],
+      "predicted": "Elise boards the train to Venice.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 39424,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 17,
+      "doc_fingerprint": "sha256:59640d9639f1ab188214d458bb4216a6c3aeae565a98cb7f2014cca4e1a47d51",
+      "n_paragraphs": 16,
+      "question": "Why did the Italian Police say they were detaining Frank?",
+      "gold_answer": [
+        "They detained him for his own safety.",
+        "For his own safety."
+      ],
+      "predicted": "The Italian Police said they were detaining Frank because they believed he was involved in an incident where somebody tried to kill him.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 39428,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 18,
+      "doc_fingerprint": "sha256:86780367a56144a6b32bb778b4b6fbe1052e2538b118f163c53cac438316a0fd",
+      "n_paragraphs": 170,
+      "question": "Who does Mary marry?",
+      "gold_answer": [
+        "Charles",
+        "Charles"
+      ],
+      "predicted": "Mary marries her husband, who is a good-natured, weak man.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1285,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 19,
+      "doc_fingerprint": "sha256:79bbef5a4992549ffc472990e3a9aefe600e68ecd5e31430613044c9402539a0",
+      "n_paragraphs": 745,
+      "question": "What horse dies?",
+      "gold_answer": [
+        "Gulliver",
+        "gulliver"
+      ],
+      "predicted": "The horse that dies is Pilgrim.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        737,
+        738,
+        739,
+        740,
+        741,
+        742,
+        743,
+        744
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1169,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 20,
+      "doc_fingerprint": "sha256:17f1b4970570ca397eb9a52786e541cab3e330e6ee3fcd9ea6ba0ea3d7461c31",
+      "n_paragraphs": 1484,
+      "question": "Who was Gilbert Markham's first romantic interest?",
+      "gold_answer": [
+        "Eliza Millward.",
+        "Helen Graham"
+      ],
+      "predicted": "Helen.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1476,
+        1477,
+        1478,
+        1479,
+        1480,
+        1481,
+        1482,
+        1483
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1601,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 21,
+      "doc_fingerprint": "sha256:548c7d7ea9a44a4ab9dff587bcf197ac076b0416774e630eadff1fba9eab5209",
+      "n_paragraphs": 587,
+      "question": "Which professor led the students on a field trip?",
+      "gold_answer": [
+        "Braithwaite Lowe",
+        "Braithwaite"
+      ],
+      "predicted": "The provided passages do not contain information about a professor leading students on a field trip.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1216,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 22,
+      "doc_fingerprint": "sha256:ac3d0a4bbf1e62e1e13489fc1df41c8bbbc13fafaccc9b4ea2b8a4dc20cd40a0",
+      "n_paragraphs": 14,
+      "question": "What happens to Wolfe and Plummer when they board the esape helicopter?",
+      "gold_answer": [
+        "They are shot.",
+        "they get shot at"
+      ],
+      "predicted": "Wolfe and Plummer are attacked by Bill, who is revealed to be a traitor, and the helicopter is shot down, causing Wolfe to be knocked unconscious.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 61786,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 23,
+      "doc_fingerprint": "sha256:d8faf0621a07dfe2f5724573d416b206ca07e3b9e54b5f77f559d875d6c2a4ce",
+      "n_paragraphs": 822,
+      "question": "Why did John Coffey Watch \"Top Hat\"?",
+      "gold_answer": [
+        "John had never seen a movie before.",
+        "As a last request before execution."
+      ],
+      "predicted": "The provided passages do not contain any information regarding John Coffey watching \"Top Hat.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        814,
+        815,
+        816,
+        817,
+        818,
+        819,
+        820,
+        821
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1151,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 24,
+      "doc_fingerprint": "sha256:fb33ce23538bbe0a01d716df4b28de8823a9377ddcbbef09255ff70f5410355a",
+      "n_paragraphs": 1032,
+      "question": "Whose Diary is read?",
+      "gold_answer": [
+        "Charmian's",
+        "Charmians"
+      ],
+      "predicted": "The diary of the character referred to as \"Red Cloud\" is read.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1024,
+        1025,
+        1026,
+        1027,
+        1028,
+        1029,
+        1030,
+        1031
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 716,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 25,
+      "doc_fingerprint": "sha256:295a2ea5385e2cfae0adc3a555e4fb2c2ab42a231da3a64ee5f662d64cae5d82",
+      "n_paragraphs": 549,
+      "question": "Where did Don Revie spend the rest of his career?",
+      "gold_answer": [
+        "In the Middle East.",
+        "Middle East"
+      ],
+      "predicted": "Don Revie spent the rest of his career in Saudi Arabia.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1304,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 26,
+      "doc_fingerprint": "sha256:91b26ff455b01959ba44b761eb78b46024517ca11f2b7a34e1048c78d30da68f",
+      "n_paragraphs": 657,
+      "question": "Who is Clifford?",
+      "gold_answer": [
+        "Clarence's father.",
+        "Clarence father."
+      ],
+      "predicted": "Clifford Worley",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        649,
+        650,
+        651,
+        652,
+        653,
+        654,
+        655,
+        656
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1462,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 27,
+      "doc_fingerprint": "sha256:ca39349bfccf9ddd384e2d4e702a3f31f9d0a121f14be39658bf5236e02d44e5",
+      "n_paragraphs": 539,
+      "question": "What is Curdie's reward for saving Princess Irene?",
+      "gold_answer": [
+        "A new red petticoat",
+        "a red petticoat for his mother."
+      ],
+      "predicted": "Curdie's reward for saving Princess Irene is the king's command for his servants to mind whatever Curdie should say to them, and he is honored alongside his father and mother as they ride away with the king and the princess.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 947,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 28,
+      "doc_fingerprint": "sha256:c38367a1f42038155812f9faf7be12f29aac84233e4bc259aeaa8e52f513dc4e",
+      "n_paragraphs": 655,
+      "question": "When was Phillip released from prison?",
+      "gold_answer": [
+        "2006",
+        "In 2006."
+      ],
+      "predicted": "The provided passages do not contain information about when Phillip was released from prison.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        647,
+        648,
+        649,
+        650,
+        651,
+        652,
+        653,
+        654
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1146,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 29,
+      "doc_fingerprint": "sha256:42af9cb4d24d29ea6a9d253533e977d7ea156b21f94a44802fe7c831e3958896",
+      "n_paragraphs": 575,
+      "question": "What do the goblins do when they realize Lizzie wants to buy a piece of fruit using a silver coin?",
+      "gold_answer": [
+        "they got angry, tried to force her to eat the fruit, then they covered her in pulp and juice from the fruit",
+        "They beat Lizzie and try to force feed her the fruit."
+      ],
+      "predicted": "The goblins laugh at Lizzie and refuse to sell her the fruit, insisting that she must eat it instead.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 793,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 30,
+      "doc_fingerprint": "sha256:deff32e2670a48cfe0a8d365fd8ed5427ea6be1c1bd5d0d0165d56d4b3b12548",
+      "n_paragraphs": 2001,
+      "question": "What does Pete do to make people believe the lies he is telling about Kate's disappearance?",
+      "gold_answer": [
+        "fakes letters between him and Kate",
+        "he fake written corrospondence"
+      ],
+      "predicted": "The provided passages do not contain information about Pete or any actions he takes regarding lies about Kate's disappearance.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 824,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 31,
+      "doc_fingerprint": "sha256:97a048cfa4a8dc3ef51c8b8557579f0e773cff722fba4c5e6549c2ec6b830d87",
+      "n_paragraphs": 745,
+      "question": "What do the girls run into when their horses slip and fall?",
+      "gold_answer": [
+        "A truck",
+        "A truck"
+      ],
+      "predicted": "The provided passages do not contain information about the girls running into anything when their horses slip and fall.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        737,
+        738,
+        739,
+        740,
+        741,
+        742,
+        743,
+        744
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1178,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 32,
+      "doc_fingerprint": "sha256:c730c44ae978f21aceaa8914d92a47b517270392bd2f02c26fbd021386bafdbd",
+      "n_paragraphs": 260,
+      "question": "Who attacked Wilma Deering and the boy when they were on air patrol?",
+      "gold_answer": [
+        "The bad bloods gang.",
+        "The Hans."
+      ],
+      "predicted": "The Hans attacked Wilma Deering and the boy when they were on air patrol.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 891,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 33,
+      "doc_fingerprint": "sha256:79473990e88916dea32cc1d222038a81a5ba7136750c6499a8706ba6e4c1a74c",
+      "n_paragraphs": 325,
+      "question": "What country is used as the example of a civilised country in which persecution still exists?",
+      "gold_answer": [
+        "France was given as an example.",
+        "France"
+      ],
+      "predicted": "Uganda",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 605,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 34,
+      "doc_fingerprint": "sha256:08209201acba87de0e81219d682495043cd05b20732a4b75f0a8d0ae45a586f7",
+      "n_paragraphs": 2001,
+      "question": "At the end of the story, who does Esther end up marrying?",
+      "gold_answer": [
+        "Mr Woodcourt",
+        "Woodcourt"
+      ],
+      "predicted": "The passages do not provide information about who Esther ends up marrying.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 936,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 35,
+      "doc_fingerprint": "sha256:8e3dda7f30ff144bfa5eb02317827a2f4ebeafe42e76c5f20f44eafc8e6bd337",
+      "n_paragraphs": 964,
+      "question": "Who controls the government at the beginning of Newton's experimentation?",
+      "gold_answer": [
+        "The Democrats",
+        "Democratic Party"
+      ],
+      "predicted": "The provided passages do not contain information regarding who controls the government at the beginning of Newton's experimentation.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        956,
+        957,
+        958,
+        959,
+        960,
+        961,
+        962,
+        963
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 879,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 36,
+      "doc_fingerprint": "sha256:7365fef9a2f69be6aa2ba4e967272d597896b7ce49e931a46fc612c2eff146e4",
+      "n_paragraphs": 833,
+      "question": "What does Diana tell the courtiers to do after the dance?",
+      "gold_answer": [
+        "Purify themselves by bathing in a sacred spring",
+        "unmask"
+      ],
+      "predicted": "Diana tells the courtiers to \"go to your rest.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        825,
+        826,
+        827,
+        828,
+        829,
+        830,
+        831,
+        832
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 651,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 37,
+      "doc_fingerprint": "sha256:ae23cffc13643e9b25af956c5f185fb108290ee5d09cc38460d4e2d7d4f5b96b",
+      "n_paragraphs": 488,
+      "question": "Where do Sir Robert and Lady Chiltern live?",
+      "gold_answer": [
+        "Grosvenor Square in London, England.",
+        "Grosvenor Square, London"
+      ],
+      "predicted": "They live in London.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 734,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 38,
+      "doc_fingerprint": "sha256:0a17da300462011137a4062523a3f73cca7861c629e496b059c723c24a70ec61",
+      "n_paragraphs": 964,
+      "question": "Which state did Newton first land in?",
+      "gold_answer": [
+        "Kentucky",
+        "Kentucky"
+      ],
+      "predicted": "The provided passages do not contain information about which state Newton first landed in.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        956,
+        957,
+        958,
+        959,
+        960,
+        961,
+        962,
+        963
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 875,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 39,
+      "doc_fingerprint": "sha256:f632349cf6ff72da11b29aa4e67ba1e498021abf938875bc97ff6ac1f5543c7e",
+      "n_paragraphs": 1540,
+      "question": "What is Orestes's main goal?",
+      "gold_answer": [
+        "Become emperor of Africa and Egypt.",
+        "emperor of Egypt and Africa"
+      ],
+      "predicted": "Orestes's main goal is not explicitly mentioned in the provided passages.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1532,
+        1533,
+        1534,
+        1535,
+        1536,
+        1537,
+        1538,
+        1539
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2084,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 40,
+      "doc_fingerprint": "sha256:0d4dcd9afa4a01c66aa082d181a3c55e48ccfc287205a570b78ad390fb4eda42",
+      "n_paragraphs": 655,
+      "question": "Who is Debbie to Steven?",
+      "gold_answer": [
+        "His wife.",
+        "is his wife"
+      ],
+      "predicted": "The provided passages do not contain information about who Debbie is to Steven.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        647,
+        648,
+        649,
+        650,
+        651,
+        652,
+        653,
+        654
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1145,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 41,
+      "doc_fingerprint": "sha256:b179e3960c1b2a5f2448ec4f4ac80683a22196e2e2b785d88c676f7b107850df",
+      "n_paragraphs": 2001,
+      "question": "How does Kate try to kill herself?",
+      "gold_answer": [
+        "She jumps into the harbour.",
+        "BY THROWING HERSELF IN THE HARBOUR"
+      ],
+      "predicted": "Kate tries to take her life.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 814,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 42,
+      "doc_fingerprint": "sha256:2dad2e961163bde94414a24acb894759da5a7369f072c5e31af121a7a4799698",
+      "n_paragraphs": 1222,
+      "question": "Where was Pierce Armitage found?",
+      "gold_answer": [
+        "Italy.",
+        "In Italy."
+      ],
+      "predicted": "Pierce Armitage was found looking upon his dead daughter's face and laying flowers on her in her little coffin.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1214,
+        1215,
+        1216,
+        1217,
+        1218,
+        1219,
+        1220,
+        1221
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1354,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 43,
+      "doc_fingerprint": "sha256:b5e1c2ac0acefe3f59daa278b8bc3b134585eb0b7d098401000c6d6286b1bb4f",
+      "n_paragraphs": 2001,
+      "question": "Who is Prince Turveydrop married to?",
+      "gold_answer": [
+        "Caddy Jellyby",
+        "Caddy Jellyby."
+      ],
+      "predicted": "Caddy.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 932,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 44,
+      "doc_fingerprint": "sha256:704075c6be657c17fb899becf10276f89a641d4dd598a413784dd15ceaf74412",
+      "n_paragraphs": 378,
+      "question": "Who ultimately rejects the study of language?",
+      "gold_answer": [
+        "Socrates rejects it.",
+        "socrates"
+      ],
+      "predicted": "Socrates ultimately rejects the study of language.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 883,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 45,
+      "doc_fingerprint": "sha256:c1d6fb0d13191405135f55b1d942a3a9fa423052a1305611e117cc21fbb43edf",
+      "n_paragraphs": 745,
+      "question": "Who does Anne have feelings for, other than her husband?",
+      "gold_answer": [
+        "Tom Brooker",
+        "Tom Booker, the \"horse whisperer\""
+      ],
+      "predicted": "Robert",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        737,
+        738,
+        739,
+        740,
+        741,
+        742,
+        743,
+        744
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1177,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 46,
+      "doc_fingerprint": "sha256:eee2a4b1ddc63b8da59b088e54db5d2e6c7c94e684cbd168d2dfc76d28b77b77",
+      "n_paragraphs": 488,
+      "question": "Who are wed i the last act?",
+      "gold_answer": [
+        "Lord Goring and Mabel",
+        "Lord Goring and Mabel"
+      ],
+      "predicted": "Sir Robert Chiltern and Lady Chiltern.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 732,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 47,
+      "doc_fingerprint": "sha256:ac339e2599feb92cdf9b6df685f6a99b5c68db4a5dbd9f82c9ff685586c77b72",
+      "n_paragraphs": 1222,
+      "question": "Who is Innocent's birth father?",
+      "gold_answer": [
+        "Pierce Armitage",
+        "Pierce Armitage."
+      ],
+      "predicted": "Pierce Armitage",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1214,
+        1215,
+        1216,
+        1217,
+        1218,
+        1219,
+        1220,
+        1221
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1354,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 48,
+      "doc_fingerprint": "sha256:94b18f9bc7c278e0d2e863a79e91263666d036580b9cba826f109282a46a1621",
+      "n_paragraphs": 721,
+      "question": "What is the name of Jenne's husband?",
+      "gold_answer": [
+        "Scott",
+        "Scott"
+      ],
+      "predicted": "The name of Jenny's husband is not provided in the passages.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        713,
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        720
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1197,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 49,
+      "doc_fingerprint": "sha256:79f4f943c59710bc26f4cd837acbe1215a2b1f8e5f91cbadad4271a13f8d868b",
+      "n_paragraphs": 170,
+      "question": "What does Mary devote much of her time to?",
+      "gold_answer": [
+        "charity",
+        "Charity"
+      ],
+      "predicted": "Mary devotes much of her time to establishing manufactories, creating small farms, visiting the sick, supporting the old, and educating the young.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1290,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 50,
+      "doc_fingerprint": "sha256:fb7168ce30c75ae06773d92243a632202d51e5965fe4d0911048aec473f77371",
+      "n_paragraphs": 1022,
+      "question": "What year did Doyle submit a list of best stories?",
+      "gold_answer": [
+        "1927",
+        "1927"
+      ],
+      "predicted": "The provided passages do not contain information regarding the year Doyle submitted a list of best stories.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1014,
+        1015,
+        1016,
+        1017,
+        1018,
+        1019,
+        1020,
+        1021
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1087,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 51,
+      "doc_fingerprint": "sha256:875dd07d7c57f09e85875e2e030522d4bf9d72df0312eff43be03283e684934f",
+      "n_paragraphs": 742,
+      "question": "Which of the armed forces did Roberta's husband work for?",
+      "gold_answer": [
+        "US Navy",
+        "US Navy"
+      ],
+      "predicted": "The provided context does not mention which armed forces Roberta's husband worked for.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        734,
+        735,
+        736,
+        737,
+        738,
+        739,
+        740,
+        741
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1071,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 52,
+      "doc_fingerprint": "sha256:fb34aeea7371f08e325733d1740c8414aa654d11b30ef36eb4db5368e2221d6b",
+      "n_paragraphs": 604,
+      "question": "Who does Sebastian push to safety which results in him being hit by a car?",
+      "gold_answer": [
+        "Annette",
+        "Annette"
+      ],
+      "predicted": "Sebastian pushes Annette to safety, resulting in him being hit by a car.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        596,
+        597,
+        598,
+        599,
+        600,
+        601,
+        602,
+        603
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1167,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 53,
+      "doc_fingerprint": "sha256:abb12a7f5b5806412647c6215a154d3ed45fba50206837d3a278a6bd8b42496a",
+      "n_paragraphs": 14,
+      "question": "What happens to the passengers after they eat dinner?",
+      "gold_answer": [
+        "They contract food poisoning.",
+        "they get sick"
+      ],
+      "predicted": "Every passenger on the plane who ate fish for dinner becomes violently ill within the next half hour.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 51953,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 54,
+      "doc_fingerprint": "sha256:0ce85bebdf874410c13408248b9ad80c41d0be20c86ab9f35180da3a0c39c049",
+      "n_paragraphs": 14,
+      "question": "Who lures a large crowd of police to the house?",
+      "gold_answer": [
+        "The children.",
+        "The children."
+      ],
+      "predicted": "Zoe lures a large crowd of police to the house.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 61783,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 55,
+      "doc_fingerprint": "sha256:b244e832d2bea606ca5ee152ffa25db1db29359dbdfea60f8ed5d36b9f4fbe60",
+      "n_paragraphs": 1090,
+      "question": "What is the subject of the painting that Claude can't complete?",
+      "gold_answer": [
+        "A view of the lle de la Cite.",
+        "A screen scape of the Ile de la Cite."
+      ],
+      "predicted": "The subject of the painting that Claude can't complete is not explicitly mentioned in the provided passages.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1082,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087,
+        1088,
+        1089
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 881,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 56,
+      "doc_fingerprint": "sha256:b6c6313cbc8535054937d2dfe6708cba7d1a663a92bdddfe1adf73e5eabd2d13",
+      "n_paragraphs": 964,
+      "question": "Which political party takes power after stories of the Newtown scandal are released?",
+      "gold_answer": [
+        "The Republican Party",
+        "Republican party"
+      ],
+      "predicted": "The relevant passages do not provide information regarding which political party takes power after the Newtown scandal stories are released.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        956,
+        957,
+        958,
+        959,
+        960,
+        961,
+        962,
+        963
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 882,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 57,
+      "doc_fingerprint": "sha256:5ea6e15bd288b9119fe899cc2f36b81916fba2499cef940e66c52466265c109e",
+      "n_paragraphs": 508,
+      "question": "What song does the crowd outside sing that weakens Vigo?",
+      "gold_answer": [
+        "Auld Lang Syne",
+        "Auld Lang Syne"
+      ],
+      "predicted": "The crowd outside sings \"The Ghostbusters Theme.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1304,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 58,
+      "doc_fingerprint": "sha256:b0d9a3f5f00c67dfa990af9098b3e98ab491a8d36ee74e123dae1327c96c63a3",
+      "n_paragraphs": 618,
+      "question": "Where is Rebecca moving to?",
+      "gold_answer": [
+        "Aunt Miranda and Aunt Jane Sawyer's house",
+        "Riverboro"
+      ],
+      "predicted": "Rebecca is moving to the brick house at Sunnybrook Farm.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        610,
+        611,
+        612,
+        613,
+        614,
+        615,
+        616,
+        617
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1178,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 59,
+      "doc_fingerprint": "sha256:c38aa38c2afc90052f79fac4fe8e458403ac478beb74affd63eb283a2bc326d9",
+      "n_paragraphs": 1164,
+      "question": "Why is Claudia estranged from her father?",
+      "gold_answer": [
+        "She believes Jimmy molested her.",
+        "she believes he molested her as a child"
+      ],
+      "predicted": "The provided passages do not contain information regarding why Claudia is estranged from her father.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1156,
+        1157,
+        1158,
+        1159,
+        1160,
+        1161,
+        1162,
+        1163
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1281,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 60,
+      "doc_fingerprint": "sha256:f4d76c52d5528113157c2e639bb49cf12262de75997ac265aa34d3937fc5f255",
+      "n_paragraphs": 577,
+      "question": "Where does the flying saucer land?",
+      "gold_answer": [
+        "In Washington, D.C.",
+        "Washington,D.C."
+      ],
+      "predicted": "The flying saucer lands in a temporary structure that disintegrates, leaving the delegates and the ship out in the open Mall under a starry sky.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1287,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 61,
+      "doc_fingerprint": "sha256:018b2663e2fc7eb66bfd50f43020aa88c1710ade7373b45a6599996b177ddf9d",
+      "n_paragraphs": 659,
+      "question": "How does Chris earn extra money?",
+      "gold_answer": [
+        "He has a paper route",
+        "paper route"
+      ],
+      "predicted": "The provided passages do not contain information about how Chris earns extra money.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        651,
+        652,
+        653,
+        654,
+        655,
+        656,
+        657,
+        658
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1106,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 62,
+      "doc_fingerprint": "sha256:7bb8dc017ad6beb087643a09444eaf794ab2f0b52ef409a57f62dbf9416c4305",
+      "n_paragraphs": 1022,
+      "question": "What Dictionary shows that these stories point out the social injustices of the time?",
+      "gold_answer": [
+        "The Oxford Dictionary of National Biography",
+        "The Oxford Dictionary of National Biography"
+      ],
+      "predicted": "The stories point out the social injustices of the time as reflected in the context of class and gender dynamics, particularly through the character of Miss Alice and her treatment by her father, Mr. Rucastle.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1014,
+        1015,
+        1016,
+        1017,
+        1018,
+        1019,
+        1020,
+        1021
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1092,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 63,
+      "doc_fingerprint": "sha256:116a2b5bd1ac39b5e466f7b671d1240d9cc4b6d0337b011507e00ee4148fc0f3",
+      "n_paragraphs": 195,
+      "question": "Who warns the women and children to flee?",
+      "gold_answer": [
+        "Balthus.",
+        "Balthus"
+      ],
+      "predicted": "Balthus and old Slasher warned the women and children to flee.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1151,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 64,
+      "doc_fingerprint": "sha256:205cdc62cc77d128e2b9001c646f9f418bb66d10767d8fe6737a32bd7c33e507",
+      "n_paragraphs": 1341,
+      "question": "Who came to the rescue with English reinforcements?",
+      "gold_answer": [
+        "Henry March.",
+        "Henry March"
+      ],
+      "predicted": "The relevant passages do not provide information about who came to the rescue with English reinforcements.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1333,
+        1334,
+        1335,
+        1336,
+        1337,
+        1338,
+        1339,
+        1340
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2047,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 65,
+      "doc_fingerprint": "sha256:eed2939996cdbbbadade05071849c368349c65c0354dec9f71e2d278fa9e72cc",
+      "n_paragraphs": 247,
+      "question": "What are the only companions of the Ex-Main force Patrol officer?",
+      "gold_answer": [
+        "Australian Cattle Dog and rare functioning firearm- Sawn off shotgun",
+        "A dog and a sawed-off shotgun."
+      ],
+      "predicted": "The only companions of the Ex-Main Force Patrol officer are the Feral Kid and the Gyro Captain.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1698,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 66,
+      "doc_fingerprint": "sha256:246fadee726b54ba504e9528c8ebc56f79967f9c56e7c3fa72880abef2ddc9ba",
+      "n_paragraphs": 249,
+      "question": "What did Jim use to knock out Dave?",
+      "gold_answer": [
+        "Hock bone from a mule",
+        "mule hock bone"
+      ],
+      "predicted": "The provided passages do not contain any information about Jim knocking out Dave or any related context.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 741,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 67,
+      "doc_fingerprint": "sha256:2b120b503dfe3636abf49ff7b3d58f2f4360ef3259bbe885fdfe5ca7cc3859de",
+      "n_paragraphs": 913,
+      "question": "Where did Mrs. Inglethorpe take her document case?",
+      "gold_answer": [
+        "To bed with her",
+        "To her bedroom."
+      ],
+      "predicted": "Mrs. Inglethorpe took her document case to the library.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        905,
+        906,
+        907,
+        908,
+        909,
+        910,
+        911,
+        912
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 848,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 68,
+      "doc_fingerprint": "sha256:3b5c3f79786834bbbcf245db161098946f340b2b01486bce14e882be9a121009",
+      "n_paragraphs": 604,
+      "question": "Who eventually get's Sebastian's Jaguar?",
+      "gold_answer": [
+        "Annette",
+        "Annette"
+      ],
+      "predicted": "Annette gets Sebastian's Jaguar.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        596,
+        597,
+        598,
+        599,
+        600,
+        601,
+        602,
+        603
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1159,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 69,
+      "doc_fingerprint": "sha256:2b99770d16b838ab69de8d29d101bb70fae218556edc55840e4ede9654c2a42f",
+      "n_paragraphs": 638,
+      "question": "What seeps out the the skull Stevie finds in the hole?",
+      "gold_answer": [
+        "Black oil.",
+        "Black oil."
+      ],
+      "predicted": "The relevant passages do not provide information about what seeps out of the skull Stevie finds in the hole.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        630,
+        631,
+        632,
+        633,
+        634,
+        635,
+        636,
+        637
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1365,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 70,
+      "doc_fingerprint": "sha256:13d830c71fa9f4906d09f1435df0be15fd44a52ada9e8835442356154096d29b",
+      "n_paragraphs": 549,
+      "question": "What year did the conflict begin between Brian Clough and Leeds?",
+      "gold_answer": [
+        "1968",
+        "1968"
+      ],
+      "predicted": "The relevant passages do not provide a specific year for when the conflict began between Brian Clough and Leeds.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1305,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 71,
+      "doc_fingerprint": "sha256:a37da85572c3f3ac8cb6ca05b5870d1fbeb93398874783a304a9a95a83fe91d8",
+      "n_paragraphs": 613,
+      "question": "Where did Frances' dad shoot Bishop?",
+      "gold_answer": [
+        "at the Stratosphere Hotel and Casino",
+        "Afghanistan"
+      ],
+      "predicted": "The provided passages do not contain information about where Frances' dad shot Bishop.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        605,
+        606,
+        607,
+        608,
+        609,
+        610,
+        611,
+        612
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 698,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 72,
+      "doc_fingerprint": "sha256:d34de854745b42d896f9c949daa920c3c08a4f08cad3e62dd2b8ecfce3aaf288",
+      "n_paragraphs": 547,
+      "question": "What is Esther's real name?",
+      "gold_answer": [
+        "Leena",
+        "Leena Klammer"
+      ],
+      "predicted": "Esther's real name is Leena.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2004,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 73,
+      "doc_fingerprint": "sha256:57f963672dda89714510606a5a4f18c65ffa6538ab56a223f4f039818603ea64",
+      "n_paragraphs": 684,
+      "question": "Where does Jack meet Pavel?",
+      "gold_answer": [
+        "Abruzzo",
+        "On his way to meet Clara."
+      ],
+      "predicted": "The provided passages do not contain information about where Jack meets Pavel.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        676,
+        677,
+        678,
+        679,
+        680,
+        681,
+        682,
+        683
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1154,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 74,
+      "doc_fingerprint": "sha256:949de29d1536d355f03b8ffc5ac6724788dc57aa44902df82f842e1a58040977",
+      "n_paragraphs": 580,
+      "question": "How did Flecher Reede won the case for Samantha?",
+      "gold_answer": [
+        "Flecher Reed proved that the contract Samanth sign was void",
+        "A technicality that Samantha had lied as a minor."
+      ],
+      "predicted": "The provided passages do not contain information about how Fletcher Reede won the case for Samantha.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1120,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 75,
+      "doc_fingerprint": "sha256:346cc693ab4de05b4d43492a8364b8bc4275f0286d209a64fe28db9307801051",
+      "n_paragraphs": 493,
+      "question": "Which two people lay a guilt trip on Hartman for getting Amy into the mine mess?",
+      "gold_answer": [
+        "Elizabeth and Howard",
+        "Elizabeth and Howard"
+      ],
+      "predicted": "Mary and Howard lay a guilt trip on Hartman for getting Amy into the mine mess.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1212,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 76,
+      "doc_fingerprint": "sha256:8b72739e42a992c46d04d8fcf8e58987882c42ca7851c5076d32b200eb77ed05",
+      "n_paragraphs": 115,
+      "question": "Who does the Inca want to marry in the end, even though she refuses?",
+      "gold_answer": [
+        "Ermyntrude",
+        "Erymntrude"
+      ],
+      "predicted": "Ermyintrude",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 935,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 77,
+      "doc_fingerprint": "sha256:dca8e1a80d4a57d9335f7c41210a8fa1e733cf577d52fc6327c35e1ab4bfc518",
+      "n_paragraphs": 247,
+      "question": "Who rescues Max?",
+      "gold_answer": [
+        "The Gyro Captain.",
+        "Gyro Captain."
+      ],
+      "predicted": "Pappagallo rescues Max.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1689,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 78,
+      "doc_fingerprint": "sha256:0276a8babcaa663c8764e87ec22d6f8a36a1cd59540596f260eb577d256bba8b",
+      "n_paragraphs": 534,
+      "question": "Who does King Phillip intend to make the Queen of England?",
+      "gold_answer": [
+        "Isabella",
+        "Mary, Queen of Scots"
+      ],
+      "predicted": "King Phillip intends to make Mary, Queen of Scots, the Queen of England.",
+      "judge_score": 0.5,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1240,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 79,
+      "doc_fingerprint": "sha256:3ec3d24cc59ebbdfdb9705b5bdd26c2552e2199cfecef2bde7735d4e7e17c337",
+      "n_paragraphs": 1484,
+      "question": "When did Helen give Gilbert her diaries?",
+      "gold_answer": [
+        "When Gilbert accused her of loving Mr Lawrence.",
+        "When he accuses here of loving Lawrence."
+      ],
+      "predicted": "The relevant passages do not provide information about when Helen gave Gilbert her diaries.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1476,
+        1477,
+        1478,
+        1479,
+        1480,
+        1481,
+        1482,
+        1483
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1599,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 80,
+      "doc_fingerprint": "sha256:2d6f4a944aacbef12177cde60289d8bebccc6d5617dd643577790d1c022059c7",
+      "n_paragraphs": 721,
+      "question": "Who shoots the alien craft?",
+      "gold_answer": [
+        "The US Government",
+        "The US government."
+      ],
+      "predicted": "The provided passages do not contain information about who shoots the alien craft.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        713,
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        720
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1193,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 81,
+      "doc_fingerprint": "sha256:52112f555115bd44c6fbf36070124652f371b8ded30b906ed4f0761f4badc491",
+      "n_paragraphs": 137,
+      "question": "What did Lily do after walking out on the con?",
+      "gold_answer": [
+        "She revealed the plan to Price.",
+        "she revelaed the con to Price"
+      ],
+      "predicted": "Lily dropped the gun and broke down in tears.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2525,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 82,
+      "doc_fingerprint": "sha256:b3d8150eb14b2e0194533156f22109e76513a95a6ca98b0b448c9553de2b709e",
+      "n_paragraphs": 137,
+      "question": "What is the name of the independent con artist?",
+      "gold_answer": [
+        "Lily",
+        "The King"
+      ],
+      "predicted": "Jake",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2524,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 83,
+      "doc_fingerprint": "sha256:16308157bef526d02a2cddaece81f7770a90517ef3a0d2d4e11475519bea3348",
+      "n_paragraphs": 260,
+      "question": "Why do the bosses of Wilma's gang believe that Anthony Rogers will be useful to them in the current conflict?",
+      "gold_answer": [
+        "Anthony Rogers has previous wartime and combatant experience.",
+        "Because he fought in the first world war."
+      ],
+      "predicted": "The bosses of Wilma's gang believe that Anthony Rogers will be useful to them in the current conflict because he has a belief in the efficiency of the American explosive rocket as a weapon and has demonstrated confidence in their ability to overcome the Hans through effective barrage tactics.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 898,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 84,
+      "doc_fingerprint": "sha256:cf9af52ed4f422a33c5d6807e2d0ff45a06c71932660d4ec99ffc85513855d49",
+      "n_paragraphs": 15,
+      "question": "What line of business do Lilly and Roy work in?",
+      "gold_answer": [
+        "They are grifters.",
+        "Conartists"
+      ],
+      "predicted": "Lilly and Roy work in the grifting or con artist business.",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 52726,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 85,
+      "doc_fingerprint": "sha256:d659465b56681599efd7e796ed508571d1c22bac0dc17717f53465e9e26a862f",
+      "n_paragraphs": 578,
+      "question": "What side do the Tolstoians support for the will?",
+      "gold_answer": [
+        "Release to the public domain.",
+        "They support the new will"
+      ],
+      "predicted": "The Tolstoians support the side that favors the will.",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1177,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 86,
+      "doc_fingerprint": "sha256:24106553060041469912dd6a940fa21a7aa79d6882ed72eb072290ba33fe2da7",
+      "n_paragraphs": 1540,
+      "question": "Who does the Christian mob blame for the unrest in the city?",
+      "gold_answer": [
+        "The mob blames Hypatia.",
+        "Hypatia."
+      ],
+      "predicted": "The Christian mob blames Hypatia for the unrest in the city.",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1532,
+        1533,
+        1534,
+        1535,
+        1536,
+        1537,
+        1538,
+        1539
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2088,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 87,
+      "doc_fingerprint": "sha256:84143908352d7a5b03524c9c99e06d6bdbdb89ba7668b5c3a346f8da46ce062d",
+      "n_paragraphs": 458,
+      "question": "What does Luis think Bateman's attack means?",
+      "gold_answer": [
+        "That Bateman is attracted to Luis",
+        "a sexual advance"
+      ],
+      "predicted": "Luis thinks Bateman's attack means that Bateman is a \"fucking psycho.\"",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1279,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 88,
+      "doc_fingerprint": "sha256:a6eb1566eb0a0435de8a71415373bc9eab6462ad533eb052141bd21598321c26",
+      "n_paragraphs": 604,
+      "question": "Why does Kathryn want to get revenge on Court?",
+      "gold_answer": [
+        "He dumped her for Cecile.",
+        "He dumped her for Cecile"
+      ],
+      "predicted": "The provided passages do not contain information regarding Kathryn's reasons for wanting to get revenge on Court.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        596,
+        597,
+        598,
+        599,
+        600,
+        601,
+        602,
+        603
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1161,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 89,
+      "doc_fingerprint": "sha256:aaf93ed85ab143cb637d93e14877117c8c19196a1d84a8be95c5d265d671094a",
+      "n_paragraphs": 555,
+      "question": "How many sections was the Mark divided into?",
+      "gold_answer": [
+        "Three.",
+        "Three sections"
+      ],
+      "predicted": "The Mark was divided into kindreds.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1524,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 90,
+      "doc_fingerprint": "sha256:645b9e083c61a70fa549a68a77da9196e6b9e075a1193982b269b8e5ee338fc0",
+      "n_paragraphs": 67,
+      "question": "Who was the last owner of La Grande Breteche?",
+      "gold_answer": [
+        "Madame de Merret.",
+        "Madame de Merret."
+      ],
+      "predicted": "Monsieur de Merret",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 847,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 91,
+      "doc_fingerprint": "sha256:595f00f787e0b5da0cc8e38315d0eb4784c0142f13bf357233295b9ef0950d8c",
+      "n_paragraphs": 1090,
+      "question": "Why is there an outcry in the artistic community?",
+      "gold_answer": [
+        "The sidelining of new artists in favor of popular ones for",
+        "Because new artists are being sidelined in favor of established, traditional artists."
+      ],
+      "predicted": "The outcry in the artistic community stems from feelings of powerlessness and despair among artists, as they believe they are merely producing incomplete and untruthful work, leading to discussions about the futility of their efforts and the desire to end their struggles.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        1082,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087,
+        1088,
+        1089
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 880,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 92,
+      "doc_fingerprint": "sha256:e34d7f1947ccf9b834063e5265b9cec0cade43189c5a17b6467d27255c5f2798",
+      "n_paragraphs": 655,
+      "question": "Who is the gay man?",
+      "gold_answer": [
+        "Steven and Phillip",
+        "Steven"
+      ],
+      "predicted": "Steven",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        647,
+        648,
+        649,
+        650,
+        651,
+        652,
+        653,
+        654
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1145,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 93,
+      "doc_fingerprint": "sha256:3acf9583b10f8c9b33717cc14d63af0a02b00b39cd69980db778f16e80dfeace",
+      "n_paragraphs": 64,
+      "question": "After studying the autopilot, how does Renfry attempt to get the men back home?",
+      "gold_answer": [
+        "By rewinding the tape",
+        "He rewinds the course tape"
+      ],
+      "predicted": "The provided passages do not contain any information about Renfry or his attempts to get the men back home after studying the autopilot.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1336,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 94,
+      "doc_fingerprint": "sha256:850955b8eabed93465e6aa043bcb9e7c2e7e975d9b87dc61e785a3b7ad1d6117",
+      "n_paragraphs": 539,
+      "question": "What species lives in the nearby mines?",
+      "gold_answer": [
+        "The Goblins",
+        "Goblins."
+      ],
+      "predicted": "Goblins.",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 944,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 95,
+      "doc_fingerprint": "sha256:843f24950cd54e27739a7215600bcfccf13787eebc5284f7b62e5b70534d0242",
+      "n_paragraphs": 547,
+      "question": "How does Esther attempt to kill Daniel a second time?",
+      "gold_answer": [
+        "By suffocating him with a pillow",
+        "smothers him with a pillow"
+      ],
+      "predicted": "Esther attempts to kill Daniel a second time by using a gun.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 2008,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 96,
+      "doc_fingerprint": "sha256:66a2e067cee176744956e9296427dcc8b046b58129f0ff44d53a68f64833f38d",
+      "n_paragraphs": 444,
+      "question": "What disorder does Melvin suffer from?",
+      "gold_answer": [
+        "Obsessive-Compulsive Disorder",
+        "Obsessive-compulsive disorder"
+      ],
+      "predicted": "Melvin suffers from obsessive-compulsive disorder (OCD).",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1461,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 97,
+      "doc_fingerprint": "sha256:bbba57a6c205d870e57b002b380612dac729e7b61dbb998c4df69c5d3ef9060f",
+      "n_paragraphs": 15,
+      "question": "Who does the FBI agent ask Roy to identify face down in a hotel room?",
+      "gold_answer": [
+        "Lilly",
+        "Lilly's body"
+      ],
+      "predicted": "Lilly.",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 52731,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 98,
+      "doc_fingerprint": "sha256:b3795d126289da8970d6633d45f7cf9d6f4b0b59a38f8d01f8ec5b23af91334f",
+      "n_paragraphs": 672,
+      "question": "What does Valjean steal from the Bishop of Digne?",
+      "gold_answer": [
+        "Silverware",
+        "Silverware"
+      ],
+      "predicted": "Valjean steals silver from the Bishop of Digne.",
+      "judge_score": 0.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        664,
+        665,
+        666,
+        667,
+        668,
+        669,
+        670,
+        671
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1323,
+      "projected_cost_usd": 0.0
+    },
+    {
+      "doc_idx": 99,
+      "doc_fingerprint": "sha256:86672b9c51b7980c72a7b7b705433141029633f75286ea9ccd3409224dffc8a9",
+      "n_paragraphs": 577,
+      "question": "What is the alien's name?",
+      "gold_answer": [
+        "Klaatu.",
+        "Klaatu"
+      ],
+      "predicted": "Klaatu",
+      "judge_score": 1.0,
+      "recall_at_k": null,
+      "retrieved_steps": [
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576
+      ],
+      "relevant_paragraphs": [],
+      "prompt_tokens_estimated": 1286,
+      "projected_cost_usd": 0.0
+    }
+  ]
+}
