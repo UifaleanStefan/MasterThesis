@@ -124,6 +124,14 @@ class MemoryParamsV4:
     w_embed: float = 1.0
     w_recency: float = 0.2
     mode: Literal["fixed", "learnable"] = "learnable"
+    # Stage 3 corpus-ingestion knob (default False = legacy Stage 1/2
+    # behavior unchanged). When True, the Bayesian entity-importance
+    # gate is bypassed: every extracted entity creates a node on first
+    # mention, then mention_count accumulates as the corpus is ingested.
+    # Necessary for text-mode ingestion where novel proper nouns arrive
+    # constantly; the Bayesian gate (calibrated for grid-world's tiny
+    # entity set) suppresses them indefinitely.
+    text_mode_entities: bool = False
 
     def __post_init__(self) -> None:
         if self.mode == "fixed":
@@ -299,7 +307,11 @@ class GraphMemoryV4:
             self._stored_embeddings = self._stored_embeddings[-_NOVELTY_WINDOW:]
 
         # --- Entity nodes with Bayesian importance + decay (V4 change) ---
-        entities = extract_entities(event.observation)
+        # Auto-dispatch: grid-world obs -> original keyword extractor
+        # (backward compatible); natural-language obs -> text extractor
+        # (Stage 3 corpus ingestion, real benchmarks).
+        from .entity_extraction import extract_entities_auto
+        entities = extract_entities_auto(event.observation)
         self._max_entities_seen = max(self._max_entities_seen, len(entities))
 
         # Update mention counts and last-seen step
@@ -312,6 +324,14 @@ class GraphMemoryV4:
         n_unique_entities = len(self._entity_mention_count)
 
         for entity_name in entities:
+            if params.text_mode_entities:
+                # Bypass the Bayesian importance gate (Stage 3 corpus mode).
+                # Every extracted entity becomes a node on first mention.
+                if not self._graph.has_node(entity_name):
+                    self._graph.add_node(entity_name, type="entity", name=entity_name)
+                self._graph.add_edge(node_id, entity_name, edge_type="mentions")
+                self._graph.add_edge(entity_name, node_id, edge_type="mentioned_in")
+                continue
             ent_importance = _bayesian_importance(
                 entity_name,
                 event.step,
@@ -350,7 +370,8 @@ class GraphMemoryV4:
             prev_id = _event_node(event.step - 1)
             if self._graph.has_node(prev_id):
                 self._graph.add_edge(prev_id, node_id, edge_type="temporal")
-        for entity_name in extract_entities(event.observation):
+        from .entity_extraction import extract_entities_auto
+        for entity_name in extract_entities_auto(event.observation):
             if not self._graph.has_node(entity_name):
                 self._graph.add_node(entity_name, type="entity", name=entity_name)
             self._graph.add_edge(node_id, entity_name, edge_type="mentions")
