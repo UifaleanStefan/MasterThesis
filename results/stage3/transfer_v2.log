@@ -1,0 +1,42 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 7358.18it/s]
+
+==============================================================================
+  Cross-benchmark theta-transfer matrix
+  rows: ['canonical', 'qasper-tuned', 'cuad-tuned', 'qasper-heldout', 'cuad-heldout']
+  cols: ['qasper', 'cuad']
+  n_docs=15, k=8, seed=42
+==============================================================================
+
+  --- canonical (source: grid_world_baseline) ---
+    eval on qasper... Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 6438.45it/s]
+mean_recall=0.2083  (48/50 gold, 8.1s)
+    eval on cuad... mean_recall=0.3656  (186/186 gold, 16.6s)
+
+  --- qasper-tuned (source: wide) ---
+    eval on qasper... mean_recall=0.5625  (48/50 gold, 0.3s)
+    eval on cuad... mean_recall=0.5914  (186/186 gold, 0.9s)
+
+  --- cuad-tuned (source: narrow) ---
+    eval on qasper... mean_recall=0.5000  (48/50 gold, 0.2s)
+    eval on cuad... mean_recall=0.6290  (186/186 gold, 0.9s)
+
+  --- qasper-heldout (source: heldout) ---
+    eval on qasper... mean_recall=0.5417  (48/50 gold, 0.3s)
+    eval on cuad... mean_recall=0.6075  (186/186 gold, 0.8s)
+
+  --- cuad-heldout (source: heldout) ---
+    eval on qasper... mean_recall=0.5417  (48/50 gold, 0.3s)
+    eval on cuad... mean_recall=0.6237  (186/186 gold, 0.9s)
+
+==============================================================================
+  TRANSFER MATRIX SUMMARY
+==============================================================================
+  canonical avg recall:    0.2870
+  diagonal     avg recall: 0.5892
+  off-diagonal avg recall: 0.5601
+  diagonal     lift vs canonical: +0.3023
+  off-diagonal lift vs canonical: +0.2732
+  -> Diagonal cells (matched theta) beat canonical by avg +0.302.
+  -> Off-diagonal cells exceed canonical by avg +0.273 — some cross-task transfer DOES happen between the long-haystack benchmarks.
+
+  Saved to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\theta_transfer_matrix_v2.json

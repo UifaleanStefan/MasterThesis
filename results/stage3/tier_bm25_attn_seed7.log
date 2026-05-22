@@ -1,0 +1,35 @@
+[tuned attention temperatures] loaded for: ['cuad', 'qasper']
+[full mode] WARNING: OPENAI_API_KEY not set — LLM calls will fall back to heuristic.
+
+==============================================================================
+  Stage 3 orchestrator — mode=full
+  benchmarks=['cuad', 'qasper']
+  configs=['bm25', 'attention-tuned']
+  n_questions=100, k=8, model=gpt-4o-mini
+==============================================================================
+
+---- cuad x bm25 ----
+[LLMAgent] OPENAI_API_KEY not set — using fallback heuristic mode.
+    n=100  recall@8=0.300  judge=0.180  prompt_tok=213,066  projected=$0.0410  (0.7s)
+
+---- cuad x attention-tuned ----
+[LLMAgent] OPENAI_API_KEY not set — using fallback heuristic mode.
+    n=100  recall@8=0.430  judge=0.320  prompt_tok=152,766  projected=$0.0319  (101.3s)
+
+---- qasper x bm25 ----
+[LLMAgent] OPENAI_API_KEY not set — using fallback heuristic mode.
+    n=100  recall@8=0.718  judge=0.076  prompt_tok=110,407  projected=$0.0256  (0.3s)
+
+---- qasper x attention-tuned ----
+[LLMAgent] OPENAI_API_KEY not set — using fallback heuristic mode.
+    n=100  recall@8=0.753  judge=0.115  prompt_tok=75,227  projected=$0.0203  (44.9s)
+
+==============================================================================
+  ORCHESTRATOR SUMMARY
+==============================================================================
+  total cells: 4  elapsed: 151.5s
+  total prompt tokens (est): 551,466
+  projected cost (gpt-4o-mini, full mode): $0.1187
+  ACTUAL cost: $0.0000
+  judge cost: $0.0000
+  -> D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\stage3_runs.json
