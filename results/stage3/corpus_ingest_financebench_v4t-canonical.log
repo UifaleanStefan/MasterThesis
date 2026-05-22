@@ -1,0 +1,21 @@
+
+==============================================================================
+  CORPUS INGESTION  benchmark=financebench (domain_coherent)
+  config=v4t-canonical  seed=42  limit_docs=ALL
+  order=canonical
+==============================================================================
+  Loaded 150 docs in 'canonical' order.
+  Memory: V4t with params=theta_store=0.293 theta_novel=0.908 w_embed=1.079 w_recency=3.777
+  doc    25/150    global_step=     34  |events|=    14  |entities|=  179  snapshots=  50  elapsed=   1.0s  dt=1.0s
+  doc    50/150    global_step=     62  |events|=    28  |entities|=  322  snapshots= 100  elapsed=   1.3s  dt=0.3s
+  doc    75/150    global_step=     92  |events|=    40  |entities|=  449  snapshots= 150  elapsed=   1.7s  dt=0.4s
+  doc   100/150    global_step=    125  |events|=    58  |entities|=  621  snapshots= 200  elapsed=   2.3s  dt=0.5s
+  doc   125/150    global_step=    159  |events|=    74  |entities|=  757  snapshots= 206  elapsed=   2.7s  dt=0.4s
+  doc   150/150    global_step=    189  |events|=    93  |entities|=  909  snapshots= 212  elapsed=   3.1s  dt=0.4s
+
+  Building final graph dump...
+
+  Saved snapshots.json, meta.json, final_graph.json
+  Elapsed: 3.1s
+  Final graph: 93 events, 909 entities, 2737 edges
+  Store ratio: 49.21% (93/189)

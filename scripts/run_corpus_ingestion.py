@@ -335,8 +335,23 @@ def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
                     break
         if params is None:
             raise FileNotFoundError(f"No tuned theta for {benchmark!r}")
+    elif config_name == "v4t-corpus-tuned":
+        path = ROOT / "results" / "stage3" / f"tuned_theta_v4t_corpus_{benchmark}.json"
+        if not path.exists():
+            raise FileNotFoundError(
+                f"No corpus-mode tuned θ for {benchmark!r}. "
+                f"Run `python -m tuning.tune_v4t_corpus --benchmarks {benchmark}` first."
+            )
+        data = json.loads(path.read_text())
+        vec = data.get("tuned_theta_vec")
+        if not isinstance(vec, list) or len(vec) != 10:
+            raise ValueError(f"Malformed corpus-tuned θ for {benchmark!r}")
+        params = vec_to_params(np.asarray(vec, dtype=np.float64))
     else:
-        raise ValueError(f"Unknown config: {config_name!r}. Valid: v4t-canonical, v4t-tuned.")
+        raise ValueError(
+            f"Unknown config: {config_name!r}. "
+            f"Valid: v4t-canonical, v4t-tuned, v4t-corpus-tuned."
+        )
     params.text_mode_entities = True
     return params
 
@@ -577,11 +592,12 @@ def main() -> int:
     )
     parser.add_argument(
         "--config", default="v4t-tuned",
-        choices=["v4t-tuned", "v4t-canonical", "v4-tuned", "v4-canonical"],
-        help="Memory configuration. v4t-tuned uses per-benchmark CMA-ES-tuned θ "
-             "with text_mode_entities=True. v4t-canonical uses grid-world θ "
-             "with text_mode_entities=True. v4-tuned / v4-canonical are legacy "
-             "aliases.",
+        choices=["v4t-tuned", "v4t-canonical", "v4t-corpus-tuned",
+                 "v4-tuned", "v4-canonical"],
+        help="Memory configuration. v4t-tuned uses per-benchmark Phase 1.5/1.6 "
+             "CMA-ES-tuned θ with text_mode_entities=True. v4t-canonical uses "
+             "grid-world θ. v4t-corpus-tuned uses Phase 2 corpus-mode CMA-ES θ "
+             "(loads from tuned_theta_v4t_corpus_<bench>.json). v4-* are legacy.",
     )
     parser.add_argument(
         "--limit-docs", type=int, default=None,
