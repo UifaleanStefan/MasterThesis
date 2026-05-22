@@ -258,17 +258,32 @@ def dump_final_graph(memory: GraphMemoryV4, max_nodes: int = FINAL_GRAPH_MAX_NOD
 
 
 def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
-    """Map config name -> MemoryParamsV4 with text_mode_entities=True.
+    """Map V4ₜ config name -> MemoryParamsV4 with text_mode_entities=True.
 
-    Stage 3 corpus ingestion always opts in to the text-mode entity
-    gate bypass — without it, the Bayesian importance gate (calibrated
-    for grid-world) suppresses novel proper nouns indefinitely and the
-    graph is mostly events with no entity nodes. See chapter §3.6.
+    "V4ₜ" / "V4-text" is the text-mode-entity variant of V4 used in
+    Stage 3 corpus ingestion. It uses the same θ vectors as V4 but
+    bypasses the Bayesian entity-importance gate (which was calibrated
+    for grid-world's 4-5 entities with high repeat counts; on text
+    corpora with hundreds of novel proper nouns, the gate suppresses
+    everything). Variant naming is explicit per critique #7 to avoid
+    silently relabeling architectural changes.
+
+    Accepted config names:
+      * v4t-canonical  — grid-world θ + text-mode entities
+      * v4t-tuned      — per-benchmark CMA-ES-tuned θ + text-mode entities
+
+    Legacy aliases v4-canonical / v4-tuned are accepted for backward
+    compatibility but log a deprecation warning.
     """
-    if config_name == "v4-canonical":
+    # Normalize legacy aliases.
+    if config_name in ("v4-canonical", "v4-tuned"):
+        print(f"  [WARN] config {config_name!r} is a legacy alias for {config_name.replace('v4-', 'v4t-')!r} "
+              f"in corpus mode (text_mode_entities=True). Please use the v4t- prefix going forward.")
+        config_name = config_name.replace("v4-", "v4t-")
+
+    if config_name == "v4t-canonical":
         params = vec_to_params(CANONICAL_THETA_VEC)
-    elif config_name == "v4-tuned":
-        # Prefer wide if available, else narrow.
+    elif config_name == "v4t-tuned":
         params = None
         for fname in [
             f"tuned_theta_wide_{benchmark}.json",
@@ -284,7 +299,7 @@ def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
         if params is None:
             raise FileNotFoundError(f"No tuned theta for {benchmark!r}")
     else:
-        raise ValueError(f"Unknown config: {config_name!r}")
+        raise ValueError(f"Unknown config: {config_name!r}. Valid: v4t-canonical, v4t-tuned.")
     params.text_mode_entities = True
     return params
 
@@ -481,8 +496,12 @@ def main() -> int:
         help="Which benchmark to ingest.",
     )
     parser.add_argument(
-        "--config", default="v4-tuned", choices=["v4-tuned", "v4-canonical"],
-        help="Memory configuration (v4-tuned uses per-benchmark tuned θ).",
+        "--config", default="v4t-tuned",
+        choices=["v4t-tuned", "v4t-canonical", "v4-tuned", "v4-canonical"],
+        help="Memory configuration. v4t-tuned uses per-benchmark CMA-ES-tuned θ "
+             "with text_mode_entities=True. v4t-canonical uses grid-world θ "
+             "with text_mode_entities=True. v4-tuned / v4-canonical are legacy "
+             "aliases.",
     )
     parser.add_argument(
         "--limit-docs", type=int, default=None,
