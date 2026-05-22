@@ -1266,6 +1266,65 @@ within the document-QA family: a θ tuned for any long-haystack QA
 benchmark will exhibit these same three properties, and porting it
 to a different long-haystack benchmark preserves ~90% of the lift.
 
+### 6.5.1 What corpus-tuning learns (FinanceBench)
+
+Section 6.5 reports per-document tuning: each FinanceBench item is its
+own short haystack of 1–3 paragraphs, the V4ₜ memory is reset between
+documents, and θ is tuned to maximize recall@k within those tiny
+haystacks. **Corpus-cumulative tuning** is a different regime: one
+V4ₜ instance ingests all 150 documents end-to-end, and θ is tuned to
+maximize recall when the question for document _K_ is asked against a
+memory holding the union of docs 0…_K_ (online) or 0…150 (batch).
+This amplifies the three shifts from §6.5 and surfaces a fourth.
+
+| Dimension | Canonical (grid) | Per-doc tuned (§5.2) | **Corpus-tuned** |
+|---|---:|---:|---:|
+| `theta_store` | 0.293 | 0.319 | **0.010** |
+| `theta_decay` | 0.668 | 0.563 | 0.596 |
+| `w_graph` | 0.000 | 0.029 | **1.627** |
+| `w_embed` | 1.079 | 0.406 | **2.633** |
+| `w_recency` | 3.777 | 2.236 | **0.003** |
+
+`w_recency` collapses essentially to zero — the per-document regime's
+2.236 still kept some recency bias, but a memory spanning 150 docs
+can no longer use "what arrived most recently" as a useful prior.
+`w_embed` more than doubles, and `theta_store` drops by 30× — the
+corpus-tuned policy stores ~99% of incoming paragraphs and retrieves
+purely by embedding similarity. The new finding is **`w_graph`**:
+dormant in canonical and per-doc tuned (0.000 / 0.029), it rises to
+**1.627** under corpus tuning. The graph-structure component of V4's
+retrieval scoring carries non-trivial load for the first time when
+memory must disambiguate across overlapping topical clusters
+(3M-2018, 3M-2022, AES, Adobe…) rather than within a single document.
+
+On the FinanceBench end-to-end QA evaluation (n=150 questions, manual
+Claude judge per `evaluation/claude_judge_protocol.md`, gpt-4o-mini
+answerer, $0.15 cost per config), the corpus-tuned θ produces 0.697
+mean judge in online mode vs canonical's 0.455 (+0.242 lift) and
+per-doc tuned's 0.437. The sharpest single comparison is **dump-all
+batch** (all 188 paragraphs in the prompt, no retrieval — recall=1.0)
+collapsing to **0.037 judge**, while v4t-corpus-tuned batch (k=8
+selective, recall=0.97) holds at **0.677**. gpt-4o-mini drowns when
+all 188 paragraphs are concatenated; selective retrieval at k=8 is
+structurally necessary for this model and this context length.
+
+The same low-`theta_store` / near-zero-`w_recency` configuration that
+wins on average also retrieves more cross-document context — batch
+in-doc retrieval ratio 0.057 for corpus-tuned vs 0.003 for canonical.
+On 14 of 150 questions the corpus-tuned config regresses relative to
+canonical because of this bleed (e.g., a question about American Water
+Works EBITDA retrieves 3M, Amazon, and AES events instead). Net is
++38 questions favoring corpus-tuned (52 wins, 84 ties, 14 losses), but
+the bleed is a real failure mode worth naming.
+
+> The judge protocol (5-point rubric, 5% numeric tolerance, refusal
+> counted against gold) is in `evaluation/claude_judge_protocol.md`;
+> per-cell aggregates in `results/stage3/financebench_judge_summary.json`;
+> consolidated audit in `results/stage3/finbench_audit.json`. Question
+> categorisation ("multi-formula calc", "qualitative judgement", …)
+> used in the interactive panel is informal regex on question text,
+> not human-coded.
+
 ### 6.6 Limitations (generic risks of the framework)
 
 * **k=8 is fixed in the headline numbers.** Section 5.6 explores

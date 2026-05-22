@@ -5,6 +5,64 @@
 
 ---
 
+## -8. Stage 3 Phase 1.8 — FinanceBench corpus-mode visuals + chapter §6.5.1 (May 2026)
+
+Phase 1.8 closes the loop on the Phase 2 FinanceBench end-to-end QA
+results — 1,800 manually Claude-judged predictions (6 configs × 2
+modes × 150 questions) that landed at the end of Phase 2 without
+frontend or chapter coverage. No new experiments; no API spend.
+
+**Workstream A — graph_evolution data.** Ran
+`scripts/run_corpus_ingestion.py --benchmark financebench --config
+v4t-corpus-tuned` (~3 s) to generate the missing `snapshots.json`,
+`final_graph.json`, `meta.json` for the winning config. 189 events,
+1,591 entity nodes, 6,376 edges; well under the 5,000-node viewer cap
+even at `theta_store=0.010` (100% store ratio).
+`scripts/build_graph_evolution_frontend.py` picks the run up
+automatically — `financebench__v4t-corpus-tuned` now appears in the
+GraphEvolution viewer run-picker (index now 9 runs).
+
+**Workstream B — data aggregator.** New
+`scripts/build_finbench_corpus_qa_data.py` (~280 lines) consolidates
+12 `judge_queue/results.jsonl` + `queue.jsonl` files, 6 `qa_summary`
+files, `tuned_theta_v4t_corpus_financebench.json`, and the
+v4t-canonical snapshots into a single
+`web/public/data/stage3_finbench_corpus.json` (~100 KB) with:
+judge_table (12 cells with 95% bootstrap CI), theta_contrast
+(canonical / per-doc tuned / corpus-tuned × 5 params), cross-doc
+scatter (12 points), question-type heatmap (5 regex-categorized
+buckets × 12 cells), and ~30 pre-bundled drill-down examples
+(always-hard / always-easy / corpus-wins / corpus-regressions).
+
+**Workstream C — frontend section.** New
+`web/src/sections/FinanceBenchCorpus.tsx` (~600 lines) plus two new
+viz primitives: `CrossDocScatter.tsx` (recharts ScatterChart with
+custom circle/diamond shapes for online/batch and a
+gpt-4o-mini-ceiling reference line) and `QuestionTypeHeatmap.tsx`
+(CSS-grid heatmap, online/batch toggle). Four interactive panels —
+judge table, θ contrast bars, cross-doc bleed scatter, question
+category heatmap — with hover-tooltip, click-drill-down, and a
+shared config filter. Mounted in `App.tsx` between `<Stage3>` and
+`<GraphEvolution>`. Fixed one Rules-of-Hooks violation
+(`useMemo` after the early `if (!data)` return) caught by the
+preview server.
+
+**Workstream D — chapter §6.5.1.** Inserted "What corpus-tuning
+learns (FinanceBench)" between §6.5 and §6.6. ~400 words covering
+the four-shift finding (`w_recency` 3.78 → 0.003, `w_embed`
+1.08 → 2.63, `theta_store` 0.29 → 0.010, **`w_graph` 0.00 → 1.627**
+— the newly-activated parameter), the FinanceBench end-to-end
+evidence (v4t-corpus-tuned online judge 0.697 vs canonical 0.455),
+the dump-all batch catastrophic collapse (R=1.00 / J=0.037), and
+the cross-doc bleed caveat (14/150 regressions vs canonical).
+
+**Regression status:** `npm run build` clean; 146/146 pytest still
+pass (no Python tests changed); determinism audit unchanged
+(no memory/V4 code changes). Total Phase 4 + 1.7 + 1.8 spend
+remains ~$5.
+
+---
+
 ## -7. Stage 3 Phase 1.7 — bulletproofing the thesis against adversarial review (May 2026)
 
 Phase 1.7 systematically addressed the 17-point adversarial critique
