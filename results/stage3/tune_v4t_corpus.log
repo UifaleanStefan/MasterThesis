@@ -1,0 +1,70 @@
+
+==============================================================================
+  V4t corpus tuning for 'cuad'
+  limit_docs=30  n_generations=6  sigma=0.3  seed=42  k=8
+==============================================================================
+  [eval_fn] cuad: 30 docs, 30 eval QAs with gold
+  Canonical V4t corpus recall@k=8: 0.0333
+  CMA-ES gen   1 | best=0.2000 | sigma=0.2933 | mean=[0.502, 0.833, 0.523, 0.563, 0.114, 0.481, 0.511, 0.338, 0.344, 0.187]
+  CMA-ES gen   2 | best=0.2000 | sigma=0.3013 | mean=[0.072, 0.798, 0.501, 0.761, -0.022, 0.592, 0.359, 0.433, 0.489, -0.002]
+  CMA-ES gen   3 | best=0.2000 | sigma=0.3421 | mean=[-0.171, 0.937, 0.041, 0.916, -0.224, 0.197, 0.254, 0.317, 0.395, -0.118]
+  CMA-ES gen   4 | best=0.2000 | sigma=0.3482 | mean=[-0.278, 0.862, -0.002, 1.06, -0.093, 0.505, 0.343, 0.54, 0.51, -0.076]
+  CMA-ES gen   5 | best=0.3000 | sigma=0.3167 | mean=[0.074, 0.75, 0.098, 1.053, -0.024, 0.581, 0.214, 0.479, 0.364, -0.1]
+  CMA-ES gen   6 | best=0.3000 | sigma=0.3060 | mean=[0.152, 0.797, 0.36, 1.161, 0.284, 0.6, 0.198, 0.258, 0.744, -0.077]
+
+  V4t corpus tuning done in 122.6s
+  canonical recall = 0.0333
+  tuned     recall = 0.3000
+  improvement      = +0.2667
+
+  Tuned theta (corpus mode):
+    theta_store    = 0.3117
+    theta_novel    = 0.7122
+    theta_erich    = 0.2979
+    theta_surprise = 0.9157
+    theta_entity   = 0.1410
+    theta_temporal = 0.4232
+    theta_decay    = 0.0403
+    w_graph        = 1.6077
+    w_embed        = 2.7799
+    w_recency      = 0.0001
+  -> saved D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\tuned_theta_v4t_corpus_cuad.json
+
+==============================================================================
+  V4t corpus tuning for 'qasper'
+  limit_docs=30  n_generations=6  sigma=0.3  seed=42  k=8
+==============================================================================
+  [eval_fn] qasper: 30 docs, 28 eval QAs with gold
+  Canonical V4t corpus recall@k=8: 0.0000
+  CMA-ES gen   1 | best=0.1071 | sigma=0.2918 | mean=[0.645, 0.691, 0.557, 0.712, 0.058, 0.575, 0.56, 0.533, 0.412, 0.223]
+  CMA-ES gen   2 | best=0.1071 | sigma=0.2822 | mean=[0.604, 0.755, 0.601, 0.716, 0.262, 0.856, 0.363, 0.349, 0.286, 0.142]
+  CMA-ES gen   3 | best=0.1071 | sigma=0.2931 | mean=[0.343, 0.646, 0.278, 0.811, 0.239, 0.705, 0.057, 0.399, 0.411, -0.118]
+  CMA-ES gen   4 | best=0.2143 | sigma=0.3104 | mean=[0.13, 0.898, 0.277, 1.0, 0.364, 0.853, -0.144, 0.259, 0.466, 0.009]
+  CMA-ES gen   5 | best=0.2143 | sigma=0.3114 | mean=[-0.042, 0.918, 0.178, 0.76, 0.477, 0.936, -0.039, 0.192, 0.596, -0.024]
+  CMA-ES gen   6 | best=0.2143 | sigma=0.3180 | mean=[-0.21, 0.819, 0.145, 0.401, 0.12, 0.725, 0.123, 0.51, 0.687, 0.001]
+
+  V4t corpus tuning done in 46.1s
+  canonical recall = 0.0000
+  tuned     recall = 0.2143
+  improvement      = +0.2143
+
+  Tuned theta (corpus mode):
+    theta_store    = 0.0186
+    theta_novel    = 0.8413
+    theta_erich    = 0.2650
+    theta_surprise = 0.9753
+    theta_entity   = 0.4563
+    theta_temporal = 0.9960
+    theta_decay    = 0.3909
+    w_graph        = 0.1528
+    w_embed        = 2.0726
+    w_recency      = 0.0227
+  -> saved D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\tuned_theta_v4t_corpus_qasper.json
+
+==============================================================================
+  V4t CORPUS-MODE TUNING SUMMARY
+==============================================================================
+  Total elapsed: 223.4s
+  benchmark         status   canonical       tuned        lift     w_graph
+  cuad                  ok      0.0333      0.3000     +0.2667      1.6077
+  qasper                ok      0.0000      0.2143     +0.2143      0.1528

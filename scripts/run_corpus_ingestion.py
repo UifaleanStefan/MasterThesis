@@ -354,11 +354,14 @@ def run_corpus_ingestion(
     out_dir: Path,
     progress_every_docs: int = 25,
     w_recency_zero: bool = False,
+    order: str = "canonical",
+    shuffle_seed: int = 7,
 ) -> dict:
     category = benchmark_category(benchmark)
     print(f"\n{'=' * 78}")
     print(f"  CORPUS INGESTION  benchmark={benchmark} ({category})")
     print(f"  config={config}  seed={seed}  limit_docs={limit_docs or 'ALL'}")
+    print(f"  order={order}" + (f" (shuffle_seed={shuffle_seed})" if order == "shuffle" else ""))
     if w_recency_zero:
         print(f"  w_recency_zero=True (Block B / critique #4): retrieval recency "
               f"disabled for clean online vs batch comparison")
@@ -373,9 +376,20 @@ def run_corpus_ingestion(
         )
 
     adapter = get_adapter(benchmark)
-    docs = list(adapter.iter_documents(limit=limit_docs))
+    # Block C / critique #1: order sensitivity. Order options:
+    #   canonical — HF dataset / JSON file row order
+    #   reverse   — canonical reversed (tests early-vs-late dependence)
+    #   shuffle   — randomized with shuffle_seed (tests order-invariance)
+    if order == "shuffle":
+        docs = list(adapter.iter_documents(limit=limit_docs, seed=shuffle_seed, shuffle=True))
+    else:
+        docs = list(adapter.iter_documents(limit=limit_docs))
+        if order == "reverse":
+            docs = list(reversed(docs))
+        elif order != "canonical":
+            raise ValueError(f"Unknown order: {order!r}. Valid: canonical, reverse, shuffle.")
     total_docs = len(docs)
-    print(f"  Loaded {total_docs} docs.")
+    print(f"  Loaded {total_docs} docs in {order!r} order.")
 
     # Build memory with the config's params.
     params = load_config_params(config, benchmark)
@@ -504,6 +518,8 @@ def run_corpus_ingestion(
         "config": config,
         "v4_variant": "V4t (text_mode_entities=True)",
         "w_recency_zero": w_recency_zero,
+        "order": order,
+        "shuffle_seed": shuffle_seed if order == "shuffle" else None,
         "seed": seed,
         "n_docs": total_docs,
         "limit_docs": limit_docs,
@@ -578,12 +594,28 @@ def main() -> int:
              "vs batch (end-of-corpus step) retrieval. Use for the methodologically "
              "clean comparison; default keeps the tuned w_recency value.",
     )
+    parser.add_argument(
+        "--order", default="canonical", choices=["canonical", "reverse", "shuffle"],
+        help="Block C / critique #1: document ingestion order. canonical = HF/JSON "
+             "row order (default); reverse = canonical reversed; shuffle = "
+             "randomized with --shuffle-seed. Use for order-sensitivity testing.",
+    )
+    parser.add_argument(
+        "--shuffle-seed", type=int, default=7,
+        help="Seed used only when --order=shuffle.",
+    )
     args = parser.parse_args()
 
     if args.out_dir is None:
         out_dir = OUT_ROOT / f"{args.benchmark}__{args.config}"
     else:
         out_dir = Path(args.out_dir)
+
+    # Default out-dir reflects order if non-canonical (e.g.
+    # financebench__v4t-tuned__reverse, financebench__v4t-tuned__shuffle7).
+    if args.out_dir is None and args.order != "canonical":
+        suffix = args.order if args.order != "shuffle" else f"shuffle{args.shuffle_seed}"
+        out_dir = OUT_ROOT / f"{args.benchmark}__{args.config}__{suffix}"
 
     try:
         run_corpus_ingestion(
@@ -594,6 +626,8 @@ def main() -> int:
             out_dir=out_dir,
             progress_every_docs=args.progress_every_docs,
             w_recency_zero=args.w_recency_zero,
+            order=args.order,
+            shuffle_seed=args.shuffle_seed,
         )
         return 0
     except Exception as e:

@@ -67,6 +67,8 @@ from agent.llm_agent import LLMAgent
 from environment.benchmarks import ADAPTERS, get_adapter
 from environment.benchmarks.base import document_fingerprint
 from evaluation.document_qa_llm_judge import llm_judge_score_multi_ref
+from memory.bm25_memory import BM25Memory
+from memory.dump_all_memory import DumpAllMemory
 from memory.event import Event
 from memory.graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
 from results.manifest import build_manifest
@@ -88,11 +90,13 @@ def benchmark_category(benchmark: str) -> str:
 
 
 def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
-    """Mirror of scripts/run_corpus_ingestion.load_config_params.
+    """V4ₜ ("V4-text") variant params. Same θ as V4 but with
+    text_mode_entities=True. Used by v4t-canonical and v4t-tuned configs.
+    Critique #7: variant naming must be explicit.
 
-    V4ₜ ("V4-text") variant: same θ as V4 but with text_mode_entities=True
-    (Stage 3 corpus mode bypasses the Bayesian gate calibrated for
-    grid-world). Critique #7: variant naming must be explicit.
+    For corpus-mode-tuned θ (Block B / critique #6), pass
+    config_name='v4t-corpus-tuned' which loads from
+    tuned_theta_v4t_corpus_<benchmark>.json.
     """
     if config_name in ("v4-canonical", "v4-tuned"):
         config_name = config_name.replace("v4-", "v4t-")
@@ -114,10 +118,63 @@ def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
                     break
         if params is None:
             raise FileNotFoundError(f"No tuned theta for {benchmark!r}")
+    elif config_name == "v4t-corpus-tuned":
+        # Block B / critique #6: θ tuned UNDER the corpus-cumulative regime.
+        path = ROOT / "results" / "stage3" / f"tuned_theta_v4t_corpus_{benchmark}.json"
+        if not path.exists():
+            raise FileNotFoundError(
+                f"No corpus-mode tuned θ for {benchmark!r}. "
+                f"Run `python -m tuning.tune_v4t_corpus --benchmarks {benchmark}` first."
+            )
+        data = json.loads(path.read_text())
+        vec = data.get("tuned_theta_vec")
+        if not isinstance(vec, list) or len(vec) != 10:
+            raise ValueError(f"Malformed corpus-tuned θ for {benchmark!r}")
+        params = vec_to_params(np.asarray(vec, dtype=np.float64))
     else:
-        raise ValueError(f"Unknown config: {config_name!r}. Valid: v4t-canonical, v4t-tuned.")
+        raise ValueError(
+            f"Unknown config: {config_name!r}. "
+            f"Valid V4ₜ configs: v4t-canonical, v4t-tuned, v4t-corpus-tuned."
+        )
     params.text_mode_entities = True
     return params
+
+
+def build_memory(config_name: str, benchmark: str) -> Any:
+    """Memory factory dispatch.
+
+    V4ₜ family configs (v4t-canonical, v4t-tuned, v4t-corpus-tuned):
+      return GraphMemoryV4 with the appropriate MemoryParamsV4.
+
+    bm25-corpus: returns BM25Memory (Phase 1.7 baseline, now in corpus
+      mode where it indexes EVERY paragraph of EVERY doc in the
+      benchmark and retrieves top-k by BM25 score). This is the
+      industry-standard sparse-retrieval baseline; without it, the
+      V4ₜ claim ("learned memory beats sparse retrieval") is
+      unanchored.
+
+    Returns: a memory instance satisfying the 4-method contract
+    (add_event, get_relevant_events, clear, get_stats).
+    """
+    if config_name in ("v4-canonical", "v4-tuned"):
+        config_name = config_name.replace("v4-", "v4t-")
+
+    if config_name in ("v4t-canonical", "v4t-tuned", "v4t-corpus-tuned"):
+        params = load_config_params(config_name, benchmark)
+        return GraphMemoryV4(params), params
+    elif config_name == "bm25-corpus":
+        # BM25 has no tunable params; placeholder None for the downstream
+        # snapshot/manifest code to detect.
+        return BM25Memory(), None
+    elif config_name == "dump-all":
+        # No-selection baseline (#9): feasible only on small corpora.
+        # Runner should check context overflow per question.
+        return DumpAllMemory(), None
+    else:
+        raise ValueError(
+            f"Unknown config: {config_name!r}. "
+            f"Valid: v4t-canonical, v4t-tuned, v4t-corpus-tuned, bm25-corpus, dump-all."
+        )
 
 # gpt-4o-mini pricing (per 1M tokens; sync'd with run_stage3_full.py).
 PRICING = {
@@ -284,13 +341,17 @@ def run_corpus_qa(
     total_docs = len(docs)
     print(f"  Loaded {total_docs} docs.")
 
-    params = load_config_params(config, benchmark)
-    if w_recency_zero:
+    memory, params = build_memory(config, benchmark)
+    if params is not None and w_recency_zero:
         params.w_recency = 0.0
-    memory = GraphMemoryV4(params)
-    print(f"  V4t params: "
-          f"theta_store={params.theta_store:.3f} theta_entity={params.theta_entity:.3f} "
-          f"w_embed={params.w_embed:.3f} w_recency={params.w_recency:.3f}")
+        # Rebuild memory so retrieval uses the overridden w_recency.
+        memory = GraphMemoryV4(params)
+    if params is not None:
+        print(f"  V4t params: "
+              f"theta_store={params.theta_store:.3f} theta_entity={params.theta_entity:.3f} "
+              f"w_embed={params.w_embed:.3f} w_recency={params.w_recency:.3f}")
+    else:
+        print(f"  Memory: {type(memory).__name__} (no tunable params; pure sparse retrieval)")
 
     agent = LLMAgent(model=model, temperature=0.0, max_tokens=MAX_ANSWER_TOKENS, seed=seed)
     token_count = _make_token_counter(model)
@@ -302,6 +363,16 @@ def run_corpus_qa(
     cumulative_stored = 0
     t_start = time.time()
 
+    def _node_count_o1(m) -> int:
+        """Memory-agnostic O(1) graph-size probe. Used to detect whether
+        add_event accepted (graph grew) or rejected (no change). V4's
+        graph also tracks entity nodes, so this counts events+entities."""
+        if hasattr(m, "_graph"):
+            return m._graph.number_of_nodes()  # O(1) in NetworkX DiGraph
+        if hasattr(m, "_events"):
+            return len(m._events)
+        return m.get_stats().get("n_nodes", 0)
+
     # Phase A: ingest doc K, then optionally answer its QAs (online mode).
     for doc_idx, doc in enumerate(docs):
         doc_title = str(doc.get("title", f"doc_{doc_idx}"))[:120]
@@ -311,9 +382,9 @@ def run_corpus_qa(
         for para_idx, paragraph in enumerate(paragraphs):
             obs = f"[{doc_title}] {paragraph}" if para_idx == 0 else paragraph
             event = Event(step=global_step, observation=obs, action="read")
-            n_before = memory._graph.number_of_nodes()
+            n_before = _node_count_o1(memory)
             memory.add_event(event, episode_seed=seed)
-            if memory._graph.number_of_nodes() > n_before:
+            if _node_count_o1(memory) > n_before:
                 cumulative_stored += 1
             global_step += 1
 
@@ -501,9 +572,15 @@ def run_corpus_qa(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--benchmark", required=True, choices=sorted(ADAPTERS.keys()))
-    parser.add_argument("--config", default="v4t-tuned",
-                        choices=["v4t-tuned", "v4t-canonical", "v4-tuned", "v4-canonical"],
-                        help="V4ₜ variant. v4- legacy aliases auto-promote to v4t-.")
+    parser.add_argument(
+        "--config", default="v4t-tuned",
+        choices=["v4t-tuned", "v4t-canonical", "v4t-corpus-tuned",
+                 "bm25-corpus", "dump-all", "v4-tuned", "v4-canonical"],
+        help="Memory configuration. V4t variants use GraphMemoryV4 with "
+             "text_mode_entities=True; bm25-corpus uses BM25Memory; "
+             "dump-all is the no-selection baseline (feasible only on small "
+             "corpora that fit in 128K context). Legacy v4-* aliases promote.",
+    )
     parser.add_argument("--limit-docs", type=int, default=None)
     parser.add_argument("--k", type=int, default=8)
     parser.add_argument("--seed", type=int, default=42)
