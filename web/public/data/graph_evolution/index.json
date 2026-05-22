@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "runs": [
+    {
+      "run_id": "cuad__v4t-canonical",
+      "benchmark": "cuad",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-canonical",
+      "order": "canonical",
+      "n_docs": 510,
+      "n_snapshots": 370,
+      "n_nodes": 5000,
+      "n_edges": 22096
+    },
+    {
+      "run_id": "cuad__v4t-corpus-tuned",
+      "benchmark": "cuad",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-corpus-tuned",
+      "order": "canonical",
+      "n_docs": 510,
+      "n_snapshots": 370,
+      "n_nodes": 5000,
+      "n_edges": 19228
+    },
+    {
+      "run_id": "financebench__v4t-canonical",
+      "benchmark": "financebench",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-canonical",
+      "order": "canonical",
+      "n_docs": 150,
+      "n_snapshots": 212,
+      "n_nodes": 1002,
+      "n_edges": 2733
+    },
+    {
+      "run_id": "financebench__v4t-tuned",
+      "benchmark": "financebench",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-tuned",
+      "order": "canonical",
+      "n_docs": 150,
+      "n_snapshots": 212,
+      "n_nodes": 939,
+      "n_edges": 2478
+    },
+    {
+      "run_id": "financebench__v4t-tuned__reverse",
+      "benchmark": "financebench",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-tuned",
+      "order": "reverse",
+      "n_docs": 150,
+      "n_snapshots": 212,
+      "n_nodes": 976,
+      "n_edges": 2558
+    },
+    {
+      "run_id": "financebench__v4t-tuned__shuffle7",
+      "benchmark": "financebench",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-tuned",
+      "order": "shuffle",
+      "n_docs": 150,
+      "n_snapshots": 212,
+      "n_nodes": 980,
+      "n_edges": 2690
+    },
+    {
+      "run_id": "qasper__v4t-canonical",
+      "benchmark": "qasper",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-canonical",
+      "order": "canonical",
+      "n_docs": 281,
+      "n_snapshots": 279,
+      "n_nodes": 5000,
+      "n_edges": 13400
+    },
+    {
+      "run_id": "qasper__v4t-corpus-tuned",
+      "benchmark": "qasper",
+      "benchmark_category": "domain_coherent",
+      "config": "v4t-corpus-tuned",
+      "order": "canonical",
+      "n_docs": 281,
+      "n_snapshots": 279,
+      "n_nodes": 5000,
+      "n_edges": 17503
+    }
+  ],
+  "benchmarks": [
+    "cuad",
+    "financebench",
+    "qasper"
+  ],
+  "configs": [
+    "v4t-canonical",
+    "v4t-corpus-tuned",
+    "v4t-tuned"
+  ],
+  "orders": [
+    "canonical",
+    "reverse",
+    "shuffle"
+  ]
+}

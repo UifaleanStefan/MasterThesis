@@ -239,6 +239,8 @@ def make_snapshot(
 def dump_final_graph(memory: GraphMemoryV4, max_nodes: int = FINAL_GRAPH_MAX_NODES) -> dict:
     """Full final-state dump for the viewer. Caps total nodes to max_nodes
     by sampling: keep all entities + the most-recent events up to budget.
+
+    Entity nodes include first_seen_step (Phase 2 viewer animation).
     """
     g = memory._graph
     entity_nodes = []
@@ -250,6 +252,7 @@ def dump_final_graph(memory: GraphMemoryV4, max_nodes: int = FINAL_GRAPH_MAX_NOD
                 "type": "entity",
                 "mention_count": int(memory._entity_mention_count.get(node, 0)),
                 "last_step": int(memory._entity_last_step.get(node, -1)),
+                "first_seen_step": int(memory._entity_first_step.get(node, -1)),
             })
         elif data.get("type") == "event":
             event_nodes.append({

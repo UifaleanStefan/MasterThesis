@@ -84,21 +84,34 @@ def slim_snapshot(snap: dict) -> dict:
     }
 
 
-def annotate_graph(graph: dict, first_seen: dict[str, int]) -> dict:
-    """Add `first_seen_step` to every node in the final graph."""
+def annotate_graph(graph: dict, first_seen: dict[str, int], total_steps: int) -> dict:
+    """Add `first_seen_step` to every node in the final graph.
+
+    Prefer the node's OWN first_seen_step (now tracked in V4 directly
+    via _entity_first_step). Fall back to the derived-from-top-entities
+    map. If both miss, mark the entity as first-seen at the END of the
+    corpus rather than the beginning — better visualization default
+    for entities that never made top-30 (they're rare and appear late
+    in the corpus).
+    """
     nodes = []
     for n in graph.get("nodes", []):
         nid = n["id"]
         if n.get("type") == "event":
-            # Event node IDs are like "event_<step>"; parse the step.
             try:
                 step = int(nid.split("_", 1)[1])
             except Exception:
                 step = n.get("step", 0)
             n = {**n, "first_seen_step": step}
         else:
-            # Entity node: look up first_seen step from timeline.
-            n = {**n, "first_seen_step": first_seen.get(nid, 0)}
+            # Prefer the node's own first_seen_step (added by the tracer).
+            own = n.get("first_seen_step", -1)
+            if isinstance(own, (int, float)) and own >= 0:
+                fs = int(own)
+            else:
+                # Derived-from-snapshots fallback.
+                fs = first_seen.get(nid, total_steps)
+            n = {**n, "first_seen_step": fs}
         nodes.append(n)
 
     edges = []
@@ -159,7 +172,11 @@ def process_run(run_dir: Path) -> dict | None:
 
     first_seen = derive_entity_first_seen(snapshots_raw)
     timeline = [slim_snapshot(s) for s in snapshots_raw]
-    graph = annotate_graph(graph_raw, first_seen)
+    total_steps = (
+        meta_raw.get("total_paragraphs_seen", 0)
+        or (snapshots_raw[-1]["global_step"] if snapshots_raw else 0)
+    )
+    graph = annotate_graph(graph_raw, first_seen, total_steps=total_steps)
     manifest = slim_manifest(meta_raw)
 
     out_dir = OUT_ROOT / run_dir.name

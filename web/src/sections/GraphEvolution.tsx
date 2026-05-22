@@ -528,7 +528,14 @@ function GraphCanvas({
           {visibleGraph.nodes.length} nodes · {visibleGraph.links.length} edges
         </span>
       </div>
-      <div style={{ height: 520 }}>
+      <div
+        style={{
+          height: 520,
+          // Subtle radial gradient for depth + improved contrast on dim nodes.
+          background:
+            "radial-gradient(ellipse at center, rgba(15, 23, 42, 0.6) 0%, rgba(8, 11, 20, 0.95) 70%)",
+        }}
+      >
         <ForceGraph2D
           ref={fgRef}
           graphData={visibleGraph as any}
@@ -536,41 +543,48 @@ function GraphCanvas({
           width={undefined}
           height={520}
           backgroundColor="rgba(0,0,0,0)"
-          cooldownTicks={50}
-          d3VelocityDecay={0.4}
-          warmupTicks={20}
+          cooldownTicks={60}
+          cooldownTime={2000}
+          d3VelocityDecay={0.5}
+          warmupTicks={30}
           enableNodeDrag={true}
           enableZoomInteraction={true}
           enablePanInteraction={true}
-          nodeRelSize={3}
+          nodeRelSize={5}
           nodeVal={(n: any) => {
-            if (n.type === "event") return 1.5;
+            if (n.type === "event") return 2;
             const c = (n as GraphNode).mention_count ?? 1;
-            return 2 + Math.sqrt(c) * 1.2;
+            return 3 + Math.sqrt(c) * 2;
+          }}
+          onEngineStop={() => {
+            // Center + zoom-to-fit after the simulation cools.
+            fgRef.current?.zoomToFit?.(400, 40);
           }}
           nodeColor={(n: any) => {
-            const dimmed =
-              connectedToHover && !connectedToHover.has(n.id) ? 0.18 : 1.0;
             const base = n.type === "event" ? EVENT_COLOR : entityColor(n.id);
-            return dimmed === 1.0 ? base : base + "33";
+            // Default: full opacity. Only dim when actively hovering an
+            // entity AND this node is not connected to it.
+            if (connectedToHover && !connectedToHover.has(n.id)) {
+              return base + "33"; // ~20% alpha for unconnected nodes
+            }
+            return base;
           }}
           linkColor={(e: any) => {
             const eid = e.edge_type;
-            const dimmed =
-              connectedToHover &&
-              !connectedToHover.has(
-                typeof e.source === "object" ? e.source.id : e.source,
-              ) &&
-              !connectedToHover.has(
-                typeof e.target === "object" ? e.target.id : e.target,
-              );
-            if (dimmed) return "rgba(148, 163, 184, 0.04)";
+            // Default coloring. Only dim non-connected edges when hovering.
+            if (connectedToHover) {
+              const src = typeof e.source === "object" ? e.source.id : e.source;
+              const tgt = typeof e.target === "object" ? e.target.id : e.target;
+              if (!connectedToHover.has(src) && !connectedToHover.has(tgt)) {
+                return "rgba(148, 163, 184, 0.04)";
+              }
+            }
             if (eid === "temporal") return TEMPORAL_EDGE_COLOR;
             if (eid === "mentions" || eid === "mentioned_in")
               return MENTION_EDGE_COLOR;
             return "rgba(148,163,184,0.15)";
           }}
-          linkWidth={0.6}
+          linkWidth={1.0}
           linkDirectionalArrowLength={0}
           onNodeHover={(n: any) => {
             if (n && n.type === "entity") setHoverEntity(n.id);

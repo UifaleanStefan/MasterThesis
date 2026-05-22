@@ -263,6 +263,7 @@ class GraphMemoryV4:
         self._params = params or MemoryParamsV4()
         self._entity_mention_count: dict[str, int] = {}
         self._entity_last_step: dict[str, int] = {}
+        self._entity_first_step: dict[str, int] = {}  # Phase 2 viewer
         self._stored_embeddings: list[np.ndarray] = []
         self._max_entities_seen: int = 0
 
@@ -320,6 +321,8 @@ class GraphMemoryV4:
                 self._entity_mention_count.get(entity_name, 0) + 1
             )
             self._entity_last_step[entity_name] = event.step
+            # Phase 2 viewer: first_seen for graph evolution animation.
+            self._entity_first_step.setdefault(entity_name, event.step)
 
         n_unique_entities = len(self._entity_mention_count)
 
@@ -429,6 +432,7 @@ class GraphMemoryV4:
         self._graph.clear()
         self._entity_mention_count.clear()
         self._entity_last_step.clear()
+        self._entity_first_step.clear()
         self._stored_embeddings.clear()
         self._max_entities_seen = 0
 

@@ -1,0 +1,38 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 18700.26it/s]
+
+==============================================================================
+  CORPUS INGESTION  benchmark=cuad (domain_coherent)
+  config=v4t-corpus-tuned  seed=42  limit_docs=ALL
+  order=canonical
+==============================================================================
+  Loaded 510 docs in 'canonical' order.
+  Memory: V4t with params=theta_store=0.312 theta_novel=0.712 w_embed=2.780 w_recency=0.000
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 6631.67it/s]
+  doc    25/510    global_step=   3377  |events|=  1623  |entities|= 2708  snapshots= 136  elapsed=  39.2s  dt=39.2s
+  doc    50/510    global_step=   6243  |events|=  2949  |entities|= 4737  snapshots= 186  elapsed=  71.4s  dt=32.2s
+  doc    75/510    global_step=  10020  |events|=  4646  |entities|= 6651  snapshots= 236  elapsed= 113.6s  dt=42.3s
+  doc   100/510    global_step=  13620  |events|=  6351  |entities|= 8647  snapshots= 286  elapsed= 155.9s  dt=42.2s
+  doc   125/510    global_step=  17022  |events|=  7867  |entities|=10082  snapshots= 292  elapsed= 192.2s  dt=36.3s
+  doc   150/510    global_step=  20870  |events|=  9550  |entities|=12280  snapshots= 296  elapsed= 231.4s  dt=39.2s
+  doc   175/510    global_step=  25412  |events|= 11567  |entities|=13932  snapshots= 302  elapsed= 276.5s  dt=45.0s
+  doc   200/510    global_step=  32576  |events|= 14958  |entities|=16397  snapshots= 306  elapsed= 343.3s  dt=66.8s
+  doc   225/510    global_step=  35706  |events|= 16418  |entities|=17834  snapshots= 312  elapsed= 370.2s  dt=26.9s
+  doc   250/510    global_step=  38911  |events|= 17905  |entities|=19410  snapshots= 316  elapsed= 398.7s  dt=28.5s
+  doc   275/510    global_step=  44257  |events|= 20412  |entities|=21541  snapshots= 322  elapsed= 447.9s  dt=49.1s
+  doc   300/510    global_step=  48748  |events|= 22226  |entities|=23036  snapshots= 326  elapsed= 484.1s  dt=36.3s
+  doc   325/510    global_step=  51245  |events|= 23448  |entities|=24232  snapshots= 332  elapsed= 508.5s  dt=24.4s
+  doc   350/510    global_step=  55037  |events|= 25271  |entities|=26063  snapshots= 336  elapsed= 543.8s  dt=35.3s
+  doc   375/510    global_step=  57226  |events|= 26319  |entities|=27087  snapshots= 342  elapsed= 564.3s  dt=20.5s
+  doc   400/510    global_step=  59545  |events|= 27393  |entities|=28214  snapshots= 346  elapsed= 589.4s  dt=25.1s
+  doc   425/510    global_step=  63781  |events|= 29417  |entities|=29689  snapshots= 352  elapsed= 632.2s  dt=42.8s
+  doc   450/510    global_step=  68594  |events|= 31490  |entities|=31264  snapshots= 356  elapsed= 676.9s  dt=44.7s
+  doc   475/510    global_step=  70585  |events|= 32315  |entities|=32180  snapshots= 362  elapsed= 697.4s  dt=20.5s
+  doc   500/510    global_step=  73228  |events|= 33557  |entities|=33483  snapshots= 366  elapsed= 723.8s  dt=26.4s
+  doc   510/510    global_step=  74435  |events|= 34107  |entities|=33920  snapshots= 370  elapsed= 735.6s  dt=11.8s
+
+  Building final graph dump...
+
+  Saved snapshots.json, meta.json, final_graph.json
+  Elapsed: 735.6s
+  Final graph: 34107 events, 33920 entities, 295343 edges
+  Store ratio: 45.82% (34107/74435)

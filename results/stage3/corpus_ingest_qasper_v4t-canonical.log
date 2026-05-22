@@ -1,0 +1,29 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 20592.66it/s]
+
+==============================================================================
+  CORPUS INGESTION  benchmark=qasper (domain_coherent)
+  config=v4t-canonical  seed=42  limit_docs=ALL
+  order=canonical
+==============================================================================
+  Loaded 281 docs in 'canonical' order.
+  Memory: V4t with params=theta_store=0.293 theta_novel=0.908 w_embed=1.079 w_recency=3.777
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 6414.26it/s]
+  doc    25/281    global_step=   1620  |events|=  1218  |entities|= 1473  snapshots=  91  elapsed=  20.0s  dt=20.0s
+  doc    50/281    global_step=   3311  |events|=  2458  |entities|= 2823  snapshots= 141  elapsed=  39.0s  dt=18.9s
+  doc    75/281    global_step=   4586  |events|=  3370  |entities|= 3659  snapshots= 191  elapsed=  53.2s  dt=14.3s
+  doc   100/281    global_step=   5986  |events|=  4407  |entities|= 4578  snapshots= 241  elapsed=  70.8s  dt=17.6s
+  doc   125/281    global_step=   7524  |events|=  5568  |entities|= 5504  snapshots= 247  elapsed=  87.5s  dt=16.7s
+  doc   150/281    global_step=   9146  |events|=  6878  |entities|= 6516  snapshots= 251  elapsed= 105.8s  dt=18.3s
+  doc   175/281    global_step=  10697  |events|=  8027  |entities|= 7418  snapshots= 257  elapsed= 123.0s  dt=17.2s
+  doc   200/281    global_step=  12383  |events|=  9230  |entities|= 8265  snapshots= 261  elapsed= 142.9s  dt=20.0s
+  doc   225/281    global_step=  13845  |events|= 10306  |entities|= 9061  snapshots= 267  elapsed= 158.8s  dt=15.9s
+  doc   250/281    global_step=  15276  |events|= 11385  |entities|= 9885  snapshots= 271  elapsed= 175.6s  dt=16.7s
+  doc   275/281    global_step=  16960  |events|= 12570  |entities|=10826  snapshots= 277  elapsed= 193.7s  dt=18.2s
+  doc   281/281    global_step=  17342  |events|= 12818  |entities|=11035  snapshots= 279  elapsed= 198.0s  dt=4.2s
+
+  Building final graph dump...
+
+  Saved snapshots.json, meta.json, final_graph.json
+  Elapsed: 198.0s
+  Final graph: 12818 events, 11035 entities, 75834 edges
+  Store ratio: 73.91% (12818/17342)

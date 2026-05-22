@@ -101,6 +101,16 @@ _PROPER_NOUN_STOPWORDS = {
     "Maybe", "Perhaps", "Indeed", "Surely",
     "Note", "Notes", "See", "Refer", "Also",
     "Inc", "Corp", "Ltd", "Co",
+    # Common sentence-starters seen on QASPER pilot run that produced
+    # high-mention false positives. Generally these are NOT entity-like
+    # in scientific papers either.
+    "For", "Finally", "Then", "Now", "Here", "Thus",
+    "Furthermore", "Moreover", "Specifically", "Importantly",
+    "Notably", "Conversely", "Similarly", "Additionally", "Consequently",
+    "Subsequently", "Generally", "Typically", "Usually", "Often",
+    "Sometimes", "Always", "Never", "Once", "Twice",
+    "Within", "Without", "Above", "Below", "Beyond", "Inside", "Outside",
+    "Recently", "Currently", "Previously", "Lastly",
 }
 
 
