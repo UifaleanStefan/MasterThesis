@@ -133,6 +133,43 @@ hyperparameters (Snoek et al. 2012) and retrieval scoring weights
 is `BayesOpt-RAG` (concurrent and unpublished as of writing) — but
 again, on retrieval weights, not on the storage policy.
 
+### Persistent memory across document streams (corpus-cumulative)
+
+The Stage 3 Phase 2 framing — one memory instance ingesting an entire
+benchmark corpus sequentially — has direct cousins in the practical
+RAG literature:
+
+* **StreamingLLM** (Xiao et al. 2023) introduces attention sinks so a
+  transformer can attend over an effectively-infinite token stream
+  without recomputing. The "stream" framing matches ours; the memory
+  *representation* differs (attention sinks vs. learned graph + θ
+  retrieval scoring).
+* **MemGPT / Letta** (Packer et al. 2023) implements a multi-tier
+  memory (core / archival / external) with LLM-orchestrated paging.
+  The paging policy is LLM-driven and fixed; θ is not a tunable
+  parameter. Stage 3 Phase 2's V4ₜ is closest to MemGPT's "archival"
+  tier but with a learnable storage gate replacing the LLM paging
+  decision.
+* **mem0** (open-source, 2024) and **LangMem** (LangChain, 2024) ship
+  practitioner-grade persistent memory frameworks built on top of
+  vector stores + LLM-summarized fact extraction. They formalize what
+  we call corpus-cumulative ingestion but treat storage and
+  extraction as LLM-prompted (read: expensive, not optimizable in
+  closed form). V4ₜ's CMA-ES tuning is the kind of optimization
+  these frameworks invite but haven't published.
+* **HippoRAG** (Gutiérrez et al. 2024 — also cited above for entity
+  graph retrieval) builds its knowledge graph once over the full
+  corpus and queries via Personalized PageRank. The graph
+  construction is *not* learned. Stage 3 Phase 2's V4ₜ corpus mode
+  is essentially HippoRAG with a learnable construction policy.
+
+The shared limitation across this practitioner-RAG cluster is that
+the storage policy is either hard-coded (HippoRAG, BM25) or
+LLM-prompted (MemGPT, mem0, LangMem). Stage 3 Phase 2 contributes
+the **black-box-optimized** storage policy under a corpus-cumulative
+regime — closing the gap between toy-environment θ-tuning (Stage 1+2)
+and production-RAG corpus ingestion.
+
 ### Reflexion and verbal memory
 
 The thesis's Stage 2 chapter (V6 era — see `docs/REFLEXION_RESULTS.md`)
@@ -501,6 +538,27 @@ per benchmark depending on QAs-per-doc density. For tuning, 8 docs
 * **Prompt-byte budget** (Phase 1.5, current guardrail) — asserted in
   Layer 2 of the test pyramid as a leading indicator of Phase-4 cost
   blowups.
+
+### 4.2.1 Embedding choice (free parameter, critique #13)
+
+All embedding-based retrieval (V4's `w_embed` term, the BM25 baseline's
+*absence* of embeddings, RAGMemory, AttentionMemory, etc.) uses
+**`sentence-transformers/all-MiniLM-L6-v2`** — a small (384-dim)
+all-purpose sentence encoder. The choice is deliberate but
+underexamined: MiniLM is fast on CPU (~100ms per batch), produces
+deterministic embeddings (we seed the model), and was widely-used at
+the time the Stage 3 adapters were built. It is *not* the strongest
+available encoder — `text-embedding-3-large` (3,072-dim) or domain-
+specific encoders (e.g., `BGE-M3` for legal, `SciBERT`-derived for
+scientific text) would likely improve recall@k at the cost of
+inference time + API/disk footprint.
+
+We treat the embedding model as a free parameter and report all
+results conditional on this choice. A more capable encoder might
+shift the absolute recall numbers but is unlikely to change the
+direction of the headline findings (V4-tuned vs V4-canonical lift,
+graph-traversal weight at corpus scale) because both compared
+configurations share the same encoder.
 
 ### 4.3 Memory systems (12 + tuned variants)
 

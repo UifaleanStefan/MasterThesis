@@ -531,6 +531,15 @@ def run_corpus_ingestion(
         "final_n_edges": memory._graph.number_of_edges(),
         "final_n_unique_entities": len(memory._entity_mention_count),
         "n_snapshots": len(snapshots),
+        "snapshot_strategy": {
+            # Block D / critique #15: snapshot strategy explicit in meta.json
+            "within_doc_keyframe_every_paragraphs": KEYFRAME_EVERY,
+            "within_doc_keyframes_for_first_N_docs": KEYFRAME_DOCS,
+            "doc_boundary_snapshots_for_first_N_docs": FREQUENT_DOCS,
+            "doc_boundary_snapshots_every_N_docs_thereafter": SPARSE_EVERY,
+            "anchor_doc_indices": sorted(ANCHOR_DOC_INDICES),
+            "max_snapshots": MAX_SNAPSHOTS,
+        },
         "elapsed_seconds": elapsed,
         "params": {
             "theta_store": params.theta_store,

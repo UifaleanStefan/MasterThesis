@@ -277,9 +277,124 @@ class TestCorpusTracerSmoke:
         assert meta["final_n_event_nodes"] > 0
         # With text-mode entities + financial text, should produce entities.
         assert meta["final_n_entity_nodes"] > 0
+        # Snapshot strategy is documented in meta.json (critique #15).
+        assert "snapshot_strategy" in meta
+        assert meta["snapshot_strategy"]["within_doc_keyframe_every_paragraphs"] > 0
 
         snapshots = json.loads((out_dir / "snapshots.json").read_text())
         assert len(snapshots) > 0
         # First snapshot should have at least 1 entity if text mode is wired right.
         last_snap = snapshots[-1]
         assert last_snap["n_entity_nodes"] > 0
+
+
+class TestV4SaveLoad:
+    """Memory persistence API (Block D / critique #14)."""
+
+    def test_save_load_roundtrip(self, tmp_path):
+        # Build a small graph, save it, load it, verify state matches.
+        params = MemoryParamsV4(
+            theta_store=0.0, theta_novel=0.5, w_embed=1.0,
+            text_mode_entities=True,
+        )
+        m1 = GraphMemoryV4(params)
+        for i, obs in enumerate([
+            "Microsoft's Q3 2023 revenue rose to $56.5 billion.",
+            "Section 4.1 of the contract defines termination clauses.",
+            "Apple reported FY2024 results in fiscal year 2024.",
+        ]):
+            m1.add_event(Event(step=i, observation=obs, action="read"), episode_seed=42)
+
+        ckpt = tmp_path / "v4_state.pkl"
+        m1.save(ckpt)
+        assert ckpt.exists()
+
+        m2 = GraphMemoryV4.load(ckpt)
+        assert m2._graph.number_of_nodes() == m1._graph.number_of_nodes()
+        assert m2._graph.number_of_edges() == m1._graph.number_of_edges()
+        assert m2._entity_mention_count == m1._entity_mention_count
+        assert m2._entity_last_step == m1._entity_last_step
+        assert m2._max_entities_seen == m1._max_entities_seen
+        # Retrieval should produce identical results.
+        q = "Microsoft revenue 2023"
+        r1 = m1.get_relevant_events(q, current_step=3, k=2)
+        r2 = m2.get_relevant_events(q, current_step=3, k=2)
+        assert [e.step for e in r1] == [e.step for e in r2]
+
+    def test_load_missing_file_raises(self, tmp_path):
+        with pytest.raises(FileNotFoundError):
+            GraphMemoryV4.load(tmp_path / "no_such_file.pkl")
+
+
+class TestClaudeJudgeQueue:
+    """Block E / critique #11: queue + results infrastructure."""
+
+    def test_write_read_roundtrip(self, monkeypatch, tmp_path):
+        import evaluation.claude_judge_queue as cjq
+        monkeypatch.setattr(cjq, "QUEUE_ROOT", tmp_path)
+
+        run_id = "test_bench__test_cfg__online__seed42"
+        items = [
+            {"qid": "test__doc0_qa0", "question": "Q1", "gold_answer": "A1",
+             "predicted": "A1 exact"},
+            {"qid": "test__doc1_qa0", "question": "Q2", "gold_answer": "A2",
+             "predicted": "wrong answer"},
+        ]
+        cjq.write_judge_queue(run_id, items)
+        loaded = cjq.read_judge_queue(run_id)
+        assert len(loaded) == 2
+        assert loaded[0]["qid"] == "test__doc0_qa0"
+        assert loaded[1]["predicted"] == "wrong answer"
+
+    def test_results_merge(self, monkeypatch, tmp_path):
+        import evaluation.claude_judge_queue as cjq
+        monkeypatch.setattr(cjq, "QUEUE_ROOT", tmp_path)
+
+        run_id = "test_bench__test_cfg__online__seed42"
+        qdir = cjq.queue_dir_for(run_id)
+        qdir.mkdir(parents=True)
+        # Write queue
+        (qdir / "queue.jsonl").write_text(
+            '{"qid": "q1", "question": "Q1"}\n'
+            '{"qid": "q2", "question": "Q2"}\n'
+        )
+        # Write Claude's results
+        (qdir / "results.jsonl").write_text(
+            '{"qid": "q1", "judge_score": 1.0, "rationale": "exact match"}\n'
+            '{"qid": "q2", "judge_score": 0.0, "rationale": "wrong"}\n'
+        )
+        # QA records (without judge_score yet)
+        qa_path = tmp_path / "qa_online.json"
+        import json as _json
+        _json.dump([
+            {"qid": "q1", "predicted": "A1", "judge_score": None},
+            {"qid": "q2", "predicted": "X", "judge_score": None},
+        ], qa_path.open("w"))
+
+        summary = cjq.merge_judge_results_into_qa(run_id, qa_path)
+        assert summary["matched"] == 2
+        assert summary["not_yet_judged"] == 0
+
+        # Verify merge happened
+        merged = _json.load(qa_path.open())
+        assert merged[0]["judge_score"] == 1.0
+        assert merged[0]["judge_rationale"] == "exact match"
+        assert merged[1]["judge_score"] == 0.0
+
+    def test_queue_summary_partial_progress(self, monkeypatch, tmp_path):
+        import evaluation.claude_judge_queue as cjq
+        monkeypatch.setattr(cjq, "QUEUE_ROOT", tmp_path)
+
+        run_id = "partial__test"
+        qdir = cjq.queue_dir_for(run_id)
+        qdir.mkdir(parents=True)
+        (qdir / "queue.jsonl").write_text(
+            '\n'.join(f'{{"qid": "q{i}"}}' for i in range(10)) + "\n"
+        )
+        (qdir / "results.jsonl").write_text(
+            '\n'.join(f'{{"qid": "q{i}", "judge_score": 1.0}}' for i in range(3)) + "\n"
+        )
+        s = cjq.queue_summary(run_id)
+        assert s["n_queued"] == 10
+        assert s["n_judged"] == 3
+        assert s["pct_complete"] == 30.0

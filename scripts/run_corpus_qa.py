@@ -67,6 +67,7 @@ from agent.llm_agent import LLMAgent
 from environment.benchmarks import ADAPTERS, get_adapter
 from environment.benchmarks.base import document_fingerprint
 from evaluation.document_qa_llm_judge import llm_judge_score_multi_ref
+from evaluation.claude_judge_queue import write_judge_queue
 from memory.bm25_memory import BM25Memory
 from memory.dump_all_memory import DumpAllMemory
 from memory.event import Event
@@ -539,12 +540,56 @@ def run_corpus_qa(
                 "agreement_rate": float((online_arr == batch_arr).mean()),
             }
 
+    # Block A: assign canonical qid to each record so Claude-in-the-loop
+    # judge results merge back correctly.
+    def _qid(rec: dict, mode_label: str) -> str:
+        return (
+            f"{benchmark}__{config}__{mode_label}__"
+            f"doc{rec['doc_idx']}_qa{rec['qa_idx_in_doc']}__seed{seed}"
+        )
+
+    for rec in online_results:
+        rec["qid"] = _qid(rec, "online")
+    for rec in batch_results:
+        rec["qid"] = _qid(rec, "batch")
+
     out_dir.mkdir(parents=True, exist_ok=True)
     if do_online:
         (out_dir / "qa_online.json").write_text(json.dumps(online_results, indent=2, default=str))
     if do_batch:
         (out_dir / "qa_batch.json").write_text(json.dumps(batch_results, indent=2, default=str))
     (out_dir / "qa_summary.json").write_text(json.dumps(summary, indent=2, default=str))
+
+    # Block E: emit Claude-in-the-loop judge queues (one per mode).
+    # Each entry has just what the judge needs: question, gold, predicted.
+    # The merger downstream looks up by qid to splice judge_score back.
+    def _queue_entry(rec: dict) -> dict:
+        return {
+            "qid": rec["qid"],
+            "benchmark": benchmark,
+            "config": config,
+            "mode": rec.get("mode"),
+            "doc_idx": rec.get("doc_idx"),
+            "qa_idx_in_doc": rec.get("qa_idx_in_doc"),
+            "docs_seen": rec.get("docs_seen"),
+            "question": rec["question"],
+            "scoped_question": rec.get("scoped_question"),
+            "gold_answer": rec["gold_answer"],
+            "predicted": rec["predicted"],
+            "retrieved_steps": rec.get("retrieved_steps"),
+            "k": rec.get("k"),
+        }
+
+    if do_online and online_results:
+        write_judge_queue(
+            f"{benchmark}__{config}__online__seed{seed}",
+            (_queue_entry(r) for r in online_results),
+        )
+    if do_batch and batch_results:
+        write_judge_queue(
+            f"{benchmark}__{config}__batch__seed{seed}",
+            (_queue_entry(r) for r in batch_results),
+        )
 
     print(f"\n  Saved qa_online.json / qa_batch.json / qa_summary.json to {out_dir}")
     print(f"  Total cost: ${total_cost:.4f}")

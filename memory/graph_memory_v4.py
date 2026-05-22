@@ -431,3 +431,57 @@ class GraphMemoryV4:
         self._entity_last_step.clear()
         self._stored_embeddings.clear()
         self._max_entities_seen = 0
+
+    # ------------------------------------------------------------------
+    # Persistence (Stage 3 Phase 2 / critique #14)
+    # ------------------------------------------------------------------
+
+    def save(self, path) -> None:
+        """Serialize the full memory state to disk via pickle.
+
+        Stage 3 corpus ingestion can be slow (minutes-to-hours for the
+        larger benchmarks). save()/load() lets a long ingestion run be
+        resumed without redoing the work — important when the QA loop
+        is separated from ingestion (e.g. Claude-in-the-loop judging
+        runs hours after ingestion completes).
+
+        Stored: the NetworkX DiGraph (with node + edge attributes,
+        including stored embeddings), the entity mention/last-step
+        dicts, _stored_embeddings, _max_entities_seen, and the params.
+        """
+        import pickle
+        from pathlib import Path
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        state = {
+            "graph": self._graph,
+            "params": self._params,
+            "entity_mention_count": self._entity_mention_count,
+            "entity_last_step": self._entity_last_step,
+            "stored_embeddings": self._stored_embeddings,
+            "max_entities_seen": self._max_entities_seen,
+            "schema_version": 1,
+        }
+        path.write_bytes(pickle.dumps(state, protocol=4))
+
+    @classmethod
+    def load(cls, path) -> "GraphMemoryV4":
+        """Restore a memory state previously saved via save()."""
+        import pickle
+        from pathlib import Path
+        path = Path(path)
+        if not path.exists():
+            raise FileNotFoundError(f"No saved memory at {path}")
+        state = pickle.loads(path.read_bytes())
+        if state.get("schema_version") != 1:
+            raise ValueError(
+                f"Unsupported memory checkpoint schema_version "
+                f"{state.get('schema_version')!r}; expected 1."
+            )
+        instance = cls(params=state["params"])
+        instance._graph = state["graph"]
+        instance._entity_mention_count = state["entity_mention_count"]
+        instance._entity_last_step = state["entity_last_step"]
+        instance._stored_embeddings = state["stored_embeddings"]
+        instance._max_entities_seen = state["max_entities_seen"]
+        return instance
