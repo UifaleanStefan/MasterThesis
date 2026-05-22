@@ -75,8 +75,11 @@ def main() -> int:
         }
 
     # Cross-benchmark theta-transfer matrix (optional — present iff W3 ran).
+    # Prefer v2 (5x2, Phase 1.7) over v1 (3x2, Phase 1.6) when both exist.
     transfer_payload: dict | None = None
-    transfer_path = TUNED_DIR / "theta_transfer_matrix.json"
+    v2_path = TUNED_DIR / "theta_transfer_matrix_v2.json"
+    v1_path = TUNED_DIR / "theta_transfer_matrix.json"
+    transfer_path = v2_path if v2_path.exists() else v1_path
     if transfer_path.exists():
         try:
             tj = json.loads(transfer_path.read_text())

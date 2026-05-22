@@ -164,7 +164,9 @@
     "rows": [
       "canonical",
       "qasper-tuned",
-      "cuad-tuned"
+      "cuad-tuned",
+      "qasper-heldout",
+      "cuad-heldout"
     ],
     "cols": [
       "qasper",
@@ -182,14 +184,22 @@
       "cuad-tuned": {
         "qasper": 0.5,
         "cuad": 0.6290322580645161
+      },
+      "qasper-heldout": {
+        "qasper": 0.5416666666666666,
+        "cuad": 0.6075268817204301
+      },
+      "cuad-heldout": {
+        "qasper": 0.5416666666666666,
+        "cuad": 0.6236559139784946
       }
     },
-    "diagonal_avg": 0.595766129032258,
-    "off_diagonal_avg": 0.5456989247311828,
+    "diagonal_avg": 0.5892137096774193,
+    "off_diagonal_avg": 0.5601478494623655,
     "canonical_avg": 0.28696236559139787,
-    "diagonal_lift_vs_canonical": 0.30880376344086014,
-    "off_diagonal_lift_vs_canonical": 0.2587365591397849,
-    "interpretation": "Diagonal cells (matched theta) beat canonical by avg +0.309. Off-diagonal cells exceed canonical by avg +0.259 \u2014 some cross-task transfer DOES happen between the long-haystack benchmarks."
+    "diagonal_lift_vs_canonical": 0.3022513440860214,
+    "off_diagonal_lift_vs_canonical": 0.27318548387096764,
+    "interpretation": "Diagonal cells (matched theta) beat canonical by avg +0.302. Off-diagonal cells exceed canonical by avg +0.273 \u2014 some cross-task transfer DOES happen between the long-haystack benchmarks."
   },
   "width_comparison": {
     "threshold": 0.02,

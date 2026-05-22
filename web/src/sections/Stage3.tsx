@@ -48,6 +48,25 @@ type PairedTest = {
   lift: number | null;
   tuned_mean: number | null;
   canonical_mean: number | null;
+  // Phase 1.7 additions:
+  p_holm_t?: number | null;
+  significant_holm_t?: boolean;
+  p_holm_wilcoxon?: number | null;
+  significant_holm_wilcoxon?: boolean;
+  wilcoxon?: {
+    W: number;
+    p_two_sided: number;
+    significant: boolean;
+  } | null;
+  cohens_d?: {
+    d: number;
+    magnitude: string;
+  } | null;
+  lift_cluster_ci?: {
+    point_estimate: number;
+    ci_lower: number;
+    ci_upper: number;
+  } | null;
 };
 type Phase4Data = {
   benchmarks: string[];
@@ -82,7 +101,7 @@ export function Stage3() {
           <>
             Six published benchmarks.{" "}
             <span style={{ color: "var(--color-amber)" }}>
-              Per-task &theta; lifts V4 by +0.26 to +0.36 recall.
+              Per-task &theta; lifts V4 on CUAD with Holm-corrected p&nbsp;&lt;&nbsp;0.01.
             </span>
           </>
         }
@@ -91,10 +110,14 @@ export function Stage3() {
             We migrated the evaluation off hand-authored documents onto six real
             long-context QA benchmarks (HotpotQA, QASPER, CUAD, NarrativeQA,
             FinanceBench, LongMemEval). Per-benchmark CMA-ES tuning of V4's 10D
-            &theta; on recall@k <strong>beats every other memory system</strong>{" "}
-            on the two long-haystack tasks (QASPER and CUAD). The remaining
-            four saturate at recall = 1.0 — they have small haystacks where
-            k = 8 retrieves everything that matters.
+            &theta; lifts CUAD answer quality by +0.067 judge points
+            (<strong>p<sub>Holm</sub> = 0.0033, d = +0.191</strong>) and gives
+            comparable lift on QASPER (not Holm-significant). Phase 1.7
+            added BM25 and tuned-AttentionMemory baselines under identical
+            CMA-ES budgets — on CUAD, AttentionMemory-tuned actually beats
+            V4-tuned by +0.053, narrowing the claim from{" "}
+            <em>"this architecture wins"</em> to{" "}
+            <em>"tuning wins; architecture is benchmark-dependent."</em>
           </>
         }
       />
@@ -171,16 +194,17 @@ export function Stage3() {
               </code>
               ) layers GPT-4o-mini on top: each retrieved passage feeds the LLM
               answer prompt, scored by LLM-judge, with token cost tracked
-              per cell. A <strong>dry-run</strong> mode uses tiktoken to project
-              cost without spending — we've measured it under{" "}
-              <strong>$2 for the canonical 6 × 3 × 30-question Phase-4 sweep</strong>.
+              per cell. <strong>Phase 4 + 1.7 complete</strong>: total spend
+              ~$5 across 11,000 LLM-judged questions (3 seeds × 100 q × 5
+              configs × 6 benchmarks, plus held-out test split and k-sweep
+              multi-seed). The Pareto frontier is in §5.6 of the chapter.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-3 gap-3 mt-4">
             <Pill tone="cyan">6 benchmarks</Pill>
-            <Pill tone="amber">3 memory configs</Pill>
-            <Pill tone="violet">GPT-4o-mini judge</Pill>
+            <Pill tone="amber">5 memory configs</Pill>
+            <Pill tone="violet">3 seeds · Holm-corrected</Pill>
           </div>
         </div>
 
@@ -188,20 +212,27 @@ export function Stage3() {
           <div className="panel-rise p-5">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles size={16} style={{ color: "var(--color-amber)" }} />
-              <h3 className="font-semibold text-base">Three commands to reproduce</h3>
+              <h3 className="font-semibold text-base">Reproduction recipe</h3>
             </div>
             <CodeBlock
               label="powershell"
               code={`# 1. Tune V4 theta per benchmark (no LLM, ~3 min)
 python -m tuning.tune_v4_per_benchmark --benchmarks all
 
-# 2. Run the retrieval study (no LLM, ~3 min)
-python scripts/run_stage3_retrieval.py --benchmarks all \\
-  --n-docs 15 --load-tuned-thetas
+# 2. Tune AttentionMemory tau with identical CMA-ES budget
+python -m tuning.tune_attention_per_benchmark --benchmarks qasper cuad
 
-# 3. Project Phase-4 cost (no LLM, ~1 min)
-python scripts/run_stage3_full.py --mode dry-run \\
-  --benchmarks all --configs v4-canonical v4-tuned flat-50`}
+# 3. Held-out V4 tuning (TRAIN/TEST split)
+python -m tuning.tune_v4_per_benchmark --benchmarks qasper cuad \\
+  --held-out-split --split-seed 42 --out-suffix heldout
+
+# 4. Multi-seed Phase 4 eval (requires OPENAI_API_KEY)
+python scripts/run_stage3_full.py --mode full --benchmarks all \\
+  --configs v4-canonical v4-tuned flat-50 bm25 attention-tuned \\
+  --n-questions 100 --seeds 42 7 100
+
+# 5. Aggregate with Holm-Bonferroni + cluster-bootstrap CI
+python scripts/aggregate_stage3_results.py --seeds 42 7 100`}
             />
           </div>
 
@@ -216,20 +247,23 @@ python scripts/run_stage3_full.py --mode dry-run \\
               className="font-semibold text-base mb-2"
               style={{ color: "var(--color-cyan)" }}
             >
-              What stays gated by API budget.
+              The narrowed claim, Phase 1.7.
             </h3>
             <p
               className="text-sm leading-relaxed"
               style={{ color: "var(--color-text-2)" }}
             >
-              The LLM-judge scoring path (
-              <code className="font-mono text-xs">
-                evaluation/document_qa_llm_judge.py
-              </code>
-              ) is wired in and dry-run-validated. With OPENAI_API_KEY set, the
-              orchestrator runs the same per-cell loop but calls GPT-4o-mini for
-              both the answer and the judge — producing the joint answer-quality
-              x cost numbers that close Stage 3.
+              Original claim: <em>"V4-tuned dominates the long-haystack
+              regime."</em> Adversarial review surfaced 17 critique points;
+              the held-out test (B), BM25 baseline (C), tuned-AttentionMemory
+              baseline (D), and Holm correction (A) narrow this to:{" "}
+              <strong>
+                task-tuned parameterized memory beats canonical V4 with
+                Holm-corrected significance on CUAD (p&lt;0.01); which tuned
+                architecture wins among V4 / BM25 / AttentionMemory is
+                benchmark-dependent.
+              </strong>{" "}
+              Full Limitations bundle in chapter §6.6.
             </p>
           </div>
         </div>
@@ -241,17 +275,12 @@ python scripts/run_stage3_full.py --mode dry-run \\
 function RetrievalTable({ data }: { data: StageData }) {
   const { benchmarks, table, tuned_vs_canonical } = data;
   // Sort systems by long-haystack performance: avg of CUAD + QASPER.
-  const systems = data.systems.slice().sort((a, b) => {
-    const scoreA = HEADLINE_BENCHMARKS.reduce((acc, b) => {
-      const v = table[a]?.[b];
+  const systemScore = (sys: string): number =>
+    HEADLINE_BENCHMARKS.reduce((acc, bench) => {
+      const v = table[sys]?.[bench];
       return acc + (typeof v === "number" ? v : 0);
     }, 0);
-    const scoreB = HEADLINE_BENCHMARKS.reduce((acc, b) => {
-      const v = table[b]?.[b];
-      return acc + (typeof v === "number" ? v : 0);
-    }, 0);
-    return scoreB - scoreA;
-  });
+  const systems = data.systems.slice().sort((a, b) => systemScore(b) - systemScore(a));
 
   return (
     <motion.div
@@ -440,7 +469,7 @@ function TransferMatrixPanel({ matrix }: { matrix: TransferMatrix }) {
             className="text-[0.65rem] uppercase tracking-[0.18em]"
             style={{ color: "var(--color-muted)" }}
           >
-            cross-benchmark theta transfer · 3 × 2 matrix · n_docs = 15
+            cross-benchmark theta transfer · 5 × 2 matrix · n_docs = 15
           </div>
           <h3 className="font-semibold text-lg mt-1">
             Does task-specific θ generalize across long-haystack benchmarks?
@@ -483,7 +512,10 @@ function TransferMatrixPanel({ matrix }: { matrix: TransferMatrix }) {
               </td>
               {matrix.cols.map((col) => {
                 const v = matrix.matrix_means?.[row]?.[col];
-                const isDiagonal = row === `${col}-tuned`;
+                // Diagonal if theta-source benchmark matches eval benchmark.
+                // Phase 1.7: matches both "<bench>-tuned" and "<bench>-heldout".
+                const isDiagonal =
+                  row === `${col}-tuned` || row === `${col}-heldout`;
                 return (
                   <td
                     key={col}
@@ -593,20 +625,35 @@ function TransferMatrixPanel({ matrix }: { matrix: TransferMatrix }) {
 }
 
 function Phase4Panel({ data }: { data: Phase4Data }) {
-  const sigMarker = (p: number | null): string =>
-    p === null ? "" : p < 0.001 ? "***" : p < 0.01 ? "**" : p < 0.05 ? "*" : "";
+  const sigMarker = (p: number | null | undefined): string =>
+    p === null || p === undefined
+      ? ""
+      : p < 0.001
+      ? "***"
+      : p < 0.01
+      ? "**"
+      : p < 0.05
+      ? "*"
+      : "";
+  // Winners-by-benchmark restricted to configs with full multi-seed coverage.
+  // Single-seed configs (BM25/AttentionMemory on most benchmarks) are still
+  // shown in the table but not bolded as "winners" — see § note below.
   const winnersByBench: Record<string, string> = {};
   data.benchmarks.forEach((b) => {
-    let best: { cfg: string; judge: number } | null = null;
+    let best: { cfg: string; judge: number; n: number } | null = null;
     data.configs.forEach((c) => {
       const cell = data.summary[b]?.[c];
       const j = cell?.mean_judge;
-      if (typeof j === "number" && (best === null || j > best.judge)) {
-        best = { cfg: c, judge: j };
+      const n = cell?.n_questions_pooled ?? 0;
+      // Require >=200 pooled questions for "winner" eligibility — i.e. true
+      // multi-seed (>=2 seeds × 100 q). Single-seed cells excluded from
+      // winner highlight because their CI is too wide for a fair comparison.
+      if (typeof j === "number" && n >= 200 && (best === null || j > best.judge)) {
+        best = { cfg: c, judge: j, n };
       }
     });
     if (best !== null) {
-      const w: { cfg: string; judge: number } = best;
+      const w: { cfg: string; judge: number; n: number } = best;
       winnersByBench[b] = w.cfg;
     }
   });
@@ -629,97 +676,151 @@ function Phase4Panel({ data }: { data: Phase4Data }) {
             className="text-[0.65rem] uppercase tracking-[0.18em]"
             style={{ color: "var(--color-muted)" }}
           >
-            Phase 4 · LLM answer quality · gpt-4o-mini · {data.seeds.length} seed(s) × 100 questions × paired t-test
+            Phase 4 + 1.7 · LLM answer quality · gpt-4o-mini ·{" "}
+            {data.seeds.length} seed(s) × 100 q · Holm-Bonferroni corrected
           </div>
           <h3 className="font-semibold text-lg mt-1">
             LLM-Judge Score per Memory Configuration
           </h3>
         </div>
         <div className="text-xs" style={{ color: "var(--color-text-2)" }}>
-          Total API spend: <span style={{ color: "var(--color-emerald)", fontWeight: 600 }}>${data.total_cost_usd.toFixed(4)}</span>
+          Total API spend:{" "}
+          <span style={{ color: "var(--color-emerald)", fontWeight: 600 }}>
+            ${data.total_cost_usd.toFixed(4)}
+          </span>
         </div>
       </div>
 
-      <table className="w-full text-xs font-mono">
-        <thead>
-          <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-            <th className="text-left py-2 pr-3 font-semibold">benchmark</th>
-            {data.configs.map((c) => (
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs font-mono">
+          <thead>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <th className="text-left py-2 pr-3 font-semibold">benchmark</th>
+              {data.configs.map((c) => (
+                <th
+                  key={c}
+                  className="text-right py-2 px-2 font-semibold"
+                  style={{
+                    color:
+                      c === "v4-tuned"
+                        ? "var(--color-amber)"
+                        : "var(--color-text-2)",
+                  }}
+                >
+                  {c}
+                </th>
+              ))}
               <th
-                key={c}
                 className="text-right py-2 px-2 font-semibold"
-                style={{ color: "var(--color-text-2)" }}
+                style={{ color: "var(--color-amber)" }}
               >
-                {c}
+                V4t − V4c · lift · p_Holm · d
               </th>
-            ))}
-            <th className="text-right py-2 px-2 font-semibold" style={{ color: "var(--color-amber)" }}>
-              tuned-vs-canonical · paired-t
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.benchmarks.map((b) => {
-            const t = data.paired_ttests?.[b];
-            return (
-              <tr key={b} style={{ borderBottom: "1px solid var(--color-border-soft)" }}>
-                <td className="py-2 pr-3 font-medium">{b}</td>
-                {data.configs.map((c) => {
-                  const cell = data.summary[b]?.[c];
-                  const j = cell?.mean_judge;
-                  const ci = cell?.judge_95ci;
-                  const isWinner = winnersByBench[b] === c;
-                  return (
-                    <td
-                      key={c}
-                      className="text-right py-2 px-2 tabular-nums"
-                      style={{
-                        color: isWinner ? "var(--color-emerald)" : "var(--color-text)",
-                        fontWeight: isWinner ? 700 : 400,
-                      }}
-                    >
-                      {typeof j === "number" ? j.toFixed(3) : "—"}
-                      {ci ? (
-                        <div
-                          className="text-[0.6rem]"
-                          style={{ color: "var(--color-muted)", fontWeight: 400 }}
-                        >
-                          [{ci[0].toFixed(2)}, {ci[1].toFixed(2)}]
-                        </div>
-                      ) : null}
-                    </td>
-                  );
-                })}
-                <td className="text-right py-2 px-2 tabular-nums">
-                  {t && typeof t.lift === "number" ? (
-                    <>
-                      <span
+            </tr>
+          </thead>
+          <tbody>
+            {data.benchmarks.map((b) => {
+              const t = data.paired_ttests?.[b];
+              return (
+                <tr
+                  key={b}
+                  style={{ borderBottom: "1px solid var(--color-border-soft)" }}
+                >
+                  <td className="py-2 pr-3 font-medium">{b}</td>
+                  {data.configs.map((c) => {
+                    const cell = data.summary[b]?.[c];
+                    const j = cell?.mean_judge;
+                    const ci = cell?.judge_95ci;
+                    const n = cell?.n_questions_pooled ?? 0;
+                    const isWinner = winnersByBench[b] === c;
+                    const isSingleSeed = n > 0 && n < 200;
+                    return (
+                      <td
+                        key={c}
+                        className="text-right py-2 px-2 tabular-nums"
                         style={{
-                          color: t.lift > 0 ? "var(--color-emerald)" : t.lift < 0 ? "var(--color-rose)" : "var(--color-muted)",
-                          fontWeight: 600,
+                          color: isWinner
+                            ? "var(--color-emerald)"
+                            : isSingleSeed
+                            ? "var(--color-text-2)"
+                            : "var(--color-text)",
+                          fontWeight: isWinner ? 700 : 400,
+                          fontStyle: isSingleSeed ? "italic" : "normal",
                         }}
                       >
-                        {t.lift >= 0 ? "+" : ""}
-                        {t.lift.toFixed(3)} {sigMarker(t.p_two_sided)}
-                      </span>
-                      <div className="text-[0.6rem]" style={{ color: "var(--color-muted)" }}>
-                        t={t.t?.toFixed(2)}, p={t.p_two_sided?.toFixed(3)}
-                      </div>
-                    </>
-                  ) : (
-                    "—"
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                        {typeof j === "number" ? j.toFixed(3) : "—"}
+                        {ci ? (
+                          <div
+                            className="text-[0.6rem]"
+                            style={{
+                              color: "var(--color-muted)",
+                              fontWeight: 400,
+                              fontStyle: "normal",
+                            }}
+                          >
+                            [{ci[0].toFixed(2)}, {ci[1].toFixed(2)}]
+                            {isSingleSeed ? " · 1 seed" : ""}
+                          </div>
+                        ) : null}
+                      </td>
+                    );
+                  })}
+                  <td className="text-right py-2 px-2 tabular-nums">
+                    {t && typeof t.lift === "number" ? (
+                      <>
+                        <span
+                          style={{
+                            color:
+                              t.significant_holm_t
+                                ? "var(--color-emerald)"
+                                : t.lift > 0
+                                ? "var(--color-text)"
+                                : t.lift < 0
+                                ? "var(--color-rose)"
+                                : "var(--color-muted)",
+                            fontWeight: t.significant_holm_t ? 700 : 600,
+                          }}
+                        >
+                          {t.lift >= 0 ? "+" : ""}
+                          {t.lift.toFixed(3)} {sigMarker(t.p_holm_t)}
+                        </span>
+                        <div
+                          className="text-[0.6rem]"
+                          style={{ color: "var(--color-muted)" }}
+                        >
+                          p_Holm=
+                          {typeof t.p_holm_t === "number"
+                            ? t.p_holm_t.toFixed(3)
+                            : "—"}
+                          {t.cohens_d ? (
+                            <>
+                              {" · d="}
+                              {t.cohens_d.d >= 0 ? "+" : ""}
+                              {t.cohens_d.d.toFixed(2)}
+                            </>
+                          ) : null}
+                        </div>
+                      </>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
       <p className="mt-4 text-xs" style={{ color: "var(--color-text-2)" }}>
-        Bold = best mean judge per benchmark. 95% CIs are bootstrap percentile over per-question
-        judge scores pooled across seeds. <code>*</code> p&lt;0.05, <code>**</code> p&lt;0.01, <code>***</code> p&lt;0.001
-        (paired t-test, V4-tuned − V4-canonical, per question matched by doc_idx).
+        Bold-green = best mean judge per benchmark (restricted to configs with
+        ≥2 seeds; <em>italicized</em> cells are single-seed and excluded from
+        the winner highlight). 95% CIs are cluster-bootstrap (resampled by
+        per-document cluster) over pooled per-question judge. Significance
+        markers <code>*</code> p_Holm&lt;0.05, <code>**</code> p_Holm&lt;0.01,{" "}
+        <code>***</code> p_Holm&lt;0.001 — apply Holm-Bonferroni step-down
+        correction across the 5 benchmarks tested. The right column reports
+        the V4-tuned − V4-canonical paired contrast with Cohen's d effect size.
       </p>
     </motion.div>
   );
