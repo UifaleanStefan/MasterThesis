@@ -9,6 +9,7 @@ import { Ablation } from "./sections/Ablation";
 import { TransferSensitivity } from "./sections/TransferSensitivity";
 import { NeuralController } from "./sections/NeuralController";
 import { Stage3 } from "./sections/Stage3";
+import { FinanceBenchCorpus } from "./sections/FinanceBenchCorpus";
 import { GraphEvolution } from "./sections/GraphEvolution";
 import { Reproducibility } from "./sections/Reproducibility";
 import { ScrollProgress } from "./components/nav/ScrollProgress";
@@ -30,6 +31,7 @@ function App() {
       <TransferSensitivity />
       <NeuralController />
       <Stage3 />
+      <FinanceBenchCorpus />
       <GraphEvolution />
       <Reproducibility />
     </EmbeddingProvider>

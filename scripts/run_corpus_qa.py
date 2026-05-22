@@ -153,7 +153,7 @@ def _load_tuned_attention_temp(benchmark: str) -> float:
     tuned AttentionMemory temperature. Falls back to 0.5 if missing."""
     path = ROOT / "results" / "stage3" / f"tuned_temperature_{benchmark}.json"
     if not path.exists():
-        print(f"  [WARN] no tuned τ for {benchmark!r}; using default 0.5")
+        print(f"  [WARN] no tuned tau for {benchmark!r}; using default 0.5")
         return 0.5
     try:
         data = json.loads(path.read_text())

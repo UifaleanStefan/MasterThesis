@@ -1,0 +1,88 @@
+{
+  "finbench_end_to_end_qa": {
+    "v4t-corpus-tuned": {
+      "online_recall": 1.0,
+      "online_judge": 0.697,
+      "batch_recall": 0.9666666666666667,
+      "batch_judge": 0.677,
+      "cost_usd": 0.14979434999999997
+    },
+    "v4t-canonical": {
+      "online_recall": 0.5666666666666667,
+      "online_judge": 0.455,
+      "batch_recall": 0.22,
+      "batch_judge": 0.225,
+      "cost_usd": 0.10936619999999996
+    },
+    "v4t-tuned": {
+      "online_recall": 0.5266666666666666,
+      "online_judge": 0.437,
+      "batch_recall": 0.12,
+      "batch_judge": 0.132,
+      "cost_usd": 0.10493895000000004
+    },
+    "bm25-corpus": {
+      "online_recall": 0.9133333333333333,
+      "online_judge": 0.648,
+      "batch_recall": 0.7,
+      "batch_judge": 0.497,
+      "cost_usd": 0.17159820000000006
+    },
+    "attention-corpus-tuned": {
+      "online_recall": 1.0,
+      "online_judge": 0.7,
+      "batch_recall": 0.9666666666666667,
+      "batch_judge": 0.652,
+      "cost_usd": 0.14967465000000002
+    },
+    "dump-all": {
+      "online_recall": 1.0,
+      "online_judge": 0.703,
+      "batch_recall": 1.0,
+      "batch_judge": 0.037,
+      "cost_usd": 0.2182773
+    }
+  },
+  "theta_canonical_grid_world": {
+    "theta_store": 0.293,
+    "theta_decay": 0.668,
+    "w_graph": 0.0,
+    "w_embed": 1.079,
+    "w_recency": 3.777
+  },
+  "theta_corpus_tuned": {
+    "theta_store": 0.009900097319873964,
+    "theta_novel": 0.7103974353297468,
+    "theta_erich": 0.20186852423904222,
+    "theta_surprise": 0.9439808011702628,
+    "theta_entity": 0.5573852362058379,
+    "theta_temporal": 0.3972333743100886,
+    "theta_decay": 0.5962228331385312,
+    "w_graph": 1.626504805384318,
+    "w_embed": 2.6327646590555407,
+    "w_recency": 0.0030769066704558023
+  },
+  "question_difficulty": {
+    "always_hard_count": 37,
+    "always_easy_count": 15,
+    "in_between_count": 98,
+    "always_hard_dominant_categories": [
+      "multi-formula calc (16/37)",
+      "qualitative judgement (11/37)"
+    ]
+  },
+  "corpus_vs_canonical_wins": {
+    "online_wins_for_corpus_tuned": 52,
+    "online_ties": 84,
+    "online_losses_for_corpus_tuned": 14,
+    "net_swing": 38
+  },
+  "cross_doc_pollution_in_batch": {
+    "v4t-canonical": 0.003,
+    "v4t-tuned": 0.001,
+    "v4t-corpus-tuned": 0.057,
+    "bm25-corpus": 0.04,
+    "attention-corpus-tuned": 0.057,
+    "dump-all": 0.004
+  }
+}
