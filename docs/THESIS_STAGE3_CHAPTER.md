@@ -1,8 +1,13 @@
 # Stage 3 — Task-Adaptive Parameterized Memory on Six Real Long-Context Benchmarks
 
-*Draft. Sections 1, 2, 3, 4, 6, 7 in prose. Section 5 (Results) has the
-retrieval-quality table populated from Phase 1.5 runs; the LLM-judge
-answer-quality and Pareto-frontier tables await Phase 4 API runs.*
+*Draft, Phase 1.7 honesty pass applied. All sections in prose. Section 5
+results are populated from Phase 1.5 (retrieval) + Phase 4 (LLM answer
+quality, 3 seeds × 100q × 5 configs × 6 benchmarks, ~$5 spend) +
+Phase 1.7 (multi-seed BM25 / AttentionMemory-tuned baselines,
+held-out V4-tuning, Holm-Bonferroni correction, cluster-bootstrap CI,
+extended θ-transfer matrix). Section 6.7 maps all 17 adversarial
+critiques to their resolution (addressed empirically / softened in
+language / acknowledged as remaining limitation).*
 
 ---
 
@@ -40,8 +45,9 @@ The Stage 3 contribution comes in two layers:
 
 1. **A retrieval-quality contribution.** The same `GraphMemoryV4` 10-D
    θ-vector, when re-tuned per benchmark via CMA-ES on recall@k, beats
-   the grid-world-tuned canonical θ by +0.357 on QASPER and +0.263 on
-   CUAD in recall — a finding that validates the "task-dependent memory"
+   the grid-world-tuned canonical θ by +0.357 on QASPER (+0.469 with
+   wide CMA-ES) and +0.229 on CUAD in recall — a finding that
+   validates the "task-dependent memory"
    claim on real data. Section 6.6 honestly narrows the original
    thesis "task-tuned graph memory is the best memory" claim: on
    answer-quality judge scores at k=8, simpler tunable baselines
@@ -462,10 +468,8 @@ on CUAD (−0.016). The transfer matrix (§5.3) uses the **better** of
 narrow vs. wide per benchmark — wide for QASPER, narrow for CUAD —
 as recorded in `theta_width_comparison.json`.
 
-*Original "TBD" placeholders below are now filled in.
-complete: wide CMA-ES delivered the QASPER lift (+0.112 over narrow)
-but regressed slightly on CUAD (−0.016). The diminishing-returns
-discussion is in §6.4.*
+The diminishing-returns discussion (why wide ≠ better on CUAD) is in
+§6.4.
 
 ### 5.3 Cross-benchmark θ-transfer matrix (Phase 1.6 + Phase 1.7 extension)
 
@@ -637,44 +641,32 @@ for 10 candidates, not whether 8 is enough.
   AttentionMemory-tuned wins CUAD); (c) the spread between tuned
   configs is small (≤0.07 judge points absolute on a [0, 1] scale)**.
 
-* **AttentionMemory-tuned** (1-D CMA-ES on `temperature`, same
-  tuning budget as V4): tuned τ = 2.60 produces **identical** recall
-  to default τ = 0.5 on both QASPER (recall 0.66) and CUAD (recall
-  0.64) — confirming the CMA-ES converged to the right answer for
-  the retrieval-recall objective. **However**, the *judge score*
-  (which the tuner did NOT optimize) is dramatically different at
-  the tuned τ: on **CUAD, AttentionMemory-tuned scores judge =
-  0.465** (n=100, seed=42), vs V4-tuned 0.220, BM25 0.310,
-  V4-canonical 0.140, flat-50 0.178. On **QASPER, AttentionMemory-
-  tuned scores judge = 0.235**, marginally above V4-tuned's 0.210.
-
-  **This is a thesis-shifting finding.** AttentionMemory with a
-  flattened attention (τ = 2.6, vs default 0.5) appears to surface
-  context that the LLM uses more effectively for answer generation,
-  even though recall@k=8 is unchanged. The interpretation: recall@k
-  is not a sufficient proxy for answer quality — the **structure**
-  of retrieved context matters, not just whether the gold passage
-  is somewhere in the top-k. V4's tuning objective (mean recall@k)
-  was insufficient; AttentionMemory's softer retrieval happened to
-  produce a better answer-LLM-friendly context distribution despite
-  identical recall.
-
-  The honest chapter claim therefore narrows: **task-tuned
-  parameterized memory beats canonical θ on CUAD with high
-  statistical significance (p_holm < 0.01), but does NOT dominate
-  other tunable memory systems**. AttentionMemory-tuned with its
-  single τ parameter beats V4-tuned with 10 θ parameters on the same
-  benchmark — a striking instance of "simpler is better when
-  recall isn't the right objective."
+  *Interpretation of the AttentionMemory-tuned CUAD win.*
+  AttentionMemory with a flattened attention (τ = 2.6, vs default 0.5)
+  appears to surface context that the LLM uses more effectively for
+  answer generation, even though recall@k=8 is unchanged. The
+  takeaway: recall@k is not a sufficient proxy for answer quality —
+  the **structure** of retrieved context matters, not just whether
+  the gold passage is somewhere in the top-k. V4's tuning objective
+  (mean recall@k) was insufficient; AttentionMemory's softer
+  retrieval produces a context distribution the answer-LLM uses more
+  effectively despite identical recall. This is consistent with the
+  HotpotQA contradiction (§5.4 paragraph above) — both are worked
+  examples of the retrieval-vs-answer-quality gap discussed in §6.4.
 
 * **V4-tuned-heldout** (Phase 1.7 leak-free re-tune on 25 disjoint
-  TRAIN docs, evaluated on 25 disjoint TEST docs at seed=42): On
+  TRAIN docs, evaluated on the other 25 TEST docs at seed=42): On
   CUAD, the held-out-tuned θ scores **recall 0.560, judge 0.620** on
-  TEST — substantially **higher** than the original in-distribution-
-  tuned V4 on the same TEST docs (recall 0.24, judge 0.22). The "data
-  leakage" critique is empirically refuted; thorough tuning beats
-  data-overlap-aware fairness concerns by a wide margin in this
-  benchmark.
+  the 25 TEST docs — substantially higher than the original
+  in-distribution-tuned V4 on its full seed=42 sample (recall 0.290,
+  judge 0.315 across all 100 questions). On QASPER the held-out
+  score is recall 0.667, judge 0.240. The comparison is not perfectly
+  apples-to-apples (the held-out eval is on 25 disjoint TEST docs,
+  the in-distribution eval is on the full 100q seed=42 sample), but
+  the directional finding holds: more thorough tuning on disjoint
+  TRAIN data outperforms less thorough tuning on the original data,
+  refuting the "data leakage inflates results" critique. See
+  `results/stage3/tuned_theta_heldout_*.json` and the cell JSONs.
 
 ### 5.5 Cost per question (Phase 4, complete)
 
@@ -701,34 +693,6 @@ retrieved-context-per-question both stayed compact. We report the
 actual figure as a concrete operational data point, not as a "we
 beat the budget" claim — the budget was over-padded by design.
 
-### 5.7 Benchmarks where no memory configuration differentiated (honest null-result section)
-
-**Three of the six benchmarks contribute no methodological signal**
-to the comparison-of-memory-systems story. They are retained for
-domain-coverage reasons (the chapter aims at six disjoint domains:
-legal contracts, scientific papers, Wikipedia multi-hop, full books,
-SEC filings, multi-session dialogue) but produced essentially flat
-results across every memory configuration we tested.
-
-| Benchmark | Range of mean judge (across all configs) | Why no differentiation |
-|---|---:|---|
-| **LongMemEval** | 0.37–0.40 | Short haystacks (median 2 sessions per question) — recall saturates at k=8 for every system, and the LLM's answer-quality is bottlenecked by the question's temporal-reasoning difficulty, not by which sessions were retrieved. |
-| **FinanceBench** | 0.42–0.45 | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). Every memory system retrieves the same gold paragraphs; the spread reflects LLM answer-extraction variability, not memory-system quality. |
-| **NarrativeQA** | 0.16–0.20 (V4/flat-50); BM25 = **0.575** | 800+ paragraph books with no paragraph-level gold relevance signal. At k=8 of 800, V4/flat-50 retrieval is essentially random and the LLM produces low-quality answers (judge ~0.18). **Phase 1.7 counter-finding**: BM25 scores judge=0.575 on the same benchmark — 3× higher than V4 or flat-50. Sparse lexical retrieval finds entity/place-name matches in narrative text that dense embeddings miss; the LLM uses those better-matched paragraphs to construct plausible answers. NarrativeQA therefore *does* differentiate memory systems — but the differentiator is lexical retrieval quality, not parameterized graph memory. |
-
-The chapter does **not** claim a methodological contribution from
-these three benchmarks. The honest message is:
-
-> NarrativeQA stress-tests retrieval at scale (1.2 M-character books)
-> but admits no paragraph-level gold supervision, so we can neither
-> tune nor reliably evaluate memory systems on it. LongMemEval and
-> FinanceBench have small enough haystacks that retrieval saturates,
-> reducing the comparison to "which LLM answer was a slightly better
-> phrasing of the same retrieved context." For headline methodological
-> claims (V4-tuned vs V4-canonical vs baselines), we rely on the two
-> long-haystack benchmarks where memory-system choice is non-trivial:
-> CUAD and QASPER.
-
 ### 5.6 Pareto frontier — cost-quality elasticity (lambda-sweep)
 
 Defining the joint objective `J(λ) = judge_score − λ × cost_per_q`,
@@ -747,11 +711,18 @@ does the optimal config change":
 | FinanceBench | flat-50 | v4-tuned | 5 000 |
 | NarrativeQA | v4-canonical | v4-canonical | (no crossover) |
 
-The empirical reading is **V4-tuned dominates the upper-left of the
-Pareto frontier** (low cost-sensitivity, where judge quality matters
-most) on the two long-haystack benchmarks, exactly as hypothesised. As
-λ grows past 5 000 (i.e. cost matters ~5,000× more than quality
-per token), flat-50 wins on CUAD by being slightly cheaper.
+The empirical reading, restricted to the three configs in this λ-sweep
+(v4-canonical, v4-tuned, flat-50), is **V4-tuned leads the upper-left
+of the Pareto frontier** (low cost-sensitivity, where judge quality
+matters most) on the two long-haystack benchmarks, exactly as
+hypothesised. As λ grows past 5,000 (i.e. cost matters ~5,000× more
+than quality per token), flat-50 wins on CUAD by being slightly
+cheaper. *Note: this λ-sweep predates Phase 1.7's BM25 and
+AttentionMemory-tuned baselines, so the v4-tuned-leads-at-λ=0 claim
+holds within the original 3-config sweep but does not address how
+the simpler tuned baselines (§5.4) would compete in the same
+Pareto picture; extending the λ-sweep to the 5-config space is
+future work.*
 
 **Translating λ into operational currency** (Phase 1.7 honesty pass —
 critique #12): the λ=5000 crossover corresponds to weighting each
@@ -764,8 +735,9 @@ spend matters more than 50% of judge-score quality** — operationally
 unrealistic for any production workload where answer quality has
 non-trivial business value. The crossover regime is therefore an
 extreme; for the realistic range λ ∈ [0, 1000] (each judge-point
-worth ≥ $0.001 = $10/day at 10,000 q/day), V4-tuned dominates on
-both long-haystack benchmarks.
+worth ≥ $0.001 = $10/day at 10,000 q/day), V4-tuned leads
+v4-canonical and flat-50 on both long-haystack benchmarks within
+this 3-config sweep.
 
 The Tier C k-sweep (k ∈ {4, 8, 16, 32}, 100 q × seed 42 × 6 benchmarks ×
 2 configs = 4,800 questions, total $1.52 in API calls) extends the
@@ -798,18 +770,49 @@ Two findings emerge cleanly:
    The cost-quality elasticity is therefore best at k = 8 across most
    benchmarks; QASPER is the exception with its k = 16 elbow.
 
-3. **V4-tuned dominates V4-canonical at every k on long-haystack
-   benchmarks** (CUAD, QASPER): on CUAD the gap is +0.10 to +0.07 in
-   judge score consistently from k = 4 to k = 32; on QASPER the gap is
-   +0.03 to +0.05. On short-haystack benchmarks the two configs are
-   within 0.05 of each other and the ordering swings benchmark-by-
-   benchmark and k-by-k — consistent with §6.1's two-cluster finding.
+3. **V4-tuned outperforms V4-canonical at every k on long-haystack
+   benchmarks** (CUAD, QASPER) within this 2-config k-sweep: on CUAD
+   the gap is +0.10 to +0.07 in judge score consistently from k = 4
+   to k = 32; on QASPER the gap is +0.03 to +0.05. On short-haystack
+   benchmarks the two configs are within 0.05 of each other and the
+   ordering swings benchmark-by-benchmark and k-by-k — consistent
+   with §6.1's two-cluster finding. (Phase 1.7's AttentionMemory-tuned
+   and BM25 baselines were not included in the k-sweep; the §5.4
+   results above are the authoritative 5-config head-to-head at k=8.)
 
 The thesis's choice of k = 8 throughout the rest of Stage 3 is
 empirically justified: it sits at the Pareto elbow for 5 of 6 benchmarks
 (QASPER alone would prefer k = 16, with marginal +0.04 judge gain for a
 1.4× cost increase). Cross-benchmark, k = 8 is the cost-quality sweet
 spot.
+
+### 5.7 Benchmarks where no memory configuration differentiated (honest null-result section)
+
+**Three of the six benchmarks contribute no methodological signal**
+to the comparison-of-memory-systems story. They are retained for
+domain-coverage reasons (the chapter aims at six disjoint domains:
+legal contracts, scientific papers, Wikipedia multi-hop, full books,
+SEC filings, multi-session dialogue) but produced essentially flat
+results across every memory configuration we tested.
+
+| Benchmark | Range of mean judge (across all configs) | Why no differentiation |
+|---|---:|---|
+| **LongMemEval** | 0.37–0.40 | Short haystacks (median 2 sessions per question) — recall saturates at k=8 for every system, and the LLM's answer-quality is bottlenecked by the question's temporal-reasoning difficulty, not by which sessions were retrieved. |
+| **FinanceBench** | 0.42–0.45 | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). Every memory system retrieves the same gold paragraphs; the spread reflects LLM answer-extraction variability, not memory-system quality. |
+| **NarrativeQA** | 0.16–0.20 (V4/flat-50); BM25 = **0.575** | 800+ paragraph books with no paragraph-level gold relevance signal. At k=8 of 800, V4/flat-50 retrieval is essentially random and the LLM produces low-quality answers (judge ~0.18). **Phase 1.7 counter-finding**: BM25 scores judge=0.575 on the same benchmark — 3× higher than V4 or flat-50. Sparse lexical retrieval finds entity/place-name matches in narrative text that dense embeddings miss; the LLM uses those better-matched paragraphs to construct plausible answers. NarrativeQA therefore *does* differentiate memory systems — but the differentiator is lexical retrieval quality, not parameterized graph memory. |
+
+The chapter does **not** claim a methodological contribution from
+these three benchmarks. The honest message is:
+
+> NarrativeQA stress-tests retrieval at scale (1.2 M-character books)
+> but admits no paragraph-level gold supervision, so we can neither
+> tune nor reliably evaluate memory systems on it. LongMemEval and
+> FinanceBench have small enough haystacks that retrieval saturates,
+> reducing the comparison to "which LLM answer was a slightly better
+> phrasing of the same retrieved context." For headline methodological
+> claims (V4-tuned vs V4-canonical vs baselines), we rely on the two
+> long-haystack benchmarks where memory-system choice is non-trivial:
+> CUAD and QASPER.
 
 ---
 
@@ -866,8 +869,10 @@ tuned AttentionMemory):** Phase 1.7 added two fair-comparison
 baselines — BM25 sparse retrieval, and AttentionMemory tuned with
 the identical CMA-ES budget V4 received — and re-evaluated each at
 3 seeds × 100 q on the long-haystack benchmarks (CUAD + QASPER).
-The Tier B V4-tuned 3-seed mean (0.296 on CUAD, 0.214 on QASPER) is
-the headline; the new multi-seed baselines compare as follows:
+The Phase 4 + 1.7 V4-tuned 3-seed mean (0.316 on CUAD, 0.203 on
+QASPER, per the corrected aggregator after restoring k=8 cells from
+cells_tier_b/) is the headline; the new multi-seed baselines compare
+as follows:
 
 | Benchmark | V4-tuned | BM25 | AttentionMemory-tuned | Best |
 |---|---:|---:|---:|---|
@@ -911,8 +916,8 @@ recency scores swamped the embedding signal.
 
 V4-tuned discovers θ vectors with `w_recency` near zero and `w_embed`
 elevated to recover the embedding-driven retrieval that grid-world θ
-suppressed. The +0.357 lift on QASPER and +0.263 lift on CUAD are
-the direct empirical consequence of this rebalancing.
+suppressed. The +0.357 lift on QASPER and +0.229 lift on CUAD in
+recall@k=8 are the direct empirical consequence of this rebalancing.
 
 This is *exactly* the finding the cross-environment grid-world
 results in the Stage 1 chapter predicted at toy scale: **the optimal θ
@@ -1000,7 +1005,7 @@ substantively converged at the narrow budget. Further tuning would
 need a fundamentally different search strategy (e.g. Bayesian
 optimization with a GP prior) rather than longer CMA-ES.
 
-### 6.4 What memory parameters actually capture
+### 6.5 What memory parameters actually capture
 
 The per-benchmark tuned θ vectors provide diagnostic information.
 Comparing canonical vs. tuned values:
@@ -1032,7 +1037,7 @@ within the document-QA family: a θ tuned for any long-haystack QA
 benchmark will exhibit these same three properties, and porting it
 to a different long-haystack benchmark preserves ~90% of the lift.
 
-### 6.5 Limitations (old — generic risks of the framework)
+### 6.6 Limitations (generic risks of the framework)
 
 * **k=8 is fixed in the headline numbers.** Section 5.6 explores
   k ∈ {4, 8, 16, 32}; the k-sensitivity finding is reported there.
@@ -1048,7 +1053,7 @@ to a different long-haystack benchmark preserves ~90% of the lift.
   smaller budget. CUAD's wide run regressed slightly relative to the
   narrow run, which we documented (Section 6.4) rather than hid.
 
-### 6.6 Adversarial review — addressed and acknowledged critiques
+### 6.7 Adversarial review — addressed and acknowledged critiques
 
 Subsequent adversarial review (Phase 1.7) identified ~17 specific
 critique points across four severity tiers. This subsection records
@@ -1076,8 +1081,8 @@ and which remain genuine limitations.
    produced zero recall improvement (default τ=0.5 and tuned τ=2.60
    yield identical recall), BUT **multi-seed evaluation on the LLM-
    judge metric reveals AttentionMemory-tuned beats V4-tuned on CUAD
-   by +0.073 judge points** (3-seed mean 0.369 vs 0.296). On QASPER
-   the ordering flips: V4-tuned wins by +0.064 (0.214 vs 0.150). The
+   by +0.053 judge points** (3-seed mean 0.369 vs 0.316). On QASPER
+   the ordering flips: V4-tuned wins by +0.053 (0.203 vs 0.150). The
    corrected resolution of critique #2 is therefore: **the "V4 wins
    only because we tuned it" critique becomes the "V4's specific
    architecture is not the source of the win — tuning is" finding**.
@@ -1091,7 +1096,7 @@ and which remain genuine limitations.
    k=8 across all 6 benchmarks at seed=42, then re-evaluated at
    seeds 7 and 100 on CUAD + QASPER. Multi-seed result: **V4-tuned
    beats BM25 on both long-haystack benchmarks** (CUAD 3-seed
-   judge 0.296 vs BM25's 0.225; QASPER 0.214 vs 0.130). The
+   judge 0.316 vs BM25's 0.225; QASPER 0.203 vs 0.130). The
    sparse-retrieval critique is addressed; BM25 is a real baseline
    but not the winner on these benchmarks.
 
@@ -1100,9 +1105,10 @@ and which remain genuine limitations.
    and rewrote §5.4 to report **Holm-corrected p-values, Wilcoxon
    signed-rank tests, Cohen's d effect sizes, and cluster-bootstrap
    95% CIs over per-document clusters**. The corrected result: CUAD
-   survives correction at `p_holm = 0.0053` (Wilcoxon: 0.0079);
-   QASPER's lift does not survive correction (p_holm > 0.05). The
-   defensible claim narrows accordingly.
+   survives correction at `p_holm_t = 0.0033` (Wilcoxon p_holm_w =
+   0.0032), Cohen's d = +0.191. QASPER's lift does not survive
+   correction (p_holm = 0.64). The defensible claim narrows
+   accordingly.
 
 5. **k-sweep single-seed** ("judge peaks then declines past k-elbow"
    rested on seed=42 only). Phase 1.7 added seeds 7 and 100 at the
@@ -1112,8 +1118,11 @@ and which remain genuine limitations.
 6. **Transfer claim with N=2**. Phase 1.7 added the held-out-tuned θ
    variants as additional rows in the transfer matrix
    (`results/stage3/theta_transfer_matrix_v2.json`), bringing the
-   effective N to 4 off-diagonal cells. The 84% transfer figure was
-   recomputed with the richer matrix and reported in §5.3.
+   matrix to 4 tuned-θ source rows × 2 evaluation benchmarks =
+   8 cells (4 diagonal, 4 off-diagonal). The recovery figure was
+   recomputed with the richer matrix: **off-diagonal cells now
+   recover ~90% of the diagonal lift over canonical** (0.273 / 0.302),
+   up from 84% in the original 3×2. Reported in §5.3.
 
 **Softened in language (writing-only honesty pass):**
 
@@ -1125,12 +1134,14 @@ and which remain genuine limitations.
    require k « |haystack|, which Section 5.6 partially explores with
    the k-sweep but does not exhaustively test.
 
-8. **HotpotQA contradicts the V4-tuned headline.** At k=8 with 100
-   questions, V4-canonical judge 0.689 beats V4-tuned 0.649. This is
-   honestly reported as a worked example of the retrieval-quality vs
-   answer-quality gap: the HotpotQA tuned θ was found by CMA-ES to
-   maximize recall@k, not judge-score; the resulting θ retrieves the
-   gold passages but produces marginally worse final answers.
+8. **HotpotQA contradicts the V4-tuned headline.** At k=8 across
+   3 seeds × 100 questions (n=300), V4-canonical mean judge 0.648
+   beats V4-tuned mean judge 0.636 by 0.012 (not statistically
+   significant; p_holm=0.69, d=−0.028). This is honestly reported as
+   a worked example of the retrieval-quality vs answer-quality gap:
+   the HotpotQA tuned θ was found by CMA-ES to maximize recall@k,
+   not judge-score; the resulting θ retrieves the gold passages but
+   produces marginally worse final answers.
 
 9. **NarrativeQA / LongMemEval / FinanceBench null results.** These
    three benchmarks showed no spread between memory configurations at
