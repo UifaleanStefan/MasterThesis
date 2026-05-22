@@ -74,6 +74,18 @@ from tuning.tune_v4_per_benchmark import CANONICAL_THETA_VEC, vec_to_params
 
 OUT_ROOT = ROOT / "results" / "stage3" / "corpus_traces"
 
+# Mirrored from run_corpus_ingestion.py (Block B / critique #2).
+DOMAIN_COHERENT = {"cuad", "qasper", "financebench"}
+DOMAIN_INCOHERENT = {"hotpotqa", "narrativeqa", "longmemeval"}
+
+
+def benchmark_category(benchmark: str) -> str:
+    if benchmark in DOMAIN_COHERENT:
+        return "domain_coherent"
+    if benchmark in DOMAIN_INCOHERENT:
+        return "domain_incoherent_control"
+    return "uncategorized"
+
 
 def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
     """Mirror of scripts/run_corpus_ingestion.load_config_params.
@@ -256,10 +268,15 @@ def run_corpus_qa(
     do_batch: bool,
     out_dir: Path,
     progress_every_docs: int = 25,
+    w_recency_zero: bool = False,
 ) -> dict:
+    category = benchmark_category(benchmark)
     print(f"\n{'=' * 78}")
-    print(f"  CORPUS QA  benchmark={benchmark}  config={config}  seed={seed}")
+    print(f"  CORPUS QA  benchmark={benchmark} ({category})")
+    print(f"  config={config}  seed={seed}")
     print(f"  online={do_online}  batch={do_batch}  k={k}  limit_docs={limit_docs or 'ALL'}")
+    if w_recency_zero:
+        print(f"  w_recency_zero=True (Block B / critique #4)")
     print(f"{'=' * 78}")
 
     adapter = get_adapter(benchmark)
@@ -268,8 +285,10 @@ def run_corpus_qa(
     print(f"  Loaded {total_docs} docs.")
 
     params = load_config_params(config, benchmark)
+    if w_recency_zero:
+        params.w_recency = 0.0
     memory = GraphMemoryV4(params)
-    print(f"  V4 params (text_mode_entities=True): "
+    print(f"  V4t params: "
           f"theta_store={params.theta_store:.3f} theta_entity={params.theta_entity:.3f} "
           f"w_embed={params.w_embed:.3f} w_recency={params.w_recency:.3f}")
 
@@ -493,6 +512,11 @@ def main() -> int:
     parser.add_argument("--no-batch", action="store_true", help="Skip batch (end-of-corpus) QA")
     parser.add_argument("--out-dir", default=None)
     parser.add_argument("--progress-every-docs", type=int, default=25)
+    parser.add_argument(
+        "--w-recency-zero", action="store_true",
+        help="Block B / critique #4: override w_recency=0 to eliminate "
+             "recency-bias confound when comparing online vs batch retrieval.",
+    )
     args = parser.parse_args()
 
     do_online = not args.no_online
@@ -518,6 +542,7 @@ def main() -> int:
             do_batch=do_batch,
             out_dir=out_dir,
             progress_every_docs=args.progress_every_docs,
+            w_recency_zero=args.w_recency_zero,
         )
         return 0
     except Exception as e:

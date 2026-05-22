@@ -335,6 +335,135 @@ off-diagonal cells (`off_qc, off_cq`) near canonical — would confirm
 mirroring the cross-environment finding from the Stage 1 chapter on
 grid-worlds. The actual numbers are in Section 5.
 
+### 3.6 Corpus-cumulative ingestion (Stage 3 Phase 2 — V4ₜ)
+
+The Phase 1.5–1.7 evaluation framing was per-document: for each
+question, V4 ingested only its own document's paragraphs, then was
+discarded. That measures *per-document retrieval quality*, but it
+sidesteps the more interesting question — **can the same V4 build
+domain knowledge by reading an entire corpus, and does that knowledge
+help retrieval?**
+
+Phase 2 introduces the corpus-cumulative regime: one V4 memory
+instance ingests every paragraph of every document in a benchmark
+sequentially, persisting the graph across documents. By the time the
+agent reaches contract #237 of CUAD, it has seen 236 prior contracts;
+recurring entities (`termination_clause`, `governing_law`,
+`fiscal_year_2022`) have accumulated hundreds of mention edges; the
+graph encodes a learned representation of the **domain**.
+
+**V4ₜ ("V4-text") — variant disclosure.** V4's original Bayesian
+entity-importance gate was calibrated for grid-world's 4–5 entities
+with high repeat counts. On text corpora with hundreds of novel
+proper nouns arriving every paragraph, that gate suppresses
+everything. We disclose this honestly: the corpus-mode runs use a
+variant called **V4ₜ** that bypasses the Bayesian gate
+(`MemoryParamsV4.text_mode_entities=True`). All other θ parameters
+are unchanged. Section §5's per-document numbers retain the original
+V4 (gate enabled); only §5.8's corpus-mode numbers use V4ₜ.
+
+**Benchmark categorization.** Of the six benchmarks, three have
+**domain-coherent** corpora where cross-doc accumulation is
+methodologically meaningful:
+
+* **CUAD** (510 legal contracts) — shared clause vocabulary across
+  contracts (`termination`, `force majeure`, `governing law`).
+* **QASPER** (281 NLP papers) — shared methodology terms
+  (`BERT`, `transformer`, `F1 score`) and dataset names.
+* **FinanceBench** (150 financial filings) — shared accounting
+  terms (`revenue`, `fiscal year 2022`, `consolidated statements`)
+  and company names.
+
+The other three are **domain-incoherent control benchmarks** where
+each document comes from a different micro-domain, so we predict
+NO meaningful cross-doc accumulation:
+
+* **HotpotQA** (7,405 random Wikipedia mini-pages, e.g., 19th-c.
+  philosophers and video games side by side).
+* **NarrativeQA** (3,461 books from disjoint fictional universes).
+* **LongMemEval** (separate users' multi-session dialogues with no
+  shared participants).
+
+We run all six in corpus mode but reserve headline empirical claims
+for the three coherent ones. The incoherent three are presented as
+*falsifiable sanity checks* on the framing — if cross-doc
+accumulation accidentally appears strong in HotpotQA, our claim that
+the framing requires domain coherence is wrong.
+
+**Online vs. batch QA.** With the graph fully built, we run answer
+generation in two modes:
+
+* **Online** (interleaved): after ingesting doc K, immediately
+  answer doc K's questions using `current_step = end_of_doc_K`.
+  Recency-weighted retrieval favors recent paragraphs — usually
+  paragraphs from doc K itself. Analogous to "answer this question
+  *now*, against everything I've read up to this point."
+* **Batch** (end-of-corpus): after ingesting all N docs, loop over
+  every question with `current_step = end_of_corpus`. Recency
+  uniformly favors the LAST documents ingested regardless of which
+  doc the question is about. Analogous to "build a knowledge base,
+  then ask any question at deployment time."
+
+To avoid measuring an artifact rather than a finding, we report a
+`--w-recency-zero` variant of both online and batch that overrides
+`w_recency=0` at retrieval time. With recency disabled, online and
+batch differ only in *graph contents*, not in which events the
+recency term elevates. The clean comparison shows whether more docs
+ingested ≠ better answers, isolated from recency bias.
+
+**Doc-scope question framing.** Per-document questions implicitly
+mean "in this contract" / "in this paper". Corpus mode breaks that
+implicit scoping — the same question gets matched against every
+other doc. To restore the doc-scope signal, all corpus-mode
+questions are prepended with `[Regarding {doc_title}]` before
+both retrieval embedding and LLM generation.
+
+**Recall mapping.** The per-doc `relevant_paragraphs` (doc-local
+indices) are mapped to global step indices via
+`global_step = doc_start_step + paragraph_idx_in_doc`. Corpus-mode
+recall@k uses the global mapping; without it, recall would always
+be zero because the corpus has thousands of paragraphs but the
+gold relevant set was doc-local.
+
+#### 3.6.1 Testable empirical claims (pinned before any API spend)
+
+Without a testable claim, "the magnum opus" reduces to decoration —
+beautiful graph animations that don't predict anything. We pin three
+falsifiable predictions:
+
+**P1 (cross-doc accumulation is real on coherent corpora):**
+Mean entity mention count in the final graph is positively correlated
+with `n_docs_ingested` in the three coherent benchmarks but flat or
+near-zero in the three control benchmarks. Quantitatively: for CUAD,
+QASPER, FinanceBench, the top-10 entities' mean mention count grows
+super-linearly with corpus size; for HotpotQA, NarrativeQA,
+LongMemEval, it grows near-linearly (each doc contributes its own
+fresh entities with no reinforcement). **Falsifiable**: if all six
+benchmarks show similar scaling, the corpus-coherence framing is
+wrong.
+
+**P2 (corpus knowledge helps coherent-corpus answers):**
+Mean LLM-judge score in online mode is higher at doc N than at doc
+N/10 on coherent benchmarks (more docs ingested → better answers
+about later docs because relevant cross-doc entities are now in
+memory). On incoherent benchmarks, no such trend. **Falsifiable**:
+if online judge score is flat or declining with corpus size on
+coherent benchmarks, V4ₜ's accumulation isn't producing useful signal
+at retrieval time.
+
+**P3 (w_recency=0 isolates the corpus-knowledge contribution):**
+The online-vs-batch judge gap on coherent benchmarks shrinks when
+`w_recency=0`. The default w_recency tuned per-benchmark is high
+enough that batch retrieval is dominated by end-of-corpus recency
+(an artifact), masking any real corpus-knowledge contribution. With
+recency disabled, online and batch should produce closer judge
+scores on coherent benchmarks. **Falsifiable**: if the gap is the
+same size with and without recency, then w_recency wasn't the
+confound — something else explains the gap.
+
+These three predictions are the empirical claim Phase 2 makes. The
+graph evolution viewer is the *evidence* for them.
+
 ---
 
 ## 4. Experimental Setup

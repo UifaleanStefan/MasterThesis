@@ -64,6 +64,43 @@ OUT_ROOT = ROOT / "results" / "stage3" / "corpus_traces"
 
 
 # ----------------------------------------------------------------------
+# Benchmark categorization (Block B / critique #2)
+# ----------------------------------------------------------------------
+# Corpus-cumulative ingestion only makes methodological sense when the
+# documents in a benchmark share a domain — recurring vocabulary,
+# stable entity classes, cross-doc structural patterns. For corpora
+# where each doc is from a different micro-domain (HotpotQA's random
+# Wikipedia mini-pages, NarrativeQA's disjoint fiction, LongMemEval's
+# separate users' dialogues), there's no shared domain to accumulate
+# into a graph. We retain these as "domain-incoherent control
+# benchmarks" — the empirical prediction is that they will show NO
+# meaningful cross-doc entity reinforcement, confirming the framing's
+# limit.
+#
+# This categorization is reported in meta.json so downstream analysis
+# (chapter §3.6, frontend viewer) can label benchmarks correctly.
+
+DOMAIN_COHERENT = {
+    "cuad",         # legal contracts share clause vocabulary
+    "qasper",       # NLP papers share methodology + datasets terms
+    "financebench", # 10-K/Q filings share financial terms + companies
+}
+DOMAIN_INCOHERENT = {
+    "hotpotqa",     # 7,405 random Wikipedia mini-articles, no shared domain
+    "narrativeqa",  # 3,461 books from disjoint fictional universes
+    "longmemeval",  # separate users' multi-session dialogues, no shared domain
+}
+
+
+def benchmark_category(benchmark: str) -> str:
+    if benchmark in DOMAIN_COHERENT:
+        return "domain_coherent"
+    if benchmark in DOMAIN_INCOHERENT:
+        return "domain_incoherent_control"
+    return "uncategorized"
+
+
+# ----------------------------------------------------------------------
 # Snapshot scheduling
 # ----------------------------------------------------------------------
 
@@ -316,11 +353,24 @@ def run_corpus_ingestion(
     seed: int,
     out_dir: Path,
     progress_every_docs: int = 25,
+    w_recency_zero: bool = False,
 ) -> dict:
+    category = benchmark_category(benchmark)
     print(f"\n{'=' * 78}")
-    print(f"  CORPUS INGESTION  benchmark={benchmark}  config={config}  seed={seed}")
-    print(f"  limit_docs={limit_docs or 'ALL'}")
+    print(f"  CORPUS INGESTION  benchmark={benchmark} ({category})")
+    print(f"  config={config}  seed={seed}  limit_docs={limit_docs or 'ALL'}")
+    if w_recency_zero:
+        print(f"  w_recency_zero=True (Block B / critique #4): retrieval recency "
+              f"disabled for clean online vs batch comparison")
     print(f"{'=' * 78}")
+
+    if category == "domain_incoherent_control":
+        print(
+            f"  [NOTE] {benchmark!r} is a domain-incoherent control benchmark. "
+            f"Corpus-cumulative framing predicts NO meaningful cross-doc "
+            f"entity reinforcement here. Results retained as a falsifiable "
+            f"sanity check on the framing — not for headline claims."
+        )
 
     adapter = get_adapter(benchmark)
     docs = list(adapter.iter_documents(limit=limit_docs))
@@ -329,8 +379,10 @@ def run_corpus_ingestion(
 
     # Build memory with the config's params.
     params = load_config_params(config, benchmark)
+    if w_recency_zero:
+        params.w_recency = 0.0
     memory = GraphMemoryV4(params)
-    print(f"  Memory: V4 with params="
+    print(f"  Memory: V4t with params="
           f"theta_store={params.theta_store:.3f} "
           f"theta_novel={params.theta_novel:.3f} "
           f"w_embed={params.w_embed:.3f} "
@@ -448,7 +500,10 @@ def run_corpus_ingestion(
             "config": config,
         }),
         "benchmark": benchmark,
+        "benchmark_category": category,
         "config": config,
+        "v4_variant": "V4t (text_mode_entities=True)",
+        "w_recency_zero": w_recency_zero,
         "seed": seed,
         "n_docs": total_docs,
         "limit_docs": limit_docs,
@@ -516,6 +571,13 @@ def main() -> int:
         "--progress-every-docs", type=int, default=25,
         help="Print a progress line every N docs.",
     )
+    parser.add_argument(
+        "--w-recency-zero", action="store_true",
+        help="Block B / critique #4: override w_recency=0 to eliminate "
+             "recency-bias confound when comparing online (per-doc-K step) "
+             "vs batch (end-of-corpus step) retrieval. Use for the methodologically "
+             "clean comparison; default keeps the tuned w_recency value.",
+    )
     args = parser.parse_args()
 
     if args.out_dir is None:
@@ -531,6 +593,7 @@ def main() -> int:
             seed=args.seed,
             out_dir=out_dir,
             progress_every_docs=args.progress_every_docs,
+            w_recency_zero=args.w_recency_zero,
         )
         return 0
     except Exception as e:
