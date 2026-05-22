@@ -68,10 +68,17 @@ from environment.benchmarks import ADAPTERS, get_adapter
 from environment.benchmarks.base import document_fingerprint
 from evaluation.document_qa_llm_judge import llm_judge_score_multi_ref
 from evaluation.claude_judge_queue import write_judge_queue
+from memory.attention_memory import AttentionMemory
 from memory.bm25_memory import BM25Memory
 from memory.dump_all_memory import DumpAllMemory
 from memory.event import Event
+from memory.flat_memory import FlatMemory
+from memory.graph_memory import GraphMemory, MemoryParams as MemoryParamsV1
+from memory.graph_memory_v3 import GraphMemoryV3, MemoryParamsV3
 from memory.graph_memory_v4 import GraphMemoryV4, MemoryParamsV4
+from memory.graph_memory_v5 import GraphMemoryV5
+from memory.rag_memory import RAGMemory
+from memory.semantic_memory import SemanticMemory
 from results.manifest import build_manifest
 from tuning.tune_v4_per_benchmark import CANONICAL_THETA_VEC, vec_to_params
 
@@ -141,41 +148,98 @@ def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
     return params
 
 
+def _load_tuned_attention_temp(benchmark: str) -> float:
+    """Block 12-configs / critique #2: load Phase 1.7's per-benchmark
+    tuned AttentionMemory temperature. Falls back to 0.5 if missing."""
+    path = ROOT / "results" / "stage3" / f"tuned_temperature_{benchmark}.json"
+    if not path.exists():
+        print(f"  [WARN] no tuned τ for {benchmark!r}; using default 0.5")
+        return 0.5
+    try:
+        data = json.loads(path.read_text())
+        return float(data.get("tuned_temperature", 0.5))
+    except Exception:
+        return 0.5
+
+
 def build_memory(config_name: str, benchmark: str) -> Any:
-    """Memory factory dispatch.
+    """Memory factory dispatch for the 12-config corpus suite.
 
-    V4ₜ family configs (v4t-canonical, v4t-tuned, v4t-corpus-tuned):
-      return GraphMemoryV4 with the appropriate MemoryParamsV4.
+    Configs (V4ₜ variants use text_mode_entities=True):
 
-    bm25-corpus: returns BM25Memory (Phase 1.7 baseline, now in corpus
-      mode where it indexes EVERY paragraph of EVERY doc in the
-      benchmark and retrieves top-k by BM25 score). This is the
-      industry-standard sparse-retrieval baseline; without it, the
-      V4ₜ claim ("learned memory beats sparse retrieval") is
-      unanchored.
+      Graph family (V4t = V4 + text_mode_entities):
+        v4t-canonical       — grid-world θ
+        v4t-tuned           — per-doc Phase 1.5/1.6 CMA-ES θ
+        v4t-corpus-tuned    — corpus-mode CMA-ES θ (Block B)  ← HEADLINE
+        v5t-corpus          — V5 (V4+attention gating) + text-mode entities
+        v1-corpus           — GraphMemory V1 (3-D θ baseline)
+        v3-corpus           — GraphMemory V3 (V2 + importance-scored storage)
 
-    Returns: a memory instance satisfying the 4-method contract
-    (add_event, get_relevant_events, clear, get_stats).
+      Attention family:
+        attention-corpus        — AttentionMemory(τ=0.5) default
+        attention-corpus-tuned  — AttentionMemory with per-bench tuned τ
+                                  (Phase 1.7)
+
+      Retrieval baselines:
+        rag-corpus       — RAGMemory (dense MiniLM cosine)
+        semantic-corpus  — SemanticMemory (TF-IDF cosine)
+        bm25-corpus      — BM25Memory (Okapi BM25 sparse)
+        flat-corpus      — FlatMemory(window=50) baseline
+        dump-all         — no-selection upper bound (small corpora only)
+
+    Returns: (memory_instance, params_or_None).
     """
+    # Legacy alias normalization
     if config_name in ("v4-canonical", "v4-tuned"):
         config_name = config_name.replace("v4-", "v4t-")
 
+    # V4ₜ family
     if config_name in ("v4t-canonical", "v4t-tuned", "v4t-corpus-tuned"):
         params = load_config_params(config_name, benchmark)
         return GraphMemoryV4(params), params
-    elif config_name == "bm25-corpus":
-        # BM25 has no tunable params; placeholder None for the downstream
-        # snapshot/manifest code to detect.
+
+    # V5ₜ — V4 with attention gating, also runs in text-mode-entities path
+    if config_name == "v5t-corpus":
+        # Default to canonical θ; corpus-tuning V5 specifically is future work.
+        params = vec_to_params(CANONICAL_THETA_VEC)
+        params.text_mode_entities = True
+        return GraphMemoryV5(params), params
+
+    # V1 (3D θ baseline). MemoryParamsV1 has only theta_store, theta_entity,
+    # theta_temporal — the original POC params. Default (1.0, 0.0, 1.0)
+    # reproduces unparameterized behavior.
+    if config_name == "v1-corpus":
+        return GraphMemory(MemoryParamsV1()), None
+
+    # V3 (V2 + importance-scored storage)
+    if config_name == "v3-corpus":
+        return GraphMemoryV3(MemoryParamsV3()), None
+
+    # Attention family
+    if config_name == "attention-corpus":
+        return AttentionMemory(temperature=0.5), None
+    if config_name == "attention-corpus-tuned":
+        tau = _load_tuned_attention_temp(benchmark)
+        return AttentionMemory(temperature=tau), None
+
+    # Retrieval baselines
+    if config_name == "rag-corpus":
+        return RAGMemory(), None
+    if config_name == "semantic-corpus":
+        return SemanticMemory(), None
+    if config_name == "bm25-corpus":
         return BM25Memory(), None
-    elif config_name == "dump-all":
-        # No-selection baseline (#9): feasible only on small corpora.
-        # Runner should check context overflow per question.
+    if config_name == "flat-corpus":
+        return FlatMemory(window_size=50), None
+    if config_name == "dump-all":
         return DumpAllMemory(), None
-    else:
-        raise ValueError(
-            f"Unknown config: {config_name!r}. "
-            f"Valid: v4t-canonical, v4t-tuned, v4t-corpus-tuned, bm25-corpus, dump-all."
-        )
+
+    raise ValueError(
+        f"Unknown config: {config_name!r}. Valid 12-config suite: "
+        f"v4t-canonical, v4t-tuned, v4t-corpus-tuned, v5t-corpus, "
+        f"v1-corpus, v3-corpus, attention-corpus, attention-corpus-tuned, "
+        f"rag-corpus, semantic-corpus, bm25-corpus, flat-corpus, dump-all."
+    )
 
 # gpt-4o-mini pricing (per 1M tokens; sync'd with run_stage3_full.py).
 PRICING = {
@@ -619,12 +683,19 @@ def main() -> int:
     parser.add_argument("--benchmark", required=True, choices=sorted(ADAPTERS.keys()))
     parser.add_argument(
         "--config", default="v4t-tuned",
-        choices=["v4t-tuned", "v4t-canonical", "v4t-corpus-tuned",
-                 "bm25-corpus", "dump-all", "v4-tuned", "v4-canonical"],
-        help="Memory configuration. V4t variants use GraphMemoryV4 with "
-             "text_mode_entities=True; bm25-corpus uses BM25Memory; "
-             "dump-all is the no-selection baseline (feasible only on small "
-             "corpora that fit in 128K context). Legacy v4-* aliases promote.",
+        choices=[
+            # Graph family
+            "v4t-canonical", "v4t-tuned", "v4t-corpus-tuned",
+            "v5t-corpus", "v1-corpus", "v3-corpus",
+            # Attention family
+            "attention-corpus", "attention-corpus-tuned",
+            # Retrieval baselines
+            "rag-corpus", "semantic-corpus", "bm25-corpus",
+            "flat-corpus", "dump-all",
+            # Legacy aliases
+            "v4-tuned", "v4-canonical",
+        ],
+        help="12-config corpus suite + dump-all special. See build_memory() docstring.",
     )
     parser.add_argument("--limit-docs", type=int, default=None)
     parser.add_argument("--k", type=int, default=8)

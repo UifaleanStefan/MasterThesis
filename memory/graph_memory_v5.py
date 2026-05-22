@@ -24,7 +24,7 @@ import numpy as np
 import networkx as nx
 
 from .embedding import embed_observation
-from .entity_extraction import extract_entities
+from .entity_extraction import extract_entities_auto as extract_entities
 from .event import Event
 from .graph_memory_v4 import (
     MemoryParamsV4,

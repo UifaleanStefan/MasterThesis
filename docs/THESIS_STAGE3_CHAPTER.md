@@ -562,13 +562,55 @@ configurations share the same encoder.
 
 ### 4.3 Memory systems (12 + tuned variants)
 
-The reference panel from `evaluation/document_qa_memory.py:_make_document_qa_memory_systems`:
+**Per-document evaluation (Phase 1.5 — 12 reference panel + V4-tuned).**
+The reference panel from
+`evaluation/document_qa_memory.py:_make_document_qa_memory_systems`:
 `FlatWindow(50)`, `GraphMemory+Theta`, `GraphMemoryV4`, `GraphMemoryV5`,
 `SemanticMemory`, `SummaryMemory`, `EpisodicSemantic`, `RAGMemory`,
 `HierarchicalMemory`, `WorkingMemory(7)`, `CausalMemory`,
 `AttentionMemory`. Plus one extra row per benchmark with V4
 instantiated using that benchmark's CMA-ES-tuned θ
 (`V4-tuned-<benchmark>`).
+
+**Corpus-cumulative evaluation (Phase 2 — 12-config suite).**
+Phase 2's "1 benchmark = 1 test" framing requires that each candidate
+memory system can plausibly ingest an entire benchmark's corpus
+(thousands of paragraphs, persisting across documents). We
+restricted the corpus-suite to systems that meet this criterion —
+excluding `WorkingMemory(7)` (7-event buffer collapses to last 7
+docs), `SummaryMemory` (LLM-prompted summarization during ingestion
+would defeat the $0-ingestion guarantee), `GraphMemoryV6` (depends
+on Reflexion-generated `Lesson` events), and the `NeuralController`
+family (frozen weights tuned for grid-worlds, would need re-training
+on text). The remaining 12 configs span the three retrieval
+paradigms (graph / attention / sparse + dense) and the full V1→V4→V5
+GraphMemory lineage:
+
+| Family | Config | Architecture | Notes |
+|---|---|---|---|
+| **Graph (V4ₜ)** | `v4t-canonical` | V4 + grid-world θ + text-mode entities | Baseline: shows grid-world θ on text |
+| | `v4t-tuned` | V4 + per-doc Phase 1.5/1.6 tuned θ + text-mode | Phase 1.7's headline V4 carried over |
+| | `v4t-corpus-tuned` | V4 + Phase 2 corpus-CMA-ES θ + text-mode | **Headline** (w_graph=1.61 on CUAD) |
+| **Graph (lineage)** | `v1-corpus` | GraphMemory V1 (3-D θ baseline) | Shows what V4 ablations remove |
+| | `v3-corpus` | V2 + importance-scored storage | The V3→V4 step (V4 adds Bayesian decay) |
+| | `v5t-corpus` | V4 + attention-based storage gating | Ablation: does attention gate beat θ_store? |
+| **Attention** | `attention-corpus` | AttentionMemory(τ=0.5) default | |
+| | `attention-corpus-tuned` | AttentionMemory(τ=2.60) per-bench | Phase 1.7's CUAD winner |
+| **Retrieval** | `rag-corpus` | RAGMemory (dense MiniLM cosine top-k) | Standard dense baseline |
+| | `semantic-corpus` | SemanticMemory (TF-IDF cosine top-k) | Hashing-style sparse baseline |
+| | `bm25-corpus` | BM25Memory (Okapi BM25 top-k) | Industry-standard sparse retrieval |
+| | `flat-corpus` | FlatMemory(window=50) sliding | Naive baseline |
+| | `dump-all` | All events into LLM context | Upper bound (small corpora only) |
+
+All V1/V2/V3/V5 graph systems were updated to use the text-mode
+auto-dispatch entity extractor; their grid-world behavior is
+preserved (auto-dispatch returns identical entities for grid-world
+observations).
+
+Each config dispatched by
+`scripts/run_corpus_qa.py:build_memory(config_name, benchmark)`.
+The Phase 2 headline cross-tab is 12 configs × 6 benchmarks ×
+{online, batch} = 144 cells per seed.
 
 ### 4.4 Reproducibility
 
