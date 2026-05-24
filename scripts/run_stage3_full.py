@@ -3,6 +3,25 @@ Stage 3 Phase 4 orchestrator — the loop Phase 4 will run when the API
 key is available. Built now in Phase 1.5 so we can dry-run the entire
 pipeline cost-free and produce a real cost projection.
 
+⚠️  SCOPE WARNING — READ ``docs/THESIS_SCOPE_AUDIT.md`` BEFORE USING THIS  ⚠️
+This script implements **per-document RAG**: for each document it builds a
+**fresh memory instance**, ingests that doc's paragraphs, asks that doc's
+QA pairs against that memory using top-k retrieval, then discards the
+memory before moving to the next doc. The LLM only ever sees the **top-k=8
+retrieved snippets**, never the whole document or corpus.
+
+This is a valid retrieval-quality baseline but it does **NOT** test the
+thesis-headline claim about a memory that ingests a corpus cumulatively and
+is queried online + batch. For that protocol, use
+``scripts/run_corpus_ingestion.py`` instead (currently FinanceBench-only —
+§6.5.1 of the chapter).
+
+If you're adding a new cell, baseline, or judging pass, FIRST decide which
+of the two protocols supports the claim you want to make, then route to
+the right script. See the prevention checklist in
+``docs/THESIS_SCOPE_AUDIT.md`` §"Prevention checklist."
+
+
 Three modes:
   * ``--mode retrieval`` — recall@k only, no LLM. Equivalent to
     ``scripts/run_stage3_retrieval.py`` but emitted per-cell instead of

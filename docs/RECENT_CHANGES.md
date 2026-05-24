@@ -5,6 +5,53 @@
 
 ---
 
+## -10. Stage 3 scope audit — per-doc RAG vs corpus mode (May 25 2026)
+
+**Critical scope discovery:** the §5.4 / Phase 4 orchestrator
+(`scripts/run_stage3_full.py`) wipes the V4 memory between every document
+and asks each question against only its own document's paragraphs. That is
+**per-document RAG with the memory as a fancier dense retriever** — it does
+NOT test the thesis-headline claim that the memory **develops state over a
+corpus** and is queried during + after ingestion. The actual thesis claim
+is only empirically demonstrated for FinanceBench via Phase 1.8 corpus mode
+(§6.5.1).
+
+Discovered while triple-checking what gpt-4o-mini actually receives at the
+API boundary in §5.4: the LLM sees `top-k=8 retrieved snippets`, never the
+whole document or corpus. That's correct standard RAG, but it's not the
+thesis-headline protocol.
+
+**Documented in:** [`docs/THESIS_SCOPE_AUDIT.md`](THESIS_SCOPE_AUDIT.md) — the
+full audit, per-benchmark gap table, prevention checklist for future Stage 3
+experiments, and concrete fixes for `AGENTS.md`, this file, the chapter, and
+the orchestrator docstrings.
+
+**Two paths now on the table:**
+
+1. **Narrow the claim.** Reframe §5.4 as a "memory-as-retriever baseline
+   study" and let §6.5.1 (FinanceBench corpus mode) carry the thesis claim
+   as a single-benchmark deep case. Pure chapter rewrite, no new
+   experiments.
+2. **Widen the evidence.** Extend the corpus-mode protocol
+   (`scripts/run_corpus_ingestion.py`) to LongMemEval (best natural fit) +
+   NarrativeQA + QASPER. Replicates the four-shift finding (`w_recency↓↓`,
+   `w_graph↑↑↑`, `w_embed↑`, `theta_store↓`) across multiple corpus
+   structures. ~$2-5 API per benchmark + corpus-mode tuning + cross-vendor
+   Claude judging per benchmark.
+
+Decision still open — flagged for next session.
+
+**Status of the in-flight cross-vendor Claude judging:** ~15,283 entries
+across 5 benchmarks done (CUAD/HotpotQA/LongMemEval/NarrativeQA complete +
+QASPER 24%). Those numbers are correct for the per-doc RAG baseline they
+describe — they replace gpt-4o-mini auto-judge with a stronger judge on the
+§5.4 table — but they don't move the thesis-headline claim, which still
+rides on §6.5.1's FinanceBench-only corpus-mode finding. The judging work
+is not wasted, just mislabeled in intent until §5.4 is reframed or the
+corpus-mode experiments are widened.
+
+---
+
 ## -9. Stage 3 Phase 4 FinanceBench — Claude re-judge (May 2026)
 
 Re-judged all 1,000 Phase 4 FinanceBench QA predictions (10 cells ×

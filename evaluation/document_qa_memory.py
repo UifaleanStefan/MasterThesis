@@ -7,6 +7,14 @@ relevant_paragraphs (from doc metadata) appear in the retrieved set.
 
 This isolates memory quality: which systems retain and retrieve the right paragraphs
 for multi-hop questions? No policy or LLM required.
+
+⚠️  SCOPE NOTE — ``_run_reading_phase`` ingests **one document's paragraphs into a
+**fresh memory instance** and does NOT persist memory state across documents.
+Every caller of this function is therefore running per-document retrieval, not
+the cumulative-corpus protocol that the thesis-headline claim requires. See
+``docs/THESIS_SCOPE_AUDIT.md`` for the per-doc-RAG vs corpus-mode distinction
+and ``scripts/run_corpus_ingestion.py`` for the corpus protocol that drives
+§6.5.1 of the chapter.
 """
 
 from __future__ import annotations

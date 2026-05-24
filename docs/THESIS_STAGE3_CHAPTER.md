@@ -681,6 +681,37 @@ LRU-cached at 8192 entries). End-to-end timings:
 
 ## 5. Results
 
+### 5.0 Scope caveat — what §§5.1–5.7 actually measure
+
+> **The numbers reported in §§5.1–5.7 are from the per-document RAG
+> protocol** (`scripts/run_stage3_full.py` and
+> `evaluation/document_qa_memory.py`): for each document we build a fresh
+> V4 memory instance, ingest only that document's paragraphs, and ask only
+> that document's QA pairs against it. The LLM (gpt-4o-mini) sees the
+> top-k=8 retrieved snippets from that single-document memory — never the
+> whole document and never the whole corpus.
+>
+> This protocol benchmarks V4 as a per-document retriever against
+> reference systems (BM25, AttentionMemory, flat windows). It does **not**
+> test the thesis-headline claim that the memory **develops state over a
+> corpus** and is **queried online + batch**. That claim requires a single
+> memory instance ingesting many documents cumulatively, with state
+> evolving over time, and is empirically demonstrated in **§6.5.1
+> (FinanceBench corpus-mode case study)**.
+>
+> §§5.1–5.7 should therefore be read as "memory-as-retriever baseline
+> study" — useful evidence that the V4 retriever holds up against
+> alternatives at small scale, and the natural place to lodge the §5.4
+> direction-of-effect confirmations under cross-vendor Claude judging.
+> The four-shift finding (`w_recency 3.78 → 0.003`, `w_graph 0.000 →
+> 1.627`, `w_embed 1.08 → 2.63`, `theta_store 0.29 → 0.010`) that
+> motivates the chapter's headline claim sits in §6.5.1 and only there.
+>
+> The audit that uncovered this scope mismatch is documented in
+> [`docs/THESIS_SCOPE_AUDIT.md`](THESIS_SCOPE_AUDIT.md), along with a
+> per-benchmark gap table and a prevention checklist for any future
+> Stage 3 experiment.
+
 ### 5.1 Retrieval-quality table (Phase 1.5, complete)
 
 Mean recall@k=8 across 15 documents per benchmark, all 12 reference

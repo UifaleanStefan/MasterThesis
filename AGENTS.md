@@ -1,9 +1,41 @@
 # AGENTS.md — AI Agent Guide for the Learnable Memory Thesis Project
 
-**For:** Any AI assistant (Cursor, Claude, GPT-4o, etc.) picking up this project  
-**Last updated:** March 2026  
-**Repo:** https://github.com/UifaleanStefan/MasterThesis  
+**For:** Any AI assistant (Cursor, Claude, GPT-4o, etc.) picking up this project
+**Last updated:** May 2026
+**Repo:** https://github.com/UifaleanStefan/MasterThesis
 **Read this before touching any code.**
+
+---
+
+## 0. CRITICAL — READ BEFORE PLANNING ANY STAGE 3 EXPERIMENT
+
+The thesis claim is about a memory that **ingests a corpus cumulatively** and
+is **queried online (during ingestion) + batch (at the end)**. The Phase 4 /
+§5.4 orchestrator (`scripts/run_stage3_full.py`) **wipes the memory between
+every document** and is therefore NOT testing the thesis claim — it benchmarks
+V4 as a per-document retriever, which is a useful baseline but not the
+headline. The corpus-mode protocol (`scripts/run_corpus_ingestion.py`,
+Phase 1.8) IS the thesis claim and currently exists only for FinanceBench.
+
+**Before running any new Stage 3 cell, read [`docs/THESIS_SCOPE_AUDIT.md`](docs/THESIS_SCOPE_AUDIT.md)**
+end-to-end (especially the "Prevention checklist") and confirm:
+
+1. Does the cell use one memory instance per corpus, or one per document?
+2. Does the memory state evolve, or is it reset?
+3. Are questions asked online + batch, or only at end?
+4. What does gpt-4o-mini actually see in the user prompt (top-k snippets vs
+   whole document vs dump-all)?
+5. Which tuner produced the θ used here, and does it match the cell's protocol?
+
+If the answers don't match the thesis claim, either re-scope the experiment
+or label its output as "memory-as-retriever baseline" and route it to a
+non-headline table in the chapter.
+
+This warning exists because ~1 day of cross-vendor Claude judging effort
+went into the §5.4 table before someone caught that the table was measuring
+the wrong thing. Don't repeat that. The judging numbers are still correct
+for the per-doc baseline they describe — they just don't carry the thesis
+headline.
 
 ---
 
