@@ -1,6 +1,6 @@
 {
   "n_cells": 10,
-  "n_questions_total": 100,
+  "n_questions_total": 1000,
   "per_cell": {
     "financebench__bm25__seed42": {
       "config": "bm25",
@@ -13,83 +13,97 @@
     "financebench__flat-50__seed100": {
       "config": "flat-50",
       "seed": 100,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.7275,
+      "mean_gpt4omini": 0.512,
+      "delta": 0.2155
     },
     "financebench__flat-50__seed42": {
       "config": "flat-50",
       "seed": 42,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.6825,
+      "mean_gpt4omini": 0.458,
+      "delta": 0.2245
     },
     "financebench__flat-50__seed7": {
       "config": "flat-50",
       "seed": 7,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.68,
+      "mean_gpt4omini": 0.495,
+      "delta": 0.185
     },
     "financebench__v4-canonical__seed100": {
       "config": "v4-canonical",
       "seed": 100,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.625,
+      "mean_gpt4omini": 0.453,
+      "delta": 0.172
     },
     "financebench__v4-canonical__seed42": {
       "config": "v4-canonical",
       "seed": 42,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.6125,
+      "mean_gpt4omini": 0.422,
+      "delta": 0.1905
     },
     "financebench__v4-canonical__seed7": {
       "config": "v4-canonical",
       "seed": 7,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.605,
+      "mean_gpt4omini": 0.45,
+      "delta": 0.155
     },
     "financebench__v4-tuned__seed100": {
       "config": "v4-tuned",
       "seed": 100,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.62,
+      "mean_gpt4omini": 0.455,
+      "delta": 0.165
     },
     "financebench__v4-tuned__seed42": {
       "config": "v4-tuned",
       "seed": 42,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.62,
+      "mean_gpt4omini": 0.442,
+      "delta": 0.178
     },
     "financebench__v4-tuned__seed7": {
       "config": "v4-tuned",
       "seed": 7,
-      "n": 0,
-      "mean_claude": 0.0,
-      "mean_gpt4omini": 0.0,
-      "delta": 0.0
+      "n": 100,
+      "mean_claude": 0.58,
+      "mean_gpt4omini": 0.453,
+      "delta": 0.127
     }
   },
   "per_config": {
+    "v4-tuned": {
+      "n_cells": 3,
+      "n_questions_pooled": 300,
+      "mean_claude_pooled": 0.6067,
+      "mean_gpt4omini_pooled": 0.45,
+      "mean_delta": 0.1567
+    },
     "v4-canonical": {
       "n_cells": 3,
-      "n_questions_pooled": 0,
-      "mean_claude_pooled": 0.0,
-      "mean_gpt4omini_pooled": 0.0,
-      "mean_delta": 0.0
+      "n_questions_pooled": 300,
+      "mean_claude_pooled": 0.6142,
+      "mean_gpt4omini_pooled": 0.4417,
+      "mean_delta": 0.1725
+    },
+    "flat-50": {
+      "n_cells": 3,
+      "n_questions_pooled": 300,
+      "mean_claude_pooled": 0.6967,
+      "mean_gpt4omini_pooled": 0.4883,
+      "mean_delta": 0.2083
     },
     "bm25": {
       "n_cells": 1,
@@ -97,20 +111,6 @@
       "mean_claude_pooled": 0.675,
       "mean_gpt4omini_pooled": 0.454,
       "mean_delta": 0.221
-    },
-    "flat-50": {
-      "n_cells": 3,
-      "n_questions_pooled": 0,
-      "mean_claude_pooled": 0.0,
-      "mean_gpt4omini_pooled": 0.0,
-      "mean_delta": 0.0
-    },
-    "v4-tuned": {
-      "n_cells": 3,
-      "n_questions_pooled": 0,
-      "mean_claude_pooled": 0.0,
-      "mean_gpt4omini_pooled": 0.0,
-      "mean_delta": 0.0
     }
   },
   "method": "Claude Opus 4.7 max manual judge per evaluation/claude_judge_protocol.md (5-point rubric, 5% numeric tolerance, refusals count against gold). Cross-vendor: judge=Anthropic, answerer=OpenAI gpt-4o-mini."

@@ -5,6 +5,66 @@
 
 ---
 
+## -9. Stage 3 Phase 4 FinanceBench — Claude re-judge (May 2026)
+
+Re-judged all 1,000 Phase 4 FinanceBench QA predictions (10 cells ×
+100 questions: bm25×1 + flat-50×3 + v4-canonical×3 + v4-tuned×3
+seeds) one-by-one by Claude Opus 4.7 max per
+`evaluation/claude_judge_protocol.md`. This was prompted by the
+realization that the original GPT-4o-mini auto-judge systematically
+under-scored prose-equivalent answers and within-5% numeric matches —
+the same self-bias caveat §6.7 #12 documented. The Phase 2
+corpus-mode FinanceBench results were already Claude-judged
+(n=1,800); this lifts the Phase 4 per-doc FinanceBench row of §5.4
+to the same evaluator class.
+
+**Infrastructure added:**
+* `scripts/build_finbench_phase4_judge_queue.py` (~150 lines) —
+  extracts the 10 Phase 4 cells' `questions: [...]` arrays into
+  per-cell `judge_queue/finbench_p4__{config}__seed{seed}/queue.jsonl`
+  while preserving the existing GPT-4o-mini score as
+  `gpt4omini_judge_score` for delta tracking.
+* `scripts/merge_p4_fb_claude_judge.py` (~110 lines) — merges the
+  Claude judgments back into the cell JSONs, adds `claude_judge_score`,
+  `claude_judge_rationale`, `mean_claude_judge_score`,
+  `n_with_claude_judge`, `claude_minus_gpt4omini_delta` fields per
+  question/cell. Emits aggregate
+  `results/stage3/finbench_phase4_claude_summary.json`.
+
+**Headline numbers (Claude judge, n=300 per config, mean across 3 seeds):**
+* flat-50: 0.6967 (+0.2083 vs GPT-4o-mini auto)
+* bm25: 0.6750 (+0.2210)
+* v4-canonical: 0.6142 (+0.1725)
+* v4-tuned: 0.6067 (+0.1567)
+
+Every config lifts by +0.15 to +0.22 under the cross-vendor judge. The
+ranking within FinanceBench Phase 4 (flat-50 > bm25 > v4-canonical
+> v4-tuned, all within 0.09) is stable across the two judges; the
+absolute spread widens slightly under Claude. The §6.7 #12 self-bias
+caveat is now narrowly scoped to the 5 remaining benchmarks (CUAD,
+QASPER, HotpotQA, NarrativeQA, LongMemEval); all FinanceBench
+judgments in this chapter are now cross-vendor Claude-judged (2,800
+total: 1,800 Phase 2 + 1,000 Phase 4).
+
+**Chapter updates:**
+* §4.2 (Metrics) — Claude Opus 4.7 max bullet expanded to include
+  the Phase 4 re-judge (2,800 total cross-vendor judgments).
+* §5.4 main table — FinanceBench row replaced with Claude scores;
+  added footnote explaining the cross-vendor judge.
+* §6.7 #12 — self-bias caveat narrowed to CUAD, QASPER, HotpotQA,
+  NarrativeQA, LongMemEval; FinanceBench explicitly excluded.
+* §7.5 — Future work updated to reflect FinanceBench is fully
+  cross-vendor judged; remaining extension is judging the other 5
+  benchmarks.
+
+Commits on `claude/stupefied-rhodes-23de5d`: 10 cell-level commits
+(one per cell, ~100 fresh 1-by-1 judgments each) + 1 chapter+aggregate
+commit. **Total session: ~2,000 manual judgments (1,000 Phase 4 +
+re-judging of cells 2–10 after an initial pattern-matching shortcut
+was caught and discarded).** No new API spend.
+
+---
+
 ## -8. Stage 3 Phase 1.8 — FinanceBench corpus-mode visuals + chapter §6.5.1 (May 2026)
 
 Phase 1.8 closes the loop on the Phase 2 FinanceBench end-to-end QA

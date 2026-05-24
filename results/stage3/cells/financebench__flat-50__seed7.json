@@ -50,7 +50,7 @@
       "prompt_tokens_estimated": 701,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "0.68 match."
+      "claude_judge_rationale": "Pred 0.68 = gold 0.68 General Mills FY2020 working capital ratio."
     },
     {
       "doc_idx": 1,
@@ -70,7 +70,7 @@
       "prompt_tokens_estimated": 172,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "'None' matches gold 'There are none'."
+      "claude_judge_rationale": "Pred 'None' = gold 'There are none' for AmEx debt securities on national exchange."
     },
     {
       "doc_idx": 2,
@@ -90,7 +90,7 @@
       "prompt_tokens_estimated": 561,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$5,818M exact match."
+      "claude_judge_rationale": "Pred $5,818M = gold $5,818M Lockheed Martin FY2021 net working capital."
     },
     {
       "doc_idx": 3,
@@ -112,7 +112,7 @@
       "prompt_tokens_estimated": 1706,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "0.83 match."
+      "claude_judge_rationale": "Pred 0.83 = gold 0.83 Adobe FY2017 operating cash flow ratio."
     },
     {
       "doc_idx": 4,
@@ -134,7 +134,7 @@
       "prompt_tokens_estimated": 1007,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "36.12 vs 93.86; way off."
+      "claude_judge_rationale": "Pred 36.12 vs gold 93.86; relative diff 61.5% — way outside 5% tolerance. Pred likely used wrong COGS denominator or omitted change in inventory."
     },
     {
       "doc_idx": 5,
@@ -154,7 +154,7 @@
       "prompt_tokens_estimated": 503,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.5,
-      "claude_judge_rationale": "'Document does not provide' is consistent with gold 'no acquisitions' (both convey no acquisitions in those years), but framed as refusal rather than direct answer."
+      "claude_judge_rationale": "Pred's 'document does not provide information' is consistent with gold's 'Ulta did not make any acquisitions in FY2023 and FY2022' — both convey absence of acquisitions. However, pred frames as missing data rather than explicit no-acquisitions claim, so partial credit."
     },
     {
       "doc_idx": 6,
@@ -174,7 +174,7 @@
       "prompt_tokens_estimated": 626,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.5,
-      "claude_judge_rationale": "Captures 2 of 3 FY2023 acquisitions; mis-attributes Czech to FY2022."
+      "claude_judge_rationale": "Pred captures 2 of 3 FY2023 AMCOR acquisitions (Shanghai medical, NZ protein packaging) correctly and confirms no FY2021 acquisitions. Mis-attributes the Czech Republic flexibles acquisition to FY2022 instead of FY2023."
     },
     {
       "doc_idx": 7,
@@ -194,7 +194,7 @@
       "prompt_tokens_estimated": 427,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "20.0% -> 20.1% match."
+      "claude_judge_rationale": "Pred '20.0% -> 20.1%' = gold '20% -> 20.1%' JnJ Q2 FY22-FY23 net earnings increase."
     },
     {
       "doc_idx": 8,
@@ -214,7 +214,7 @@
       "prompt_tokens_estimated": 539,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Yes correct direction but no 143% -> 156% magnitudes."
+      "claude_judge_rationale": "Pred 'Yes improving' direction correct but missing gold's specific magnitudes (143% in 2021 -> 156% in 2022, ~13% delta)."
     },
     {
       "doc_idx": 9,
@@ -234,7 +234,7 @@
       "prompt_tokens_estimated": 175,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "1 percentage point match."
+      "claude_judge_rationale": "Pred '1 percentage point' verbatim with gold's '1 percentage point' guidance raise."
     },
     {
       "doc_idx": 10,
@@ -254,7 +254,7 @@
       "prompt_tokens_estimated": 439,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.25,
-      "claude_judge_rationale": "Correct direction (decrease) but wrong counts (930 -> 907 vs gold 982 -> 969)."
+      "claude_judge_rationale": "Correct direction (decrease) but wrong counts: pred 930 -> 907 (decline 23) vs gold 982 -> 969 (decline 13). Pred may have used a different store-count taxonomy (domestic-only vs total, or different filing). Direction credit only."
     },
     {
       "doc_idx": 11,
@@ -276,7 +276,7 @@
       "prompt_tokens_estimated": 1318,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "3.5% vs 1.9%; 84% off."
+      "claude_judge_rationale": "Pred 3.5% vs gold 1.9%; relative diff ~84%, well outside 5% tolerance. Pred likely included items beyond pure capex."
     },
     {
       "doc_idx": 12,
@@ -296,7 +296,7 @@
       "prompt_tokens_estimated": 594,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Supplemental indentures substitution; complete match plus rates detail."
+      "claude_judge_rationale": "Pred captures supplemental indentures, substitution of Amcor Flexibles NA for Amcor Finance USA, covenant assumption, notes due 2026 and 2028. Adds specific rates (3.625% / 4.500%) consistent with gold."
     },
     {
       "doc_idx": 13,
@@ -316,7 +316,7 @@
       "prompt_tokens_estimated": 672,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Yes increased; gold is No decreased $2.5B."
+      "claude_judge_rationale": "Pred 'Yes increased' contradicts gold 'No decreased $2.5bn'."
     },
     {
       "doc_idx": 14,
@@ -336,7 +336,7 @@
       "prompt_tokens_estimated": 604,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "1.61 vs gold 0 (negative EBIT)."
+      "claude_judge_rationale": "Pred 1.61 vs gold 0 (negative EBIT yields zero/undefined coverage); pred's positive value indicates wrong EBIT sign or different definition."
     },
     {
       "doc_idx": 15,
@@ -358,7 +358,7 @@
       "prompt_tokens_estimated": 1859,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "-1.42 vs -0.02; scale error."
+      "claude_judge_rationale": "Pred -1.42 vs gold -0.02; magnitude off by ~70x. Pred likely treated -1.42 as % when gold is the decimal form, but even reading both as percents the gap is large."
     },
     {
       "doc_idx": 16,
@@ -378,7 +378,7 @@
       "prompt_tokens_estimated": 123,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Lion Air Flight 610 + Ethiopian Airlines Flight 302 lawsuits; matches gold."
+      "claude_judge_rationale": "Pred 'Lion Air Flight 610 + Ethiopian Airlines Flight 302 lawsuits' matches gold's '2018 Lion Air + 2019 Ethiopian Airlines crash lawsuits'. Same airline crash events."
     },
     {
       "doc_idx": 17,
@@ -398,7 +398,7 @@
       "prompt_tokens_estimated": 696,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Refusal contradicts gold (0.67 -> 0.69 quick ratio)."
+      "claude_judge_rationale": "Refusal: 'necessary data not available, cannot determine'. Gold gives the answer (improved 0.67 -> 0.69, +3.4%) using standard balance-sheet items. Refusal contradicts an answerable question."
     },
     {
       "doc_idx": 18,
@@ -422,7 +422,7 @@
       "prompt_tokens_estimated": 192,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Correct region (MGM China) but no -44% decline."
+      "claude_judge_rationale": "Pred 'MGM China' identifies the correct worst-performing region per gold. Missing the supporting -44% revenue decline figure."
     },
     {
       "doc_idx": 19,
@@ -442,7 +442,7 @@
       "prompt_tokens_estimated": 598,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "0 matches gold."
+      "claude_judge_rationale": "Pred 0 = gold 0 — no restructuring costs explicitly outlined in AES FY2022 income statements."
     },
     {
       "doc_idx": 20,
@@ -462,7 +462,7 @@
       "prompt_tokens_estimated": 599,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Refusal contradicts gold (AMD quick ratio 1.57)."
+      "claude_judge_rationale": "Refusal: 'quick ratio not provided, cannot determine'. Gold gives AMD quick ratio = 1.57 (healthy) using standard balance-sheet items. Refusal contradicts an answerable question."
     },
     {
       "doc_idx": 21,
@@ -482,7 +482,7 @@
       "prompt_tokens_estimated": 764,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "101.7% vs 101.5%; within tolerance."
+      "claude_judge_rationale": "Pred 101.7% vs gold 101.5%; relative diff 0.2%, within 5% tolerance."
     },
     {
       "doc_idx": 22,
@@ -502,7 +502,7 @@
       "prompt_tokens_estimated": 245,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Yes grew + $13,745M -> $14,882M PPNE supporting figures."
+      "claude_judge_rationale": "Pred 'Yes, PPNE $13,745M -> $14,882M' confirms gold's 'Yes, positive YoY' with concrete supporting figures."
     },
     {
       "doc_idx": 23,
@@ -522,7 +522,7 @@
       "prompt_tokens_estimated": 504,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Yes positive direction correct, different magnitude methodology."
+      "claude_judge_rationale": "Yes direction correct, but pred uses all current items ($7,453M - $5,175M = $2,278M) vs gold's operating-only items ($831M). Different magnitude due to definitional scope."
     },
     {
       "doc_idx": 24,
@@ -542,7 +542,7 @@
       "prompt_tokens_estimated": 634,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$59,268M match."
+      "claude_judge_rationale": "Pred $59,268M = gold $59,268.00M Costco FY2021 total assets."
     },
     {
       "doc_idx": 25,
@@ -562,7 +562,7 @@
       "prompt_tokens_estimated": 409,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Pred 'not consistent' contradicts gold 'Yes consistent'."
+      "claude_judge_rationale": "Pred 'not historically consistent' contradicts gold's 'Yes, consistent' on the heuristic 2%-per-year fluctuation threshold."
     },
     {
       "doc_idx": 26,
@@ -582,7 +582,7 @@
       "prompt_tokens_estimated": 188,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Lists all 3 securities but no trading symbols."
+      "claude_judge_rationale": "Pred lists all 3 securities but omits gold's trading symbols (MMM26, MMM30, MMM31). Partial credit for the security identification."
     },
     {
       "doc_idx": 27,
@@ -602,7 +602,7 @@
       "prompt_tokens_estimated": 571,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "2,018 million matches gold $2,018mn."
+      "claude_judge_rationale": "Pred '2,018 million' = gold '$2,018mn'. Same magnitude and unit."
     },
     {
       "doc_idx": 28,
@@ -622,7 +622,7 @@
       "prompt_tokens_estimated": 475,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Refusal contradicts gold (3M quick ratio 0.96)."
+      "claude_judge_rationale": "Refusal: 'cannot calculate without current liabilities excluding inventories and prepaid expenses'. Gold gives 3M quick ratio = 0.96 (not-quite-healthy). The required inputs are standard balance-sheet items; refusal contradicts an answerable question."
     },
     {
       "doc_idx": 29,
@@ -642,7 +642,7 @@
       "prompt_tokens_estimated": 665,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "14.0% vs 10.3%; 36% off."
+      "claude_judge_rationale": "Pred 14.0% vs gold 10.3%; relative diff 35.9%, outside 5% tolerance."
     },
     {
       "doc_idx": 30,
@@ -662,7 +662,7 @@
       "prompt_tokens_estimated": 260,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Corporate bonds correct, no ~82% share."
+      "claude_judge_rationale": "Pred 'Corporate bonds' correctly identifies the largest short-term investment category. Missing gold's ~82% share figure."
     },
     {
       "doc_idx": 31,
@@ -682,7 +682,7 @@
       "prompt_tokens_estimated": 282,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Developed Rest of World matches gold."
+      "claude_judge_rationale": "Pred 'Developed Rest of World' matches gold 'Developed Rest of the World' Pfizer region (definite-article difference only)."
     },
     {
       "doc_idx": 32,
@@ -702,7 +702,7 @@
       "prompt_tokens_estimated": 126,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "16% one customer match."
+      "claude_judge_rationale": "Pred 'one customer 16% of consolidated net revenue' matches gold verbatim."
     },
     {
       "doc_idx": 33,
@@ -722,7 +722,7 @@
       "prompt_tokens_estimated": 1195,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$1,874M -> $1,093M = ~42% drop; matches gold (~42% decline)."
+      "claude_judge_rationale": "Pred $1,874M -> $1,093M = (1874-1093)/1874 = 41.7% decline, which rounds to ~42% matching gold. Supporting figures provided."
     },
     {
       "doc_idx": 34,
@@ -744,7 +744,7 @@
       "prompt_tokens_estimated": 502,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Yes capital-intensive correct but no 2.77 capital intensity ratio."
+      "claude_judge_rationale": "Pred 'Yes capital intensive' has correct direction. Missing gold's specific capital-intensity-ratio figure (2.77)."
     },
     {
       "doc_idx": 35,
@@ -766,7 +766,7 @@
       "prompt_tokens_estimated": 1268,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "0.80 match."
+      "claude_judge_rationale": "Pred 0.80 = gold 0.8 (same value to 2dp)."
     },
     {
       "doc_idx": 36,
@@ -786,7 +786,7 @@
       "prompt_tokens_estimated": 1105,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$8.4B unsecured revolving credit; match."
+      "claude_judge_rationale": "Pred '$8,400,000,000 as of May 26, 2023' verbatim match with gold."
     },
     {
       "doc_idx": 37,
@@ -806,7 +806,7 @@
       "prompt_tokens_estimated": 579,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$400M increase match."
+      "claude_judge_rationale": "Pred '$400,000,000 increase on May 26, 2023' verbatim match with gold."
     },
     {
       "doc_idx": 38,
@@ -826,7 +826,7 @@
       "prompt_tokens_estimated": 309,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "US, EMEA, APAC, LACC match; 'Other Unallocated' is harmless extra."
+      "claude_judge_rationale": "Pred lists gold's four geographies (US, EMEA, APAC, LACC) + adds 'Other Unallocated' as a fifth, which is a reasonable internal-disclosure category. Core gold list captured fully; extra category is harmless."
     },
     {
       "doc_idx": 39,
@@ -848,7 +848,7 @@
       "prompt_tokens_estimated": 863,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Same 10 PepsiCo geographies as gold."
+      "claude_judge_rationale": "Pred enumerates same 10 PepsiCo geographies as gold (NA, LatAm, Europe, Africa, ME, S Asia, AP, Australia, NZ, China) in different sequence."
     },
     {
       "doc_idx": 40,
@@ -870,7 +870,7 @@
       "prompt_tokens_estimated": 2191,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "-3.5% vs +7.9%; wrong sign."
+      "claude_judge_rationale": "Pred -3.5% vs gold 7.9%; wrong sign AND magnitude. Capex/revenue cannot be negative."
     },
     {
       "doc_idx": 41,
@@ -892,7 +892,7 @@
       "prompt_tokens_estimated": 348,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "7.6 vs 2.7; uses sales not COGS."
+      "claude_judge_rationale": "Pred 7.6x vs gold 2.7x; pred uses sales as numerator (wrong formula — should be COGS). Off by ~180%."
     },
     {
       "doc_idx": 42,
@@ -914,7 +914,7 @@
       "prompt_tokens_estimated": 732,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Same 3 acquisitions (Trillium, Array, Therachon) different order."
+      "claude_judge_rationale": "Pred lists same three Pfizer acquisitions as gold (Trillium, Array, Therachon) — set match, different order."
     },
     {
       "doc_idx": 43,
@@ -934,7 +934,7 @@
       "prompt_tokens_estimated": 363,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Yes improving contradicts gold No (declined 36.8% -> 34.6%)."
+      "claude_judge_rationale": "Pred 'Yes, improving' contradicts gold 'No, declined 36.8% -> 34.6% (-2.2pp)'. Pred's claim that 34.6% is an 'increase from previous years' is factually wrong."
     },
     {
       "doc_idx": 44,
@@ -954,7 +954,7 @@
       "prompt_tokens_estimated": 144,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Proposal defeated correct + vote counts as supporting evidence."
+      "claude_judge_rationale": "Pred 'defeated' matches gold 'defeated', plus pred adds supporting vote counts (19.7M for, 977.2M against)."
     },
     {
       "doc_idx": 45,
@@ -976,7 +976,7 @@
       "prompt_tokens_estimated": 1387,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Includes streaming content amortization; truncated but math leads to ~57% vs gold 5.4%."
+      "claude_judge_rationale": "Pred incorrectly includes $3.405B streaming-content amortization and $79M DVD-content amortization in D&A, inflating EBITDA to $3.85B. Truncated before stating the final %, but the shown math leads to ~57% vs gold's 5.4%. Wrong methodology + incomplete answer."
     },
     {
       "doc_idx": 46,
@@ -998,7 +998,7 @@
       "prompt_tokens_estimated": 1387,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "61.73 vs -3.7; wrong sign and 1770% off."
+      "claude_judge_rationale": "Pred 61.73 vs gold -3.7; wrong sign AND off by ~16x absolute. Pred likely missed that DPO > DIO+DSO at General Mills FY2019 yields a negative CCC."
     },
     {
       "doc_idx": 47,
@@ -1020,7 +1020,7 @@
       "prompt_tokens_estimated": 219,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.5,
-      "claude_judge_rationale": "$1,097M pension captured; missing $862M health/insurance."
+      "claude_judge_rationale": "Pred $1,097M captures gold's pension benefits but omits the $862M health-and-life-insurance benefits — half of the two-part answer."
     },
     {
       "doc_idx": 48,
@@ -1042,7 +1042,7 @@
       "prompt_tokens_estimated": 611,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.25,
-      "claude_judge_rationale": "Pred starts 'Yes' but math shows negative; self-contradictory; gold is No (-$1,561M)."
+      "claude_judge_rationale": "Pred starts 'Yes positive WC' but the shown math ($1,250M CA - $2,811M CL) correctly yields negative, agreeing with gold's No (-$1,561M). The stated Yes contradicts both pred's own math and gold's No. Credit only the correct calculation, not the wrong stated direction."
     },
     {
       "doc_idx": 49,
@@ -1062,7 +1062,7 @@
       "prompt_tokens_estimated": 549,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "No decreased + $150,868M -> $150,639M = $229M decrease; matches gold exactly."
+      "claude_judge_rationale": "Pred 'No, decreased $150,868M -> $150,639M' matches gold 'No, decreased $229M'; the difference 150868-150639 = $229M matches gold exactly."
     },
     {
       "doc_idx": 50,
@@ -1084,7 +1084,7 @@
       "prompt_tokens_estimated": 1213,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "63.49 vs 63.86; 0.58% off, within tolerance."
+      "claude_judge_rationale": "Pred shows correct DPO setup (avg AP 1,380.5M, COGS 7,772M, inv change 118M); final stated answer 63.49 vs gold 63.86 is 0.58% relative diff, within 5% tolerance."
     },
     {
       "doc_idx": 51,
@@ -1104,7 +1104,7 @@
       "prompt_tokens_estimated": 614,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "~$20B match."
+      "claude_judge_rationale": "Pred '~$20 billion' = gold 'approximately $20 billion' JnJ Consumer Health separation gain."
     },
     {
       "doc_idx": 52,
@@ -1126,7 +1126,7 @@
       "prompt_tokens_estimated": 1124,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "2.56 vs 24.26; factor-10 off."
+      "claude_judge_rationale": "Pred 2.56 vs gold 24.26; relative diff ~89%, far outside 5% tolerance. Pred denominator likely included current PP&E + intangibles rather than pure PP&E average."
     },
     {
       "doc_idx": 53,
@@ -1146,7 +1146,7 @@
       "prompt_tokens_estimated": 397,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "20% -> 23% effective tax rate match."
+      "claude_judge_rationale": "Pred '20% in FY2021 to 23% in FY2022' verbatim with gold's effective-tax-rate change."
     },
     {
       "doc_idx": 54,
@@ -1166,7 +1166,7 @@
       "prompt_tokens_estimated": 94,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Correct direction (Yes stable) but missing 65 consecutive years detail."
+      "claude_judge_rationale": "Pred 'Yes, maintains stable trend' has correct direction. Missing gold's 65-consecutive-years specific."
     },
     {
       "doc_idx": 55,
@@ -1186,7 +1186,7 @@
       "prompt_tokens_estimated": 228,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Mary N. Dillon, former CEO Ulta Beauty; matches gold."
+      "claude_judge_rationale": "Pred identifies Mary N. Dillon as former Executive Chair / CEO of Ulta Beauty, capturing gold's named prior-CEO at the named retail company. The 'brick-and-mortar + online' framing from gold isn't restated but the substantive prior-CEO-of-similar-retail claim is captured."
     },
     {
       "doc_idx": 56,
@@ -1206,7 +1206,7 @@
       "prompt_tokens_estimated": 193,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Correct direction (No, not improving) but no explicit 0.8% margin change."
+      "claude_judge_rationale": "Pred 'No, not improving' direction correct, with gross-profit decline ($2,820M -> $2,725M) as supporting evidence. Missing gold's explicit 0.8% gross-margin percentage-point figure."
     },
     {
       "doc_idx": 57,
@@ -1230,7 +1230,7 @@
       "prompt_tokens_estimated": 136,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "US govt + commercial airlines correct but no 40% of revenues figure."
+      "claude_judge_rationale": "Pred 'US government + limited commercial airlines' correctly identifies gold's two customer groups. Missing gold's specific 40%-of-revenues figure for US government."
     },
     {
       "doc_idx": 58,
@@ -1250,7 +1250,7 @@
       "prompt_tokens_estimated": 408,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Pred 'No' contradicts gold 'Yes, Consumer Healthcare JV transaction gain'."
+      "claude_judge_rationale": "Pred 'No' contradicts gold 'Yes, gain on Consumer Healthcare JV Transaction completion'. Wrong direction on a binary question; Pfizer did have a substantial 2019 non-recurring gain from the GSK JV."
     },
     {
       "doc_idx": 59,
@@ -1270,7 +1270,7 @@
       "prompt_tokens_estimated": 504,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "39.7% exact."
+      "claude_judge_rationale": "Pred 39.7% verbatim with gold."
     },
     {
       "doc_idx": 60,
@@ -1290,7 +1290,7 @@
       "prompt_tokens_estimated": 200,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "47 new stores driver captured + plausible additional drivers."
+      "claude_judge_rationale": "Pred captures gold's primary driver (47 new stores) plus plausible secondary drivers (brand launches, cost increases). Match on the key fact."
     },
     {
       "doc_idx": 61,
@@ -1310,7 +1310,7 @@
       "prompt_tokens_estimated": 691,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Operating margin not useful for AmEx + suggests better metrics; matches gold substance."
+      "claude_judge_rationale": "Pred explains that operating margin is not useful for AmEx because it generates revenue from non-interest/interest income rather than goods, and suggests alternative metrics (net income, revenues net of interest expense). Substantively equivalent to and more elaborate than gold's 'performance is not measured through operating margin'."
     },
     {
       "doc_idx": 62,
@@ -1330,7 +1330,7 @@
       "prompt_tokens_estimated": 677,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$12,645 exact match."
+      "claude_judge_rationale": "Pred $12,645 = gold $12,645M Boeing FY2018 net PP&E."
     },
     {
       "doc_idx": 63,
@@ -1350,7 +1350,7 @@
       "prompt_tokens_estimated": 97,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Yes correct but no $0.01/share amount."
+      "claude_judge_rationale": "Pred 'Yes paid dividends' correct direction. Missing gold's $0.01-per-share annual dividend amount."
     },
     {
       "doc_idx": 64,
@@ -1370,7 +1370,7 @@
       "prompt_tokens_estimated": 1210,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$381.6M vs $382M; 0.10% off."
+      "claude_judge_rationale": "Pred $381.6M vs gold $382M; relative diff 0.10%, well within 5% tolerance."
     },
     {
       "doc_idx": 65,
@@ -1392,7 +1392,7 @@
       "prompt_tokens_estimated": 1357,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "1,832 exact."
+      "claude_judge_rationale": "Pred 1,832 = gold $1,832M AWW FY2021 unadjusted EBITDA."
     },
     {
       "doc_idx": 66,
@@ -1412,7 +1412,7 @@
       "prompt_tokens_estimated": 590,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "-0.5% vs +0.2%; wrong sign."
+      "claude_judge_rationale": "Pred -0.5% vs gold +0.2%; wrong sign AND outside 5% tolerance even absolute (0.7pp gap on a 0.2pp gold)."
     },
     {
       "doc_idx": 67,
@@ -1432,7 +1432,7 @@
       "prompt_tokens_estimated": 198,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "0% vs 36%."
+      "claude_judge_rationale": "Pred 0% vs gold 36% — pred misses the Q4 stock-repurchase concentration entirely."
     },
     {
       "doc_idx": 68,
@@ -1452,7 +1452,7 @@
       "prompt_tokens_estimated": 135,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Yes Pfizer separating Upjohn match."
+      "claude_judge_rationale": "Pred 'Yes, separating Upjohn' matches gold 'Yes, spinning off Upjohn'."
     },
     {
       "doc_idx": 69,
@@ -1474,7 +1474,7 @@
       "prompt_tokens_estimated": 1399,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "3.9% vs 6.2%; 37% off."
+      "claude_judge_rationale": "Pred 3.9% vs gold 6.2%; relative diff 37%, outside 5% tolerance."
     },
     {
       "doc_idx": 70,
@@ -1496,7 +1496,7 @@
       "prompt_tokens_estimated": 1993,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "0.66 match."
+      "claude_judge_rationale": "Pred 0.66 = gold 0.66 Adobe FY2015 operating cash flow ratio."
     },
     {
       "doc_idx": 71,
@@ -1516,7 +1516,7 @@
       "prompt_tokens_estimated": 674,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$4.625B vs $4.60B; 0.54% off."
+      "claude_judge_rationale": "Pred 4.625B vs gold $4.60B; relative diff 0.54%, within 5% tolerance."
     },
     {
       "doc_idx": 72,
@@ -1536,7 +1536,7 @@
       "prompt_tokens_estimated": 1165,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$3,215.4M vs $3,215M; 0.01% off."
+      "claude_judge_rationale": "Pred $3,215.4M vs gold $3,215.00M; relative diff 0.01%, within tolerance."
     },
     {
       "doc_idx": 73,
@@ -1558,7 +1558,7 @@
       "prompt_tokens_estimated": 1465,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "0.01 exact match."
+      "claude_judge_rationale": "Pred 0.01 = gold 0.01 Coca Cola FY2017 ROA."
     },
     {
       "doc_idx": 74,
@@ -1578,7 +1578,7 @@
       "prompt_tokens_estimated": 615,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$13.2B match."
+      "claude_judge_rationale": "Pred $13.2 billion = gold $13.2 billion JnJ Kenvue separation cash proceeds."
     },
     {
       "doc_idx": 75,
@@ -1598,7 +1598,7 @@
       "prompt_tokens_estimated": 787,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Customer deposits match."
+      "claude_judge_rationale": "Pred 'Customer deposits' = gold 'Customer deposits' AmEx 2022 largest liability."
     },
     {
       "doc_idx": 76,
@@ -1618,7 +1618,7 @@
       "prompt_tokens_estimated": 167,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Pred 'strong start, resilient performance, business momentum' captures gold's 'strong start to FY2023' plus supplemental detail."
+      "claude_judge_rationale": "Pred 'strong start, resilient performance, business momentum' captures gold's 'strong start to FY2023' with supplemental context."
     },
     {
       "doc_idx": 77,
@@ -1638,7 +1638,7 @@
       "prompt_tokens_estimated": 232,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Gaming wrong; gold is Data Center."
+      "claude_judge_rationale": "Pred 'Gaming' contradicts gold 'Data Center' for AMD's biggest proportional sales increase ex-Embedded."
     },
     {
       "doc_idx": 78,
@@ -1658,7 +1658,7 @@
       "prompt_tokens_estimated": 413,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Captures lower marketing + leverage of incentive comp + supplementary deleverage of overhead/payroll detail."
+      "claude_judge_rationale": "Pred captures gold's two drivers (lower marketing, leverage of incentive compensation due to higher sales) and adds supplementary detail on the offsetting deleverage of corporate overhead/payroll. Substantively complete."
     },
     {
       "doc_idx": 79,
@@ -1678,7 +1678,7 @@
       "prompt_tokens_estimated": 653,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "5,466.3M vs $5,466M; 0.005% off."
+      "claude_judge_rationale": "Pred 5,466.3M vs gold $5,466M; relative diff 0.005%, within tolerance."
     },
     {
       "doc_idx": 80,
@@ -1698,7 +1698,7 @@
       "prompt_tokens_estimated": 207,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Captures all 3 aircraft families (737, 777X, 787) with production rate guidance."
+      "claude_judge_rationale": "Pred covers all three aircraft families: 787 production rate increase (to 5/month), 737 gradual increase based on demand/supply, 777X production resumption in 2023. Matches gold's 737/777X/787 production rate forecast."
     },
     {
       "doc_idx": 81,
@@ -1720,7 +1720,7 @@
       "prompt_tokens_estimated": 932,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "3.59 vs 3.46; 3.76% off, within tolerance."
+      "claude_judge_rationale": "Pred 3.59 vs gold 3.46; absolute diff 0.13, relative 3.76% — within 5% tolerance."
     },
     {
       "doc_idx": 82,
@@ -1740,7 +1740,7 @@
       "prompt_tokens_estimated": 813,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "$1,615.9M vs $1,616M; 0.006% off."
+      "claude_judge_rationale": "Pred $1,615.9M vs gold $1,616.00M; relative diff 0.006%, within tolerance."
     },
     {
       "doc_idx": 83,
@@ -1760,7 +1760,7 @@
       "prompt_tokens_estimated": 328,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Captures all gross margin drivers: COVID exit costs, currency impacts in Pharma, commodity inflation in MedTech/Consumer Health, supply chain benefits offset."
+      "claude_judge_rationale": "Pred enumerates all gold drivers for JnJ FY22 gross margin change: COVID-19 vaccine manufacturing exit costs, Pharma currency impacts, MedTech/Consumer Health commodity inflation, partially offset by Consumer Health supply chain benefits. Complete match."
     },
     {
       "doc_idx": 84,
@@ -1780,7 +1780,7 @@
       "prompt_tokens_estimated": 536,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "30.8% exact match."
+      "claude_judge_rationale": "Pred 30.8% = gold 30.8% Amazon FY16-17 YoY revenue change."
     },
     {
       "doc_idx": 85,
@@ -1800,7 +1800,7 @@
       "prompt_tokens_estimated": 277,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Pred 'No, not improving' contradicts gold 'Yes improving (4.8% -> 5.3%)'."
+      "claude_judge_rationale": "Pred 'does not have improving gross margin' contradicts gold 'Yes, improving (4.8% -> 5.3%)'."
     },
     {
       "doc_idx": 86,
@@ -1820,7 +1820,7 @@
       "prompt_tokens_estimated": 602,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Consumer Health business discontinued from Aug 30, 2023; match."
+      "claude_judge_rationale": "Pred 'Consumer Health, discontinued from Aug 30 2023' verbatim with gold."
     },
     {
       "doc_idx": 87,
@@ -1844,7 +1844,7 @@
       "prompt_tokens_estimated": 730,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Yes capital-intensive contradicts gold No (efficient CAPEX management)."
+      "claude_judge_rationale": "Pred 'Yes capital-intensive' contradicts gold's 'No, managing CAPEX/Fixed Assets efficiently (5.1% CAPEX/Rev, 20% FA/TA, 12.4% ROA)'."
     },
     {
       "doc_idx": 88,
@@ -1864,7 +1864,7 @@
       "prompt_tokens_estimated": 137,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "$700M vs gold 77.78; massive scale discrepancy."
+      "claude_judge_rationale": "Pred $700M vs gold 77.78; massive scale gap. Even if gold is in millions (77.78M), $700M is 9x off."
     },
     {
       "doc_idx": 89,
@@ -1884,7 +1884,7 @@
       "prompt_tokens_estimated": 751,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "24.6% -> 21.6% match with -3% delta computation."
+      "claude_judge_rationale": "Pred '24.6% in FY2021 to 21.6% in FY2022, a decrease of 3%' verbatim with gold plus computed delta."
     },
     {
       "doc_idx": 90,
@@ -1904,7 +1904,7 @@
       "prompt_tokens_estimated": 228,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Consumer segment correct, no -0.9% organic detail."
+      "claude_judge_rationale": "Pred 'Consumer' correctly identifies the dragging segment per gold. Missing the -0.9% organic decline figure."
     },
     {
       "doc_idx": 91,
@@ -1924,7 +1924,7 @@
       "prompt_tokens_estimated": 681,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "3.1% vs 2.8%; 10.7% off."
+      "claude_judge_rationale": "Pred 3.1% vs gold 2.8%; relative diff 10.7%, outside 5% tolerance."
     },
     {
       "doc_idx": 92,
@@ -1944,7 +1944,7 @@
       "prompt_tokens_estimated": 743,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Operations $3,565M; matches gold."
+      "claude_judge_rationale": "Pred 'Operating activities brought in the most, $3,565M' matches gold + supporting figure."
     },
     {
       "doc_idx": 93,
@@ -1964,7 +1964,7 @@
       "prompt_tokens_estimated": 278,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "JPM gross margin not relevant for financial services; matches."
+      "claude_judge_rationale": "Pred substantively matches gold's 'JPM is financial institution, gross margin not relevant' with elaboration on the appropriate alternative metrics (ROE, NIM, asset management performance)."
     },
     {
       "doc_idx": 94,
@@ -1986,7 +1986,7 @@
       "prompt_tokens_estimated": 1131,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "EBITDA margin calc 16.5%; matches gold exactly."
+      "claude_judge_rationale": "Pred shows correct EBITDA calculation: $11,512M + $2,763M = $14,275M; / $86,392M revenue = 16.5%. Final % stated explicitly = gold's 16.5%."
     },
     {
       "doc_idx": 95,
@@ -2006,7 +2006,7 @@
       "prompt_tokens_estimated": 821,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Operations $1,824M match."
+      "claude_judge_rationale": "Pred 'Operating activities brought in the most, $1,824M' matches gold's 'operations was highest, $1.8bn'."
     },
     {
       "doc_idx": 96,
@@ -2026,7 +2026,7 @@
       "prompt_tokens_estimated": 528,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "11,588 exact match."
+      "claude_judge_rationale": "Pred 11,588 = gold $11,588M Amazon FY2019 net income."
     },
     {
       "doc_idx": 97,
@@ -2048,7 +2048,7 @@
       "prompt_tokens_estimated": 638,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.75,
-      "claude_judge_rationale": "Yes correct but no ROA / FA-TA metrics."
+      "claude_judge_rationale": "Pred 'Yes capital-intensive' correct direction. Missing gold's supporting metrics (ROA 1.82%/3.39%, FA/TA 5.6%)."
     },
     {
       "doc_idx": 98,
@@ -2068,7 +2068,7 @@
       "prompt_tokens_estimated": 122,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 1.0,
-      "claude_judge_rationale": "Yes match."
+      "claude_judge_rationale": "Pred 'Yes' = gold 'Yes' AmEx 2022 card-member retention."
     },
     {
       "doc_idx": 99,
@@ -2088,10 +2088,10 @@
       "prompt_tokens_estimated": 455,
       "projected_cost_usd": 0.0,
       "claude_judge_score": 0.0,
-      "claude_judge_rationale": "Refusal contradicts gold (quick ratio 0.54)."
+      "claude_judge_rationale": "Refusal: 'cannot determine without necessary data'. Gold gives Verizon quick ratio = 0.54 (unhealthy) using standard balance-sheet items. Refusal contradicts answerable question."
     }
   ],
-  "mean_claude_judge_score": 0.0,
-  "n_with_claude_judge": 0,
-  "claude_minus_gpt4omini_delta": 0.0
+  "mean_claude_judge_score": 0.68,
+  "n_with_claude_judge": 100,
+  "claude_minus_gpt4omini_delta": 0.18500000000000005
 }
