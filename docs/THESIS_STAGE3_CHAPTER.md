@@ -65,13 +65,17 @@ The Stage 3 contribution comes in two layers:
    document-QA), with much weaker within-family task-specificity than
    the original cross-environment grid-world finding implied.
 
-2. **An LLM-cost contribution** (Phase 4, in progress). Building on the
-   above retrieval table, the same parameterized memory is wired into
-   a GPT-4o-mini answer-quality pipeline. Because memory selects fewer
-   but more relevant paragraphs to feed to the LLM, the joint objective
+2. **An LLM-cost contribution** (Phase 4, complete; Phase 2 corpus-mode
+   on FinanceBench, complete). Building on the above retrieval table,
+   the same parameterized memory is wired into a GPT-4o-mini answer-
+   quality pipeline. Because memory selects fewer but more relevant
+   paragraphs to feed to the LLM, the joint objective
    `J = QA_score − λ × cost_usd` becomes operational: selective memory
    directly translates to dollars saved per query while preserving (or
-   improving) answer quality.
+   improving) answer quality. The headline corpus-mode result (§5.7,
+   §6.5.1) was judged by Claude Opus 4.7 max manually on all 1,800
+   (config × mode × question) cells — a cross-vendor evaluator
+   independent of the GPT-4o-mini answerer.
 
 This chapter focuses on (1), with (2) introduced as future work
 pending API budget. The reader's roadmap: Section 2 places the work in
@@ -528,13 +532,27 @@ per benchmark depending on QAs-per-doc density. For tuning, 8 docs
   else 0.0. Aggregated as the mean over qa_pairs with non-empty gold.
   Mean (not median) chosen because the binary distribution makes
   median brittle.
-* **LLM-judge score** (Phase 4, future) — `evaluation/document_qa_llm_judge.py:llm_judge_score`
-  using gpt-4o-mini with a 0–1 rubric. `llm_judge_score_multi_ref`
+* **Claude Opus 4.7 max manual judge** — the headline evaluator for
+  the FinanceBench Phase 2 results (§5.7, §6.5.1). The judge model
+  reads (question, gold, predicted) one entry at a time and assigns
+  a score in {0.00, 0.25, 0.50, 0.75, 1.00} per the rubric in
+  `evaluation/claude_judge_protocol.md` (5% numeric tolerance for
+  numeric answers; refusals counted against gold; partial credit for
+  substantively-correct but incomplete answers). Cross-vendor:
+  answerer is GPT-4o-mini (OpenAI), judge is Claude Opus 4.7 max
+  (Anthropic), so the self-bias literature does not apply. n=1,800
+  judgments (6 configs × 2 modes × 150 questions) for FinanceBench.
+* **LLM-judge score** (Phase 4 automated pipeline) — `evaluation/document_qa_llm_judge.py:llm_judge_score`
+  using GPT-4o-mini with a 0–1 rubric. `llm_judge_score_multi_ref`
   wrapper handles NarrativeQA's list-typed reference answers (max
-  over references).
-* **USD cost** (Phase 4, future) — tiktoken-counted prompt tokens +
-  bounded completion tokens, multiplied by gpt-4o-mini's `$0.15/M`
-  input + `$0.60/M` output pricing.
+  over references). Used for the §5.4 multi-benchmark sweep, where
+  the per-cell judgment count (15,000+ across 5 benchmarks × 3 configs
+  × 3 seeds × ~100 questions) made manual evaluation infeasible.
+  Generator and judge are the same model class — see §6.7 point 12
+  for the self-bias caveat that applies here but not to FinanceBench.
+* **USD cost** — tiktoken-counted prompt tokens + bounded completion
+  tokens, multiplied by GPT-4o-mini's `$0.15/M` input + `$0.60/M`
+  output pricing.
 * **Prompt-byte budget** (Phase 1.5, current guardrail) — asserted in
   Layer 2 of the test pyramid as a leading indicator of Phase-4 cost
   blowups.
@@ -1027,7 +1045,7 @@ results across every memory configuration we tested.
 | Benchmark | Range of mean judge (across all configs) | Why no differentiation |
 |---|---:|---|
 | **LongMemEval** | 0.37–0.40 | Short haystacks (median 2 sessions per question) — recall saturates at k=8 for every system, and the LLM's answer-quality is bottlenecked by the question's temporal-reasoning difficulty, not by which sessions were retrieved. |
-| **FinanceBench** | 0.42–0.45 | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). Every memory system retrieves the same gold paragraphs; the spread reflects LLM answer-extraction variability, not memory-system quality. |
+| **FinanceBench (per-doc Phase 4 regime)** | 0.42–0.45 | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). Every memory system retrieves the same gold paragraphs; the spread reflects LLM answer-extraction variability, not memory-system quality. **However — see §6.5.1**: the corpus-cumulative regime (one V4ₜ memory ingesting all 150 documents) differentiates strongly. v4t-corpus-tuned online judge **0.697** vs v4t-canonical online **0.455** (+0.242 lift, Claude Opus 4.7 max judge, n=150). FinanceBench's "no differentiation" finding is therefore scoped to per-document evaluation — when the memory is asked to span the whole corpus, it differentiates as much as CUAD or QASPER. |
 | **NarrativeQA** | 0.16–0.20 (V4/flat-50); BM25 = **0.575** | 800+ paragraph books with no paragraph-level gold relevance signal. At k=8 of 800, V4/flat-50 retrieval is essentially random and the LLM produces low-quality answers (judge ~0.18). **Phase 1.7 counter-finding**: BM25 scores judge=0.575 on the same benchmark — 3× higher than V4 or flat-50. Sparse lexical retrieval finds entity/place-name matches in narrative text that dense embeddings miss; the LLM uses those better-matched paragraphs to construct plausible answers. NarrativeQA therefore *does* differentiate memory systems — but the differentiator is lexical retrieval quality, not parameterized graph memory. |
 
 The chapter does **not** claim a methodological contribution from
@@ -1317,10 +1335,17 @@ Works EBITDA retrieves 3M, Amazon, and AES events instead). Net is
 +38 questions favoring corpus-tuned (52 wins, 84 ties, 14 losses), but
 the bleed is a real failure mode worth naming.
 
-> The judge protocol (5-point rubric, 5% numeric tolerance, refusal
-> counted against gold) is in `evaluation/claude_judge_protocol.md`;
-> per-cell aggregates in `results/stage3/financebench_judge_summary.json`;
-> consolidated audit in `results/stage3/finbench_audit.json`. Question
+> **Evaluator.** All 1,800 judgments (6 configs × 2 modes × 150
+> questions) were made by Claude Opus 4.7 max one-by-one against the
+> 5-point rubric in `evaluation/claude_judge_protocol.md` (5% numeric
+> tolerance, refusal counted against gold). This is a **cross-vendor
+> judge** — the answerer (GPT-4o-mini, OpenAI) and the judge (Claude
+> Opus 4.7 max, Anthropic) come from independent model families, so
+> the self-bias caveat that applies to the §5.4 Phase 4 automated
+> judge (GPT-4o-mini scoring GPT-4o-mini; see §6.7 point 12) does
+> not apply here. Per-cell aggregates in
+> `results/stage3/financebench_judge_summary.json`; consolidated
+> audit in `results/stage3/finbench_audit.json`. Question
 > categorisation ("multi-formula calc", "qualitative judgement", …)
 > used in the interactive panel is informal regex on question text,
 > not human-coded.
@@ -1453,11 +1478,16 @@ and which remain genuine limitations.
 
 **Acknowledged as remaining limitations (cannot fully address within scope):**
 
-12. **LLM-judge is GPT-4o-mini scoring GPT-4o-mini** — known self-bias
-    literature applies. Cross-judging with a different-vendor model
-    (Claude, Gemini) is future work and would require an additional
-    API. The chapter does NOT claim independence between generator
-    and judge.
+12. **For §5.4 only: LLM-judge is GPT-4o-mini scoring GPT-4o-mini.**
+    The Phase 4 automated judge pipeline in
+    `evaluation/document_qa_llm_judge.py` uses GPT-4o-mini, so the
+    self-bias literature applies to the §5.4 multi-benchmark sweep.
+    Note this caveat does **not** apply to the headline FinanceBench
+    Phase 2 numbers in §5.7 / §6.5.1 — those 1,800 judgments were
+    done manually by Claude Opus 4.7 max (cross-vendor judge, frontier
+    model class), per `evaluation/claude_judge_protocol.md`. Generator
+    (GPT-4o-mini, OpenAI) and judge (Claude Opus 4.7 max, Anthropic)
+    are independent for the corpus-mode results.
 
 13. **Bootstrap CI clustering** — Phase 1.7 added cluster bootstrap
     (resampling by per-document cluster ID rather than per-question)
@@ -1541,13 +1571,17 @@ tuning protocol carries over directly. Worth one more CMA-ES sweep.
 
 ### 7.5 Multi-LLM-judge calibration
 
-GPT-4o-mini scoring GPT-4o-mini is the cheap baseline. Cross-judging
-with Claude Sonnet 4.5 and Gemini 2.0 Pro on the same answer set
-would calibrate the judge's reliability. For ~$5–10 of judge-only
-cost, the existing 540-answer set can be cross-scored across three
-judges and report inter-judge agreement κ. This is a standard
-sanity-check for LLM-judge-based evaluation and would strengthen the
-Stage 3 answer-quality claims.
+The FinanceBench Phase 2 results (§5.7, §6.5.1; n=1,800) are already
+cross-vendor: Claude Opus 4.7 max judging GPT-4o-mini. The Phase 4
+multi-benchmark sweep (§5.4) still uses the cheaper GPT-4o-mini self-
+judge. Two natural extensions:
+* Apply the same Claude Opus 4.7 max manual-judge protocol to CUAD
+  and QASPER (the other two long-haystack benchmarks) — would lift
+  §5.4 to the same evaluator class as §5.7. ~3,000 additional judg-
+  ments at ~30 s each.
+* Cross-score the existing FinanceBench answer set with a third judge
+  (Gemini 2.5 Pro) for ~$2 of judge-only cost and report inter-judge
+  agreement κ between Claude Opus 4.7 max and Gemini 2.5 Pro.
 
 ---
 
