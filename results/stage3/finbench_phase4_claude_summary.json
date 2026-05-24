@@ -1,0 +1,117 @@
+{
+  "n_cells": 10,
+  "n_questions_total": 100,
+  "per_cell": {
+    "financebench__bm25__seed42": {
+      "config": "bm25",
+      "seed": 42,
+      "n": 100,
+      "mean_claude": 0.675,
+      "mean_gpt4omini": 0.454,
+      "delta": 0.221
+    },
+    "financebench__flat-50__seed100": {
+      "config": "flat-50",
+      "seed": 100,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__flat-50__seed42": {
+      "config": "flat-50",
+      "seed": 42,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__flat-50__seed7": {
+      "config": "flat-50",
+      "seed": 7,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__v4-canonical__seed100": {
+      "config": "v4-canonical",
+      "seed": 100,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__v4-canonical__seed42": {
+      "config": "v4-canonical",
+      "seed": 42,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__v4-canonical__seed7": {
+      "config": "v4-canonical",
+      "seed": 7,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__v4-tuned__seed100": {
+      "config": "v4-tuned",
+      "seed": 100,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__v4-tuned__seed42": {
+      "config": "v4-tuned",
+      "seed": 42,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    },
+    "financebench__v4-tuned__seed7": {
+      "config": "v4-tuned",
+      "seed": 7,
+      "n": 0,
+      "mean_claude": 0.0,
+      "mean_gpt4omini": 0.0,
+      "delta": 0.0
+    }
+  },
+  "per_config": {
+    "v4-canonical": {
+      "n_cells": 3,
+      "n_questions_pooled": 0,
+      "mean_claude_pooled": 0.0,
+      "mean_gpt4omini_pooled": 0.0,
+      "mean_delta": 0.0
+    },
+    "bm25": {
+      "n_cells": 1,
+      "n_questions_pooled": 100,
+      "mean_claude_pooled": 0.675,
+      "mean_gpt4omini_pooled": 0.454,
+      "mean_delta": 0.221
+    },
+    "flat-50": {
+      "n_cells": 3,
+      "n_questions_pooled": 0,
+      "mean_claude_pooled": 0.0,
+      "mean_gpt4omini_pooled": 0.0,
+      "mean_delta": 0.0
+    },
+    "v4-tuned": {
+      "n_cells": 3,
+      "n_questions_pooled": 0,
+      "mean_claude_pooled": 0.0,
+      "mean_gpt4omini_pooled": 0.0,
+      "mean_delta": 0.0
+    }
+  },
+  "method": "Claude Opus 4.7 max manual judge per evaluation/claude_judge_protocol.md (5-point rubric, 5% numeric tolerance, refusals count against gold). Cross-vendor: judge=Anthropic, answerer=OpenAI gpt-4o-mini."
+}

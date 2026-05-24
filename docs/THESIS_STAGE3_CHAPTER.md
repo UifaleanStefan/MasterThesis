@@ -1045,7 +1045,7 @@ results across every memory configuration we tested.
 | Benchmark | Range of mean judge (across all configs) | Why no differentiation |
 |---|---:|---|
 | **LongMemEval** | 0.37–0.40 | Short haystacks (median 2 sessions per question) — recall saturates at k=8 for every system, and the LLM's answer-quality is bottlenecked by the question's temporal-reasoning difficulty, not by which sessions were retrieved. |
-| **FinanceBench (per-doc Phase 4 regime)** | 0.42–0.45 | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). Every memory system retrieves the same gold paragraphs; the spread reflects LLM answer-extraction variability, not memory-system quality. **However — see §6.5.1**: the corpus-cumulative regime (one V4ₜ memory ingesting all 150 documents) differentiates strongly. v4t-corpus-tuned online judge **0.697** vs v4t-canonical online **0.455** (+0.242 lift, Claude Opus 4.7 max judge, n=150). FinanceBench's "no differentiation" finding is therefore scoped to per-document evaluation — when the memory is asked to span the whole corpus, it differentiates as much as CUAD or QASPER. |
+| **FinanceBench (per-doc Phase 4 regime)** | 0.42–0.45 under GPT-4o-mini judge (re-judging in progress) | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). The GPT-4o-mini auto-judge reports no differentiation, but a Claude Opus 4.7 max re-judge of bm25__seed42 (1 of 10 cells) shows +0.22 lift purely from changing the judge (0.675 vs 0.454), suggesting the original numbers under-count substantively-correct predictions that fell outside the auto-judge's narrow string-match criteria. The remaining 9 cells of Phase 4 FB are being re-judged manually by Claude one entry at a time; results will live in `results/stage3/finbench_phase4_claude_summary.json` once complete. Separately, the corpus-cumulative regime in §6.5.1 differentiates strongly regardless of judge (v4t-corpus-tuned 0.697 vs v4t-canonical 0.455 online, Claude-judged). |
 | **NarrativeQA** | 0.16–0.20 (V4/flat-50); BM25 = **0.575** | 800+ paragraph books with no paragraph-level gold relevance signal. At k=8 of 800, V4/flat-50 retrieval is essentially random and the LLM produces low-quality answers (judge ~0.18). **Phase 1.7 counter-finding**: BM25 scores judge=0.575 on the same benchmark — 3× higher than V4 or flat-50. Sparse lexical retrieval finds entity/place-name matches in narrative text that dense embeddings miss; the LLM uses those better-matched paragraphs to construct plausible answers. NarrativeQA therefore *does* differentiate memory systems — but the differentiator is lexical retrieval quality, not parameterized graph memory. |
 
 The chapter does **not** claim a methodological contribution from
@@ -1478,16 +1478,19 @@ and which remain genuine limitations.
 
 **Acknowledged as remaining limitations (cannot fully address within scope):**
 
-12. **For §5.4 only: LLM-judge is GPT-4o-mini scoring GPT-4o-mini.**
-    The Phase 4 automated judge pipeline in
+12. **For §5.4: LLM-judge is GPT-4o-mini scoring GPT-4o-mini.** The
+    Phase 4 automated judge pipeline in
     `evaluation/document_qa_llm_judge.py` uses GPT-4o-mini, so the
-    self-bias literature applies to the §5.4 multi-benchmark sweep.
-    Note this caveat does **not** apply to the headline FinanceBench
-    Phase 2 numbers in §5.7 / §6.5.1 — those 1,800 judgments were
-    done manually by Claude Opus 4.7 max (cross-vendor judge, frontier
-    model class), per `evaluation/claude_judge_protocol.md`. Generator
-    (GPT-4o-mini, OpenAI) and judge (Claude Opus 4.7 max, Anthropic)
-    are independent for the corpus-mode results.
+    self-bias literature applies to the §5.4 multi-benchmark sweep
+    for CUAD, QASPER, HotpotQA, NarrativeQA, LongMemEval, and the
+    9-of-10 still-pending FinanceBench Phase 4 cells. The FinanceBench
+    Phase 2 corpus-mode results in §5.7 / §6.5.1 (1,800 entries) are
+    fully Claude-judged (Opus 4.7 max, manual, per
+    `evaluation/claude_judge_protocol.md`). A re-judging of all 1,000
+    FinanceBench Phase 4 entries by Claude is in progress; once
+    complete, the FinanceBench column of §5.4 will switch to the
+    cross-vendor judge and this caveat will narrow to "CUAD, QASPER,
+    HotpotQA, NarrativeQA, LongMemEval only."
 
 13. **Bootstrap CI clustering** — Phase 1.7 added cluster bootstrap
     (resampling by per-document cluster ID rather than per-question)
