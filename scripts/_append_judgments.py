@@ -3109,7 +3109,36 @@ JUDGMENTS_QASPER_VTUNED_42 = [
 ]
 
 
+JUDGMENTS_QASPER_HELDOUT = [
+    ("q000", 0.0, "Wrong: varying training data; gold no data/pretrained."),
+    ("q001", 0.0, "Wrong: 20 Newsgroups; gold CoNLL 2003."),
+    ("q002", 1.0, "Yes pre-training effective = Yes."),
+    ("q003", 0.0, "Wrong: BERT from BIBREF12; gold MaxEnt/SVM."),
+    ("q004", 0.25, "Experiments non-ironic transformations - partial vs Irony Classifier."),
+    ("q005", 0.0, "Wrong: No sensitive to seed; gold Yes."),
+    ("q006", 1.0, "German-English exact."),
+    ("q007", 0.0, "Wrong: levels 2/3/4 preprocessing; gold raw text."),
+    ("q008", 0.75, "Low precision rates / ambiguity - close to gold."),
+    ("q009", 0.75, "BIBREF9 + BIBREF8 - contains gold."),
+    ("q010", 1.0, "De-En + Ja-En + Ro-En - contains De-En."),
+    ("q011", 1.0, "Acknowledges interannotator not specified - matches unanswerable."),
+    ("q012", 0.0, "Wrong: male/European American; gold female anger/joy/valence."),
+    ("q013", 0.0, "Wrong: loss function analysis; gold long CLIR."),
+    ("q014", 0.5, "Acknowledges no crowdsourcing - partial vs No."),
+    ("q015", 0.0, "Wrong: 0.92/0.97 F1; gold 2.3-6.8."),
+    ("q016", 1.0, "Yes with word segmentation/spelling challenges = Yes."),
+    ("q017", 1.0, "Acknowledges humans not specified - matches unanswerable."),
+    ("q018", 0.0, "Wrong: new metrics for diversity; gold average unique predictions."),
+    ("q019", 0.0, "Wrong: CNN/DailyMail; gold BIBREF26."),
+    ("q020", 1.0, "Acknowledges improvement not specified - matches unanswerable."),
+    ("q021", 0.0, "Wrong: Turkish; gold Russian."),
+    ("q022", 0.0, "Wrong: Libertarianism etc.; gold politics/business/science/AskReddit."),
+    ("q023", 0.0, "Wrong: Jasper architecture; gold unanswerable."),
+    ("q024", 0.5, "Acknowledges not mentioned - partial vs No."),
+]
+
+
 if __name__ == "__main__":
-    append("p4_main__qasper__v4-tuned__seed42",
-           "p4_main__qasper__v4-tuned__seed42__",
-           JUDGMENTS_QASPER_VTUNED_42)
+    append("p4_main__qasper__v4-tuned-heldout__seed42",
+           "p4_main__qasper__v4-tuned-heldout__seed42__",
+           JUDGMENTS_QASPER_HELDOUT)
