@@ -1389,7 +1389,141 @@ JUDGMENTS_HP_P4MAIN_BM25_42 = [
 ]
 
 
+JUDGMENTS_HP_P4K4_VCANON = [
+    ("q003", 0.0, "Wrong: 21 members; gold is 40 members."),
+    ("q007", 0.75, "Salma Hayek - missing Pinault surname (mentions Mexican/American film actress Salma Hayek)."),
+    ("q008", 0.0, "Wrong: London Heathrow; gold is Gatwick Airport."),
+    ("q012", 0.0, "Wrong: Courteney Cox; gold is Laurie Metcalf."),
+    ("q015", 0.0, "Wrong: Fairhope population 1,151; gold is 729 at 2010 census."),
+    ("q016", 0.0, "Wrong: Beautiful Brown Eyes by The Delmore Brothers; gold is Francis McPeake."),
+    ("q022", 1.0, "Contains Royal Air Force."),
+    ("q023", 0.0, "Refusal: passages do not mention; gold is Norwegian language."),
+    ("q027", 0.0, "Wrong: Crimean War; gold is Cold War 1947-91."),
+    ("q028", 0.0, "Refusal: passages do not contain information; gold is about 115 miles."),
+    ("q029", 0.0, "Wrong: Baraki Barak; gold is Puli Alam."),
+    ("q030", 0.0, "Refusal: passages do not provide information; gold is 310."),
+    ("q031", 1.0, "Exact: Kitty Hawk."),
+    ("q032", 1.0, "Marvel Comics contains Marvel."),
+    ("q035", 0.0, "Refusal: passages do not provide information; gold is Albany."),
+    ("q040", 1.0, "Contains Smoothie King Center."),
+    ("q044", 0.0, "Refusal: passages do not contain information; gold is Oklahoma State University."),
+    ("q050", 0.0, "Refusal: passages do not provide information; gold is Justin Spitzer."),
+    ("q053", 0.0, "Refusal: passages do not contain information; gold is Personal History."),
+    ("q054", 1.0, "Contains Netherlands (theme park served by Huis Ten Bosch)."),
+    ("q056", 1.0, "Gwailo ≈ Gweilo (different romanization of same Cantonese term)."),
+    ("q057", 0.0, "Refusal: passages do not provide information; gold is Tian Tan Buddha."),
+    ("q060", 1.0, "No = no (Phlebodium ferns / Pieris elaboration; says butterflies which is wrong sub-fact but overall answer right)."),
+    ("q062", 0.75, "At the age of 12 - partial answer, missing Bocelli context."),
+    ("q063", 0.0, "Refusal: passage does not provide information; gold is Naomi Elaine Campbell."),
+    ("q064", 0.0, "Wrong: The Honey Pot; gold is Revengers Tragedy."),
+    ("q066", 0.0, "Refusal: passage does not provide information; gold is Rosie O'Donnell."),
+    ("q068", 0.0, "Wrong: Broken Bells; gold is The Shins."),
+    ("q069", 0.75, "Scandinavia, Norway, Sweden - close (missing Denmark explicitly though Scandinavia includes Denmark)."),
+    ("q070", 0.0, "Refusal: Mach number not specified; gold is 2."),
+    ("q072", 0.0, "Wrong: Chris Engler; gold is Mookie Blaylock."),
+    ("q075", 0.0, "Wrong: The Cryptanthus; gold is Chaerophyllum."),
+    ("q076", 1.0, "The Tropicana Casino & Resort Atlantic City contains Tropicana Casino & Resort."),
+    ("q077", 0.5, "Names only Leslie Bricusse (one of three); partial - missing Wildhorn and Cuden."),
+    ("q078", 0.75, "Christian religion - close to evangelical Christian (missing evangelical qualifier)."),
+    ("q084", 1.0, "Contains drummer (Mark Gaudet is a drummer)."),
+    ("q087", 1.0, "A green dinosaur contains dinosaur."),
+    ("q088", 0.0, "Wrong: Norwegian; gold is Punjabi/Pashtun."),
+    ("q089", 0.0, "Wrong: Dr Pepper/Seven Up Ballpark; gold is Drillers Stadium."),
+    ("q090", 0.0, "Wrong: Crawfordville/Wakulla County; gold is Alachua."),
+    ("q094", 0.75, "Texas Longhorns - close (missing 'University of' prefix)."),
+    ("q097", 0.0, "Wrong: 2002; gold is 1974."),
+    ("q098", 0.0, "Wrong reference (Joanna Jędrzejczyk instead of Anderson Silva); gold is Anderson Silva."),
+    ("q099", 0.5, "Says opera in common - partial; gold is music."),
+]
+
+
+JUDGMENTS_HP_P4K4_VTUNED = [
+    ("q007", 0.75, "Salma Hayek - missing Pinault surname."),
+    ("q015", 0.0, "Refusal: passages do not mention; gold is 729 at 2010 census."),
+    ("q016", 0.0, "Wrong: Fiddlin Arthur Smith Alton Delmore; gold is Francis McPeake."),
+    ("q021", 0.75, "Names Carl von Clausewitz + Prussian General + political realism; close - missing 'modern thinker associated with classical realism' framing."),
+    ("q023", 0.0, "Refusal: passages do not contain information; gold is Norwegian language."),
+    ("q024", 0.0, "Wrong: Sasanian Empire; gold is Parthian Empire."),
+    ("q027", 1.0, "Contains Cold War (1947-91)."),
+    ("q032", 1.0, "Marvel Comics contains Marvel."),
+    ("q035", 0.0, "Refusal: passages do not provide information; gold is Albany."),
+    ("q039", 0.0, "Refusal: cannot derive answer; gold is Buffalo."),
+    ("q055", 0.0, "Does not give dates; gold is 1945 to 1951."),
+    ("q061", 0.0, "Vague (member of Hawaiian nobility); does not name Kalokuokamaile."),
+    ("q064", 0.0, "Refusal: not mentioned in passages; gold is Revengers Tragedy."),
+    ("q066", 0.0, "Refusal: passages do not provide information; gold is Rosie O'Donnell."),
+    ("q070", 0.0, "Refusal: specific value not provided; gold is 2."),
+    ("q072", 0.0, "Wrong: Dikembe Mutombo; gold is Mookie Blaylock."),
+    ("q075", 0.0, "Wrong: The Cryptanthus; gold is Chaerophyllum."),
+    ("q078", 0.75, "Christian religion - close (missing evangelical qualifier)."),
+    ("q079", 1.0, "Exact: The Late Late Show."),
+    ("q087", 1.0, "Silhouette of large green dinosaur contains dinosaur."),
+    ("q098", 0.0, "Wrong reference (Michael Bisping); gold is Anderson Silva."),
+]
+
+JUDGMENTS_HP_P4K8_VCANON = [
+    ("q027", 0.75, "The Cold War - close (missing 1947-91 dates)."),
+    ("q086", 1.0, "Contains 1.6 million passengers."),
+]
+
+JUDGMENTS_HP_P4K8_VTUNED = [
+    ("q032", 1.0, "Marvel Comics contains Marvel."),
+    ("q086", 1.0, "Contains 1.6 million passengers."),
+]
+
+JUDGMENTS_HP_P4K16_VCANON = [
+    ("q027", 0.75, "The Cold War - close (missing 1947-91 dates)."),
+    ("q052", 1.0, "Yes = yes (with Korematsu/Chaplinsky elaboration)."),
+    ("q070", 1.0, "Mach 2 = 2."),
+    ("q082", 1.0, "Contains Rudolf Höss."),
+    ("q094", 0.75, "The Texas Longhorns - close (missing 'University of' prefix)."),
+]
+
+JUDGMENTS_HP_P4K16_VTUNED = [
+    ("q032", 1.0, "Marvel Comics contains Marvel."),
+    ("q039", 0.0, "Mwabvi River; gold is Buffalo."),
+    ("q057", 0.0, "Refusal: year not provided; gold is Tian Tan Buddha."),
+    ("q061", 0.0, "Wrong: Don Manuel Carrillo Tablas; gold is Kalokuokamaile."),
+    ("q070", 0.0, "Refusal: specific value not provided; gold is 2."),
+    ("q094", 0.75, "The Texas Longhorns - close (missing 'University of' prefix)."),
+    ("q098", 0.0, "Wrong reference (Michael Bisping/Chris Weidman); gold is Anderson Silva."),
+]
+
+JUDGMENTS_HP_P4K32_VCANON = [
+    ("q027", 1.0, "Cold War (1947-91) exact match."),
+    ("q082", 1.0, "Contains Rudolf Höss."),
+    ("q094", 0.75, "The Texas Longhorns - close (missing 'University of' prefix)."),
+]
+
+JUDGMENTS_HP_P4K32_VTUNED = [
+    ("q032", 1.0, "Marvel Comics contains Marvel."),
+    ("q039", 0.0, "Refusal: no information about river; gold is Buffalo."),
+    ("q057", 0.0, "Refusal: year not provided; gold is Tian Tan Buddha."),
+    ("q061", 0.0, "Wrong: Don Manuel Carrillo Tablas; gold is Kalokuokamaile."),
+    ("q070", 0.0, "Refusal: specific value not provided; gold is 2."),
+    ("q094", 0.75, "The Texas Longhorns - close (missing 'University of' prefix)."),
+]
+
+
 if __name__ == "__main__":
-    append("p4_main__hotpotqa__bm25__seed42",
-           "p4_main__hotpotqa__bm25__seed42__",
-           JUDGMENTS_HP_P4MAIN_BM25_42)
+    append("p4_k4__hotpotqa__v4-tuned__seed42",
+           "p4_k4__hotpotqa__v4-tuned__seed42__",
+           JUDGMENTS_HP_P4K4_VTUNED)
+    append("p4_k8__hotpotqa__v4-canonical__seed42",
+           "p4_k8__hotpotqa__v4-canonical__seed42__",
+           JUDGMENTS_HP_P4K8_VCANON)
+    append("p4_k8__hotpotqa__v4-tuned__seed42",
+           "p4_k8__hotpotqa__v4-tuned__seed42__",
+           JUDGMENTS_HP_P4K8_VTUNED)
+    append("p4_k16__hotpotqa__v4-canonical__seed42",
+           "p4_k16__hotpotqa__v4-canonical__seed42__",
+           JUDGMENTS_HP_P4K16_VCANON)
+    append("p4_k16__hotpotqa__v4-tuned__seed42",
+           "p4_k16__hotpotqa__v4-tuned__seed42__",
+           JUDGMENTS_HP_P4K16_VTUNED)
+    append("p4_k32__hotpotqa__v4-canonical__seed42",
+           "p4_k32__hotpotqa__v4-canonical__seed42__",
+           JUDGMENTS_HP_P4K32_VCANON)
+    append("p4_k32__hotpotqa__v4-tuned__seed42",
+           "p4_k32__hotpotqa__v4-tuned__seed42__",
+           JUDGMENTS_HP_P4K32_VTUNED)
