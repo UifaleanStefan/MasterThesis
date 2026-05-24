@@ -51,6 +51,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import random
 import sys
 import time
 from pathlib import Path
@@ -379,6 +380,40 @@ def answer_one_qa(
     }
 
 
+def _build_all_qa_inventory(docs: list) -> list[dict]:
+    """Pre-walk all docs to assemble the full (doc_idx, qa_idx, q, gold) inventory
+    BEFORE ingestion. Required for Protocol B (calibration) so the random sampler
+    at each doc-end can pick from ALL future questions, including ones whose
+    source docs have not been ingested yet.
+
+    Each entry includes the doc_start_step (cumulative global step at which the
+    doc's paragraphs begin) so retrieval recall@k works the same as in the
+    incremental inventory in run_corpus_qa.
+    """
+    inventory = []
+    cumulative_step = 0
+    for doc_idx, doc in enumerate(docs):
+        paragraphs = doc.get("paragraphs", []) or []
+        qa_pairs = doc.get("qa_pairs", []) or []
+        doc_title = str(doc.get("title", f"doc_{doc_idx}"))[:120]
+        for qa_idx, qa in enumerate(qa_pairs):
+            local_relevant = qa.get("relevant_paragraphs", []) or []
+            global_relevant = {cumulative_step + i for i in local_relevant
+                               if 0 <= i < len(paragraphs)}
+            inventory.append({
+                "doc_idx": doc_idx,
+                "doc_title": doc_title,
+                "qa_idx_in_doc": qa_idx,
+                "question": qa["question"],
+                "gold_answer": qa["answer"],
+                "relevant_global_steps": sorted(global_relevant),
+                "doc_start_step": cumulative_step,
+                "n_paragraphs": len(paragraphs),
+            })
+        cumulative_step += len(paragraphs)
+    return inventory
+
+
 def run_corpus_qa(
     benchmark: str,
     config: str,
@@ -391,12 +426,51 @@ def run_corpus_qa(
     out_dir: Path,
     progress_every_docs: int = 25,
     w_recency_zero: bool = False,
+    protocol: str = "online_batch",
+    questions_per_doc: int = 10,
 ) -> dict:
+    """Corpus-cumulative QA driver.
+
+    Two protocols supported (controlled by the `protocol` arg):
+
+    * ``protocol="online_batch"`` (default, the original behaviour) — runs
+      Protocol A "memory retention" experiment:
+        - ONLINE: after ingesting doc K, ask doc K's questions against the
+          cumulative memory.
+        - BATCH: after all docs ingested, ask every question once more
+          against the final memory.
+
+    * ``protocol="calibration"`` (Phase 1.9 Protocol B "honesty" experiment)
+      — at each doc-end, sample ``questions_per_doc`` random questions from
+      the **full** corpus question pool (mix of already-ingested-source-doc and
+      not-yet-ingested-source-doc), then ask them. Each entry is tagged with
+      ``expected_behavior``:
+        - "answer" if the source doc has already been ingested (model should
+          answer correctly);
+        - "acknowledge_missing" if the source doc has NOT been ingested yet
+          (model should admit it doesn't know).
+      Plus the same end-of-corpus batch as protocol="online_batch" (writes
+      ``qa_batch.json`` with the standard schema; predictions are
+      byte-identical to a matched protocol="online_batch" run, so the dedupe
+      transfer downstream can save Claude judging effort).
+    """
+    if protocol not in {"online_batch", "calibration"}:
+        raise ValueError(f"unknown protocol={protocol!r}; choose 'online_batch' or 'calibration'")
+    is_calibration = (protocol == "calibration")
+    # In calibration mode, the "online" per-doc questions are replaced by
+    # the random-sample calibration questions, so `do_online` (per-doc QA
+    # of the just-ingested doc's questions) is force-off — the calibration
+    # loop covers that slot.
+    if is_calibration:
+        do_online = False
+
     category = benchmark_category(benchmark)
     print(f"\n{'=' * 78}")
     print(f"  CORPUS QA  benchmark={benchmark} ({category})")
-    print(f"  config={config}  seed={seed}")
+    print(f"  config={config}  seed={seed}  protocol={protocol}")
     print(f"  online={do_online}  batch={do_batch}  k={k}  limit_docs={limit_docs or 'ALL'}")
+    if is_calibration:
+        print(f"  calibration: {questions_per_doc} random q's per doc-end")
     if w_recency_zero:
         print(f"  w_recency_zero=True (Block B / critique #4)")
     print(f"{'=' * 78}")
@@ -405,6 +479,15 @@ def run_corpus_qa(
     docs = list(adapter.iter_documents(limit=limit_docs))
     total_docs = len(docs)
     print(f"  Loaded {total_docs} docs.")
+
+    # Calibration mode (Protocol B): pre-build the full question inventory so
+    # the per-doc-end random sampler can draw from questions whose source docs
+    # have not yet been ingested.
+    all_qa_inventory: list[dict] = []
+    if is_calibration:
+        all_qa_inventory = _build_all_qa_inventory(docs)
+        print(f"  Calibration: pre-built inventory of {len(all_qa_inventory)} questions "
+              f"across {total_docs} docs (sampler will draw {questions_per_doc} per doc-end).")
 
     memory, params = build_memory(config, benchmark)
     if params is not None and w_recency_zero:
@@ -422,6 +505,7 @@ def run_corpus_qa(
     token_count = _make_token_counter(model)
 
     online_results: list[dict] = []
+    calibration_results: list[dict] = []
     qa_inventory: list[dict] = []  # (doc_idx, qa_idx_in_doc, question, gold)
 
     global_step = 0
@@ -496,6 +580,43 @@ def run_corpus_qa(
                 r["docs_seen"] = doc_idx + 1
                 online_results.append(r)
 
+        # Calibration mode (Protocol B): after ingesting doc K, sample
+        # `questions_per_doc` random questions from the FULL corpus pool
+        # and ask each one. Each entry is tagged with `expected_behavior`
+        # = "answer" if source doc has been ingested (source_doc_idx <= K)
+        # or "acknowledge_missing" if not (source_doc_idx > K). The model
+        # uses the same retrieval + LLM stack as protocol="online_batch";
+        # only the question selection differs.
+        if is_calibration and all_qa_inventory:
+            # Deterministic per-(seed, doc_idx) sampling: same seed → same
+            # sampled qids per doc-end, across configs. This lets us pair
+            # questions across configs for paired analysis.
+            rng = random.Random(seed * 31 + doc_idx)
+            n_to_sample = min(questions_per_doc, len(all_qa_inventory))
+            sampled_indices = rng.sample(range(len(all_qa_inventory)), n_to_sample)
+            for q_idx in sampled_indices:
+                qi = all_qa_inventory[q_idx]
+                src_doc_idx = qi["doc_idx"]
+                expected_behavior = (
+                    "answer" if src_doc_idx <= doc_idx else "acknowledge_missing"
+                )
+                r = answer_one_qa(
+                    agent, memory, qi["question"], qi["gold_answer"],
+                    doc_title=qi["doc_title"],
+                    relevant_global_steps=set(qi["relevant_global_steps"]),
+                    current_step=global_step,  # cumulative end-of-doc-K
+                    k=k, model=model, token_count=token_count,
+                    skip_judge=True,
+                )
+                r["doc_idx"] = src_doc_idx
+                r["qa_idx_in_doc"] = qi["qa_idx_in_doc"]
+                r["mode"] = "calibration"
+                r["docs_seen"] = doc_idx + 1
+                r["expected_behavior"] = expected_behavior
+                r["source_doc_idx"] = src_doc_idx
+                r["asked_after_doc_idx"] = doc_idx
+                calibration_results.append(r)
+
         if (doc_idx + 1) % progress_every_docs == 0 or doc_idx == total_docs - 1:
             elapsed = time.time() - t_start
             cost = agent.session_cost_usd
@@ -504,6 +625,7 @@ def run_corpus_qa(
                 f"global_step={global_step:>7}  "
                 f"events_stored={cumulative_stored:>6}  "
                 f"online_qa={len(online_results):>5}  "
+                f"calib_qa={len(calibration_results):>5}  "
                 f"cost=${cost:>6.4f}  elapsed={elapsed:>6.1f}s"
             )
 
@@ -553,6 +675,7 @@ def run_corpus_qa(
             "benchmark": benchmark,
             "config": config,
             "model": model,
+            "protocol": protocol,
         }),
         "benchmark": benchmark,
         "config": config,
@@ -562,6 +685,7 @@ def run_corpus_qa(
         "n_docs": total_docs,
         "limit_docs": limit_docs,
         "n_qa_total": len(qa_inventory),
+        "protocol": protocol,
         "do_online": do_online,
         "do_batch": do_batch,
         "online": {
@@ -582,6 +706,24 @@ def run_corpus_qa(
         } if do_batch else None,
         "total_cost_usd": total_cost,
     }
+
+    # Calibration (Protocol B) summary, only when protocol="calibration".
+    if is_calibration:
+        n_answer = sum(1 for r in calibration_results
+                       if r.get("expected_behavior") == "answer")
+        n_ack = sum(1 for r in calibration_results
+                    if r.get("expected_behavior") == "acknowledge_missing")
+        summary["protocol"] = "calibration"
+        summary["questions_per_doc"] = questions_per_doc
+        summary["calibration"] = {
+            "n": len(calibration_results),
+            "n_expected_answer": n_answer,
+            "n_expected_acknowledge_missing": n_ack,
+            "mean_recall_at_k": _mean(calibration_results, "recall_at_k"),
+            "elapsed_seconds": online_elapsed,
+            "n_with_judge": sum(1 for r in calibration_results
+                                if r.get("judge_score") is not None),
+        }
 
     # Online vs batch recall agreement (when both modes ran). Judge
     # agreement is computed downstream once Claude scores both queues.
@@ -612,23 +754,41 @@ def run_corpus_qa(
             f"doc{rec['doc_idx']}_qa{rec['qa_idx_in_doc']}__seed{seed}"
         )
 
+    def _qid_calib(rec: dict) -> str:
+        """Calibration qid disambiguates by `asked_after_doc_idx` because
+        the same (source_doc_idx, qa_idx) can be sampled at multiple
+        doc-end checkpoints. Without `asked_after`, qids would collide."""
+        return (
+            f"{benchmark}__{config}__calibration__"
+            f"doc{rec['doc_idx']}_qa{rec['qa_idx_in_doc']}__"
+            f"after{rec['asked_after_doc_idx']}__seed{seed}"
+        )
+
     for rec in online_results:
         rec["qid"] = _qid(rec, "online")
     for rec in batch_results:
         rec["qid"] = _qid(rec, "batch")
+    for rec in calibration_results:
+        rec["qid"] = _qid_calib(rec)
 
     out_dir.mkdir(parents=True, exist_ok=True)
     if do_online:
         (out_dir / "qa_online.json").write_text(json.dumps(online_results, indent=2, default=str))
     if do_batch:
         (out_dir / "qa_batch.json").write_text(json.dumps(batch_results, indent=2, default=str))
+    if is_calibration:
+        (out_dir / "qa_calibration.json").write_text(
+            json.dumps(calibration_results, indent=2, default=str))
     (out_dir / "qa_summary.json").write_text(json.dumps(summary, indent=2, default=str))
 
     # Block E: emit Claude-in-the-loop judge queues (one per mode).
     # Each entry has just what the judge needs: question, gold, predicted.
     # The merger downstream looks up by qid to splice judge_score back.
+    # Calibration entries carry `expected_behavior` + `source_doc_idx` +
+    # `asked_after_doc_idx` so the judge applies the calibration rubric
+    # in `evaluation/claude_judge_protocol.md`.
     def _queue_entry(rec: dict) -> dict:
-        return {
+        entry = {
             "qid": rec["qid"],
             "benchmark": benchmark,
             "config": config,
@@ -643,6 +803,12 @@ def run_corpus_qa(
             "retrieved_steps": rec.get("retrieved_steps"),
             "k": rec.get("k"),
         }
+        # Calibration entries carry extra fields the judge needs.
+        if rec.get("mode") == "calibration":
+            entry["expected_behavior"] = rec.get("expected_behavior")
+            entry["source_doc_idx"] = rec.get("source_doc_idx")
+            entry["asked_after_doc_idx"] = rec.get("asked_after_doc_idx")
+        return entry
 
     if do_online and online_results:
         write_judge_queue(
@@ -653,6 +819,11 @@ def run_corpus_qa(
         write_judge_queue(
             f"{benchmark}__{config}__batch__seed{seed}",
             (_queue_entry(r) for r in batch_results),
+        )
+    if is_calibration and calibration_results:
+        write_judge_queue(
+            f"{benchmark}__{config}__calibration__seed{seed}",
+            (_queue_entry(r) for r in calibration_results),
         )
 
     print(f"\n  Saved qa_online.json / qa_batch.json / qa_summary.json to {out_dir}")
@@ -671,6 +842,14 @@ def run_corpus_qa(
         n = summary["batch"]["n"]
         judge_status = _fmt(mj) if mj is not None else "pending Claude judging"
         print(f"  Batch:  n={n}  recall@k={_fmt(mr)}  judge={judge_status}")
+    if summary.get("calibration"):
+        cal = summary["calibration"]
+        n = cal["n"]
+        n_ans = cal["n_expected_answer"]
+        n_ack = cal["n_expected_acknowledge_missing"]
+        mr = cal.get("mean_recall_at_k")
+        print(f"  Calibration: n={n}  expected_answer={n_ans}  expected_acknowledge_missing={n_ack}  "
+              f"recall@k={_fmt(mr)}  judge=pending Claude judging")
     if "online_vs_batch_recall" in summary:
         ovb = summary["online_vs_batch_recall"]
         print(f"  Online vs batch recall: diff={ovb['diff_mean']:+.4f}  agreement={ovb['agreement_rate']:.3f}")
@@ -710,16 +889,39 @@ def main() -> int:
         help="Block B / critique #4: override w_recency=0 to eliminate "
              "recency-bias confound when comparing online vs batch retrieval.",
     )
+    parser.add_argument(
+        "--protocol", default="online_batch",
+        choices=["online_batch", "calibration"],
+        help="Phase 1.9. 'online_batch' (default) = Protocol A memory-retention "
+             "test: after each doc, ask that doc's own questions; at end, ask all "
+             "again. 'calibration' = Protocol B honesty test: at each doc-end, "
+             "sample N random questions from the full pool (mix of already- and "
+             "not-yet-ingested), tag each with expected_behavior; at end, ask "
+             "all once more (same as Protocol A's batch).",
+    )
+    parser.add_argument(
+        "--questions-per-doc", type=int, default=10,
+        help="Calibration mode only: how many random questions to sample at "
+             "each doc-end. Default 10. With seed=42 and FB's 150 docs, this "
+             "produces 1,500 calibration entries + 150 end-of-corpus = 1,650 "
+             "judge_queue entries per config.",
+    )
     args = parser.parse_args()
 
     do_online = not args.no_online
     do_batch = not args.no_batch
-    if not do_online and not do_batch:
+    if args.protocol == "calibration":
+        # Calibration mode: per-doc-end sampling replaces the online slot, so
+        # do_online is force-off inside run_corpus_qa() — silently ignore
+        # --no-online here. do_batch can still be toggled (default True).
+        pass
+    elif not do_online and not do_batch:
         print("[FAIL] cannot disable both --no-online and --no-batch")
         return 1
 
     if args.out_dir is None:
-        out_dir = OUT_ROOT / f"{args.benchmark}__{args.config}"
+        suffix = "" if args.protocol == "online_batch" else f"__{args.protocol}"
+        out_dir = OUT_ROOT / f"{args.benchmark}__{args.config}{suffix}"
     else:
         out_dir = Path(args.out_dir)
 
@@ -736,6 +938,8 @@ def main() -> int:
             out_dir=out_dir,
             progress_every_docs=args.progress_every_docs,
             w_recency_zero=args.w_recency_zero,
+            protocol=args.protocol,
+            questions_per_doc=args.questions_per_doc,
         )
         return 0
     except Exception as e:
