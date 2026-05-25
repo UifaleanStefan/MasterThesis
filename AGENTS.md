@@ -7,7 +7,45 @@
 
 ---
 
-## 0. CRITICAL — READ BEFORE PLANNING ANY STAGE 3 EXPERIMENT
+## 0. CRITICAL — ALL ANSWER-QUALITY JUDGING IS DONE BY CLAUDE IN-SESSION, FULL STOP
+
+**Hard rule, no exceptions, signed off by the user on 2026-05-25:**
+
+> Every `judge_score` in `results/stage3/judge_queue/**/results.jsonl` MUST be
+> produced by the **Claude agent in the active conversation** reading the
+> `(question, gold, predicted)` triple and applying the rubric in
+> [`evaluation/claude_judge_protocol.md`](evaluation/claude_judge_protocol.md)
+> manually for that specific entry.
+>
+> - **Forbidden:** gpt-4o-mini auto-judging (the old `llm_judge_score` path is dead — do not revive it)
+> - **Forbidden:** heuristic judgers (string overlap, BLEU, embedding cosine, regex, "substring of gold → 1.0", etc.)
+> - **Forbidden:** any LLM-as-judge that isn't the active Claude session
+> - **Forbidden:** reusing prior-session judgments against fresh predictions (OpenAI's
+>   approximate-determinism means ~30-50% of predictions differ between reruns even at
+>   seed=42 temp=0; stale scores are invalid for fresh predictions)
+> - **Forbidden:** writing a script that produces the scores automatically by parsing
+>   gold/pred; the only allowed script is the persistence wrapper that writes Claude's
+>   already-made `(qid, score, rationale)` tuples to `results.jsonl`
+>
+> Every result line must carry `"judge_model": "claude-opus-4.7-1m"` (or current
+> variant) and a rationale that cites the specific value comparison.
+>
+> Validate via `python scripts/audit_judge_provenance.py` — it must exit 0
+> before any commit that touches `results.jsonl` files.
+
+The whole point of moving off gpt-4o-mini judging in Phase 1.7 was to remove
+the gpt-4o-mini-judges-gpt-4o-mini self-bias. A heuristic judger would
+reintroduce the same problem in a different shape. The thesis chapter has to
+honestly state: *every score is a Claude (or human) reading the entry and
+applying the rubric.*
+
+If a previous agent or session wrote scores that violate this rule, treat
+the affected `results.jsonl` lines as poisoned, delete them, and re-judge
+fresh. Document the cleanup in `docs/RECENT_CHANGES.md`.
+
+---
+
+## 0.1. CRITICAL — READ BEFORE PLANNING ANY STAGE 3 EXPERIMENT
 
 The thesis claim is about a memory that **ingests a corpus cumulatively** and
 is **queried online (during ingestion) + batch (at the end)**. The Phase 4 /

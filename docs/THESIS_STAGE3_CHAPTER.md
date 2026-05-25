@@ -1370,14 +1370,14 @@ retrieval scoring carries non-trivial load for the first time when
 memory must disambiguate across overlapping topical clusters
 (3M-2018, 3M-2022, AES, Adobe…) rather than within a single document.
 
-On the FinanceBench end-to-end QA evaluation (n=150 questions, manual
-Claude judge per `evaluation/claude_judge_protocol.md`, gpt-4o-mini
-answerer, $0.15 cost per config), the corpus-tuned θ produces 0.697
-mean judge in online mode vs canonical's 0.455 (+0.242 lift) and
-per-doc tuned's 0.437. The sharpest single comparison is **dump-all
-batch** (all 188 paragraphs in the prompt, no retrieval — recall=1.0)
-collapsing to **0.037 judge**, while v4t-corpus-tuned batch (k=8
-selective, recall=0.97) holds at **0.677**. gpt-4o-mini drowns when
+On the FinanceBench end-to-end QA evaluation (n=150 questions per
+cell, manual Claude judge per `evaluation/claude_judge_protocol.md`,
+gpt-4o-mini answerer), the corpus-tuned θ produces **0.678** mean
+judge in online mode vs canonical's 0.490 (+0.188 lift) and per-doc
+tuned's 0.455. The sharpest single comparison is **dump-all batch**
+(all 188 paragraphs in the prompt, no retrieval — recall=1.0)
+collapsing to **0.038 judge**, while v4t-corpus-tuned batch (k=8
+selective, recall=0.97) holds at **0.645**. gpt-4o-mini drowns when
 all 188 paragraphs are concatenated; selective retrieval at k=8 is
 structurally necessary for this model and this context length.
 
@@ -1390,8 +1390,37 @@ Works EBITDA retrieves 3M, Amazon, and AES events instead). Net is
 +38 questions favoring corpus-tuned (52 wins, 84 ties, 14 losses), but
 the bleed is a real failure mode worth naming.
 
-> **Evaluator.** All 1,800 judgments (6 configs × 2 modes × 150
-> questions) were made by Claude Opus 4.7 max one-by-one against the
+**Extension: four additional baselines at end-of-corpus.** Phase 1.9
+added four more memory backbones evaluated calibration-only (1,500
+questions sampled across ingestion + 150 end-of-corpus questions per
+config, all Claude-judged). At end-of-corpus they sort cleanly into
+two clusters. **Retain**: RAG (MiniLM dense embeddings, cosine
+retrieval) 0.615; BM25-corpus (sparse) 0.502 — both beat every V4ₜ
+variant with default θ. **Collapse**: V5 graph with canonical θ
+0.217 (4.5× FlatMemory but still 3× below the selective + tuned
+configs); semantic TF-IDF 0.062; FlatMemory with `window=50` eviction
+0.048. Dense-embedding retrieval is the strongest non-tuned baseline;
+sparse retrieval loses ~0.11 to it at this scale; and structural graph
+memory adds real value only once θ has been tuned for the regime —
+canonical-θ V5 lands closer to TF-IDF than to the corpus-tuned V4ₜ.
+
+**Protocol B calibration trajectory** (10 deciles × 150 questions each,
+sorted by `docs_seen` at time of asking). All configs start in the
+0.93–0.97 band at decile 1 (early corpus, mostly honest "I don't have
+that information" refusals — the calibration setup samples random
+questions, ~95% of which target docs not yet ingested). The decile-10
+spread is the discriminator: selective + tuned (attention-corpus-tuned
+0.70, v4t-corpus-tuned 0.68, RAG 0.62, BM25 0.57) holds within 0.30
+of the early-corpus ceiling; canonical-θ V4 (0.22), V5 (0.20), per-doc
+tuned (0.17), dump-all (0.13), semantic TF-IDF (0.10), and FlatMemory
+(0.09) collapse to between 0.10 and 0.25. The trajectory chart in the
+interactive panel (`web/public/data/stage3_finbench_corpus.json` ›
+`calibration_data`) makes the two-cluster structure visually obvious:
+four lines stay in the upper band, six lines fall to the lower band.
+
+> **Evaluator.** All **18,300 judgments** (Protocol A 12 cells × 150q
+> + Protocol B 12 cells × {1,500q + 150q} + Extension 8 cells ×
+> {1,500q + 150q}) were made by Claude Opus 4.7 max one-by-one against the
 > 5-point rubric in `evaluation/claude_judge_protocol.md` (5% numeric
 > tolerance, refusal counted against gold). This is a **cross-vendor
 > judge** — the answerer (GPT-4o-mini, OpenAI) and the judge (Claude

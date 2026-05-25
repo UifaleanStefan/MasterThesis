@@ -17,6 +17,7 @@ import { ChartFrame } from "../components/shared/ChartFrame";
 import { cn } from "../lib/format";
 import { CrossDocScatter } from "../components/viz/CrossDocScatter";
 import { QuestionTypeHeatmap } from "../components/viz/QuestionTypeHeatmap";
+import { CalibrationTrajectory } from "../components/viz/CalibrationTrajectory";
 import type {
   FinanceBenchConfig,
   FinanceBenchCorpusData,
@@ -130,7 +131,12 @@ export function FinanceBenchCorpus() {
         }
         onSelectWinners={() =>
           setVisibleConfigs(
-            new Set(["v4t-corpus-tuned", "attention-corpus-tuned", "dump-all"]),
+            new Set([
+              "v4t-corpus-tuned",
+              "attention-corpus-tuned",
+              "rag-corpus",
+              "dump-all",
+            ]),
           )
         }
       />
@@ -225,6 +231,21 @@ export function FinanceBenchCorpus() {
           />
         </ChartFrame>
       </div>
+
+      {data.calibration_data ? (
+        <div className="mt-6">
+          <ChartFrame
+            title="Protocol B calibration trajectory"
+            subtitle="Per-decile mean across the 1500 calibration questions (10 configs × 150 questions/decile). Selective + tuned configs hold; canonical θ / windowed / TF-IDF / dump-all collapse as the corpus dilutes memory."
+          >
+            <CalibrationTrajectory
+              calibration={data.calibration_data}
+              configs={data.configs}
+              visibleConfigs={visibleConfigs}
+            />
+          </ChartFrame>
+        </div>
+      ) : null}
 
       <div
         className="mt-6 text-[0.7rem] font-mono"
@@ -358,9 +379,15 @@ function JudgeTable({
 }: JudgeTableProps) {
   const shown = configs.filter((c) => visibleConfigs.has(c.name));
 
-  // Best cell per column for highlighting
-  const bestOnline = Math.max(...shown.map((c) => data.judge_table[c.name].online.mean_judge));
-  const bestBatch = Math.max(...shown.map((c) => data.judge_table[c.name].batch.mean_judge));
+  // Best cell per column for highlighting — only consider populated cells (n > 0)
+  const populated = (mode: "online" | "batch") =>
+    shown.map((c) => data.judge_table[c.name][mode]).filter((cell) => cell.n > 0);
+  const bestOnline = populated("online").length
+    ? Math.max(...populated("online").map((c) => c.mean_judge))
+    : -1;
+  const bestBatch = populated("batch").length
+    ? Math.max(...populated("batch").map((c) => c.mean_judge))
+    : -1;
 
   return (
     <div className="overflow-x-auto">
@@ -391,7 +418,9 @@ function JudgeTable({
           {shown.map((c) => {
             const onl = data.judge_table[c.name].online;
             const bat = data.judge_table[c.name].batch;
-            const delta = onl.mean_judge - bat.mean_judge;
+            const haveOnl = onl.n > 0;
+            const haveBat = bat.n > 0;
+            const delta = haveOnl && haveBat ? onl.mean_judge - bat.mean_judge : null;
             const isHovered = hoveredConfig === c.name;
 
             return (
@@ -416,35 +445,50 @@ function JudgeTable({
                     <span style={{ color: "var(--color-text)" }}>{c.label}</span>
                   </div>
                 </td>
-                <Cell
-                  cell={onl}
-                  best={onl.mean_judge >= bestOnline - 0.005}
-                  onClick={() => onCellClick(c.name, "online")}
-                />
+                {haveOnl ? (
+                  <Cell
+                    cell={onl}
+                    best={onl.mean_judge >= bestOnline - 0.005}
+                    onClick={() => onCellClick(c.name, "online")}
+                  />
+                ) : (
+                  <EmptyCell />
+                )}
                 <td
                   className="text-right py-2 px-2 tabular-nums"
                   style={{ color: "var(--color-text-2)" }}
                 >
-                  {onl.mean_recall.toFixed(2)}
+                  {haveOnl ? onl.mean_recall.toFixed(2) : "—"}
                 </td>
-                <Cell
-                  cell={bat}
-                  best={bat.mean_judge >= bestBatch - 0.005}
-                  onClick={() => onCellClick(c.name, "batch")}
-                />
+                {haveBat ? (
+                  <Cell
+                    cell={bat}
+                    best={bat.mean_judge >= bestBatch - 0.005}
+                    onClick={() => onCellClick(c.name, "batch")}
+                  />
+                ) : (
+                  <EmptyCell />
+                )}
                 <td
                   className="text-right py-2 px-2 tabular-nums"
                   style={{ color: "var(--color-text-2)" }}
                 >
-                  {bat.mean_recall.toFixed(2)}
+                  {haveBat ? bat.mean_recall.toFixed(2) : "—"}
                 </td>
                 <td
                   className="text-right py-2 pl-2 tabular-nums"
                   style={{
-                    color: Math.abs(delta) < 0.05 ? "var(--color-text-2)" : delta > 0 ? "var(--color-amber)" : "var(--color-emerald)",
+                    color:
+                      delta === null
+                        ? "var(--color-muted)"
+                        : Math.abs(delta) < 0.05
+                          ? "var(--color-text-2)"
+                          : delta > 0
+                            ? "var(--color-amber)"
+                            : "var(--color-emerald)",
                   }}
                 >
-                  {delta >= 0 ? "+" : ""}{delta.toFixed(3)}
+                  {delta === null ? "—" : (delta >= 0 ? "+" : "") + delta.toFixed(3)}
                 </td>
               </tr>
             );
@@ -487,6 +531,18 @@ function Cell({ cell, best, onClick }: CellProps) {
       <span className="ml-1 text-[0.55rem]" style={{ color: "var(--color-muted)" }}>
         ±{((cell.ci_upper - cell.ci_lower) / 2).toFixed(2)}
       </span>
+    </td>
+  );
+}
+
+function EmptyCell() {
+  return (
+    <td
+      className="text-right py-2 px-2 tabular-nums"
+      style={{ color: "var(--color-muted)" }}
+      title="No data — this config was evaluated calibration-only (Phase 1.9 extension; no Protocol A run)."
+    >
+      —
     </td>
   );
 }

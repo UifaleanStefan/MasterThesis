@@ -283,7 +283,36 @@ class LLMAgent:
     # Internal
     # ------------------------------------------------------------------
 
+    @staticmethod
+    def _maybe_load_dotenv() -> None:
+        """Read a top-level .env file into os.environ if OPENAI_API_KEY is
+        not already set. Idempotent. Matches python-dotenv shape but with
+        zero deps so we don't add a requirement. The .env file is gitignored."""
+        if os.environ.get("OPENAI_API_KEY"):
+            return
+        try:
+            from pathlib import Path
+            # Walk up from this file to find a .env at project root
+            here = Path(__file__).resolve()
+            for parent in (here.parent, *here.parents):
+                env_file = parent / ".env"
+                if env_file.is_file():
+                    for line in env_file.read_text(encoding="utf-8").splitlines():
+                        line = line.strip()
+                        if line and not line.startswith("#") and "=" in line:
+                            k, v = line.split("=", 1)
+                            k = k.strip()
+                            v = v.strip().strip("'").strip('"')
+                            if k and k not in os.environ:
+                                os.environ[k] = v
+                    break
+        except Exception:
+            # Best-effort load; don't crash startup if .env is malformed
+            pass
+
     def _try_init_client(self) -> bool:
+        # Lazy auto-load .env on first agent construction.
+        self._maybe_load_dotenv()
         api_key = os.environ.get("OPENAI_API_KEY", "")
         if not api_key:
             print("[LLMAgent] OPENAI_API_KEY not set — using fallback heuristic mode.")

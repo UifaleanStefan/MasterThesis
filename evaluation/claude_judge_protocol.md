@@ -1,5 +1,24 @@
 # Claude-as-Judge Protocol
 
+> ## ⚠️ HARD RULE — JUDGING IS DONE *EXCLUSIVELY* BY THE CLAUDE AGENT IN-SESSION
+>
+> **Every single judge score in this project — past, present, future — MUST be produced by Claude reading each `(question, gold, predicted)` triple and applying the rubric below entry by entry.**
+>
+> **Forbidden, no exceptions:**
+> - Calling gpt-4o-mini, gpt-4o, or any OpenAI/Anthropic API to score predictions (the old `llm_judge_score` path is dead — do not revive it)
+> - Heuristic auto-judgers (string overlap, BLEU, embedding cosine, regex matching, "if gold is substring of pred then 1.0", etc.)
+> - LLM-as-a-judge of any kind that isn't the Claude agent currently in the conversation
+> - Copy-pasting judgments from a previous session WITHOUT re-reading each entry against the current `predicted` (OpenAI's gpt-4o-mini is only approximately deterministic across reruns — ~30-50% of predictions change between runs even with `seed=42, temperature=0`, so stale scores from prior sessions are not valid for fresh predictions)
+> - Writing a script that runs the rubric automatically (e.g. parsing numbers, comparing to gold, picking a score)
+>
+> **Required:** Claude reads the full queue dump, evaluates each entry manually using the rubric below, and emits judgments via a script whose ONLY job is persistence (a list of hand-compiled `(qid, score, rationale)` tuples written to `results.jsonl`). The script encodes Claude's already-made judgments; it does not produce them.
+>
+> **Why this rule exists:** The whole point of Phase 1.7 critique #11 (gpt-4o-mini self-judges-gpt-4o-mini self-bias) was to remove auto-judging from the answer-quality measurement. A heuristic judger has the same problem in a different shape — it bakes its own bias into every score with no recourse. The thesis judgment chapter must be honestly defensible as "every score was a human (or Claude) reading the entry and applying the rubric."
+>
+> **How to know a score was produced correctly:** the `results.jsonl` entry must carry `"judge_model": "claude-opus-4.7-1m"` (or current Claude variant) and the `rationale` must cite the specific value comparison (e.g. `"Pred 30.73 vs gold 42.69 — 28% off"` or `"Y/N flip: pred Yes vs gold No"`), not a generic template ("pred matches gold", "wrong answer", etc.).
+>
+> **If you find ANY `judge_score` in `results/stage3/judge_queue/**/results.jsonl` whose `judge_model` is `gpt-4o-mini` or unset, DELETE that line and re-judge fresh.** Use `scripts/audit_judge_provenance.py` to detect such drift; it must exit 0 before any chapter aggregation or commit.
+
 **Role:** Claude scores corpus-mode QA results from `scripts/run_corpus_qa.py` in-session, without calling the OpenAI judge API. This eliminates the gpt-4o-mini self-judges-gpt-4o-mini self-bias that Phase 1.7 critique #11 flagged.
 
 **Architecture:** The QA runner writes batches of `{qid, question, gold, predicted, ...}` to `results/stage3/judge_queue/<run_id>/queue.jsonl`. Claude reads the queue, scores each entry, writes results to `results/stage3/judge_queue/<run_id>/results.jsonl`. The aggregator script reads results back and merges them into `qa_online.json` / `qa_batch.json` for downstream stats.

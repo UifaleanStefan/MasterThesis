@@ -1,7 +1,7 @@
 {
   "_manifest": {
-    "git_sha": "c5edef9",
-    "timestamp_utc": "2026-05-22T13:00:48+00:00",
+    "git_sha": "c1addc9",
+    "timestamp_utc": "2026-05-25T12:32:48+00:00",
     "n_questions": 150,
     "k": 8,
     "model": "gpt-4o-mini",
@@ -13,39 +13,109 @@
   "configs": [
     {
       "name": "v4t-corpus-tuned",
-      "label": "V4t corpus-tuned",
+      "label": "V4ₜ corpus-tuned",
       "family": "v4-corpus",
-      "color": "#22d3ee"
+      "color": "#22d3ee",
+      "queue_for": {
+        "online": "online",
+        "batch": "batch"
+      },
+      "has_protocol_a": true
     },
     {
       "name": "attention-corpus-tuned",
       "label": "Attention corpus-tuned",
       "family": "attention",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "queue_for": {
+        "online": "online",
+        "batch": "batch"
+      },
+      "has_protocol_a": true
     },
     {
       "name": "dump-all",
       "label": "Dump-all (188 paras)",
       "family": "dump-all",
-      "color": "#f43f5e"
+      "color": "#f43f5e",
+      "queue_for": {
+        "online": "online",
+        "batch": "batch"
+      },
+      "has_protocol_a": true
     },
     {
       "name": "bm25-corpus",
       "label": "BM25-corpus",
       "family": "bm25",
-      "color": "#64748b"
+      "color": "#64748b",
+      "queue_for": {
+        "online": "online",
+        "batch": "batch"
+      },
+      "has_protocol_a": true
     },
     {
       "name": "v4t-canonical",
-      "label": "V4t canonical (grid)",
+      "label": "V4ₜ canonical (grid)",
       "family": "v4-grid",
-      "color": "#0891b2"
+      "color": "#0891b2",
+      "queue_for": {
+        "online": "online",
+        "batch": "batch"
+      },
+      "has_protocol_a": true
     },
     {
       "name": "v4t-tuned",
-      "label": "V4t per-doc tuned",
+      "label": "V4ₜ per-doc tuned",
       "family": "v4-perdoc",
-      "color": "#06b6d4"
+      "color": "#06b6d4",
+      "queue_for": {
+        "online": "online",
+        "batch": "batch"
+      },
+      "has_protocol_a": true
+    },
+    {
+      "name": "rag-corpus",
+      "label": "RAG (MiniLM cosine)",
+      "family": "rag",
+      "color": "#10b981",
+      "queue_for": {
+        "batch": "batch_calib"
+      },
+      "has_protocol_a": false
+    },
+    {
+      "name": "flat-corpus",
+      "label": "FlatMemory (window=50)",
+      "family": "flat",
+      "color": "#fb7185",
+      "queue_for": {
+        "batch": "batch_calib"
+      },
+      "has_protocol_a": false
+    },
+    {
+      "name": "v5t-corpus",
+      "label": "V5 graph (canonical θ)",
+      "family": "v5",
+      "color": "#a78bfa",
+      "queue_for": {
+        "batch": "batch_calib"
+      },
+      "has_protocol_a": false
+    },
+    {
+      "name": "semantic-corpus",
+      "label": "Semantic (TF-IDF)",
+      "family": "tfidf",
+      "color": "#fbbf24",
+      "queue_for": {
+        "batch": "batch_calib"
+      },
+      "has_protocol_a": false
     }
   ],
   "modes": [
@@ -55,123 +125,365 @@
   "judge_table": {
     "v4t-corpus-tuned": {
       "online": {
-        "mean_judge": 0.6967,
-        "ci_lower": 0.63,
-        "ci_upper": 0.7617,
+        "mean_judge": 0.6783,
+        "ci_lower": 0.61,
+        "ci_upper": 0.7417,
         "mean_recall": 1.0,
         "n": 150,
-        "cost_usd": 0.1498,
+        "cost_usd": 0.1497,
         "in_doc_ratio": 0.1169
       },
       "batch": {
-        "mean_judge": 0.6767,
-        "ci_lower": 0.6017,
-        "ci_upper": 0.745,
+        "mean_judge": 0.645,
+        "ci_lower": 0.57,
+        "ci_upper": 0.715,
         "mean_recall": 0.9667,
         "n": 150,
-        "cost_usd": 0.1498,
+        "cost_usd": 0.1497,
         "in_doc_ratio": 0.1083
       }
     },
     "attention-corpus-tuned": {
       "online": {
-        "mean_judge": 0.7,
-        "ci_lower": 0.6317,
-        "ci_upper": 0.7667,
+        "mean_judge": 0.7083,
+        "ci_lower": 0.645,
+        "ci_upper": 0.7733,
         "mean_recall": 1.0,
         "n": 150,
-        "cost_usd": 0.1497,
+        "cost_usd": 0.15,
         "in_doc_ratio": 0.1161
       },
       "batch": {
-        "mean_judge": 0.6517,
-        "ci_lower": 0.5783,
-        "ci_upper": 0.725,
+        "mean_judge": 0.6567,
+        "ci_lower": 0.585,
+        "ci_upper": 0.73,
         "mean_recall": 0.9667,
         "n": 150,
-        "cost_usd": 0.1497,
+        "cost_usd": 0.15,
         "in_doc_ratio": 0.1083
       }
     },
     "dump-all": {
       "online": {
-        "mean_judge": 0.7033,
-        "ci_lower": 0.63,
-        "ci_upper": 0.7717,
+        "mean_judge": 0.735,
+        "ci_lower": 0.6667,
+        "ci_upper": 0.8,
         "mean_recall": 1.0,
         "n": 150,
-        "cost_usd": 0.2183,
+        "cost_usd": 0.2182,
         "in_doc_ratio": 0.035
       },
       "batch": {
-        "mean_judge": 0.0367,
-        "ci_lower": 0.01,
-        "ci_upper": 0.0667,
+        "mean_judge": 0.0383,
+        "ci_lower": 0.0117,
+        "ci_upper": 0.0717,
         "mean_recall": 1.0,
         "n": 150,
-        "cost_usd": 0.2183,
+        "cost_usd": 0.2182,
         "in_doc_ratio": 0.0067
       }
     },
     "bm25-corpus": {
       "online": {
-        "mean_judge": 0.6483,
-        "ci_lower": 0.5783,
+        "mean_judge": 0.65,
+        "ci_lower": 0.58,
         "ci_upper": 0.7233,
         "mean_recall": 0.9133,
         "n": 150,
-        "cost_usd": 0.1716,
+        "cost_usd": 0.1715,
         "in_doc_ratio": 0.1036
       },
       "batch": {
-        "mean_judge": 0.4967,
-        "ci_lower": 0.42,
-        "ci_upper": 0.575,
+        "mean_judge": 0.5033,
+        "ci_lower": 0.43,
+        "ci_upper": 0.5817,
         "mean_recall": 0.7,
         "n": 150,
-        "cost_usd": 0.1716,
+        "cost_usd": 0.1715,
         "in_doc_ratio": 0.0725
       }
     },
     "v4t-canonical": {
       "online": {
-        "mean_judge": 0.455,
-        "ci_lower": 0.38,
-        "ci_upper": 0.5367,
+        "mean_judge": 0.49,
+        "ci_lower": 0.4167,
+        "ci_upper": 0.57,
         "mean_recall": 0.5667,
         "n": 150,
-        "cost_usd": 0.1094,
+        "cost_usd": 0.1093,
         "in_doc_ratio": 0.062
       },
       "batch": {
-        "mean_judge": 0.225,
-        "ci_lower": 0.16,
-        "ci_upper": 0.2917,
+        "mean_judge": 0.2433,
+        "ci_lower": 0.1767,
+        "ci_upper": 0.3067,
         "mean_recall": 0.22,
         "n": 150,
-        "cost_usd": 0.1094,
+        "cost_usd": 0.1093,
         "in_doc_ratio": 0.02
       }
     },
     "v4t-tuned": {
       "online": {
-        "mean_judge": 0.4367,
-        "ci_lower": 0.3633,
-        "ci_upper": 0.515,
+        "mean_judge": 0.455,
+        "ci_lower": 0.38,
+        "ci_upper": 0.535,
         "mean_recall": 0.5267,
         "n": 150,
         "cost_usd": 0.1049,
         "in_doc_ratio": 0.0606
       },
       "batch": {
-        "mean_judge": 0.1317,
-        "ci_lower": 0.0817,
-        "ci_upper": 0.19,
+        "mean_judge": 0.1433,
+        "ci_lower": 0.0933,
+        "ci_upper": 0.2,
         "mean_recall": 0.12,
         "n": 150,
         "cost_usd": 0.1049,
         "in_doc_ratio": 0.0083
       }
+    },
+    "rag-corpus": {
+      "online": {
+        "mean_judge": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "mean_recall": 0.0,
+        "n": 0,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.0
+      },
+      "batch": {
+        "mean_judge": 0.615,
+        "ci_lower": 0.5467,
+        "ci_upper": 0.685,
+        "mean_recall": 0.0,
+        "n": 150,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.1083
+      }
+    },
+    "flat-corpus": {
+      "online": {
+        "mean_judge": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "mean_recall": 0.0,
+        "n": 0,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.0
+      },
+      "batch": {
+        "mean_judge": 0.0483,
+        "ci_lower": 0.0183,
+        "ci_upper": 0.0867,
+        "mean_recall": 0.0,
+        "n": 150,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.0067
+      }
+    },
+    "v5t-corpus": {
+      "online": {
+        "mean_judge": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "mean_recall": 0.0,
+        "n": 0,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.0
+      },
+      "batch": {
+        "mean_judge": 0.2167,
+        "ci_lower": 0.155,
+        "ci_upper": 0.2767,
+        "mean_recall": 0.0,
+        "n": 150,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.02
+      }
+    },
+    "semantic-corpus": {
+      "online": {
+        "mean_judge": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "mean_recall": 0.0,
+        "n": 0,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.0
+      },
+      "batch": {
+        "mean_judge": 0.0617,
+        "ci_lower": 0.0317,
+        "ci_upper": 0.0967,
+        "mean_recall": 0.0,
+        "n": 150,
+        "cost_usd": 0.0,
+        "in_doc_ratio": 0.0067
+      }
+    }
+  },
+  "calibration_data": {
+    "v4t-corpus-tuned": {
+      "mean_judge": 0.806,
+      "n": 1500,
+      "deciles": [
+        0.9633,
+        0.915,
+        0.8667,
+        0.8233,
+        0.8017,
+        0.7417,
+        0.7317,
+        0.7917,
+        0.745,
+        0.68
+      ]
+    },
+    "attention-corpus-tuned": {
+      "mean_judge": 0.829,
+      "n": 1500,
+      "deciles": [
+        0.9533,
+        0.91,
+        0.8783,
+        0.84,
+        0.8433,
+        0.8017,
+        0.76,
+        0.805,
+        0.7967,
+        0.7017
+      ]
+    },
+    "dump-all": {
+      "mean_judge": 0.5488,
+      "n": 1500,
+      "deciles": [
+        0.9433,
+        0.855,
+        0.8017,
+        0.7067,
+        0.6083,
+        0.4133,
+        0.4417,
+        0.3717,
+        0.2167,
+        0.13
+      ]
+    },
+    "bm25-corpus": {
+      "mean_judge": 0.773,
+      "n": 1500,
+      "deciles": [
+        0.9367,
+        0.8983,
+        0.885,
+        0.7983,
+        0.8033,
+        0.7583,
+        0.7267,
+        0.715,
+        0.6417,
+        0.5667
+      ]
+    },
+    "v4t-canonical": {
+      "mean_judge": 0.6087,
+      "n": 1500,
+      "deciles": [
+        0.9433,
+        0.9067,
+        0.8317,
+        0.7517,
+        0.635,
+        0.5117,
+        0.5233,
+        0.4133,
+        0.3467,
+        0.2233
+      ]
+    },
+    "v4t-tuned": {
+      "mean_judge": 0.5777,
+      "n": 1500,
+      "deciles": [
+        0.9383,
+        0.9017,
+        0.8133,
+        0.7183,
+        0.6733,
+        0.4433,
+        0.495,
+        0.3867,
+        0.24,
+        0.1667
+      ]
+    },
+    "rag-corpus": {
+      "mean_judge": 0.8108,
+      "n": 1500,
+      "deciles": [
+        0.9433,
+        0.9067,
+        0.8617,
+        0.8467,
+        0.8117,
+        0.7817,
+        0.74,
+        0.8283,
+        0.77,
+        0.6183
+      ]
+    },
+    "flat-corpus": {
+      "mean_judge": 0.5218,
+      "n": 1500,
+      "deciles": [
+        0.9417,
+        0.8583,
+        0.77,
+        0.665,
+        0.575,
+        0.39,
+        0.4283,
+        0.3117,
+        0.19,
+        0.0883
+      ]
+    },
+    "v5t-corpus": {
+      "mean_judge": 0.5973,
+      "n": 1500,
+      "deciles": [
+        0.9367,
+        0.8867,
+        0.825,
+        0.745,
+        0.6017,
+        0.5133,
+        0.5383,
+        0.41,
+        0.3133,
+        0.2033
+      ]
+    },
+    "semantic-corpus": {
+      "mean_judge": 0.5263,
+      "n": 1500,
+      "deciles": [
+        0.9333,
+        0.9067,
+        0.785,
+        0.69,
+        0.565,
+        0.39,
+        0.37,
+        0.3183,
+        0.2067,
+        0.0983
+      ]
     }
   },
   "theta_contrast": {
@@ -224,28 +536,28 @@
   "cross_doc_scatter": [
     {
       "config": "v4t-corpus-tuned",
-      "label": "V4t corpus-tuned",
+      "label": "V4ₜ corpus-tuned",
       "family": "v4-corpus",
       "color": "#22d3ee",
       "mode": "online",
       "in_doc_ratio": 0.1169,
-      "mean_judge": 0.6967,
+      "mean_judge": 0.6783,
       "mean_recall": 1.0,
-      "ci_lower": 0.63,
-      "ci_upper": 0.7617,
+      "ci_lower": 0.61,
+      "ci_upper": 0.7417,
       "n": 150
     },
     {
       "config": "v4t-corpus-tuned",
-      "label": "V4t corpus-tuned",
+      "label": "V4ₜ corpus-tuned",
       "family": "v4-corpus",
       "color": "#22d3ee",
       "mode": "batch",
       "in_doc_ratio": 0.1083,
-      "mean_judge": 0.6767,
+      "mean_judge": 0.645,
       "mean_recall": 0.9667,
-      "ci_lower": 0.6017,
-      "ci_upper": 0.745,
+      "ci_lower": 0.57,
+      "ci_upper": 0.715,
       "n": 150
     },
     {
@@ -255,10 +567,10 @@
       "color": "#f59e0b",
       "mode": "online",
       "in_doc_ratio": 0.1161,
-      "mean_judge": 0.7,
+      "mean_judge": 0.7083,
       "mean_recall": 1.0,
-      "ci_lower": 0.6317,
-      "ci_upper": 0.7667,
+      "ci_lower": 0.645,
+      "ci_upper": 0.7733,
       "n": 150
     },
     {
@@ -268,10 +580,10 @@
       "color": "#f59e0b",
       "mode": "batch",
       "in_doc_ratio": 0.1083,
-      "mean_judge": 0.6517,
+      "mean_judge": 0.6567,
       "mean_recall": 0.9667,
-      "ci_lower": 0.5783,
-      "ci_upper": 0.725,
+      "ci_lower": 0.585,
+      "ci_upper": 0.73,
       "n": 150
     },
     {
@@ -281,10 +593,10 @@
       "color": "#f43f5e",
       "mode": "online",
       "in_doc_ratio": 0.035,
-      "mean_judge": 0.7033,
+      "mean_judge": 0.735,
       "mean_recall": 1.0,
-      "ci_lower": 0.63,
-      "ci_upper": 0.7717,
+      "ci_lower": 0.6667,
+      "ci_upper": 0.8,
       "n": 150
     },
     {
@@ -294,10 +606,10 @@
       "color": "#f43f5e",
       "mode": "batch",
       "in_doc_ratio": 0.0067,
-      "mean_judge": 0.0367,
+      "mean_judge": 0.0383,
       "mean_recall": 1.0,
-      "ci_lower": 0.01,
-      "ci_upper": 0.0667,
+      "ci_lower": 0.0117,
+      "ci_upper": 0.0717,
       "n": 150
     },
     {
@@ -307,9 +619,9 @@
       "color": "#64748b",
       "mode": "online",
       "in_doc_ratio": 0.1036,
-      "mean_judge": 0.6483,
+      "mean_judge": 0.65,
       "mean_recall": 0.9133,
-      "ci_lower": 0.5783,
+      "ci_lower": 0.58,
       "ci_upper": 0.7233,
       "n": 150
     },
@@ -320,62 +632,114 @@
       "color": "#64748b",
       "mode": "batch",
       "in_doc_ratio": 0.0725,
-      "mean_judge": 0.4967,
+      "mean_judge": 0.5033,
       "mean_recall": 0.7,
-      "ci_lower": 0.42,
-      "ci_upper": 0.575,
+      "ci_lower": 0.43,
+      "ci_upper": 0.5817,
       "n": 150
     },
     {
       "config": "v4t-canonical",
-      "label": "V4t canonical (grid)",
+      "label": "V4ₜ canonical (grid)",
       "family": "v4-grid",
       "color": "#0891b2",
       "mode": "online",
       "in_doc_ratio": 0.062,
-      "mean_judge": 0.455,
+      "mean_judge": 0.49,
       "mean_recall": 0.5667,
-      "ci_lower": 0.38,
-      "ci_upper": 0.5367,
+      "ci_lower": 0.4167,
+      "ci_upper": 0.57,
       "n": 150
     },
     {
       "config": "v4t-canonical",
-      "label": "V4t canonical (grid)",
+      "label": "V4ₜ canonical (grid)",
       "family": "v4-grid",
       "color": "#0891b2",
       "mode": "batch",
       "in_doc_ratio": 0.02,
-      "mean_judge": 0.225,
+      "mean_judge": 0.2433,
       "mean_recall": 0.22,
-      "ci_lower": 0.16,
-      "ci_upper": 0.2917,
+      "ci_lower": 0.1767,
+      "ci_upper": 0.3067,
       "n": 150
     },
     {
       "config": "v4t-tuned",
-      "label": "V4t per-doc tuned",
+      "label": "V4ₜ per-doc tuned",
       "family": "v4-perdoc",
       "color": "#06b6d4",
       "mode": "online",
       "in_doc_ratio": 0.0606,
-      "mean_judge": 0.4367,
+      "mean_judge": 0.455,
       "mean_recall": 0.5267,
-      "ci_lower": 0.3633,
-      "ci_upper": 0.515,
+      "ci_lower": 0.38,
+      "ci_upper": 0.535,
       "n": 150
     },
     {
       "config": "v4t-tuned",
-      "label": "V4t per-doc tuned",
+      "label": "V4ₜ per-doc tuned",
       "family": "v4-perdoc",
       "color": "#06b6d4",
       "mode": "batch",
       "in_doc_ratio": 0.0083,
-      "mean_judge": 0.1317,
+      "mean_judge": 0.1433,
       "mean_recall": 0.12,
-      "ci_lower": 0.0817,
-      "ci_upper": 0.19,
+      "ci_lower": 0.0933,
+      "ci_upper": 0.2,
+      "n": 150
+    },
+    {
+      "config": "rag-corpus",
+      "label": "RAG (MiniLM cosine)",
+      "family": "rag",
+      "color": "#10b981",
+      "mode": "batch",
+      "in_doc_ratio": 0.1083,
+      "mean_judge": 0.615,
+      "mean_recall": 0.0,
+      "ci_lower": 0.5467,
+      "ci_upper": 0.685,
+      "n": 150
+    },
+    {
+      "config": "flat-corpus",
+      "label": "FlatMemory (window=50)",
+      "family": "flat",
+      "color": "#fb7185",
+      "mode": "batch",
+      "in_doc_ratio": 0.0067,
+      "mean_judge": 0.0483,
+      "mean_recall": 0.0,
+      "ci_lower": 0.0183,
+      "ci_upper": 0.0867,
+      "n": 150
+    },
+    {
+      "config": "v5t-corpus",
+      "label": "V5 graph (canonical θ)",
+      "family": "v5",
+      "color": "#a78bfa",
+      "mode": "batch",
+      "in_doc_ratio": 0.02,
+      "mean_judge": 0.2167,
+      "mean_recall": 0.0,
+      "ci_lower": 0.155,
+      "ci_upper": 0.2767,
+      "n": 150
+    },
+    {
+      "config": "semantic-corpus",
+      "label": "Semantic (TF-IDF)",
+      "family": "tfidf",
+      "color": "#fbbf24",
+      "mode": "batch",
+      "in_doc_ratio": 0.0067,
+      "mean_judge": 0.0617,
+      "mean_recall": 0.0,
+      "ci_lower": 0.0317,
+      "ci_upper": 0.0967,
       "n": 150
     }
   ],
@@ -390,18 +754,18 @@
     "category_method": "heuristic regex on question text; not human-coded",
     "counts": {
       "always_hard": [
-        19,
+        18,
         1,
         0,
         4,
-        13
+        12
       ],
       "always_easy": [
-        6,
+        7,
         2,
         0,
         6,
-        51
+        52
       ],
       "mid": [
         16,
@@ -565,88 +929,116 @@
     },
     "per_cell_mean_judge": {
       "v4t-corpus-tuned__online": {
-        "multi-formula calc": 0.5122,
-        "qualitative judgement": 0.6667,
+        "multi-formula calc": 0.5,
+        "qualitative judgement": 0.5833,
         "list extraction": 0.0,
-        "simple extraction": 0.7344,
-        "other": 0.775
+        "simple extraction": 0.7031,
+        "other": 0.7583
       },
       "v4t-corpus-tuned__batch": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.6767
+        "other": 0.645
       },
       "attention-corpus-tuned__online": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.7
+        "other": 0.7083
       },
       "attention-corpus-tuned__batch": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.6517
+        "other": 0.6567
       },
       "dump-all__online": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.7033
+        "other": 0.735
       },
       "dump-all__batch": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.0367
+        "other": 0.0383
       },
       "bm25-corpus__online": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.6483
+        "other": 0.65
       },
       "bm25-corpus__batch": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.4967
+        "other": 0.5033
       },
       "v4t-canonical__online": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.455
+        "other": 0.49
       },
       "v4t-canonical__batch": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.225
+        "other": 0.2433
       },
       "v4t-tuned__online": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.4367
+        "other": 0.455
       },
       "v4t-tuned__batch": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.1317
+        "other": 0.1433
+      },
+      "rag-corpus__batch": {
+        "multi-formula calc": 0.0,
+        "qualitative judgement": 0.0,
+        "list extraction": 0.0,
+        "simple extraction": 0.0,
+        "other": 0.615
+      },
+      "flat-corpus__batch": {
+        "multi-formula calc": 0.0,
+        "qualitative judgement": 0.0,
+        "list extraction": 0.0,
+        "simple extraction": 0.0,
+        "other": 0.0483
+      },
+      "v5t-corpus__batch": {
+        "multi-formula calc": 0.0,
+        "qualitative judgement": 0.0,
+        "list extraction": 0.0,
+        "simple extraction": 0.0,
+        "other": 0.2167
+      },
+      "semantic-corpus__batch": {
+        "multi-formula calc": 0.0,
+        "qualitative judgement": 0.0,
+        "list extraction": 0.0,
+        "simple extraction": 0.0,
+        "other": 0.0617
       }
     },
     "per_cell_n_by_cat": {
@@ -733,406 +1125,42 @@
         "list extraction": 0,
         "simple extraction": 0,
         "other": 150
+      },
+      "rag-corpus__batch": {
+        "multi-formula calc": 0,
+        "qualitative judgement": 0,
+        "list extraction": 0,
+        "simple extraction": 0,
+        "other": 150
+      },
+      "flat-corpus__batch": {
+        "multi-formula calc": 0,
+        "qualitative judgement": 0,
+        "list extraction": 0,
+        "simple extraction": 0,
+        "other": 150
+      },
+      "v5t-corpus__batch": {
+        "multi-formula calc": 0,
+        "qualitative judgement": 0,
+        "list extraction": 0,
+        "simple extraction": 0,
+        "other": 150
+      },
+      "semantic-corpus__batch": {
+        "multi-formula calc": 0,
+        "qualitative judgement": 0,
+        "list extraction": 0,
+        "simple extraction": 0,
+        "other": 150
       }
     },
-    "always_hard_n": 37,
-    "always_easy_n": 65,
+    "always_hard_n": 35,
+    "always_easy_n": 67,
     "mid_n": 48
   },
   "drilldown_examples": {
     "always_hard": [
-      {
-        "doc_idx": 144,
-        "question": "Does Verizon have a reasonably healthy liquidity profile based on its quick ratio for FY 2022? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
-        "gold_answer": "No. The quick ratio was approximately 0.54 for Verizon. It indicated that Verizon does not have a healthy liquidity profile.",
-        "category": "multi-formula calc",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or its liquidity profile for FY 2022.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or its liquidity profile for FY 2022.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 23,
-        "question": "Has AMCOR's quick ratio improved or declined between FY2023 and FY2022? If the quick ratio is not something that a financial analyst would ask about a company like this, then state that and explain why.",
-        "gold_answer": "The quick ratio has slightly improved from 0.67 times to 0.69 times between FY 2023 and FY 2022.(3.4% jump)",
-        "category": "multi-formula calc",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "The quick ratio is not explicitly provided in the Amcor 10k 2023 document, and it may not be a primary focus for financial analysts assessing a company like Amcor, which operates in the manufacturing and packaging sector where inventory levels can be significant. Analysts typically focus on metrics like current ratio, debt levels, and cash flow in such industries.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The quick ratio for Amcor cannot be determined from the provided information, as the necessary data for calculating it (current assets minus inventories divided by current liabilities) is not explicitly stated. However, a financial analyst may focus on other liquidity measures or overall financial health rather than the quick ratio specifically for a packaging company like Amcor, which may have si",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "The quick ratio is not explicitly provided in the Amcor 10k 2023 document, and it may not be a primary focus for financial analysts assessing a company like Amcor, which operates in the packaging industry where inventory levels can be significant. Analysts typically focus on metrics like total assets, liabilities, and overall liquidity rather than the quick ratio, which excludes inventory.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The quick ratio for Amcor cannot be determined from the provided information, as the necessary data for calculating it (current assets minus inventories divided by current liabilities) is not explicitly stated. However, a financial analyst may focus on other liquidity ratios or metrics relevant to Amcor's industry rather than the quick ratio specifically.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "The quick ratio is not explicitly provided in the Amcor 10k 2023 document, and it may not be a primary focus for financial analysts assessing a company like Amcor, which operates in the packaging industry where inventory levels can be significant. Analysts typically focus on metrics like current ratio, debt levels, and cash flow rather than quick ratio for such companies.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amcor's quick ratio for FY2023 or FY2022. Therefore, I cannot determine if it has improved or declined.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The quick ratio is not explicitly provided in the Amcor 10k 2023 document, and it may not be a primary focus for financial analysts assessing a company like Amcor, which operates in the manufacturing and packaging sector where inventory levels can be significant. Analysts typically focus on metrics like current ratio, debt levels, and cash flow in such industries.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The quick ratio is not mentioned in the provided context, and it is not typically a focus for a company like Amcor, which operates in the packaging industry. Financial analysts may prioritize metrics such as revenue growth, profit margins, and cash flow over the quick ratio for such companies.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The quick ratio is not mentioned in the provided context, so it cannot be determined whether Amcor's quick ratio improved or declined between FY2023 and FY2022.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amcor's quick ratio for FY2023 or FY2022. Therefore, it cannot be determined whether Amcor's quick ratio has improved or declined.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The quick ratio for Amcor is not provided in the relevant passages, so it cannot be determined whether it has improved or declined between FY2023 and FY2022.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amcor's quick ratio for FY2023 or FY2022. Therefore, it cannot be determined whether Amcor's quick ratio has improved or declined.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 67,
-        "question": "What is the FY2017 return on assets (ROA) for Coca Cola? ROA is defined as: FY2017 net income / (average total assets between FY2016 and FY2017). Round your answer to two decimal places. Give a response to the question by relying on the details shown in the balance sheet and the P&L statement.",
-        "gold_answer": "0.01",
-        "category": "multi-formula calc",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 1.46%.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 1.73%.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 1.46%.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 1.46%.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 1.46%.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The relevant passages do not provide information about Coca-Cola's FY2017 net income or total assets. Therefore, I cannot calculate the return on assets (ROA) for Coca-Cola.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 1.46%.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The average total assets between FY2016 and FY2017 for Coca-Cola are $87,270 million (FY2016) + $87,896 million (FY2017) / 2 = $87,583 million. The net income for FY2017 is $1,248 million. \n\nROA = $1,248 million / $87,583 million = 0.0142 or 1.42%.\n\nAnswer: 1.42",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 3.06%.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about Coca-Cola's FY2017 net income or total assets. Therefore, I cannot calculate the return on assets (ROA) for Coca-Cola.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 0.03.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide information about Coca-Cola's FY2017 net income or total assets. Therefore, I cannot calculate the return on assets (ROA) for Coca-Cola.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 123,
-        "question": "What is the FY2022 unadjusted EBITDA less capex for PepsiCo? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization [from cash flow statement]. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the d",
-        "gold_answer": "$9068.00",
-        "category": "simple extraction",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "$14,275 million",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "$14,275 million",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "$13,275 million",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "$14,275 million",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "$14,275 million",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The relevant passages do not contain any information regarding PepsiCo's financials, including unadjusted EBITDA or capex for FY2022. Therefore, I cannot provide an answer based on the provided context.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "$14,275 million",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "$12,275 million",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "$10,389 million",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain specific information regarding PepsiCo's FY2022 unadjusted EBITDA or capital expenditures. Therefore, I cannot provide an answer based on the given context.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "$10,985 million",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain specific information regarding PepsiCo's FY2022 unadjusted EBITDA or capital expenditures. Therefore, I cannot provide an answer based on the given context.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 18,
-        "question": "What is Amazon's FY2017 days payable outstanding (DPO)? DPO is defined as: 365 * (average accounts payable between FY2016 and FY2017) / (FY2017 COGS + change in inventory between FY2016 and FY2017). Round your answer to two decimal places. Address the question by using the line items and information",
-        "gold_answer": "93.86",
-        "category": "multi-formula calc",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 36.12.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 30.77.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 36.73.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 30.73.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 36.12.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amazon's FY2017 financial data, including accounts payable, COGS, or inventory changes. Therefore, I cannot calculate Amazon's FY2017 days payable outstanding (DPO).",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 36.12.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amazon's FY2017 days payable outstanding (DPO) or the necessary financial data to calculate it.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "To calculate Amazon's FY2017 days payable outstanding (DPO), we need the average accounts payable, FY2017 cost of goods sold (COGS), and the change in inventory.\n\n1. **Cost of Goods Sold (COGS) for FY2017**: $111,934 million\n2. **Change in Inventory**: \n   - COGS for FY2016: $88,265 million\n   - COGS for FY2017: $111,934 million\n   - Change in Inventory = COGS FY2017 - COGS FY2016 = $111,934 - $88",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide the necessary information to calculate Amazon's FY2017 days payable outstanding (DPO).",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "To calculate Amazon's FY2017 days payable outstanding (DPO), we need the average accounts payable, FY2017 cost of goods sold (COGS), and the change in inventory between FY2016 and FY2017. However, the provided passages do not include specific values for accounts payable or inventory. Therefore, we cannot compute the DPO with the given information. \n\nThe answer is: Not enough information to calcula",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide the necessary information to calculate Amazon's FY2017 days payable outstanding (DPO).",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 2,
-        "question": "Is 3M a capital-intensive business based on FY2022 data?",
-        "gold_answer": "No, the company is managing its CAPEX and Fixed Assets pretty efficiently, which is evident from below key metrics:\nCAPEX/Revenue Ratio: 5.1%\nFixed assets/Total Assets: 20%\nReturn on Assets= 12.4%",
-        "category": "qualitative judgement",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by its significant investments in property, plant, and equipment totaling $26,459 million.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by its significant investments in property, plant, and equipment, totaling $26,459 million.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain specific information about 3M's capital intensity or FY2022 data. Therefore, I cannot determine if 3M is a capital-intensive business based on the given context.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant purchases of property, plant, and equipment (PP&E) amounting to $1,749 million.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by its significant investment in property, plant, and equipment totaling $25,998 million.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain specific information regarding 3M's capital intensity or FY2022 data. Therefore, an answer cannot be determined from the given context.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant expenditures on property, plant, and equipment (PP&E) and other investments.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain specific information regarding 3M's capital intensity or FY2022 data. Therefore, an answer cannot be determined from the given context.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 88,
-        "question": "Is growth in JnJ's adjusted EPS expected to accelerate in FY2023?",
-        "gold_answer": "No, rate of growth in adjusted EPS is expected to decelerate slightly from 3.6% in FY2022 to 3.5% in FY2023.",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Yes, adjusted EPS is expected to grow by 3.5% in FY2023.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Yes, growth in Johnson & Johnson's adjusted EPS is expected to accelerate in FY2023, with an expected increase of 12.5% at the mid-point.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "Yes, growth in JnJ's adjusted EPS is expected to accelerate in FY2023, reflecting growth of 3.5%.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Yes, growth in Johnson & Johnson's adjusted EPS is expected to accelerate in FY2023, with an expected increase of 12.5% at the mid-point.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "Yes, adjusted operational EPS is expected to grow by 3.5% in FY2023.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Johnson & Johnson's earnings or expectations for growth in adjusted EPS for FY2023.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "Yes, growth in Johnson & Johnson's adjusted EPS is expected to accelerate in FY2023, with a forecasted adjusted operational EPS of $10.50, reflecting growth of 3.5%.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "Yes, growth in Johnson & Johnson's adjusted EPS is expected to accelerate in FY2023, with an expected increase of 12.5% at the mid-point.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "Yes, growth in Johnson & Johnson's adjusted EPS is expected to accelerate in FY2023, reflecting growth of 3.5%.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain information regarding Johnson & Johnson's adjusted EPS growth expectations for FY2023.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The provided passages do not contain information regarding the expected growth in Johnson & Johnson's adjusted EPS for FY2023.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain any information regarding Johnson & Johnson's earnings or adjusted EPS for FY2023.",
-            "judge_score": 0.0
-          }
-        }
-      },
       {
         "doc_idx": 9,
         "question": "What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard? Answer in units of percents and round to one decimal place. Calculate (or extract) the answer from the statement of income and the cash flow statement.",
@@ -1144,7 +1172,7 @@
             "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "6.0%",
+            "predicted": "The FY2017 - FY2019 3 year average of capital expenditures (capex) as a percentage of revenue for Activision Blizzard is 2.9%.",
             "judge_score": 0.0
           },
           "attention-corpus-tuned__online": {
@@ -1152,7 +1180,7 @@
             "judge_score": 0.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "3.5%",
+            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 3.5%.",
             "judge_score": 0.0
           },
           "dump-all__online": {
@@ -1164,7 +1192,7 @@
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "5.0%",
+            "predicted": "3.5%",
             "judge_score": 0.0
           },
           "bm25-corpus__batch": {
@@ -1176,7 +1204,7 @@
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about Activision Blizzard's FY2017 - FY2019 capital expenditures (capex) or revenues. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for Activision Blizzard.",
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot provide the requested percentage.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -1184,7 +1212,311 @@
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide information about Activision Blizzard's FY2017 - FY2019 capital expenditures (capex) or revenues. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for Activision Blizzard.",
+            "predicted": "The relevant passages do not provide information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for Activision Blizzard.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "3.5%",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's financials, including capital expenditures (capex) or revenue for FY2017 - FY2019. Therefore, I cannot provide the requested percentage.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot provide the requested percentage.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's financials, including capital expenditures (capex) or revenue for FY2017 - FY2019. Therefore, I cannot provide the requested answer.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 29,
+        "question": "How much was the Real change in Sales for AMCOR in FY 2023 vs FY 2022, if we exclude the impact of FX movement, passthrough costs and one-off items?",
+        "gold_answer": "The Real Growth was flat in FY 2023 vs FY 2022.",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "The real change in sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "The real change in sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain any information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The real change in sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 vs FY 2022.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales changes for FY 2023 vs FY 2022.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 104,
+        "question": "What is the FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts? Answer in units of percents and round to one decimal place. Please utilize information provided primarily within the statement of cash flows and the statement of income.",
+        "gold_answer": "7.9%",
+        "category": "simple extraction",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "10.0%",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "-3.5%",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "10.0%",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "-3.5%",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "15.5%",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The information provided does not include data specific to MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "The FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts is 12.5%.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The relevant passages do not provide specific information regarding MGM Resorts' capital expenditures (capex) as a percentage of revenue for FY2018 - FY2020. Therefore, I cannot calculate the requested average.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts is 10.5%.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain specific information regarding MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The 3-year average of capex as a % of revenue for MGM Resorts from FY2018 to FY2020 is 10.5%.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The relevant passages do not provide specific information regarding MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "-3.5%",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The 3-year average of capital expenditures (capex) as a percentage of revenue for MGM Resorts from FY2018 to FY2020 is not available in the provided passages.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The information provided does not include the necessary data for MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about MGM Resorts' capital expenditures (capex) or revenue for FY2018 - FY2020. Therefore, I cannot provide the requested percentage.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 62,
+        "question": "Does Boeing have an improving gross margin profile as of FY2022? If gross margin is not a useful metric for a company like this, then state that and explain why.",
+        "gold_answer": "Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.",
+        "category": "multi-formula calc",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the nature of its business, which involves significant costs associated with manufacturing and delivering complex products and services, making it more relevant to analyze total revenues and costs rather than gross margin alone.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the nature of its business, which involves significant costs associated with manufacturing and delivering complex products like aircraft, where total revenues and costs are more relevant for assessing financial performance.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing as it operates in a capital-intensive industry with significant costs associated with production and services, making total revenues and net income more relevant indicators of financial performance.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile or financial performance for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile as of FY2022.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Boeing does not have an improving gross margin profile as of FY2022, as the cost of products increased significantly compared to the revenue from sales of products, leading to a lower gross margin.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not include specific information about Boeing's gross margin profile for FY2022, so it cannot be determined whether Boeing has an improving gross margin profile. Additionally, the context does not provide enough information to assess the relevance of gross margin as a metric for Boeing.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing as it primarily operates in the aerospace and defense sectors, where revenue is often recognized based on long-term contracts and project milestones rather than traditional product sales.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing as it primarily operates in the aerospace and defense sectors, where revenue is often recognized based on long-term contracts and project milestones rather than traditional product sales.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Boeing's gross margin profile or financial performance for FY2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Boeing's gross margin profile for FY2022.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile or its financial metrics for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile as of FY2022.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 48,
+        "question": "In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
+        "gold_answer": "2.8%",
+        "category": "multi-formula calc",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "3.1%",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "3.9%",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "3.1%",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "3.9%",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "3.1%",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's financials or net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "3.1%",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not contain specific information regarding Best Buy's FY2015 - FY2017 net profit margin. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "3.1%",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's financials or net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "3.1%",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The relevant passages do not provide information about Best Buy's financials or net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "3.9%",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's financials or net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's financials or net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's financial data, including net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question.",
             "judge_score": 0.0
           }
         }
@@ -1232,7 +1564,7 @@
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain any information regarding AES Corporation's financial data, including net income or total assets for FY2022. Therefore, it is not possible to calculate AES's FY2022 return on assets (ROA) based on the given context.",
+            "predicted": "The relevant passages do not provide information about AES Corporation's net income or total assets for FY2022. Therefore, it is not possible to calculate AES's FY2022 return on assets (ROA) based on the provided context.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -1242,61 +1574,309 @@
           "v4t-tuned__batch": {
             "predicted": "The relevant passages do not provide information about AES Corporation's net income or total assets for FY2022. Therefore, it is not possible to calculate the return on assets (ROA) for AES Corporation based on the provided context.",
             "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "-1.42",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding AES Corporation's financial data for FY2022, including net income or total assets. Therefore, I cannot calculate the return on assets (ROA) for AES Corporation.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide information about AES Corporation's FY2022 net income or total assets. Therefore, I cannot calculate the return on assets (ROA) for AES Corporation.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding AES Corporation's financial data, including net income or total assets for FY2022. Therefore, I cannot calculate the return on assets (ROA) for AES Corporation.",
+            "judge_score": 0.0
           }
         }
       },
       {
-        "doc_idx": 133,
-        "question": "How much does Pfizer expect to pay to spin off Upjohn in the future in USD million?",
-        "gold_answer": "77.78",
+        "doc_idx": 94,
+        "question": "Which of JPM's business segments had the lowest net revenue in 2021 Q1?",
+        "gold_answer": "Corporate. Its net revenue was -$473 million.",
         "category": "other",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million to separate Upjohn.",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "$700 million",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million to separate Upjohn.",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "$700 million",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "dump-all__online": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million in connection with separating Upjohn.",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Pfizer or the expected payments to spin off Upjohn.",
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million in connection with separating Upjohn.",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million in connection with separating Upjohn.",
+            "predicted": "Commercial Banking",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million to separate Upjohn.",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million in connection with separating Upjohn.",
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
-            "predicted": "Pfizer expects to incur costs of approximately $700 million in connection with separating Upjohn.",
+            "predicted": "Commercial Banking",
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
-            "predicted": "Approximately $700 million.",
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Consumer & Community Banking",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenue for 2021 Q1.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 144,
+        "question": "Does Verizon have a reasonably healthy liquidity profile based on its quick ratio for FY 2022? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
+        "gold_answer": "No. The quick ratio was approximately 0.54 for Verizon. It indicated that Verizon does not have a healthy liquidity profile.",
+        "category": "multi-formula calc",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or its liquidity profile for FY 2022.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or its liquidity profile for FY 2022.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or liquidity profile for FY 2022. Therefore, I cannot determine if Verizon has a reasonably healthy liquidity profile based on its quick ratio.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 81,
+        "question": "What is the FY2019 cash conversion cycle (CCC) for General Mills? CCC is defined as: DIO + DSO - DPO. DIO is defined as: 365 * (average inventory between FY2018 and FY2019) / (FY2019 COGS). DSO is defined as: 365 * (average accounts receivable between FY2018 and FY2019) / (FY2019 Revenue). DPO is de",
+        "gold_answer": "-3.7",
+        "category": "simple extraction",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 56.73 days.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 66.73 days.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is not calculable with the provided information, as the necessary figures for COGS and Revenue are not included in the passages.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "To calculate the cash conversion cycle (CCC) for General Mills for FY2019, we need the following information:\n\n1. **Cost of Goods Sold (COGS) for FY2019**: This is not directly provided in the passages, but we can infer it from the financial statements if available. However, since the specific COGS figure is not included in the provided context, we cannot calculate DIO, DSO, or DPO accurately.\n\n2.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 56.73 days.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain any information regarding General Mills' financial data, such as COGS, revenue, inventory, accounts receivable, or accounts payable for FY2019. Therefore, I cannot calculate the cash conversion cycle (CCC) for General Mills.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 36.73 days.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not contain the necessary financial data or specific line items from General Mills' 10-K for FY2019 to calculate the cash conversion cycle (CCC). Therefore, I cannot provide the CCC for General Mills.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 36.73 days.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain any information regarding General Mills' financial data for FY2019, including COGS, revenue, or accounts payable. Therefore, the cash conversion cycle (CCC) cannot be calculated.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 cannot be calculated with the provided information, as the necessary data for average inventory, average accounts receivable, and average accounts payable is not included in the passages.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The relevant passages do not contain information about General Mills' FY2019 cash conversion cycle (CCC), including details on average inventory, accounts receivable, accounts payable, COGS, or revenue. Therefore, I cannot provide an answer.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The FY2019 cash conversion cycle (CCC) for General Mills is 66.73 days.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding General Mills' financial data, including cash conversion cycle (CCC), inventory, accounts receivable, or accounts payable for FY2019. Therefore, I cannot calculate the CCC for General Mills.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide the necessary data to calculate the cash conversion cycle (CCC) for General Mills for FY2019.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding General Mills' financial data for FY2019, including cash conversion cycle (CCC), inventory, accounts receivable, or accounts payable. Therefore, I cannot calculate the CCC for General Mills.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 38,
+        "question": "Which debt securities are registered to trade on a national securities exchange under American Express' name as of 2022?",
+        "gold_answer": "There are none",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "American Express has registered the following debt securities to trade on a national securities exchange as of 2022: 1.500% Notes due 2026, 1.750% Notes due 2030, and 1.500% Notes due 2031.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Common Shares (par value $0.20 per Share) are registered to trade on a national securities exchange under American Express' name as of 2022.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "As of 2022, the debt securities registered to trade on a national securities exchange under American Express' name are the 1.500% Notes due 2026, 1.750% Notes due 2030, and 1.500% Notes due 2031.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Common Shares (par value $0.20 per Share)",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "Common Shares (par value $0.20 per Share) with trading symbol AXP on the New York Stock Exchange.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain information regarding American Express' debt securities registered to trade on a national securities exchange as of 2022.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Common Shares (par value $0.20 per Share) trading under the symbol AXP on the New York Stock Exchange.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "Common Shares (par value $0.20 per Share) registered under the trading symbol AXP on the New York Stock Exchange.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "Common Shares (par value $0.20 per Share) with trading symbol AXP on the New York Stock Exchange.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain information regarding the debt securities registered to trade on a national securities exchange under American Express' name as of 2022.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "Common Shares (par value $0.20 per Share) with trading symbol AXP on the New York Stock Exchange.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding the debt securities registered to trade on a national securities exchange under American Express' name as of 2022.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Common Shares (par value $0.20 per Share) are registered to trade on a national securities exchange under American Express' name as of 2022.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding American Express or its debt securities registered to trade on a national securities exchange as of 2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding the debt securities registered to trade on a national securities exchange under American Express' name as of 2022.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding American Express or its debt securities registered to trade on a national securities exchange as of 2022.",
             "judge_score": 0.0
           }
         }
@@ -1304,57 +1884,73 @@
     ],
     "always_easy": [
       {
-        "doc_idx": 145,
-        "question": "Is Verizon a capital intensive business based on FY 2022 data?",
-        "gold_answer": "Yes. Verizon's capital intensity ratio was approximately 2.774729. This means that it took approximately $2.77 of assets to generate $1 of revenue and thus, Verizon can be considered capital intensive.",
-        "category": "qualitative judgement",
+        "doc_idx": 90,
+        "question": "Which business segment of JnJ will be treated as a discontinued operation from August 30, 2023 onward?",
+        "gold_answer": "The Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
+        "category": "other",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "Johnson & Johnson's Consumer Health business will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307.7 billion.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "bm25-corpus__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-canonical__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-canonical__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-tuned__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-tuned__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment, totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
+            "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
+            "judge_score": 1.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
+            "judge_score": 1.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           }
         }
@@ -1374,15 +1970,15 @@
             "judge_score": 1.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it primarily operates in financial services where net interest income and noninterest income are more critical indicators of performance than gross margins typically used in manufacturing or retail sectors.",
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it primarily operates in financial services where net interest income and noninterest income are more significant indicators of performance than gross margins.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan Chase, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins associated with product sales.",
+            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins associated with product sales.",
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it primarily operates in financial services where profitability is typically assessed through metrics like net income, return on equity, and net revenue rather than gross margins, which are more applicable to manufacturing and retail sectors.",
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where profitability is typically assessed through metrics like net income, return on equity, and revenue growth rather than gross margins.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
@@ -1394,23 +1990,39 @@
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and its performance is typically evaluated using metrics such as return on equity, net interest margin, and efficiency ratio rather than gross margins, which are more applicable to manufacturing or retail companies.",
+            "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and its performance is typically evaluated using metrics such as return on equity, net interest margin, and efficiency ratio rather than gross margins.",
             "judge_score": 1.0
           },
           "v4t-canonical__online": {
-            "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and such firms typically focus on metrics like net interest margin, return on equity, and total net revenue rather than gross margins, which are more applicable to manufacturing or retail companies.",
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where net interest income and noninterest income are more critical indicators of performance than gross margins typically used in manufacturing or retail sectors.",
             "judge_score": 1.0
           },
           "v4t-canonical__batch": {
-            "predicted": "Gross margins are not a relevant metric for JPMorgan as it is a financial services company, and its performance is typically evaluated using metrics such as net interest income, noninterest income, and return on equity rather than gross margins.",
+            "predicted": "Gross margins are not a relevant metric for JPMorgan as it is a financial services company, and its performance is better assessed through net revenue, noninterest expenses, and net income rather than traditional gross margins used in product-based industries.",
             "judge_score": 1.0
           },
           "v4t-tuned__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where revenue is generated from fees, interest, and commissions rather than product sales.",
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where metrics such as net income, return on equity, and total assets are more significant indicators of performance rather than gross margins typically used in manufacturing or retail sectors.",
             "judge_score": 1.0
           },
           "v4t-tuned__batch": {
             "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins.",
+            "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan Chase, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins used in product-based companies.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins, which are more applicable to manufacturing or retail companies.",
+            "judge_score": 1.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for JPMorgan as it is a financial services company, and its performance is typically assessed using metrics such as net interest income, noninterest income, and return on equity rather than gross margins.",
+            "judge_score": 1.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins, which are more applicable to manufacturing or retail companies.",
             "judge_score": 1.0
           }
         }
@@ -1468,118 +2080,166 @@
           "v4t-tuned__batch": {
             "predicted": "0",
             "judge_score": 1.0
-          }
-        }
-      },
-      {
-        "doc_idx": 142,
-        "question": "Among all of the derivative instruments that Verizon used to manage the exposure to fluctuations of foreign currencies exchange rates or interest rates, which one had the highest notional value in FY 2021?",
-        "gold_answer": "Cross currency swaps. Its notional value was $32,502 million.",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 0.75
           },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Cross currency swaps",
+          "rag-corpus__batch": {
+            "predicted": "0",
             "judge_score": 1.0
           },
-          "attention-corpus-tuned__online": {
-            "predicted": "Cross currency swaps",
+          "flat-corpus__batch": {
+            "predicted": "0",
             "judge_score": 1.0
           },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Cross currency swaps",
+          "v5t-corpus__batch": {
+            "predicted": "0",
             "judge_score": 1.0
           },
-          "dump-all__online": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 1.0
-          },
-          "dump-all__batch": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 1.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "Cross currency swaps",
-            "judge_score": 1.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "Cross currency swaps",
+          "semantic-corpus__batch": {
+            "predicted": "0",
             "judge_score": 1.0
           }
         }
       },
       {
-        "doc_idx": 78,
-        "question": "Has CVS Health paid dividends to common shareholders in Q2 of FY2022?",
-        "gold_answer": "Yes, CVS paid a $ 0.55 dividend per share every quarter in FY2022",
+        "doc_idx": 125,
+        "question": "At the Pepsico AGM held on May 3, 2023, what was the outcome of the shareholder vote on the shareholder proposal for a congruency report by Pepsico on net-zero emissions policies?",
+        "gold_answer": "The shareholder proposal for a congruency report by Pepsico on net-zero emissions policies was defeated.",
         "category": "other",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "Yes, CVS Health paid dividends to common shareholders in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "Yes, CVS Health paid a quarterly cash dividend of $0.55 per share in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "Yes, CVS Health paid dividends to common shareholders in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "Yes, CVS Health paid a quarterly cash dividend of $0.55 per share in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Yes, CVS Health paid a quarterly cash dividend of $0.55 per share in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding CVS Health's dividend payments in Q2 of FY2022.",
+            "predicted": "The provided passages do not contain any information regarding the outcome of the shareholder vote on the shareholder proposal for a congruency report by PepsiCo on net-zero emissions policies at the AGM held on May 3, 2023.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "Yes, CVS Health paid dividends of $0.55 per share to common shareholders in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Yes, CVS Health paid a quarterly cash dividend of $0.55 per share in 2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "v4t-canonical__online": {
-            "predicted": "Yes, CVS Health paid a quarterly cash dividend of $0.55 per share in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "v4t-canonical__batch": {
-            "predicted": "Yes, CVS Health paid dividends to common shareholders in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "v4t-tuned__online": {
-            "predicted": "Yes, CVS Health paid a quarterly cash dividend of $0.55 per share in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
           },
           "v4t-tuned__batch": {
-            "predicted": "Yes, CVS Health paid dividends to common shareholders in Q2 of FY2022.",
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
             "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The outcome of the shareholder vote on the shareholder proposal for a congruency report by PepsiCo on net-zero emissions policies was that the proposal was not approved.",
+            "judge_score": 1.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
+            "judge_score": 1.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The outcome of the shareholder vote on the shareholder proposal for a congruency report by PepsiCo on net-zero emissions policies was that the proposal was not approved.",
+            "judge_score": 1.0
+          }
+        }
+      },
+      {
+        "doc_idx": 145,
+        "question": "Is Verizon a capital intensive business based on FY 2022 data?",
+        "gold_answer": "Yes. Verizon's capital intensity ratio was approximately 2.774729. This means that it took approximately $2.77 of assets to generate $1 of revenue and thus, Verizon can be considered capital intensive.",
+        "category": "qualitative judgement",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 0.75
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "dump-all__online": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "dump-all__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment, totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment, totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 0.75
+          },
+          "flat-corpus__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data.",
+            "judge_score": 0.75
+          },
+          "v5t-corpus__batch": {
+            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "judge_score": 0.75
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Verizon or its capital intensity for FY 2022.",
+            "judge_score": 0.0
           }
         }
       }
@@ -1604,8 +2264,8 @@
             "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "$8.738 billion",
-            "judge_score": 1.0
+            "predicted": "9.211 billion",
+            "judge_score": 0.75
           },
           "dump-all__online": {
             "predicted": "8.738 billion",
@@ -1624,20 +2284,36 @@
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
-            "predicted": "Net PP&E for 3M at year end FY2018 is $16.4 billion.",
+            "predicted": "1.577 billion",
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about 3M's balance sheet or its net PPNE for FY2018. Therefore, I cannot provide an answer based on the given context.",
+            "predicted": "The provided passages do not contain information regarding 3M's balance sheet or its net PPNE for FY2018. Therefore, I cannot provide an answer based on the given context.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
-            "predicted": "1.577 billion",
+            "predicted": "Net PP&E for 3M at year end FY2018 is $16.4 billion.",
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
             "predicted": "The relevant passages do not provide information about 3M's balance sheet or its net PPNE for FY2018. Therefore, I cannot provide an answer based on the given context.",
             "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "9.211 billion",
+            "judge_score": 0.25
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information about 3M's balance sheet or its net PPNE for FY2018. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding 3M's balance sheet or its net PPNE for FY2018. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "8.738 billion USD",
+            "judge_score": 1.0
           }
         }
       },
@@ -1676,7 +2352,7 @@
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "The provided passages do not contain the necessary financial data for Adobe's FY2015 operating cash flow ratio calculation. Therefore, I cannot provide an answer.",
+            "predicted": "The provided passages do not contain the necessary financial data for Adobe's FY2015 operating cash flow ratio calculation.",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
@@ -1684,7 +2360,7 @@
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about Adobe's financials, including cash from operations or total current liabilities for FY2015. Therefore, I cannot calculate the operating cash flow ratio for Adobe.",
+            "predicted": "The relevant passages do not provide information about Adobe's cash from operations or total current liabilities for FY2015. Therefore, I cannot calculate the operating cash flow ratio for Adobe.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -1693,6 +2369,22 @@
           },
           "v4t-tuned__batch": {
             "predicted": "The relevant passages do not provide information about Adobe's financials, including cash from operations or total current liabilities for FY2015. Therefore, I cannot calculate the operating cash flow ratio for Adobe.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The operating cash flow ratio for Adobe in FY2015 is 1.98.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Adobe's financial statements or operating cash flow ratio for FY2015. Therefore, I cannot provide an answer.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide information about Adobe's cash from operations or total current liabilities for FY2015. Therefore, I cannot calculate the operating cash flow ratio for Adobe.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Adobe's financial statements for FY2015, including cash from operations or total current liabilities. Therefore, I cannot provide the operating cash flow ratio for Adobe.",
             "judge_score": 0.0
           }
         }
@@ -1724,7 +2416,7 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The relevant passages do not contain information about Adobe's cash from operations or total current liabilities for FY2017. Therefore, I cannot provide the operating cash flow ratio for Adobe.",
+            "predicted": "The relevant passages do not contain information about Adobe's FY2017 operating cash flow or total current liabilities. Therefore, I cannot provide the operating cash flow ratio for Adobe.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -1732,15 +2424,15 @@
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "The relevant passages do not provide specific information regarding Adobe's cash from operations or total current liabilities for FY2017. Therefore, I cannot calculate the operating cash flow ratio for Adobe.",
+            "predicted": "The relevant passages do not provide specific financial data for Adobe's FY2017 operating cash flow or total current liabilities. Therefore, I cannot calculate the operating cash flow ratio for Adobe.",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
-            "predicted": "The operating cash flow ratio for Adobe in FY2017 cannot be calculated as the relevant cash flow statement data for FY2017 is not provided in the passages.",
+            "predicted": "The operating cash flow ratio for Adobe in FY2017 cannot be calculated as the necessary cash from operations figure is not provided in the relevant passages.",
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about Adobe's cash from operations or total current liabilities for FY2017. Therefore, the operating cash flow ratio for Adobe cannot be determined from the provided context.",
+            "predicted": "The relevant passages do not contain information about Adobe's cash from operations or total current liabilities for FY2017. Therefore, the operating cash flow ratio for Adobe cannot be determined from the provided context.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -1750,61 +2442,21 @@
           "v4t-tuned__batch": {
             "predicted": "The relevant passages do not provide information about Adobe's cash from operations or total current liabilities for FY2017. Therefore, the operating cash flow ratio for Adobe cannot be determined from the provided context.",
             "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 19,
-        "question": "What is Amazon's year-over-year change in revenue from FY2016 to FY2017 (in units of percents and round to one decimal place)? Calculate what was asked by utilizing the line items clearly shown in the statement of income.",
-        "gold_answer": "30.8%",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "30.8%",
-            "judge_score": 1.0
           },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The year-over-year change in revenue from FY2016 to FY2017 is 30.7%.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "30.8%",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The year-over-year change in revenue from FY2016 to FY2017 is 30.7%.",
-            "judge_score": 1.0
-          },
-          "dump-all__online": {
-            "predicted": "24.8%",
+          "rag-corpus__batch": {
+            "predicted": "The operating cash flow ratio for Adobe in FY2017 is 1.23.",
             "judge_score": 0.0
           },
-          "dump-all__batch": {
-            "predicted": "The relevant passages do not contain information about Amazon's revenue for FY2016 or FY2017. Therefore, I cannot provide the year-over-year change in revenue for Amazon.",
+          "flat-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Adobe's financials, including its operating cash flow or total current liabilities for FY2017. Therefore, I cannot provide an answer.",
             "judge_score": 0.0
           },
-          "bm25-corpus__online": {
-            "predicted": "30.8%",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The relevant passages do not contain information about Amazon's revenue or financial data for FY2016 or FY2017. Therefore, I cannot provide the year-over-year change in revenue for Amazon from FY2016 to FY2017.",
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide information about Adobe's cash from operations or total current liabilities for FY2017. Therefore, the operating cash flow ratio for Adobe cannot be determined from the provided context.",
             "judge_score": 0.0
           },
-          "v4t-canonical__online": {
-            "predicted": "15.4%",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not contain information about Amazon's revenue for FY2016 and FY2017. Therefore, I cannot provide the year-over-year change in revenue for Amazon from FY2016 to FY2017.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "23.5%",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The year-over-year change in revenue from FY2016 to FY2017 for Amazon is not provided in the relevant passages.",
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Adobe's FY2017 operating cash flow or total current liabilities. Therefore, the operating cash flow ratio for Adobe cannot be determined from the provided context.",
             "judge_score": 0.0
           }
         }
@@ -1862,6 +2514,22 @@
           "v4t-tuned__batch": {
             "predicted": "The provided passages do not contain information regarding Amazon's FY2019 net income attributable to shareholders.",
             "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "11,588",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Amazon's FY2019 net income attributable to shareholders.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Amazon's FY2019 net income attributable to shareholders.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Amazon's FY2019 net income attributable to shareholders.",
+            "judge_score": 0.0
           }
         }
       },
@@ -1872,7 +2540,7 @@
         "category": "other",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "1,615.9",
+            "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
             "judge_score": 1.0
           },
           "v4t-corpus-tuned__batch": {
@@ -1880,7 +2548,7 @@
             "judge_score": 1.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "1,615.9",
+            "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
@@ -1888,11 +2556,11 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
+            "predicted": "1,615.9 million USD",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
+            "predicted": "The provided passages do not contain any information regarding Amcor's financials, including its year-end FY2020 net accounts receivable (AR). Therefore, I cannot provide an answer based on the given context.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -1900,7 +2568,7 @@
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
+            "predicted": "The relevant passages do not provide information regarding Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
@@ -1908,7 +2576,7 @@
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
+            "predicted": "The relevant passages do not contain information about Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -1916,7 +2584,23 @@
             "judge_score": 1.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
+            "predicted": "The relevant passages do not contain information about Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Amcor's year end FY2020 net accounts receivable (AR) in USD millions.",
             "judge_score": 0.0
           }
         }
@@ -1928,35 +2612,35 @@
         "category": "multi-formula calc",
         "predictions": {
           "v4t-corpus-tuned__online": {
+            "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = (167 / 3991) * 100 = 4.18%.",
+            "judge_score": 1.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "The FY2015 depreciation and amortization (D&A) from the cash flow statement is $167 million. The net revenue for FY2015 is $3,991 million. \n\nTo calculate the D&A % margin:\nD&A % margin = (D&A / Net Revenue) * 100\nD&A % margin = ($167 million / $3,991 million) * 100 ≈ 4.18%\n\nThe FY2015 depreciation and amortization % margin for AMD is approximately 4.18%.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
             "predicted": "The FY2015 depreciation and amortization (D&A) % margin for AMD is approximately 4.18%.",
             "judge_score": 1.0
           },
-          "v4t-corpus-tuned__batch": {
+          "attention-corpus-tuned__batch": {
             "predicted": "The FY2015 depreciation and amortization (D&A) from the cash flow statement for AMD is $167 million. The net revenue for FY2015 is $3,991 million. \n\nTo calculate the D&A % margin:\nD&A % margin = (D&A / Net Revenue) * 100\nD&A % margin = ($167 million / $3,991 million) * 100 ≈ 4.18%\n\nThe FY2015 depreciation and amortization % margin for AMD is approximately 4.18%.",
             "judge_score": 1.0
           },
-          "attention-corpus-tuned__online": {
-            "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = (167 / 3991) * 100 = 4.18%.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The FY2015 depreciation and amortization (D&A) amount is $167 million. The net revenue for FY2015 is $3,991 million. To calculate the D&A % margin:\n\nD&A % margin = (D&A / Net Revenue) * 100\nD&A % margin = ($167 million / $3,991 million) * 100 ≈ 4.18%\n\nThe FY2015 depreciation and amortization % margin for AMD is approximately 4.18%.",
-            "judge_score": 1.0
-          },
           "dump-all__online": {
             "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = (167 / 3991) * 100 = 4.18%.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding AMD's financial metrics, including depreciation and amortization for FY2015. Therefore, I cannot provide the requested percentage margin for AMD.",
+            "predicted": "The relevant passages do not provide information about AMD's financials, including depreciation and amortization for FY2015. Therefore, I cannot provide the requested percentage margin for AMD.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "The FY2015 depreciation and amortization (D&A) amount for AMD is $167 million. The net revenue for FY2015 is $3,991 million. To calculate the D&A % margin:\n\nD&A % margin = (D&A / Net Revenue) * 100\nD&A % margin = ($167 million / $3,991 million) * 100 ≈ 4.18%\n\nThe FY2015 depreciation and amortization % margin for AMD is approximately 4.18%.",
+            "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = ($167 / $3,991) * 100 = 4.18%.",
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "The relevant passages do not provide specific financial metrics or details from AMD's P&L statement or statement of cash flows for FY2015, including depreciation and amortization (D&A) figures. Therefore, I cannot determine the FY2015 D&A % margin for AMD.",
+            "predicted": "The relevant passages do not provide specific financial metrics or details from AMD's P&L statement or statement of cash flows for FY2015, including depreciation and amortization (D&A) figures. Therefore, I cannot calculate the D&A % margin for AMD for that fiscal year.",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
@@ -1974,61 +2658,21 @@
           "v4t-tuned__batch": {
             "predicted": "The provided passages do not contain any information regarding AMD's financial metrics, including depreciation and amortization for FY2015. Therefore, I cannot provide the requested percentage margin for AMD.",
             "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 42,
-        "question": "How much has the effective tax rate of American Express changed between FY2021 and FY2022?",
-        "gold_answer": "The effective tax rate for American Express has changed/dropped from 24.6% in FY 2021 to 21.6% in FY 2022.",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "The effective tax rate of American Express changed from 24.6% in FY2021 to 21.6% in FY2022.",
+          },
+          "rag-corpus__batch": {
+            "predicted": "The FY2015 depreciation and amortization (D&A) amount is $167 million. The net revenue for FY2015 is $3,991 million. To calculate the D&A % margin: \n\nD&A % margin = (D&A / Net Revenue) * 100 = ($167 / $3,991) * 100 ≈ 4.18%. \n\nTherefore, the D&A % margin for AMD in FY2015 is approximately 4.18%.",
             "judge_score": 1.0
           },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The effective tax rate of American Express changed from 24.6% in FY2021 to 21.6% in FY2022.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "The effective tax rate of American Express changed from 24.6% in FY2021 to 21.6% in FY2022.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The effective tax rate of American Express changed from 24.6% in FY2021 to 21.6% in FY2022.",
-            "judge_score": 1.0
-          },
-          "dump-all__online": {
-            "predicted": "The effective tax rate of American Express changed from 24.6% in FY2021 to 21.6% in FY2022.",
-            "judge_score": 1.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding the effective tax rate of American Express for FY2021 and FY2022.",
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding AMD's financial metrics, including depreciation and amortization for FY2015. Therefore, I cannot provide the requested percentage margin for AMD.",
             "judge_score": 0.0
           },
-          "bm25-corpus__online": {
-            "predicted": "The effective tax rate of American Express changed from 24.6% in FY2021 to 21.6% in FY2022.",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The effective tax rate of American Express decreased from 24.6% in FY2021 to 21.6% in FY2022.",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The effective tax rate of American Express has changed from 6.5% in FY2021 to 8.0% in FY2022.",
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding AMD's financial metrics, including depreciation and amortization for FY2015. Therefore, I cannot provide the requested percentage margin.",
             "judge_score": 0.0
           },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain information regarding the effective tax rate of American Express for FY2021 and FY2022.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The effective tax rate of American Express has changed from 9.4% in FY2021 to 10.4% in FY2022.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain information regarding the effective tax rate of American Express for FY2021 and FY2022.",
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding AMD's financial metrics, including depreciation and amortization (D&A) for FY2015. Therefore, I cannot provide the requested percentage margin for AMD.",
             "judge_score": 0.0
           }
         }
@@ -2052,7 +2696,7 @@
             "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "$0.389 billion",
+            "predicted": "0.389 billion USD",
             "judge_score": 1.0
           },
           "dump-all__online": {
@@ -2060,7 +2704,7 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding American Water Works or its cash dividends for FY2020. Therefore, I cannot provide an answer to the question.",
+            "predicted": "The relevant passages do not contain information about American Water Works or its cash dividends for FY2020. Therefore, I cannot provide an answer based on the provided context.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -2076,7 +2720,7 @@
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about American Water Works' cash dividends for FY2020. Therefore, I cannot provide an answer.",
+            "predicted": "The relevant passages do not provide information about American Water Works' cash dividends for FY2020.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -2084,7 +2728,23 @@
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain information regarding American Water Works' cash dividends for FY2020.",
+            "predicted": "The relevant passages do not provide information about American Water Works' cash dividends for FY2020.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "0.389 billion",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding American Water Works or its cash dividends for FY2020. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide information about American Water Works' cash dividends for FY2020.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about American Water Works or its cash dividends for FY2020. Therefore, I cannot provide an answer based on the provided context.",
             "judge_score": 0.0
           }
         }
@@ -2132,7 +2792,7 @@
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain any information regarding Best Buy's inventories for FY2019.",
+            "predicted": "The provided passages do not contain information regarding Best Buy's inventories for FY2019.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -2140,7 +2800,167 @@
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain information regarding Best Buy's inventories for FY2019.",
+            "predicted": "The provided passages do not contain any information regarding Best Buy's inventories for FY2019.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "5,409",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's financials, including inventories for FY2019. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's inventories for FY2019.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's FY2019 total amount of inventories.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 52,
+        "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Best Buy in FY2023?",
+        "gold_answer": "Best Buy generated the most cash flow from operating activities in FY 2023 ($1.8 bn)",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+            "judge_score": 1.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with total cash provided by operating activities amounting to $1,824 million.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+            "judge_score": 1.0
+          },
+          "dump-all__online": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+            "judge_score": 1.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's cash flow for FY2023.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with total cash provided by operating activities of $1,824 million.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The provided passages do not contain specific information regarding cash flow from operations, investing, and financing activities for Best Buy in FY2023.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The operating activities brought in the most cash flow for Best Buy in FY2023.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The provided passages do not contain specific information regarding cash flow from operations, investing, and financing activities for Best Buy in FY2023.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's cash flow for FY2023.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The cash flow from operating activities brought in the most cash flow for Best Buy in FY2023.",
+            "judge_score": 0.75
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The operating activities brought in the most cash flow for Best Buy in FY2023.",
+            "judge_score": 0.75
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's cash flow for FY2023.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 53,
+        "question": "Was there any drop in Cash & Cash equivalents between FY 2023 and Q2 of FY2024?",
+        "gold_answer": "Yes, there was a decline of ~42% between FY2023 and Q2 of FY 2024.",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Yes, there was a drop in Cash and cash equivalents from $1,874 million in January 28, 2023, to $1,093 million on July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Yes, there was a drop in Cash and cash equivalents from $1,874 million in January 28, 2023, to $1,093 million in July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Yes, there was a drop in Cash and cash equivalents from $1,874 million in January 28, 2023, to $1,093 million on July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Yes, there was a drop in Cash and cash equivalents from $1,874 million in January 28, 2023, to $1,093 million in July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "dump-all__online": {
+            "predicted": "Yes, cash and cash equivalents decreased from $1,874 million on January 28, 2023, to $1,093 million on July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's cash and cash equivalents for FY 2023 or Q2 of FY 2024.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Yes, cash and cash equivalents dropped from $1,874 million on January 28, 2023, to $1,093 million on July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "Yes, there was a drop in Cash and cash equivalents from $1,874 million in January 28, 2023, to $1,093 million on July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The provided passages do not contain information regarding Cash & Cash equivalents for FY 2023 or Q2 of FY 2024 for Best Buy.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's Cash & Cash equivalents for FY 2023 or Q2 of FY 2024.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The provided passages do not contain information regarding Cash & Cash equivalents for FY 2023 or Q2 of FY 2024 for Best Buy.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's Cash & Cash equivalents for FY 2023 or Q2 of FY 2024.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Yes, there was a drop in Cash and cash equivalents from $1,874 million in January 28, 2023, to $1,093 million on July 29, 2023.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information about Best Buy's cash and cash equivalents for FY 2023 or Q2 of FY 2024.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's cash and cash equivalents for FY 2023 or Q2 of FY 2024.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information about Best Buy's cash and cash equivalents for FY 2023 or Q2 of FY 2024.",
             "judge_score": 0.0
           }
         }
@@ -2158,15 +2978,15 @@
             "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "1,899",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__online": {
             "predicted": "1,829",
             "judge_score": 1.0
           },
+          "attention-corpus-tuned__online": {
+            "predicted": "1,832",
+            "judge_score": 1.0
+          },
           "attention-corpus-tuned__batch": {
-            "predicted": "1,899",
+            "predicted": "1,829",
             "judge_score": 1.0
           },
           "dump-all__online": {
@@ -2174,11 +2994,11 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding American Water Works's financials, including its cash flow statement or income statement for FY2021. Therefore, I cannot provide the requested unadjusted operating income + depreciation and amortization (unadjusted EBITDA) for American Water Works.",
+            "predicted": "The provided passages do not contain any information regarding American Water Works's financials, including its cash flow statement or income statement for FY2021. Therefore, I cannot provide the requested unadjusted operating income + depreciation and amortization for American Water Works.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "1,832",
+            "predicted": "1,829",
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
@@ -2190,7 +3010,7 @@
             "judge_score": 1.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not contain information about American Water Works's financials, including its cash flow statement or income statement for FY2021. Therefore, I cannot provide the unadjusted operating income + depreciation and amortization for American Water Works.",
+            "predicted": "The relevant passages do not contain information about American Water Works's FY2021 unadjusted operating income or depreciation and amortization. Therefore, I cannot provide an answer based on the provided context.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
@@ -2198,6 +3018,22 @@
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
+            "predicted": "The relevant passages do not contain information about American Water Works's FY2021 unadjusted operating income or depreciation and amortization. Therefore, I cannot provide an answer based on the provided context.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "1,829",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding American Water Works's financials for FY2021, including its cash flow statement or income statement. Therefore, I cannot provide the unadjusted operating income + depreciation and amortization for American Water Works for FY2021.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about American Water Works's FY2021 unadjusted operating income or depreciation and amortization. Therefore, I cannot provide an answer based on the provided context.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
             "predicted": "The relevant passages do not contain information about American Water Works's FY2021 unadjusted operating income or depreciation and amortization. Therefore, I cannot provide an answer based on the provided context.",
             "judge_score": 0.0
           }
@@ -2210,7 +3046,7 @@
         "category": "multi-formula calc",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "80.0%",
+            "predicted": "17.5%",
             "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
@@ -2226,7 +3062,7 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "101.7%",
+            "predicted": "102.0%",
             "judge_score": 1.0
           },
           "dump-all__batch": {
@@ -2238,7 +3074,7 @@
             "judge_score": 0.0
           },
           "bm25-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding Block's (formerly known as Square) total revenue growth rate for FY2019 - FY2020.",
+            "predicted": "The provided passages do not contain any information regarding Block's (formerly known as Square) FY2019 - FY2020 total revenue growth rate.",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
@@ -2250,11 +3086,27 @@
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
-            "predicted": "The relevant passages do not provide the total revenue figures for FY2019 and FY2020 for Block (formerly known as Square). Therefore, I cannot calculate the total revenue growth rate.",
+            "predicted": "The relevant passages do not provide the total revenue figures for FY2019 and FY2020 for Block (formerly known as Square). Therefore, the total revenue growth rate cannot be calculated.",
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
             "predicted": "The relevant passages do not provide information about Block's total revenue for FY2019 or FY2020, therefore the total revenue growth rate cannot be determined.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "102.0%",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The relevant passages do not provide information about Block (formerly known as Square) or its financials. Therefore, I cannot answer the question regarding the FY2019 - FY2020 total revenue growth rate for Block.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide information about Block's total revenue growth rate for FY2019 - FY2020.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Block's (formerly known as Square) total revenue growth rate for FY2019 - FY2020. Therefore, I cannot provide an answer.",
             "judge_score": 0.0
           }
         }
@@ -2294,7 +3146,7 @@
             "judge_score": 0.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Consumer & Community Banking had the highest net income in 2022 Q2, with $3,100 million.",
+            "predicted": "Consumer & Community Banking",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
@@ -2312,61 +3164,93 @@
           "v4t-tuned__batch": {
             "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net income for Q2 2022.",
             "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Consumer & Community Banking",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net income for Q2 2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "Corporate & Investment Bank",
+            "judge_score": 0.75
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net income for 2022 Q2.",
+            "judge_score": 0.0
           }
         }
       },
       {
-        "doc_idx": 77,
-        "question": "Has CVS Health reported any materially important ongoing legal battles from 2022, 2021 and 2020?",
-        "gold_answer": "Yes, CVS Health has been involved in multiple ongoing legal battles. Some notable legal dispute areas for CVS are: (1) usual and customary pricing litigation: where it's claimed that CVSâs retail pharmacies overcharged for prescription drugs; (2) PBM litigation and investigations: where it's claim",
+        "doc_idx": 140,
+        "question": "What percent of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023?",
+        "gold_answer": "36%. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
         "category": "other",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "Yes, CVS Health reported ongoing lawsuits alleging that its retail pharmacies overcharged for prescription drugs by not submitting the correct usual and customary price during the claims adjudication process.",
-            "judge_score": 0.25
+            "predicted": "22.5%",
+            "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "Yes, CVS Health is involved in lawsuits alleging that its retail pharmacies overcharged for prescription drugs by not submitting the correct usual and customary price during the claims adjudication process.",
-            "judge_score": 0.5
+            "predicted": "36.5%",
+            "judge_score": 1.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "Yes, CVS Health reported ongoing lawsuits alleging that its retail pharmacies overcharged for prescription drugs by not submitting the correct usual and customary price during the claims adjudication process.",
-            "judge_score": 0.5
+            "predicted": "The total spend on stock repurchases for FY 2022 was $900.0 million, and the spend in Q4 of FY 2022 was $328.1 million. To find the percentage of the total spend that occurred in Q4, we calculate:\n\n(328.1 million / 900.0 million) * 100 = 36.5%\n\nTherefore, 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2022 occurred in Q4 of FY 2022.",
+            "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "Yes, CVS Health is involved in lawsuits alleging that its retail pharmacies overcharged for prescription drugs by not submitting the correct usual and customary price during the claims adjudication process.",
-            "judge_score": 0.5
+            "predicted": "36.5%",
+            "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Yes, CVS Health is facing multiple lawsuits regarding drug pricing and rebate arrangements, as well as lawsuits alleging overcharging for prescription drugs. Additionally, in December 2022, the company agreed to a settlement regarding opioid claims, which is a significant ongoing legal matter.",
+            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding CVS Health or its ongoing legal battles from 2022, 2021, and 2020.",
+            "predicted": "The provided passages do not contain any information regarding Ulta Beauty's earnings or stock repurchases for FY 2023.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "Yes, CVS Health is facing multiple lawsuits regarding drug pricing and rebate arrangements with drug manufacturers, as well as lawsuits alleging overcharging for prescription drugs related to usual and customary pricing.",
-            "judge_score": 0.75
+            "predicted": "21.8%",
+            "judge_score": 0.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Yes, CVS Health is named as a defendant in lawsuits alleging that its retail pharmacies overcharged for prescription drugs by not submitting the correct usual and customary price during the claims adjudication process.",
-            "judge_score": 0.5
+            "predicted": "36.5%",
+            "judge_score": 1.0
           },
           "v4t-canonical__online": {
-            "predicted": "Yes, CVS Health reported ongoing legal battles related to opioid claims, drug pricing, and usual and customary pricing litigation in 2022, 2021, and 2020.",
+            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY 2023.",
             "judge_score": 1.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain any information regarding CVS Health's ongoing legal battles from 2022, 2021, or 2020.",
-            "judge_score": 0.0
+            "predicted": "Approximately 36.4% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023.",
+            "judge_score": 1.0
           },
           "v4t-tuned__online": {
-            "predicted": "Yes, CVS Health reported ongoing legal battles related to opioid claims, drug pricing, rebate arrangements, and usual and customary pricing litigation in 2022.",
+            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY 2023.",
             "judge_score": 1.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain any information regarding CVS Health's ongoing legal battles from 2022, 2021, or 2020.",
+            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023.",
+            "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Ulta Beauty's earnings or stock repurchases for FY 2023.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023.",
+            "judge_score": 1.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Ulta Beauty's earnings or stock repurchases for FY 2023.",
             "judge_score": 0.0
           }
         }
@@ -2379,35 +3263,35 @@
         "predictions": {
           "v4t-corpus-tuned__online": {
             "predicted": "PepsiCo primarily operates in Africa, the Middle East, South Asia, Asia Pacific, Australia, New Zealand, and China.",
-            "judge_score": 0.5
+            "judge_score": 0.25
           },
           "v4t-corpus-tuned__batch": {
             "predicted": "PepsiCo primarily operates in the United States, Developed Europe, Developed Rest of World, and Emerging Markets.",
-            "judge_score": 0.75
+            "judge_score": 0.5
           },
           "attention-corpus-tuned__online": {
-            "predicted": "PepsiCo primarily operates in Africa, the Middle East and South Asia (AMESA), and Asia Pacific, Australia and New Zealand, and China Region (APAC).",
-            "judge_score": 0.25
+            "predicted": "PepsiCo primarily operates in Africa, the Middle East, South Asia, Asia Pacific, Australia, New Zealand, and China.",
+            "judge_score": 0.5
           },
           "attention-corpus-tuned__batch": {
             "predicted": "PepsiCo primarily operates in the United States, Developed Europe, Developed Rest of World, and Emerging Markets.",
-            "judge_score": 0.75
+            "judge_score": 0.5
           },
           "dump-all__online": {
             "predicted": "PepsiCo primarily operates in the following geographies as of FY2022: North America, Latin America, Europe, Africa, the Middle East and South Asia (AMESA), and Asia Pacific, Australia and New Zealand, and China Region (APAC).",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding PepsiCo's operations or the geographies it primarily operates in as of FY2022.",
+            "predicted": "The provided passages do not contain information regarding the geographies that PepsiCo primarily operates in as of FY2022.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
             "predicted": "PepsiCo primarily operates in the United States, Canada, Latin America, and Europe.",
-            "judge_score": 0.5
+            "judge_score": 0.25
           },
           "bm25-corpus__batch": {
             "predicted": "PepsiCo primarily operates in the following geographies as of FY2022: United States, Canada, Latin America, and Europe.",
-            "judge_score": 0.5
+            "judge_score": 0.25
           },
           "v4t-canonical__online": {
             "predicted": "PepsiCo primarily operates in Africa, the Middle East, South Asia, Asia Pacific, Australia, New Zealand, China, North America, Latin America, and Europe.",
@@ -2422,64 +3306,24 @@
             "judge_score": 1.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide information about the geographies that PepsiCo primarily operates in as of FY2022.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 132,
-        "question": "What are three main companies acquired by Pfizer mentioned in this 10K report?",
-        "gold_answer": "Trillium, Array, and Therachon",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Trillium, Array, and a third company not specified in the provided passages.",
-            "judge_score": 0.5
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Trillium, Array, and Upjohn.",
-            "judge_score": 0.5
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "Trillium, Array, and a third company not specified in the provided passages.",
-            "judge_score": 0.5
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Trillium, Array, and Upjohn.",
-            "judge_score": 0.5
-          },
-          "dump-all__online": {
-            "predicted": "Therachon, Trillium, Array",
-            "judge_score": 1.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Pfizer or its acquisitions.",
+            "predicted": "The relevant passages do not provide specific information about the geographies that PepsiCo primarily operates in as of FY2022.",
             "judge_score": 0.0
           },
-          "bm25-corpus__online": {
-            "predicted": "Trillium, Array, and a clinical stage immuno-oncology company.",
+          "rag-corpus__batch": {
+            "predicted": "PepsiCo primarily operates in the United States, Developed Europe, Developed Rest of World, and Emerging Markets.",
             "judge_score": 0.5
           },
-          "bm25-corpus__batch": {
-            "predicted": "Trillium, Array, and Upjohn.",
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding PepsiCo's operations or geographies for FY2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide specific information about the geographies that PepsiCo primarily operates in as of FY2022.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "PepsiCo primarily operates in the United States, Canada, Latin America, and Europe.",
             "judge_score": 0.5
-          },
-          "v4t-canonical__online": {
-            "predicted": "Therachon, Trillium, Array",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about specific companies acquired by Pfizer.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "Therachon, Trillium, Array",
-            "judge_score": 1.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide information about the companies acquired by Pfizer in the 10K report.",
-            "judge_score": 0.0
           }
         }
       },
@@ -2491,7 +3335,7 @@
         "predictions": {
           "v4t-corpus-tuned__online": {
             "predicted": "The provided passages do not contain information about major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
-            "judge_score": 0.25
+            "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
             "predicted": "The provided passages do not mention any major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
@@ -2514,7 +3358,7 @@
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "The provided passages do not contain information about major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
+            "predicted": "The provided passages do not mention any major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
             "judge_score": 0.75
           },
           "bm25-corpus__batch": {
@@ -2522,7 +3366,7 @@
             "judge_score": 0.75
           },
           "v4t-canonical__online": {
-            "predicted": "The provided passages do not contain information regarding major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
+            "predicted": "The provided passages do not contain information about major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
             "judge_score": 0.75
           },
           "v4t-canonical__batch": {
@@ -2530,12 +3374,172 @@
             "judge_score": 1.0
           },
           "v4t-tuned__online": {
-            "predicted": "The provided passages do not contain information regarding major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
+            "predicted": "The provided passages do not mention any major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
             "judge_score": 0.75
           },
           "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain information regarding major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
+            "predicted": "The provided passages do not mention any major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
+            "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The provided passages do not mention any major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
             "judge_score": 0.75
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding major acquisitions by Ulta Beauty in FY2023 and FY2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "There are no major acquisitions reported by Ulta Beauty in FY2023 and FY2022.",
+            "judge_score": 0.75
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding major acquisitions by Ulta Beauty in FY2023 and FY2022.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 4,
+        "question": "If we exclude the impact of M&A, which segment has dragged down 3M's overall growth in 2022?",
+        "gold_answer": "The consumer segment shrunk by 0.9% organically.",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Consumer segment",
+            "judge_score": 0.5
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Consumer segment",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Consumer segment",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Consumer segment",
+            "judge_score": 1.0
+          },
+          "dump-all__online": {
+            "predicted": "Consumer segment",
+            "judge_score": 1.0
+          },
+          "dump-all__batch": {
+            "predicted": "The document passages provided do not contain information regarding 3M's overall growth or the impact of M&A on its segments in 2022. Therefore, I cannot answer the question based on the provided context.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Consumer segment",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The segment that has dragged down 3M's overall growth in 2022 is related to significant litigation costs, particularly the Combat Arms Earplugs litigation.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "Consumer segment",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The Corporate and other segment has dragged down 3M's overall growth in 2022.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "Consumer segment",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The Corporate and other segment has dragged down 3M's overall growth in 2022.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Consumer segment",
+            "judge_score": 0.5
+          },
+          "flat-corpus__batch": {
+            "predicted": "The document passages provided do not contain information regarding 3M's overall growth or its segments for 2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The Corporate and other segment has dragged down 3M's overall growth in 2022.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "Consumer segment",
+            "judge_score": 0.5
+          }
+        }
+      },
+      {
+        "doc_idx": 51,
+        "question": "What are major acquisitions that Best Buy has done in FY2023, FY2022 and FY2021?",
+        "gold_answer": "Best Buy closed two acquisitions, both these companies were already partially owned by Best Buy, but Best Buy acquired all outstanding shares of these two companies during FY 2022: (1) Current Health Ltd and (2) Two Peaks, LLC d/b/a Yardbird Furniture",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
+            "judge_score": 0.5
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions reported for FY2023 and FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions reported for FY2023 and FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "dump-all__online": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions reported for FY2023 or FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "dump-all__batch": {
+            "predicted": "The provided passages do not contain any information regarding Best Buy's acquisitions in FY2023, FY2022, or FY2021.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions reported for fiscal 2023 and fiscal 2021.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain information regarding major acquisitions by Best Buy in FY2023, FY2022, or FY2021.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding major acquisitions by Best Buy in FY2023, FY2022, or FY2021.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd., a care-at-home technology platform, for $389 million, and Two Peaks, LLC d/b/a Yardbird Furniture, for $79 million. There are no major acquisitions reported for FY2023 or FY2021 in the provided context.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's acquisitions in FY2023, FY2022, or FY2021.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding major acquisitions by Best Buy in FY2023, FY2022, or FY2021.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Best Buy's acquisitions in FY2023, FY2022, or FY2021.",
+            "judge_score": 0.0
           }
         }
       }

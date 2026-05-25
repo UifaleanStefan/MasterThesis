@@ -8,6 +8,8 @@ export interface FinanceBenchConfig {
   label: string;
   family: string;
   color: string;
+  queue_for?: { [displayMode: string]: string };
+  has_protocol_a?: boolean;
 }
 
 export type FinanceBenchMode = "online" | "batch";
@@ -20,6 +22,12 @@ export interface JudgeCell {
   n: number;
   cost_usd: number;
   in_doc_ratio: number;
+}
+
+export interface CalibrationCell {
+  mean_judge: number;
+  n: number;
+  deciles: number[];
 }
 
 export interface ThetaRow {
@@ -91,6 +99,7 @@ export interface FinanceBenchCorpusData {
   configs: FinanceBenchConfig[];
   modes: FinanceBenchMode[];
   judge_table: { [config: string]: { [mode in FinanceBenchMode]: JudgeCell } };
+  calibration_data?: { [config: string]: CalibrationCell };
   theta_contrast: ThetaContrast;
   cross_doc_scatter: ScatterPoint[];
   question_types: QuestionTypes;
