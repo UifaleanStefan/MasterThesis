@@ -816,8 +816,14 @@ def run_corpus_qa(
             (_queue_entry(r) for r in online_results),
         )
     if do_batch and batch_results:
+        # Calibration mode's batch component goes to a separate "__batch_calib"
+        # path so it doesn't overwrite Protocol A's batch queue (the same
+        # corpus seed=42 setting produces near-identical predictions, but
+        # OpenAI's approximate determinism means Protocol A judgments would
+        # become slightly stale if overwritten).
+        batch_suffix = "__batch_calib" if is_calibration else "__batch"
         write_judge_queue(
-            f"{benchmark}__{config}__batch__seed{seed}",
+            f"{benchmark}__{config}{batch_suffix}__seed{seed}",
             (_queue_entry(r) for r in batch_results),
         )
     if is_calibration and calibration_results:

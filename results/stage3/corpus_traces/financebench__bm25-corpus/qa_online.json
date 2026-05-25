@@ -3,8 +3,8 @@
     "question": "What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
     "scoped_question": "[Regarding 3M 10k 2018] What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
     "gold_answer": "$1577.00",
-    "predicted": "The FY2018 capital expenditure amount for 3M is $1,577 million.",
-    "judge_score": 1.0,
+    "predicted": "$1,577 million",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0
@@ -19,15 +19,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 1,
-    "qid": "financebench__bm25-corpus__online__doc0_qa0__seed42",
-    "judge_rationale": "$1,577 million exact match."
+    "qid": "financebench__bm25-corpus__online__doc0_qa0__seed42"
   },
   {
     "question": "Assume that you are a public equities analyst. Answer the following question by primarily using information that is shown in the balance sheet: what is the year end FY2018 net PPNE for 3M? Answer in USD billions.",
     "scoped_question": "[Regarding 3M 10k 2018] Assume that you are a public equities analyst. Answer the following question by primarily using information that is shown in the balance sheet: what is the year end FY2018 net PPNE for 3M? Answer in USD billions.",
     "gold_answer": "$8.70",
     "predicted": "8.738 billion",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0,
@@ -43,15 +42,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 2,
-    "qid": "financebench__bm25-corpus__online__doc1_qa0__seed42",
-    "judge_rationale": "8.738B vs gold $8.70B \u2014 0.44% off, within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc1_qa0__seed42"
   },
   {
     "question": "Is 3M a capital-intensive business based on FY2022 data?",
     "scoped_question": "[Regarding 3M 10k 2022] Is 3M a capital-intensive business based on FY2022 data?",
     "gold_answer": "No, the company is managing its CAPEX and Fixed Assets pretty efficiently, which is evident from below key metrics:\nCAPEX/Revenue Ratio: 5.1%\nFixed assets/Total Assets: 20%\nReturn on Assets= 12.4%",
     "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       4,
@@ -72,15 +70,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 3,
-    "qid": "financebench__bm25-corpus__online__doc2_qa0__seed42",
-    "judge_rationale": "Yes contradicts gold No on capital-intensive."
+    "qid": "financebench__bm25-corpus__online__doc2_qa0__seed42"
   },
   {
     "question": "What drove operating margin change as of FY2022 for 3M? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
     "scoped_question": "[Regarding 3M 10k 2022] What drove operating margin change as of FY2022 for 3M? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
     "gold_answer": "Operating Margin for 3M in FY2022 has decreased by 1.7% primarily due to: \n-Decrease in gross Margin\n-mostly one-off charges including Combat Arms Earplugs litigation, impairment related to exiting PFAS manufacturing, costs related to exiting Russia and divestiture-related restructuring\ncharges",
     "predicted": "Operating margin change for 3M in FY2022 was driven by increased SG&A costs due to special item costs related to litigation, impairment costs from exiting PFAS manufacturing, costs from exiting Russia, divestiture-related restructuring charges, and continued investment in growth initiatives, partially offset by restructuring benefits and cost management.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       5,
@@ -100,15 +97,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 4,
-    "qid": "financebench__bm25-corpus__online__doc3_qa0__seed42",
-    "judge_rationale": "Captures litigation, PFAS, Russia exit, restructuring \u2014 matches gold drivers."
+    "qid": "financebench__bm25-corpus__online__doc3_qa0__seed42"
   },
   {
     "question": "If we exclude the impact of M&A, which segment has dragged down 3M's overall growth in 2022?",
     "scoped_question": "[Regarding 3M 10k 2022] If we exclude the impact of M&A, which segment has dragged down 3M's overall growth in 2022?",
     "gold_answer": "The consumer segment shrunk by 0.9% organically.",
     "predicted": "Consumer segment",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       5,
@@ -129,15 +125,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 5,
-    "qid": "financebench__bm25-corpus__online__doc4_qa0__seed42",
-    "judge_rationale": "Consumer segment \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc4_qa0__seed42"
   },
   {
     "question": "Does 3M have a reasonably healthy liquidity profile based on its quick ratio for Q2 of FY2023? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
     "scoped_question": "[Regarding 3M 10q 2023] Does 3M have a reasonably healthy liquidity profile based on its quick ratio for Q2 of FY2023? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
     "gold_answer": "No. The quick ratio for 3M was 0.96 by Jun'23 close, which needs a bit of an improvement to touch the 1x mark",
-    "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
-    "judge_score": 0.0,
+    "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       5,
@@ -159,15 +154,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 6,
-    "qid": "financebench__bm25-corpus__online__doc5_qa0__seed42",
-    "judge_rationale": "Cannot determine vs gold No 0.96."
+    "qid": "financebench__bm25-corpus__online__doc5_qa0__seed42"
   },
   {
     "question": "Which debt securities are registered to trade on a national securities exchange under 3M's name as of Q2 of 2023?",
     "scoped_question": "[Regarding 3M 10q 2023] Which debt securities are registered to trade on a national securities exchange under 3M's name as of Q2 of 2023?",
     "gold_answer": "Following debt securities registered under 3M's name are listed to trade on the New York Stock Exchange:\n-1.500% Notes due 2026 (Trading Symbol: MMM26)\n-1.750% Notes due 2030 (Trading Symbol: MMM30)\n-1.500% Notes due 2031 (Trading Symbol: MMM31)",
     "predicted": "1.500% Notes due 2026 (MMM26), 1.750% Notes due 2030 (MMM30), 1.500% Notes due 2031 (MMM31)",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       8,
@@ -189,15 +183,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 7,
-    "qid": "financebench__bm25-corpus__online__doc6_qa0__seed42",
-    "judge_rationale": "Lists same 3 notes \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc6_qa0__seed42"
   },
   {
     "question": "Does 3M maintain a stable trend of dividend distribution?",
     "scoped_question": "[Regarding 3M 10q 2023] Does 3M maintain a stable trend of dividend distribution?",
     "gold_answer": "Yes, not only they distribute the dividends on a routine basis, 3M has also been increasing the per share dividend for consecutive 65 years",
     "predicted": "Yes, 3M marked the 65th consecutive year of dividend increases.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       9,
@@ -219,15 +212,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 8,
-    "qid": "financebench__bm25-corpus__online__doc7_qa0__seed42",
-    "judge_rationale": "65th consecutive year \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc7_qa0__seed42"
   },
   {
     "question": "What is the FY2019 fixed asset turnover ratio for Activision Blizzard? Fixed asset turnover ratio is defined as: FY2019 revenue / (average PP&E between FY2018 and FY2019). Round your answer to two decimal places. Base your judgments on the information provided primarily in the statement of income and the statement of financial position.",
     "scoped_question": "[Regarding Activision Blizzard 10k 2019] What is the FY2019 fixed asset turnover ratio for Activision Blizzard? Fixed asset turnover ratio is defined as: FY2019 revenue / (average PP&E between FY2018 and FY2019). Round your answer to two decimal places. Base your judgments on the information provided primarily in the statement of income and the statement of financial position.",
     "gold_answer": "24.26",
-    "predicted": "The fixed asset turnover ratio for Activision Blizzard in FY2019 is 25.66.",
-    "judge_score": 0.25,
+    "predicted": "The fixed asset turnover ratio for Activision Blizzard in FY2019 is 25.73.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       4,
@@ -250,15 +242,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 9,
-    "qid": "financebench__bm25-corpus__online__doc8_qa0__seed42",
-    "judge_rationale": "25.66 vs gold 24.26 \u2014 5.8% off, just outside 5% tolerance."
+    "qid": "financebench__bm25-corpus__online__doc8_qa0__seed42"
   },
   {
     "question": "What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard? Answer in units of percents and round to one decimal place. Calculate (or extract) the answer from the statement of income and the cash flow statement.",
     "scoped_question": "[Regarding Activision Blizzard 10k 2019] What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard? Answer in units of percents and round to one decimal place. Calculate (or extract) the answer from the statement of income and the cash flow statement.",
     "gold_answer": "1.9%",
-    "predicted": "5.0%",
-    "judge_score": 0.0,
+    "predicted": "3.5%",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       5,
@@ -281,15 +272,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 10,
-    "qid": "financebench__bm25-corpus__online__doc9_qa0__seed42",
-    "judge_rationale": "5.0% vs gold 1.9% \u2014 163% off."
+    "qid": "financebench__bm25-corpus__online__doc9_qa0__seed42"
   },
   {
     "question": "You are an investment banker and your only resource(s) to answer the following question is (are): the statement of financial position and the cash flow statement. Here's the question: what is the FY2015 operating cash flow ratio for Adobe? Operating cash flow ratio is defined as: cash from operations / total current liabilities. Round your answer to two decimal places.",
     "scoped_question": "[Regarding Adobe 10k 2015] You are an investment banker and your only resource(s) to answer the following question is (are): the statement of financial position and the cash flow statement. Here's the question: what is the FY2015 operating cash flow ratio for Adobe? Operating cash flow ratio is defined as: cash from operations / total current liabilities. Round your answer to two decimal places.",
     "gold_answer": "0.66",
     "predicted": "0.66",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0,
@@ -312,15 +302,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 11,
-    "qid": "financebench__bm25-corpus__online__doc10_qa0__seed42",
-    "judge_rationale": "0.66 exact match."
+    "qid": "financebench__bm25-corpus__online__doc10_qa0__seed42"
   },
   {
     "question": "What is Adobe's year-over-year change in unadjusted operating income from FY2015 to FY2016 (in units of percents and round to one decimal place)? Give a solution to the question by using the income statement.",
     "scoped_question": "[Regarding Adobe 10k 2016] What is Adobe's year-over-year change in unadjusted operating income from FY2015 to FY2016 (in units of percents and round to one decimal place)? Give a solution to the question by using the income statement.",
     "gold_answer": "65.4%",
     "predicted": "65.4%",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0,
@@ -342,15 +331,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 12,
-    "qid": "financebench__bm25-corpus__online__doc11_qa0__seed42",
-    "judge_rationale": "65.4% exact match."
+    "qid": "financebench__bm25-corpus__online__doc11_qa0__seed42"
   },
   {
     "question": "What is the FY2017 operating cash flow ratio for Adobe? Operating cash flow ratio is defined as: cash from operations / total current liabilities. Round your answer to two decimal places. Please utilize information provided primarily within the balance sheet and the cash flow statement.",
     "scoped_question": "[Regarding Adobe 10k 2017] What is the FY2017 operating cash flow ratio for Adobe? Operating cash flow ratio is defined as: cash from operations / total current liabilities. Round your answer to two decimal places. Please utilize information provided primarily within the balance sheet and the cash flow statement.",
     "gold_answer": "0.83",
     "predicted": "0.83",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0,
@@ -373,15 +361,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 13,
-    "qid": "financebench__bm25-corpus__online__doc12_qa0__seed42",
-    "judge_rationale": "0.83 exact match."
+    "qid": "financebench__bm25-corpus__online__doc12_qa0__seed42"
   },
   {
     "question": "Does Adobe have an improving operating margin profile as of FY2022? If operating margin is not a useful metric for a company like this, then state that and explain why.",
     "scoped_question": "[Regarding Adobe 10k 2022] Does Adobe have an improving operating margin profile as of FY2022? If operating margin is not a useful metric for a company like this, then state that and explain why.",
     "gold_answer": "No the operating margins of Adobe have recently declined from 36.8% in FY 2021 to 34.6% in FY2022. A drop by 2.2% in a year.",
     "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total revenue of $17,606 million, resulting in an operating margin of approximately 34.6%, which is an increase from previous years.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       5,
@@ -403,15 +390,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 14,
-    "qid": "financebench__bm25-corpus__online__doc13_qa0__seed42",
-    "judge_rationale": "Yes improving contradicts gold No declining 36.8% to 34.6%."
+    "qid": "financebench__bm25-corpus__online__doc13_qa0__seed42"
   },
   {
     "question": "Does Adobe have an improving Free cashflow conversion as of FY2022?",
     "scoped_question": "[Regarding Adobe 10k 2022] Does Adobe have an improving Free cashflow conversion as of FY2022?",
     "gold_answer": "Yes, the FCF conversion (using net income as the denominator) for Adobe has improved by ~13% from 143% in 2021 to 156% in 2022",
     "predicted": "The provided passages do not contain information regarding Adobe's Free cash flow conversion for FY2022.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       5,
@@ -433,15 +419,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 15,
-    "qid": "financebench__bm25-corpus__online__doc14_qa0__seed42",
-    "judge_rationale": "Cannot determine vs gold Yes FCF improved."
+    "qid": "financebench__bm25-corpus__online__doc14_qa0__seed42"
   },
   {
     "question": "What is the quantity of restructuring costs directly outlined in AES Corporation's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
     "scoped_question": "[Regarding AES Corporation 10k 2022] What is the quantity of restructuring costs directly outlined in AES Corporation's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
     "gold_answer": "0",
     "predicted": "0",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       21,
@@ -463,15 +448,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 16,
-    "qid": "financebench__bm25-corpus__online__doc15_qa0__seed42",
-    "judge_rationale": "0 matches gold 0."
+    "qid": "financebench__bm25-corpus__online__doc15_qa0__seed42"
   },
   {
     "question": "Roughly how many times has AES Corporation sold its inventory in FY2022? Calculate inventory turnover ratio for the FY2022; if conventional inventory management is not meaningful for the company then state that and explain why.",
     "scoped_question": "[Regarding AES Corporation 10k 2022] Roughly how many times has AES Corporation sold its inventory in FY2022? Calculate inventory turnover ratio for the FY2022; if conventional inventory management is not meaningful for the company then state that and explain why.",
     "gold_answer": "AES has converted inventory 9.5 times in FY 2022.",
-    "predicted": "The inventory turnover ratio for AES Corporation in FY2022 is approximately 12.0 times. This is calculated by dividing the cost of sales ($10,069 million) by the average inventory (($1,055 million + $604 million) / 2). Conventional inventory management may not be meaningful for AES Corporation due to the nature of its business, which involves long-term projects and regulated operations rather than typical retail inventory practices.",
-    "judge_score": 0.0,
+    "predicted": "The inventory turnover ratio for AES Corporation in FY2022 is approximately 12.0 times. This is calculated by dividing the cost of sales ($10,069 million) by the average inventory (($1,055 million + $604 million) / 2). Conventional inventory management may not be meaningful for AES Corporation due to the nature of its business, which involves long-term energy projects and regulated assets, rather than typical retail inventory management.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       22,
@@ -494,15 +478,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 17,
-    "qid": "financebench__bm25-corpus__online__doc16_qa0__seed42",
-    "judge_rationale": "12.0 vs gold 9.5 \u2014 26% off."
+    "qid": "financebench__bm25-corpus__online__doc16_qa0__seed42"
   },
   {
     "question": "Based on the information provided primarily in the statement of financial position and the statement of income, what is AES's FY2022 return on assets (ROA)? ROA is defined as: FY2022 net income / (average total assets between FY2021 and FY2022). Round your answer to two decimal places.",
     "scoped_question": "[Regarding AES Corporation 10k 2022] Based on the information provided primarily in the statement of financial position and the statement of income, what is AES's FY2022 return on assets (ROA)? ROA is defined as: FY2022 net income / (average total assets between FY2021 and FY2022). Round your answer to two decimal places.",
     "gold_answer": "-0.02",
     "predicted": "-1.42",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       25,
@@ -525,15 +508,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 18,
-    "qid": "financebench__bm25-corpus__online__doc17_qa0__seed42",
-    "judge_rationale": "-1.42 vs gold -0.02 \u2014 wrong order of magnitude."
+    "qid": "financebench__bm25-corpus__online__doc17_qa0__seed42"
   },
   {
     "question": "What is Amazon's FY2017 days payable outstanding (DPO)? DPO is defined as: 365 * (average accounts payable between FY2016 and FY2017) / (FY2017 COGS + change in inventory between FY2016 and FY2017). Round your answer to two decimal places. Address the question by using the line items and information shown within the balance sheet and the P&L statement.",
     "scoped_question": "[Regarding Amazon 10k 2017] What is Amazon's FY2017 days payable outstanding (DPO)? DPO is defined as: 365 * (average accounts payable between FY2016 and FY2017) / (FY2017 COGS + change in inventory between FY2016 and FY2017). Round your answer to two decimal places. Address the question by using the line items and information shown within the balance sheet and the P&L statement.",
     "gold_answer": "93.86",
     "predicted": "Amazon's FY2017 days payable outstanding (DPO) is 36.12.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0,
@@ -556,15 +538,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 19,
-    "qid": "financebench__bm25-corpus__online__doc18_qa0__seed42",
-    "judge_rationale": "36.12 vs gold 93.86 \u2014 61% off."
+    "qid": "financebench__bm25-corpus__online__doc18_qa0__seed42"
   },
   {
     "question": "What is Amazon's year-over-year change in revenue from FY2016 to FY2017 (in units of percents and round to one decimal place)? Calculate what was asked by utilizing the line items clearly shown in the statement of income.",
     "scoped_question": "[Regarding Amazon 10k 2017] What is Amazon's year-over-year change in revenue from FY2016 to FY2017 (in units of percents and round to one decimal place)? Calculate what was asked by utilizing the line items clearly shown in the statement of income.",
     "gold_answer": "30.8%",
     "predicted": "30.8%",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0,
@@ -586,15 +567,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 20,
-    "qid": "financebench__bm25-corpus__online__doc19_qa0__seed42",
-    "judge_rationale": "30.8% exact match."
+    "qid": "financebench__bm25-corpus__online__doc19_qa0__seed42"
   },
   {
     "question": "By drawing conclusions from the information stated only in the income statement, what is Amazon's FY2019 net income attributable to shareholders (in USD millions)?",
     "scoped_question": "[Regarding Amazon 10k 2019] By drawing conclusions from the information stated only in the income statement, what is Amazon's FY2019 net income attributable to shareholders (in USD millions)?",
     "gold_answer": "$11588.00",
     "predicted": "11,588",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       0,
@@ -616,15 +596,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 21,
-    "qid": "financebench__bm25-corpus__online__doc20_qa0__seed42",
-    "judge_rationale": "11,588 matches gold $11588M."
+    "qid": "financebench__bm25-corpus__online__doc20_qa0__seed42"
   },
   {
     "question": "What is Amcor's year end FY2020 net AR (in USD millions)? Address the question by adopting the perspective of a financial analyst who can only use the details shown within the balance sheet.",
     "scoped_question": "[Regarding Amcor 10k 2020] What is Amcor's year end FY2020 net AR (in USD millions)? Address the question by adopting the perspective of a financial analyst who can only use the details shown within the balance sheet.",
     "gold_answer": "$1616.00",
     "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       30,
@@ -646,15 +625,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 22,
-    "qid": "financebench__bm25-corpus__online__doc21_qa0__seed42",
-    "judge_rationale": "$1,615.9M matches gold $1616M."
+    "qid": "financebench__bm25-corpus__online__doc21_qa0__seed42"
   },
   {
     "question": "What was the key agenda of the AMCOR's 8k filing dated 1st July 2022?",
     "scoped_question": "[Regarding Amcor 8k 2022] What was the key agenda of the AMCOR's 8k filing dated 1st July 2022?",
     "gold_answer": "Amcor Finance (USA), Inc. and Amcor Flexibles North America, Inc., entered into supplemental indentures relating to Guaranteed Senior Notes due 2026 and 2028. This involved the substitution of the Substitute Issuer (Amcor Flexibles North America) for the Former Issuer (Amcor Finance) and the assumption of covenants under the indentures. (In essence a novation agreement)",
     "predicted": "The key agenda of Amcor's 8-K filing dated July 1, 2022, was the entry into a Second Supplemental Indenture and a First Supplemental Indenture with respect to the Indentures governing the substitution of Amcor Flexibles North America, Inc. as the Substitute Issuer for Amcor Finance (USA), Inc. and the assumption of covenants under the Indentures.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       31,
@@ -676,15 +654,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 23,
-    "qid": "financebench__bm25-corpus__online__doc22_qa0__seed42",
-    "judge_rationale": "Supplemental indentures and substitution \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc22_qa0__seed42"
   },
   {
     "question": "Has AMCOR's quick ratio improved or declined between FY2023 and FY2022? If the quick ratio is not something that a financial analyst would ask about a company like this, then state that and explain why.",
     "scoped_question": "[Regarding Amcor 10k 2023] Has AMCOR's quick ratio improved or declined between FY2023 and FY2022? If the quick ratio is not something that a financial analyst would ask about a company like this, then state that and explain why.",
     "gold_answer": "The quick ratio has slightly improved from 0.67 times to 0.69 times between FY 2023 and FY 2022.(3.4% jump)",
-    "predicted": "The quick ratio is not explicitly provided in the Amcor 10k 2023 document, and it may not be a primary focus for financial analysts assessing a company like Amcor, which operates in the manufacturing and packaging sector where inventory levels can be significant. Analysts typically focus on metrics like current ratio, debt levels, and cash flow in such industries.",
-    "judge_score": 0.0,
+    "predicted": "The quick ratio is not explicitly provided in the Amcor 10k 2023 document, and it may not be a primary focus for financial analysts assessing a company like Amcor, which operates in the manufacturing sector where inventory levels can be significant. Analysts typically focus on metrics like current ratio, debt levels, and cash flow in such industries.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       31,
@@ -706,15 +683,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 24,
-    "qid": "financebench__bm25-corpus__online__doc23_qa0__seed42",
-    "judge_rationale": "Refused vs gold improved 0.67->0.69."
+    "qid": "financebench__bm25-corpus__online__doc23_qa0__seed42"
   },
   {
     "question": "What are major acquisitions that AMCOR has done in FY2023, FY2022 and FY2021?",
     "scoped_question": "[Regarding Amcor 10k 2023] What are major acquisitions that AMCOR has done in FY2023, FY2022 and FY2021?",
     "gold_answer": "Amcor completed these acquisitions during FY2023:\n-100% equity interest of a flexibles manufacturing company in the Czech Republic\n- 100% equity interest in a medical device packaging manufacturing site in\nShanghai, China.\n-acquisition of a New Zealand-based leading manufacturer of state-of-the-art, automated protein\npackaging machines.",
     "predicted": "In FY2023, Amcor completed the acquisition of a medical device packaging manufacturing site in Shanghai, China, for $60 million. In FY2022, Amcor acquired a Czech Republic company operating a flexible packaging manufacturing plant for $59 million. There are no acquisitions mentioned for FY2021 in the provided context.",
-    "judge_score": 0.5,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -736,15 +712,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 25,
-    "qid": "financebench__bm25-corpus__online__doc24_qa0__seed42",
-    "judge_rationale": "Identifies Shanghai and Czech but assigns wrong years; misses NZ."
+    "qid": "financebench__bm25-corpus__online__doc24_qa0__seed42"
   },
   {
     "question": "What industry does AMCOR primarily operate in?",
     "scoped_question": "[Regarding Amcor 10k 2023] What industry does AMCOR primarily operate in?",
     "gold_answer": "Amcor is a global leader in packaging production for various use cases.",
     "predicted": "Amcor primarily operates in the packaging industry, developing and producing responsible packaging for food, beverage, pharmaceutical, medical, home and personal-care, and other products.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       34,
@@ -766,15 +741,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 26,
-    "qid": "financebench__bm25-corpus__online__doc25_qa0__seed42",
-    "judge_rationale": "Packaging industry \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc25_qa0__seed42"
   },
   {
     "question": "Does AMCOR have an improving gross margin profile as of FY2023? If gross margin is not a useful metric for a company like this, then state that and explain why.",
     "scoped_question": "[Regarding Amcor 10k 2023] Does AMCOR have an improving gross margin profile as of FY2023? If gross margin is not a useful metric for a company like this, then state that and explain why.",
     "gold_answer": "No. For AMCOR there has been a slight decline in gross margins by 0.8%.",
-    "predicted": "Gross margin for Amcor in FY2023 is 18.5%, which is a decrease from 19.4% in FY2022 and 21.3% in FY2021, indicating a declining gross margin profile.",
-    "judge_score": 1.0,
+    "predicted": "Gross margin for Amcor in FY2023 is 18.5% (gross profit of $2,725 million on net sales of $14,694 million), which is a decrease from 19.4% in FY2022 (gross profit of $2,820 million on net sales of $14,544 million). Therefore, Amcor does not have an improving gross margin profile as of FY2023.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -796,15 +770,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 27,
-    "qid": "financebench__bm25-corpus__online__doc26_qa0__seed42",
-    "judge_rationale": "Declining gross margin \u2014 matches gold No, slight decline."
+    "qid": "financebench__bm25-corpus__online__doc26_qa0__seed42"
   },
   {
     "question": "What is the nature & purpose of AMCOR's restructuring liability as oF Q2 of FY2023 close?",
     "scoped_question": "[Regarding Amcor 10q 2023] What is the nature & purpose of AMCOR's restructuring liability as oF Q2 of FY2023 close?",
     "gold_answer": "87% of the total restructuring liability is related Employee liabilities.",
-    "predicted": "The restructuring liability as of Q2 of FY2023 is related to employee costs, fixed asset-related costs, and other costs, totaling $93 million. It reflects net charges to earnings, cash paid, and reversals of unused amounts, indicating ongoing efforts to manage costs and streamline operations.",
-    "judge_score": 0.5,
+    "predicted": "The restructuring liability as of Q2 of FY2023 is related to employee costs, fixed asset-related costs, and other costs, totaling $93 million. It reflects net charges to earnings, cash paid, and reversals of unused amounts associated with the company's restructuring activities.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -826,15 +799,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 28,
-    "qid": "financebench__bm25-corpus__online__doc27_qa0__seed42",
-    "judge_rationale": "Mentions employee costs + $93M but missed 87% concentration."
+    "qid": "financebench__bm25-corpus__online__doc27_qa0__seed42"
   },
   {
     "question": "What Was AMCOR's Adjusted Non GAAP EBITDA for FY 2023",
     "scoped_question": "[Regarding Amcor Earnings 2023] What Was AMCOR's Adjusted Non GAAP EBITDA for FY 2023",
     "gold_answer": "AMCOR's Adj. EBITDA was $2,018mn in FY 2023",
     "predicted": "2,018 million",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       37,
@@ -856,15 +828,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 29,
-    "qid": "financebench__bm25-corpus__online__doc28_qa0__seed42",
-    "judge_rationale": "2,018 million matches gold."
+    "qid": "financebench__bm25-corpus__online__doc28_qa0__seed42"
   },
   {
     "question": "How much was the Real change in Sales for AMCOR in FY 2023 vs FY 2022, if we exclude the impact of FX movement, passthrough costs and one-off items?",
     "scoped_question": "[Regarding Amcor Earnings 2023] How much was the Real change in Sales for AMCOR in FY 2023 vs FY 2022, if we exclude the impact of FX movement, passthrough costs and one-off items?",
     "gold_answer": "The Real Growth was flat in FY 2023 vs FY 2022.",
     "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -886,15 +857,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 30,
-    "qid": "financebench__bm25-corpus__online__doc29_qa0__seed42",
-    "judge_rationale": "Decrease 5% vs gold flat."
+    "qid": "financebench__bm25-corpus__online__doc29_qa0__seed42"
   },
   {
     "question": "Answer the following question as if you are an equity research analyst and have lost internet connection so you do not have access to financial metric providers. According to the details clearly outlined within the P&L statement and the statement of cash flows, what is the FY2015 depreciation and amortization (D&A from cash flow statement) % margin for AMD?",
     "scoped_question": "[Regarding AMD 10k 2015] Answer the following question as if you are an equity research analyst and have lost internet connection so you do not have access to financial metric providers. According to the details clearly outlined within the P&L statement and the statement of cash flows, what is the FY2015 depreciation and amortization (D&A from cash flow statement) % margin for AMD?",
     "gold_answer": "4.2%",
-    "predicted": "The FY2015 depreciation and amortization (D&A) amount for AMD is $167 million. The net revenue for FY2015 is $3,991 million. To calculate the D&A % margin:\n\nD&A % margin = (D&A / Net Revenue) * 100\nD&A % margin = ($167 million / $3,991 million) * 100 \u2248 4.18%\n\nThe FY2015 depreciation and amortization % margin for AMD is approximately 4.18%.",
-    "judge_score": 1.0,
+    "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = ($167 / $3,991) * 100 = 4.18%.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -917,15 +887,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 31,
-    "qid": "financebench__bm25-corpus__online__doc30_qa0__seed42",
-    "judge_rationale": "4.18% vs gold 4.2% \u2014 within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc30_qa0__seed42"
   },
   {
     "question": "Does AMD have a reasonably healthy liquidity profile based on its quick ratio for FY22? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
     "scoped_question": "[Regarding AMD 10k 2022] Does AMD have a reasonably healthy liquidity profile based on its quick ratio for FY22? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
     "gold_answer": "Yes. The quick ratio is 1.57, calculated as (cash and cash equivalents+Short term investments+Accounts receivable, net+receivables from related parties)/ (current liabilities).",
     "predicted": "The quick ratio is not provided in the AMD 10k 2022 document, so it cannot be determined if AMD has a reasonably healthy liquidity profile based on that metric.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -947,15 +916,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 32,
-    "qid": "financebench__bm25-corpus__online__doc31_qa0__seed42",
-    "judge_rationale": "Refused vs gold Yes 1.57."
+    "qid": "financebench__bm25-corpus__online__doc31_qa0__seed42"
   },
   {
     "question": "What are the major products and services that AMD sells as of FY22?",
     "scoped_question": "[Regarding AMD 10k 2022] What are the major products and services that AMD sells as of FY22?",
     "gold_answer": "AMD sells server microprocessors (CPUs) and graphics processing units (GPUs), data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), and Adaptive System-on-Chip (SoC) products for data centers; CPUs, accelerated processing units (APUs) that integrate CPUs and GPUs, and chipsets for desktop and notebook personal computers; discrete GPUs, and semi-custom SoC products and development services; and embedded CPUs, GPUs, APUs, FPGAs, and Adaptive SoC products.",
     "predicted": "AMD primarily offers server microprocessors (CPUs), graphics processing units (GPUs), data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), Adaptive System-on-Chip (SoC) products for data centers, CPUs and accelerated processing units (APUs) for personal computers, discrete GPUs, semi-custom SoC products, and embedded CPUs, GPUs, APUs, FPGAs, and Adaptive SoC products.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       42,
@@ -977,15 +945,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 33,
-    "qid": "financebench__bm25-corpus__online__doc32_qa0__seed42",
-    "judge_rationale": "Lists AMD products matching gold."
+    "qid": "financebench__bm25-corpus__online__doc32_qa0__seed42"
   },
   {
     "question": "What drove revenue change as of the FY22 for AMD?",
     "scoped_question": "[Regarding AMD 10k 2022] What drove revenue change as of the FY22 for AMD?",
     "gold_answer": "In 2022, AMD reported Higher sales of their EPYC server processors, higher semi-custom product sales, and the inclusion of Xilinx embedded product sales",
     "predicted": "The increase in net revenue for AMD in FY22 was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of EPYC server processors, a 21% increase in Gaming segment revenue primarily due to higher semi-custom product sales, and a significant increase in Embedded segment revenue from the inclusion of Xilinx embedded product sales.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       43,
@@ -1007,15 +974,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 34,
-    "qid": "financebench__bm25-corpus__online__doc33_qa0__seed42",
-    "judge_rationale": "EPYC + semi-custom + Xilinx \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc33_qa0__seed42"
   },
   {
     "question": "What drove operating margin change as of the FY22 for AMD? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
     "scoped_question": "[Regarding AMD 10k 2022] What drove operating margin change as of the FY22 for AMD? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
     "gold_answer": "The decrease in AMD's operating income was primarily driven by amortization of intangible assets associated with the Xilinx acquisition",
     "predicted": "The operating margin change for AMD in FY22 was primarily driven by the amortization of intangible assets associated with the Xilinx acquisition.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -1037,15 +1003,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 35,
-    "qid": "financebench__bm25-corpus__online__doc34_qa0__seed42",
-    "judge_rationale": "Xilinx intangibles amortization \u2014 exact match."
+    "qid": "financebench__bm25-corpus__online__doc34_qa0__seed42"
   },
   {
     "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for AMD in FY22?",
     "scoped_question": "[Regarding AMD 10k 2022] Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for AMD in FY22?",
     "gold_answer": "In 2022, AMD brought in the most cashflow from Operations",
     "predicted": "Cash flows from operating activities brought in the most cash flow for AMD in FY22, with a net cash provided of $3,565 million.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       45,
@@ -1067,15 +1032,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 36,
-    "qid": "financebench__bm25-corpus__online__doc35_qa0__seed42",
-    "judge_rationale": "Operating activities $3,565M \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc35_qa0__seed42"
   },
   {
     "question": "From FY21 to FY22, excluding Embedded, in which AMD reporting segment did sales proportionally increase the most?",
     "scoped_question": "[Regarding AMD 10k 2022] From FY21 to FY22, excluding Embedded, in which AMD reporting segment did sales proportionally increase the most?",
     "gold_answer": "Data Center",
     "predicted": "Data Center segment",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       43,
@@ -1097,15 +1061,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 37,
-    "qid": "financebench__bm25-corpus__online__doc36_qa0__seed42",
-    "judge_rationale": "Data Center segment \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc36_qa0__seed42"
   },
   {
     "question": "Did AMD report customer concentration in FY22?",
     "scoped_question": "[Regarding AMD 10k 2022] Did AMD report customer concentration in FY22?",
     "gold_answer": "Yes, one customer accounted for 16% of consolidated net revenue",
     "predicted": "Yes, AMD reported that one customer accounted for 16% of their consolidated net revenue for the year ended December 31, 2022.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       47,
@@ -1127,15 +1090,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 38,
-    "qid": "financebench__bm25-corpus__online__doc37_qa0__seed42",
-    "judge_rationale": "Yes 16% \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc37_qa0__seed42"
   },
   {
     "question": "Which debt securities are registered to trade on a national securities exchange under American Express' name as of 2022?",
     "scoped_question": "[Regarding American Express 10k 2022] Which debt securities are registered to trade on a national securities exchange under American Express' name as of 2022?",
     "gold_answer": "There are none",
     "predicted": "Common Shares (par value $0.20 per Share) trading under the symbol AXP on the New York Stock Exchange.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       48,
@@ -1157,15 +1119,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 39,
-    "qid": "financebench__bm25-corpus__online__doc38_qa0__seed42",
-    "judge_rationale": "Common Shares (equity) vs gold none (no debt)."
+    "qid": "financebench__bm25-corpus__online__doc38_qa0__seed42"
   },
   {
     "question": "What are the geographies that American Express primarily operates in as of 2022?",
     "scoped_question": "[Regarding American Express 10k 2022] What are the geographies that American Express primarily operates in as of 2022?",
     "gold_answer": "United States, EMEA, APAC, and LACC",
-    "predicted": "United States, EMEA, APAC, LACC, Other Unallocated",
-    "judge_score": 1.0,
+    "predicted": "United States, EMEA, APAC, LACC, Other Unallocated.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       48,
@@ -1187,15 +1148,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 40,
-    "qid": "financebench__bm25-corpus__online__doc39_qa0__seed42",
-    "judge_rationale": "US, EMEA, APAC, LACC \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc39_qa0__seed42"
   },
   {
     "question": "Does AMEX have an improving operating margin profile as of 2022? If operating margin is not a useful metric for a company like this, then state that and explain why.",
     "scoped_question": "[Regarding American Express 10k 2022] Does AMEX have an improving operating margin profile as of 2022? If operating margin is not a useful metric for a company like this, then state that and explain why.",
     "gold_answer": "Performance is not measured through operating margin",
-    "predicted": "Operating margin is not a useful metric for American Express as it primarily focuses on financial services and credit card operations, where net revenues and pretax income are more relevant indicators of performance.",
-    "judge_score": 1.0,
+    "predicted": "Operating margin is not a useful metric for American Express as it primarily focuses on financial services, where net revenues and pretax income are more relevant indicators of performance rather than operating margin.",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       33,
@@ -1217,15 +1177,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 41,
-    "qid": "financebench__bm25-corpus__online__doc40_qa0__seed42",
-    "judge_rationale": "Op margin not useful for AMEX \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc40_qa0__seed42"
   },
   {
     "question": "What drove gross margin change as of the FY2022 for American Express? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
     "scoped_question": "[Regarding American Express 10k 2022] What drove gross margin change as of the FY2022 for American Express? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
     "gold_answer": "Performance is not measured through gross margin",
     "predicted": "Gross margin is not a useful metric for American Express as it primarily operates in the financial services sector, where revenue is generated from fees and interest rather than product sales.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       33,
@@ -1247,15 +1206,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 42,
-    "qid": "financebench__bm25-corpus__online__doc41_qa0__seed42",
-    "judge_rationale": "Gross margin not useful for AMEX \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc41_qa0__seed42"
   },
   {
     "question": "How much has the effective tax rate of American Express changed between FY2021 and FY2022?",
     "scoped_question": "[Regarding American Express 10k 2022] How much has the effective tax rate of American Express changed between FY2021 and FY2022?",
     "gold_answer": "The effective tax rate for American Express has changed/dropped from 24.6% in FY 2021 to 21.6% in FY 2022.",
     "predicted": "The effective tax rate of American Express changed from 24.6% in FY2021 to 21.6% in FY2022.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       48,
@@ -1277,15 +1235,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 43,
-    "qid": "financebench__bm25-corpus__online__doc42_qa0__seed42",
-    "judge_rationale": "24.6% to 21.6% \u2014 exact match to gold."
+    "qid": "financebench__bm25-corpus__online__doc42_qa0__seed42"
   },
   {
     "question": "What was the largest liability in American Express's Balance Sheet in 2022?",
     "scoped_question": "[Regarding American Express 10k 2022] What was the largest liability in American Express's Balance Sheet in 2022?",
     "gold_answer": "Customer deposits",
     "predicted": "Customer deposits",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       48,
@@ -1307,15 +1264,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 44,
-    "qid": "financebench__bm25-corpus__online__doc43_qa0__seed42",
-    "judge_rationale": "Customer deposits \u2014 exact match."
+    "qid": "financebench__bm25-corpus__online__doc43_qa0__seed42"
   },
   {
     "question": "Was American Express able to retain card members during 2022?",
     "scoped_question": "[Regarding American Express 10k 2022] Was American Express able to retain card members during 2022?",
     "gold_answer": "Yes",
     "predicted": "Yes, Card Member retention remained high in 2022.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       54,
@@ -1337,15 +1293,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 45,
-    "qid": "financebench__bm25-corpus__online__doc44_qa0__seed42",
-    "judge_rationale": "Yes retention high \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc44_qa0__seed42"
   },
   {
     "question": "How much (in USD billions) did American Water Works pay out in cash dividends for FY2020? Compute or extract the answer by primarily using the details outlined in the statement of cash flows.",
     "scoped_question": "[Regarding American Water Works 10k 2020] How much (in USD billions) did American Water Works pay out in cash dividends for FY2020? Compute or extract the answer by primarily using the details outlined in the statement of cash flows.",
     "gold_answer": "$0.40",
     "predicted": "0.389 billion",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       55,
@@ -1367,15 +1322,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 46,
-    "qid": "financebench__bm25-corpus__online__doc45_qa0__seed42",
-    "judge_rationale": "0.389B vs gold $0.40B \u2014 2.75% off, within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc45_qa0__seed42"
   },
   {
     "question": "Basing your judgments off of the cash flow statement and the income statement, what is American Water Works's FY2021 unadjusted operating income + depreciation and amortization from the cash flow statement (unadjusted EBITDA) in USD millions?",
     "scoped_question": "[Regarding American Water Works 10k 2021] Basing your judgments off of the cash flow statement and the income statement, what is American Water Works's FY2021 unadjusted operating income + depreciation and amortization from the cash flow statement (unadjusted EBITDA) in USD millions?",
     "gold_answer": "$1832.00",
-    "predicted": "1,832",
-    "judge_score": 1.0,
+    "predicted": "1,829",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       56,
@@ -1398,15 +1352,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 47,
-    "qid": "financebench__bm25-corpus__online__doc46_qa0__seed42",
-    "judge_rationale": "1,832 exact match."
+    "qid": "financebench__bm25-corpus__online__doc46_qa0__seed42"
   },
   {
     "question": "Does American Water Works have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
     "scoped_question": "[Regarding American Water Works 10k 2022] Does American Water Works have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
     "gold_answer": "No, American Water Works had negative working capital of -$1561M in FY 2022.",
     "predicted": "American Water Works does not have positive working capital based on FY2022 data, as current liabilities ($2,811 million) exceed current assets ($1,250 million).",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       56,
@@ -1429,15 +1382,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 48,
-    "qid": "financebench__bm25-corpus__online__doc47_qa0__seed42",
-    "judge_rationale": "Identifies negative WC with $1250M-$2811M=$-1561M \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc47_qa0__seed42"
   },
   {
     "question": "In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
     "scoped_question": "[Regarding Best Buy 10k 2017] In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
     "gold_answer": "2.8%",
     "predicted": "3.1%",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -1459,15 +1411,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 49,
-    "qid": "financebench__bm25-corpus__online__doc48_qa0__seed42",
-    "judge_rationale": "3.1% vs gold 2.8% \u2014 10.7% off, outside tolerance."
+    "qid": "financebench__bm25-corpus__online__doc48_qa0__seed42"
   },
   {
     "question": "What is the year end FY2019 total amount of inventories for Best Buy? Answer in USD millions. Base your judgments on the information provided primarily in the balance sheet.",
     "scoped_question": "[Regarding Best Buy 10k 2019] What is the year end FY2019 total amount of inventories for Best Buy? Answer in USD millions. Base your judgments on the information provided primarily in the balance sheet.",
     "gold_answer": "$5409.00",
     "predicted": "5,409",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -1489,15 +1440,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 50,
-    "qid": "financebench__bm25-corpus__online__doc49_qa0__seed42",
-    "judge_rationale": "5,409 exact match."
+    "qid": "financebench__bm25-corpus__online__doc49_qa0__seed42"
   },
   {
     "question": "Are Best Buy's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
     "scoped_question": "[Regarding Best Buy 10k 2023] Are Best Buy's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
     "gold_answer": "Yes, the margins have been consistent, there has been a minor decline of 1.1% in gross margins between FY2022 and FY2023.",
-    "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, as evidenced by the gross profit figures: $11,640 million in 2022 and $9,912 million in 2023, indicating a significant change in gross margin.",
-    "judge_score": 0.0,
+    "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, with gross profit margins of 21.4% in 2023, 22.5% in 2022, and 22.4% in 2021.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -1519,15 +1469,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 51,
-    "qid": "financebench__bm25-corpus__online__doc50_qa0__seed42",
-    "judge_rationale": "Uses wrong years (2017/2016/2015) claiming not consistent \u2014 contradicts gold Yes consistent FY22-23."
+    "qid": "financebench__bm25-corpus__online__doc50_qa0__seed42"
   },
   {
     "question": "What are major acquisitions that Best Buy has done in FY2023, FY2022 and FY2021?",
     "scoped_question": "[Regarding Best Buy 10k 2023] What are major acquisitions that Best Buy has done in FY2023, FY2022 and FY2021?",
     "gold_answer": "Best Buy closed two acquisitions, both these companies were already partially owned by Best Buy, but Best Buy acquired all outstanding shares of these two companies during FY 2022: (1) Current Health Ltd and (2) Two Peaks, LLC d/b/a Yardbird Furniture",
-    "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions listed for FY2023 or FY2021 in the provided context.",
-    "judge_score": 1.0,
+    "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       63,
@@ -1549,15 +1498,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 52,
-    "qid": "financebench__bm25-corpus__online__doc51_qa0__seed42",
-    "judge_rationale": "Current Health + Yardbird \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc51_qa0__seed42"
   },
   {
     "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Best Buy in FY2023?",
     "scoped_question": "[Regarding Best Buy 10k 2023] Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Best Buy in FY2023?",
     "gold_answer": "Best Buy generated the most cash flow from operating activities in FY 2023 ($1.8 bn)",
     "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       63,
@@ -1579,15 +1527,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 53,
-    "qid": "financebench__bm25-corpus__online__doc52_qa0__seed42",
-    "judge_rationale": "Operating activities $1,824M \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc52_qa0__seed42"
   },
   {
     "question": "Was there any drop in Cash & Cash equivalents between FY 2023 and Q2 of FY2024?",
     "scoped_question": "[Regarding Best Buy 10q 2024] Was there any drop in Cash & Cash equivalents between FY 2023 and Q2 of FY2024?",
     "gold_answer": "Yes, there was a decline of ~42% between FY2023 and Q2 of FY 2024.",
-    "predicted": "Yes, cash and cash equivalents decreased from $1,874 million on January 28, 2023, to $1,093 million on July 29, 2023.",
-    "judge_score": 1.0,
+    "predicted": "Yes, cash and cash equivalents dropped from $1,874 million on January 28, 2023, to $1,093 million on July 29, 2023.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -1609,15 +1556,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 54,
-    "qid": "financebench__bm25-corpus__online__doc53_qa0__seed42",
-    "judge_rationale": "$1,874M to $1,093M (41.7% drop) \u2014 matches gold ~42%."
+    "qid": "financebench__bm25-corpus__online__doc53_qa0__seed42"
   },
   {
     "question": "Was there any change in the number of Best Buy stores between Q2 of FY2024 and FY2023?",
     "scoped_question": "[Regarding Best Buy 10q 2024] Was there any change in the number of Best Buy stores between Q2 of FY2024 and FY2023?",
     "gold_answer": "Yes, there is decline in number stores by 1.32% from 982 stores in Q2 FY 2023 to 969 by the end of Q2 FY2024.",
     "predicted": "Yes, the total number of Best Buy stores decreased from 930 at the end of Q2 FY2023 to 907 at the end of Q2 FY2024.",
-    "judge_score": 0.25,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       66,
@@ -1639,15 +1585,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 55,
-    "qid": "financebench__bm25-corpus__online__doc54_qa0__seed42",
-    "judge_rationale": "Yes change correct but wrong store counts (930/907 vs gold 982/969)."
+    "qid": "financebench__bm25-corpus__online__doc54_qa0__seed42"
   },
   {
     "question": "Which Best Buy product category performed the best (by top line) in the domestic (USA) Market during Q2 of FY2024?",
     "scoped_question": "[Regarding Best Buy 10q 2024] Which Best Buy product category performed the best (by top line) in the domestic (USA) Market during Q2 of FY2024?",
     "gold_answer": "The entertainment segment experienced the highest growth of 9% during Q2 FY2024, primarily from gaming division.",
     "predicted": "Entertainment, with a 9.0% comparable sales growth driven primarily by gaming.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       66,
@@ -1669,15 +1614,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 56,
-    "qid": "financebench__bm25-corpus__online__doc55_qa0__seed42",
-    "judge_rationale": "Entertainment with 9% growth from gaming \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc55_qa0__seed42"
   },
   {
     "question": "Considering the data in the balance sheet, what is Block's (formerly known as Square) FY2016 working capital ratio? Define working capital ratio as total current assets divided by total current liabilities. Round your answer to two decimal places.",
     "scoped_question": "[Regarding Block 10k 2016] Considering the data in the balance sheet, what is Block's (formerly known as Square) FY2016 working capital ratio? Define working capital ratio as total current assets divided by total current liabilities. Round your answer to two decimal places.",
     "gold_answer": "1.73",
     "predicted": "1.74",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -1699,15 +1643,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 57,
-    "qid": "financebench__bm25-corpus__online__doc56_qa0__seed42",
-    "judge_rationale": "1.74 vs gold 1.73 \u2014 within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc56_qa0__seed42"
   },
   {
     "question": "What is the FY2019 - FY2020 total revenue growth rate for Block (formerly known as Square)? Answer in units of percents and round to one decimal place. Approach the question asked by assuming the standpoint of an investment banking analyst who only has access to the statement of income.",
     "scoped_question": "[Regarding Block 10k 2020] What is the FY2019 - FY2020 total revenue growth rate for Block (formerly known as Square)? Answer in units of percents and round to one decimal place. Approach the question asked by assuming the standpoint of an investment banking analyst who only has access to the statement of income.",
     "gold_answer": "101.5%",
     "predicted": "The relevant passages do not provide information regarding Block's (formerly known as Square) total revenue growth rate for FY2019 - FY2020. Therefore, I cannot provide an answer based on the given context.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       65,
@@ -1729,15 +1672,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 58,
-    "qid": "financebench__bm25-corpus__online__doc57_qa0__seed42",
-    "judge_rationale": "Refused vs gold 101.5%."
+    "qid": "financebench__bm25-corpus__online__doc57_qa0__seed42"
   },
   {
     "question": "Using the cash flow statement, answer the following question to the best of your abilities: how much did Block (formerly known as Square) generate in cash flow from operating activities in FY2020? Answer in USD millions.",
     "scoped_question": "[Regarding Block 10k 2020] Using the cash flow statement, answer the following question to the best of your abilities: how much did Block (formerly known as Square) generate in cash flow from operating activities in FY2020? Answer in USD millions.",
     "gold_answer": "$382.00",
-    "predicted": "$1,200",
-    "judge_score": 0.0,
+    "predicted": "$1,000",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       65,
@@ -1759,15 +1701,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 59,
-    "qid": "financebench__bm25-corpus__online__doc58_qa0__seed42",
-    "judge_rationale": "$1,200 vs gold $382 \u2014 214% off."
+    "qid": "financebench__bm25-corpus__online__doc58_qa0__seed42"
   },
   {
     "question": "We need to calculate a financial metric by using information only provided within the balance sheet. Please answer the following question: what is Boeing's year end FY2018 net property, plant, and equipment (in USD millions)?",
     "scoped_question": "[Regarding Boeing 10k 2018] We need to calculate a financial metric by using information only provided within the balance sheet. Please answer the following question: what is Boeing's year end FY2018 net property, plant, and equipment (in USD millions)?",
     "gold_answer": "$12645.00",
     "predicted": "$12,645",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -1789,15 +1730,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 60,
-    "qid": "financebench__bm25-corpus__online__doc59_qa0__seed42",
-    "judge_rationale": "$12,645 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc59_qa0__seed42"
   },
   {
     "question": "Are there any product categories / service categories that represent more than 20% of Boeing's revenue for FY2022?",
     "scoped_question": "[Regarding Boeing 10k 2022] Are there any product categories / service categories that represent more than 20% of Boeing's revenue for FY2022?",
     "gold_answer": "Yes. Boeing has product and service categories that represent more than 20% of Boeing's revenue for FY2022. These categories are Commercial Airplanes which comprises 39% of total revenue, Defence which comprises 35% of total revenue and Services which comprises 26% of total revenue.",
-    "predicted": "Yes, the Commercial Airplanes segment represents more than 20% of Boeing's revenue for FY2022, with revenues of $25,867 million.",
-    "judge_score": 0.5,
+    "predicted": "Yes, the Commercial Airplanes category represents more than 20% of Boeing's revenue for FY2022, with revenues of $25,867 million.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       63,
@@ -1819,15 +1759,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 61,
-    "qid": "financebench__bm25-corpus__online__doc60_qa0__seed42",
-    "judge_rationale": "Only Commercial Airplanes identified; misses Defense and Services."
+    "qid": "financebench__bm25-corpus__online__doc60_qa0__seed42"
   },
   {
     "question": "Has Boeing reported any materially important ongoing legal battles from FY2022?",
     "scoped_question": "[Regarding Boeing 10k 2022] Has Boeing reported any materially important ongoing legal battles from FY2022?",
     "gold_answer": "Yes. Multiple lawsuits have been filed against Boeing resulting from a 2018 Lion Air crash and a 2019 Ethiopian Airlines crash.",
     "predicted": "Yes, Boeing has reported multiple legal actions filed against them as a result of the October 29, 2018 accident of Lion Air Flight 610 and the March 10, 2019 accident of Ethiopian Airlines Flight 302.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       73,
@@ -1849,15 +1788,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 62,
-    "qid": "financebench__bm25-corpus__online__doc61_qa0__seed42",
-    "judge_rationale": "Lion Air + Ethiopian Airlines \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc61_qa0__seed42"
   },
   {
     "question": "Does Boeing have an improving gross margin profile as of FY2022? If gross margin is not a useful metric for a company like this, then state that and explain why.",
     "scoped_question": "[Regarding Boeing 10k 2022] Does Boeing have an improving gross margin profile as of FY2022? If gross margin is not a useful metric for a company like this, then state that and explain why.",
     "gold_answer": "Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.",
-    "predicted": "Gross margin is not a useful metric for Boeing as it operates in a capital-intensive industry with significant costs associated with research, development, and production, making net income and total revenues more relevant for assessing financial performance.",
-    "judge_score": 0.0,
+    "predicted": "Boeing does not have an improving gross margin profile as of FY2022, as the cost of products increased significantly compared to the revenue from sales of products, leading to a lower gross margin.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       63,
@@ -1879,15 +1817,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 63,
-    "qid": "financebench__bm25-corpus__online__doc62_qa0__seed42",
-    "judge_rationale": "Claims gross margin not useful \u2014 contradicts gold Yes improved."
+    "qid": "financebench__bm25-corpus__online__doc62_qa0__seed42"
   },
   {
     "question": "Who are the primary customers of Boeing as of FY2022?",
     "scoped_question": "[Regarding Boeing 10k 2022] Who are the primary customers of Boeing as of FY2022?",
     "gold_answer": "Boeing's primary customers as of FY2022 are a limited number of commercial airlines and the US government. The US government accounted for 40% of Boeing's total revenues in FY2022.",
     "predicted": "The primary customers of Boeing as of FY2022 are a limited number of commercial airlines.",
-    "judge_score": 0.75,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       73,
@@ -1911,15 +1848,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 64,
-    "qid": "financebench__bm25-corpus__online__doc63_qa0__seed42",
-    "judge_rationale": "Identifies commercial airlines but misses US government and 40% revenue concentration."
+    "qid": "financebench__bm25-corpus__online__doc63_qa0__seed42"
   },
   {
     "question": "Is Boeing's business subject to cyclicality?",
     "scoped_question": "[Regarding Boeing 10k 2022] Is Boeing's business subject to cyclicality?",
     "gold_answer": "Yes, Boeing's business is subject to cyclicality due to its exposure to the airline industry which is a cyclical industry.",
     "predicted": "Yes, Boeing's business is subject to cyclicality.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -1941,15 +1877,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 65,
-    "qid": "financebench__bm25-corpus__online__doc64_qa0__seed42",
-    "judge_rationale": "Yes cyclicality \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc64_qa0__seed42"
   },
   {
     "question": "What production rate changes is Boeing forecasting for FY2023?",
     "scoped_question": "[Regarding Boeing 10k 2022] What production rate changes is Boeing forecasting for FY2023?",
     "gold_answer": "Boeing forecasts an increase in the production rates for the 737, 777X and 787 aircrafts in 2023.",
     "predicted": "Boeing expects to gradually increase the 787 production rate to 5 per month and plans to gradually increase 737 production rates based on market demand and supply chain capacity. Production of the 777X is expected to resume in 2023.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       79,
@@ -1971,15 +1906,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 66,
-    "qid": "financebench__bm25-corpus__online__doc65_qa0__seed42",
-    "judge_rationale": "Identifies 787, 737, 777X resume \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc65_qa0__seed42"
   },
   {
     "question": "How does Boeing's effective tax rate in FY2022 compare to FY2021?",
     "scoped_question": "[Regarding Boeing 10k 2022] How does Boeing's effective tax rate in FY2022 compare to FY2021?",
     "gold_answer": "Effective tax rate in FY2022 was 0.62%, compared to  -14.76% in FY2021.",
     "predicted": "Boeing's effective tax rate in FY2022 was 0.6% lower than in FY2021.",
-    "judge_score": 0.5,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -2001,15 +1935,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 67,
-    "qid": "financebench__bm25-corpus__online__doc66_qa0__seed42",
-    "judge_rationale": "Direction lower correct; magnitude understated (0.6% vs actual 15.4pp difference)."
+    "qid": "financebench__bm25-corpus__online__doc66_qa0__seed42"
   },
   {
     "question": "What is the FY2017 return on assets (ROA) for Coca Cola? ROA is defined as: FY2017 net income / (average total assets between FY2016 and FY2017). Round your answer to two decimal places. Give a response to the question by relying on the details shown in the balance sheet and the P&L statement.",
     "scoped_question": "[Regarding Coca-Cola 10k 2017] What is the FY2017 return on assets (ROA) for Coca Cola? ROA is defined as: FY2017 net income / (average total assets between FY2016 and FY2017). Round your answer to two decimal places. Give a response to the question by relying on the details shown in the balance sheet and the P&L statement.",
     "gold_answer": "0.01",
-    "predicted": "The FY2017 return on assets (ROA) for Coca-Cola is 1.46%.",
-    "judge_score": 0.0,
+    "predicted": "0.01",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       81,
@@ -2032,15 +1965,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 68,
-    "qid": "financebench__bm25-corpus__online__doc67_qa0__seed42",
-    "judge_rationale": "1.46% vs gold 0.01 \u2014 wrong order of magnitude."
+    "qid": "financebench__bm25-corpus__online__doc67_qa0__seed42"
   },
   {
     "question": "What is Coca Cola's FY2021 COGS % margin? Calculate what was asked by utilizing the line items clearly shown in the income statement.",
     "scoped_question": "[Regarding Coca-Cola 10k 2021] What is Coca Cola's FY2021 COGS % margin? Calculate what was asked by utilizing the line items clearly shown in the income statement.",
     "gold_answer": "39.7%",
-    "predicted": "The Cost of Goods Sold (COGS) for FY2021 is $15,357 million, and the Net Operating Revenues are $38,655 million. The COGS % margin is calculated as (COGS / Net Operating Revenues) * 100.\n\nCOGS % margin = ($15,357 / $38,655) * 100 = 39.7%.",
-    "judge_score": 1.0,
+    "predicted": "The Cost of Goods Sold (COGS) for FY2021 is $15,357 million, and the Net Operating Revenues are $38,655 million. The COGS % margin is calculated as follows:\n\nCOGS % margin = (COGS / Net Operating Revenues) * 100  \nCOGS % margin = ($15,357 / $38,655) * 100 \u2248 39.7%\n\nCoca-Cola's FY2021 COGS % margin is approximately 39.7%.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       83,
@@ -2062,15 +1994,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 69,
-    "qid": "financebench__bm25-corpus__online__doc68_qa0__seed42",
-    "judge_rationale": "39.7% exact match."
+    "qid": "financebench__bm25-corpus__online__doc68_qa0__seed42"
   },
   {
     "question": "What is Coca Cola's FY2022 dividend payout ratio (using total cash dividends paid and net income attributable to shareholders)? Round answer to two decimal places. Answer the question asked by assuming you only have access to information clearly displayed in the cash flow statement and the income statement.",
     "scoped_question": "[Regarding Coca-Cola 10k 2022] What is Coca Cola's FY2022 dividend payout ratio (using total cash dividends paid and net income attributable to shareholders)? Round answer to two decimal places. Answer the question asked by assuming you only have access to information clearly displayed in the cash flow statement and the income statement.",
     "gold_answer": "0.8",
     "predicted": "0.33",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       84,
@@ -2093,15 +2024,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 70,
-    "qid": "financebench__bm25-corpus__online__doc69_qa0__seed42",
-    "judge_rationale": "0.33 vs gold 0.8 \u2014 59% off."
+    "qid": "financebench__bm25-corpus__online__doc69_qa0__seed42"
   },
   {
     "question": "Based on the information provided primarily in the balance sheet and the statement of income, what is FY2020 days payable outstanding (DPO) for Corning? DPO is defined as: 365 * (average accounts payable between FY2019 and FY2020) / (FY2020 COGS + change in inventory between FY2019 and FY2020). Round your answer to two decimal places.",
     "scoped_question": "[Regarding Corning 10k 2020] Based on the information provided primarily in the balance sheet and the statement of income, what is FY2020 days payable outstanding (DPO) for Corning? DPO is defined as: 365 * (average accounts payable between FY2019 and FY2020) / (FY2020 COGS + change in inventory between FY2019 and FY2020). Round your answer to two decimal places.",
     "gold_answer": "63.86",
-    "predicted": "The provided passages do not contain the necessary financial data for Corning's FY2020, such as accounts payable, COGS, or inventory changes. Therefore, I cannot calculate the days payable outstanding (DPO) for Corning.",
-    "judge_score": 0.0,
+    "predicted": "The provided passages do not contain the necessary financial data for Corning's FY2020, including accounts payable, COGS, or inventory changes. Therefore, I cannot calculate the days payable outstanding (DPO) for Corning.",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       33,
@@ -2124,15 +2054,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 71,
-    "qid": "financebench__bm25-corpus__online__doc70_qa0__seed42",
-    "judge_rationale": "Refused vs gold 63.86."
+    "qid": "financebench__bm25-corpus__online__doc70_qa0__seed42"
   },
   {
     "question": "Taking into account the information outlined in the income statement, what is the FY2019 - FY2021 3 year average unadjusted operating income % margin for Corning? Answer in units of percents and round to one decimal place.",
     "scoped_question": "[Regarding Corning 10k 2021] Taking into account the information outlined in the income statement, what is the FY2019 - FY2021 3 year average unadjusted operating income % margin for Corning? Answer in units of percents and round to one decimal place.",
     "gold_answer": "10.3%",
     "predicted": "14.9%",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -2154,15 +2083,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 72,
-    "qid": "financebench__bm25-corpus__online__doc71_qa0__seed42",
-    "judge_rationale": "14.9% vs gold 10.3% \u2014 45% off."
+    "qid": "financebench__bm25-corpus__online__doc71_qa0__seed42"
   },
   {
     "question": "How much has the effective tax rate of Corning changed between FY2021 and FY2022?",
     "scoped_question": "[Regarding Corning 10k 2022] How much has the effective tax rate of Corning changed between FY2021 and FY2022?",
     "gold_answer": "The effective tax rate of Corning has changed from 20% in FY2021 to 23% in FY 2022.",
     "predicted": "The effective tax rate of Corning changed from 20% in FY2021 to 23% in FY2022.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       89,
@@ -2184,15 +2112,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 73,
-    "qid": "financebench__bm25-corpus__online__doc72_qa0__seed42",
-    "judge_rationale": "20% to 23% \u2014 exact match."
+    "qid": "financebench__bm25-corpus__online__doc72_qa0__seed42"
   },
   {
     "question": "Does Corning have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
     "scoped_question": "[Regarding Corning 10k 2022] Does Corning have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
     "gold_answer": "Yes. Corning had a positive working capital amount of $831 million by FY 2022 close. This answer considers only operating current assets and current liabilities that were clearly shown in the balance sheet.",
     "predicted": "The provided data does not include specific information about Corning's current assets and current liabilities, which are necessary to calculate working capital. Therefore, it is not possible to determine if Corning has positive working capital based on FY2022 data.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       33,
@@ -2214,15 +2141,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 74,
-    "qid": "financebench__bm25-corpus__online__doc73_qa0__seed42",
-    "judge_rationale": "Refused vs gold Yes $831M positive."
+    "qid": "financebench__bm25-corpus__online__doc73_qa0__seed42"
   },
   {
     "question": "Using only the information within the balance sheet, how much total assets did Costco have at the end of FY2021? Answer in USD millions.",
     "scoped_question": "[Regarding Costco 10k 2021] Using only the information within the balance sheet, how much total assets did Costco have at the end of FY2021? Answer in USD millions.",
     "gold_answer": "$59268.00",
-    "predicted": "$59,268",
-    "judge_score": 1.0,
+    "predicted": "59,268",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       91,
@@ -2244,15 +2170,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 75,
-    "qid": "financebench__bm25-corpus__online__doc74_qa0__seed42",
-    "judge_rationale": "$59,268 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc74_qa0__seed42"
   },
   {
     "question": "What is the FY2018 fixed asset turnover ratio for CVS Health? Fixed asset turnover ratio is defined as: FY2018 revenue / (average PP&E between FY2017 and FY2018). Round your answer to two decimal places. Calculate what was asked by utilizing the line items clearly shown in the P&L statement and the balance sheet.",
     "scoped_question": "[Regarding CVS Health 10k 2018] What is the FY2018 fixed asset turnover ratio for CVS Health? Fixed asset turnover ratio is defined as: FY2018 revenue / (average PP&E between FY2017 and FY2018). Round your answer to two decimal places. Calculate what was asked by utilizing the line items clearly shown in the P&L statement and the balance sheet.",
     "gold_answer": "17.98",
     "predicted": "The fixed asset turnover ratio for CVS Health in FY2018 cannot be calculated with the provided information, as the average PP&E (Property, Plant, and Equipment) for FY2017 and FY2018 is not included in the passages.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       63,
@@ -2275,15 +2200,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 76,
-    "qid": "financebench__bm25-corpus__online__doc75_qa0__seed42",
-    "judge_rationale": "Refused vs gold 17.98."
+    "qid": "financebench__bm25-corpus__online__doc75_qa0__seed42"
   },
   {
     "question": "Is CVS Health a capital-intensive business based on FY2022 data?",
     "scoped_question": "[Regarding CVS Health 10k 2022] Is CVS Health a capital-intensive business based on FY2022 data?",
     "gold_answer": "Yes, CVS Health requires an extensive asset base to operate, which is evident from its ROA of only 1.82% in 2022 and 3.39% in 2021, though it should be noted that a significant portion of this asset base is goodwill, and CVS's fixed assets/total assets ratio is on the lower side of 5.6%.",
     "predicted": "Yes, CVS Health is a capital-intensive business based on FY2022 data.",
-    "judge_score": 0.75,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       63,
@@ -2306,15 +2230,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 77,
-    "qid": "financebench__bm25-corpus__online__doc76_qa0__seed42",
-    "judge_rationale": "Yes capital-intensive matches gold direction; lacks ROA/CAPEX detail."
+    "qid": "financebench__bm25-corpus__online__doc76_qa0__seed42"
   },
   {
     "question": "Has CVS Health reported any materially important ongoing legal battles from 2022, 2021 and 2020?",
     "scoped_question": "[Regarding CVS Health 10k 2022] Has CVS Health reported any materially important ongoing legal battles from 2022, 2021 and 2020?",
     "gold_answer": "Yes, CVS Health has been involved in multiple ongoing legal battles. Some notable legal dispute areas for CVS are: (1) usual and customary pricing litigation: where it's claimed that CVS\u00e2\u0080\u0099s retail pharmacies overcharged for prescription drugs; (2) PBM litigation and investigations: where it's claimed that that rebate agreements between the drug manufacturers and PBMs caused inflated prices for certain drug products; and (3) controlled substances litigation: legal matters around opioids for which CVS has agreed to pay up to $4.3 billion to claimants in remediation and $625 million to attorneys and fees",
     "predicted": "Yes, CVS Health is facing multiple lawsuits regarding drug pricing and rebate arrangements with drug manufacturers, as well as lawsuits alleging overcharging for prescription drugs related to usual and customary pricing.",
-    "judge_score": 0.75,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       96,
@@ -2338,15 +2261,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 78,
-    "qid": "financebench__bm25-corpus__online__doc77_qa0__seed42",
-    "judge_rationale": "Mentions drug pricing + rebate + U&C; misses controlled substances/opioids."
+    "qid": "financebench__bm25-corpus__online__doc77_qa0__seed42"
   },
   {
     "question": "Has CVS Health paid dividends to common shareholders in Q2 of FY2022?",
     "scoped_question": "[Regarding CVS Health 10k 2022] Has CVS Health paid dividends to common shareholders in Q2 of FY2022?",
     "gold_answer": "Yes, CVS paid a $ 0.55 dividend per share every quarter in FY2022",
     "predicted": "Yes, CVS Health paid dividends of $0.55 per share to common shareholders in Q2 of FY2022.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       99,
@@ -2368,15 +2290,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 79,
-    "qid": "financebench__bm25-corpus__online__doc78_qa0__seed42",
-    "judge_rationale": "Yes $0.55 quarterly Q2 \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc78_qa0__seed42"
   },
   {
     "question": "Does Foot Locker's new CEO have previous CEO experience in a similar company to Footlocker?",
     "scoped_question": "[Regarding Foot Locker 8k 2022] Does Foot Locker's new CEO have previous CEO experience in a similar company to Footlocker?",
     "gold_answer": "Yes. She was previous CEO of Ulta Beauty which means she had to manage a large retail company that has brick and mortar + online business. So yes she was a CEO in a similar company to Foot Locker before this.",
-    "predicted": "Yes, Mary N. Dillon was the former Executive Chair and Chief Executive Officer of Ulta Beauty, Inc., which is a similar company in the retail sector.",
-    "judge_score": 1.0,
+    "predicted": "Yes, Mary N. Dillon, the new CEO of Foot Locker, was the former Executive Chair and Chief Executive Officer of Ulta Beauty, Inc., which is a retail company similar to Foot Locker.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       100,
@@ -2398,15 +2319,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 80,
-    "qid": "financebench__bm25-corpus__online__doc79_qa0__seed42",
-    "judge_rationale": "Mary Dillon ex-Ulta CEO \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc79_qa0__seed42"
   },
   {
     "question": "Were there any board member nominees who had substantially more votes against joining than the other nominees?",
     "scoped_question": "[Regarding Foot Locker 8k 2022] Were there any board member nominees who had substantially more votes against joining than the other nominees?",
     "gold_answer": "Yes, his name is Richard A. Johnson",
-    "predicted": "Yes, Richard A. Johnson had substantially more votes against joining the board, with 16,105,005 votes against, compared to the other nominees.",
-    "judge_score": 1.0,
+    "predicted": "Yes, Richard A. Johnson had substantially more votes against joining, with 16,105,005 votes against.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       101,
@@ -2428,15 +2348,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 81,
-    "qid": "financebench__bm25-corpus__online__doc80_qa0__seed42",
-    "judge_rationale": "Yes Richard A. Johnson with 16M votes \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc80_qa0__seed42"
   },
   {
     "question": "What is the FY2019 cash conversion cycle (CCC) for General Mills? CCC is defined as: DIO + DSO - DPO. DIO is defined as: 365 * (average inventory between FY2018 and FY2019) / (FY2019 COGS). DSO is defined as: 365 * (average accounts receivable between FY2018 and FY2019) / (FY2019 Revenue). DPO is defined as: 365 * (average accounts payable between FY2018 and FY2019) / (FY2019 COGS + change in inventory between FY2018 and FY2019). Round your answer to two decimal places. Address the question by using the line items and information shown within the income statement and the balance sheet.",
     "scoped_question": "[Regarding General Mills 10k 2019] What is the FY2019 cash conversion cycle (CCC) for General Mills? CCC is defined as: DIO + DSO - DPO. DIO is defined as: 365 * (average inventory between FY2018 and FY2019) / (FY2019 COGS). DSO is defined as: 365 * (average accounts receivable between FY2018 and FY2019) / (FY2019 Revenue). DPO is defined as: 365 * (average accounts payable between FY2018 and FY2019) / (FY2019 COGS + change in inventory between FY2018 and FY2019). Round your answer to two decimal places. Address the question by using the line items and information shown within the income statement and the balance sheet.",
     "gold_answer": "-3.7",
-    "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is not calculable with the provided information, as the necessary data for average inventory, average accounts receivable, and average accounts payable is not included in the passages.",
-    "judge_score": 0.0,
+    "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 36.73 days.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       97,
@@ -2459,15 +2378,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 82,
-    "qid": "financebench__bm25-corpus__online__doc81_qa0__seed42",
-    "judge_rationale": "Refused vs gold -3.7."
+    "qid": "financebench__bm25-corpus__online__doc81_qa0__seed42"
   },
   {
     "question": "By drawing conclusions from the information stated only in the statement of financial position, what is General Mills's FY2020 working capital ratio? Define working capital ratio as total current assets divided by total current liabilities. Round your answer to two decimal places.",
     "scoped_question": "[Regarding General Mills 10k 2020] By drawing conclusions from the information stated only in the statement of financial position, what is General Mills's FY2020 working capital ratio? Define working capital ratio as total current assets divided by total current liabilities. Round your answer to two decimal places.",
     "gold_answer": "0.68",
     "predicted": "0.68",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -2489,15 +2407,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 83,
-    "qid": "financebench__bm25-corpus__online__doc82_qa0__seed42",
-    "judge_rationale": "0.68 exact match."
+    "qid": "financebench__bm25-corpus__online__doc82_qa0__seed42"
   },
   {
     "question": "According to the information provided in the statement of cash flows, what is the FY2020 free cash flow (FCF) for General Mills? FCF here is defined as: (cash from operations - capex). Answer in USD millions.",
     "scoped_question": "[Regarding General Mills 10k 2020] According to the information provided in the statement of cash flows, what is the FY2020 free cash flow (FCF) for General Mills? FCF here is defined as: (cash from operations - capex). Answer in USD millions.",
     "gold_answer": "$3215.00",
     "predicted": "$3,215.4 million",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       105,
@@ -2519,15 +2436,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 84,
-    "qid": "financebench__bm25-corpus__online__doc83_qa0__seed42",
-    "judge_rationale": "$3,215.4M matches gold $3215M."
+    "qid": "financebench__bm25-corpus__online__doc83_qa0__seed42"
   },
   {
     "question": "We want to calculate a financial metric. Please help us compute it by basing your answers off of the cash flow statement and the income statement. Here's the question: what is the FY2022 retention ratio (using total cash dividends paid and net income attributable to shareholders) for General Mills? Round answer to two decimal places.",
     "scoped_question": "[Regarding General Mills 10k 2022] We want to calculate a financial metric. Please help us compute it by basing your answers off of the cash flow statement and the income statement. Here's the question: what is the FY2022 retention ratio (using total cash dividends paid and net income attributable to shareholders) for General Mills? Round answer to two decimal places.",
     "gold_answer": "0.54",
     "predicted": "0.44",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       63,
@@ -2550,15 +2466,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 85,
-    "qid": "financebench__bm25-corpus__online__doc84_qa0__seed42",
-    "judge_rationale": "0.44 vs gold 0.54 \u2014 18% off."
+    "qid": "financebench__bm25-corpus__online__doc84_qa0__seed42"
   },
   {
     "question": "Are JnJ's FY2022 financials that of a high growth company?",
     "scoped_question": "[Regarding Johnson & Johnson 10k 2022] Are JnJ's FY2022 financials that of a high growth company?",
     "gold_answer": "No, JnJ's FY2022 financials are not of a high growth company as sales grew by 1.3% in FY2022.",
     "predicted": "No, Johnson & Johnson's FY2022 financials do not reflect those of a high growth company, as sales increased only 1.3% compared to a much higher increase of 13.6% in 2021.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       100,
@@ -2580,15 +2495,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 86,
-    "qid": "financebench__bm25-corpus__online__doc85_qa0__seed42",
-    "judge_rationale": "No 1.3% growth \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc85_qa0__seed42"
   },
   {
     "question": "What drove gross margin change as of FY2022 for JnJ? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
     "scoped_question": "[Regarding Johnson & Johnson 10k 2022] What drove gross margin change as of FY2022 for JnJ? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
     "gold_answer": "For FY22, JnJ had changes in gross margin due to: One-time COVID-19 vaccine manufacturing exit related costs, Currency impacts in the Pharmaceutical segment, Commodity inflation in the MedTech and Consumer Health segments, partially offset by Supply chain benefits in the Consumer Health segment.",
-    "predicted": "Gross margin change for Johnson & Johnson in FY2022 was driven by increased costs related to one-time COVID-19 vaccine manufacturing exit, currency impacts in the Pharmaceutical segment, and commodity inflation in the MedTech and Consumer Health segments.",
-    "judge_score": 1.0,
+    "predicted": "Gross margin change for Johnson & Johnson in FY2022 was driven by increased costs related to one-time COVID-19 vaccine manufacturing exit, currency impacts in the Pharmaceutical segment, and commodity inflation in the MedTech and Consumer Health segments, partially offset by supply chain benefits in the Consumer Health segment.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       89,
@@ -2610,15 +2524,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 87,
-    "qid": "financebench__bm25-corpus__online__doc86_qa0__seed42",
-    "judge_rationale": "COVID exit + FX + commodity inflation \u2014 matches gold drivers."
+    "qid": "financebench__bm25-corpus__online__doc86_qa0__seed42"
   },
   {
     "question": "Roughly how many times has JnJ sold its inventory in FY2022? Calculate inventory turnover ratio for FY2022; if conventional inventory management is not meaningful for the company then state that and explain why.",
     "scoped_question": "[Regarding Johnson & Johnson 10k 2022] Roughly how many times has JnJ sold its inventory in FY2022? Calculate inventory turnover ratio for FY2022; if conventional inventory management is not meaningful for the company then state that and explain why.",
     "gold_answer": "JnJ sold its inventory 2.7 times in FY2022.",
-    "predicted": "The inventory turnover ratio for FY2022 is approximately 29.0 times, calculated as follows: \n\nInventory Turnover Ratio = Cost of Products Sold / Average Inventory\n\nCost of Products Sold for 2022 = $31,089 million. \n\nAverage Inventory for 2022 = (Beginning Inventory + Ending Inventory) / 2. However, the specific beginning and ending inventory values are not provided in the passages, so we cannot calculate the average inventory directly. \n\nIf we assume the inventory at the end of FY2022 is $1,055 million (as per the AES Corporation 10k 2022), we can estimate:\n\nInventory Turnover Ratio = $31,089 million / $1,055 million \u2248 29.",
-    "judge_score": 0.0,
+    "predicted": "The inventory turnover ratio for FY2022 is approximately 89.9 times, calculated as follows: \n\nInventory turnover ratio = Cost of products sold / Average inventory. \n\nUsing the provided cost of products sold of $31,089 million and assuming an average inventory of $346 million (calculated from the inventory values of $1,055 million for 2022 and $604 million for 2021), the ratio is:\n\n31,089 / ((1,055 + 604) / 2) = 31,089 / 829.5 \u2248 37.5.\n\nHowever, this calculation indicates that conventional inventory management may not be meaningful for Johnson & Johnson due to the nature of its business, which includes pharmaceuticals and medical devices",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       97,
@@ -2641,15 +2554,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 88,
-    "qid": "financebench__bm25-corpus__online__doc87_qa0__seed42",
-    "judge_rationale": "29.0 times vs gold 2.7 \u2014 10x off."
+    "qid": "financebench__bm25-corpus__online__doc87_qa0__seed42"
   },
   {
     "question": "Is growth in JnJ's adjusted EPS expected to accelerate in FY2023?",
     "scoped_question": "[Regarding Johnson & Johnson Earnings 2022] Is growth in JnJ's adjusted EPS expected to accelerate in FY2023?",
     "gold_answer": "No, rate of growth in adjusted EPS is expected to decelerate slightly from 3.6% in FY2022 to 3.5% in FY2023.",
     "predicted": "Yes, growth in Johnson & Johnson's adjusted EPS is expected to accelerate in FY2023, with a forecasted adjusted operational EPS of $10.50, reflecting growth of 3.5%.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       112,
@@ -2671,15 +2583,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 89,
-    "qid": "financebench__bm25-corpus__online__doc88_qa0__seed42",
-    "judge_rationale": "Yes accelerate vs gold No decelerate."
+    "qid": "financebench__bm25-corpus__online__doc88_qa0__seed42"
   },
   {
     "question": "How did JnJ's US sales growth compare to international sales growth in FY2022?",
     "scoped_question": "[Regarding Johnson & Johnson Earnings 2022] How did JnJ's US sales growth compare to international sales growth in FY2022?",
     "gold_answer": "US sales increased 3.0% vs international sales decline of 0.6%.",
-    "predicted": "Johnson & Johnson's U.S. sales growth was 3.0% in FY2022, while international sales growth was a decrease of 0.6%.",
-    "judge_score": 1.0,
+    "predicted": "Johnson & Johnson's U.S. sales growth was 3.0%, while international sales growth was a decrease of 0.6% in FY2022.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       112,
@@ -2701,15 +2612,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 90,
-    "qid": "financebench__bm25-corpus__online__doc89_qa0__seed42",
-    "judge_rationale": "US 3.0% vs intl -0.6% \u2014 exact match."
+    "qid": "financebench__bm25-corpus__online__doc89_qa0__seed42"
   },
   {
     "question": "Which business segment of JnJ will be treated as a discontinued operation from August 30, 2023 onward?",
     "scoped_question": "[Regarding Johnson & Johnson 8k 2023] Which business segment of JnJ will be treated as a discontinued operation from August 30, 2023 onward?",
     "gold_answer": "The Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
     "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       114,
@@ -2731,15 +2641,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 91,
-    "qid": "financebench__bm25-corpus__online__doc90_qa0__seed42",
-    "judge_rationale": "Consumer Health business \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc90_qa0__seed42"
   },
   {
     "question": "What is the amount of the gain accruing to JnJ as a result of the separation of its Consumer Health business segment, as of August 30, 2023?",
     "scoped_question": "[Regarding Johnson & Johnson 8k 2023] What is the amount of the gain accruing to JnJ as a result of the separation of its Consumer Health business segment, as of August 30, 2023?",
     "gold_answer": "JnJ will make a gain of approximately $20 billion from the separation of its Consumer Health business segment.",
     "predicted": "Approximately $20 billion.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       114,
@@ -2761,15 +2670,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 92,
-    "qid": "financebench__bm25-corpus__online__doc91_qa0__seed42",
-    "judge_rationale": "$20B \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc91_qa0__seed42"
   },
   {
     "question": "What is the amount of the cash proceeds that JnJ realised from the separation of Kenvue (formerly Consumer Health business segment), as of August 30, 2023?",
     "scoped_question": "[Regarding Johnson & Johnson 8k 2023] What is the amount of the cash proceeds that JnJ realised from the separation of Kenvue (formerly Consumer Health business segment), as of August 30, 2023?",
     "gold_answer": "JnJ realised $13.2 billion in cash proceeds from the separation of Kenvue.",
     "predicted": "$13.2 billion",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       114,
@@ -2791,15 +2699,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 93,
-    "qid": "financebench__bm25-corpus__online__doc92_qa0__seed42",
-    "judge_rationale": "$13.2B \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc92_qa0__seed42"
   },
   {
     "question": "Did JnJ's net earnings as a percent of sales increase in Q2 of FY2023 compared to Q2 of FY2022?",
     "scoped_question": "[Regarding Johnson & Johnson Earnings 2023] Did JnJ's net earnings as a percent of sales increase in Q2 of FY2023 compared to Q2 of FY2022?",
     "gold_answer": "Yes, net earnings as a percent of sales increased from 20% in Q2 of FY2022 to 20.1% in Q2 of FY2023.",
     "predicted": "Yes, JnJ's net earnings as a percent of sales increased from 20.0% in Q2 of FY2022 to 20.1% in Q2 of FY2023.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       114,
@@ -2821,15 +2728,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 94,
-    "qid": "financebench__bm25-corpus__online__doc93_qa0__seed42",
-    "judge_rationale": "Yes 20.0% to 20.1% \u2014 exact match."
+    "qid": "financebench__bm25-corpus__online__doc93_qa0__seed42"
   },
   {
     "question": "Which of JPM's business segments had the lowest net revenue in 2021 Q1?",
     "scoped_question": "[Regarding JPMorgan 10q 2021] Which of JPM's business segments had the lowest net revenue in 2021 Q1?",
     "gold_answer": "Corporate. Its net revenue was -$473 million.",
     "predicted": "Consumer & Community Banking",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -2851,15 +2757,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 95,
-    "qid": "financebench__bm25-corpus__online__doc94_qa0__seed42",
-    "judge_rationale": "Consumer & Community Banking vs gold Corporate."
+    "qid": "financebench__bm25-corpus__online__doc94_qa0__seed42"
   },
   {
     "question": "If JPM went bankrupted by the end by 2021 Q1 and liquidated all of its assets to pay its shareholders, how much could each shareholder get?",
     "scoped_question": "[Regarding JPMorgan 10q 2021] If JPM went bankrupted by the end by 2021 Q1 and liquidated all of its assets to pay its shareholders, how much could each shareholder get?",
     "gold_answer": "They could receive $66.56 per share.",
     "predicted": "$66.56 per share",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       97,
@@ -2881,15 +2786,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 96,
-    "qid": "financebench__bm25-corpus__online__doc95_qa0__seed42",
-    "judge_rationale": "$66.56 per share \u2014 exact match."
+    "qid": "financebench__bm25-corpus__online__doc95_qa0__seed42"
   },
   {
     "question": "Are JPM's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
     "scoped_question": "[Regarding JPMorgan 10k 2022] Are JPM's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
     "gold_answer": "Since JPM is a financial institution, gross margin is not a relevant metric.",
     "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and such firms typically focus on metrics like net interest margin, return on equity, and other financial ratios rather than gross margins, which are more applicable to manufacturing or retail companies.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -2911,15 +2815,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 97,
-    "qid": "financebench__bm25-corpus__online__doc96_qa0__seed42",
-    "judge_rationale": "Gross margins not relevant for JPM \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc96_qa0__seed42"
   },
   {
     "question": "In 2022 Q2, which of JPM's business segments had the highest net income?",
     "scoped_question": "[Regarding JPMorgan 10q 2022] In 2022 Q2, which of JPM's business segments had the highest net income?",
     "gold_answer": "Corporate & Investment Bank. Its net income was $3725 million.",
     "predicted": "Consumer & Community Banking",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       120,
@@ -2941,15 +2844,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 98,
-    "qid": "financebench__bm25-corpus__online__doc97_qa0__seed42",
-    "judge_rationale": "Consumer & Community Banking vs gold Corporate & Investment Bank."
+    "qid": "financebench__bm25-corpus__online__doc97_qa0__seed42"
   },
   {
     "question": "Looking at VaR, did the risk that JPM faced in the second fiscal quarter of 2023 decrease compared to the same period in the prior year?",
     "scoped_question": "[Regarding JPMorgan 10q 2023] Looking at VaR, did the risk that JPM faced in the second fiscal quarter of 2023 decrease compared to the same period in the prior year?",
     "gold_answer": "Yes. It decreased.",
     "predicted": "Yes, the average total VaR decreased by $7 million for the three months ended June 30, 2023, compared with the same period in the prior year.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       122,
@@ -2971,15 +2873,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 99,
-    "qid": "financebench__bm25-corpus__online__doc98_qa0__seed42",
-    "judge_rationale": "Yes decreased $7M \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc98_qa0__seed42"
   },
   {
     "question": "What is Kraft Heinz's FY2019 inventory turnover ratio? Inventory turnover ratio is defined as: (FY2019 COGS) / (average inventory between FY2018 and FY2019). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the balance sheet and the P&L statement.",
     "scoped_question": "[Regarding Kraft Heinz 10k 2019] What is Kraft Heinz's FY2019 inventory turnover ratio? Inventory turnover ratio is defined as: (FY2019 COGS) / (average inventory between FY2018 and FY2019). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the balance sheet and the P&L statement.",
     "gold_answer": "6.25",
     "predicted": "3.12",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       123,
@@ -3002,15 +2903,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 100,
-    "qid": "financebench__bm25-corpus__online__doc99_qa0__seed42",
-    "judge_rationale": "3.12 vs gold 6.25 \u2014 50% off."
+    "qid": "financebench__bm25-corpus__online__doc99_qa0__seed42"
   },
   {
     "question": "We need to calculate a reasonable approximation (or exact number if possible) of a financial metric. Basing your judgment by information plainly provided in the balance sheet and the P&L statement, what is Lockheed Martin's FY2020 asset turnover ratio? Asset turnover ratio is defined as: FY2020 revenue / (average total assets between FY2019 and FY2020). Round your answer to two decimal places.",
     "scoped_question": "[Regarding Lockheed Martin 10k 2020] We need to calculate a reasonable approximation (or exact number if possible) of a financial metric. Basing your judgment by information plainly provided in the balance sheet and the P&L statement, what is Lockheed Martin's FY2020 asset turnover ratio? Asset turnover ratio is defined as: FY2020 revenue / (average total assets between FY2019 and FY2020). Round your answer to two decimal places.",
     "gold_answer": "1.33",
-    "predicted": "The relevant passages do not provide information about Lockheed Martin's FY2020 revenue or total assets for FY2019 and FY2020. Therefore, it is not possible to calculate the asset turnover ratio.",
-    "judge_score": 0.0,
+    "predicted": "The provided passages do not contain any information regarding Lockheed Martin's FY2020 revenue or total assets. Therefore, it is not possible to calculate the asset turnover ratio.",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       120,
@@ -3033,15 +2933,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 101,
-    "qid": "financebench__bm25-corpus__online__doc100_qa0__seed42",
-    "judge_rationale": "Refused vs gold 1.33."
+    "qid": "financebench__bm25-corpus__online__doc100_qa0__seed42"
   },
   {
     "question": "What is Lockheed Martin's FY2021 net working capital? Define net working capital as total current assets less total current liabilities. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the balance sheet.",
     "scoped_question": "[Regarding Lockheed Martin 10k 2021] What is Lockheed Martin's FY2021 net working capital? Define net working capital as total current assets less total current liabilities. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the balance sheet.",
     "gold_answer": "$5818.00",
     "predicted": "$5,818 million",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       127,
@@ -3063,15 +2962,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 102,
-    "qid": "financebench__bm25-corpus__online__doc101_qa0__seed42",
-    "judge_rationale": "$5,818 million exact match."
+    "qid": "financebench__bm25-corpus__online__doc101_qa0__seed42"
   },
   {
     "question": "What is Lockheed Martin's 2 year total revenue CAGR from FY2020 to FY2022 (in units of percents and round to one decimal place)? Provide a response to the question by primarily using the statement of income.",
     "scoped_question": "[Regarding Lockheed Martin 10k 2022] What is Lockheed Martin's 2 year total revenue CAGR from FY2020 to FY2022 (in units of percents and round to one decimal place)? Provide a response to the question by primarily using the statement of income.",
     "gold_answer": "0.4%",
-    "predicted": "The 2 year total revenue CAGR from FY2020 to FY2022 is 0.4%.",
-    "judge_score": 1.0,
+    "predicted": "The 2 year total revenue CAGR from FY2020 to FY2022 for Lockheed Martin is 0.4%.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -3093,15 +2991,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 103,
-    "qid": "financebench__bm25-corpus__online__doc102_qa0__seed42",
-    "judge_rationale": "0.4% exact match."
+    "qid": "financebench__bm25-corpus__online__doc102_qa0__seed42"
   },
   {
     "question": "Basing your judgments off of the balance sheet, what is the year end FY2018 amount of accounts payable for MGM Resorts? Answer in USD millions.",
     "scoped_question": "[Regarding MGM Resorts 10k 2018] Basing your judgments off of the balance sheet, what is the year end FY2018 amount of accounts payable for MGM Resorts? Answer in USD millions.",
     "gold_answer": "$303.00",
     "predicted": "$302.6 million",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       129,
@@ -3123,15 +3020,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 104,
-    "qid": "financebench__bm25-corpus__online__doc103_qa0__seed42",
-    "judge_rationale": "$302.6M vs gold $303M \u2014 within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc103_qa0__seed42"
   },
   {
     "question": "What is the FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts? Answer in units of percents and round to one decimal place. Please utilize information provided primarily within the statement of cash flows and the statement of income.",
     "scoped_question": "[Regarding MGM Resorts 10k 2020] What is the FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts? Answer in units of percents and round to one decimal place. Please utilize information provided primarily within the statement of cash flows and the statement of income.",
     "gold_answer": "7.9%",
     "predicted": "The FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts is 12.5%.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -3154,15 +3050,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 105,
-    "qid": "financebench__bm25-corpus__online__doc104_qa0__seed42",
-    "judge_rationale": "12.5% vs gold 7.9% \u2014 58% off."
+    "qid": "financebench__bm25-corpus__online__doc104_qa0__seed42"
   },
   {
     "question": "Has MGM Resorts paid dividends to common shareholders in FY2022?",
     "scoped_question": "[Regarding MGM Resorts 10k 2022] Has MGM Resorts paid dividends to common shareholders in FY2022?",
     "gold_answer": "Yes. MGM maintained 0.01$ per share annual dividend through out FY 2022.",
     "predicted": "Yes, MGM Resorts maintained an annual dividend of $0.01 per share throughout 2022.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       132,
@@ -3184,15 +3079,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 106,
-    "qid": "financebench__bm25-corpus__online__doc105_qa0__seed42",
-    "judge_rationale": "Yes $0.01 \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc105_qa0__seed42"
   },
   {
     "question": "Which region had the Highest EBITDAR Contribution for MGM during FY2022?",
     "scoped_question": "[Regarding MGM Resorts Earnings 2022] Which region had the Highest EBITDAR Contribution for MGM during FY2022?",
     "gold_answer": "Las Vegas resorts contributed ~90% of company level EBITDAR during FY2022.",
     "predicted": "Las Vegas Strip Resorts",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       133,
@@ -3214,15 +3108,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 107,
-    "qid": "financebench__bm25-corpus__online__doc106_qa0__seed42",
-    "judge_rationale": "Las Vegas Strip Resorts \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc106_qa0__seed42"
   },
   {
     "question": "What was MGM's interest coverage ratio using FY2022 Adjusted EBIT as the numerator and annual Interest Expense as the denominator?",
     "scoped_question": "[Regarding MGM Resorts Earnings 2022] What was MGM's interest coverage ratio using FY2022 Adjusted EBIT as the numerator and annual Interest Expense as the denominator?",
     "gold_answer": "As adjusted EBIT is negative, coverage ratio is zero",
     "predicted": "The interest coverage ratio for MGM Resorts in FY2022 is approximately 2.43.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       132,
@@ -3244,15 +3137,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 108,
-    "qid": "financebench__bm25-corpus__online__doc107_qa0__seed42",
-    "judge_rationale": "2.43 vs gold zero (negative EBIT)."
+    "qid": "financebench__bm25-corpus__online__doc107_qa0__seed42"
   },
   {
     "question": "Which region had the worst topline performance for MGM during FY2022?",
     "scoped_question": "[Regarding MGM Resorts Earnings 2022] Which region had the worst topline performance for MGM during FY2022?",
     "gold_answer": "MGM China experienced the worst topline performance amongst the other regions presented. Its revenue declined 44% in FY2022 whereas the other regions presented increased their revenues.",
     "predicted": "MGM China had the worst topline performance for MGM during FY2022.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       135,
@@ -3276,15 +3168,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 109,
-    "qid": "financebench__bm25-corpus__online__doc108_qa0__seed42",
-    "judge_rationale": "MGM China \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc108_qa0__seed42"
   },
   {
     "question": "Which type of debt received the largest investment among the short term investments for MGM in H1 FY2023?",
     "scoped_question": "[Regarding MGM Resorts 10q 2023] Which type of debt received the largest investment among the short term investments for MGM in H1 FY2023?",
     "gold_answer": "the biggest short term investment is in corporate bonds (almost 82% of the total investment)",
-    "predicted": "Corporate bonds received the largest investment among the short-term investments for MGM in H1 FY2023, totaling $416,420,000.",
-    "judge_score": 1.0,
+    "predicted": "Corporate bonds received the largest investment among the short-term investments for MGM in H1 FY2023, totaling $416,420 thousand.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       138,
@@ -3306,15 +3197,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 110,
-    "qid": "financebench__bm25-corpus__online__doc109_qa0__seed42",
-    "judge_rationale": "Corporate bonds $416,420K \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc109_qa0__seed42"
   },
   {
     "question": "What is the FY2016 COGS for Microsoft? Please state answer in USD millions. Provide a response to the question by primarily using the statement of income.",
     "scoped_question": "[Regarding Microsoft 10k 2016] What is the FY2016 COGS for Microsoft? Please state answer in USD millions. Provide a response to the question by primarily using the statement of income.",
     "gold_answer": "$32780.00",
-    "predicted": "The provided passages do not contain information regarding Microsoft's FY2016 COGS.",
-    "judge_score": 0.0,
+    "predicted": "The relevant passages do not contain information regarding Microsoft's FY2016 COGS.",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       65,
@@ -3336,15 +3226,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 111,
-    "qid": "financebench__bm25-corpus__online__doc110_qa0__seed42",
-    "judge_rationale": "Refused vs gold $32780M."
+    "qid": "financebench__bm25-corpus__online__doc110_qa0__seed42"
   },
   {
     "question": "Has Microsoft increased its debt on balance sheet between FY2023 and the FY2022 period?",
     "scoped_question": "[Regarding Microsoft 10k 2023] Has Microsoft increased its debt on balance sheet between FY2023 and the FY2022 period?",
     "gold_answer": "No. Microsoft decreased its debt by $2.5bn in FY 2023 vs FY 2022.",
     "predicted": "Yes, Microsoft increased its long-term debt from $47,032 million in FY2022 to $41,990 million in FY2023.",
-    "judge_score": 0.25,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       97,
@@ -3366,15 +3255,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 112,
-    "qid": "financebench__bm25-corpus__online__doc111_qa0__seed42",
-    "judge_rationale": "Yes increased contradicts numbers shown ($47B->$42B is decrease) \u2014 internally contradictory."
+    "qid": "financebench__bm25-corpus__online__doc111_qa0__seed42"
   },
   {
     "question": "We want to calculate a financial metric. Please help us compute it by basing your answers off of the statement of income and the statement of cash flows. Here's the question: what is the FY2015 unadjusted EBITDA % margin for Netflix? Calculate unadjusted EBITDA using unadjusted operating income and D&A (from cash flow statement).",
     "scoped_question": "[Regarding Netflix 10k 2015] We want to calculate a financial metric. Please help us compute it by basing your answers off of the statement of income and the statement of cash flows. Here's the question: what is the FY2015 unadjusted EBITDA % margin for Netflix? Calculate unadjusted EBITDA using unadjusted operating income and D&A (from cash flow statement).",
     "gold_answer": "5.4%",
-    "predicted": "The relevant passages do not contain information about Netflix's financials, including its statement of income or cash flows for FY2015. Therefore, I cannot provide the unadjusted EBITDA % margin for Netflix.",
-    "judge_score": 0.0,
+    "predicted": "The relevant passages do not provide information about Netflix's financials, including its unadjusted operating income or depreciation and amortization (D&A) for FY2015. Therefore, I cannot compute the unadjusted EBITDA % margin for Netflix.",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       63,
@@ -3397,15 +3285,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 113,
-    "qid": "financebench__bm25-corpus__online__doc112_qa0__seed42",
-    "judge_rationale": "Refused vs gold 5.4%."
+    "qid": "financebench__bm25-corpus__online__doc112_qa0__seed42"
   },
   {
     "question": "What is Netflix's year end FY2017 total current liabilities (in USD millions)? Base your judgments on the information provided primarily in the balance sheet.",
     "scoped_question": "[Regarding Netflix 10k 2017] What is Netflix's year end FY2017 total current liabilities (in USD millions)? Base your judgments on the information provided primarily in the balance sheet.",
     "gold_answer": "$5466.00",
     "predicted": "5,466.3 million",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       65,
@@ -3427,15 +3314,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 114,
-    "qid": "financebench__bm25-corpus__online__doc113_qa0__seed42",
-    "judge_rationale": "5,466.3 million matches gold $5466M."
+    "qid": "financebench__bm25-corpus__online__doc113_qa0__seed42"
   },
   {
     "question": "We need to calculate a reasonable approximation (or exact number if possible) of a financial metric. Basing your judgment by information plainly provided in the statement of income, what is Nike's three year average of cost of goods sold as a % of revenue from FY2016 to FY2018? Answer in units of percents and round to one decimal place.",
     "scoped_question": "[Regarding Nike 10k 2018] We need to calculate a reasonable approximation (or exact number if possible) of a financial metric. Basing your judgment by information plainly provided in the statement of income, what is Nike's three year average of cost of goods sold as a % of revenue from FY2016 to FY2018? Answer in units of percents and round to one decimal place.",
     "gold_answer": "55.1%",
     "predicted": "56.2%",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       33,
@@ -3457,15 +3343,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 115,
-    "qid": "financebench__bm25-corpus__online__doc114_qa0__seed42",
-    "judge_rationale": "56.2% vs gold 55.1% \u2014 2.0% off, within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc114_qa0__seed42"
   },
   {
     "question": "According to the details clearly outlined within the balance sheet, how much total current assets did Nike have at the end of FY2019? Answer in USD millions.",
     "scoped_question": "[Regarding Nike 10k 2019] According to the details clearly outlined within the balance sheet, how much total current assets did Nike have at the end of FY2019? Answer in USD millions.",
     "gold_answer": "$16525.00",
     "predicted": "16,525",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       145,
@@ -3487,15 +3372,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 116,
-    "qid": "financebench__bm25-corpus__online__doc115_qa0__seed42",
-    "judge_rationale": "16,525 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc115_qa0__seed42"
   },
   {
     "question": "When primarily referencing the income statement and the statement of financial position, what is the FY2021 inventory turnover ratio for Nike? Inventory turnover ratio is defined as: (FY2021 COGS) / (average inventory between FY2020 and FY2021). Round your answer to two decimal places.",
     "scoped_question": "[Regarding Nike 10k 2021] When primarily referencing the income statement and the statement of financial position, what is the FY2021 inventory turnover ratio for Nike? Inventory turnover ratio is defined as: (FY2021 COGS) / (average inventory between FY2020 and FY2021). Round your answer to two decimal places.",
     "gold_answer": "3.46",
     "predicted": "4.37",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       97,
@@ -3518,15 +3402,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 117,
-    "qid": "financebench__bm25-corpus__online__doc116_qa0__seed42",
-    "judge_rationale": "4.37 vs gold 3.46 \u2014 26% off."
+    "qid": "financebench__bm25-corpus__online__doc116_qa0__seed42"
   },
   {
     "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Nike in FY2023?",
     "scoped_question": "[Regarding Nike 10k 2023] Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Nike in FY2023?",
     "gold_answer": "Among the three, cash flow from operations was the highest for Nike in FY2023.",
     "predicted": "Cash provided (used) by operations brought in the most cash flow for Nike in FY2023, totaling $5,841 million.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       148,
@@ -3548,15 +3431,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 118,
-    "qid": "financebench__bm25-corpus__online__doc117_qa0__seed42",
-    "judge_rationale": "Operations $5,841M \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc117_qa0__seed42"
   },
   {
     "question": "Does Paypal have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
     "scoped_question": "[Regarding Paypal 10k 2022] Does Paypal have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
     "gold_answer": "Yes. Paypal has a positive working capital of $ 1.6Bn as of FY2022 end.",
     "predicted": "The provided passages do not contain any information regarding PayPal's working capital or its financial data for FY2022. Therefore, it cannot be determined if PayPal has positive working capital based on the available context.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       97,
@@ -3578,15 +3460,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 119,
-    "qid": "financebench__bm25-corpus__online__doc118_qa0__seed42",
-    "judge_rationale": "Refused vs gold Yes $1.6B positive."
+    "qid": "financebench__bm25-corpus__online__doc118_qa0__seed42"
   },
   {
     "question": "What is the FY2021 capital expenditure amount (in USD billions) for PepsiCo? Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows.",
     "scoped_question": "[Regarding PepsiCo 10k 2021] What is the FY2021 capital expenditure amount (in USD billions) for PepsiCo? Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows.",
     "gold_answer": "$4.60",
     "predicted": "4.625 billion",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       150,
@@ -3608,15 +3489,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 120,
-    "qid": "financebench__bm25-corpus__online__doc119_qa0__seed42",
-    "judge_rationale": "4.625 billion vs gold $4.60B \u2014 within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc119_qa0__seed42"
   },
   {
     "question": "What are the geographies that Pepsico primarily operates in as of FY2022?",
     "scoped_question": "[Regarding PepsiCo 10k 2022] What are the geographies that Pepsico primarily operates in as of FY2022?",
     "gold_answer": "As of FY2022, Pepsico primarily operates in the following geographies: North America, Latin America, Europe, Africa, Middle East, South Asia, Asia Pacific, Australia, New Zealand and China.",
     "predicted": "PepsiCo primarily operates in the United States, Canada, Latin America, and Europe.",
-    "judge_score": 0.5,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       151,
@@ -3639,15 +3519,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 121,
-    "qid": "financebench__bm25-corpus__online__doc120_qa0__seed42",
-    "judge_rationale": "Lists US + Canada + LA + Europe; misses Africa, ME, S Asia, AP, NZ, China from gold."
+    "qid": "financebench__bm25-corpus__online__doc120_qa0__seed42"
   },
   {
     "question": "Has Pepsico reported any materially important ongoing legal battles from FY2022 and FY2021?",
     "scoped_question": "[Regarding PepsiCo 10k 2022] Has Pepsico reported any materially important ongoing legal battles from FY2022 and FY2021?",
     "gold_answer": "No, Pepsico is not involved in material legal battles.",
     "predicted": "PepsiCo has reported being party to a variety of litigation, claims, legal or regulatory proceedings, inquiries, and investigations, but management believes that the final outcome will not have a material adverse effect on its financial condition, results of operations, or cash flows.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       151,
@@ -3669,15 +3548,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 122,
-    "qid": "financebench__bm25-corpus__online__doc121_qa0__seed42",
-    "judge_rationale": "No material adverse effect \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc121_qa0__seed42"
   },
   {
     "question": "What is the quantity of restructuring costs directly outlined in Pepsico's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
     "scoped_question": "[Regarding PepsiCo 10k 2022] What is the quantity of restructuring costs directly outlined in Pepsico's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
     "gold_answer": "Pepsico's restructuring costs in FY2022 amounted to $411 million .",
     "predicted": "$411 million",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       151,
@@ -3699,15 +3577,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 123,
-    "qid": "financebench__bm25-corpus__online__doc122_qa0__seed42",
-    "judge_rationale": "$411 million \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc122_qa0__seed42"
   },
   {
     "question": "What is the FY2022 unadjusted EBITDA less capex for PepsiCo? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization [from cash flow statement]. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows and the income statement.",
     "scoped_question": "[Regarding PepsiCo 10k 2022] What is the FY2022 unadjusted EBITDA less capex for PepsiCo? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization [from cash flow statement]. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows and the income statement.",
     "gold_answer": "$9068.00",
     "predicted": "$14,275 million",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       151,
@@ -3730,15 +3607,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 124,
-    "qid": "financebench__bm25-corpus__online__doc123_qa0__seed42",
-    "judge_rationale": "$14,275M is EBITDA only (didn't subtract capex); gold $9068M is EBITDA-capex."
+    "qid": "financebench__bm25-corpus__online__doc123_qa0__seed42"
   },
   {
     "question": "What is the FY2022 unadjusted EBITDA % margin for PepsiCo? Calculate unadjusted EBITDA using unadjusted operating income and D&A (from cash flow statement). Give a response to the question by relying on the details shown in the statement of cash flows and the P&L statement.",
     "scoped_question": "[Regarding PepsiCo 10k 2022] What is the FY2022 unadjusted EBITDA % margin for PepsiCo? Calculate unadjusted EBITDA using unadjusted operating income and D&A (from cash flow statement). Give a response to the question by relying on the details shown in the statement of cash flows and the P&L statement.",
     "gold_answer": "16.5%",
     "predicted": "The unadjusted EBITDA for PepsiCo in FY2022 is $14,128 million, resulting in an unadjusted EBITDA % margin of 16.3%.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       151,
@@ -3761,15 +3637,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 125,
-    "qid": "financebench__bm25-corpus__online__doc124_qa0__seed42",
-    "judge_rationale": "16.3% vs gold 16.5% \u2014 within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc124_qa0__seed42"
   },
   {
     "question": "At the Pepsico AGM held on May 3, 2023, what was the outcome of the shareholder vote on the shareholder proposal for a congruency report by Pepsico on net-zero emissions policies?",
     "scoped_question": "[Regarding PepsiCo 8k 2023] At the Pepsico AGM held on May 3, 2023, what was the outcome of the shareholder vote on the shareholder proposal for a congruency report by Pepsico on net-zero emissions policies?",
     "gold_answer": "The shareholder proposal for a congruency report by Pepsico on net-zero emissions policies was defeated.",
     "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       159,
@@ -3791,15 +3666,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 126,
-    "qid": "financebench__bm25-corpus__online__doc125_qa0__seed42",
-    "judge_rationale": "Defeated \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc125_qa0__seed42"
   },
   {
     "question": "By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
     "scoped_question": "[Regarding PepsiCo 8k 2023] By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
     "gold_answer": "$400,000,000 increase.",
     "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       160,
@@ -3821,15 +3695,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 127,
-    "qid": "financebench__bm25-corpus__online__doc126_qa0__seed42",
-    "judge_rationale": "$400M increase \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc126_qa0__seed42"
   },
   {
     "question": "As of May 26, 2023, what is the total amount Pepsico may borrow under its unsecured revolving credit agreements?",
     "scoped_question": "[Regarding PepsiCo 8k 2023] As of May 26, 2023, what is the total amount Pepsico may borrow under its unsecured revolving credit agreements?",
     "gold_answer": "Total amount Pepsico may borrow under unsecured revolving credit agreements = $8,400,000,000.",
     "predicted": "PepsiCo may borrow up to $8,400,000,000 under its unsecured revolving credit agreements ($4,200,000,000 from the 2023 364 Day Credit Agreement and $4,200,000,000 from the 2023 Five Year Credit Agreement).",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       161,
@@ -3851,15 +3724,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 128,
-    "qid": "financebench__bm25-corpus__online__doc127_qa0__seed42",
-    "judge_rationale": "$8.4B with $4.2B from each agreement \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc127_qa0__seed42"
   },
   {
     "question": "As of FY2023Q1, why did Pepsico raise full year guidance for FY2023?",
     "scoped_question": "[Regarding PepsiCo Earnings 2023] As of FY2023Q1, why did Pepsico raise full year guidance for FY2023?",
     "gold_answer": "Pepsico experienced a strong start to FY2023.",
-    "predicted": "PepsiCo raised its full-year guidance for FY2023 due to a strong start to the year, with resilient performance and business momentum in its categories and geographies.",
-    "judge_score": 1.0,
+    "predicted": "PepsiCo raised its full-year 2023 organic revenue guidance to increase by 8 percent (previously 6 percent) and core constant currency EPS to increase by 9 percent (previously 8 percent) due to a strong start to the year and resilient performance across its categories and geographies.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       161,
@@ -3881,15 +3753,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 129,
-    "qid": "financebench__bm25-corpus__online__doc128_qa0__seed42",
-    "judge_rationale": "Strong start with resilient performance \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc128_qa0__seed42"
   },
   {
     "question": "As of FY2023Q1, by how many percentage points did Pepsico raise full year guidance in respect of core constant currency EPS growth?",
     "scoped_question": "[Regarding PepsiCo Earnings 2023] As of FY2023Q1, by how many percentage points did Pepsico raise full year guidance in respect of core constant currency EPS growth?",
     "gold_answer": "Pepsico raised full year guidance in respect of core constant currency EPS growth by 1 percentage point.",
     "predicted": "PepsiCo raised full year guidance for core constant currency EPS growth by 1 percentage point, from 8 percent to 9 percent.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       162,
@@ -3911,15 +3782,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 130,
-    "qid": "financebench__bm25-corpus__online__doc129_qa0__seed42",
-    "judge_rationale": "1 percentage point (8% to 9%) \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc129_qa0__seed42"
   },
   {
     "question": "Did Pfizer grow its PPNE between FY20 and FY21?",
     "scoped_question": "[Regarding Pfizer 10k 2021] Did Pfizer grow its PPNE between FY20 and FY21?",
     "gold_answer": "Yes, change in PPNE was positive year over year",
-    "predicted": "Yes, Pfizer's property, plant, and equipment (PP&E) grew from $13,745 million in FY20 to $14,882 million in FY21.",
-    "judge_score": 1.0,
+    "predicted": "Yes, Pfizer's Property, Plant, and Equipment (PP&E) increased from $13,745 million in FY20 to $14,882 million in FY21.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       97,
@@ -3941,15 +3811,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 131,
-    "qid": "financebench__bm25-corpus__online__doc130_qa0__seed42",
-    "judge_rationale": "Yes PPNE grew $13,745M to $14,882M \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc130_qa0__seed42"
   },
   {
     "question": "Were there any potential events that are not in Pfizer's standard business operations that substantially increased net income in 2019?",
     "scoped_question": "[Regarding Pfizer 10k 2021] Were there any potential events that are not in Pfizer's standard business operations that substantially increased net income in 2019?",
     "gold_answer": "Yes, the gain on completion of Consumer Healthcare JV Transaction",
-    "predicted": "Yes, the net income in 2019 was substantially increased by a gain on completion of the Consumer Healthcare JV transaction, which was recorded as a gain of $(8,107) million.",
-    "judge_score": 0.75,
+    "predicted": "Yes, the net income in 2019 was significantly impacted by a gain on completion of the Consumer Healthcare JV transaction, which was recorded as a (gain) of $(8,107) million.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       151,
@@ -3971,15 +3840,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 132,
-    "qid": "financebench__bm25-corpus__online__doc131_qa0__seed42",
-    "judge_rationale": "Yes Consumer Healthcare JV gain identified; magnitude figure $(8,107)M is plausible but not verified."
+    "qid": "financebench__bm25-corpus__online__doc131_qa0__seed42"
   },
   {
     "question": "What are three main companies acquired by Pfizer mentioned in this 10K report?",
     "scoped_question": "[Regarding Pfizer 10k 2021] What are three main companies acquired by Pfizer mentioned in this 10K report?",
     "gold_answer": "Trillium, Array, and Therachon",
-    "predicted": "Trillium, Array, and a clinical stage immuno-oncology company.",
-    "judge_score": 0.5,
+    "predicted": "Trillium, Array, and a commercial stage biopharmaceutical company (not named in the provided text).",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       166,
@@ -4002,15 +3870,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 133,
-    "qid": "financebench__bm25-corpus__online__doc132_qa0__seed42",
-    "judge_rationale": "Trillium and Array correct; describes third only generically (not Therachon)."
+    "qid": "financebench__bm25-corpus__online__doc132_qa0__seed42"
   },
   {
     "question": "How much does Pfizer expect to pay to spin off Upjohn in the future in USD million?",
     "scoped_question": "[Regarding Pfizer 10q 2023] How much does Pfizer expect to pay to spin off Upjohn in the future in USD million?",
     "gold_answer": "77.78",
     "predicted": "Pfizer expects to incur costs of approximately $700 million in connection with separating Upjohn.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       168,
@@ -4032,15 +3899,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 134,
-    "qid": "financebench__bm25-corpus__online__doc133_qa0__seed42",
-    "judge_rationale": "$700M vs gold 77.78 \u2014 wildly different."
+    "qid": "financebench__bm25-corpus__online__doc133_qa0__seed42"
   },
   {
     "question": "For Pfizer, which geographic region had the biggest drop in Q22023 year over year revenues (on a percentage basis)?",
     "scoped_question": "[Regarding Pfizer 10q 2023] For Pfizer, which geographic region had the biggest drop in Q22023 year over year revenues (on a percentage basis)?",
     "gold_answer": "Developed Rest of the World",
-    "predicted": "Developed Rest of World had the biggest drop in Q2 2023 year over year revenues at (74)%.",
-    "judge_score": 1.0,
+    "predicted": "Developed Rest of World",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       169,
@@ -4062,15 +3928,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 135,
-    "qid": "financebench__bm25-corpus__online__doc134_qa0__seed42",
-    "judge_rationale": "Developed Rest of World \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc134_qa0__seed42"
   },
   {
     "question": "As of Q2'2023, is Pfizer spinning off any large business segments?",
     "scoped_question": "[Regarding Pfizer 10q 2023] As of Q2'2023, is Pfizer spinning off any large business segments?",
     "gold_answer": "Yes, it's spinning off Upjohn.",
-    "predicted": "Yes, Pfizer is separating Upjohn as part of its business restructuring.",
-    "judge_score": 1.0,
+    "predicted": "Yes, Pfizer is separating Upjohn.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       168,
@@ -4092,15 +3957,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 136,
-    "qid": "financebench__bm25-corpus__online__doc135_qa0__seed42",
-    "judge_rationale": "Yes separating Upjohn \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc135_qa0__seed42"
   },
   {
     "question": "Which debt securities are registered to trade on a national securities exchange under Ulta Beauty's name as of FY2023?",
     "scoped_question": "[Regarding Ulta Beauty 10k 2023] Which debt securities are registered to trade on a national securities exchange under Ulta Beauty's name as of FY2023?",
     "gold_answer": "There are none",
-    "predicted": "Ulta Beauty has registered common stock, par value $0.01 per share, trading under the symbol ULTA on the NASDAQ Global Select Market.",
-    "judge_score": 0.0,
+    "predicted": "Ulta Beauty has registered common stock, par value $0.01 per share, trading under the symbol ULTA on The NASDAQ Global Select Market.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       171,
@@ -4122,15 +3986,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 137,
-    "qid": "financebench__bm25-corpus__online__doc136_qa0__seed42",
-    "judge_rationale": "Common stock is equity not debt; gold answer is none."
+    "qid": "financebench__bm25-corpus__online__doc136_qa0__seed42"
   },
   {
     "question": "What are major acquisitions that Ulta Beauty has done in FY2023 and FY2022?",
     "scoped_question": "[Regarding Ulta Beauty 10k 2023] What are major acquisitions that Ulta Beauty has done in FY2023 and FY2022?",
     "gold_answer": "Ulta Beauty did not make any acquisitions in FY2023 and FY2022.",
-    "predicted": "The provided passages do not contain information about major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
-    "judge_score": 0.75,
+    "predicted": "The provided passages do not mention any major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       171,
@@ -4152,15 +4015,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 138,
-    "qid": "financebench__bm25-corpus__online__doc137_qa0__seed42",
-    "judge_rationale": "Refused (no info) effectively aligns with gold no acquisitions."
+    "qid": "financebench__bm25-corpus__online__doc137_qa0__seed42"
   },
   {
     "question": "What drove the reduction in SG&A expense as a percent of net sales in FY2023?",
     "scoped_question": "[Regarding Ulta Beauty Earnings 2023] What drove the reduction in SG&A expense as a percent of net sales in FY2023?",
     "gold_answer": "Lower marketing expenses and leverage of incentive compensation due to higher sales. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
-    "predicted": "The reduction in SG&A expenses as a percentage of net sales in FY2023 was primarily due to lower marketing expenses and leverage of incentive compensation due to higher sales, partially offset by deleverage of corporate overhead due to strategic investments and deleverage of store payroll and benefits due to wage investments.",
-    "judge_score": 1.0,
+    "predicted": "The reduction in SG&A expenses as a percentage of net sales in FY2023 was primarily due to lower marketing expenses and leverage of incentive compensation resulting from higher sales, partially offset by deleverage of corporate overhead due to strategic investments and deleverage of store payroll and benefits due to wage investments.",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       173,
@@ -4182,15 +4044,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 139,
-    "qid": "financebench__bm25-corpus__online__doc138_qa0__seed42",
-    "judge_rationale": "Lower marketing + leverage incentive \u2014 matches gold drivers."
+    "qid": "financebench__bm25-corpus__online__doc138_qa0__seed42"
   },
   {
     "question": "What drove the increase in Ulta Beauty's merchandise inventories balance at end of FY2023?",
     "scoped_question": "[Regarding Ulta Beauty Earnings 2023] What drove the increase in Ulta Beauty's merchandise inventories balance at end of FY2023?",
     "gold_answer": "Increase in Merchandise inventories balance was driven by the opening of 47 new stores. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
     "predicted": "The increase in Ulta Beauty's merchandise inventories balance at the end of FY2023 was primarily due to the opening of 47 new stores since January 29, 2022, inventory to support new brand launches and brand expansions, and inventory cost increases.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       174,
@@ -4212,15 +4073,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 140,
-    "qid": "financebench__bm25-corpus__online__doc139_qa0__seed42",
-    "judge_rationale": "47 new stores + brand launches + cost increases \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc139_qa0__seed42"
   },
   {
     "question": "What percent of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023?",
     "scoped_question": "[Regarding Ulta Beauty Earnings 2023] What percent of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023?",
     "gold_answer": "36%. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
-    "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY 2023.",
-    "judge_score": 1.0,
+    "predicted": "21.8%",
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       171,
@@ -4242,15 +4102,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 141,
-    "qid": "financebench__bm25-corpus__online__doc140_qa0__seed42",
-    "judge_rationale": "36.5% vs gold 36% \u2014 within tolerance."
+    "qid": "financebench__bm25-corpus__online__doc140_qa0__seed42"
   },
   {
     "question": "Did Ulta Beauty's wages expense as a percent of net sales increase or decrease in FY2023?",
     "scoped_question": "[Regarding Ulta Beauty Earnings 2023] Did Ulta Beauty's wages expense as a percent of net sales increase or decrease in FY2023?",
     "gold_answer": "Wages expense as a percent of net sales increased in FY2023. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
     "predicted": "Decrease",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       171,
@@ -4272,15 +4131,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 142,
-    "qid": "financebench__bm25-corpus__online__doc141_qa0__seed42",
-    "judge_rationale": "Decrease vs gold increased."
+    "qid": "financebench__bm25-corpus__online__doc141_qa0__seed42"
   },
   {
     "question": "Among all of the derivative instruments that Verizon used to manage the exposure to fluctuations of foreign currencies exchange rates or interest rates, which one had the highest notional value in FY 2021?",
     "scoped_question": "[Regarding Verizon 10k 2021] Among all of the derivative instruments that Verizon used to manage the exposure to fluctuations of foreign currencies exchange rates or interest rates, which one had the highest notional value in FY 2021?",
     "gold_answer": "Cross currency swaps. Its notional value was $32,502 million.",
     "predicted": "Cross currency swaps",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       177,
@@ -4302,15 +4160,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 143,
-    "qid": "financebench__bm25-corpus__online__doc142_qa0__seed42",
-    "judge_rationale": "Cross currency swaps \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc142_qa0__seed42"
   },
   {
     "question": "As of FY 2021, how much did Verizon expect to pay for its retirees in 2024?",
     "scoped_question": "[Regarding Verizon 10k 2021] As of FY 2021, how much did Verizon expect to pay for its retirees in 2024?",
     "gold_answer": "The estimated pension benefits were $1097 million, and the estimated health care and life insurance benefits were $862 million.",
     "predicted": "$1,097 million",
-    "judge_score": 0.5,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       178,
@@ -4333,15 +4190,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 144,
-    "qid": "financebench__bm25-corpus__online__doc143_qa0__seed42",
-    "judge_rationale": "$1,097M pension correct; missed $862M healthcare/life insurance."
+    "qid": "financebench__bm25-corpus__online__doc143_qa0__seed42"
   },
   {
     "question": "Does Verizon have a reasonably healthy liquidity profile based on its quick ratio for FY 2022? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
     "scoped_question": "[Regarding Verizon 10k 2022] Does Verizon have a reasonably healthy liquidity profile based on its quick ratio for FY 2022? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
     "gold_answer": "No. The quick ratio was approximately 0.54 for Verizon. It indicated that Verizon does not have a healthy liquidity profile.",
     "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or its liquidity profile for FY 2022.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       65,
@@ -4363,15 +4219,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 145,
-    "qid": "financebench__bm25-corpus__online__doc144_qa0__seed42",
-    "judge_rationale": "Refused vs gold No 0.54."
+    "qid": "financebench__bm25-corpus__online__doc144_qa0__seed42"
   },
   {
     "question": "Is Verizon a capital intensive business based on FY 2022 data?",
     "scoped_question": "[Regarding Verizon 10k 2022] Is Verizon a capital intensive business based on FY 2022 data?",
     "gold_answer": "Yes. Verizon's capital intensity ratio was approximately 2.774729. This means that it took approximately $2.77 of assets to generate $1 of revenue and thus, Verizon can be considered capital intensive.",
     "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
-    "judge_score": 1.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       181,
@@ -4394,15 +4249,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 146,
-    "qid": "financebench__bm25-corpus__online__doc145_qa0__seed42",
-    "judge_rationale": "Yes capital intensive \u2014 matches gold."
+    "qid": "financebench__bm25-corpus__online__doc145_qa0__seed42"
   },
   {
     "question": "Has Verizon increased its debt on balance sheet between 2022 and the 2021 fiscal period?",
     "scoped_question": "[Regarding Verizon 10k 2022] Has Verizon increased its debt on balance sheet between 2022 and the 2021 fiscal period?",
     "gold_answer": "No. Verizon's debt decreased by $229 million.",
     "predicted": "Yes, Verizon's total debt decreased from $150,868 million in 2021 to $150,639 million in 2022.",
-    "judge_score": 0.25,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       97,
@@ -4424,15 +4278,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 147,
-    "qid": "financebench__bm25-corpus__online__doc146_qa0__seed42",
-    "judge_rationale": "Yes increased contradicts numbers shown (150,868->150,639 is decrease, matches gold direction)."
+    "qid": "financebench__bm25-corpus__online__doc146_qa0__seed42"
   },
   {
     "question": "What is FY2018 days payable outstanding (DPO) for Walmart? DPO is defined as: 365 * (average accounts payable between FY2017 and FY2018) / (FY2018 COGS + change in inventory between FY2017 and FY2018). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the statement of financial position and the P&L statement.",
     "scoped_question": "[Regarding Walmart 10k 2018] What is FY2018 days payable outstanding (DPO) for Walmart? DPO is defined as: 365 * (average accounts payable between FY2017 and FY2018) / (FY2018 COGS + change in inventory between FY2017 and FY2018). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the statement of financial position and the P&L statement.",
     "gold_answer": "42.69",
-    "predicted": "The provided passages do not contain any information regarding Walmart's financial data, including accounts payable, COGS, or inventory changes for FY2018. Therefore, I cannot calculate the days payable outstanding (DPO) for Walmart.",
-    "judge_score": 0.0,
+    "predicted": "The relevant passages do not provide specific financial data for Walmart's FY2018, including average accounts payable, COGS, or changes in inventory. Therefore, it is not possible to calculate the days payable outstanding (DPO) for Walmart based on the provided context.",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       151,
@@ -4455,15 +4308,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 148,
-    "qid": "financebench__bm25-corpus__online__doc147_qa0__seed42",
-    "judge_rationale": "Refused vs gold 42.69."
+    "qid": "financebench__bm25-corpus__online__doc147_qa0__seed42"
   },
   {
     "question": "Based on the information provided primarily in the statement of income, what is the FY2018 - FY2019 change in unadjusted operating income % margin for Walmart? Answer in units of percents and round to one decimal place.",
     "scoped_question": "[Regarding Walmart 10k 2019] Based on the information provided primarily in the statement of income, what is the FY2018 - FY2019 change in unadjusted operating income % margin for Walmart? Answer in units of percents and round to one decimal place.",
     "gold_answer": "0.2%",
-    "predicted": "The unadjusted operating income % margin for FY2018 is calculated as follows:\n\nOperating income for FY2018: $20,437 million  \nTotal revenues for FY2018: $500,343 million  \nOperating income % margin for FY2018 = (Operating income / Total revenues) * 100 = (20,437 / 500,343) * 100 \u2248 4.1%\n\nFor FY2019, the operating income is not provided in the passages, so we cannot calculate the change in unadjusted operating income % margin for Walmart from FY2018 to FY2019. \n\nTherefore, the answer is not determinable based on the provided information.",
-    "judge_score": 0.0,
+    "predicted": "The unadjusted operating income % margin for Walmart in FY2018 is calculated as follows:\n\nOperating income for FY2018: $20,437 million  \nTotal revenues for FY2018: $500,343 million  \n\nOperating income % margin for FY2018 = (Operating income / Total revenues) * 100  \n= ($20,437 / $500,343) * 100  \n= 4.1%\n\nFor FY2019, the operating income is not provided in the passages, so we cannot calculate the change in unadjusted operating income % margin for Walmart from FY2018 to FY2019. \n\nTherefore, the answer is: Data not available.",
+    "judge_score": null,
     "recall_at_k": 0.0,
     "retrieved_steps": [
       151,
@@ -4485,15 +4337,14 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 149,
-    "qid": "financebench__bm25-corpus__online__doc148_qa0__seed42",
-    "judge_rationale": "Cannot calculate vs gold 0.2%."
+    "qid": "financebench__bm25-corpus__online__doc148_qa0__seed42"
   },
   {
     "question": "What is the FY2018 - FY2020 3 year average unadjusted EBITDA % margin for Walmart? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization from the cash flow statement. Answer in units of percents and round to one decimal place. Calculate what was asked by utilizing the line items clearly shown in the P&L statement and the cash flow statement.",
     "scoped_question": "[Regarding Walmart 10k 2020] What is the FY2018 - FY2020 3 year average unadjusted EBITDA % margin for Walmart? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization from the cash flow statement. Answer in units of percents and round to one decimal place. Calculate what was asked by utilizing the line items clearly shown in the P&L statement and the cash flow statement.",
     "gold_answer": "6.2%",
     "predicted": "The FY2018 - FY2020 3 year average unadjusted EBITDA % margin for Walmart is 10.5%.",
-    "judge_score": 0.0,
+    "judge_score": null,
     "recall_at_k": 1.0,
     "retrieved_steps": [
       151,
@@ -4516,7 +4367,6 @@
     "qa_idx_in_doc": 0,
     "mode": "online",
     "docs_seen": 150,
-    "qid": "financebench__bm25-corpus__online__doc149_qa0__seed42",
-    "judge_rationale": "10.5% vs gold 6.2% \u2014 69% off."
+    "qid": "financebench__bm25-corpus__online__doc149_qa0__seed42"
   }
 ]
