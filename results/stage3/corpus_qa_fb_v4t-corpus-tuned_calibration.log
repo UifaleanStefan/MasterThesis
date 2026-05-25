@@ -1,0 +1,30 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10300.99it/s]
+
+==============================================================================
+  CORPUS QA  benchmark=financebench (domain_coherent)
+  config=v4t-corpus-tuned  seed=42  protocol=calibration
+  online=False  batch=True  k=8  limit_docs=ALL
+  calibration: 10 random q's per doc-end
+==============================================================================
+Using the latest cached version of the dataset since PatronusAI/financebench couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\data\benchmarks\hf_cache\PatronusAI___financebench\default\0.0.0\e04404e3a97f69f79c14d42f24981a1c9c3bcd18 (last modified on Sat May 16 16:44:02 2026).
+  Loaded 150 docs.
+  Calibration: pre-built inventory of 150 questions across 150 docs (sampler will draw 10 per doc-end).
+  V4t params: theta_store=0.010 theta_entity=0.557 w_embed=2.633 w_recency=0.003
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|█████████�  doc    25/150    global_step=     34  events_stored=    34  online_qa=    0  calib_qa=  250  cost=$0.1234  elapsed= 302.1s
+  doc    50/150    global_step=     62  events_stored=    62  online_qa=    0  calib_qa=  500  cost=$0.2515  elapsed= 658.6s
+  doc    75/150    global_step=     92   doc    75/150    global_step=     92  events_stored=    92  online_qa=    0  calib_qa=  750  cost=$0.3741  elapsed= 963.8s
+  doc   100/150    global_step=    125  events_stored=   125  online_qa=    0  calib_qa= 1000  cost=$0.5008  elapsed=1248.4s
+  doc   125/150    global_step=    159  events_stored=   159  online_qa=    0  calib_qa= 1250  cost=$0.6225  elapsed=1602.8s
+  doc   150/150    global_step=    189  events_stored=   189  online_qa=    0  calib_qa= 1500  cost=$0.7411  elapsed=2007.5s
+
+  Running batch QA on 150 questions against final memory...
+  batch   100/150    cost=$0.7897  elapsed= 123.2s
+  batch   150/150    cost=$0.8140  elapsed= 168.9s
+[claude_judge_queue] wrote 150 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\financebench__v4t-corpus-tuned__batch_calib__seed42\queue.jsonl
+[claude_judge_queue] wrote 1500 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\financebench__v4t-corpus-tuned__calibration__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\financebench__v4t-corpus-tuned__calibration
+  Total cost: $0.8140
+  Batch:  n=150  recall@k=0.9667  judge=pending Claude judging
+  Calibration: n=1500  expected_answer=745  expected_acknowledge_missing=755  recall@k=0.4780  judge=pending Claude judging

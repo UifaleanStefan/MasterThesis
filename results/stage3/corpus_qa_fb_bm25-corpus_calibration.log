@@ -1,0 +1,35 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 11446.79it/s]
+
+==============================================================================
+  CORPUS QA  benchmark=financebench (domain_coherent)
+  config=bm25-corpus  seed=42  protocol=calibration
+  online=False  batch=True  k=8  limit_docs=ALL
+  calibration: 10 random q's per doc-end
+==============================================================================
+Using the latest cached version of th
+==============================================================================
+  CORPUS QA  benchmark=financebench (domain_coherent)
+  config=bm25-corpus  seed=42  protocol=calibration
+  online=False  batch=True  k=8  limit_docs=ALL
+  calibration: 10 random q's per doc-end
+==============================================================================
+  Loaded 150 docs.
+  Calibration: pre-built inventory of 150 questions across 150 docs (sampler will draw 10 per doc-end).
+  Memory: BM25Memory (no tunable params; pure sparse retrieval)
+  doc    25/150    global_step=     34  events_stored=    34  online_qa=    0  calib_qa=  250  cost=$0.1401  elapsed= 288.1s
+  doc    50/150    global_step=     62  events_stored=    62  online_qa=    0  calib_qa=  500  cost=$0.2798  elapsed= 594.5s
+  doc    75/150    g  doc    75/150    global_step=     92  events_stored=    92  online_qa=    0  calib_qa=  750  cost=$0.4339  elapsed= 915.1s
+  doc   100/150    global_step=    125  events_stored=   125  online_qa=    0  calib_qa= 1000  cost=$0.5788  elapsed=1223.8s
+  doc   125/150    global_step=    159  events_stored=   159  online_qa=    0  calib_qa= 1250  cost=$0.7175  elapsed=1517.3s
+  doc   150/150    global_step=    189  events_stored=   189  online_qa=    0  calib_qa= 1500  cost=$0.8623  elapsed=1786.0s
+
+  Running batch QA on 150 questions against final memory...
+  batch   100/150    cost=$0.9197  elapsed= 123.1s
+  batch   150/150    cost=$0.9484  elapsed= 181.4s
+[claude_judge_queue] wrote 150 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\financebench__bm25-corpus__batch_calib__seed42\queue.jsonl
+[claude_judge_queue] wrote 1500 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\financebench__bm25-corpus__calibration__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\financebench__bm25-corpus__calibration
+  Total cost: $0.9484
+  Batch:  n=150  recall@k=0.7000  judge=pending Claude judging
+  Calibration: n=1500  expected_answer=745  expected_acknowledge_missing=755  recall@k=0.3813  judge=pending Claude judging

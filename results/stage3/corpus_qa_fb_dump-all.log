@@ -1,0 +1,29 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 6865.96it/s]
+Using the latest cached version of the dataset since PatronusAI/financebench couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\data\benchmarks\hf_cache\PatronusAI___financebench\default\0.0.0\e04404e3a97f69f79c14d42f24981a1c9c3bcd18 (last modified on Sat May 16 16:44:02 2026).
+
+==============================================================================
+  CORPUS QA  benchmark=financebench (domain_coherent)
+  config=dump-all  seed=42
+  online=True  batch=True  k=8  limit_docs=ALL
+==============================================================================
+  Loaded 150 docs.
+  Memory: DumpAllMemory (no tunable params; pure sparse retrieval)
+  doc    25/150    global_step=     34  events_stored=    34  online_qa=   25  cost=$0.0193  elapsed=  46.6s
+  doc    50/150    global_step=     62  events_stored=    62  online_qa=   50  cost=$0.0376  elapsed= 103.7s
+  doc    75/150    global_step=     92  events_stored=    92  online_qa=   75  cost=$0.0587  elapsed= 164.0s
+  doc   100/150    global_step=    125  events_stored=   125  online_qa=  100  cost=$0.0777  elapsed= 227.9s
+  doc   125/150    global_step=    159  events_stored=   159  online_qa=  125  cost=$0.0987  elapsed= 268.3s
+  doc   150/150    global_step=    189  events_stored=   189  online_qa=  150  cost=$0.1138  elapsed= 326.5s
+
+  Running batch QA on 150 questions against final memory...
+  batch   100/150    cost=$0.1835  elapsed= 151.1s
+  batch   150/150    cost=$0.2183  elapsed= 236.9s
+[claude_judge_queue] wrote 150 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\financebench__dump-all__online__seed42\queue.jsonl
+[claude_judge_queue] wrote 150 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\financebench__dump-all__batch__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\financebench__dump-all
+  Total cost: $0.2183
+  Online: n=150  recall@k=1.0000  judge=pending Claude judging
+  Batch:  n=150  recall@k=1.0000  judge=pending Claude judging
+  Online vs batch recall: diff=+0.0000  agreement=1.000
