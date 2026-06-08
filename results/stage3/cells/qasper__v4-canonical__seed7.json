@@ -1417,8 +1417,8 @@
       "doc_fingerprint": "sha256:94f55a04ff0df7c09fb3c7a658461fdfe472e84319aaa0c145c8659161802493",
       "n_paragraphs": 59,
       "question": "What languages pairs are used in machine translation?",
-      "gold_answer": "German\u2013English",
-      "predicted": "German\u2013English",
+      "gold_answer": "German–English",
+      "predicted": "German–English",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -2748,7 +2748,7 @@
       "n_paragraphs": 55,
       "question": "what is the state of the art?",
       "gold_answer": "Babelfy, DBpedia Spotlight, Entityclassifier.eu, FOX, LingPipe MUC-7, NERD-ML, Stanford NER, TagMe 2",
-      "predicted": "The state of the art includes achieving F1 scores between 84\u201394% using bidirectional multi-layered LSTMs, letter-trigram word hashing, and surface form features on a limited number of training examples.",
+      "predicted": "The state of the art includes achieving F1 scores between 84–94% using bidirectional multi-layered LSTMs, letter-trigram word hashing, and surface form features on a limited number of training examples.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -2794,7 +2794,9 @@
         54
       ],
       "prompt_tokens_estimated": 565,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: 84-94% F1 LSTMs; gold list of NER systems. [transferred from global qasper dedupe]"
     },
     {
       "doc_idx": 83,
@@ -3372,5 +3374,9 @@
       "prompt_tokens_estimated": 507,
       "projected_cost_usd": 0.0
     }
-  ]
+  ],
+  "mean_claude_judge_score": 0.0,
+  "n_with_claude_judge": 1,
+  "claude_minus_gpt4omini_delta": 0.0,
+  "queue_dir_used": "p4_main__qasper__v4-canonical__seed7"
 }

@@ -55,7 +55,9 @@
         4
       ],
       "prompt_tokens_estimated": 733,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: varying training data; gold no data/pretrained."
     },
     {
       "doc_idx": 1,
@@ -80,7 +82,9 @@
         48
       ],
       "prompt_tokens_estimated": 1108,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: 20 Newsgroups; gold CoNLL 2003."
     },
     {
       "doc_idx": 2,
@@ -106,7 +110,9 @@
         59
       ],
       "prompt_tokens_estimated": 507,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "Yes pre-training effective = Yes."
     },
     {
       "doc_idx": 3,
@@ -131,7 +137,9 @@
         7
       ],
       "prompt_tokens_estimated": 922,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: BERT from BIBREF12; gold MaxEnt/SVM."
     },
     {
       "doc_idx": 4,
@@ -160,7 +168,9 @@
         67
       ],
       "prompt_tokens_estimated": 447,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "Experiments non-ironic transformations - partial vs Irony Classifier."
     },
     {
       "doc_idx": 5,
@@ -186,15 +196,17 @@
         24
       ],
       "prompt_tokens_estimated": 545,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: No sensitive to seed; gold Yes."
     },
     {
       "doc_idx": 6,
       "doc_fingerprint": "sha256:94f55a04ff0df7c09fb3c7a658461fdfe472e84319aaa0c145c8659161802493",
       "n_paragraphs": 59,
       "question": "What languages pairs are used in machine translation?",
-      "gold_answer": "German\u2013English",
-      "predicted": "German\u2013English",
+      "gold_answer": "German–English",
+      "predicted": "German–English",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -211,7 +223,9 @@
         44
       ],
       "prompt_tokens_estimated": 541,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "German-English exact."
     },
     {
       "doc_idx": 7,
@@ -259,7 +273,9 @@
         31
       ],
       "prompt_tokens_estimated": 773,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: levels 2/3/4 preprocessing; gold raw text."
     },
     {
       "doc_idx": 8,
@@ -286,7 +302,9 @@
         17
       ],
       "prompt_tokens_estimated": 1227,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "Low precision rates / ambiguity - close to gold."
     },
     {
       "doc_idx": 9,
@@ -312,7 +330,9 @@
         61
       ],
       "prompt_tokens_estimated": 469,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "BIBREF9 + BIBREF8 - contains gold."
     },
     {
       "doc_idx": 10,
@@ -337,7 +357,9 @@
         16
       ],
       "prompt_tokens_estimated": 809,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "De-En + Ja-En + Ro-En - contains De-En."
     },
     {
       "doc_idx": 11,
@@ -360,7 +382,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 789,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "Acknowledges interannotator not specified - matches unanswerable."
     },
     {
       "doc_idx": 12,
@@ -386,7 +410,9 @@
         52
       ],
       "prompt_tokens_estimated": 1180,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: male/European American; gold female anger/joy/valence."
     },
     {
       "doc_idx": 13,
@@ -411,7 +437,9 @@
         19
       ],
       "prompt_tokens_estimated": 273,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: loss function analysis; gold long CLIR."
     },
     {
       "doc_idx": 14,
@@ -436,7 +464,9 @@
         66
       ],
       "prompt_tokens_estimated": 752,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "Acknowledges no crowdsourcing - partial vs No."
     },
     {
       "doc_idx": 15,
@@ -468,7 +498,9 @@
         12
       ],
       "prompt_tokens_estimated": 1219,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: 0.92/0.97 F1; gold 2.3-6.8."
     },
     {
       "doc_idx": 16,
@@ -493,7 +525,9 @@
         4
       ],
       "prompt_tokens_estimated": 699,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "Yes with word segmentation/spelling challenges = Yes."
     },
     {
       "doc_idx": 17,
@@ -516,7 +550,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 316,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "Acknowledges humans not specified - matches unanswerable."
     },
     {
       "doc_idx": 18,
@@ -543,7 +579,9 @@
         75
       ],
       "prompt_tokens_estimated": 574,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: new metrics for diversity; gold average unique predictions."
     },
     {
       "doc_idx": 19,
@@ -569,7 +607,9 @@
         29
       ],
       "prompt_tokens_estimated": 704,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: CNN/DailyMail; gold BIBREF26."
     },
     {
       "doc_idx": 20,
@@ -592,7 +632,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 631,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "Acknowledges improvement not specified - matches unanswerable."
     },
     {
       "doc_idx": 21,
@@ -644,7 +686,9 @@
         37
       ],
       "prompt_tokens_estimated": 953,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: Turkish; gold Russian."
     },
     {
       "doc_idx": 22,
@@ -670,7 +714,9 @@
         48
       ],
       "prompt_tokens_estimated": 753,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: Libertarianism etc.; gold politics/business/science/AskReddit."
     },
     {
       "doc_idx": 23,
@@ -701,7 +747,9 @@
         43
       ],
       "prompt_tokens_estimated": 485,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Wrong: Jasper architecture; gold unanswerable."
     },
     {
       "doc_idx": 24,
@@ -724,7 +772,13 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 1172,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "Acknowledges not mentioned - partial vs No."
     }
-  ]
+  ],
+  "mean_claude_judge_score": 0.39,
+  "n_with_claude_judge": 25,
+  "claude_minus_gpt4omini_delta": 0.15000000000000002,
+  "queue_dir_used": "p4_main__qasper__v4-tuned-heldout__seed42"
 }
