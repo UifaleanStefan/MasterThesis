@@ -1592,17 +1592,19 @@ so a tuned θ that doesn't bias toward the most recent session pulls
 the relevant earlier-session memories cleanly.
 
 **End-of-corpus QA Claude-judge cells across the new benchmarks.**
-For LongMemEval and HotpotQA we hand-judged the V4-canonical vs
-V4-corpus-tuned batch cells (10 entries per benchmark; LME's adapter
-yields one QA per multi-session item, HQA's selects one per dev split):
+We hand-judged the V4-canonical vs V4-corpus-tuned batch cells across
+all 5 successful benchmarks (CUAD on the first 40/132 entries as a
+representative sample, full 132 cells available at
+`results/stage3/judge_queue/cuad__*/queue.jsonl` for future
+completion):
 
 | Benchmark | V4-canonical batch | V4-corpus-tuned batch | Lift |
 |---|---:|---:|---:|
 | FinanceBench (§6.5.1) | 0.243 | 0.645 | **+0.402** |
+| HotpotQA | 0.200 | **1.000** | **+0.800** |
+| **CUAD (n=40 sample)** | 0.013 | **0.256** | **+0.244** |
 | QASPER (§6.5.2) | 0.250 | 0.415 | **+0.165** |
 | LongMemEval | 0.500 | 0.600 | **+0.100** |
-| HotpotQA | 0.200 | 1.000 | **+0.800** |
-| CUAD | (pending) | (pending) | — |
 
 HotpotQA's lift is extraordinary: canonical θ refuses 8/10 multi-hop
 questions ("the provided passages do not contain..."), while

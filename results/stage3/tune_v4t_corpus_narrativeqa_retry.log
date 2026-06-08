@@ -1,0 +1,27 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9801.78it/s]
+Using the latest cached version of the dataset since deepmind/narrativeqa couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\data\benchmarks\hf_cache\deepmind___narrativeqa\default\0.0.0\2e643e7363944af1c33a652d1c87320d0871c4e4 (last modified on Sat May 16 16:43:59 2026).
+Traceback (most recent call last):
+  File "D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\tuning\tune_v4t_corpus.py", line 247, in main
+    result = tune_one_benchmark(
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\tuning\tune_v4t_corpus.py", line 159, in tune_one_benchmark
+    eval_fn, n_total = make_corpus_eval_fn(benchmark, limit_docs, k, seed=seed)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\tuning\tune_v4t_corpus.py", line 114, in make_corpus_eval_fn
+    raise RuntimeError(f"adapter {benchmark!r} produced no QAs with gold under limit_docs={limit_docs}")
+RuntimeError: adapter 'narrativeqa' produced no QAs with gold under limit_docs=5
+
+==============================================================================
+  V4t corpus tuning for 'narrativeqa'
+  limit_docs=5  n_generations=12  sigma=0.2  seed=42  k=8
+==============================================================================
+  [eval_fn] narrativeqa: 5 docs, 0 eval QAs with gold
+  -> saved D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\tuned_theta_v4t_corpus_narrativeqa.json
+
+==============================================================================
+  V4t CORPUS-MODE TUNING SUMMARY
+==============================================================================
+  Total elapsed: 11.7s
+  benchmark         status   canonical       tuned        lift     w_graph
+  narrativeqa        error

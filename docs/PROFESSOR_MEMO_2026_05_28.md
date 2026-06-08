@@ -46,6 +46,7 @@ fresh hand-judgments** behind the §5.4 + §6.5 tables.
    |---|---:|---:|---:|
    | FinanceBench | 0.243 | 0.645 | **+0.402** |
    | HotpotQA | 0.200 | **1.000** | **+0.800** |
+   | CUAD (n=40 sample) | 0.013 | 0.256 | **+0.244** |
    | QASPER | 0.250 | 0.415 | +0.165 |
    | LongMemEval | 0.500 | 0.600 | +0.100 |
 
