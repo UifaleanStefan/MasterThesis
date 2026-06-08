@@ -1,9 +1,37 @@
 # Recent Changes — Session Log
 
 **Purpose:** Record of work done on the thesis codebase (analysis, fixes, dashboard, figures).
-**Last updated:** May 2026
+**Last updated:** June 2026
 
 ---
+
+## -16. CUAD Protocol A complete — 1,188q Claude-judged, §6.5.3 updated (June 8 2026)
+
+All 9 CUAD Protocol A cells (online + batch for 6 configs) now fully
+Claude-judged 1-by-1 (1,188 judgments total, audit: 38,654 total Claude
+judge lines, 250 cells parity-green):
+
+| Cell | n | Mean |
+|---|---:|---:|
+| cuad__v4t-tuned__online | 132 | **0.409** |
+| cuad__attention-corpus-tuned__batch | 132 | 0.320 |
+| cuad__bm25-corpus__batch | 132 | 0.269 |
+| cuad__v4t-corpus-tuned__online | 132 | 0.261 |
+| cuad__v4t-canonical__online | 132 | 0.212 |
+| cuad__v4t-corpus-tuned__batch | 132 | 0.184 |
+| cuad__v4t-tuned__batch | 132 | 0.125 |
+| cuad__v4t-canonical__batch | 132 | 0.023 |
+| cuad__dump-all__batch | 132 | 0.015 |
+
+Key finding: online mode dramatically outperforms batch on CUAD (+0.284
+for v4t-tuned). The dump-all and v4t-canonical batch modes nearly fail
+due to EKR/PPI promissory note context bleeding into all 10 contracts.
+
+New scripts: `scripts/build_cuad_corpus_qa_data.py`,
+output: `results/stage3/cuad_corpus_summary.json`.
+
+Chapter §6.5.3 updated: "CUAD pending" → full 132q numbers, online-vs-batch
+gap table, attention-corpus-tuned comparison, "N=5 all complete" conclusion.
 
 ## -15. Phase 1.9 full N=5/6 cross-benchmark θ validation (May 28 2026)
 

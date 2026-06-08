@@ -1530,8 +1530,7 @@ papers with entity-rich narrative prose), the same four shifts in θ
 emerge under corpus-cumulative tuning, and the same end-of-corpus QA
 advantage materializes. This is no longer "what happened on
 FinanceBench"; it is what corpus-cumulative tuning does when the regime
-allows it. Caveat: N=2 is still small — replication across 3+ benchmarks
-(CUAD, LongMemEval) is future work (§7.5).
+allows it. §6.5.3 extends this finding to all five successful benchmarks.
 
 ¹ The `attention-corpus-tuned` cell hit OpenAI API quota mid-run; 59/94
 entries returned fallback predictions (paper title + first paragraph
@@ -1547,11 +1546,12 @@ verifies every judge line carries Claude provenance.
 
 ### 6.5.3 Full six-benchmark cross-validation of the four-shift finding
 
-§6.5.1 and §6.5.2 demonstrated the four-shift in θ on FinanceBench and QASPER
-(N=2). To push the architectural claim further, we ran corpus-cumulative
-CMA-ES tuning across **all six benchmarks** (`tuning/tune_v4t_corpus.py`,
-no-LLM-in-the-loop, ~$0 cost), producing per-benchmark `θ_v4t_corpus`
-vectors that we can directly compare against the canonical grid-world θ.
+§6.5.1 and §6.5.2 demonstrated the four-shift in θ on FinanceBench and QASPER.
+To push the architectural claim across all remaining benchmarks, we ran
+corpus-cumulative CMA-ES tuning across **all six benchmarks**
+(`tuning/tune_v4t_corpus.py`, no-LLM-in-the-loop, ~$0 cost), producing
+per-benchmark `θ_v4t_corpus` vectors that we can directly compare against
+the canonical grid-world θ.
 
 **Result — the four-shift replicates across 5 of 6 benchmarks:**
 
@@ -1591,20 +1591,51 @@ hops in a single retrieval. LongMemEval also nearly maxes out
 so a tuned θ that doesn't bias toward the most recent session pulls
 the relevant earlier-session memories cleanly.
 
-**End-of-corpus QA Claude-judge cells across the new benchmarks.**
-We hand-judged the V4-canonical vs V4-corpus-tuned batch cells across
-all 5 successful benchmarks (CUAD on the first 40/132 entries as a
-representative sample, full 132 cells available at
-`results/stage3/judge_queue/cuad__*/queue.jsonl` for future
-completion):
+**End-of-corpus QA Claude-judge cells across all five successful benchmarks.**
+All 9 CUAD Protocol A cells (1,188 Claude judgments) are now complete.
+Combined with the earlier QASPER, HotpotQA, LongMemEval, and FinanceBench
+cells, we have a full cross-benchmark picture (46 Claude-judged cells,
+2,868 hand-judged entries across 5 benchmarks):
 
 | Benchmark | V4-canonical batch | V4-corpus-tuned batch | Lift |
 |---|---:|---:|---:|
 | FinanceBench (§6.5.1) | 0.243 | 0.645 | **+0.402** |
 | HotpotQA | 0.200 | **1.000** | **+0.800** |
-| **CUAD (n=40 sample)** | 0.013 | **0.256** | **+0.244** |
 | QASPER (§6.5.2) | 0.250 | 0.415 | **+0.165** |
+| **CUAD (n=132, full)** | **0.023** | **0.184** | **+0.161** |
 | LongMemEval | 0.500 | 0.600 | **+0.100** |
+
+CUAD's lift (+0.161) holds at roughly the same level as QASPER (+0.165)
+despite the batch mode facing a severe **context-bleed problem**: the
+v4t-canonical batch mean (0.023) is near-zero because the memory system,
+after ingesting all 10 contracts, retrieves EKR/PPI promissory note context
+for unrelated contracts (doc0–doc7). Corpus-tuned θ — with its `w_embed`
+boost and near-zero `w_recency` — partially corrects this by favouring
+semantic similarity over recency, recovering to 0.184.
+
+**CUAD's most striking finding is the online-vs-batch gap:**
+
+| Config | Online | Batch | Gap |
+|---|---:|---:|---:|
+| V4ₜ canonical | 0.212 | 0.023 | +0.189 |
+| V4ₜ per-doc tuned | **0.409** | 0.125 | +0.284 |
+| V4ₜ corpus-tuned | 0.261 | 0.184 | +0.077 |
+
+The online mode gap is far larger on CUAD than on any other benchmark.
+When the memory system processes each contract individually (online mode),
+it correctly localises the QA to that contract's text. When it processes
+all 10 at batch end, the EKR/PPI promissory note (the longest and most
+entity-rich document, doc9) dominates the graph and bleeds into other
+contracts. **V4ₜ per-doc tuned online (0.409) is the best CUAD result**
+— the individually-tuned θ per contract is the most resistant to
+cross-document interference, and online mode prevents post-hoc retrieval
+confusion entirely.
+
+Attention-corpus-tuned outperforms v4t-corpus-tuned in batch mode on CUAD
+(0.320 vs 0.184), unlike QASPER where API quota errors compromised the
+attention cell. For CUAD, attention's explicit paragraph-gating selects
+clause-bearing paragraphs that are uniquely identifying per contract,
+partially sidestepping the EKR/PPI bleed.
 
 HotpotQA's lift is extraordinary: canonical θ refuses 8/10 multi-hop
 questions ("the provided passages do not contain..."), while
@@ -1615,9 +1646,7 @@ person-comparison ("Who is older, X or Y?"), nationality joins
 behavioural demonstration of the four-shift's effect: corpus-tuned θ
 with `w_recency → 0`, `w_embed ↑↑↑`, and `w_graph ↑` produces a
 memory that supports multi-hop joins without recency bias, exactly
-the regime HotpotQA tests. CUAD QA cells are produced
-(`results/stage3/corpus_traces/cuad__*/qa_*.json`, 132 entries per
-cell) but Claude-judge cells remain pending in this draft.
+the regime HotpotQA tests.
 
 **Interpretation across N=5 benchmarks.** The four-shift is no longer
 "what happened on FinanceBench" or even "what happened on FB + QASPER" —
@@ -1627,12 +1656,17 @@ it. The signature
 (`w_recency → ~0`, `w_embed ↑↑`, `theta_store → ~0`, `w_graph ↑`) is
 consistent across financial filings, NLP papers, legal contracts,
 multi-session dialogue, and multi-hop Wikipedia. The CUAD divergence
-on `theta_store` is the only deviation — and it points toward a
-benchmark-specific insight (clause extraction wants more selective
-storage), not a refutation of the central claim.
+on `theta_store` is the only deviation across 20 parameter-benchmark
+measurements — and it points toward a benchmark-specific insight (clause
+extraction wants more selective storage), not a refutation of the central
+claim. With all five benchmark Protocol A cells now fully Claude-judged
+(2,868 entries across 46 cells), this is the most complete cross-benchmark
+verification achievable within this thesis scope.
 
-Full data: `results/stage3/multi_corpus_summary.json` (per-benchmark
-configs, θ vectors, recall lifts, judge counts).
+Full data: `results/stage3/multi_corpus_summary.json`,
+`results/stage3/qasper_corpus_summary.json`,
+`results/stage3/cuad_corpus_summary.json`
+(per-benchmark configs, θ vectors, recall lifts, judge counts).
 
 ### 6.6 Limitations (generic risks of the framework)
 
