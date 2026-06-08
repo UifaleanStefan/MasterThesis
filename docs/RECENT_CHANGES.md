@@ -5,6 +5,19 @@
 
 ---
 
+## -17. QASPER Protocol B complete — 4,820q Claude-judged, §6.5.2 Protocol B paragraph added (June 8 2026)
+
+QASPER Protocol B (v4t-canonical + bm25-corpus calibration cells): 2 × 2,410
+entries hand-judged 1-by-1 by Claude Opus 4.7 (1M context). Key headline numbers:
+- v4t-canonical: calib_mean=0.421, batch_calib_mean=0.133
+  (ack_mean=0.704 — extreme recency accidentally helps honest refusal)
+- bm25-corpus: calib_mean=0.339, batch_calib_mean=0.294
+  (ack_mean=0.398 — no-decay keyword retrieval hallucinates from wrong docs;
+   ans_mean=0.280 — keyword retrieval fidelity 2× v4t-canonical when doc present)
+Section §6.5.2 extended with Protocol B calibration table and mechanistic analysis.
+Audit: 44,144 total Claude-judge lines, 267 cells queue-parity green.
+Commits: 17eb6c9 (v4t-canonical), fba9bbd (bm25-corpus).
+
 ## -16. CUAD Protocol A complete — 1,188q Claude-judged, §6.5.3 updated (June 8 2026)
 
 All 9 CUAD Protocol A cells (online + batch for 6 configs) now fully

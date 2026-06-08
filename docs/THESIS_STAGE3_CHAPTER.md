@@ -1533,6 +1533,34 @@ advantage materializes. This is no longer "what happened on
 FinanceBench"; it is what corpus-cumulative tuning does when the regime
 allows it. §6.5.3 extends this finding to all five successful benchmarks.
 
+**Protocol B calibration — BM25 vs V4ₜ-canonical on QASPER.**
+Two Protocol B cells (2 × 2,410 entries; v4t-canonical and bm25-corpus)
+were hand-judged 1-by-1 with Claude Opus 4.7. The calibration phase
+samples 5 questions per doc-end during corpus ingestion, tagging each with
+`expected_behavior=acknowledge_missing` (source doc not yet ingested) or
+`expected_behavior=answer` (source doc already ingested).
+
+| Config | Calib overall | Calib ack_mean | Calib ans_mean | batch_calib |
+|---|---:|---:|---:|---:|
+| V4ₜ canonical | 0.421 | **0.704** | 0.130 | 0.133 |
+| BM25 sparse | 0.339 | 0.398 | **0.280** | **0.294** |
+
+The inversion is mechanistically informative. V4ₜ-canonical's extreme
+`w_recency` (3.777) accidentally helps on `acknowledge_missing` entries:
+since only the most recently-ingested documents score highly, questions
+about docs further back in the ingestion sequence fall below retrieval
+threshold — producing a correct refusal for the right wrong reason.
+BM25 (no decay, perfect keyword recall) has no such built-in forgetting:
+it matches text fragments across all ingested documents regardless of
+when they arrived, hallucinating plausible answers from unrelated papers
+that share vocabulary with the question (0.398 ack_mean vs 0.704).
+Conversely, when the source doc IS present, BM25 surfaces it via keyword
+overlap more reliably (0.280 ans_mean vs 0.130), and at full corpus the
+gap widens further (0.294 vs 0.133 batch_calib). This establishes the
+diagnostic pattern §6.5.1 observed: calibration separates configs along
+the *honest-refusal axis*, while batch_calib separates them along the
+*retrieval-fidelity axis*.
+
 ¹ The `attention-corpus-tuned` cell hit OpenAI API quota mid-run; 59/94
 entries returned fallback predictions (paper title + first paragraph
 fragment). Real-answer-only mean on the 35 valid entries: 0.421 — within
@@ -1595,8 +1623,9 @@ the relevant earlier-session memories cleanly.
 **End-of-corpus QA Claude-judge cells across all five successful benchmarks.**
 All 9 CUAD Protocol A cells (1,188 Claude judgments) are now complete.
 Combined with the earlier QASPER, HotpotQA, LongMemEval, and FinanceBench
-cells, we have a full cross-benchmark picture (46 Claude-judged cells,
-2,868 hand-judged entries across 5 benchmarks):
+cells, we have a full cross-benchmark picture (47 Claude-judged Protocol A cells,
+4,004 hand-judged entries across 5 benchmarks — FB 12×150, QASPER 9×94,
+CUAD 9×132, HQA 8×10, LME 9×10):
 
 | Benchmark | V4-canonical batch | V4-corpus-tuned batch | Lift |
 |---|---:|---:|---:|
