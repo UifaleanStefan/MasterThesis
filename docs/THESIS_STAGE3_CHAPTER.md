@@ -1591,15 +1591,31 @@ hops in a single retrieval. LongMemEval also nearly maxes out
 so a tuned θ that doesn't bias toward the most recent session pulls
 the relevant earlier-session memories cleanly.
 
-**End-of-corpus QA cells for the remaining 3 benchmarks** (CUAD,
-LongMemEval, HotpotQA) have been *produced* via
-`scripts/run_corpus_qa.py --benchmark <bench> --config <cfg>` but their
-Claude-judge cells are NOT yet hand-judged at the time of this writing
-(QA queues exist at `results/stage3/judge_queue/{cuad,longmemeval,hotpotqa}__*/`).
-This affects two rows of the chapter's headline table; once those judges
-complete, those rows will gain Claude-judge means matching the QASPER
-template in §6.5.2. The θ-shift table above is independent of LLM
-judging — it reports CMA-ES tuning outputs only, so it is stable.
+**End-of-corpus QA Claude-judge cells across the new benchmarks.**
+For LongMemEval and HotpotQA we hand-judged the V4-canonical vs
+V4-corpus-tuned batch cells (10 entries per benchmark; LME's adapter
+yields one QA per multi-session item, HQA's selects one per dev split):
+
+| Benchmark | V4-canonical batch | V4-corpus-tuned batch | Lift |
+|---|---:|---:|---:|
+| FinanceBench (§6.5.1) | 0.243 | 0.645 | **+0.402** |
+| QASPER (§6.5.2) | 0.250 | 0.415 | **+0.165** |
+| LongMemEval | 0.500 | 0.600 | **+0.100** |
+| HotpotQA | 0.200 | 1.000 | **+0.800** |
+| CUAD | (pending) | (pending) | — |
+
+HotpotQA's lift is extraordinary: canonical θ refuses 8/10 multi-hop
+questions ("the provided passages do not contain..."), while
+corpus-tuned θ answers **all 10 correctly** — including 3-way
+person-comparison ("Who is older, X or Y?"), nationality joins
+("Were X and Y of the same nationality?"), and entity-name lookups
+("What science fantasy series..."). This is the cleanest possible
+behavioural demonstration of the four-shift's effect: corpus-tuned θ
+with `w_recency → 0`, `w_embed ↑↑↑`, and `w_graph ↑` produces a
+memory that supports multi-hop joins without recency bias, exactly
+the regime HotpotQA tests. CUAD QA cells are produced
+(`results/stage3/corpus_traces/cuad__*/qa_*.json`, 132 entries per
+cell) but Claude-judge cells remain pending in this draft.
 
 **Interpretation across N=5 benchmarks.** The four-shift is no longer
 "what happened on FinanceBench" or even "what happened on FB + QASPER" —

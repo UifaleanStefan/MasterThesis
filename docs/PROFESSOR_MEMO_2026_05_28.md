@@ -37,8 +37,21 @@ fresh hand-judgments** behind the §5.4 + §6.5 tables.
    gap (0.008 vs canonical's 0.080), behaviourally confirming that
    `w_recency → 0` produces a memory that does not rely on recency.
 
-4. **§6.5.3 Full N=5/6 cross-benchmark θ validation.** CMA-ES
-   tuning extended to all six benchmarks:
+4. **§6.5.3 Full N=5/6 cross-benchmark θ validation + headline judge
+   lifts on 4 benchmarks.** CMA-ES tuning extended to all six
+   benchmarks, plus Claude-judge cells for the V4-canonical vs
+   V4-corpus-tuned batch comparison on 4 of them:
+
+   | Benchmark | V4 canon batch | V4 corpus batch | Claude lift |
+   |---|---:|---:|---:|
+   | FinanceBench | 0.243 | 0.645 | **+0.402** |
+   | HotpotQA | 0.200 | **1.000** | **+0.800** |
+   | QASPER | 0.250 | 0.415 | +0.165 |
+   | LongMemEval | 0.500 | 0.600 | +0.100 |
+
+   HotpotQA is the most striking: canonical refuses 8/10 multi-hop
+   questions, corpus-tuned gets all 10 correct. Cross-benchmark
+   four-shift summary:
 
    | Benchmark | w_recency↓ | w_embed↑ | theta_store↓ | w_graph↑ | Score | Recall lift |
    |---|---:|---:|---:|---:|:---:|---:|
