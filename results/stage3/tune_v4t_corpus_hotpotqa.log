@@ -1,0 +1,42 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 7281.04it/s]
+Using the latest cached version of the dataset since hotpotqa/hotpot_qa couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'distractor' at D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\data\benchmarks\hf_cache\hotpotqa___hotpot_qa\distractor\0.0.0\1908d6afbbead072334abe2965f91bd2709910ab (last modified on Sat May 16 16:42:28 2026).
+
+==============================================================================
+  V4t corpus tuning for 'hotpotqa'
+  limit_docs=30  n_generations=6  sigma=0.3  seed=42  k=8
+==============================================================================
+  [eval_fn] hotpotqa: 30 docs, 30 eval QAs with gold
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8999.15it/s]
+  Canonical V4t corpus recall@k=8: 0.0333
+  CMA-ES gen   1 | best=0.6000 | sigma=0.2831 | mean=[0.476, 0.802, 0.437, 0.55, 0.224, 0.639, 0.542, 0.456, 0.464, 0.196]
+  CMA-ES gen   2 | best=0.6333 | sigma=0.2828 | mean=[0.326, 0.547, 0.535, 0.527, 0.271, 0.607, 0.294, 0.465, 0.666, -0.149]
+  CMA-ES gen   3 | best=1.0000 | sigma=0.2899 | mean=[0.201, 0.473, 0.89, 0.724, 0.573, 0.592, 0.299, 0.329, 0.853, -0.062]
+  CMA-ES gen   4 | best=1.0000 | sigma=0.2888 | mean=[0.024, 0.442, 0.878, 0.969, 0.402, 0.621, 0.339, 0.201, 0.712, -0.036]
+  CMA-ES gen   5 | best=1.0000 | sigma=0.2920 | mean=[0.015, 0.298, 1.119, 0.928, 0.218, 0.611, 0.375, -0.021, 0.66, -0.001]
+  CMA-ES gen   6 | best=1.0000 | sigma=0.2813 | mean=[0.063, 0.594, 1.128, 0.786, -0.048, 0.615, 0.341, 0.257, 0.662, -0.081]
+
+  V4t corpus tuning done in 8.0s
+  canonical recall = 0.0333
+  tuned     recall = 1.0000
+  improvement      = +0.9667
+
+  Tuned theta (corpus mode):
+    theta_store    = 0.0392
+    theta_novel    = 0.3723
+    theta_erich    = 0.9423
+    theta_surprise = 0.8289
+    theta_entity   = 0.8344
+    theta_temporal = 0.7397
+    theta_decay    = 0.2584
+    w_graph        = 0.4774
+    w_embed        = 3.6739
+    w_recency      = 0.0097
+  -> saved D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\tuned_theta_v4t_corpus_hotpotqa.json
+
+==============================================================================
+  V4t CORPUS-MODE TUNING SUMMARY
+==============================================================================
+  Total elapsed: 11.9s
+  benchmark         status   canonical       tuned        lift     w_graph
+  hotpotqa              ok      0.0333      1.0000     +0.9667      0.4774

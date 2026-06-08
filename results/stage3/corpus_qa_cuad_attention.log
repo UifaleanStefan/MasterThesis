@@ -1,0 +1,20 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8236.67it/s]
+
+==============================================================================
+  CORPUS QA  benchmark=cuad (domain_coherent)
+  config=attention-corpus-tuned  seed=42  protocol=online_batch
+  online=False  batch=True  k=8  limit_docs=10
+==============================================================================
+  Loaded 10 docs.
+  Memory: AttentionMemory (no tunable params; pure sparse retrieval)
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10279.67it/s]
+  doc    10/10     global_step=   1756  events_stored=  1756  online_qa=    0  calib_qa=    0  cost=$0.0000  elapsed=  11.3s
+
+  Running batch QA on 132 questions against final memory...
+  batch   100/132    cost=$0.0153  elapsed= 214.9s
+  batch   132/132    cost=$0.0199  elapsed= 282.5s
+[claude_judge_queue] wrote 132 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\cuad__attention-corpus-tuned__batch__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\cuad__attention-corpus-tuned
+  Total cost: $0.0199
+  Batch:  n=132  recall@k=0.4394  judge=pending Claude judging

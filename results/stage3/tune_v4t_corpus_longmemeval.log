@@ -1,0 +1,40 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 6695.60it/s]
+
+==============================================================================
+  V4t corpus tuning for 'longmemeval'
+  limit_docs=30  n_generations=6  sigma=0.3  seed=42  k=8
+==============================================================================
+  [eval_fn] longmemeval: 30 docs, 30 eval QAs with gold
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 7555.19it/s]
+  Canonical V4t corpus recall@k=8: 0.1667
+  CMA-ES gen   1 | best=0.9000 | sigma=0.2853 | mean=[0.505, 0.766, 0.409, 0.58, 0.174, 0.629, 0.545, 0.547, 0.518, 0.179]
+  CMA-ES gen   2 | best=1.0000 | sigma=0.2925 | mean=[0.314, 1.016, 0.314, 0.797, 0.173, 0.64, 0.38, 0.36, 0.546, -0.037]
+  CMA-ES gen   3 | best=1.0000 | sigma=0.3015 | mean=[0.05, 1.172, 0.281, 0.701, 0.178, 0.564, 0.335, 0.254, 0.747, -0.049]
+  CMA-ES gen   4 | best=1.0000 | sigma=0.2849 | mean=[-0.029, 0.954, 0.276, 0.685, 0.288, 0.499, 0.594, 0.355, 0.648, -0.119]
+  CMA-ES gen   5 | best=1.0000 | sigma=0.2603 | mean=[0.029, 0.9, 0.535, 0.658, 0.186, 0.628, 0.64, 0.226, 0.761, -0.034]
+  CMA-ES gen   6 | best=1.0000 | sigma=0.2233 | mean=[0.066, 0.955, 0.35, 0.722, 0.116, 0.619, 0.535, 0.216, 0.678, 0.043]
+
+  V4t corpus tuning done in 7.0s
+  canonical recall = 0.1667
+  tuned     recall = 1.0000
+  improvement      = +0.8333
+
+  Tuned theta (corpus mode):
+    theta_store    = 0.2849
+    theta_novel    = 0.9998
+    theta_erich    = 0.1614
+    theta_surprise = 0.4830
+    theta_entity   = 0.3547
+    theta_temporal = 0.3913
+    theta_decay    = 0.2234
+    w_graph        = 0.5392
+    w_embed        = 1.3196
+    w_recency      = 0.0917
+  -> saved D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\tuned_theta_v4t_corpus_longmemeval.json
+
+==============================================================================
+  V4t CORPUS-MODE TUNING SUMMARY
+==============================================================================
+  Total elapsed: 8.9s
+  benchmark         status   canonical       tuned        lift     w_graph
+  longmemeval           ok      0.1667      1.0000     +0.8333      0.5392

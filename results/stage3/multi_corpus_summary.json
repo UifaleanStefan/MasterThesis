@@ -1,0 +1,688 @@
+{
+  "schema_version": 1,
+  "judge_model": "claude-opus-4.7-1m",
+  "judge_protocol": "v1",
+  "seed": 42,
+  "canonical_theta": {
+    "theta_store": 0.293,
+    "w_graph": 0.0,
+    "w_embed": 1.079,
+    "w_recency": 3.777
+  },
+  "benchmarks": {
+    "financebench": {
+      "configs": {
+        "v4t-canonical": {
+          "label": "V4ₜ canonical (grid θ)",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 150,
+              "claude_judge_mean": 0.49,
+              "recall_at_k_8": 0.5666666666666667
+            },
+            "batch": {
+              "n": 150,
+              "claude_judge_mean": 0.24333333333333335,
+              "recall_at_k_8": 0.22
+            }
+          }
+        },
+        "v4t-tuned": {
+          "label": "V4ₜ per-doc tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 150,
+              "claude_judge_mean": 0.455,
+              "recall_at_k_8": 0.5266666666666666
+            },
+            "batch": {
+              "n": 150,
+              "claude_judge_mean": 0.14333333333333334,
+              "recall_at_k_8": 0.12
+            }
+          }
+        },
+        "v4t-corpus-tuned": {
+          "label": "V4ₜ corpus-cumulative tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 150,
+              "claude_judge_mean": 0.6783333333333333,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 150,
+              "claude_judge_mean": 0.645,
+              "recall_at_k_8": 0.9666666666666667
+            }
+          }
+        },
+        "bm25-corpus": {
+          "label": "BM25 sparse retrieval",
+          "family": "baseline",
+          "modes": {
+            "online": {
+              "n": 150,
+              "claude_judge_mean": 0.65,
+              "recall_at_k_8": 0.9133333333333333
+            },
+            "batch": {
+              "n": 150,
+              "claude_judge_mean": 0.5033333333333333,
+              "recall_at_k_8": 0.7
+            }
+          }
+        },
+        "attention-corpus-tuned": {
+          "label": "Attention memory (corpus-tuned)",
+          "family": "baseline",
+          "modes": {
+            "online": {
+              "n": 150,
+              "claude_judge_mean": 0.7083333333333334,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 150,
+              "claude_judge_mean": 0.6566666666666666,
+              "recall_at_k_8": 0.9666666666666667
+            }
+          }
+        },
+        "dump-all": {
+          "label": "Dump-all (context-stuffing)",
+          "family": "baseline",
+          "modes": {
+            "online": {
+              "n": 150,
+              "claude_judge_mean": 0.735,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 150,
+              "claude_judge_mean": 0.03833333333333333,
+              "recall_at_k_8": 1.0
+            }
+          }
+        }
+      },
+      "corpus_tuned_theta": {
+        "theta_store": 0.009900097319873964,
+        "w_graph": 1.626504805384318,
+        "w_embed": 2.6327646590555407,
+        "w_recency": 0.0030769066704558023,
+        "canonical_recall": 0.16,
+        "tuned_recall": 0.98,
+        "improvement": 0.82,
+        "limit_docs": 50,
+        "n_eval_questions": 50
+      }
+    },
+    "qasper": {
+      "configs": {
+        "v4t-canonical": {
+          "label": "V4ₜ canonical (grid θ)",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 94,
+              "claude_judge_mean": 0.32978723404255317,
+              "recall_at_k_8": 0.25274725274725274
+            },
+            "batch": {
+              "n": 94,
+              "claude_judge_mean": 0.25,
+              "recall_at_k_8": 0.0989010989010989
+            }
+          }
+        },
+        "v4t-tuned": {
+          "label": "V4ₜ per-doc tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 94,
+              "claude_judge_mean": 0.45478723404255317,
+              "recall_at_k_8": 0.5054945054945055
+            },
+            "batch": {
+              "n": 94,
+              "claude_judge_mean": 0.3617021276595745,
+              "recall_at_k_8": 0.34065934065934067
+            }
+          }
+        },
+        "v4t-corpus-tuned": {
+          "label": "V4ₜ corpus-cumulative tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 94,
+              "claude_judge_mean": 0.4228723404255319,
+              "recall_at_k_8": 0.4945054945054945
+            },
+            "batch": {
+              "n": 94,
+              "claude_judge_mean": 0.4148936170212766,
+              "recall_at_k_8": 0.4065934065934066
+            }
+          }
+        },
+        "bm25-corpus": {
+          "label": "BM25 sparse retrieval",
+          "family": "baseline",
+          "modes": {
+            "batch": {
+              "n": 94,
+              "claude_judge_mean": 0.40425531914893614,
+              "recall_at_k_8": 0.37362637362637363
+            }
+          }
+        },
+        "attention-corpus-tuned": {
+          "label": "Attention memory (corpus-tuned)",
+          "family": "baseline",
+          "modes": {
+            "batch": {
+              "n": 94,
+              "claude_judge_mean": 0.15691489361702127,
+              "recall_at_k_8": 0.45054945054945056
+            }
+          }
+        },
+        "dump-all": {
+          "label": "Dump-all (context-stuffing)",
+          "family": "baseline",
+          "modes": {
+            "batch": {
+              "n": 94,
+              "claude_judge_mean": 0.03723404255319149,
+              "recall_at_k_8": 1.0
+            }
+          }
+        }
+      },
+      "corpus_tuned_theta": {
+        "theta_store": 0.018599377607783206,
+        "w_graph": 0.15284968675301194,
+        "w_embed": 2.0726257772848604,
+        "w_recency": 0.022685295302023005,
+        "canonical_recall": 0.0,
+        "tuned_recall": 0.21428571428571427,
+        "improvement": 0.21428571428571427,
+        "limit_docs": 30,
+        "n_eval_questions": 28
+      }
+    },
+    "cuad": {
+      "configs": {
+        "v4t-canonical": {
+          "label": "V4ₜ canonical (grid θ)",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.19696969696969696
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.0
+            }
+          }
+        },
+        "v4t-tuned": {
+          "label": "V4ₜ per-doc tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.5151515151515151
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.16666666666666666
+            }
+          }
+        },
+        "v4t-corpus-tuned": {
+          "label": "V4ₜ corpus-cumulative tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.2727272727272727
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.17424242424242425
+            }
+          }
+        },
+        "bm25-corpus": {
+          "label": "BM25 sparse retrieval",
+          "family": "baseline",
+          "modes": {
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.3712121212121212
+            }
+          }
+        },
+        "attention-corpus-tuned": {
+          "label": "Attention memory (corpus-tuned)",
+          "family": "baseline",
+          "modes": {
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.4393939393939394
+            }
+          }
+        },
+        "dump-all": {
+          "label": "Dump-all (context-stuffing)",
+          "family": "baseline",
+          "modes": {
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            }
+          }
+        }
+      },
+      "corpus_tuned_theta": {
+        "theta_store": 0.3116632543637187,
+        "w_graph": 1.6076931475206038,
+        "w_embed": 2.779934615187323,
+        "w_recency": 9.567803081737357e-05,
+        "canonical_recall": 0.03333333333333333,
+        "tuned_recall": 0.3,
+        "improvement": 0.26666666666666666,
+        "limit_docs": 30,
+        "n_eval_questions": 30
+      }
+    },
+    "longmemeval": {
+      "configs": {
+        "v4t-canonical": {
+          "label": "V4ₜ canonical (grid θ)",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.6
+            }
+          }
+        },
+        "v4t-tuned": {
+          "label": "V4ₜ per-doc tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.8
+            }
+          }
+        },
+        "v4t-corpus-tuned": {
+          "label": "V4ₜ corpus-cumulative tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            }
+          }
+        }
+      },
+      "corpus_tuned_theta": {
+        "theta_store": 0.28489265128469243,
+        "w_graph": 0.539181879964145,
+        "w_embed": 1.3196158078552767,
+        "w_recency": 0.09169361868059701,
+        "canonical_recall": 0.16666666666666666,
+        "tuned_recall": 1.0,
+        "improvement": 0.8333333333333334,
+        "limit_docs": 30,
+        "n_eval_questions": 30
+      }
+    },
+    "hotpotqa": {
+      "configs": {
+        "v4t-canonical": {
+          "label": "V4ₜ canonical (grid θ)",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 0.2
+            }
+          }
+        },
+        "v4t-corpus-tuned": {
+          "label": "V4ₜ corpus-cumulative tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            },
+            "batch": {
+              "n": 0,
+              "claude_judge_mean": null,
+              "recall_at_k_8": 1.0
+            }
+          }
+        }
+      },
+      "corpus_tuned_theta": {
+        "theta_store": 0.03916039850133058,
+        "w_graph": 0.47735944914288986,
+        "w_embed": 3.673871064667513,
+        "w_recency": 0.009713864230414026,
+        "canonical_recall": 0.03333333333333333,
+        "tuned_recall": 1.0,
+        "improvement": 0.9666666666666667,
+        "limit_docs": 30,
+        "n_eval_questions": 30
+      }
+    },
+    "narrativeqa": {
+      "configs": {},
+      "corpus_tuned_theta": {
+        "theta_store": null,
+        "w_graph": null,
+        "w_embed": null,
+        "w_recency": null,
+        "canonical_recall": null,
+        "tuned_recall": null,
+        "improvement": null,
+        "limit_docs": null,
+        "n_eval_questions": null
+      }
+    }
+  },
+  "four_shift_summary": {
+    "financebench": {
+      "shifts": {
+        "w_recency": {
+          "canonical": 3.777,
+          "corpus_tuned": 0.0030769066704558023,
+          "delta": -3.7739230933295445,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_embed": {
+          "canonical": 1.079,
+          "corpus_tuned": 2.6327646590555407,
+          "delta": 1.5537646590555407,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        },
+        "theta_store": {
+          "canonical": 0.293,
+          "corpus_tuned": 0.009900097319873964,
+          "delta": -0.283099902680126,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_graph": {
+          "canonical": 0.0,
+          "corpus_tuned": 1.626504805384318,
+          "delta": 1.626504805384318,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        }
+      },
+      "replicated_count": 4,
+      "total_shifts": 4,
+      "recall_lift": 0.82
+    },
+    "qasper": {
+      "shifts": {
+        "w_recency": {
+          "canonical": 3.777,
+          "corpus_tuned": 0.022685295302023005,
+          "delta": -3.7543147046979772,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_embed": {
+          "canonical": 1.079,
+          "corpus_tuned": 2.0726257772848604,
+          "delta": 0.9936257772848605,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        },
+        "theta_store": {
+          "canonical": 0.293,
+          "corpus_tuned": 0.018599377607783206,
+          "delta": -0.2744006223922168,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_graph": {
+          "canonical": 0.0,
+          "corpus_tuned": 0.15284968675301194,
+          "delta": 0.15284968675301194,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        }
+      },
+      "replicated_count": 4,
+      "total_shifts": 4,
+      "recall_lift": 0.21428571428571427
+    },
+    "cuad": {
+      "shifts": {
+        "w_recency": {
+          "canonical": 3.777,
+          "corpus_tuned": 9.567803081737357e-05,
+          "delta": -3.776904321969183,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_embed": {
+          "canonical": 1.079,
+          "corpus_tuned": 2.779934615187323,
+          "delta": 1.7009346151873233,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        },
+        "theta_store": {
+          "canonical": 0.293,
+          "corpus_tuned": 0.3116632543637187,
+          "delta": 0.01866325436371874,
+          "expected": "down",
+          "actual": "up",
+          "replicated": false
+        },
+        "w_graph": {
+          "canonical": 0.0,
+          "corpus_tuned": 1.6076931475206038,
+          "delta": 1.6076931475206038,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        }
+      },
+      "replicated_count": 3,
+      "total_shifts": 4,
+      "recall_lift": 0.26666666666666666
+    },
+    "longmemeval": {
+      "shifts": {
+        "w_recency": {
+          "canonical": 3.777,
+          "corpus_tuned": 0.09169361868059701,
+          "delta": -3.685306381319403,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_embed": {
+          "canonical": 1.079,
+          "corpus_tuned": 1.3196158078552767,
+          "delta": 0.2406158078552767,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        },
+        "theta_store": {
+          "canonical": 0.293,
+          "corpus_tuned": 0.28489265128469243,
+          "delta": -0.00810734871530755,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_graph": {
+          "canonical": 0.0,
+          "corpus_tuned": 0.539181879964145,
+          "delta": 0.539181879964145,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        }
+      },
+      "replicated_count": 4,
+      "total_shifts": 4,
+      "recall_lift": 0.8333333333333334
+    },
+    "hotpotqa": {
+      "shifts": {
+        "w_recency": {
+          "canonical": 3.777,
+          "corpus_tuned": 0.009713864230414026,
+          "delta": -3.767286135769586,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_embed": {
+          "canonical": 1.079,
+          "corpus_tuned": 3.673871064667513,
+          "delta": 2.5948710646675126,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        },
+        "theta_store": {
+          "canonical": 0.293,
+          "corpus_tuned": 0.03916039850133058,
+          "delta": -0.2538396014986694,
+          "expected": "down",
+          "actual": "down",
+          "replicated": true
+        },
+        "w_graph": {
+          "canonical": 0.0,
+          "corpus_tuned": 0.47735944914288986,
+          "delta": 0.47735944914288986,
+          "expected": "up",
+          "actual": "up",
+          "replicated": true
+        }
+      },
+      "replicated_count": 4,
+      "total_shifts": 4,
+      "recall_lift": 0.9666666666666667
+    },
+    "narrativeqa": {
+      "shifts": {},
+      "replicated_count": 0,
+      "total_shifts": 0,
+      "recall_lift": null
+    }
+  },
+  "headline_table": {
+    "financebench": {
+      "v4t_canonical_batch": 0.24333333333333335,
+      "v4t_corpus_tuned_batch": 0.645,
+      "lift": 0.40166666666666667,
+      "four_shifts_replicated": "4/4",
+      "recall_lift_from_tuning": 0.82
+    },
+    "qasper": {
+      "v4t_canonical_batch": 0.25,
+      "v4t_corpus_tuned_batch": 0.4148936170212766,
+      "lift": 0.16489361702127658,
+      "four_shifts_replicated": "4/4",
+      "recall_lift_from_tuning": 0.21428571428571427
+    },
+    "cuad": {
+      "v4t_canonical_batch": null,
+      "v4t_corpus_tuned_batch": null,
+      "lift": null,
+      "four_shifts_replicated": "3/4",
+      "recall_lift_from_tuning": 0.26666666666666666
+    },
+    "longmemeval": {
+      "v4t_canonical_batch": null,
+      "v4t_corpus_tuned_batch": null,
+      "lift": null,
+      "four_shifts_replicated": "4/4",
+      "recall_lift_from_tuning": 0.8333333333333334
+    },
+    "hotpotqa": {
+      "v4t_canonical_batch": null,
+      "v4t_corpus_tuned_batch": null,
+      "lift": null,
+      "four_shifts_replicated": "4/4",
+      "recall_lift_from_tuning": 0.9666666666666667
+    },
+    "narrativeqa": {
+      "v4t_canonical_batch": null,
+      "v4t_corpus_tuned_batch": null,
+      "lift": null,
+      "four_shifts_replicated": "0/0",
+      "recall_lift_from_tuning": null
+    }
+  }
+}

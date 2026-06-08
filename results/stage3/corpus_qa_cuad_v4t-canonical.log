@@ -1,0 +1,23 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8232.75it/s]
+
+==============================================================================
+  CORPUS QA  benchmark=cuad (domain_coherent)
+  config=v4t-canonical  seed=42  protocol=online_batch
+  online=True  batch=True  k=8  limit_docs=10
+==============================================================================
+  Loaded 10 docs.
+  V4t params: theta_store=0.293 theta_entity=0.285 w_embed=1.079 w_recency=3.777
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8883.50it/s]
+  doc    10/10     global_step=   1756  events_stored=  1156  online_qa=  132  calib_qa=    0  cost=$0.0159  elapsed= 204.7s
+
+  Running batch QA on 132 questions against final memory...
+  batch   100/132    cost=$0.0287  elapsed= 138.1s
+  batch   132/132    cost=$0.0331  elapsed= 182.9s
+[claude_judge_queue] wrote 132 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\cuad__v4t-canonical__online__seed42\queue.jsonl
+[claude_judge_queue] wrote 132 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\cuad__v4t-canonical__batch__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\cuad__v4t-canonical
+  Total cost: $0.0331
+  Online: n=132  recall@k=0.1970  judge=pending Claude judging
+  Batch:  n=132  recall@k=0.0000  judge=pending Claude judging
+  Online vs batch recall: diff=-0.1970  agreement=0.803

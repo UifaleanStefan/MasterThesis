@@ -1,0 +1,24 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9156.12it/s]
+Using the latest cached version of the dataset since hotpotqa/hotpot_qa couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'distractor' at D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\data\benchmarks\hf_cache\hotpotqa___hotpot_qa\distractor\0.0.0\1908d6afbbead072334abe2965f91bd2709910ab (last modified on Sat May 16 16:42:28 2026).
+
+==============================================================================
+  CORPUS QA  benchmark=hotpotqa (domain_incoherent_control)
+  config=v4t-corpus-tuned  seed=42  protocol=online_batch
+  online=True  batch=True  k=8  limit_docs=10
+==============================================================================
+  Loaded 10 docs.
+  V4t params: theta_store=0.039 theta_entity=0.834 w_embed=3.674 w_recency=0.010
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8185.02it/s]
+  doc    10/10     global_step=    100  events_stored=   100  online_qa=   10  calib_qa=    0  cost=$0.0022  elapsed=  12.1s
+
+  Running batch QA on 10 questions against final memory...
+  batch    10/10     cost=$0.0044  elapsed=   9.3s
+[claude_judge_queue] wrote 10 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\hotpotqa__v4t-corpus-tuned__online__seed42\queue.jsonl
+[claude_judge_queue] wrote 10 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\hotpotqa__v4t-corpus-tuned__batch__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\hotpotqa__v4t-corpus-tuned
+  Total cost: $0.0044
+  Online: n=10  recall@k=1.0000  judge=pending Claude judging
+  Batch:  n=10  recall@k=1.0000  judge=pending Claude judging
+  Online vs batch recall: diff=+0.0000  agreement=1.000

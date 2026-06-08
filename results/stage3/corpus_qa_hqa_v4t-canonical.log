@@ -1,0 +1,24 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8375.43it/s]
+Using the latest cached version of the dataset since hotpotqa/hotpot_qa couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'distractor' at D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\data\benchmarks\hf_cache\hotpotqa___hotpot_qa\distractor\0.0.0\1908d6afbbead072334abe2965f91bd2709910ab (last modified on Sat May 16 16:42:28 2026).
+
+==============================================================================
+  CORPUS QA  benchmark=hotpotqa (domain_incoherent_control)
+  config=v4t-canonical  seed=42  protocol=online_batch
+  online=True  batch=True  k=8  limit_docs=10
+==============================================================================
+  Loaded 10 docs.
+  V4t params: theta_store=0.293 theta_entity=0.285 w_embed=1.079 w_recency=3.777
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8436.11it/s]
+  doc    10/10     global_step=    100  events_stored=    95  online_qa=   10  calib_qa=    0  cost=$0.0019  elapsed=  12.2s
+
+  Running batch QA on 10 questions against final memory...
+  batch    10/10     cost=$0.0037  elapsed=   9.5s
+[claude_judge_queue] wrote 10 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\hotpotqa__v4t-canonical__online__seed42\queue.jsonl
+[claude_judge_queue] wrote 10 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\hotpotqa__v4t-canonical__batch__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\hotpotqa__v4t-canonical
+  Total cost: $0.0037
+  Online: n=10  recall@k=1.0000  judge=pending Claude judging
+  Batch:  n=10  recall@k=0.2000  judge=pending Claude judging
+  Online vs batch recall: diff=-0.8000  agreement=0.200

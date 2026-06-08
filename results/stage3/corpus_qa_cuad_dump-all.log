@@ -1,0 +1,19 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8581.06it/s]
+
+==============================================================================
+  CORPUS QA  benchmark=cuad (domain_coherent)
+  config=dump-all  seed=42  protocol=online_batch
+  online=False  batch=True  k=8  limit_docs=10
+==============================================================================
+  Loaded 10 docs.
+  Memory: DumpAllMemory (no tunable params; pure sparse retrieval)
+  doc    10/10     global_step=   1756  events_stored=  1756  online_qa=    0  calib_qa=    0  cost=$0.0000  elapsed=   0.0s
+
+  Running batch QA on 132 questions against final memory...
+  batch   100/132    cost=$0.0157  elapsed= 168.0s
+  batch   132/132    cost=$0.0207  elapsed= 217.5s
+[claude_judge_queue] wrote 132 items to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\judge_queue\cuad__dump-all__batch__seed42\queue.jsonl
+
+  Saved qa_online.json / qa_batch.json / qa_summary.json to D:\Bocconi\Thesis\.claude\worktrees\stupefied-rhodes-23de5d\results\stage3\corpus_traces\cuad__dump-all
+  Total cost: $0.0207
+  Batch:  n=132  recall@k=1.0000  judge=pending Claude judging

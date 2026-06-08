@@ -1,0 +1,54 @@
+{
+  "_manifest": {
+    "git_sha": "ad21c23",
+    "git_dirty": true,
+    "timestamp_utc": "2026-06-08T11:54:51+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_corpus_qa",
+    "benchmark": "cuad",
+    "config": "v4t-tuned",
+    "model": "gpt-4o-mini",
+    "protocol": "online_batch"
+  },
+  "benchmark": "cuad",
+  "config": "v4t-tuned",
+  "model": "gpt-4o-mini",
+  "seed": 42,
+  "k": 8,
+  "n_docs": 10,
+  "limit_docs": 10,
+  "n_qa_total": 132,
+  "protocol": "online_batch",
+  "do_online": true,
+  "do_batch": true,
+  "online": {
+    "n": 132,
+    "mean_judge": null,
+    "mean_recall_at_k": 0.5151515151515151,
+    "n_with_judge": 0,
+    "n_with_recall": 132,
+    "elapsed_seconds": 198.46984839439392
+  },
+  "batch": {
+    "n": 132,
+    "mean_judge": null,
+    "mean_recall_at_k": 0.16666666666666666,
+    "n_with_judge": 0,
+    "n_with_recall": 132,
+    "elapsed_seconds": 217.5776755809784
+  },
+  "total_cost_usd": 0.0358059,
+  "online_vs_batch_recall": {
+    "n_paired": 132,
+    "online_recall_mean": 0.5151515151515151,
+    "batch_recall_mean": 0.16666666666666666,
+    "diff_mean": -0.3484848484848485,
+    "diff_std": 0.5523696141247941,
+    "agreement_rate": 0.5757575757575758
+  }
+}
