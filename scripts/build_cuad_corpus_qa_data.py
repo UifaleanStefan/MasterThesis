@@ -3,6 +3,8 @@
 Walks results/stage3/judge_queue/cuad__{cfg}__{mode}__seed42/ and aggregates
 Claude-judge means per cell. Loads tuned theta files for the four-shift table.
 Emits results/stage3/cuad_corpus_summary.json with chapter-ready figures.
+
+Handles both Protocol A (online/batch) and Protocol B (calibration/batch_calib).
 """
 from __future__ import annotations
 import json
@@ -40,6 +42,80 @@ def cell_mean(cfg: str, mode: str) -> tuple[float | None, int, list[float]]:
     if not scores:
         return None, 0, []
     return statistics.mean(scores), len(scores), scores
+
+
+def cell_mean_with_behavior(cfg: str, mode: str) -> dict:
+    """For Protocol B cells: mean split by expected_behavior."""
+    path = JUDGE_QUEUE / f"cuad__{cfg}__{mode}__seed42" / "results.jsonl"
+    if not path.exists():
+        return {}
+    answer_scores: list[float] = []
+    ack_scores: list[float] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            rec = json.loads(line)
+            score = rec["judge_score"]
+            behavior = rec.get("expected_behavior", "answer")
+            if behavior == "answer":
+                answer_scores.append(score)
+            else:
+                ack_scores.append(score)
+        except (json.JSONDecodeError, KeyError):
+            continue
+    all_scores = answer_scores + ack_scores
+    if not all_scores:
+        return {}
+    return {
+        "overall_mean": round(statistics.mean(all_scores), 4),
+        "n": len(all_scores),
+        "answer_mean": round(statistics.mean(answer_scores), 4) if answer_scores else None,
+        "answer_n": len(answer_scores),
+        "acknowledge_missing_mean": round(statistics.mean(ack_scores), 4) if ack_scores else None,
+        "acknowledge_missing_n": len(ack_scores),
+    }
+
+
+def calibration_trajectory(cfg: str) -> list[dict] | None:
+    """Build per-doc calibration trajectory for CUAD (10 doc-ends)."""
+    path = JUDGE_QUEUE / f"cuad__{cfg}__calibration__seed42" / "results.jsonl"
+    if not path.exists():
+        return None
+    by_docs: dict[int, list] = {}
+    import re
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            rec = json.loads(line)
+            docs_seen = rec.get("docs_seen")
+            if docs_seen is None:
+                qid = rec.get("qid", "")
+                m = re.search(r"__after(\d+)__seed", qid)
+                docs_seen = int(m.group(1)) + 1 if m else None
+            if docs_seen is not None:
+                by_docs.setdefault(docs_seen, []).append(rec)
+        except (json.JSONDecodeError, KeyError):
+            continue
+    if not by_docs:
+        return None
+    trajectory = []
+    for docs_seen in sorted(by_docs.keys()):
+        entries = by_docs[docs_seen]
+        scores = [e["judge_score"] for e in entries]
+        ans_scores = [e["judge_score"] for e in entries if e.get("expected_behavior") == "answer"]
+        ack_scores = [e["judge_score"] for e in entries if e.get("expected_behavior") != "answer"]
+        trajectory.append({
+            "docs_seen": docs_seen,
+            "n": len(scores),
+            "mean_score": round(statistics.mean(scores), 4),
+            "answer_n": len(ans_scores),
+            "answer_mean": round(statistics.mean(ans_scores), 4) if ans_scores else None,
+            "acknowledge_missing_n": len(ack_scores),
+            "acknowledge_missing_mean": round(statistics.mean(ack_scores), 4) if ack_scores else None,
+        })
+    return trajectory
 
 
 def get_summary(cfg: str, mode: str) -> dict | None:
@@ -92,6 +168,9 @@ def main() -> None:
     judge_table: dict = {}
     recall_table: dict = {}
 
+    # Protocol B per-config data
+    protocol_b: dict = {}
+
     for cfg_info in CONFIGS:
         cfg = cfg_info["key"]
         modes = cfg_info["available_modes"]
@@ -112,6 +191,17 @@ def main() -> None:
             cell = cell_data["modes"].get(mode, {})
             judge_table.setdefault(mode, {})[cfg] = cell.get("claude_judge_mean")
             recall_table.setdefault(mode, {})[cfg] = cell.get("recall_at_k_8")
+
+        # Protocol B — calibration trajectory + batch_calib
+        calib_data = cell_mean_with_behavior(cfg, "calibration")
+        batch_calib_data = cell_mean_with_behavior(cfg, "batch_calib")
+        trajectory = calibration_trajectory(cfg)
+        if calib_data or batch_calib_data:
+            protocol_b[cfg] = {
+                "calibration": calib_data or None,
+                "batch_calib": batch_calib_data or None,
+                "trajectory": trajectory,
+            }
 
     theta = get_theta_contrast()
 
@@ -135,6 +225,13 @@ def main() -> None:
     if jo.get("v4t-tuned") is not None and jb.get("v4t-tuned") is not None:
         deltas["online vs batch advantage (v4t-tuned)"] = round(jo["v4t-tuned"] - jb["v4t-tuned"], 4)
 
+    # Protocol B end-of-corpus comparison (batch_calib means for available configs)
+    protocol_b_end: dict = {}
+    for cfg in ["v4t-canonical", "v4t-tuned", "v4t-corpus-tuned", "bm25-corpus", "attention-corpus-tuned", "dump-all"]:
+        bc = protocol_b.get(cfg, {}).get("batch_calib")
+        if bc:
+            protocol_b_end[cfg] = bc.get("overall_mean")
+
     out = {
         "benchmark": "cuad",
         "n_docs_ingested": 10,
@@ -149,6 +246,12 @@ def main() -> None:
         "theta_contrast": theta,
         "v4_corpus_tuned_advantage": deltas,
         "best_online_config": {"config": best_online[0], "mean": best_online[1]},
+        "protocol_b": {
+            "configs": protocol_b,
+            "end_of_corpus_batch_calib": protocol_b_end,
+            "n_calibration_per_config": "10 doc-ends × 132 q/doc (pool capped) = ~1,320",
+            "n_batch_calib_per_config": "~132 (full Protocol A question pool)",
+        },
         "fb_comparison": {
             "fb_v4t_corpus_tuned_batch": 0.665,
             "cuad_v4t_corpus_tuned_batch": jb.get("v4t-corpus-tuned"),

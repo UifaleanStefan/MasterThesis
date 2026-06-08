@@ -1,6 +1,6 @@
 {
   "benchmark": "qasper",
-  "n_docs_ingested": 30,
+  "n_docs_ingested": 281,
   "n_questions_per_cell": 94,
   "n_cells": 9,
   "judge_model": "claude-opus-4.7-1m",
@@ -175,6 +175,14 @@
     "v4t-corpus-tuned vs bm25-corpus (batch)": 0.0106,
     "v4t-corpus-tuned vs attention-corpus-tuned (batch)": 0.258,
     "v4t-corpus-tuned vs dump-all (batch)": 0.3777
+  },
+  "protocol_b": {
+    "configs": {},
+    "end_of_corpus_batch_calib": {},
+    "dump_all_excluded": true,
+    "dump_all_exclusion_reason": "MemoryError at doc 25/281: progressive calibration accumulates all stored events into context_lines; dump-all cannot scale to large corpora under Protocol B.",
+    "n_calibration_per_config": "281 doc-ends × 5 q/doc = ~1,405",
+    "n_batch_calib_per_config": "~1,005 (full question pool)"
   },
   "fb_comparison": {
     "fb_v4t_corpus_tuned_batch": 0.665,
