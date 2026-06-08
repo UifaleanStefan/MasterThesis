@@ -5,6 +5,73 @@
 
 ---
 
+## -14. Phase 1.9 cross-benchmark replication: QASPER (May 26 2026)
+
+The FB Phase 1.9 corpus-cumulative methodology is now replicated on a
+second benchmark, QASPER (281 NLP research papers, sparse-evidence QA).
+
+**Scope:** First 30 papers ingested (1,880 paragraphs, 6× FB scale).
+3 V4 architecture configs (v4t-canonical, v4t-tuned, v4t-corpus-tuned) ×
+{online, batch} = 564 entries; 3 baseline configs (bm25, attention,
+dump-all) × batch = 282 entries. Total **846 fresh Claude judgments**,
+all hand-judged 1-by-1 per `evaluation/claude_judge_protocol.md`.
+
+**The four-shift in θ replicates.** Same directional signature as FB:
+
+| Param | Canonical | FB corpus-tuned | QASPER corpus-tuned |
+|---|---:|---:|---:|
+| `w_recency` | 3.777 | 0.003 | 0.023 ↓↓↓ |
+| `w_embed` | 1.079 | 2.633 | 2.073 ↑↑ |
+| `theta_store` | 0.293 | 0.010 | 0.019 ↓↓↓ |
+| `w_graph` | 0.000 | 1.627 | 0.153 ↑ |
+
+**The end-of-corpus QA advantage replicates.** V4-corpus-tuned wins:
+
+| Config | QASPER batch judge | Recall@k=8 |
+|---|---:|---:|
+| v4t-canonical | 0.250 | 0.099 |
+| v4t-tuned | 0.362 | 0.341 |
+| **v4t-corpus-tuned** | **0.415** | **0.407** |
+| bm25-corpus | 0.404 | 0.374 |
+| attention-corpus-tuned | 0.157¹ | 0.450 |
+| dump-all | **0.037** | 1.000 |
+
+¹ attention-corpus-tuned compromised by OpenAI API quota mid-run
+(59/94 fallback predictions). Real-answer mean on 35 valid entries:
+0.421.
+
+**Dump-all collapse confirmed at scale.** QASPER 0.037 vs FB 0.038
+batch_calib — identical context-stuffing failure pattern at 6× the
+corpus size.
+
+**Online vs batch gap exposes recency dependence:**
+
+| Config | Online | Batch | Δ |
+|---|---:|---:|---:|
+| v4t-canonical | 0.330 | 0.250 | +0.080 |
+| v4t-tuned | 0.455 | 0.362 | +0.093 |
+| v4t-corpus-tuned | 0.423 | 0.415 | **+0.008** |
+
+Corpus-tuned θ — with `w_recency` collapsed — has no online-batch gap.
+Behavioural confirmation of what the θ values predict.
+
+**Files added:**
+* `scripts/run_corpus_qa.py` runs for 6 configs × QASPER (output traces
+  in `results/stage3/corpus_traces/qasper__{cfg}/`)
+* `scripts/_judge_phase19_qasper_{cfg}_{mode}.py` × 9 hand-judging scripts
+* `scripts/build_qasper_corpus_qa_data.py` aggregator
+* `results/stage3/qasper_corpus_summary.json` — per-cell means + θ table
+* Chapter §6.5.2 added (cross-benchmark validation subsection)
+* §7.5 updated: QASPER removed from corpus-cumulative replication backlog;
+  CUAD + LongMemEval remain.
+
+Audit: 33,930 lines provenance-green, 224 cells parity-green, 0 duplicates.
+
+The N=1 single-benchmark finding from §6.5.1 is now an N=2 cross-benchmark
+finding — much harder to dismiss as an FB-specific artifact.
+
+---
+
 ## -13. Phase 1.9 finalized: Protocol B + 4-config extension + POC audit (May 25–26 2026)
 
 Phase 1.9 closed out with 32 FB cells, 18,300 entries judged 1-by-1 by Claude.

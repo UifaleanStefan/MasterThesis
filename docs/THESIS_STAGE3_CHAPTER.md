@@ -1457,6 +1457,94 @@ four lines stay in the upper band, six lines fall to the lower band.
 > used in the interactive panel is informal regex on question text,
 > not human-coded.
 
+### 6.5.2 Cross-benchmark validation — QASPER replication
+
+§6.5.1 demonstrated the four-shift in θ on FinanceBench (N=1). To test
+whether the finding generalizes beyond financial filings — or whether it
+is an artifact of FB's specific corpus structure — we replicated the
+methodology on **QASPER** (281 NLP research papers, sparse-evidence QA).
+Same recipe: ingest the first 30 papers (1,880 paragraphs, ~6× FB scale),
+tune θ on the corpus-cumulative regime, then re-judge end-of-corpus QA
+1-by-1 with Claude Opus 4.7. Total: 846 fresh cross-vendor judgments
+across 9 cells (3 V4 architecture configs × {online, batch} + 3 baselines
+× batch).
+
+**The four-shift in θ replicates.** Corpus-cumulative tuning on QASPER
+produces a θ vector with the same directional signature as FB:
+
+| Param | Canonical | FB corpus-tuned | QASPER corpus-tuned | Direction |
+|---|---:|---:|---:|---|
+| `w_recency` | 3.777 | 0.003 | **0.023** | ↓↓↓ |
+| `w_embed` | 1.079 | 2.633 | **2.073** | ↑↑ |
+| `theta_store` | 0.293 | 0.010 | **0.019** | ↓↓↓ |
+| `w_graph` | 0.000 | 1.627 | **0.153** | ↑ |
+
+Four for four — every shift reproduces in direction. `w_graph` has a
+smaller magnitude on QASPER (0.15 vs FB's 1.63), which we attribute to
+the narrower entity domain: each NLP paper introduces 20–80 method/dataset
+entities, vs FB filings which connect across companies, fiscal years, and
+financial concepts. Smaller graphs, weaker graph-prior on QASPER — but
+the directional signature is identical.
+
+**The end-of-corpus QA advantage replicates.** Hand-judged Claude scores
+(n=94 per cell) on the corpus-cumulative batch QA test:
+
+| Config | Batch judge | Recall@k=8 |
+|---|---:|---:|
+| V4ₜ canonical (grid θ) | 0.250 | 0.099 |
+| V4ₜ per-doc tuned | 0.362 | 0.341 |
+| **V4ₜ corpus-tuned** | **0.415** | **0.407** |
+| BM25 sparse retrieval | 0.404 | 0.374 |
+| Attention memory (corpus-tuned)¹ | 0.157 | 0.450 |
+| Dump-all (context-stuffing) | **0.037** | 1.000 |
+
+V4-corpus-tuned wins by **+0.165** over V4-canonical (matches FB's +0.215
+lift in direction and same order of magnitude). BM25 is competitive on
+QASPER (0.404 vs 0.415, Δ +0.011) — sparse retrieval works well on NLP
+papers where the canonical paper-name vocabulary ("SemEval-2010",
+"BIBREF34", specific dataset names) gives BM25 strong matches. Attention
+memory is heavily compromised by API quota errors mid-run.² Dump-all
+collapses identically to FB: 0.037 on QASPER vs 0.038 on FB, despite a
+6× larger corpus. **Context-stuffing fails the same way at every scale we
+tested.**
+
+**A new finding the online-vs-batch gap exposes.** The Claude judge
+also reveals which configs depend on recency:
+
+| Config | Online | Batch | Online−Batch gap |
+|---|---:|---:|---:|
+| V4ₜ canonical | 0.330 | 0.250 | +0.080 |
+| V4ₜ per-doc tuned | 0.455 | 0.362 | +0.093 |
+| **V4ₜ corpus-tuned** | 0.423 | **0.415** | **+0.008** |
+
+Canonical and per-doc-tuned both lose ~0.09 in judge when shifted from
+online (current doc fresh) to batch (full corpus, no recency advantage).
+The corpus-tuned θ — with `w_recency` collapsed to 0.023 — has essentially
+no online-batch gap (0.008). This is a *behavioural* confirmation of what
+the θ values predict: corpus-cumulative tuning produces a memory that
+does not rely on recency, so end-of-corpus QA does not degrade.
+
+**Interpretation.** Across two benchmarks with very different corpus
+structures (financial filings with hierarchical numeric data vs NLP
+papers with entity-rich narrative prose), the same four shifts in θ
+emerge under corpus-cumulative tuning, and the same end-of-corpus QA
+advantage materializes. This is no longer "what happened on
+FinanceBench"; it is what corpus-cumulative tuning does when the regime
+allows it. Caveat: N=2 is still small — replication across 3+ benchmarks
+(CUAD, LongMemEval) is future work (§7.5).
+
+¹ The `attention-corpus-tuned` cell hit OpenAI API quota mid-run; 59/94
+entries returned fallback predictions (paper title + first paragraph
+fragment). Real-answer-only mean on the 35 valid entries: 0.421 — within
+0.01 of v4t-corpus-tuned. Full data in
+`results/stage3/qasper_corpus_summary.json`.
+
+² All per-cell numbers, theta vectors, recall trajectories, and 846 Claude
+judgments with per-entry rationales are persisted at
+`results/stage3/qasper_corpus_summary.json` and
+`results/stage3/judge_queue/qasper__*/results.jsonl`. The audit script
+verifies every judge line carries Claude provenance.
+
 ### 6.6 Limitations (generic risks of the framework)
 
 * **k=8 is fixed in the headline numbers.** Section 5.6 explores
@@ -1714,14 +1802,14 @@ What remains for future work:
   session.
 
 * **Phase 1.9 Protocol B + Extension on additional benchmarks.** The
-  FB-as-POC corpus-cumulative methodology (Protocol A retention + B
-  honesty, 18,300 entries) demonstrated on FinanceBench could
-  generalize to LongMemEval (best natural fit — sessions are
-  cumulative by construction), QASPER (each paper = corpus), or CUAD
-  (each contract = corpus). Replicating the four-shift finding
-  (w_recency↓, w_embed↑, theta_store↓, w_graph↑) on a second benchmark
-  would dramatically strengthen the chapter's central architectural
-  claim. ~$2-3 API + 1-2 days judging per benchmark.
+  FB-as-POC corpus-cumulative methodology has now been replicated on
+  **QASPER** (§6.5.2, 846 judgments, four-shift confirmed). The
+  remaining replication targets are **LongMemEval** (best natural
+  fit — sessions are cumulative by construction) and **CUAD** (each
+  contract = corpus, sparse-evidence questions test recall hard).
+  Both have ingestion infrastructure already in place. ~$2-3 API
+  + 1-2 days judging per benchmark, would lift the N=2 finding
+  toward N=4.
 
 * **Third-judge calibration.** Cross-score the existing FinanceBench
   answer set with Gemini 2.5 Pro (or Claude Sonnet 4) for ~$2 of

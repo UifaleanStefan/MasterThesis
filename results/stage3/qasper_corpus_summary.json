@@ -1,0 +1,191 @@
+{
+  "benchmark": "qasper",
+  "n_docs_ingested": 30,
+  "n_questions_per_cell": 94,
+  "n_cells": 9,
+  "judge_model": "claude-opus-4.7-1m",
+  "judge_protocol": "v1",
+  "seed": 42,
+  "config_table": {
+    "v4t-canonical": {
+      "label": "V4ₜ canonical (grid θ)",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 94,
+          "claude_judge_mean": 0.32978723404255317,
+          "recall_at_k_8": 0.25274725274725274
+        },
+        "batch": {
+          "n": 94,
+          "claude_judge_mean": 0.25,
+          "recall_at_k_8": 0.0989010989010989
+        }
+      }
+    },
+    "v4t-tuned": {
+      "label": "V4ₜ per-doc tuned",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 94,
+          "claude_judge_mean": 0.45478723404255317,
+          "recall_at_k_8": 0.5054945054945055
+        },
+        "batch": {
+          "n": 94,
+          "claude_judge_mean": 0.3617021276595745,
+          "recall_at_k_8": 0.34065934065934067
+        }
+      }
+    },
+    "v4t-corpus-tuned": {
+      "label": "V4ₜ corpus-cumulative tuned",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 94,
+          "claude_judge_mean": 0.4228723404255319,
+          "recall_at_k_8": 0.4945054945054945
+        },
+        "batch": {
+          "n": 94,
+          "claude_judge_mean": 0.4148936170212766,
+          "recall_at_k_8": 0.4065934065934066
+        }
+      }
+    },
+    "bm25-corpus": {
+      "label": "BM25 sparse retrieval",
+      "family": "baseline",
+      "modes": {
+        "batch": {
+          "n": 94,
+          "claude_judge_mean": 0.40425531914893614,
+          "recall_at_k_8": 0.37362637362637363
+        }
+      }
+    },
+    "attention-corpus-tuned": {
+      "label": "Attention memory (corpus-tuned)",
+      "family": "baseline",
+      "modes": {
+        "batch": {
+          "n": 94,
+          "claude_judge_mean": 0.15691489361702127,
+          "recall_at_k_8": 0.45054945054945056
+        }
+      }
+    },
+    "dump-all": {
+      "label": "Dump-all (context-stuffing)",
+      "family": "baseline",
+      "modes": {
+        "batch": {
+          "n": 94,
+          "claude_judge_mean": 0.03723404255319149,
+          "recall_at_k_8": 1.0
+        }
+      }
+    }
+  },
+  "judge_table_flat": {
+    "online": {
+      "v4t-canonical": 0.32978723404255317,
+      "v4t-tuned": 0.45478723404255317,
+      "v4t-corpus-tuned": 0.4228723404255319,
+      "bm25-corpus": null,
+      "attention-corpus-tuned": null,
+      "dump-all": null
+    },
+    "batch": {
+      "v4t-canonical": 0.25,
+      "v4t-tuned": 0.3617021276595745,
+      "v4t-corpus-tuned": 0.4148936170212766,
+      "bm25-corpus": 0.40425531914893614,
+      "attention-corpus-tuned": 0.15691489361702127,
+      "dump-all": 0.03723404255319149
+    }
+  },
+  "recall_at_k_8_flat": {
+    "online": {
+      "v4t-canonical": 0.25274725274725274,
+      "v4t-tuned": 0.5054945054945055,
+      "v4t-corpus-tuned": 0.4945054945054945,
+      "bm25-corpus": null,
+      "attention-corpus-tuned": null,
+      "dump-all": null
+    },
+    "batch": {
+      "v4t-canonical": 0.0989010989010989,
+      "v4t-tuned": 0.34065934065934067,
+      "v4t-corpus-tuned": 0.4065934065934066,
+      "bm25-corpus": 0.37362637362637363,
+      "attention-corpus-tuned": 0.45054945054945056,
+      "dump-all": 1.0
+    }
+  },
+  "theta_contrast": {
+    "four_shift": {
+      "param_order": [
+        "w_recency",
+        "w_embed",
+        "theta_store",
+        "w_graph"
+      ],
+      "fb": {
+        "canonical": {
+          "theta_store": 0.293,
+          "w_graph": 0.0,
+          "w_embed": 1.079,
+          "w_recency": 3.777
+        },
+        "corpus_tuned": {
+          "theta_store": 0.01,
+          "w_graph": 1.627,
+          "w_embed": 2.633,
+          "w_recency": 0.003
+        }
+      },
+      "qasper": {
+        "canonical": {
+          "theta_store": 0.293,
+          "w_graph": 0.0,
+          "w_embed": 1.079,
+          "w_recency": 3.777
+        },
+        "corpus_tuned": {
+          "theta_store": 0.018599377607783206,
+          "w_graph": 0.15284968675301194,
+          "w_embed": 2.0726257772848604,
+          "w_recency": 0.022685295302023005
+        }
+      }
+    },
+    "expected_directions": {
+      "w_recency": "decrease (collapses)",
+      "w_embed": "increase",
+      "theta_store": "decrease",
+      "w_graph": "increase from 0"
+    }
+  },
+  "v4_corpus_tuned_advantage": {
+    "v4t-corpus-tuned vs v4t-canonical (batch)": 0.1649,
+    "v4t-corpus-tuned vs v4t-tuned (batch)": 0.0532,
+    "v4t-corpus-tuned vs bm25-corpus (batch)": 0.0106,
+    "v4t-corpus-tuned vs attention-corpus-tuned (batch)": 0.258,
+    "v4t-corpus-tuned vs dump-all (batch)": 0.3777
+  },
+  "fb_comparison": {
+    "fb_v4t_corpus_tuned_batch": 0.665,
+    "qasper_v4t_corpus_tuned_batch": 0.4148936170212766,
+    "fb_v4t_canonical_batch": 0.45,
+    "qasper_v4t_canonical_batch": 0.25,
+    "fb_lift_corpus_vs_canonical_batch": 0.215,
+    "qasper_lift_corpus_vs_canonical_batch": 0.1649
+  },
+  "notes": {
+    "attention-corpus-tuned_batch": "Compromised by OpenAI API quota exhaustion (~59/94 fallback predictions). Real-answer-only mean: 0.421 on 35 entries.",
+    "dump-all_batch": "61/94 entries are context-overflow fallbacks; real-answer-only mean: 0.106 on 33 entries. Identical to FB dump-all collapse (0.038 vs 0.037)."
+  }
+}
