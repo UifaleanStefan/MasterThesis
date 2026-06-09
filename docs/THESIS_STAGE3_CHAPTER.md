@@ -1719,31 +1719,76 @@ most cleanly in calibration:
 | Config | HQA calib | HQA ack | HQA ans | HQA batch_calib |
 |---|---:|---:|---:|---:|
 | V4ₜ canonical | 0.613 | **1.000** | 0.295 | 0.200 |
+| V4ₜ per-doc tuned | 0.695 | **1.000** | 0.445 | 0.375 |
 | V4ₜ corpus-tuned | **0.920** | 0.956 | **0.891** | **0.950** |
-| Attention-tuned | 0.950 | 0.956 | **0.945** | **1.000** |
+| Attention-tuned | **0.950** | 0.956 | **0.945** | **1.000** |
 | BM25 | 0.767 | 0.933 | 0.632 | 0.750 |
 | Dump-all | 0.555 | 0.978 | 0.209 | 0.225 |
 
-V4ₜ-canonical achieves perfect ack_missing (1.000) via the same accidental
-recency-forgetting mechanism as on QASPER. Corpus-tuned θ maintains near-
-perfect ack performance (0.956) while reaching near-perfect ans performance
-(0.891) — this is the cleanest demonstration that the four-shift resolves the
-fundamental tension between honest refusal and retrieval fidelity.
-Attention-tuned is equally strong on HotpotQA (ans=0.945, batch_calib=1.000),
-consistent with its Protocol A batch result. Dump-all correctly refuses
-missing docs (0.978) but has very low ans capacity (0.209) — context stuffing
-cannot answer end-of-corpus questions because the answer is buried in 20
-documents of narrative text.
+V4ₜ-canonical and V4ₜ-per-doc-tuned both achieve perfect ack_missing (1.000)
+via the accidental recency-forgetting mechanism. V4ₜ-per-doc-tuned additionally
+improves ans_mean substantially (0.445 vs 0.295 canonical) — per-doc tuning
+helps on HotpotQA because each Wikipedia passage is its own "document" and
+individual tuning finds a θ that retrieves it well. But batch_calib (0.375)
+still lags far behind corpus-tuned (0.950), confirming that per-doc tuning
+cannot compensate for corpus-scale distribution shift.
 
-LongMemEval calibration shows a different pattern: the ack/ans trade-off is
-less extreme (LME is a conversational memory benchmark, so "missing" vs
-"present" is fuzzier), and dump-all scores surprisingly well (ans=0.600,
-batch=0.600) — multi-session dialogue compresses naturally into a flat context.
+Corpus-tuned θ maintains near-perfect ack performance (0.956) while reaching
+near-perfect ans performance (0.891) — this is the cleanest demonstration that
+the four-shift resolves the fundamental tension between honest refusal and
+retrieval fidelity. Attention-tuned is equally strong (ans=0.945,
+batch_calib=1.000), consistent with its Protocol A batch result. Dump-all
+correctly refuses missing docs (0.978) but has very low ans capacity (0.209) —
+context stuffing cannot answer end-of-corpus questions because the answer is
+buried in 20 documents of narrative text.
+
+**LongMemEval Protocol B calibration.** LME is a multi-session dialogue
+benchmark, and "missing vs present" is fuzzier than in QASPER (papers have
+discrete ingestion points; dialogue sessions accumulate continuously). This
+blurs the ack/ans split:
+
+| Config | LME calib | LME ack | LME ans | LME batch_calib |
+|---|---:|---:|---:|---:|
+| V4ₜ canonical | 0.440 | 0.378 | 0.491 | 0.400 |
+| V4ₜ per-doc tuned | 0.390 | 0.800 | 0.055 | **0.100** |
+| V4ₜ corpus-tuned | 0.520 | 0.467 | 0.564 | **0.700** |
+| Attention-tuned | 0.510 | 0.467 | 0.545 | 0.400 |
+| BM25 | 0.537 | 0.467 | **0.595** | **0.750** |
+| Dump-all | 0.530 | 0.444 | **0.600** | 0.600 |
+
+LME's ack_mean values are uniformly lower than HotpotQA (0.378–0.800 vs
+1.000), reflecting the softer missing/present distinction. V4ₜ-canonical's
+ans_mean (0.491) actually exceeds its ack_mean (0.378) — unlike any other
+benchmark, because dialogue content is semantically similar across sessions,
+so the high-w_recency canonical θ still retrieves some earlier-session
+context via embedding similarity. V4ₜ-per-doc-tuned collapses at
+batch_calib (0.100) — per-session overfit is extreme when θ is tuned to a
+single session's vocabulary. Corpus-tuned θ (batch_calib=0.700) and BM25
+(0.750) lead at end-of-corpus; dump-all is surprisingly competitive (0.600)
+because multi-session dialogue compresses naturally into a flat context
+window — the "haystack" structure does not degrade in the same way as
+QASPER or CUAD.
+
+**CUAD Protocol B calibration (v4t-canonical full-scale, others partial).**
+CUAD v4t-canonical has 2,550 calibration entries fully judged (510 docs × 5q;
+calib_mean=0.374, ack_mean=0.728, ans_mean=0.046, batch_calib_mean=0.041).
+The extreme ans_mean collapse (0.046) is mechanistically consistent with
+the EKR/PPI promissory note bleed documented in Protocol A: every
+batch-mode question about any contract retrieves EKR/PPI context, making
+canonical θ nearly useless at end-of-corpus. Ack_mean (0.728) is high for
+the same reason — the high-recency canonical θ treats most questions about
+earlier-ingested documents as unanswerable. The five remaining CUAD configs
+have 10-doc test runs (n=50) pending full 510-doc re-runs; their partial data
+suggests bm25-corpus (ans=0.467, batch=0.341) and attention-corpus-tuned
+(ans=0.489, batch=0.398) both recover substantially over canonical.
 
 With all **six** benchmark Protocol A cells now fully Claude-judged
-(2,948 entries across 58 cells), and Protocol B calibration cells for four
-benchmarks (FB, QASPER partial, HQA, LME), this is the most complete
-cross-benchmark verification achievable within this thesis scope.
+(2,948 entries across 58 cells), and Protocol B calibration cells for five
+benchmarks (FB 6 configs full, HQA 6 configs, LME 6 configs, QASPER 3/6
+complete + 3 pending, CUAD 1/6 full + 5 partial), this is the most
+complete cross-benchmark verification achievable within this thesis scope.
+QASPER v4t-corpus-tuned, attention-corpus-tuned, and dump-all calibration
+runs are in progress; CUAD full calibration for 5 configs follows.
 
 ⁴ NarrativeQA Protocol A: 10 questions per cell, one literary work per
 corpus. V4t-canonical batch=0.400, corpus-tuned batch=0.400, BM25
