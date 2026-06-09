@@ -1803,11 +1803,12 @@ suggests bm25-corpus (ans=0.467, batch=0.341) and attention-corpus-tuned
 
 With all **six** benchmark Protocol A cells now fully Claude-judged
 (4,134 entries across 60 cells), and Protocol B calibration cells for five
-benchmarks (FB 6 configs full, HQA 6 configs, LME 6 configs, QASPER 3/6
-complete + 3 pending, CUAD 1/6 full + 5 partial), this is the most
-complete cross-benchmark verification achievable within this thesis scope.
-QASPER v4t-corpus-tuned, attention-corpus-tuned, and dump-all calibration
-runs are in progress; CUAD full calibration for 5 configs follows.
+benchmarks (FB 6 configs full, HQA 6 configs pilot, LME 6 configs pilot,
+QASPER 6/6 complete full-scale, CUAD 1/6 full + 5 partial with v4t-tuned
+full-scale in progress), this is the most complete cross-benchmark
+verification within this thesis scope. CUAD full 510-doc calibration for
+the remaining five configs follows; HQA/LME full-scale runs are planned
+after CUAD completes.
 
 ⁴ NarrativeQA Protocol A: 10 questions per cell, one literary work per
 corpus. V4t-canonical batch=0.400, corpus-tuned batch=0.400, BM25
