@@ -979,25 +979,31 @@ for 10 candidates, not whether 8 is enough.
   semantic embeddings miss in narrative text) is reported but not
   asserted as headline.
 
-  The narrowed thesis claim is: **(a) task-tuned parameterized
-  memory beats canonical-θ memory on the long-haystack regime
-  (Holm-corrected significant on CUAD); (b) which tuned memory
-  architecture wins depends on the benchmark (V4-tuned wins QASPER,
-  AttentionMemory-tuned wins CUAD); (c) the spread between tuned
-  configs is small (≤0.07 judge points absolute on a [0, 1] scale)**.
+  The narrowed thesis claim (**Phase 1.7 gpt-4o-mini version**):
+  (a) task-tuned parameterized memory beats canonical-θ memory on the
+  long-haystack regime (Holm-corrected significant on CUAD); (b)
+  which tuned memory architecture wins was benchmark-dependent under
+  gpt-4o-mini (V4-tuned QASPER, AttentionMemory-tuned CUAD); (c)
+  the spread was small (≤0.07 judge points). **Under Phase 1.9
+  Claude cross-vendor judging** (see above): (b) collapses — V4-tuned
+  wins on BOTH benchmarks (+0.089 CUAD, +0.185 QASPER over
+  AttentionMemory-tuned); (c) the spread is substantially larger
+  (0.089–0.185, not ≤0.07). The "benchmark-dependent architecture"
+  language no longer applies.
 
-  *Interpretation of the AttentionMemory-tuned CUAD win.*
+  *Interpretation of the AttentionMemory-tuned CUAD win (Phase 1.7,
+  gpt-4o-mini only).* Under the original gpt-4o-mini judge,
   AttentionMemory with a flattened attention (τ = 2.6, vs default 0.5)
-  appears to surface context that the LLM uses more effectively for
-  answer generation, even though recall@k=8 is unchanged. The
-  takeaway: recall@k is not a sufficient proxy for answer quality —
-  the **structure** of retrieved context matters, not just whether
-  the gold passage is somewhere in the top-k. V4's tuning objective
-  (mean recall@k) was insufficient; AttentionMemory's softer
-  retrieval produces a context distribution the answer-LLM uses more
-  effectively despite identical recall. This is consistent with the
-  HotpotQA contradiction (§5.4 paragraph above) — both are worked
-  examples of the retrieval-vs-answer-quality gap discussed in §6.4.
+  appeared to surface context that the LLM used more effectively for
+  answer generation, even though recall@k=8 was unchanged. The
+  takeaway at the time: recall@k is not a sufficient proxy for answer
+  quality. **Under Phase 1.9 Claude judging, the CUAD AttentionMemory
+  win reversed** (V4-tuned 0.383 vs attention 0.294, +0.089), so this
+  interpretation is a Phase 1.7 artefact. The structural-context
+  hypothesis may still hold but is not confirmed by the cross-vendor
+  judge. This is consistent with the HotpotQA contradiction
+  (§5.4 paragraph above) — both are worked examples of the
+  retrieval-vs-answer-quality gap discussed in §6.4.
 
 * **V4-tuned-heldout** (Phase 1.7 leak-free re-tune on 25 disjoint
   TRAIN docs, evaluated on the other 25 TEST docs at seed=42): On
