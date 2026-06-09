@@ -5,6 +5,38 @@
 
 ---
 
+## -20. Fix §5.4 QASPER stale numbers — cross-vendor 3-seed means corrected (June 9 2026)
+
+**Critical §5.4 correction.** The QASPER headline table row had stale values:
+v4-canonical still carried the original gpt-4o-mini score (0.160); several
+configs showed seed=42 single-seed Claude values rather than 3-seed means.
+Corrected with Phase 1.9 Claude 3-seed means (n=300 per config):
+
+| Config | Old (stale) | New (Claude 3-seed mean) |
+|---|---:|---:|
+| v4-canonical | 0.160 | 0.381 |
+| v4-tuned | 0.358 | 0.420 |
+| flat-50 | 0.353 | 0.403 |
+| bm25 | 0.427 | 0.215 |
+| attention-tuned | 0.556 | 0.235 |
+| Lift V4t−V4c | +0.198 | +0.039 |
+
+Key narrative change: the QASPER attention-tuned "win" (0.556) was a seed=42
+outlier (seed=7: 0.122, seed=100: 0.120). Under 3-seed Claude judging,
+V4-tuned (0.420) leads the table. The previously reported +0.198 lift is
+corrected to +0.039. The central claim (positive lift on all long-haystack
+benchmarks) is maintained.
+
+BM25 and attention sub-tables labeled as Phase 1.7 gpt-4o-mini analysis;
+Claude 3-seed means added as parenthetical annotations.
+
+**Files changed:**
+- `docs/THESIS_STAGE3_CHAPTER.md` (§5.4 table line 836, footnotes ‡ and †,
+  headline findings #2 and #4, BM25+attention sub-tables, narrative)
+- `docs/RECENT_CHANGES.md` (this entry)
+
+---
+
 ## -19. QASPER Protocol B complete — all 6 configs judged, §6.5.2 updated with full table (June 9 2026)
 
 **QASPER Protocol B all-six-config complete.** All 14,460 Protocol B
