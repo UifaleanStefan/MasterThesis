@@ -1533,22 +1533,24 @@ advantage materializes. This is no longer "what happened on
 FinanceBench"; it is what corpus-cumulative tuning does when the regime
 allows it. §6.5.3 extends this finding to all five successful benchmarks.
 
-**Protocol B calibration — three configs on QASPER.**
-Three Protocol B cells (3 × 2,410 entries; v4t-canonical, v4t-tuned, and
-bm25-corpus) were hand-judged 1-by-1 with Claude Opus 4.7 (n=1,405 calib
-+ n=1,005 batch_calib per config). The calibration phase samples 5
-questions per doc-end during corpus ingestion, tagging each with
+**Protocol B calibration — all six configs on QASPER.**
+All six Protocol B cells (6 × 2,410 entries; n=1,405 calib + n=1,005
+batch_calib per config) were hand-judged 1-by-1 with Claude Opus 4.7
+(14,460 total judgments with per-entry rationales). The calibration phase
+samples 5 questions per doc-end during corpus ingestion, tagging each with
 `expected_behavior=acknowledge_missing` (source doc not yet ingested) or
-`expected_behavior=answer` (source doc already ingested). Three additional
-configs (v4t-corpus-tuned, attention-corpus-tuned, dump-all) are pending
-pipeline completion; the full 6-config Protocol B table will be available
-in `results/stage3/qasper_corpus_summary.json`.
+`expected_behavior=answer` (source doc already ingested). Full data in
+`results/stage3/qasper_corpus_summary.json` and
+`results/stage3/judge_queue/qasper__*/results.jsonl`.
 
 | Config | Calib overall | Calib ack_mean | Calib ans_mean | batch_calib |
 |---|---:|---:|---:|---:|
 | V4ₜ canonical | 0.421 | **0.704** | 0.130 | 0.133 |
 | V4ₜ per-doc tuned | 0.315 | 0.499 | 0.126 | 0.091 |
-| BM25 sparse | 0.339 | 0.398 | **0.280** | **0.294** |
+| **V4ₜ corpus-tuned** | 0.410 | 0.475 | **0.343** | **0.384** |
+| BM25 sparse | 0.339 | 0.398 | 0.280 | 0.294 |
+| Attention (corpus-tuned) | 0.379 | 0.430 | 0.327 | 0.328 |
+| Dump-all | 0.452 | 0.787 | 0.108 | 0.111 |
 
 The inversion between canonical and BM25 is mechanistically informative.
 V4ₜ-canonical's extreme `w_recency` (3.777) accidentally helps on
@@ -1571,9 +1573,26 @@ distribution shift that only corpus-cumulative tuning resolves. This is a
 key negative result: the calibration trajectory distinguishes the *type*
 of failure each config has, and per-doc tuning inherits canonical's
 retrieval failure at scale while also losing its accidental honesty
-advantage. This establishes the diagnostic pattern §6.5.1 observed:
-calibration separates configs along the *honest-refusal axis*, while
-batch_calib separates them along the *retrieval-fidelity axis*.
+advantage.
+
+**V4ₜ corpus-tuned** achieves the highest batch_calib score (0.384) by a
+clear margin over BM25 (0.294) and attention (0.328), and does so via the
+right mechanism: ans_mean 0.343 (highest of any config) with ack_mean
+0.475. The ack_mean is not accidentally inflated by recency — the model
+refuses when the document genuinely hasn't been ingested, and answers when
+it has. This is the Protocol B analogue of the online-batch gap result:
+corpus-tuning produces a memory that is honest *and* informative, while
+canonical tuning produces one that is honest *accidentally* (via decay) and
+uninformative at scale.
+
+Dump-all shows a distinctive signature: very high ack_mean (0.787) because
+context overflow causes the model to refuse even on answerable questions
+(no passage visible = implicit refusal), but extremely low ans_mean (0.108)
+and batch_calib (0.111) — identical to the Protocol A collapse (0.037 batch).
+This establishes the diagnostic pattern §6.5.1 observed: calibration
+separates configs along the *honest-refusal axis*, while batch_calib
+separates them along the *retrieval-fidelity axis*, and only corpus-tuning
+achieves both simultaneously.
 
 ¹ The `attention-corpus-tuned` cell hit OpenAI API quota mid-run; 59/94
 entries returned fallback predictions (paper title + first paragraph

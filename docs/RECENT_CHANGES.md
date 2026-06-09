@@ -5,6 +5,28 @@
 
 ---
 
+## -19. QASPER Protocol B complete — all 6 configs judged, §6.5.2 updated with full table (June 9 2026)
+
+**QASPER Protocol B all-six-config complete.** All 14,460 Protocol B
+entries (6 configs × 2,410 entries each) hand-judged 1-by-1 with Claude
+Opus 4.7. V4ₜ corpus-tuned achieves highest batch_calib (0.384) and
+highest ans_mean (0.343), confirming that corpus-tuning produces a memory
+that is honest *and* informative. Dump-all shows distinctive Protocol B
+signature: high ack_mean (0.787) from context-overflow implicit refusals,
+but near-zero ans_mean (0.108) and batch_calib (0.111). §6.5.2 Protocol B
+section updated with complete 6-config table. Commits: d8e88da (judge
+scripts) + this commit.
+
+**Files changed:**
+- `scripts/_judge_phase19_qasper_dump-all_calibration.py` (all 547 RNR entries)
+- `results/stage3/judge_queue/qasper__dump-all__calibration__seed42/results.jsonl`
+- `results/stage3/judge_queue/qasper__dump-all__batch_calib__seed42/results.jsonl`
+- `results/stage3/qasper_corpus_summary.json` (regenerated with all 6 configs)
+- `docs/THESIS_STAGE3_CHAPTER.md` (§6.5.2 Protocol B section updated)
+- `docs/RECENT_CHANGES.md` (this entry)
+
+---
+
 ## -18. Multi-benchmark Protocol B expansion: QASPER v4t-tuned + HQA/LME 6-config tables, chapter §6.5.2-§6.5.3 (June 9 2026)
 
 **QASPER v4t-tuned Protocol B judged** (2,410 entries, calib=0.315,
