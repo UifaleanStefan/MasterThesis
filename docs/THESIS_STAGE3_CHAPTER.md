@@ -1600,9 +1600,9 @@ fragment). Real-answer-only mean on the 35 valid entries: 0.421 — within
 0.01 of v4t-corpus-tuned. Full data in
 `results/stage3/qasper_corpus_summary.json`.
 
-² All per-cell numbers, theta vectors, recall trajectories, and 846 Claude
-judgments with per-entry rationales are persisted at
-`results/stage3/qasper_corpus_summary.json` and
+² All per-cell numbers, theta vectors, recall trajectories, and 15,306 Claude
+judgments (846 Protocol A + 14,460 Protocol B) with per-entry rationales
+are persisted at `results/stage3/qasper_corpus_summary.json` and
 `results/stage3/judge_queue/qasper__*/results.jsonl`. The audit script
 verifies every judge line carries Claude provenance.
 
