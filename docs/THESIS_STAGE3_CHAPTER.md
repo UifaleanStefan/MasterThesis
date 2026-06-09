@@ -546,7 +546,9 @@ per benchmark depending on QAs-per-doc density. For tuning, 8 docs
   for substantively-correct but incomplete answers). Cross-vendor:
   answerer is GPT-4o-mini (OpenAI), judge is Claude Opus 4.7 max
   (Anthropic), so the self-bias literature does not apply. Total
-  manual cross-vendor judgments produced for this chapter: **2,800**.
+  manual cross-vendor judgments produced for this chapter: **18,150**
+  (17,150 across CUAD/QASPER/HQA/LME/NQA in the Phase 1.9 §5.4
+  retrofit + 1,000 FinanceBench Phase 4 re-judging).
 * **LLM-judge score** (Phase 4 automated pipeline) — `evaluation/document_qa_llm_judge.py:llm_judge_score`
   using GPT-4o-mini with a 0–1 rubric. `llm_judge_score_multi_ref`
   wrapper handles NarrativeQA's list-typed reference answers (max
