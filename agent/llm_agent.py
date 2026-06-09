@@ -319,7 +319,7 @@ class LLMAgent:
             return False
         try:
             from openai import OpenAI
-            self._client = OpenAI(api_key=api_key)
+            self._client = OpenAI(api_key=api_key, timeout=120.0)
             return True
         except ImportError:
             print("[LLMAgent] openai package not installed — using fallback heuristic mode.")
