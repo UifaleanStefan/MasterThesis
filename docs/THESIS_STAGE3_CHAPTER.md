@@ -1783,7 +1783,7 @@ suggests bm25-corpus (ans=0.467, batch=0.341) and attention-corpus-tuned
 (ans=0.489, batch=0.398) both recover substantially over canonical.
 
 With all **six** benchmark Protocol A cells now fully Claude-judged
-(2,948 entries across 58 cells), and Protocol B calibration cells for five
+(4,134 entries across 60 cells), and Protocol B calibration cells for five
 benchmarks (FB 6 configs full, HQA 6 configs, LME 6 configs, QASPER 3/6
 complete + 3 pending, CUAD 1/6 full + 5 partial), this is the most
 complete cross-benchmark verification achievable within this thesis scope.
