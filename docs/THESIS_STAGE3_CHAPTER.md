@@ -1636,10 +1636,10 @@ the relevant earlier-session memories cleanly.
 
 **End-of-corpus QA Claude-judge cells across all five successful benchmarks.**
 All 9 CUAD Protocol A cells (1,188 Claude judgments) are now complete.
-Combined with the earlier QASPER, HotpotQA, LongMemEval, and FinanceBench
-cells, we have a full cross-benchmark picture (47 Claude-judged Protocol A cells,
-4,004 hand-judged entries across 5 benchmarks — FB 12×150, QASPER 9×94,
-CUAD 9×132, HQA 8×10, LME 9×10):
+Combined with the earlier QASPER, HotpotQA, LongMemEval, NarrativeQA, and
+FinanceBench cells, we have a full cross-benchmark picture (60 Claude-judged
+Protocol A cells, 4,134 hand-judged entries across 6 benchmarks —
+FB 12×150, QASPER 9×94, CUAD 9×132, HQA 9×10, LME 9×10, NQA 12×10):
 
 | Benchmark | V4-canonical batch | V4-corpus-tuned batch | Lift |
 |---|---:|---:|---:|
