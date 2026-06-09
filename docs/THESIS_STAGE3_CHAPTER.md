@@ -2062,11 +2062,14 @@ also complete, with Phase 1.7 adding multi-seed CIs, Holm-Bonferroni
 correction, BM25/AttentionMemory-tuned baselines, and held-out
 validation. Total API spend ~$5. The chapter's remaining "headline
 result" gap is the single null-result on QASPER's V4-tuned vs
-V4-canonical lift (the +0.023 effect does not survive Holm correction
-at the 5-comparison family-wise error rate). Closing this gap would
-require either (a) a larger N (e.g., 1000 questions across 10 seeds),
-or (b) a different effect-size threshold; both are out-of-scope at the
-current budget.
+V4-canonical lift (the +0.023 gpt-4o-mini effect, p_holm=0.64, does
+not survive Holm correction at the 5-comparison family-wise error
+rate). Under Phase 1.9 Claude cross-vendor judging the lift increases
+to +0.039 (3-seed mean) but re-running the Holm test on Claude-judged
+QASPER data is future work. Closing this gap would require either
+(a) a larger N (e.g., 1000 questions across 10 seeds) or
+(b) re-running significance tests on the full Claude-judged Phase 4
+QASPER cells; both are out-of-scope at the current budget.
 
 ### 7.2 m_cleaned streaming for LongMemEval (deferred)
 

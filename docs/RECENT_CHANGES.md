@@ -5,6 +5,42 @@
 
 ---
 
+## -21. Fix §6.1, §6.7, §5.6, §7.1 with Claude cross-vendor corrections (June 9 2026)
+
+**Multi-section chapter correction pass.** Chapter critical re-read found several
+sections still referencing stale gpt-4o-mini (Phase 1.7) numbers without cross-vendor
+Claude parentheticals.
+
+**§6.1 fair-comparison baseline table:**
+Added Claude 3-seed means as parenthetical annotations to V4-tuned, BM25, and
+AttentionMemory-tuned entries. Updated "Best" column: under Claude judging, V4-tuned
+wins on both CUAD and QASPER (not "benchmark-dependent" as Phase 1.7 implied).
+
+**§6.7 #2 (AttentionMemory critique):**
+Updated to note that "attention wins on CUAD" was a gpt-4o-mini artifact. Under Phase 1.9
+Claude judging: V4-tuned (0.383) beats AttentionMemory-tuned (0.294) by +0.089 on CUAD.
+The architecture provides a real advantage under cross-vendor judging.
+
+**§6.7 #3 (BM25 critique):**
+Added Claude 3-seed means: CUAD 0.383 vs 0.166; QASPER 0.420 vs 0.215. V4-tuned beats
+BM25 under both judge regimes — finding is robust to judge choice.
+
+**§5.6 bias caveat:**
+Corrected QASPER V4-tuned vs V4-canonical lift from +0.198 (seed=42 artifact) to
++0.039 (3-seed mean, consistent with §5.4 finding #2). Cross-reference added to §5.4
+footnote ‡.
+
+**§7.1 future work gap:**
+Updated "the +0.023 effect does not survive Holm correction" to note the Phase 1.9
+Claude mean is +0.039; re-running Holm tests on Claude-judged QASPER data is
+explicitly marked as future work.
+
+**Files changed:**
+- `docs/THESIS_STAGE3_CHAPTER.md` (§6.1, §6.7 #2, §6.7 #3, §5.6, §7.1)
+- `docs/RECENT_CHANGES.md` (this entry)
+
+---
+
 ## -20. Fix §5.4 QASPER stale numbers — cross-vendor 3-seed means corrected (June 9 2026)
 
 **Critical §5.4 correction.** The QASPER headline table row had stale values:
