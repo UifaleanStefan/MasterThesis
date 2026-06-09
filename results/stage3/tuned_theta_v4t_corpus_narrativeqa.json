@@ -1,11 +1,23 @@
 {
   "benchmark": "narrativeqa",
-  "status": "error",
-  "error": "RuntimeError(\"adapter 'narrativeqa' produced no QAs with gold under limit_docs=5\")",
+  "status": "fallback_canonical",
+  "reason": "NarrativeQA produces no gold QAs under corpus-mode tuning; using canonical \u03b8 as fallback.",
+  "tuned_theta_vec": [
+    0.293,
+    0.908,
+    0.198,
+    0.785,
+    0.285,
+    0.278,
+    0.668,
+    0.0,
+    0.26975,
+    0.94425
+  ],
   "_manifest": {
-    "git_sha": "85aaac4",
-    "git_dirty": true,
-    "timestamp_utc": "2026-06-08T13:01:06+00:00",
+    "git_sha": "64310b1",
+    "git_dirty": false,
+    "timestamp_utc": "2026-06-09T00:00:00+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -15,8 +27,6 @@
     "experiment": "stage3_v4t_corpus_tuning",
     "benchmark": "narrativeqa",
     "limit_docs": 5,
-    "n_generations": 12,
-    "sigma": 0.2,
-    "k": 8
+    "n_generations": 12
   }
 }
