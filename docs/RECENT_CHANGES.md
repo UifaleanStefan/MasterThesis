@@ -5,6 +5,40 @@
 
 ---
 
+## -18. Multi-benchmark Protocol B expansion: QASPER v4t-tuned + HQA/LME 6-config tables, chapter §6.5.2-§6.5.3 (June 9 2026)
+
+**QASPER v4t-tuned Protocol B judged** (2,410 entries, calib=0.315,
+ack=0.499, ans=0.126, batch_calib=0.091). Per-doc tuning erodes the
+accidental honest-refusal advantage (ack drops from 0.704 to 0.499) without
+improving retrieval at corpus scale (batch_calib drops from 0.133 to 0.091).
+Key negative result: per-doc tuning inherits canonical's retrieval failure
+while also losing its accidental honesty advantage. Commit: 6b04de9.
+
+**CUAD v4t-canonical Protocol B full-scale** (2,550 calib + 6,702 batch_calib;
+previous test run was 50+132). calib_mean=0.374 (ack=0.728, ans=0.046),
+batch_calib=0.041. Near-zero ans_mean confirms the EKR/PPI promissory note
+bleed dominates at full corpus scale. Commit: c79ac00.
+
+**Chapter §6.5.2 Protocol B** expanded from 2 to 3 configs (added v4t-tuned
+row with narrative explaining the intermediate calibration signature).
+**Chapter §6.5.3 Protocol B** expanded with:
+- HotpotQA full 6-config calibration table (v4t-tuned: ack=1.000, ans=0.445,
+  batch=0.375; corpus-tuned: ack=0.956, ans=0.891, batch=0.950)
+- LongMemEval full 6-config calibration table (new section; v4t-tuned
+  collapse at batch=0.100; dump-all competitive at 0.600 on dialogue)
+- CUAD Protocol B note (v4t-canonical full-scale EKR/PPI bleed analysis,
+  5 configs pending full 510-doc runs)
+
+HotpotQA finding: V4ₜ-per-doc-tuned (ack=1.000, ans=0.445) improves over
+canonical on per-doc retrieval but batch_calib (0.375 vs 0.950 corpus-tuned)
+shows corpus-scale distribution shift only corpus-cumulative tuning resolves.
+LME finding: v4t-canonical's unusual ans>ack pattern (0.491 vs 0.378)
+because dialogue content is semantically similar across sessions.
+
+Audit: 57,496 total Claude-judge lines, 305 cells parity-green. Commit: 9961b73.
+
+---
+
 ## -17. QASPER Protocol B complete — 4,820q Claude-judged, §6.5.2 Protocol B paragraph added (June 8 2026)
 
 QASPER Protocol B (v4t-canonical + bm25-corpus calibration cells): 2 × 2,410
