@@ -2072,13 +2072,13 @@ tuning protocol carries over directly. Worth one more CMA-ES sweep.
 is now Claude Opus 4.7 max (cross-vendor: Anthropic judge × OpenAI
 answerer). Specific completions:
 
-* **All Phase 4 cross-vendor cells complete.** 305 cells, 57,496
+* **All Phase 4 cross-vendor cells complete.** 311 cells, 64,726
   Claude judgments — Phase 4 (headline k=8), k-sweep variants
   (k=4/8/16/32, seeds 7/42/100), tierb variants, all 6 benchmarks'
   Protocol A corpus-mode cells, and Protocol B calibration cells
-  (FB 6 configs full + extension, QASPER 3/6 complete, HQA 6/6,
-  LME 6/6, CUAD 1/6 full). Audit green: 0 duplicates, 100% Claude
-  provenance.
+  (FB 6 configs full + extension, QASPER 6/6 full-scale, HQA 6/6
+  pilot, LME 6/6 pilot, CUAD 1/6 full + v4t-tuned full-scale in
+  progress). Audit green: 0 duplicates, 100% Claude provenance.
 
 * **QASPER k-sweep fully covered.** All 45 QASPER p4_* cells
   (4,425 entries) are Claude-judged — including k-sweep variants
@@ -2124,10 +2124,10 @@ What remains for future work (genuinely not done):
 * `tests/test_benchmark_{adapters, snapshots, smoke, adversarial}.py` — 4-layer test pyramid (146 tests, ~1,300 lines).
 * `scripts/run_corpus_qa.py` — Phase 1.9 corpus-mode runner (Protocol A + B, ~850 lines).
 * `scripts/build_{finbench,qasper,cuad}_corpus_qa_data.py` — per-benchmark Protocol B aggregators.
-* `scripts/audit_judge_provenance.py` — judge provenance auditor (verifies all 57,496 judge lines carry Claude provenance).
+* `scripts/audit_judge_provenance.py` — judge provenance auditor (verifies all 64,726 judge lines carry Claude provenance).
 * `evaluation/claude_judge_queue.py` — judge queue infrastructure (write/read/merge).
 * `evaluation/claude_judge_protocol.md` — 5-point rubric + Protocol B sub-rubric.
-* `scripts/_judge_phase19_*` — ~80+ hand-judging part-scripts (all 305 cells, all 1-by-1).
+* `scripts/_judge_phase19_*` — ~90+ hand-judging part-scripts (all 311 cells, all 1-by-1).
 
 ### Data and results
 
@@ -2139,7 +2139,7 @@ What remains for future work (genuinely not done):
 * `results/stage3/theta_transfer_matrix.json` — 3×2 transfer ablation (post-W3).
 * `results/stage3/stage3_runs.json` — orchestrator summary across cells.
 * `results/stage3/corpus_traces/` — per-{bench × config} QA JSON traces from corpus runs.
-* `results/stage3/judge_queue/` — 305+ cells, each with `queue.jsonl` (predictions) and `results.jsonl` (Claude judgments).
+* `results/stage3/judge_queue/` — 311+ cells, each with `queue.jsonl` (predictions) and `results.jsonl` (Claude judgments).
 * `results/stage3/{finbench,qasper,cuad}_corpus_summary.json` — per-benchmark aggregated Protocol A+B means.
 * `results/stage3/multi_corpus_summary.json` — cross-benchmark aggregate (headline four-shift table).
 * `web/public/data/stage3_retrieval.json` — frontend-consumed retrieval table.
