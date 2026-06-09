@@ -52,3 +52,8 @@ data/benchmarks/
 .env.*
 .env_local
 *.key
+
+# QASPER calibration corpus traces too large for GitHub (200+ MB)
+results/stage3/corpus_traces/qasper__*__calibration/
+# Large QASPER dump-all queue files (106+ MB, exceed GitHub limit)
+results/stage3/judge_queue/qasper__dump-all__*calib*/queue.jsonl
