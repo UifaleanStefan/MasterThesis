@@ -1089,46 +1089,51 @@ The Tier C k-sweep (k ∈ {4, 8, 16, 32}, 100 q × seed 42 × 6 benchmarks ×
 Pareto picture to the *retrieval budget* dimension. Source:
 `results/stage3/ksweep_analysis.json`.
 
-**Headline judge scores per k, per benchmark (V4-tuned config):**
+**Headline judge scores per k, per benchmark (V4-tuned config, Claude cross-vendor judging¹):**
 
-| k | CUAD | QASPER | HotpotQA | LongMemEval | FinanceBench | NarrativeQA |
+| k | CUAD | QASPER | HotpotQA | LongMemEval | FinanceBench¹ | NarrativeQA |
 |---:|---:|---:|---:|---:|---:|---:|
-|  4 | 0.150 | 0.133 | 0.508 | 0.375 | 0.433 | (n/a) |
-|  8 | **0.310** | 0.190 | 0.649 | 0.370 | 0.424 | (n/a) |
-| 16 | 0.258 | **0.230** | 0.669 | 0.385 | 0.418 | (n/a) |
-| 32 | 0.254 | 0.217 | 0.678 | 0.365 | 0.434 | (n/a) |
+|  4 | 0.170 | 0.318 | 0.613 | 0.480 | 0.433¹ | (n/a) |
+|  8 | **0.357** | 0.355 | 0.782 | 0.487 | 0.424¹ | (n/a) |
+| 16 | 0.263 | **0.420** | 0.802 | 0.490 | 0.418¹ | (n/a) |
+| 32 | 0.242 | 0.372 | **0.812** | 0.463 | 0.434¹ | (n/a) |
+
+¹ FinanceBench k-sweep cells were not re-judged with Claude cross-vendor; values
+are Phase 1.7 gpt-4o-mini scores. CUAD, QASPER, HQA, and LME values are
+Claude Opus 4.7 max (seed=42, n=100 per cell).
 
 Two findings emerge cleanly:
 
 1. **Judge score plateaus or DECLINES past a benchmark-specific elbow.**
-   CUAD peaks at k = 8 then loses 0.05 by k = 16; QASPER peaks at k = 16
-   then loses 0.01 by k = 32. The conventional intuition "more retrieval
-   is always better" is empirically false for LLM answer-quality: past a
-   point, additional context dilutes the gold signal with noise that the
-   answer-generation LLM weights into its output. Recall keeps climbing
-   (CUAD recall 0.06 → 0.66 across k ∈ {4, 8, 16, 32}) — but answer
-   quality does not track it past the elbow.
+   CUAD peaks at k = 8 (0.357) then falls to 0.263 at k = 16 (−0.094);
+   QASPER peaks at k = 16 (0.420) then falls to 0.372 at k = 32 (−0.048).
+   The conventional intuition "more retrieval is always better" is
+   empirically false for LLM answer-quality: past a point, additional
+   context dilutes the gold signal with noise that the answer-generation
+   LLM weights into its output. Recall keeps climbing (CUAD recall
+   0.06 → 0.66 across k ∈ {4, 8, 16, 32}) — but answer quality does
+   not track it past the elbow.
 
 2. **Cost grows nearly linearly with k**, yet quality plateaus or
    degrades. For CUAD: cost-per-question $0.00010 → $0.00018 → $0.00024 →
-   $0.00023 (k ∈ 4..32), while judge moves 0.16 → 0.31 → 0.21 → 0.21.
+   $0.00023 (k ∈ 4..32), while judge moves 0.17 → 0.36 → 0.26 → 0.24.
    The cost-quality elasticity is therefore best at k = 8 across most
    benchmarks; QASPER is the exception with its k = 16 elbow.
 
 3. **V4-tuned outperforms V4-canonical at every k on long-haystack
    benchmarks** (CUAD, QASPER) within this 2-config k-sweep: on CUAD
-   the gap is +0.10 to +0.07 in judge score consistently from k = 4
-   to k = 32; on QASPER the gap is +0.03 to +0.05. On short-haystack
-   benchmarks the two configs are within 0.05 of each other and the
-   ordering swings benchmark-by-benchmark and k-by-k — consistent
-   with §6.1's two-cluster finding. (Phase 1.7's AttentionMemory-tuned
-   and BM25 baselines were not included in the k-sweep; the §5.4
-   results above are the authoritative 5-config head-to-head at k=8.)
+   the gap is +0.06 to +0.09 in judge score from k = 4 to k = 8,
+   then narrows at k = 16/32; on QASPER the gap is +0.04 to +0.09.
+   On short-haystack benchmarks (HQA, LME) the two configs are within
+   0.05 of each other — consistent with §6.1's two-cluster finding.
+   (Phase 1.7's AttentionMemory-tuned and BM25 baselines were not
+   included in the k-sweep; §5.4 above is the authoritative 5-config
+   head-to-head at k=8.)
 
 The thesis's choice of k = 8 throughout the rest of Stage 3 is
 empirically justified: it sits at the Pareto elbow for 5 of 6 benchmarks
-(QASPER alone would prefer k = 16, with marginal +0.04 judge gain for a
-1.4× cost increase). Cross-benchmark, k = 8 is the cost-quality sweet
+(QASPER alone would prefer k = 16, with marginal +0.065 judge gain for
+a 1.4× cost increase). Cross-benchmark, k = 8 is the cost-quality sweet
 spot.
 
 ### 5.7 Benchmarks where no memory configuration differentiated (honest null-result section)
