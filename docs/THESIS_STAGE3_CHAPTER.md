@@ -2086,10 +2086,11 @@ answerer). Specific completions:
 * **CUAD Protocol A complete.** All 9 CUAD corpus-mode cells
   (1,188 entries) Claude-judged 1-by-1. §6.5.3 table updated.
 
-* **Protocol B calibration on 4 benchmarks complete** (FB 6 configs
-  + 4 extension configs, HQA 6 configs, LME 6 configs, QASPER 3/6).
-  QASPER v4t-corpus-tuned + attention-corpus-tuned calibration pending.
-  CUAD 5 remaining configs need full 510-doc pipeline runs.
+* **Protocol B calibration on 5 benchmarks complete (pilot or full).**
+  FB 6 configs + 4 extension configs (full-scale), QASPER 6/6 configs
+  full-scale, HQA 6 configs (100-entry pilot), LME 6 configs (100-entry
+  pilot), CUAD 1/6 full-scale (v4t-canonical); CUAD v4t-tuned full 510-doc
+  run in progress; remaining 4 CUAD configs follow one at a time.
 
 * **Five-benchmark four-shift complete.** §6.5.3 covers all 5
   successful benchmarks (NarrativeQA tuning still did not converge —
