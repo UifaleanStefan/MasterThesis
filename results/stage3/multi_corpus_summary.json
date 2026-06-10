@@ -506,7 +506,104 @@
       }
     },
     "narrativeqa": {
-      "configs": {},
+      "configs": {
+        "v4t-canonical": {
+          "label": "V4ₜ canonical (grid θ)",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 10,
+              "claude_judge_mean": 0.4,
+              "recall_at_k_8": null
+            },
+            "batch": {
+              "n": 10,
+              "claude_judge_mean": 0.4,
+              "recall_at_k_8": null
+            }
+          }
+        },
+        "v4t-tuned": {
+          "label": "V4ₜ per-doc tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 10,
+              "claude_judge_mean": 0.375,
+              "recall_at_k_8": null
+            },
+            "batch": {
+              "n": 10,
+              "claude_judge_mean": 0.4,
+              "recall_at_k_8": null
+            }
+          }
+        },
+        "v4t-corpus-tuned": {
+          "label": "V4ₜ corpus-cumulative tuned",
+          "family": "v4",
+          "modes": {
+            "online": {
+              "n": 10,
+              "claude_judge_mean": 0.375,
+              "recall_at_k_8": null
+            },
+            "batch": {
+              "n": 10,
+              "claude_judge_mean": 0.4,
+              "recall_at_k_8": null
+            }
+          }
+        },
+        "bm25-corpus": {
+          "label": "BM25 sparse retrieval",
+          "family": "baseline",
+          "modes": {
+            "online": {
+              "n": 10,
+              "claude_judge_mean": 1.0,
+              "recall_at_k_8": null
+            },
+            "batch": {
+              "n": 10,
+              "claude_judge_mean": 0.85,
+              "recall_at_k_8": null
+            }
+          }
+        },
+        "attention-corpus-tuned": {
+          "label": "Attention memory (corpus-tuned)",
+          "family": "baseline",
+          "modes": {
+            "online": {
+              "n": 10,
+              "claude_judge_mean": 0.3,
+              "recall_at_k_8": null
+            },
+            "batch": {
+              "n": 10,
+              "claude_judge_mean": 0.25,
+              "recall_at_k_8": null
+            }
+          }
+        },
+        "dump-all": {
+          "label": "Dump-all (context-stuffing)",
+          "family": "baseline",
+          "modes": {
+            "online": {
+              "n": 10,
+              "claude_judge_mean": 0.35,
+              "recall_at_k_8": null
+            },
+            "batch": {
+              "n": 10,
+              "claude_judge_mean": 0.25,
+              "recall_at_k_8": null
+            }
+          }
+        }
+      },
       "corpus_tuned_theta": {
         "theta_store": null,
         "w_graph": null,
@@ -760,9 +857,9 @@
       "recall_lift_from_tuning": 0.9666666666666667
     },
     "narrativeqa": {
-      "v4t_canonical_batch": null,
-      "v4t_corpus_tuned_batch": null,
-      "lift": null,
+      "v4t_canonical_batch": 0.4,
+      "v4t_corpus_tuned_batch": 0.4,
+      "lift": 0.0,
       "four_shifts_replicated": "0/0",
       "recall_lift_from_tuning": null
     }

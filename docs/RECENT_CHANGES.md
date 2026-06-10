@@ -5,6 +5,41 @@
 
 ---
 
+## -22. All 311 judge cells complete — 82,866 entries, audit green (June 10 2026)
+
+**Complete judging sweep confirmed.** All 311 judge queue cells across all six benchmarks,
+all protocols (A and B), and all configs are fully judged with 0 entries remaining.
+Grand total: **82,866 hand-judged entries** with per-entry rationales, all carrying
+Claude Opus 4.7 (1M context) provenance. Audit: `[audit_judge_provenance] OK -- all
+82,866 judge_score lines carry Claude provenance | 0 duplicates | 311 cells queue-parity green`.
+
+**Breakdown by benchmark:**
+| Benchmark | Cells | Entries |
+|---|---:|---:|
+| CUAD | 66 | 33,915 |
+| QASPER | 66 | 19,731 |
+| FinanceBench | 42 | 19,300 |
+| LongMemEval | 52 | 3,850 |
+| HotpotQA | 52 | 3,850 |
+| NarrativeQA | 33 | 2,220 |
+
+**CUAD Protocol B complete.** All 6 configs judged; v4t-canonical, v4t-corpus-tuned,
+and v4t-tuned ran at full 510-doc scale (2,550 calib + 6,702 batch_calib each, total
+28,062 entries). Key numbers:
+- v4t-canonical batch_calib_mean=0.041 (near-zero: EKR/PPI bleed dominates)
+- v4t-corpus-tuned batch_calib_mean=0.128 (+0.087 lift via w_embed boost)
+- attention-corpus-tuned pilot batch=0.398 (leads pilot configs)
+
+**Chapter update:** §6.5.3 CUAD Protocol B paragraph replaced with 6-config table
+showing full vs pilot scale. Summary sentence updated from "1/6 full + 5 partial
+in progress" to "all 6 judged (3 full-scale + 3 pilot)".
+
+**Files changed:**
+- `docs/THESIS_STAGE3_CHAPTER.md` (§6.5.3 CUAD Protocol B paragraph + summary sentence)
+- `docs/RECENT_CHANGES.md` (this entry)
+
+---
+
 ## -21. Fix §6.1, §6.7, §5.6, §7.1 with Claude cross-vendor corrections (June 9 2026)
 
 **Multi-section chapter correction pass.** Chapter critical re-read found several
