@@ -32,9 +32,10 @@ import json
 import sys
 from pathlib import Path
 
-# Import the fully-scored BATCH_JUDGMENTS from the partial accumulation file
+# Import hand-judged lookups from accumulation files
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _batch_judgments_partial import BATCH_JUDGMENTS_PARTIAL as _BJP
+from _calib_judgments_partial import CALIB_JUDGMENTS_PARTIAL as _CJP
 
 ROOT = Path(__file__).resolve().parents[1]
 JQ = ROOT / "results" / "stage3" / "judge_queue"
@@ -83,10 +84,9 @@ def is_refusal(pred: str) -> bool:
 # Only non-zero answer entries (0.0 falls through to default)
 # Format: "doc{N}_qa{M}__after{K}": (score, "rationale text")
 # ---------------------------------------------------------------------------
-CALIB_JUDGMENTS: dict[str, tuple[float, str]] = {
-    # ── FILLED AFTER PIPELINE COMPLETES ─────────────────────────────────────
-    # (2550 calib entries — non-zero answer entries will be added here)
-}
+CALIB_JUDGMENTS: dict[str, tuple[float, str]] = _CJP
+# 632 non-refusal answer entries hand-judged 1-by-1 (claude-opus-4.7-1m).
+# Non-zero entries stored in _calib_judgments_partial.py; 0.0 falls through.
 
 
 # ---------------------------------------------------------------------------
