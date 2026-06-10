@@ -5,6 +5,48 @@
 
 ---
 
+## -23. Frontend: 5 new BenchmarkCorpus sections + generalized aggregator (June 10 2026)
+
+**5 new corpus-QA sections wired into the dashboard.** All 5 non-FB benchmarks
+now have dedicated corpus-cumulative results panels in the frontend.
+
+**BenchmarkCorpus.tsx** — new generalized component accepting a `bench` prop:
+- Protocol A judge table: batch + online means per config, sorted by batch score,
+  with inline bar charts and online−batch gap column
+- Protocol B calibration summary: ack/ans split + batch_calib per config
+- θ four-shift badge: canonical → corpus-tuned for each of the 4 params with
+  directional check (↑/↓ vs expected)
+- Loads `stage3_{bench}_corpus.json` from `web/public/data/`
+
+**build_benchmark_corpus_data.py** — parameterized aggregator:
+- Usage: `python scripts/build_benchmark_corpus_data.py <bench>`
+- Writes both `web/public/data/stage3_{bench}_corpus.json` (frontend)
+  and `results/stage3/{bench}_corpus_summary.json` (chapter figures)
+- Handles Protocol A (online/batch), Protocol B (calibration + batch_calib),
+  calibration trajectory, and theta contrast
+
+**Key numbers in frontend:**
+| Benchmark | V4ₜ corpus-tuned batch | Lift vs canonical | Four-shift |
+|---|---:|---:|---|
+| HotpotQA | **1.000** | **+0.800** | 4/4 |
+| LongMemEval | 0.600 | +0.100 | 4/4 |
+| QASPER | 0.415 | +0.165 | 4/4 |
+| CUAD | 0.184 | +0.161 | 3/4 |
+| NarrativeQA | 0.400 | 0.000 | tuning failed |
+
+**Verification:** 214/214 pytest pass, determinism audit green, npm build clean.
+
+**Files changed:**
+- `web/src/sections/BenchmarkCorpus.tsx` (new)
+- `web/src/App.tsx` (5 new BenchmarkCorpus sections + import)
+- `web/public/data/stage3_{qasper,cuad,hotpotqa,longmemeval,narrativeqa}_corpus.json` (5 new)
+- `.gitignore` (5 new exceptions for corpus JSON files)
+- `scripts/build_benchmark_corpus_data.py` (new)
+- `results/stage3/{hotpotqa,longmemeval,narrativeqa}_corpus_summary.json` (new)
+- `docs/RECENT_CHANGES.md` (this entry)
+
+---
+
 ## -22. All 311 judge cells complete — 82,866 entries, audit green (June 10 2026)
 
 **Complete judging sweep confirmed.** All 311 judge queue cells across all six benchmarks,
