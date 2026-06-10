@@ -29,7 +29,12 @@ Scoring rules (Protocol B):
 """
 from __future__ import annotations
 import json
+import sys
 from pathlib import Path
+
+# Import the fully-scored BATCH_JUDGMENTS from the partial accumulation file
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _batch_judgments_partial import BATCH_JUDGMENTS_PARTIAL as _BJP
 
 ROOT = Path(__file__).resolve().parents[1]
 JQ = ROOT / "results" / "stage3" / "judge_queue"
@@ -90,12 +95,10 @@ CALIB_JUDGMENTS: dict[str, tuple[float, str]] = {
 # Only non-zero entries (0.0 falls through to default)
 # Format: "doc{N}_qa{M}": (score, "rationale text")
 # ---------------------------------------------------------------------------
-BATCH_JUDGMENTS: dict[str, tuple[float, str]] = {
-    # ── FILLED AFTER PIPELINE COMPLETES ─────────────────────────────────────
-    # (6702 batch_calib entries — non-zero entries will be added here)
-    # Based on pilot (10 docs, 132 entries): ~39% non-zero, mean=0.186
-    # Expected for full run: ~2600 non-zero entries
-}
+BATCH_JUDGMENTS: dict[str, tuple[float, str]] = _BJP
+# 3682 non-refusal entries hand-judged 1-by-1; all 3682 scored.
+# 3020 refusal entries auto-score 0.0 via is_refusal() check above.
+# Total batch_calib queue: 6702 entries.
 
 
 # ---------------------------------------------------------------------------
