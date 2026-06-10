@@ -1,0 +1,162 @@
+{
+  "_manifest": {
+    "benchmark": "narrativeqa",
+    "label": "NarrativeQA",
+    "description": "Literary reading comprehension (1 work per corpus)",
+    "n_docs": 10,
+    "total_judgments": 120,
+    "judge_model": "claude-opus-4.7-1m"
+  },
+  "configs": [
+    {
+      "key": "v4t-canonical",
+      "label": "V4ₜ canonical (grid θ)",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.4,
+          "recall_at_k_8": null
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.4,
+          "recall_at_k_8": null
+        }
+      }
+    },
+    {
+      "key": "v4t-tuned",
+      "label": "V4ₜ per-doc tuned",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.375,
+          "recall_at_k_8": null
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.4,
+          "recall_at_k_8": null
+        }
+      }
+    },
+    {
+      "key": "v4t-corpus-tuned",
+      "label": "V4ₜ corpus-cumulative tuned",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.375,
+          "recall_at_k_8": null
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.4,
+          "recall_at_k_8": null
+        }
+      }
+    },
+    {
+      "key": "bm25-corpus",
+      "label": "BM25 sparse retrieval",
+      "family": "baseline",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 1.0,
+          "recall_at_k_8": null
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.85,
+          "recall_at_k_8": null
+        }
+      }
+    },
+    {
+      "key": "attention-corpus-tuned",
+      "label": "Attention memory (corpus-tuned)",
+      "family": "baseline",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.3,
+          "recall_at_k_8": null
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.25,
+          "recall_at_k_8": null
+        }
+      }
+    },
+    {
+      "key": "dump-all",
+      "label": "Dump-all (context-stuffing)",
+      "family": "baseline",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.35,
+          "recall_at_k_8": null
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.25,
+          "recall_at_k_8": null
+        }
+      }
+    }
+  ],
+  "modes": [
+    "online",
+    "batch"
+  ],
+  "judge_table": {
+    "online": {
+      "v4t-canonical": 0.4,
+      "v4t-tuned": 0.375,
+      "v4t-corpus-tuned": 0.375,
+      "bm25-corpus": 1.0,
+      "attention-corpus-tuned": 0.3,
+      "dump-all": 0.35
+    },
+    "batch": {
+      "v4t-canonical": 0.4,
+      "v4t-tuned": 0.4,
+      "v4t-corpus-tuned": 0.4,
+      "bm25-corpus": 0.85,
+      "attention-corpus-tuned": 0.25,
+      "dump-all": 0.25
+    }
+  },
+  "recall_table": {
+    "online": {},
+    "batch": {}
+  },
+  "calibration_data": {},
+  "theta_contrast": {
+    "canonical": {
+      "theta_store": 0.293,
+      "w_graph": 0.0,
+      "w_embed": 1.079,
+      "w_recency": 3.777
+    },
+    "corpus_tuned": {
+      "theta_store": null,
+      "w_graph": null,
+      "w_embed": null,
+      "w_recency": null
+    },
+    "four_shift_score": "tuning failed"
+  },
+  "headline": {
+    "v4t_canonical_batch": 0.4,
+    "v4t_corpus_tuned_batch": 0.4,
+    "lift": 0.0,
+    "four_shifts_replicated": "tuning failed"
+  }
+}

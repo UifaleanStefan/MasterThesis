@@ -1,0 +1,816 @@
+{
+  "_manifest": {
+    "benchmark": "longmemeval",
+    "label": "LongMemEval",
+    "description": "Multi-session dialogue QA (10 sessions)",
+    "n_docs": 10,
+    "total_judgments": 90,
+    "judge_model": "claude-opus-4.7-1m"
+  },
+  "configs": [
+    {
+      "key": "v4t-canonical",
+      "label": "V4ₜ canonical (grid θ)",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.6,
+          "recall_at_k_8": 1.0
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.5,
+          "recall_at_k_8": 0.6
+        }
+      }
+    },
+    {
+      "key": "v4t-tuned",
+      "label": "V4ₜ per-doc tuned",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.5,
+          "recall_at_k_8": 1.0
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.4,
+          "recall_at_k_8": 0.8
+        }
+      }
+    },
+    {
+      "key": "v4t-corpus-tuned",
+      "label": "V4ₜ corpus-cumulative tuned",
+      "family": "v4",
+      "modes": {
+        "online": {
+          "n": 10,
+          "claude_judge_mean": 0.6,
+          "recall_at_k_8": 1.0
+        },
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.6,
+          "recall_at_k_8": 1.0
+        }
+      }
+    },
+    {
+      "key": "bm25-corpus",
+      "label": "BM25 sparse retrieval",
+      "family": "baseline",
+      "modes": {
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.7,
+          "recall_at_k_8": 1.0
+        }
+      }
+    },
+    {
+      "key": "attention-corpus-tuned",
+      "label": "Attention memory (corpus-tuned)",
+      "family": "baseline",
+      "modes": {
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.4,
+          "recall_at_k_8": 1.0
+        }
+      }
+    },
+    {
+      "key": "dump-all",
+      "label": "Dump-all (context-stuffing)",
+      "family": "baseline",
+      "modes": {
+        "batch": {
+          "n": 10,
+          "claude_judge_mean": 0.375,
+          "recall_at_k_8": 1.0
+        }
+      }
+    }
+  ],
+  "modes": [
+    "batch",
+    "online"
+  ],
+  "judge_table": {
+    "online": {
+      "v4t-canonical": 0.6,
+      "v4t-tuned": 0.5,
+      "v4t-corpus-tuned": 0.6
+    },
+    "batch": {
+      "v4t-canonical": 0.5,
+      "v4t-tuned": 0.4,
+      "v4t-corpus-tuned": 0.6,
+      "bm25-corpus": 0.7,
+      "attention-corpus-tuned": 0.4,
+      "dump-all": 0.375
+    }
+  },
+  "recall_table": {
+    "online": {
+      "v4t-canonical": 1.0,
+      "v4t-tuned": 1.0,
+      "v4t-corpus-tuned": 1.0
+    },
+    "batch": {
+      "v4t-canonical": 0.6,
+      "v4t-tuned": 0.8,
+      "v4t-corpus-tuned": 1.0,
+      "bm25-corpus": 1.0,
+      "attention-corpus-tuned": 1.0,
+      "dump-all": 1.0
+    }
+  },
+  "calibration_data": {
+    "v4t-canonical": {
+      "calibration": {
+        "overall_mean": 0.44,
+        "n": 100,
+        "answer_mean": 0.4909,
+        "answer_n": 55,
+        "acknowledge_missing_mean": 0.3778,
+        "acknowledge_missing_n": 45
+      },
+      "batch_calib": {
+        "overall_mean": 0.4,
+        "n": 10,
+        "answer_mean": 0.4,
+        "answer_n": 10,
+        "acknowledge_missing_mean": null,
+        "acknowledge_missing_n": 0
+      },
+      "trajectory": [
+        {
+          "docs_seen": 1,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 1,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 9,
+          "acknowledge_missing_mean": 0.5556
+        },
+        {
+          "docs_seen": 2,
+          "n": 10,
+          "mean_score": 0.3,
+          "answer_n": 2,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 8,
+          "acknowledge_missing_mean": 0.375
+        },
+        {
+          "docs_seen": 3,
+          "n": 10,
+          "mean_score": 0.2,
+          "answer_n": 3,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 7,
+          "acknowledge_missing_mean": 0.2857
+        },
+        {
+          "docs_seen": 4,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 4,
+          "answer_mean": 0.75,
+          "acknowledge_missing_n": 6,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 5,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 5,
+          "answer_mean": 0.6,
+          "acknowledge_missing_n": 5,
+          "acknowledge_missing_mean": 0.4
+        },
+        {
+          "docs_seen": 6,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 6,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 4,
+          "acknowledge_missing_mean": 0.25
+        },
+        {
+          "docs_seen": 7,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 7,
+          "answer_mean": 0.5714,
+          "acknowledge_missing_n": 3,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 8,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 8,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 2,
+          "acknowledge_missing_mean": 0.0
+        },
+        {
+          "docs_seen": 9,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 9,
+          "answer_mean": 0.5556,
+          "acknowledge_missing_n": 1,
+          "acknowledge_missing_mean": 1.0
+        },
+        {
+          "docs_seen": 10,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 10,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 0,
+          "acknowledge_missing_mean": null
+        }
+      ]
+    },
+    "v4t-tuned": {
+      "calibration": {
+        "overall_mean": 0.39,
+        "n": 100,
+        "answer_mean": 0.0545,
+        "answer_n": 55,
+        "acknowledge_missing_mean": 0.8,
+        "acknowledge_missing_n": 45
+      },
+      "batch_calib": {
+        "overall_mean": 0.1,
+        "n": 10,
+        "answer_mean": 0.1,
+        "answer_n": 10,
+        "acknowledge_missing_mean": null,
+        "acknowledge_missing_n": 0
+      },
+      "trajectory": [
+        {
+          "docs_seen": 1,
+          "n": 10,
+          "mean_score": 0.7,
+          "answer_n": 1,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 9,
+          "acknowledge_missing_mean": 0.7778
+        },
+        {
+          "docs_seen": 2,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 2,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 8,
+          "acknowledge_missing_mean": 0.75
+        },
+        {
+          "docs_seen": 3,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 3,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 7,
+          "acknowledge_missing_mean": 0.8571
+        },
+        {
+          "docs_seen": 4,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 4,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 6,
+          "acknowledge_missing_mean": 0.8333
+        },
+        {
+          "docs_seen": 5,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 5,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 5,
+          "acknowledge_missing_mean": 0.8
+        },
+        {
+          "docs_seen": 6,
+          "n": 10,
+          "mean_score": 0.3,
+          "answer_n": 6,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 4,
+          "acknowledge_missing_mean": 0.75
+        },
+        {
+          "docs_seen": 7,
+          "n": 10,
+          "mean_score": 0.2,
+          "answer_n": 7,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 3,
+          "acknowledge_missing_mean": 0.6667
+        },
+        {
+          "docs_seen": 8,
+          "n": 10,
+          "mean_score": 0.3,
+          "answer_n": 8,
+          "answer_mean": 0.125,
+          "acknowledge_missing_n": 2,
+          "acknowledge_missing_mean": 1.0
+        },
+        {
+          "docs_seen": 9,
+          "n": 10,
+          "mean_score": 0.2,
+          "answer_n": 9,
+          "answer_mean": 0.1111,
+          "acknowledge_missing_n": 1,
+          "acknowledge_missing_mean": 1.0
+        },
+        {
+          "docs_seen": 10,
+          "n": 10,
+          "mean_score": 0.1,
+          "answer_n": 10,
+          "answer_mean": 0.1,
+          "acknowledge_missing_n": 0,
+          "acknowledge_missing_mean": null
+        }
+      ]
+    },
+    "v4t-corpus-tuned": {
+      "calibration": {
+        "overall_mean": 0.52,
+        "n": 100,
+        "answer_mean": 0.5636,
+        "answer_n": 55,
+        "acknowledge_missing_mean": 0.4667,
+        "acknowledge_missing_n": 45
+      },
+      "batch_calib": {
+        "overall_mean": 0.7,
+        "n": 10,
+        "answer_mean": 0.7,
+        "answer_n": 10,
+        "acknowledge_missing_mean": null,
+        "acknowledge_missing_n": 0
+      },
+      "trajectory": [
+        {
+          "docs_seen": 1,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 1,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 9,
+          "acknowledge_missing_mean": 0.5556
+        },
+        {
+          "docs_seen": 2,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 2,
+          "answer_mean": 0.0,
+          "acknowledge_missing_n": 8,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 3,
+          "n": 10,
+          "mean_score": 0.3,
+          "answer_n": 3,
+          "answer_mean": 0.3333,
+          "acknowledge_missing_n": 7,
+          "acknowledge_missing_mean": 0.2857
+        },
+        {
+          "docs_seen": 4,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 4,
+          "answer_mean": 0.75,
+          "acknowledge_missing_n": 6,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 5,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 5,
+          "answer_mean": 0.6,
+          "acknowledge_missing_n": 5,
+          "acknowledge_missing_mean": 0.4
+        },
+        {
+          "docs_seen": 6,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 6,
+          "answer_mean": 0.6667,
+          "acknowledge_missing_n": 4,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 7,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 7,
+          "answer_mean": 0.5714,
+          "acknowledge_missing_n": 3,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 8,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 8,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 2,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 9,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 9,
+          "answer_mean": 0.5556,
+          "acknowledge_missing_n": 1,
+          "acknowledge_missing_mean": 1.0
+        },
+        {
+          "docs_seen": 10,
+          "n": 10,
+          "mean_score": 0.7,
+          "answer_n": 10,
+          "answer_mean": 0.7,
+          "acknowledge_missing_n": 0,
+          "acknowledge_missing_mean": null
+        }
+      ]
+    },
+    "bm25-corpus": {
+      "calibration": {
+        "overall_mean": 0.5375,
+        "n": 100,
+        "answer_mean": 0.5955,
+        "answer_n": 55,
+        "acknowledge_missing_mean": 0.4667,
+        "acknowledge_missing_n": 45
+      },
+      "batch_calib": {
+        "overall_mean": 0.75,
+        "n": 10,
+        "answer_mean": 0.75,
+        "answer_n": 10,
+        "acknowledge_missing_mean": null,
+        "acknowledge_missing_n": 0
+      },
+      "trajectory": [
+        {
+          "docs_seen": 1,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 1,
+          "answer_mean": 1.0,
+          "acknowledge_missing_n": 9,
+          "acknowledge_missing_mean": 0.5556
+        },
+        {
+          "docs_seen": 2,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 2,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 8,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 3,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 3,
+          "answer_mean": 0.6667,
+          "acknowledge_missing_n": 7,
+          "acknowledge_missing_mean": 0.4286
+        },
+        {
+          "docs_seen": 4,
+          "n": 10,
+          "mean_score": 0.425,
+          "answer_n": 4,
+          "answer_mean": 0.5625,
+          "acknowledge_missing_n": 6,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 5,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 5,
+          "answer_mean": 0.6,
+          "acknowledge_missing_n": 5,
+          "acknowledge_missing_mean": 0.4
+        },
+        {
+          "docs_seen": 6,
+          "n": 10,
+          "mean_score": 0.55,
+          "answer_n": 6,
+          "answer_mean": 0.5833,
+          "acknowledge_missing_n": 4,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 7,
+          "n": 10,
+          "mean_score": 0.45,
+          "answer_n": 7,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 3,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 8,
+          "n": 10,
+          "mean_score": 0.45,
+          "answer_n": 8,
+          "answer_mean": 0.4375,
+          "acknowledge_missing_n": 2,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 9,
+          "n": 10,
+          "mean_score": 0.65,
+          "answer_n": 9,
+          "answer_mean": 0.6111,
+          "acknowledge_missing_n": 1,
+          "acknowledge_missing_mean": 1.0
+        },
+        {
+          "docs_seen": 10,
+          "n": 10,
+          "mean_score": 0.75,
+          "answer_n": 10,
+          "answer_mean": 0.75,
+          "acknowledge_missing_n": 0,
+          "acknowledge_missing_mean": null
+        }
+      ]
+    },
+    "attention-corpus-tuned": {
+      "calibration": {
+        "overall_mean": 0.51,
+        "n": 100,
+        "answer_mean": 0.5455,
+        "answer_n": 55,
+        "acknowledge_missing_mean": 0.4667,
+        "acknowledge_missing_n": 45
+      },
+      "batch_calib": {
+        "overall_mean": 0.4,
+        "n": 10,
+        "answer_mean": 0.4,
+        "answer_n": 10,
+        "acknowledge_missing_mean": null,
+        "acknowledge_missing_n": 0
+      },
+      "trajectory": [
+        {
+          "docs_seen": 1,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 1,
+          "answer_mean": 1.0,
+          "acknowledge_missing_n": 9,
+          "acknowledge_missing_mean": 0.5556
+        },
+        {
+          "docs_seen": 2,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 2,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 8,
+          "acknowledge_missing_mean": 0.375
+        },
+        {
+          "docs_seen": 3,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 3,
+          "answer_mean": 0.3333,
+          "acknowledge_missing_n": 7,
+          "acknowledge_missing_mean": 0.5714
+        },
+        {
+          "docs_seen": 4,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 4,
+          "answer_mean": 0.75,
+          "acknowledge_missing_n": 6,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 5,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 5,
+          "answer_mean": 0.6,
+          "acknowledge_missing_n": 5,
+          "acknowledge_missing_mean": 0.4
+        },
+        {
+          "docs_seen": 6,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 6,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 4,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 7,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 7,
+          "answer_mean": 0.7143,
+          "acknowledge_missing_n": 3,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 8,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 8,
+          "answer_mean": 0.625,
+          "acknowledge_missing_n": 2,
+          "acknowledge_missing_mean": 0.5
+        },
+        {
+          "docs_seen": 9,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 9,
+          "answer_mean": 0.4444,
+          "acknowledge_missing_n": 1,
+          "acknowledge_missing_mean": 1.0
+        },
+        {
+          "docs_seen": 10,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 10,
+          "answer_mean": 0.4,
+          "acknowledge_missing_n": 0,
+          "acknowledge_missing_mean": null
+        }
+      ]
+    },
+    "dump-all": {
+      "calibration": {
+        "overall_mean": 0.53,
+        "n": 100,
+        "answer_mean": 0.6,
+        "answer_n": 55,
+        "acknowledge_missing_mean": 0.4444,
+        "acknowledge_missing_n": 45
+      },
+      "batch_calib": {
+        "overall_mean": 0.6,
+        "n": 10,
+        "answer_mean": 0.6,
+        "answer_n": 10,
+        "acknowledge_missing_mean": null,
+        "acknowledge_missing_n": 0
+      },
+      "trajectory": [
+        {
+          "docs_seen": 1,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 1,
+          "answer_mean": 1.0,
+          "acknowledge_missing_n": 9,
+          "acknowledge_missing_mean": 0.5556
+        },
+        {
+          "docs_seen": 2,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 2,
+          "answer_mean": 0.5,
+          "acknowledge_missing_n": 8,
+          "acknowledge_missing_mean": 0.375
+        },
+        {
+          "docs_seen": 3,
+          "n": 10,
+          "mean_score": 0.7,
+          "answer_n": 3,
+          "answer_mean": 0.6667,
+          "acknowledge_missing_n": 7,
+          "acknowledge_missing_mean": 0.7143
+        },
+        {
+          "docs_seen": 4,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 4,
+          "answer_mean": 0.75,
+          "acknowledge_missing_n": 6,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 5,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 5,
+          "answer_mean": 0.6,
+          "acknowledge_missing_n": 5,
+          "acknowledge_missing_mean": 0.4
+        },
+        {
+          "docs_seen": 6,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 6,
+          "answer_mean": 0.6667,
+          "acknowledge_missing_n": 4,
+          "acknowledge_missing_mean": 0.25
+        },
+        {
+          "docs_seen": 7,
+          "n": 10,
+          "mean_score": 0.5,
+          "answer_n": 7,
+          "answer_mean": 0.5714,
+          "acknowledge_missing_n": 3,
+          "acknowledge_missing_mean": 0.3333
+        },
+        {
+          "docs_seen": 8,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 8,
+          "answer_mean": 0.75,
+          "acknowledge_missing_n": 2,
+          "acknowledge_missing_mean": 0.0
+        },
+        {
+          "docs_seen": 9,
+          "n": 10,
+          "mean_score": 0.6,
+          "answer_n": 9,
+          "answer_mean": 0.5556,
+          "acknowledge_missing_n": 1,
+          "acknowledge_missing_mean": 1.0
+        },
+        {
+          "docs_seen": 10,
+          "n": 10,
+          "mean_score": 0.4,
+          "answer_n": 10,
+          "answer_mean": 0.4,
+          "acknowledge_missing_n": 0,
+          "acknowledge_missing_mean": null
+        }
+      ]
+    }
+  },
+  "theta_contrast": {
+    "canonical": {
+      "theta_store": 0.293,
+      "w_graph": 0.0,
+      "w_embed": 1.079,
+      "w_recency": 3.777
+    },
+    "corpus_tuned": {
+      "theta_store": 0.28489265128469243,
+      "w_graph": 0.539181879964145,
+      "w_embed": 1.3196158078552767,
+      "w_recency": 0.09169361868059701
+    },
+    "four_shift_score": "4/4"
+  },
+  "headline": {
+    "v4t_canonical_batch": 0.5,
+    "v4t_corpus_tuned_batch": 0.6,
+    "lift": 0.1,
+    "four_shifts_replicated": "4/4"
+  }
+}

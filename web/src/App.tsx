@@ -10,6 +10,7 @@ import { TransferSensitivity } from "./sections/TransferSensitivity";
 import { NeuralController } from "./sections/NeuralController";
 import { Stage3 } from "./sections/Stage3";
 import { FinanceBenchCorpus } from "./sections/FinanceBenchCorpus";
+import { BenchmarkCorpus } from "./sections/BenchmarkCorpus";
 import { GraphEvolution } from "./sections/GraphEvolution";
 import { Reproducibility } from "./sections/Reproducibility";
 import { ScrollProgress } from "./components/nav/ScrollProgress";
@@ -32,6 +33,11 @@ function App() {
       <NeuralController />
       <Stage3 />
       <FinanceBenchCorpus />
+      <BenchmarkCorpus bench="qasper" sectionId="corpus-qasper" />
+      <BenchmarkCorpus bench="cuad" sectionId="corpus-cuad" />
+      <BenchmarkCorpus bench="hotpotqa" sectionId="corpus-hotpotqa" />
+      <BenchmarkCorpus bench="longmemeval" sectionId="corpus-lme" />
+      <BenchmarkCorpus bench="narrativeqa" sectionId="corpus-nqa" />
       <GraphEvolution />
       <Reproducibility />
     </EmbeddingProvider>
