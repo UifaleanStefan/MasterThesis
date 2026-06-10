@@ -5,6 +5,18 @@
 
 ---
 
+## -24. Chapter §7.5: correct judge count 64,726→82,866 + CUAD Protocol B final status (June 10 2026)
+
+**§7.5 stale numbers fixed.** Two errors in the §7.5 "What shipped" bullet corrected:
+- "64,726 Claude judgments" → **82,866** (all 311 cells complete)
+- CUAD Protocol B status "1/6 full + v4t-tuned in progress" →
+  "3/6 full-scale (v4t-canonical + v4t-corpus-tuned + v4t-tuned, 28,062 entries)
+  + 3/6 at 10-doc pilot (attention/bm25/dump-all)"
+- Removed stale "remaining 4 CUAD configs follow one at a time" language
+- Added Protocol B entry counts for QASPER (14,460) and CUAD (28,062 full + pilots)
+
+---
+
 ## -23. Frontend: 5 new BenchmarkCorpus sections + generalized aggregator (June 10 2026)
 
 **5 new corpus-QA sections wired into the dashboard.** All 5 non-FB benchmarks

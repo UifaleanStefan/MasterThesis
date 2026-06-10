@@ -2122,27 +2122,25 @@ tuning protocol carries over directly. Worth one more CMA-ES sweep.
 is now Claude Opus 4.7 max (cross-vendor: Anthropic judge × OpenAI
 answerer). Specific completions:
 
-* **All Phase 4 cross-vendor cells complete.** 311 cells, 64,726
-  Claude judgments — Phase 4 (headline k=8), k-sweep variants
-  (k=4/8/16/32, seeds 7/42/100), tierb variants, all 6 benchmarks'
-  Protocol A corpus-mode cells, and Protocol B calibration cells
-  (FB 6 configs full + extension, QASPER 6/6 full-scale, HQA 6/6
-  pilot, LME 6/6 pilot, CUAD 1/6 full + v4t-tuned full-scale in
-  progress). Audit green: 0 duplicates, 100% Claude provenance.
+* **All 311 judge cells complete.** 311 cells, **82,866 Claude
+  judgments** (0 remaining, 0 duplicates, 100% Claude provenance,
+  audit green). Coverage: Phase 4 headline cells (k=8), k-sweep
+  variants (k=4/8/16/32, seeds 7/42/100), tier-b variants, all
+  6 benchmarks' Protocol A corpus-mode cells, and Protocol B
+  calibration cells (FB 6 configs + 4 extension, QASPER 6/6
+  full-scale, HQA 6/6, LME 6/6, CUAD 6/6).
 
 * **QASPER k-sweep fully covered.** All 45 QASPER p4_* cells
   (4,425 entries) are Claude-judged — including k-sweep variants
   k=4/8/16/32 and multi-seed variants seed=7/100. §5.6
   k-sensitivity numbers carry full cross-vendor provenance.
 
-* **CUAD Protocol A complete.** All 9 CUAD corpus-mode cells
-  (1,188 entries) Claude-judged 1-by-1. §6.5.3 table updated.
-
-* **Protocol B calibration on 5 benchmarks complete (pilot or full).**
-  FB 6 configs + 4 extension configs (full-scale), QASPER 6/6 configs
-  full-scale, HQA 6 configs (100-entry pilot), LME 6 configs (100-entry
-  pilot), CUAD 1/6 full-scale (v4t-canonical); CUAD v4t-tuned full 510-doc
-  run in progress; remaining 4 CUAD configs follow one at a time.
+* **Protocol B calibration on 5 benchmarks complete.**
+  FB 6 configs + 4 extension configs (full-scale); QASPER 6/6 full-scale
+  (14,460 entries); CUAD 3/6 full-scale (v4t-canonical, v4t-corpus-tuned,
+  v4t-tuned, 28,062 entries) + 3/6 at 10-doc pilot scale (attention,
+  bm25, dump-all, n≈50 each); HQA 6/6 (660 entries); LME 6/6 (660 entries).
+  Protocol B for NarrativeQA not run (tuning failed; out-of-scope per §6.5.3).
 
 * **Five-benchmark four-shift complete.** §6.5.3 covers all 5
   successful benchmarks (NarrativeQA tuning still did not converge —
