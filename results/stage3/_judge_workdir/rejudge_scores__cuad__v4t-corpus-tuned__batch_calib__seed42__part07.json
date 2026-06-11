@@ -1,0 +1,602 @@
+{
+"cuad__v4t-corpus-tuned__batch__doc202_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'April 7, 2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc202_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'April 7, 2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc203_qa1__seed42": [
+0.0,
+"Extraction: gold names 'persons and entities listed on Schedule A...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc203_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'December 12, 2014...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc203_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This Agreement is effective as of the date hereof and shall ...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc203_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (THIS AGREEMENT SHALL BE GOVERNED IN ALL RESPECTS, INCLUDING ...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc203_qa7__seed42": [
+0.0,
+"Anti-assignment: gold span 'This Agreement is solely for the benefit of the parties here...' does not support pred's consent-required assertion. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc204_qa3__seed42": [
+0.0,
+"Expiration: gold term is 'Unless earlier terminated as provided in this Agreement, upo...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc204_qa4__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be governed by and construed in accorda...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc205_qa1__seed42": [
+0.0,
+"Extraction: gold names 'PEY DIRT, INC....'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc205_qa3__seed42": [
+0.0,
+"Date extraction: gold is '\"Contract Period\" shall mean that period of time commencing ...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc205_qa4__seed42": [
+0.0,
+"Expiration: gold term is '\"Contract Period\" shall mean that period of time commencing ...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc205_qa7__seed42": [
+0.25,
+"Exclusivity: yes-direction matches gold (Manning Identification exclusive grant) but pred gives section pointers, no content."
+],
+"cuad__v4t-corpus-tuned__batch__doc205_qa9__seed42": [
+0.25,
+"Anti-assignment: 'a protection exists' partially matches but gold gives a termination-on-merger right while pred asserts consent-required - mechanism wrong."
+],
+"cuad__v4t-corpus-tuned__batch__doc205_qa15__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: 90-day sell-off) but cited clauses are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc205_qa18__seed42": [
+0.25,
+"Insurance: yes-direction and structure match gold (Company maintains $3M naming Pey Dirt) but pred cites the North contract's values."
+],
+"cuad__v4t-corpus-tuned__batch__doc206_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'JULY 15, 2005...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc206_qa3__seed42": [
+0.0,
+"Date extraction: gold is '\"Effective Date\" means July 15, 2005....'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc206_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This Agreement will remain in force for perpetuity or until ...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc206_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be construed and governed in accordance...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc206_qa8__seed42": [
+0.25,
+"RoFN: yes-direction matches gold's LKPL RFM right but pred cites another contract's heading."
+],
+"cuad__v4t-corpus-tuned__batch__doc207_qa1__seed42": [
+0.0,
+"Extraction: gold names 'ABP TRUST...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc208_qa3__seed42": [
+0.0,
+"Date extraction: gold is '\"Commencement Date\" means 16 October 2005....'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc208_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'In addition, DCL may terminate this Agreement with effect fr...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc208_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be governed by and construed in all res...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc208_qa11__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: SEV 13-week repair liability) but cited clauses are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc208_qa12__seed42": [
+0.0,
+"Content mismatch: gold 'Subject to Clause 11.6. SEV will indemnify and keep DCL inde...' vs pred from another contract; no matching aspect. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc208_qa13__seed42": [
+0.25,
+"Insurance: yes-direction matches gold (employer's liability GBP 5M + CGL) but specifics cite North $2M."
+],
+"cuad__v4t-corpus-tuned__batch__doc209_qa1__seed42": [
+0.0,
+"Extraction: gold names 'Boxing County Chengli Gas Supply Co., Ltd....'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc209_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'July 2013...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc209_qa3__seed42": [
+0.0,
+"Expiration: gold term is 'The term of the agreement is 20 years, during which if any m...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc209_qa5__seed42": [
+0.25,
+"Minimum commitment: yes-direction matches gold (7,200 hours/year) but '1,000 Units' is another contract's value."
+],
+"cuad__v4t-corpus-tuned__batch__doc210_qa1__seed42": [
+0.0,
+"Extraction: gold names 'the \"Customer\"...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc210_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'the 5th day of February, 2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc210_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'the 5th day of February, 2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc210_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'The initial term of this Agreement shall be one (1) year fro...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc211_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'November 19, 1999...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc211_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'INITIAL TERM shall mean the Effective Date through the day p...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc211_qa6__seed42": [
+0.0,
+"Notice period: gold specifies 'This Agreement will automatically renew at the end of the In...'; pred's number is from another contract. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc211_qa7__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be governed by and interpreted under th...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc211_qa17__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: phase-out discussions) but cited clause 5/6 survival is another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc212_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'this day of , 20...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc212_qa4__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement will be construed in accordance with the laws...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc212_qa7__seed42": [
+0.25,
+"Cap on liability: 'limitation exists' direction matches gold's consequential-damages exclusion but cited fee-cap clause is another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc213_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'June 13, 2012...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc213_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This Agreement shall commence on the \"Effective Date\" and sh...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc213_qa13__seed42": [
+0.25,
+"Insurance: insurance-exists direction matches gold's cancellation-notice clause but specifics cite North."
+],
+"cuad__v4t-corpus-tuned__batch__doc214_qa1__seed42": [
+0.0,
+"Extraction: gold names '\"SpinRecords.com\"  or  \"Client\"...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc214_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'Nov  5,  1999...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc214_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'Nov  5,  1999...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc214_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This  Agreement  shall  be effective upon the              -...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc214_qa6__seed42": [
+0.0,
+"Governing law: the gold annotation names no jurisdiction (clause truncated in source); pred's Nevada is the recurring wrong-contract answer and cannot be supported. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc215_qa2__seed42": [
+0.0,
+"Date extraction: gold is '4/8/2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc216_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'March 18, 2019...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc216_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'March 18, 2019...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc216_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This Agreement shall commence on the Effective Date and shal...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc216_qa5__seed42": [
+0.0,
+"Governing law: the gold annotation names no jurisdiction (clause truncated in source); pred's Nevada is the recurring wrong-contract answer and cannot be supported. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc216_qa8__seed42": [
+0.25,
+"Termination for convenience: yes-direction matches gold (Distributor at-will right) but pred's Contractor/Emerald clause is another contract."
+],
+"cuad__v4t-corpus-tuned__batch__doc216_qa18__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: Distributor continued selling) but cited clauses are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc216_qa22__seed42": [
+0.25,
+"Insurance: yes-direction matches gold (each party product liability) but specifics cite North."
+],
+"cuad__v4t-corpus-tuned__batch__doc217_qa1__seed42": [
+0.0,
+"Extraction: gold names 'LeadersOnline...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc217_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'March 15, 2000...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc217_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'March 15, 2000...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc217_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'Term shall mean the Effective Date through June 15, 2001 and...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc217_qa6__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be governed by and interpreted under th...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc217_qa10__seed42": [
+0.25,
+"Minimum commitment: yes-direction matches gold's guaranteed revenue but '1,000 Units' is another contract's value."
+],
+"cuad__v4t-corpus-tuned__batch__doc218_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'June 29, 2006...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc218_qa4__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shad be deemed a contract made under and shal...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc219_qa1__seed42": [
+0.0,
+"Extraction: gold names 'AGAPE ATP INTERNATIONAL HOLDING LIMITED...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc219_qa2__seed42": [
+0.0,
+"Date extraction: gold is '15t h day of January 2018...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc219_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This agreement is for a term of ten (10) years....'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc219_qa6__seed42": [
+0.0,
+"Notice period: gold specifies 'This agreement will be automatically renewed at the end of e...'; pred's number is from another contract. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc219_qa7__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This agreement shall be governed by the Laws of England (Eng...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc219_qa17__seed42": [
+0.0,
+"Warranty: gold is 'The Customer shall inspect all Products promptly upon receip...'; pred's 90-days value is another contract's. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc219_qa18__seed42": [
+0.25,
+"Insurance: yes-direction matches gold (Customer product liability naming Manufacturer) but specifics cite North."
+],
+"cuad__v4t-corpus-tuned__batch__doc220_qa1__seed42": [
+0.0,
+"Extraction: gold names 'Blockchain Administrator...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc220_qa2__seed42": [
+0.0,
+"Date extraction: gold is '[___], 2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc220_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This Agreement shall continue in effect for two years from t...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc220_qa6__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be construed in accordance with the law...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc221_qa1__seed42": [
+0.0,
+"Extraction: gold names 'Cargill, Incorporated...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc221_qa2__seed42": [
+0.0,
+"Date extraction: gold is '7/18/11...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc221_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'July 5, 2011...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc222_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'the ____ day of _______________2000...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc222_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'the ____ day of _______________2000...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc222_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'The initial term of this Agreement is one (1) year from the ...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc222_qa6__seed42": [
+0.0,
+"Notice period: gold specifies 'The Agreement will be automatically          renewed for add...'; pred's number is from another contract. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc222_qa7__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (The laws of the State of California          shall govern al...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc223_qa2__seed42": [
+0.25,
+"Agreement date: pred quotes a genuinely related same-document clause referencing the Purchase Agreement date but extracts no date; gold is December 13, 1999."
+],
+"cuad__v4t-corpus-tuned__batch__doc223_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'December 13, 1999...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc223_qa7__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be governed by and construed in        ...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc223_qa12__seed42": [
+0.0,
+"Content mismatch: gold 'All changes, modifications and enhancements or          deri...' vs pred from another contract; no matching aspect. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc223_qa19__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: support continues post-termination) but cited Section 8.5 clauses are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc223_qa23__seed42": [
+0.0,
+"Warranty: gold is 'Changepoint will replace          any defective media return...'; pred's 90-days value is another contract's. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc224_qa1__seed42": [
+0.0,
+"Extraction: gold names 'Establishment Labs, S.A...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc224_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'Effective Date\" shall mean December 5, 2014....'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc224_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'by either party with one (1) year written notice prior to th...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc224_qa6__seed42": [
+0.0,
+"Notice period: gold specifies 'by either party with one (1) year written notice prior to th...'; pred's number is from another contract. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc224_qa7__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (Notwithstanding its place of execution or performance, this ...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc224_qa13__seed42": [
+0.0,
+"Warranty: gold is 'APOLLO has the right to reject, via written notification to ...'; pred's 90-days value is another contract's. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc224_qa14__seed42": [
+0.25,
+"Insurance: yes-direction matches gold (ESTABLISHMENT CGL $1M) but specifics cite North $2M."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa1__seed42": [
+0.0,
+"Extraction: gold names 'SIMPLY HERBAL...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa2__seed42": [
+0.0,
+"Date extraction: gold is '27th day of November 2018...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'The Joint Venture is a fixed term Joint Venture beginning No...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'The Joint Venture is a fixed term Joint Venture beginning No...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (By this Agreement the Participants enter into a general Join...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa8__seed42": [
+0.0,
+"Anti-assignment: gold span 'Title to all Joint Venture Property will remain in the name ...' does not support pred's consent-required assertion. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa9__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: duties continue post-dissolution) but cited clauses are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc225_qa12__seed42": [
+0.0,
+"Insurance: gold span 'The Joint Venture may acquire insurance on behalf of any Par...' does not support pred's yes-with-wrong-contract specifics (permissive or unrelated clause). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc226_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'January 1, 2013...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc226_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'This Agreement shall come into force as of January 1, 2013 a...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc226_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This Agreement shall come into force as of January 1, 2013 a...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc227_qa1__seed42": [
+0.0,
+"Extraction: gold names 'Cano Petroleum, Inc....'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc227_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'This Agreement is executed in duplicate on the 5th day of De...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc227_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'The term of this Agreement shall be one (1) year, commencing...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc228_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'This Agreement shall become effective on the date on which i...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc228_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (The execution, validity, interpretation, enforcement and dis...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc228_qa10__seed42": [
+0.0,
+"Content mismatch: gold 'If Party B obtains any Intellectual Property Right in respec...' vs pred from another contract; no matching aspect. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc229_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'March 21, 2014...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc229_qa3__seed42": [
+0.0,
+"Expiration: gold term is 'Expiration Date: at midnight on the last day of the month fi...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc229_qa4__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (The Parties agree that, except to the extent governed by the...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc229_qa8__seed42": [
+0.0,
+"Anti-assignment: gold span 'We may immediately terminate this Agreement on notice to you...' does not support pred's consent-required assertion. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc229_qa10__seed42": [
+0.0,
+"Content mismatch: gold 'irrevocably assign and transfer to us (or to our designee) a...' vs pred from another contract; no matching aspect. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc229_qa15__seed42": [
+0.25,
+"Insurance: category-direction matches (gold annotates an insurance obligation stub) but pred's North specifics are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc230_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'November 15, 2012...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc230_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (All questions with respect to the construction of this Agree...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc231_qa1__seed42": [
+0.0,
+"Extraction: gold names 'UNIFORM INVESTCO GP LLC...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc232_qa2__seed42": [
+0.0,
+"Date extraction: gold is 'June 11, 2015,...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc232_qa3__seed42": [
+0.0,
+"Date extraction: gold is 'June 11, 2015...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc232_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'The Agreement shall continue through the project's in-servic...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc232_qa6__seed42": [
+0.0,
+"Notice period: gold specifies 'This Agreement will automatically renew for up to two (2) re...'; pred's number is from another contract. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc232_qa7__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be construed and interpreted in accorda...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc232_qa12__seed42": [
+0.25,
+"Minimum commitment: yes-direction matches gold's Quarterly Volume Commitment but '1,000 Units' is another contract's value."
+],
+"cuad__v4t-corpus-tuned__batch__doc233_qa1__seed42": [
+0.0,
+"Extraction: gold names '(\"Logan's\"...'; pred gives generic/wrong-contract content. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc233_qa2__seed42": [
+0.0,
+"Date extraction: gold is '24th day of February, 1998,...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc233_qa3__seed42": [
+0.0,
+"Expiration: gold term is 'The term of this Agreement shall commence on the date hereof...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc233_qa4__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement shall be constructed under and  governed by t...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc233_qa8__seed42": [
+0.25,
+"Insurance: yes-direction matches gold (certificate naming Logan's additional insured) but specifics cite North."
+],
+"cuad__v4t-corpus-tuned__batch__doc234_qa3__seed42": [
+0.0,
+"Date extraction: gold is '\"Effective Date\" means October 31, 2019....'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc234_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'Unless sooner terminated in accordance with this Article, th...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc234_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (The validity and interpretation of this Agreement and the le...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc234_qa12__seed42": [
+0.0,
+"Content mismatch: gold 'For Program Patents, if one or more employees or other repre...' vs pred from another contract; no matching aspect. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc234_qa17__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: 3-year records retention) but cited clauses are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc235_qa2__seed42": [
+0.0,
+"Date extraction: gold is '1 April, 2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc235_qa3__seed42": [
+0.0,
+"Date extraction: gold is '1 April 2020...'; pred gives boilerplate/another contract's date. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc235_qa4__seed42": [
+0.0,
+"Expiration: gold term is 'The Executive's employment with the Company will commence on...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc235_qa5__seed42": [
+0.0,
+"Governing law: gold names a different jurisdiction (This Agreement and any dispute or claim arising out of or in...); pred cites another contract's clause or a non-answer. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc235_qa9__seed42": [
+0.0,
+"Content mismatch: gold 'To the extent that the Company IP does not vest automaticall...' vs pred from another contract; no matching aspect. Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc236_qa3__seed42": [
+0.0,
+"Expiration: gold term is '\"CONTRACT PERIOD\" means that period of time commencing upon ...'; pred's specific date does not follow from it (wrong contract). Zero."
+],
+"cuad__v4t-corpus-tuned__batch__doc236_qa14__seed42": [
+0.25,
+"Post-termination: yes-direction correct (gold: Berkshire 30-day material use) but cited clauses are another contract's."
+],
+"cuad__v4t-corpus-tuned__batch__doc237_qa2__seed42": [
+0.0,
+"Date extraction: gold is '20 day of November, 1995...'; pred gives boilerplate/another contract's date. Zero."
+]
+}
