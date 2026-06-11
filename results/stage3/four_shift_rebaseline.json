@@ -1,0 +1,377 @@
+{
+  "noise_floor": 0.05,
+  "expected": {
+    "w_recency": "down",
+    "w_embed": "up",
+    "theta_store": "down",
+    "w_graph": "up"
+  },
+  "baselines": {
+    "tfidf-canonical": {
+      "theta_store": 0.293,
+      "theta_novel": 0.908,
+      "theta_erich": 0.198,
+      "theta_surprise": 0.785,
+      "theta_entity": 0.285,
+      "theta_temporal": 0.278,
+      "theta_decay": 0.668,
+      "w_graph": 0.0,
+      "w_embed": 1.079,
+      "w_recency": 3.777
+    },
+    "minilm-grid": {
+      "theta_store": 0.3480559663852598,
+      "theta_novel": 0.4417959317803908,
+      "theta_erich": 0.31183017138289626,
+      "theta_surprise": 0.41799654329378094,
+      "theta_entity": 0.06250660040264842,
+      "theta_temporal": 0.7317399019411339,
+      "theta_decay": 0.7180624584888164,
+      "w_graph": 1.1879614903973856,
+      "w_embed": 1.3125332741143303,
+      "w_recency": 1.2074538734250142
+    }
+  },
+  "benchmarks": {
+    "financebench": {
+      "tfidf-canonical": {
+        "shifts": {
+          "w_recency": {
+            "base": 3.777,
+            "tuned": 0.0030769066704558023,
+            "delta": -3.7739230933295445,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.079,
+            "tuned": 2.6327646590555407,
+            "delta": 1.5537646590555407,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.293,
+            "tuned": 0.009900097319873964,
+            "delta": -0.283099902680126,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_graph": {
+            "base": 0.0,
+            "tuned": 1.626504805384318,
+            "delta": 1.626504805384318,
+            "direction": "up",
+            "matches_expected": true
+          }
+        },
+        "n_match_of_4": 4
+      },
+      "minilm-grid": {
+        "shifts": {
+          "w_recency": {
+            "base": 1.2074538734250142,
+            "tuned": 0.0030769066704558023,
+            "delta": -1.2043769667545583,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.3125332741143303,
+            "tuned": 2.6327646590555407,
+            "delta": 1.3202313849412104,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.3480559663852598,
+            "tuned": 0.009900097319873964,
+            "delta": -0.33815586906538586,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_graph": {
+            "base": 1.1879614903973856,
+            "tuned": 1.626504805384318,
+            "delta": 0.43854331498693244,
+            "direction": "up",
+            "matches_expected": true
+          }
+        },
+        "n_match_of_4": 4
+      }
+    },
+    "qasper": {
+      "tfidf-canonical": {
+        "shifts": {
+          "w_recency": {
+            "base": 3.777,
+            "tuned": 0.022685295302023005,
+            "delta": -3.7543147046979772,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.079,
+            "tuned": 2.0726257772848604,
+            "delta": 0.9936257772848605,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.293,
+            "tuned": 0.018599377607783206,
+            "delta": -0.2744006223922168,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_graph": {
+            "base": 0.0,
+            "tuned": 0.15284968675301194,
+            "delta": 0.15284968675301194,
+            "direction": "up",
+            "matches_expected": true
+          }
+        },
+        "n_match_of_4": 4
+      },
+      "minilm-grid": {
+        "shifts": {
+          "w_recency": {
+            "base": 1.2074538734250142,
+            "tuned": 0.022685295302023005,
+            "delta": -1.1847685781229913,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.3125332741143303,
+            "tuned": 2.0726257772848604,
+            "delta": 0.7600925031705301,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.3480559663852598,
+            "tuned": 0.018599377607783206,
+            "delta": -0.32945658877747663,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_graph": {
+            "base": 1.1879614903973856,
+            "tuned": 0.15284968675301194,
+            "delta": -1.0351118036443736,
+            "direction": "down",
+            "matches_expected": false
+          }
+        },
+        "n_match_of_4": 3
+      }
+    },
+    "cuad": {
+      "tfidf-canonical": {
+        "shifts": {
+          "w_recency": {
+            "base": 3.777,
+            "tuned": 9.567803081737357e-05,
+            "delta": -3.776904321969183,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.079,
+            "tuned": 2.779934615187323,
+            "delta": 1.7009346151873233,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.293,
+            "tuned": 0.3116632543637187,
+            "delta": 0.01866325436371874,
+            "direction": "flat",
+            "matches_expected": false
+          },
+          "w_graph": {
+            "base": 0.0,
+            "tuned": 1.6076931475206038,
+            "delta": 1.6076931475206038,
+            "direction": "up",
+            "matches_expected": true
+          }
+        },
+        "n_match_of_4": 3
+      },
+      "minilm-grid": {
+        "shifts": {
+          "w_recency": {
+            "base": 1.2074538734250142,
+            "tuned": 9.567803081737357e-05,
+            "delta": -1.2073581953941968,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.3125332741143303,
+            "tuned": 2.779934615187323,
+            "delta": 1.467401341072993,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.3480559663852598,
+            "tuned": 0.3116632543637187,
+            "delta": -0.036392712021541096,
+            "direction": "flat",
+            "matches_expected": false
+          },
+          "w_graph": {
+            "base": 1.1879614903973856,
+            "tuned": 1.6076931475206038,
+            "delta": 0.41973165712321814,
+            "direction": "up",
+            "matches_expected": true
+          }
+        },
+        "n_match_of_4": 3
+      }
+    },
+    "hotpotqa": {
+      "tfidf-canonical": {
+        "shifts": {
+          "w_recency": {
+            "base": 3.777,
+            "tuned": 0.009713864230414026,
+            "delta": -3.767286135769586,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.079,
+            "tuned": 3.673871064667513,
+            "delta": 2.5948710646675126,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.293,
+            "tuned": 0.03916039850133058,
+            "delta": -0.2538396014986694,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_graph": {
+            "base": 0.0,
+            "tuned": 0.47735944914288986,
+            "delta": 0.47735944914288986,
+            "direction": "up",
+            "matches_expected": true
+          }
+        },
+        "n_match_of_4": 4
+      },
+      "minilm-grid": {
+        "shifts": {
+          "w_recency": {
+            "base": 1.2074538734250142,
+            "tuned": 0.009713864230414026,
+            "delta": -1.1977400091946002,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.3125332741143303,
+            "tuned": 3.673871064667513,
+            "delta": 2.3613377905531827,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.3480559663852598,
+            "tuned": 0.03916039850133058,
+            "delta": -0.30889556788392925,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_graph": {
+            "base": 1.1879614903973856,
+            "tuned": 0.47735944914288986,
+            "delta": -0.7106020412544958,
+            "direction": "down",
+            "matches_expected": false
+          }
+        },
+        "n_match_of_4": 3
+      }
+    },
+    "longmemeval": {
+      "tfidf-canonical": {
+        "shifts": {
+          "w_recency": {
+            "base": 3.777,
+            "tuned": 0.09169361868059701,
+            "delta": -3.685306381319403,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.079,
+            "tuned": 1.3196158078552767,
+            "delta": 0.2406158078552767,
+            "direction": "up",
+            "matches_expected": true
+          },
+          "theta_store": {
+            "base": 0.293,
+            "tuned": 0.28489265128469243,
+            "delta": -0.00810734871530755,
+            "direction": "flat",
+            "matches_expected": false
+          },
+          "w_graph": {
+            "base": 0.0,
+            "tuned": 0.539181879964145,
+            "delta": 0.539181879964145,
+            "direction": "up",
+            "matches_expected": true
+          }
+        },
+        "n_match_of_4": 3
+      },
+      "minilm-grid": {
+        "shifts": {
+          "w_recency": {
+            "base": 1.2074538734250142,
+            "tuned": 0.09169361868059701,
+            "delta": -1.1157602547444172,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_embed": {
+            "base": 1.3125332741143303,
+            "tuned": 1.3196158078552767,
+            "delta": 0.007082533740946362,
+            "direction": "flat",
+            "matches_expected": false
+          },
+          "theta_store": {
+            "base": 0.3480559663852598,
+            "tuned": 0.28489265128469243,
+            "delta": -0.06316331510056739,
+            "direction": "down",
+            "matches_expected": true
+          },
+          "w_graph": {
+            "base": 1.1879614903973856,
+            "tuned": 0.539181879964145,
+            "delta": -0.6487796104332406,
+            "direction": "down",
+            "matches_expected": false
+          }
+        },
+        "n_match_of_4": 2
+      }
+    }
+  }
+}

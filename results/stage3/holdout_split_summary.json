@@ -1,0 +1,569 @@
+{
+  "tune_limit": {
+    "financebench": 50,
+    "qasper": 30,
+    "cuad": 30
+  },
+  "benchmarks": {
+    "financebench": {
+      "configs": {
+        "v4t-canonical": {
+          "online": {
+            "n_total": 150,
+            "pooled_mean": 0.49,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.485,
+            "n_held_out": 100,
+            "held_out_mean": 0.4925,
+            "held_out_ci95": [
+              0.4075,
+              0.5825
+            ]
+          },
+          "batch": {
+            "n_total": 150,
+            "pooled_mean": 0.24333333333333335,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.08,
+            "n_held_out": 100,
+            "held_out_mean": 0.325,
+            "held_out_ci95": [
+              0.245,
+              0.4075
+            ]
+          }
+        },
+        "v4t-tuned": {
+          "online": {
+            "n_total": 150,
+            "pooled_mean": 0.455,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.475,
+            "n_held_out": 100,
+            "held_out_mean": 0.445,
+            "held_out_ci95": [
+              0.3575,
+              0.535
+            ]
+          },
+          "batch": {
+            "n_total": 150,
+            "pooled_mean": 0.14333333333333334,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.04,
+            "n_held_out": 100,
+            "held_out_mean": 0.195,
+            "held_out_ci95": [
+              0.1275,
+              0.2725
+            ]
+          }
+        },
+        "v4t-corpus-tuned": {
+          "online": {
+            "n_total": 150,
+            "pooled_mean": 0.6783333333333333,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.62,
+            "n_held_out": 100,
+            "held_out_mean": 0.7075,
+            "held_out_ci95": [
+              0.6225,
+              0.7875
+            ]
+          },
+          "batch": {
+            "n_total": 150,
+            "pooled_mean": 0.645,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.615,
+            "n_held_out": 100,
+            "held_out_mean": 0.66,
+            "held_out_ci95": [
+              0.575,
+              0.7375
+            ]
+          }
+        },
+        "bm25-corpus": {
+          "online": {
+            "n_total": 150,
+            "pooled_mean": 0.65,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.71,
+            "n_held_out": 100,
+            "held_out_mean": 0.62,
+            "held_out_ci95": [
+              0.5325,
+              0.7075
+            ]
+          },
+          "batch": {
+            "n_total": 150,
+            "pooled_mean": 0.5033333333333333,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.39,
+            "n_held_out": 100,
+            "held_out_mean": 0.56,
+            "held_out_ci95": [
+              0.47,
+              0.6425
+            ]
+          }
+        },
+        "attention-corpus-tuned": {
+          "online": {
+            "n_total": 150,
+            "pooled_mean": 0.7083333333333334,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.69,
+            "n_held_out": 100,
+            "held_out_mean": 0.7175,
+            "held_out_ci95": [
+              0.63,
+              0.7925
+            ]
+          },
+          "batch": {
+            "n_total": 150,
+            "pooled_mean": 0.6566666666666666,
+            "n_tuned_on": 50,
+            "tuned_on_mean": 0.605,
+            "n_held_out": 100,
+            "held_out_mean": 0.6825,
+            "held_out_ci95": [
+              0.6025,
+              0.7575
+            ]
+          }
+        }
+      },
+      "paired_tests": [
+        {
+          "config": "v4t-tuned",
+          "mode": "online",
+          "n_paired": 100,
+          "held_out_lift": -0.04749999999999999,
+          "wilcoxon_p_two_sided": 0.09882071848777274,
+          "n_nonzero_diffs": 12,
+          "p_holm": 0.09882071848777274,
+          "significant_holm": false
+        },
+        {
+          "config": "v4t-tuned",
+          "mode": "batch",
+          "n_paired": 100,
+          "held_out_lift": -0.13,
+          "wilcoxon_p_two_sided": 0.0002958382147231209,
+          "n_nonzero_diffs": 17,
+          "p_holm": 0.0008875146441693627,
+          "significant_holm": true
+        },
+        {
+          "config": "v4t-corpus-tuned",
+          "mode": "online",
+          "n_paired": 100,
+          "held_out_lift": 0.21500000000000002,
+          "wilcoxon_p_two_sided": 9.373920416311243e-05,
+          "n_nonzero_diffs": 50,
+          "p_holm": 0.00037495681665244973,
+          "significant_holm": true
+        },
+        {
+          "config": "v4t-corpus-tuned",
+          "mode": "batch",
+          "n_paired": 100,
+          "held_out_lift": 0.335,
+          "wilcoxon_p_two_sided": 7.057831497014888e-08,
+          "n_nonzero_diffs": 48,
+          "p_holm": 4.940482047910422e-07,
+          "significant_holm": true
+        },
+        {
+          "config": "bm25-corpus",
+          "mode": "online",
+          "n_paired": 100,
+          "held_out_lift": 0.1275,
+          "wilcoxon_p_two_sided": 0.004021184388692589,
+          "n_nonzero_diffs": 28,
+          "p_holm": 0.008042368777385178,
+          "significant_holm": true
+        },
+        {
+          "config": "bm25-corpus",
+          "mode": "batch",
+          "n_paired": 100,
+          "held_out_lift": 0.23500000000000004,
+          "wilcoxon_p_two_sided": 1.2974573845303539e-05,
+          "n_nonzero_diffs": 34,
+          "p_holm": 7.784744307182123e-05,
+          "significant_holm": true
+        },
+        {
+          "config": "attention-corpus-tuned",
+          "mode": "online",
+          "n_paired": 100,
+          "held_out_lift": 0.22500000000000003,
+          "wilcoxon_p_two_sided": 3.969405298942519e-05,
+          "n_nonzero_diffs": 41,
+          "p_holm": 0.00019847026494712594,
+          "significant_holm": true
+        },
+        {
+          "config": "attention-corpus-tuned",
+          "mode": "batch",
+          "n_paired": 100,
+          "held_out_lift": 0.3575,
+          "wilcoxon_p_two_sided": 9.027953495888141e-09,
+          "n_nonzero_diffs": 48,
+          "p_holm": 7.222362796710513e-08,
+          "significant_holm": true
+        }
+      ]
+    },
+    "qasper": {
+      "configs": {
+        "v4t-canonical": {
+          "online": {
+            "n_total": 94,
+            "pooled_mean": 0.32978723404255317,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.4166666666666667,
+            "n_held_out": 64,
+            "held_out_mean": 0.2890625,
+            "held_out_ci95": [
+              0.1791044776119403,
+              0.40625
+            ]
+          },
+          "batch": {
+            "n_total": 94,
+            "pooled_mean": 0.25,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.18333333333333332,
+            "n_held_out": 64,
+            "held_out_mean": 0.28125,
+            "held_out_ci95": [
+              0.19014084507042253,
+              0.3790322580645161
+            ]
+          }
+        },
+        "v4t-tuned": {
+          "online": {
+            "n_total": 94,
+            "pooled_mean": 0.45478723404255317,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.3333333333333333,
+            "n_held_out": 64,
+            "held_out_mean": 0.51171875,
+            "held_out_ci95": [
+              0.38636363636363635,
+              0.6394230769230769
+            ]
+          },
+          "batch": {
+            "n_total": 94,
+            "pooled_mean": 0.3617021276595745,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.2833333333333333,
+            "n_held_out": 64,
+            "held_out_mean": 0.3984375,
+            "held_out_ci95": [
+              0.2803030303030303,
+              0.5245901639344263
+            ]
+          }
+        },
+        "v4t-corpus-tuned": {
+          "online": {
+            "n_total": 94,
+            "pooled_mean": 0.4228723404255319,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.3333333333333333,
+            "n_held_out": 64,
+            "held_out_mean": 0.46484375,
+            "held_out_ci95": [
+              0.3515625,
+              0.5784313725490197
+            ]
+          },
+          "batch": {
+            "n_total": 94,
+            "pooled_mean": 0.4148936170212766,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.43333333333333335,
+            "n_held_out": 64,
+            "held_out_mean": 0.40625,
+            "held_out_ci95": [
+              0.3184931506849315,
+              0.4918032786885246
+            ]
+          }
+        },
+        "bm25-corpus": {
+          "batch": {
+            "n_total": 94,
+            "pooled_mean": 0.40425531914893614,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.2916666666666667,
+            "n_held_out": 64,
+            "held_out_mean": 0.45703125,
+            "held_out_ci95": [
+              0.359375,
+              0.5486111111111112
+            ]
+          }
+        },
+        "attention-corpus-tuned": {
+          "batch": {
+            "n_total": 94,
+            "pooled_mean": 0.15691489361702127,
+            "n_tuned_on": 30,
+            "tuned_on_mean": 0.11666666666666667,
+            "n_held_out": 64,
+            "held_out_mean": 0.17578125,
+            "held_out_ci95": [
+              0.06164383561643835,
+              0.29435483870967744
+            ]
+          }
+        }
+      },
+      "paired_tests": [
+        {
+          "config": "v4t-tuned",
+          "mode": "online",
+          "n_paired": 64,
+          "held_out_lift": 0.22265625,
+          "wilcoxon_p_two_sided": 0.001286836814572645,
+          "n_nonzero_diffs": 39,
+          "p_holm": 0.00772102088743587,
+          "significant_holm": true
+        },
+        {
+          "config": "v4t-tuned",
+          "mode": "batch",
+          "n_paired": 64,
+          "held_out_lift": 0.1171875,
+          "wilcoxon_p_two_sided": 0.050674958589065344,
+          "n_nonzero_diffs": 32,
+          "p_holm": 0.08267879203169803,
+          "significant_holm": false
+        },
+        {
+          "config": "v4t-corpus-tuned",
+          "mode": "online",
+          "n_paired": 64,
+          "held_out_lift": 0.17578125,
+          "wilcoxon_p_two_sided": 0.008240512674150935,
+          "n_nonzero_diffs": 33,
+          "p_holm": 0.03296205069660374,
+          "significant_holm": true
+        },
+        {
+          "config": "v4t-corpus-tuned",
+          "mode": "batch",
+          "n_paired": 64,
+          "held_out_lift": 0.125,
+          "wilcoxon_p_two_sided": 0.027559597343899345,
+          "n_nonzero_diffs": 26,
+          "p_holm": 0.08267879203169803,
+          "significant_holm": false
+        },
+        {
+          "config": "bm25-corpus",
+          "mode": "batch",
+          "n_paired": 64,
+          "held_out_lift": 0.17578125,
+          "wilcoxon_p_two_sided": 0.0041633056876448915,
+          "n_nonzero_diffs": 37,
+          "p_holm": 0.020816528438224458,
+          "significant_holm": true
+        },
+        {
+          "config": "attention-corpus-tuned",
+          "mode": "batch",
+          "n_paired": 64,
+          "held_out_lift": -0.10546875,
+          "wilcoxon_p_two_sided": 0.03492670743926407,
+          "n_nonzero_diffs": 27,
+          "p_holm": 0.08267879203169803,
+          "significant_holm": false
+        }
+      ]
+    },
+    "cuad": {
+      "configs": {
+        "v4t-canonical": {
+          "online": {
+            "n_total": 132,
+            "pooled_mean": 0.21212121212121213,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.75,
+            "n_held_out": 122,
+            "held_out_mean": 0.1680327868852459,
+            "held_out_ci95": [
+              0.08082706766917293,
+              0.3130630630630631
+            ]
+          },
+          "batch": {
+            "n_total": 132,
+            "pooled_mean": 0.022727272727272728,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.1,
+            "n_held_out": 122,
+            "held_out_mean": 0.01639344262295082,
+            "held_out_ci95": [
+              0.005681818181818182,
+              0.028925619834710745
+            ]
+          }
+        },
+        "v4t-tuned": {
+          "online": {
+            "n_total": 132,
+            "pooled_mean": 0.4090909090909091,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.8,
+            "n_held_out": 122,
+            "held_out_mean": 0.3770491803278688,
+            "held_out_ci95": [
+              0.28343949044585987,
+              0.5065217391304347
+            ]
+          },
+          "batch": {
+            "n_total": 132,
+            "pooled_mean": 0.125,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.1,
+            "n_held_out": 122,
+            "held_out_mean": 0.12704918032786885,
+            "held_out_ci95": [
+              0.0392156862745098,
+              0.1953125
+            ]
+          }
+        },
+        "v4t-corpus-tuned": {
+          "online": {
+            "n_total": 132,
+            "pooled_mean": 0.26136363636363635,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.55,
+            "n_held_out": 122,
+            "held_out_mean": 0.23770491803278687,
+            "held_out_ci95": [
+              0.13317757009345793,
+              0.3425925925925926
+            ]
+          },
+          "batch": {
+            "n_total": 132,
+            "pooled_mean": 0.18371212121212122,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.575,
+            "n_held_out": 122,
+            "held_out_mean": 0.15163934426229508,
+            "held_out_ci95": [
+              0.07718120805369127,
+              0.23255813953488372
+            ]
+          }
+        },
+        "bm25-corpus": {
+          "batch": {
+            "n_total": 132,
+            "pooled_mean": 0.2689393939393939,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.75,
+            "n_held_out": 122,
+            "held_out_mean": 0.22950819672131148,
+            "held_out_ci95": [
+              0.15486725663716813,
+              0.29651162790697677
+            ]
+          }
+        },
+        "attention-corpus-tuned": {
+          "batch": {
+            "n_total": 132,
+            "pooled_mean": 0.32007575757575757,
+            "n_tuned_on": 10,
+            "tuned_on_mean": 0.775,
+            "n_held_out": 122,
+            "held_out_mean": 0.2827868852459016,
+            "held_out_ci95": [
+              0.19957983193277312,
+              0.3616666666666667
+            ]
+          }
+        }
+      },
+      "paired_tests": [
+        {
+          "config": "v4t-tuned",
+          "mode": "online",
+          "n_paired": 122,
+          "held_out_lift": 0.20901639344262293,
+          "wilcoxon_p_two_sided": 5.401471911969935e-07,
+          "n_nonzero_diffs": 54,
+          "p_holm": 2.160588764787974e-06,
+          "significant_holm": true
+        },
+        {
+          "config": "v4t-tuned",
+          "mode": "batch",
+          "n_paired": 122,
+          "held_out_lift": 0.11065573770491803,
+          "wilcoxon_p_two_sided": 8.651354363342634e-06,
+          "n_nonzero_diffs": 29,
+          "p_holm": 2.59540630900279e-05,
+          "significant_holm": true
+        },
+        {
+          "config": "v4t-corpus-tuned",
+          "mode": "online",
+          "n_paired": 122,
+          "held_out_lift": 0.06967213114754098,
+          "wilcoxon_p_two_sided": 0.07774447859972122,
+          "n_nonzero_diffs": 54,
+          "p_holm": 0.07774447859972122,
+          "significant_holm": false
+        },
+        {
+          "config": "v4t-corpus-tuned",
+          "mode": "batch",
+          "n_paired": 122,
+          "held_out_lift": 0.13524590163934427,
+          "wilcoxon_p_two_sided": 1.1738918106685148e-05,
+          "n_nonzero_diffs": 31,
+          "p_holm": 2.59540630900279e-05,
+          "significant_holm": true
+        },
+        {
+          "config": "bm25-corpus",
+          "mode": "batch",
+          "n_paired": 122,
+          "held_out_lift": 0.21311475409836067,
+          "wilcoxon_p_two_sided": 9.956528934651487e-09,
+          "n_nonzero_diffs": 44,
+          "p_holm": 4.978264467325744e-08,
+          "significant_holm": true
+        },
+        {
+          "config": "attention-corpus-tuned",
+          "mode": "batch",
+          "n_paired": 122,
+          "held_out_lift": 0.2663934426229508,
+          "wilcoxon_p_two_sided": 3.363300749015252e-10,
+          "n_nonzero_diffs": 54,
+          "p_holm": 2.0179804494091513e-09,
+          "significant_holm": true
+        }
+      ]
+    }
+  }
+}

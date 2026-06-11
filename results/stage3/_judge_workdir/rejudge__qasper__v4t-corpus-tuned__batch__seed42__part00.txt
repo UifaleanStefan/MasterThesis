@@ -1,0 +1,16 @@
+[0] qid=qasper__v4t-corpus-tuned__batch__doc17_qa1__seed42
+  EXPECT=- | Q: Did they collect their own datasets?
+  GOLD: No
+  PRED: Yes, they collected their own datasets.
+[1] qid=qasper__v4t-corpus-tuned__batch__doc28_qa4__seed42
+  EXPECT=- | Q: Did they collected the two datasets?
+  GOLD: No
+  PRED: Yes, they tested the proposed UTCNN on two different datasets: FBFans and CreateDebate.
+[2] qid=qasper__v4t-corpus-tuned__batch__doc29_qa1__seed42
+  EXPECT=- | Q: Does their framework always generate purely attention-based models?
+  GOLD: Yes
+  PRED: No, their framework does not require any special treatment on the network architecture and allows for a minimal number of free parameters, indicating that it may not always generate purely attention-based models.
+[3] qid=qasper__v4t-corpus-tuned__batch__doc29_qa2__seed42
+  EXPECT=- | Q: Do they test their framework performance on commonly used language pairs, such as English-to-German?
+  GOLD: Yes
+  PRED: No, the framework is applied in translation tasks where there is no direct parallel corpus between source and target languages.

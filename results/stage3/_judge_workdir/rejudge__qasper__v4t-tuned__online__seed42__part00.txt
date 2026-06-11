@@ -1,0 +1,12 @@
+[0] qid=qasper__v4t-tuned__online__doc1_qa0__seed42
+  EXPECT=- | Q: Do they report results only on English data?
+  GOLD: Yes
+  PRED: No, they do not report results only on English data.
+[1] qid=qasper__v4t-tuned__online__doc2_qa4__seed42
+  EXPECT=- | Q: Do they add one latent variable for each language pair in their Bayesian model?
+  GOLD: Yes
+  PRED: No, they use crosslingual latent variables to capture role alignments across languages, not one latent variable for each language pair.
+[2] qid=qasper__v4t-tuned__online__doc10_qa0__seed42
+  EXPECT=- | Q: LDA is an unsupervised method; is this paper introducing an unsupervised approach to spam detection?
+  GOLD: No
+  PRED: Yes, the paper introduces an unsupervised approach to spam detection using LDA.

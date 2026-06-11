@@ -139,6 +139,10 @@ class LLMAgent:
         self._episode_stats = EpisodeStats()
         self._session_stats = EpisodeStats()
         self._step = 0
+        # Metadata about the most recent answer_question() call: fallback
+        # status, resolved API model snapshot, system_fingerprint, actual
+        # prompt tokens. Callers persist this per result record.
+        self.last_answer_meta: dict = {}
 
     # ------------------------------------------------------------------
     # Public API (matches ExplorationPolicy.decide signature)
@@ -202,15 +206,28 @@ class LLMAgent:
         "Output only the answer text, no preamble or explanation."
     )
 
-    def answer_question(self, question: str, past_events: list[Event] | None = None) -> str:
+    def answer_question(
+        self,
+        question: str,
+        past_events: list[Event] | None = None,
+        max_events: int | None = 12,
+    ) -> str:
         """
         Generate an answer to a question given retrieved document context (for DocumentQA).
         Returns raw answer string. Tracks cost like decide().
+
+        ``max_events=None`` sends every retrieved event to the prompt
+        (required for the dump-all no-selection baseline). After each call
+        ``last_answer_meta`` records whether the heuristic fallback produced
+        the answer, the resolved API model snapshot, and actual prompt tokens
+        — callers persist these so fallback answers are distinguishable from
+        model answers in result files.
         """
         if not self._has_openai:
+            self.last_answer_meta = {"fallback": True, "reason": "no_api_key"}
             return self._fallback_answer_question(question, past_events or [])
 
-        memory_context = self._formatter.format(past_events or [])
+        memory_context = self._formatter.format(past_events or [], max_events=max_events)
         user_msg = f"Relevant passages:\n{memory_context}\n\nQuestion: {question}\n\nAnswer:"
 
         t0 = time.monotonic()
@@ -227,10 +244,17 @@ class LLMAgent:
             )
         except Exception as e:
             print(f"[LLMAgent] API error: {e} — fallback answer")
+            self.last_answer_meta = {"fallback": True, "reason": f"api_error: {e}"}
             return self._fallback_answer_question(question, past_events or [])
 
         latency_ms = (time.monotonic() - t0) * 1000
         answer = response.choices[0].message.content.strip()
+        self.last_answer_meta = {
+            "fallback": False,
+            "response_model": getattr(response, "model", None),
+            "system_fingerprint": getattr(response, "system_fingerprint", None),
+            "prompt_tokens": response.usage.prompt_tokens,
+        }
 
         usage = response.usage
         pricing = _PRICING.get(self._model, {"input": 0.15, "output": 0.60})

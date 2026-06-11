@@ -87,8 +87,14 @@ class ContextFormatter:
     def __init__(self, style: FormatStyle = FormatStyle.STRUCTURED) -> None:
         self._style = style
 
-    def format(self, events: list[Event], max_events: int = 12) -> str:
-        """Convert a list of events to a formatted prompt string."""
+    def format(self, events: list[Event], max_events: int | None = 12) -> str:
+        """Convert a list of events to a formatted prompt string.
+
+        ``max_events=None`` disables truncation entirely. The no-selection
+        dump-all baseline requires every stored event to reach the prompt;
+        the default cap exists only for selective configs whose retrieval
+        already bounds the event count (k=8 < 12, so it never binds there).
+        """
         if not events:
             return "Memory context: (empty)"
 
@@ -97,7 +103,9 @@ class ContextFormatter:
         facts = [e for e in events if _is_fact(e.observation) and not _is_hint(e.observation)]
         episodic = [e for e in events if not _is_hint(e.observation) and not _is_fact(e.observation)]
         episodic.sort(key=lambda e: -e.step)  # most recent first
-        ordered = (hints + facts + episodic)[:max_events]
+        ordered = hints + facts + episodic
+        if max_events is not None:
+            ordered = ordered[:max_events]
 
         if self._style == FormatStyle.FLAT:
             return self._format_flat(ordered)

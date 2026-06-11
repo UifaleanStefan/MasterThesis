@@ -330,6 +330,7 @@ def answer_one_qa(
     model: str,
     token_count,
     skip_judge: bool = False,
+    uncapped_context: bool = False,
 ) -> dict:
     """Run one Q against the current memory state.
 
@@ -345,6 +346,12 @@ def answer_one_qa(
     `skip_judge=True` (Block E): skip the inline LLM judge call and
     write {predicted, gold} downstream to a queue for Claude-in-the-loop
     judging. The returned dict has judge_score=None when skipped.
+
+    `uncapped_context=True` (dump-all fix): send ALL retrieved events to
+    the prompt instead of the ContextFormatter's default 12-event cap.
+    Questions whose uncapped prompt would exceed the model's context
+    window are skipped before the API call and flagged
+    `context_overflow=True` — they must not enter judge queues.
     """
     scoped_question = _scope_question(question, doc_title)
     retrieved = memory.get_relevant_events(scoped_question, current_step=current_step, k=k)
@@ -352,25 +359,18 @@ def answer_one_qa(
     sys_prompt, user_msg = _build_qa_prompt(scoped_question, retrieved)
     prompt_tokens_estimated = token_count(sys_prompt) + token_count(user_msg)
 
-    predicted = agent.answer_question(scoped_question, past_events=retrieved)
-
-    if skip_judge:
-        judge_score = None
-    else:
-        judge_score = llm_judge_score_multi_ref(predicted, gold_answer, model=model)
-
-    # Block A.1: recall@k via global-step intersection.
+    # Block A.1: recall@k via global-step intersection. For uncapped
+    # (dump-all) prompts this now reflects exactly what the model sees;
+    # for capped configs retrieval is already bounded by k < 12.
     if relevant_global_steps:
         recall_at_k = 1.0 if (set(retrieved_steps) & relevant_global_steps) else 0.0
     else:
         recall_at_k = None
 
-    return {
+    base = {
         "question": question,                        # original (un-scoped) text
         "scoped_question": scoped_question,          # what was actually sent
         "gold_answer": gold_answer,
-        "predicted": predicted,
-        "judge_score": judge_score,
         "recall_at_k": recall_at_k,
         "retrieved_steps": retrieved_steps,
         "relevant_global_steps": sorted(relevant_global_steps) if relevant_global_steps else [],
@@ -378,6 +378,37 @@ def answer_one_qa(
         "k": k,
         "prompt_tokens_estimated": prompt_tokens_estimated,
     }
+
+    # 128K window minus completion budget and tokenizer-estimate slack.
+    if uncapped_context and prompt_tokens_estimated > 124_000:
+        base.update({
+            "predicted": f"[CONTEXT_OVERFLOW: ~{prompt_tokens_estimated} prompt tokens "
+                         f"exceed the 128K window — question not sent]",
+            "judge_score": None,
+            "context_overflow": True,
+        })
+        return base
+
+    predicted = agent.answer_question(
+        scoped_question, past_events=retrieved,
+        max_events=None if uncapped_context else 12,
+    )
+    meta = getattr(agent, "last_answer_meta", {}) or {}
+
+    if skip_judge:
+        judge_score = None
+    else:
+        judge_score = llm_judge_score_multi_ref(predicted, gold_answer, model=model)
+
+    base.update({
+        "predicted": predicted,
+        "judge_score": judge_score,
+        "context_overflow": False,
+        "answer_fallback": bool(meta.get("fallback")),
+        "prompt_tokens_actual": meta.get("prompt_tokens"),
+        "response_model": meta.get("response_model"),
+    })
+    return base
 
 
 def _build_all_qa_inventory(docs: list) -> list[dict]:
@@ -457,6 +488,11 @@ def run_corpus_qa(
     if protocol not in {"online_batch", "calibration"}:
         raise ValueError(f"unknown protocol={protocol!r}; choose 'online_batch' or 'calibration'")
     is_calibration = (protocol == "calibration")
+    # Dump-all fix: the no-selection baseline must send EVERY stored event
+    # to the prompt (the ContextFormatter's 12-event default previously
+    # truncated it silently). Per-question context-window overflow is
+    # guarded inside answer_one_qa.
+    uncapped = (config == "dump-all")
     # In calibration mode, the "online" per-doc questions are replaced by
     # the random-sample calibration questions, so `do_online` (per-doc QA
     # of the just-ingested doc's questions) is force-off — the calibration
@@ -573,6 +609,7 @@ def run_corpus_qa(
                     current_step=global_step,  # cumulative end-of-doc-K
                     k=k, model=model, token_count=token_count,
                     skip_judge=True,  # Block E: write to judge queue downstream
+                    uncapped_context=uncapped,
                 )
                 r["doc_idx"] = doc_idx
                 r["qa_idx_in_doc"] = qa_idx
@@ -607,6 +644,7 @@ def run_corpus_qa(
                     current_step=global_step,  # cumulative end-of-doc-K
                     k=k, model=model, token_count=token_count,
                     skip_judge=True,
+                    uncapped_context=uncapped,
                 )
                 r["doc_idx"] = src_doc_idx
                 r["qa_idx_in_doc"] = qi["qa_idx_in_doc"]
@@ -646,6 +684,7 @@ def run_corpus_qa(
                 current_step=end_of_corpus_step,
                 k=k, model=model, token_count=token_count,
                 skip_judge=True,
+                uncapped_context=uncapped,
             )
             r["doc_idx"] = qi["doc_idx"]
             r["qa_idx_in_doc"] = qi["qa_idx_in_doc"]
@@ -668,6 +707,12 @@ def run_corpus_qa(
     def _mean(values: list, key: str) -> float | None:
         xs = [v[key] for v in values if v.get(key) is not None]
         return float(np.mean(xs)) if xs else None
+
+    def _n_overflow(values: list) -> int:
+        return sum(1 for v in values if v.get("context_overflow"))
+
+    def _n_fallback(values: list) -> int:
+        return sum(1 for v in values if v.get("answer_fallback"))
 
     summary = {
         "_manifest": build_manifest(seed=seed, extra={
@@ -694,6 +739,9 @@ def run_corpus_qa(
             "mean_recall_at_k": _mean(online_results, "recall_at_k"),
             "n_with_judge": sum(1 for r in online_results if r.get("judge_score") is not None),
             "n_with_recall": sum(1 for r in online_results if r.get("recall_at_k") is not None),
+            "n_context_overflow": _n_overflow(online_results),
+            "n_answer_fallback": _n_fallback(online_results),
+            "mean_prompt_tokens_actual": _mean(online_results, "prompt_tokens_actual"),
             "elapsed_seconds": online_elapsed,
         } if do_online else None,
         "batch": {
@@ -702,8 +750,12 @@ def run_corpus_qa(
             "mean_recall_at_k": _mean(batch_results, "recall_at_k"),
             "n_with_judge": sum(1 for r in batch_results if r.get("judge_score") is not None),
             "n_with_recall": sum(1 for r in batch_results if r.get("recall_at_k") is not None),
+            "n_context_overflow": _n_overflow(batch_results),
+            "n_answer_fallback": _n_fallback(batch_results),
+            "mean_prompt_tokens_actual": _mean(batch_results, "prompt_tokens_actual"),
             "elapsed_seconds": batch_elapsed,
         } if do_batch else None,
+        "uncapped_context": uncapped,
         "total_cost_usd": total_cost,
     }
 
@@ -810,10 +862,17 @@ def run_corpus_qa(
             entry["asked_after_doc_idx"] = rec.get("asked_after_doc_idx")
         return entry
 
+    # Entries that never reached the model (context overflow) or whose
+    # answer came from the no-API heuristic fallback must NOT be judged
+    # as model output — exclude them from the queues; counts are in the
+    # summary so the chapter can report them as infeasible.
+    def _judgeable(r: dict) -> bool:
+        return not r.get("context_overflow") and not r.get("answer_fallback")
+
     if do_online and online_results:
         write_judge_queue(
             f"{benchmark}__{config}__online__seed{seed}",
-            (_queue_entry(r) for r in online_results),
+            (_queue_entry(r) for r in online_results if _judgeable(r)),
         )
     if do_batch and batch_results:
         # Calibration mode's batch component goes to a separate "__batch_calib"
@@ -824,12 +883,12 @@ def run_corpus_qa(
         batch_suffix = "__batch_calib" if is_calibration else "__batch"
         write_judge_queue(
             f"{benchmark}__{config}{batch_suffix}__seed{seed}",
-            (_queue_entry(r) for r in batch_results),
+            (_queue_entry(r) for r in batch_results if _judgeable(r)),
         )
     if is_calibration and calibration_results:
         write_judge_queue(
             f"{benchmark}__{config}__calibration__seed{seed}",
-            (_queue_entry(r) for r in calibration_results),
+            (_queue_entry(r) for r in calibration_results if _judgeable(r)),
         )
 
     print(f"\n  Saved qa_online.json / qa_batch.json / qa_summary.json to {out_dir}")

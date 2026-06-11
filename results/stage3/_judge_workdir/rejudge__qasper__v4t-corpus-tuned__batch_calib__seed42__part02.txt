@@ -1,0 +1,557 @@
+[300] qid=qasper__v4t-corpus-tuned__batch__doc145_qa2__seed42
+  EXPECT=- | Q: How do they combine a deep learning model with a knowledge base?
+  GOLD: Entities from a deep learning model are linked to the related entities from a knowledge base by a lookup.
+  PRED: They combine state-of-the-art deep learning models (ELMo) with an expansive knowledge base (Wikidata).
+[301] qid=qasper__v4t-corpus-tuned__batch__doc146_qa0__seed42
+  EXPECT=- | Q: How much higher quality is the resulting annotated data?
+  GOLD: improvement when the difficult subset with expert annotations is mixed with the remaining crowd annotation is 3.5 F1 score, much larger than when a random set of expert annotations are added
+  PRED: Expert annotations are higher quality than crowd labels, and hence preferable to obtain if practical.
+[302] qid=qasper__v4t-corpus-tuned__batch__doc146_qa1__seed42
+  EXPECT=- | Q: How do they match annotators to instances?
+  GOLD: Annotations from experts are used if they have already been collected.
+  PRED: They use difficulty scores to route instances to appropriate annotators, assigning predicted difficult instances to domain experts.
+[303] qid=qasper__v4t-corpus-tuned__batch__doc146_qa4__seed42
+  EXPECT=- | Q: Is an instance a sentence or an IE tuple?
+  GOLD: sentence
+  PRED: An instance is a sentence.
+[304] qid=qasper__v4t-corpus-tuned__batch__doc147_qa1__seed42
+  EXPECT=- | Q: What aspects of discussion are relevant to instructor intervention, according to the attention mechanism?
+  GOLD: context inference
+  PRED: The attention mechanism helps understand what aspects of a discussion post propagate through the discussion thread that prompts instructor intervention.
+[305] qid=qasper__v4t-corpus-tuned__batch__doc147_qa2__seed42
+  EXPECT=- | Q: What was the previous state of the art for this task?
+  GOLD: hLSTM
+  PRED: The previous state of the art for predicting instructor intervention in MOOC forums involved modeling the entire context or requiring the context size to be specified explicitly, without the use of deep learning models or attention-based approaches.
+[306] qid=qasper__v4t-corpus-tuned__batch__doc147_qa3__seed42
+  EXPECT=- | Q: What type of latent context is used to predict instructor intervention?
+  GOLD: the series of posts that trigger an intervention
+  PRED: The latent context used to predict instructor intervention is defined as a contiguous subsequence of student posts.
+[307] qid=qasper__v4t-corpus-tuned__batch__doc148_qa0__seed42
+  EXPECT=- | Q: What does the "sensitivity" quantity denote?
+  GOLD: the number of distinct word recognition outputs that an attacker can induce
+  PRED: Sensitivity denotes the expected number of unique outputs assigned by a word recognition system to a set of adversarial perturbations.
+[308] qid=qasper__v4t-corpus-tuned__batch__doc148_qa1__seed42
+  EXPECT=- | Q: What end tasks do they evaluate on?
+  GOLD: Sentiment analysis and paraphrase detection under adversarial attacks
+  PRED: They evaluate on sentiment analysis (SA) and named entity recognition (NER).
+[309] qid=qasper__v4t-corpus-tuned__batch__doc148_qa2__seed42
+  EXPECT=- | Q: What is a semicharacter architecture?
+  GOLD: A semi-character based RNN (ScRNN) treats the first and last characters individually, and is agnostic to the ordering of the internal characters
+  PRED: The semicharacter architecture is a type of RNN (Recurrent Neural Network) model used for recognizing words, particularly those that are corrupted by random adds, drops, swaps, and keyboard mistakes.
+[310] qid=qasper__v4t-corpus-tuned__batch__doc148_qa4__seed42
+  EXPECT=- | Q: Why is the adversarial setting appropriate for misspelling recognition?
+  GOLD: Adversarial misspellings are a real-world problem
+  PRED: The adversarial setting is appropriate for misspelling recognition because spammers use subtly misspelled words to evade spam detection while preserving the intended meaning, making it a real-world problem that requires robust handling of such perturbations.
+[311] qid=qasper__v4t-corpus-tuned__batch__doc148_qa6__seed42
+  EXPECT=- | Q: How do the backoff strategies work?
+  GOLD: In pass-through, the recognizer passes on the possibly misspelled word, backoff to neutral word backs off to a word with similar distribution across classes and backoff to background model backs off to a more generic word recognition model trained with larger and less specialized corpus.
+  PRED: The backoff strategies handle rare and unseen words by falling back on a generic word recognizer trained on a larger corpus.
+[312] qid=qasper__v4t-corpus-tuned__batch__doc149_qa0__seed42
+  EXPECT=- | Q: which existing strategies are compared?
+  GOLD: CDA
+  PRED: The existing strategies compared are data augmentation and word embedding debiasing.
+[313] qid=qasper__v4t-corpus-tuned__batch__doc149_qa2__seed42
+  EXPECT=- | Q: what kinds of male and female words are looked at?
+  GOLD: gendered word pairs like he and she
+  PRED: The study focuses on gendered word pairs like "he" and "she," specifically examining male and female words.
+[314] qid=qasper__v4t-corpus-tuned__batch__doc149_qa3__seed42
+  EXPECT=- | Q: how is mitigation of gender bias evaluated?
+  GOLD: Using INLINEFORM0 and INLINEFORM1
+  PRED: Mitigation of gender bias is evaluated using an array of bias evaluation metrics that provide a holistic diagnosis of the model behavior under debiasing treatment.
+[315] qid=qasper__v4t-corpus-tuned__batch__doc151_qa1__seed42
+  EXPECT=- | Q: What current state of the art method was used for comparison?
+  GOLD: current state-of-the-art approach BIBREF14 , BIBREF15
+  PRED: The original Word Breaker was used for comparison.
+[316] qid=qasper__v4t-corpus-tuned__batch__doc151_qa3__seed42
+  EXPECT=- | Q: How is the dataset of hashtags sourced?
+  GOLD: 1,268 randomly selected tweets in the Stanford Sentiment Analysis Dataset BIBREF36
+  PRED: The dataset of hashtags is constructed by annotating 12,594 unique hashtags and their associated tweets in a multi-step process for higher quality.
+[317] qid=qasper__v4t-corpus-tuned__batch__doc152_qa0__seed42
+  EXPECT=- | Q: What is the McGurk effect?
+  GOLD: a perceptual illusion, where listening to a speech sound while watching a mouth pronounce a different sound changes how the audio is heard
+  PRED: The McGurk effect is a phenomenon by which the perception of what we hear can be influenced by what we see, such as when the audio of the phoneme "baa" is accompanied by a video of someone mouthing "vaa," leading the viewer to perceive it as "vaa" or "gaa."
+[318] qid=qasper__v4t-corpus-tuned__batch__doc154_qa0__seed42
+  EXPECT=- | Q: what quantitative analysis is done?
+  GOLD: Answer with content missing: (Evaluation section) Given that in CLIR the primary goal is to get a better ranked list of documents against a translated query, we only report Mean Average Precision (MAP).
+  PRED: The quantitative analysis shows that the multi-task learning architecture achieves a 16% improvement over a strong NMT baseline on the Italian-English query-document dataset.
+[319] qid=qasper__v4t-corpus-tuned__batch__doc154_qa1__seed42
+  EXPECT=- | Q: what are the baselines?
+  GOLD: the baseline transformer BIBREF8
+  PRED: The baseline is a strong Neural Machine Translation (NMT) model trained on sentence-level parallel data.
+[320] qid=qasper__v4t-corpus-tuned__batch__doc155_qa1__seed42
+  EXPECT=- | Q: Why challenges does word segmentation in Vietnamese pose?
+  GOLD: Acquire very large Vietnamese corpus and build a classifier with it, design a develop a big data warehouse and analytic framework, build a system to incrementally learn new corpora and interactively process feedback.
+  PRED: Word segmentation in Vietnamese poses challenges due to the lack of complete reviews of approaches, datasets, and toolkits, as well as the complexity of accurately segmenting words from subwords in various processing tasks. Additionally, the reliance on machine learning methods requires labeled corp
+[321] qid=qasper__v4t-corpus-tuned__batch__doc155_qa2__seed42
+  EXPECT=- | Q: How successful are the approaches used to solve word segmentation in Vietnamese?
+  GOLD: Their accuracy in word segmentation is about 94%-97%.
+  PRED: The approaches used to solve word segmentation in Vietnamese have an accuracy around 94-97% based on their provided corpus.
+[322] qid=qasper__v4t-corpus-tuned__batch__doc156_qa0__seed42
+  EXPECT=- | Q: Do they report results only on English dataset?
+  GOLD: No
+  PRED: No, they do not report results only on the English dataset.
+[323] qid=qasper__v4t-corpus-tuned__batch__doc156_qa1__seed42
+  EXPECT=- | Q: What dataset does this approach achieve state of the art results on?
+  GOLD: the English-German dataset
+  PRED: The approach achieves state of the art results on multimodal machine translation tasks.
+[324] qid=qasper__v4t-corpus-tuned__batch__doc157_qa0__seed42
+  EXPECT=- | Q: Do they show on which examples how conflict works better than attention?
+  GOLD: Yes
+  PRED: They show qualitative results where the model with attention and conflict combined performs better on cases where pairs are non-duplicate and have very small differences.
+[325] qid=qasper__v4t-corpus-tuned__batch__doc157_qa2__seed42
+  EXPECT=- | Q: On which tasks do they test their conflict method?
+  GOLD: Task 1: Quora Duplicate Question Pair Detection
+  PRED: They test their conflict method on Task 1.
+[326] qid=qasper__v4t-corpus-tuned__batch__doc159_qa0__seed42
+  EXPECT=- | Q: What approaches do they use towards text analysis?
+  GOLD: Domain experts and fellow researchers can provide feedback on questions and help with dynamically revising them.
+  PRED: They aim to shed light on issues in computational text analysis methods, provide best practices for working with social and cultural concepts, and promote interdisciplinary collaborations.
+[327] qid=qasper__v4t-corpus-tuned__batch__doc159_qa2__seed42
+  EXPECT=- | Q: Do they demonstrate why interdisciplinary insights are important?
+  GOLD: No
+  PRED: Yes, they emphasize that interdisciplinary insights and partnerships are essential for realizing the full potential of computational text analysis involving social and cultural concepts.
+[328] qid=qasper__v4t-corpus-tuned__batch__doc159_qa4__seed42
+  EXPECT=- | Q: What kind of issues (that are not on the forefront of computational text analysis) do they tackle?
+  GOLD: identifying the questions we wish to explore
+  PRED: They tackle thorny issues not always at the forefront of discussions about computational text analysis methods.
+[329] qid=qasper__v4t-corpus-tuned__batch__doc161_qa1__seed42
+  EXPECT=- | Q: What were their results on the classification and regression tasks
+  GOLD: F1 of 0.8099
+  PRED: They placed 3rd in the classification task and 2nd in the regression task.
+[330] qid=qasper__v4t-corpus-tuned__batch__doc162_qa0__seed42
+  EXPECT=- | Q: Do they experiment with the toolkits?
+  GOLD: Yes
+  PRED: Yes, they experiment with the toolkits.
+[331] qid=qasper__v4t-corpus-tuned__batch__doc163_qa0__seed42
+  EXPECT=- | Q: What evaluation metrics do they use?
+  GOLD: BLEU-1
+  PRED: They use BLEU-1, Meteor, and Rouge-L as evaluation metrics.
+[332] qid=qasper__v4t-corpus-tuned__batch__doc163_qa1__seed42
+  EXPECT=- | Q: What is the size of this dataset?
+  GOLD: 13,757
+  PRED: The dataset contains 10,898 articles, 17,794 tweets, and 13,757 crowdsourced question-answer pairs.
+[333] qid=qasper__v4t-corpus-tuned__batch__doc163_qa2__seed42
+  EXPECT=- | Q: How do they determine if tweets have been used by journalists?
+  GOLD: we look into the archived snapshots of two major news websites (CNN, NBC), and then extract the tweet blocks that are embedded in the news articles
+  PRED: They determine if tweets have been used by journalists by crawling thousands of news articles that include tweet quotations.
+[334] qid=qasper__v4t-corpus-tuned__batch__doc164_qa0__seed42
+  EXPECT=- | Q: Do they report results only on English data?
+  GOLD: Yes
+  PRED: No, they do not report results only on English data.
+[335] qid=qasper__v4t-corpus-tuned__batch__doc164_qa2__seed42
+  EXPECT=- | Q: What baseline is used?
+  GOLD: Wang et al. BIBREF21
+  PRED: The baseline results are from a BOW model and maximum entropy classifier.
+[336] qid=qasper__v4t-corpus-tuned__batch__doc164_qa4__seed42
+  EXPECT=- | Q: What meaningful information does the GRU model capture, which traditional ML models do not?
+  GOLD: the context and sequential nature of the text
+  PRED: The GRU model captures the sequential nature of the text and the context, which traditional machine learning models ignore.
+[337] qid=qasper__v4t-corpus-tuned__batch__doc165_qa0__seed42
+  EXPECT=- | Q: Which deep learning architecture do they use for sentence segmentation?
+  GOLD: Bi-LSTM-CRF
+  PRED: They use a deep learning model that integrates n-gram embedding as a local representation and self-attention modules for distant representation.
+[338] qid=qasper__v4t-corpus-tuned__batch__doc165_qa1__seed42
+  EXPECT=- | Q: How do they utilize unlabeled data to improve model representations?
+  GOLD: During training, the model is trained alternately with one mini-batch of labeled data and INLINEFORM0 mini-batches of unlabeled data.
+  PRED: They investigate and adapt Cross-View Training (CVT) as a semi-supervised learning technique, allowing them to utilize unlabeled data to improve the model representations.
+[339] qid=qasper__v4t-corpus-tuned__batch__doc166_qa2__seed42
+  EXPECT=- | Q: how is diversity measured?
+  GOLD: average dissimilarity of all pairs of tags in the list of recommended tags
+  PRED: Diversity is measured in addition to recommendation accuracy, and a novel metric termed semantic similarity is proposed to validate semantic matches of tag recommendations.
+[340] qid=qasper__v4t-corpus-tuned__batch__doc166_qa4__seed42
+  EXPECT=- | Q: what dataset was used?
+  GOLD: 48,705 e-books from 13 publishers
+  PRED: The dataset used consists of e-book annotation data from two sources: editor tags and Amazon search terms, specifically collected from 48,705 e-books from 13 publishers.
+[341] qid=qasper__v4t-corpus-tuned__batch__doc166_qa5__seed42
+  EXPECT=- | Q: what algorithms did they use?
+  GOLD: popularity-based
+  PRED: They used three types of tag recommendation approaches: (i) popularity-based, (ii) similarity-based, and (iii) hybrid approaches, evaluating a total of 19 different algorithms.
+[342] qid=qasper__v4t-corpus-tuned__batch__doc167_qa0__seed42
+  EXPECT=- | Q: Which datasets are used for evaluation?
+  GOLD: ARC
+  PRED: The evaluation uses the largest challenge dataset for question classification (QC), containing 7,787 science exam questions paired with detailed classification labels, as well as benchmark open-domain and biomedical QC datasets.
+[343] qid=qasper__v4t-corpus-tuned__batch__doc167_qa1__seed42
+  EXPECT=- | Q: What previous methods is their model compared to?
+  GOLD: bag-of-words model
+  PRED: The model is compared to previous methods that were used for question classification (QC) in the context of science exams.
+[344] qid=qasper__v4t-corpus-tuned__batch__doc167_qa3__seed42
+  EXPECT=- | Q: How was the dataset collected?
+  GOLD: from 3rd to 9th grade science questions collected from 12 US states
+  PRED: The dataset was collected by identifying 9 coarse question categories from the NY Regents exam syllabus and then expanding this taxonomy through a data-driven analysis of 3 exam study guides and 3,370 training questions, resulting in 462 fine-grained categories across 6 hierarchical levels of granul
+[345] qid=qasper__v4t-corpus-tuned__batch__doc168_qa0__seed42
+  EXPECT=- | Q: What is the best model?
+  GOLD: BiLSTM+CNN(grapheme-level) and BiLSTM+CNN(G)+POS
+  PRED: The best model obtains an overall F1 score of 86.89.
+[346] qid=qasper__v4t-corpus-tuned__batch__doc168_qa2__seed42
+  EXPECT=- | Q: Do the authors train a Naive Bayes classifier on their dataset?
+  GOLD: No
+  PRED: No, the authors do not train a Naive Bayes classifier on their dataset.
+[347] qid=qasper__v4t-corpus-tuned__batch__doc168_qa3__seed42
+  EXPECT=- | Q: What is the baseline?
+  GOLD: CNN modelBIBREF0
+  PRED: The best models obtain an overall F1 score of 86.89.
+[348] qid=qasper__v4t-corpus-tuned__batch__doc168_qa4__seed42
+  EXPECT=- | Q: Which machine learning models do they explore?
+  GOLD: BiLSTM
+  PRED: They explore various machine learning models, including BiLSTM models.
+[349] qid=qasper__v4t-corpus-tuned__batch__doc168_qa5__seed42
+  EXPECT=- | Q: What is the size of the dataset?
+  GOLD: Dataset contains 3606 total sentences and 79087 total entities.
+  PRED: The dataset contains sentences collected from daily newspapers of the year 2015-2016.
+[350] qid=qasper__v4t-corpus-tuned__batch__doc168_qa6__seed42
+  EXPECT=- | Q: What is the source of their dataset?
+  GOLD: daily newspaper of the year 2015-2016
+  PRED: The dataset was created from sentences collected from daily newspapers of the year 2015-2016.
+[351] qid=qasper__v4t-corpus-tuned__batch__doc168_qa9__seed42
+  EXPECT=- | Q: How big is the new Nepali NER dataset?
+  GOLD: 3606 sentences
+  PRED: The new Nepali NER dataset contains sentences collected from daily newspapers of the year 2015-2016.
+[352] qid=qasper__v4t-corpus-tuned__batch__doc168_qa10__seed42
+  EXPECT=- | Q: What is the performance improvement of the grapheme-level representation model over the character-level model?
+  GOLD: On OurNepali test dataset Grapheme-level representation model achieves average 0.16% improvement, on ILPRL test dataset it achieves maximum 1.62% improvement
+  PRED: The grapheme-level representation model outperforms the character-level representation model, achieving an overall F1 score of 86.89, which is a significant improvement over previously reported performance in literature.
+[353] qid=qasper__v4t-corpus-tuned__batch__doc168_qa11__seed42
+  EXPECT=- | Q: Which models are used to solve NER for Nepali?
+  GOLD: BiLSTMBIBREF14, BiLSTM+CNNBIBREF20, BiLSTM+CRFBIBREF1, BiLSTM+CNN+CRFBIBREF2
+  PRED: The models used to solve NER for Nepali include Support Vector Machine (SVM), Hidden Markov Model (HMM), and neural models based on grapheme-level representations combined with BiLSTM.
+[354] qid=qasper__v4t-corpus-tuned__batch__doc169_qa0__seed42
+  EXPECT=- | Q: what were the baselines?
+  GOLD: BOW-LR, BOW-RF. TFIDF-RF, TextCNN, C-TextCNN
+  PRED: The baselines included other systems and baselines compared to BERT's performance in the datasets.
+[355] qid=qasper__v4t-corpus-tuned__batch__doc169_qa1__seed42
+  EXPECT=- | Q: what datasets were used?
+  GOLD: Friends
+  PRED: The datasets used are Friends and EmotionPush.
+[356] qid=qasper__v4t-corpus-tuned__batch__doc169_qa2__seed42
+  EXPECT=- | Q: What BERT models are used?
+  GOLD: BERT-base, BERT-large, BERT-uncased, BERT-cased
+  PRED: BERTBASE, uncased.
+[357] qid=qasper__v4t-corpus-tuned__batch__doc170_qa3__seed42
+  EXPECT=- | Q: Which datasets are used?
+  GOLD: Reuters
+  PRED: Experiments conducted on 10 standard text classification datasets.
+[358] qid=qasper__v4t-corpus-tuned__batch__doc170_qa4__seed42
+  EXPECT=- | Q: What is the message passing framework?
+  GOLD: It is a framework used to describe algorithms for neural networks represented as graphs. Main idea is that that representation of each vertex is updated based on messages from its neighbors.
+  PRED: The message passing framework is a method for processing graph-structured data, which involves message passing, vertex update, and readout functions. In the context of NLP, it is applied through the Message Passing Attention network for Document understanding (MPAD), where documents are represented 
+[359] qid=qasper__v4t-corpus-tuned__batch__doc171_qa1__seed42
+  EXPECT=- | Q: What semantic and syntactic tasks are used as probes?
+  GOLD: Word Content (WC) probing task
+  PRED: Various semantic and syntactic tasks are used as probes into models which use either negative or positive $\mathit{PMI}$ (or both).
+[360] qid=qasper__v4t-corpus-tuned__batch__doc171_qa2__seed42
+  EXPECT=- | Q: What are the disadvantages to clipping negative PMI?
+  GOLD: It may lead to poor rare word representations and word analogies.
+  PRED: Clipping negative PMI to zero, known as Positive PMI (PPMI), may result in the loss of information captured by negative PMI, which contributes almost exclusively syntactic information, while positive PMI encodes most of the semantics.
+[361] qid=qasper__v4t-corpus-tuned__batch__doc171_qa3__seed42
+  EXPECT=- | Q: Why are statistics from finite corpora unreliable?
+  GOLD: $\mathit {PMI}(w,c)$ goes to negative infinity when the word-context pair $(w,c)$ does not appear in the training corpus
+  PRED: Statistics from finite corpora are unreliable because they lead to a large number of unobserved pair cooccurrences, which causes pointwise mutual information ($\mathit{PMI}$) to go to negative infinity.
+[362] qid=qasper__v4t-corpus-tuned__batch__doc172_qa1__seed42
+  EXPECT=- | Q: How much improvement is gained from Adversarial Reward Augmented Maximum Likelihood (ARAML)?
+  GOLD: ARAM has achieved improvement over all baseline methods using reverese perplexity and  slef-BLEU metric.  The maximum reverse perplexity improvement 936,16 is gained for EMNLP2017  WMT  dataset and  48,44 for COCO dataset.
+  PRED: Experiments show that ARAML outperforms several state-of-the-art GAN baselines with lower training variance, yet producing better performance on three text generation tasks.
+[363] qid=qasper__v4t-corpus-tuned__batch__doc173_qa0__seed42
+  EXPECT=- | Q: What is the state of the art system mentioned?
+  GOLD: Two knowledge-based systems,
+two traditional word expert supervised systems, six recent neural-based systems, and one BERT feature-based system.
+  PRED: The state-of-the-art systems for Word Sense Disambiguation (WSD) mentioned are traditional supervised methods that rarely consider lexical resources like WordNet.
+[364] qid=qasper__v4t-corpus-tuned__batch__doc173_qa4__seed42
+  EXPECT=- | Q: How does the neural network architecture accomodate an unknown amount of senses per word?
+  GOLD: converts WSD to a sequence learning task
+  PRED: The neural network architecture accommodates an unknown amount of senses per word by constructing context-gloss pairs and proposing three BERT-based models for Word Sense Disambiguation (WSD).
+[365] qid=qasper__v4t-corpus-tuned__batch__doc174_qa0__seed42
+  EXPECT=- | Q: What is novel about their document-level encoder?
+  GOLD: Bert model have a maximum length of 512; we overcome this limitation by adding more position embeddings
+  PRED: The novelty of their document-level encoder lies in the pre-training of both the encoder and decoder of the seq2seq Transformer model, enhancing both language understanding and generation capabilities, which improves performance in abstractive summarization.
+[366] qid=qasper__v4t-corpus-tuned__batch__doc174_qa1__seed42
+  EXPECT=- | Q: What rouge score do they achieve?
+  GOLD: Best results on unigram:
+CNN/Daily Mail: Rogue F1 43.85
+NYT: Rogue Recall 49.02
+XSum: Rogue F1 38.81
+  PRED: They achieve 0.8 absolute ROUGE-2 improvements on CNN/DailyMail and 2.4 absolute ROUGE-2 improvements on New York Times.
+[367] qid=qasper__v4t-corpus-tuned__batch__doc174_qa2__seed42
+  EXPECT=- | Q: What are the datasets used for evaluation?
+  GOLD: CNN/DailyMail news highlights
+  PRED: The datasets used for evaluation are CNN/DailyMail and the New York Times datasets.
+[368] qid=qasper__v4t-corpus-tuned__batch__doc175_qa0__seed42
+  EXPECT=- | Q: What tasks did they use to evaluate performance for male and female speakers?
+  GOLD: ASR
+  PRED: The tasks used to evaluate performance for male and female speakers involved analyzing the word error rate (WER) scores according to gender, speaker's role, and speech type.
+[369] qid=qasper__v4t-corpus-tuned__batch__doc175_qa1__seed42
+  EXPECT=- | Q: What is the goal of investigating NLP gender bias specifically in the news broadcast domain and Anchor role?
+  GOLD: create fair systems
+  PRED: The goal is to study the impact of gender imbalance in TV and radio broadcast on the performance of an ASR system, particularly focusing on the under-representation of women in prominent roles like Anchors, which affects the performance of ASR technologies.
+[370] qid=qasper__v4t-corpus-tuned__batch__doc175_qa2__seed42
+  EXPECT=- | Q: Which corpora does this paper analyse?
+  GOLD: ESTER1
+  PRED: The paper analyzes four major corpora of French broadcast.
+[371] qid=qasper__v4t-corpus-tuned__batch__doc175_qa3__seed42
+  EXPECT=- | Q: How many categories do authors define for speaker role?
+  GOLD: two salient roles called Anchors and Punctual speakers
+  PRED: The authors define one category for speaker role, which is the Anchor category.
+[372] qid=qasper__v4t-corpus-tuned__batch__doc175_qa4__seed42
+  EXPECT=- | Q: How big is imbalance in analyzed corpora?
+  GOLD: Women represent 33.16% of the speakers
+  PRED: The analysis shows that women are under-represented in the data in terms of speakers and speech turns, with women representing only 29.47% of the speakers within the Anchor category and having smaller percentages of speech overall.
+[373] qid=qasper__v4t-corpus-tuned__batch__doc175_qa5__seed42
+  EXPECT=- | Q: What are four major corpora of French broadcast?
+  GOLD: ESTER1
+  PRED: ESTER1, ESTER2, ETAPE, REPERE
+[374] qid=qasper__v4t-corpus-tuned__batch__doc176_qa2__seed42
+  EXPECT=- | Q: What datasets are used?
+  GOLD: FSD BIBREF12 , Twitter, and Google datasets
+  PRED: The model has been evaluated on two Twitter datasets and a news article dataset.
+[375] qid=qasper__v4t-corpus-tuned__batch__doc176_qa3__seed42
+  EXPECT=- | Q: What alternative to Gibbs sampling is used?
+  GOLD: generator network to capture the event-related patterns
+  PRED: AEM could extract the events more efficiently due to CUDA acceleration.
+[376] qid=qasper__v4t-corpus-tuned__batch__doc176_qa4__seed42
+  EXPECT=- | Q: How does this model overcome the assumption that all words in a document are generated from a single event?
+  GOLD: flexibility of neural networks, the generator is capable of learning complicated nonlinear distributions
+  PRED: The model overcomes this assumption by using a generator network to learn the projection function between the document-event distribution and multiple event-related word distributions, allowing it to capture patterns underlying latent events rather than assuming all words are from a single event.
+[377] qid=qasper__v4t-corpus-tuned__batch__doc177_qa0__seed42
+  EXPECT=- | Q: What transfer learning tasks are evaluated?
+  GOLD: MR
+  PRED: The transfer learning tasks evaluated are natural language inference (NLI) and question answering (QA).
+[378] qid=qasper__v4t-corpus-tuned__batch__doc178_qa0__seed42
+  EXPECT=- | Q: Does this method help in sentiment classification task improvement?
+  GOLD: Yes
+  PRED: No, the method does not lead to a significant gain in the sentiment classification task relative to ELMo-only baselines.
+[379] qid=qasper__v4t-corpus-tuned__batch__doc178_qa3__seed42
+  EXPECT=- | Q: What are improvements for these two approaches relative to ELMo-only baselines?
+  GOLD: only modest gains on three of the four downstream tasks
+  PRED: Neither approach leads to a significant gain on any of the four downstream tasks relative to ELMo-only baselines.
+[380] qid=qasper__v4t-corpus-tuned__batch__doc178_qa4__seed42
+  EXPECT=- | Q: Which syntactic features are obtained automatically on downstream task data?
+  GOLD: token-level chunk label embeddings
+  PRED: Chunk boundary information is obtained automatically on downstream task data via BIOUL encoding of the labels.
+[381] qid=qasper__v4t-corpus-tuned__batch__doc179_qa1__seed42
+  EXPECT=- | Q: HOw does the method perform compared with baselines?
+  GOLD: On the datasets DE-EN, JA-EN, RO-EN, and EN-DE, the baseline achieves 29.79, 21.57, 32.70, and 26.02  BLEU score, respectively. The 1.5-entmax achieves  29.83, 22.13, 33.10, and 25.89 BLEU score, which is a difference of +0.04, +0.56, +0.40, and -0.13 BLEU score versus the baseline. The α-entmax ach
+  PRED: The method shows improved performance compared to baselines, as indicated by the result comparisons for Transformer architectures.
+[382] qid=qasper__v4t-corpus-tuned__batch__doc179_qa2__seed42
+  EXPECT=- | Q: How does their model improve interpretability compared to softmax transformers?
+  GOLD: the attention heads in the proposed adaptively sparse Transformer can specialize more and with higher confidence
+  PRED: The adaptively sparse Transformer improves interpretability by allowing attention heads to have flexible, context-dependent sparsity patterns, which helps uncover different head specializations and increases diversity in attention distributions compared to softmax Transformers.
+[383] qid=qasper__v4t-corpus-tuned__batch__doc180_qa0__seed42
+  EXPECT=- | Q: What metrics are used for evaluation?
+  GOLD: Byte-Pair Encoding perplexity  (BPE PPL),
+BLEU-1,
+BLEU-4,
+ROUGE-L,
+percentage of distinct unigram (D-1),
+percentage of distinct bigrams(D-2),
+user matching accuracy(UMA),
+Mean Reciprocal Rank(MRR)
+Pairwise preference over baseline(PP)
+  PRED: The evaluation metrics used include BPE perplexity, BLEU-1/4, ROUGE-L, and measures of distinct unigrams and bigrams (Distinct-1/2). Additionally, automatic coherence measures for instructional texts and personalization metrics are introduced to support the claims.
+[384] qid=qasper__v4t-corpus-tuned__batch__doc180_qa1__seed42
+  EXPECT=- | Q: What natural language(s) are the recipes written in?
+  GOLD: English
+  PRED: The recipes are written in natural text.
+[385] qid=qasper__v4t-corpus-tuned__batch__doc180_qa2__seed42
+  EXPECT=- | Q: What were their results on the new dataset?
+  GOLD: average recipe-level coherence scores of 1.78-1.82
+  PRED: Their model demonstrated the ability to generate plausible and personalized recipes compared to non-personalized baselines on the new dataset of 180K recipes and 700K interactions.
+[386] qid=qasper__v4t-corpus-tuned__batch__doc180_qa3__seed42
+  EXPECT=- | Q: What are the baseline models?
+  GOLD: name-based Nearest-Neighbor model (NN)
+  PRED: The baseline models refer to non-personalized recipe generation approaches that do not account for user preferences or historical interactions.
+[387] qid=qasper__v4t-corpus-tuned__batch__doc180_qa4__seed42
+  EXPECT=- | Q: How did they obtain the interactions?
+  GOLD: from Food.com
+  PRED: They obtained the interactions by leveraging historical user preferences extracted from previously consumed recipes.
+[388] qid=qasper__v4t-corpus-tuned__batch__doc180_qa5__seed42
+  EXPECT=- | Q: Where do they get the recipes from?
+  GOLD: from Food.com
+  PRED: They get the recipes from Food.com.
+[389] qid=qasper__v4t-corpus-tuned__batch__doc181_qa0__seed42
+  EXPECT=- | Q: What state-of-the-art results are achieved?
+  GOLD: F1 score of 92.19 on homographic pun detection, 80.19 on homographic pun location, 89.76 on heterographic pun detection.
+  PRED: The proposed model achieves new state-of-the-art results in handling both homographic and heterographic puns.
+[390] qid=qasper__v4t-corpus-tuned__batch__doc181_qa1__seed42
+  EXPECT=- | Q: What baselines do they compare with?
+  GOLD: They compare with the following models: by Pedersen (2017), by Pramanick and Das (2017), by Mikhalkova and Karyakin (2017),  by Vadehra (2017), Indurthi and Oota (2017), by Vechtomova (2017), by (Cai et al., 2018), and CRF.
+  PRED: The paper compares their approach with a "pipeline" method where the classifier for pun detection is regarded as perfect, and they report accumulated results on pun location.
+[391] qid=qasper__v4t-corpus-tuned__batch__doc181_qa2__seed42
+  EXPECT=- | Q: What datasets are used in evaluation?
+  GOLD: The homographic dataset contains 2,250 contexts, 1,607 of which contain a pun. The heterographic dataset consists of 1,780 contexts with 1,271 containing a pun.
+  PRED: The evaluation uses 1,607 instances from homographic pun corpora and 1,271 instances from heterographic pun corpora.
+[392] qid=qasper__v4t-corpus-tuned__batch__doc181_qa3__seed42
+  EXPECT=- | Q: What is the tagging scheme employed?
+  GOLD: A new tagging scheme that tags the words before and after the pun as well as the pun words.
+  PRED: The tagging scheme consists of three tags.
+[393] qid=qasper__v4t-corpus-tuned__batch__doc182_qa0__seed42
+  EXPECT=- | Q: Does their model suffer exhibit performance drops when incorporating word importance?
+  GOLD: No
+  PRED: Yes, their model exhibits performance drops when incorporating word importance, as the decrease in translation performance indicates the importance of certain words.
+[394] qid=qasper__v4t-corpus-tuned__batch__doc182_qa1__seed42
+  EXPECT=- | Q: How do they measure which words are under-translated by NMT models?
+  GOLD: They measured the under-translated words with low word importance score as calculated by Attribution.
+method
+  PRED: They measure under-translated words by estimating word importance through a gradient-based method, which attributes the NMT output to every input word.
+[395] qid=qasper__v4t-corpus-tuned__batch__doc182_qa2__seed42
+  EXPECT=- | Q: How do their models decide how much improtance to give to the output words?
+  GOLD: Given the contribution matrix, we can obtain the word importance of each input word to the entire output sentence.
+  PRED: They measure the word importance by attributing the NMT output to every input word through a gradient-based method.
+[396] qid=qasper__v4t-corpus-tuned__batch__doc182_qa3__seed42
+  EXPECT=- | Q: Which model architectures do they test their word importance approach on?
+  GOLD: Transformer BIBREF1 model and the conventional RNN-Search model BIBREF0
+  PRED: They validate the approach on a couple of perturbation operations, language pairs, and model architectures.
+[397] qid=qasper__v4t-corpus-tuned__batch__doc183_qa0__seed42
+  EXPECT=- | Q: What experiments are proposed to test that upper layers produce context-specific embeddings?
+  GOLD: They measure self-similarity, intra-sentence similarity and maximum explainable variance of the embeddings in the upper layers.
+  PRED: The experiments proposed involve comparing the contextualized representations produced by upper layers of ELMo, BERT, and GPT-2 to assess their context-specificity and anisotropy, particularly analyzing the cosine similarity of representations of the same word in different contexts versus different 
+[398] qid=qasper__v4t-corpus-tuned__batch__doc184_qa2__seed42
+  EXPECT=- | Q: How does PolyResponse architecture look like?
+  GOLD: Henderson:2017
+  PRED: PolyResponse is a retrieval-based conversational search engine that bypasses complex multi-component designs of traditional task-oriented dialogue systems. It is trained on hundreds of millions of real conversations, ranking a large index of text and visual responses based on their relevance to the 
+[399] qid=qasper__v4t-corpus-tuned__batch__doc184_qa3__seed42
+  EXPECT=- | Q: In what 8 languages is PolyResponse engine used for restourant search and booking system?
+  GOLD: English, German, Spanish, Mandarin, Polish, Russian, Korean and Serbian
+  PRED: English, German, Spanish, Mandarin, Polish, Russian, Korean, Serbian.
+[400] qid=qasper__v4t-corpus-tuned__batch__doc185_qa0__seed42
+  EXPECT=- | Q: What labels for antisocial events are available in datasets?
+  GOLD: The Conversations Gone Awry dataset is labelled as either containing a personal attack from withint (i.e. hostile behavior by one user in the conversation directed towards another) or remaining civil throughout. The Reddit Change My View dataset is labelled with whether or not a coversation eventual
+  PRED: The datasets contain labels for antisocial events such as hate speech, harassment, personal attacks, and general toxicity.
+[401] qid=qasper__v4t-corpus-tuned__batch__doc185_qa1__seed42
+  EXPECT=- | Q: What are two datasets model is applied to?
+  GOLD: `Conversations Gone Awry' dataset
+  PRED: Two new diverse datasets of online conversations with labels for antisocial events.
+[402] qid=qasper__v4t-corpus-tuned__batch__doc186_qa1__seed42
+  EXPECT=- | Q: what was the baseline?
+  GOLD: MT system on the data released by BIBREF11
+  PRED: The baseline was Multilingual BERT.
+[403] qid=qasper__v4t-corpus-tuned__batch__doc186_qa2__seed42
+  EXPECT=- | Q: what phenomena do they mention is hard to capture?
+  GOLD: Four discourse phenomena - deixis, lexical cohesion, VP ellipsis, and ellipsis which affects NP inflection.
+  PRED: Discourse phenomena.
+[404] qid=qasper__v4t-corpus-tuned__batch__doc187_qa0__seed42
+  EXPECT=- | Q: How was the dataset annotated?
+  GOLD: intents are annotated manually with guidance from queries collected using a scoping crowdsourcing task
+  PRED: The dataset was annotated by carefully collecting out-of-scope data.
+[405] qid=qasper__v4t-corpus-tuned__batch__doc187_qa1__seed42
+  EXPECT=- | Q: Which classifiers are evaluated?
+  GOLD: SVM
+  PRED: A range of benchmark classifiers, including the 1-nearest-neighbor (1NN) and the SVM-based classifier, are evaluated on the dataset.
+[406] qid=qasper__v4t-corpus-tuned__batch__doc187_qa2__seed42
+  EXPECT=- | Q: What is the size of this dataset?
+  GOLD: 23,700
+  PRED: The dataset contains 23,700 queries.
+[407] qid=qasper__v4t-corpus-tuned__batch__doc187_qa3__seed42
+  EXPECT=- | Q: Where does the data come from?
+  GOLD: crowsourcing platform
+  PRED: The data comes from a new dataset constructed with 23,700 queries that are short and unstructured, made in the same style as real users of task-oriented systems.
+[408] qid=qasper__v4t-corpus-tuned__batch__doc188_qa0__seed42
+  EXPECT=- | Q: What is the state-of-the-art model for the task?
+  GOLD: OpATT BIBREF6
+  PRED: The state-of-the-art model for the task is the one proposed in the work, which achieves a new state-of-the-art performance on the ROTOWIRE dataset.
+[409] qid=qasper__v4t-corpus-tuned__batch__doc189_qa0__seed42
+  EXPECT=- | Q: Do the authors mention any downside of lemmatizing input before training ELMo?
+  GOLD: Yes
+  PRED: Yes, the authors mention that lemmatization can lead to a loss of information about inflected word forms, which can decrease performance in certain tasks, particularly for atypical non-changeable words.
+[410] qid=qasper__v4t-corpus-tuned__batch__doc189_qa1__seed42
+  EXPECT=- | Q: What other examples of morphologically-rich languages do the authors give?
+  GOLD: Russian
+  PRED: Finnish, Estonian, Polish, and Russian.
+[411] qid=qasper__v4t-corpus-tuned__batch__doc189_qa2__seed42
+  EXPECT=- | Q: Why is lemmatization not necessary in English?
+  GOLD: Advanced neural architectures and contextualized embedding models learn how to handle spelling and morphology variations.
+  PRED: Lemmatization is not necessary in English because the differences in performance when using tokens or lemmas are negligible and seem to be simple fluctuations.
+[412] qid=qasper__v4t-corpus-tuned__batch__doc189_qa3__seed42
+  EXPECT=- | Q: How big was the corpora they trained ELMo on?
+  GOLD: 2174000000, 989000000
+  PRED: For English, the training corpus consisted of the English Wikipedia dump from February 2017, and for Russian, it was a concatenation of the Russian Wikipedia dump from December 2018 and the full Russian National Corpus (RNC).
+[413] qid=qasper__v4t-corpus-tuned__batch__doc190_qa0__seed42
+  EXPECT=- | Q: How much is performance improved on NLI?
+  GOLD: improvement on the RTE dataset is significant, i.e., 4% absolute gain over the BERTBase
+  PRED: The performance on NLI is improved by 2.5 points.
+[414] qid=qasper__v4t-corpus-tuned__batch__doc190_qa1__seed42
+  EXPECT=- | Q: Do they train their model starting from a checkpoint?
+  GOLD: No
+  PRED: Yes, they rely on a pre-trained BERT model.
+[415] qid=qasper__v4t-corpus-tuned__batch__doc190_qa2__seed42
+  EXPECT=- | Q: What BERT model do they test?
+  GOLD: BERTbase
+  PRED: They test the Multilingual BERT model.
+[416] qid=qasper__v4t-corpus-tuned__batch__doc191_qa0__seed42
+  EXPECT=- | Q: What is future work planed?
+  GOLD: ethical questions about generating sensational headlines, which can be further explored
+  PRED: The future work planned includes effectively leveraging the noisy sensationalism reward and further improving the model for generating sensational headlines.
+[417] qid=qasper__v4t-corpus-tuned__batch__doc191_qa1__seed42
+  EXPECT=- | Q: What is this method improvement over the best performing state-of-the-art?
+  GOLD: absolute improvement of 18.2% over the Pointer-Gen baseline
+  PRED: The method shows that 60.8% of samples generated are sensational, which is significantly better than the Pointer-Gen baseline and other RL models.
+[418] qid=qasper__v4t-corpus-tuned__batch__doc193_qa0__seed42
+  EXPECT=- | Q: Were any of the pipeline components based on deep learning models?
+  GOLD: No
+  PRED: Yes, the pipeline components were based on deep learning models.
+[419] qid=qasper__v4t-corpus-tuned__batch__doc200_qa0__seed42
+  EXPECT=- | Q: Do they report results only on English data?
+  GOLD: Yes
+  PRED: No, they also report results on a Spanish dataset.
+[420] qid=qasper__v4t-corpus-tuned__batch__doc209_qa1__seed42
+  EXPECT=- | Q: Is the model tested against any baseline?
+  GOLD: No
+  PRED: Yes, the model was tested against baseline results, achieving 4.85% WER on the VLSP 2018 and 15.09% WER on the VLSP 2019 data sets.
+[421] qid=qasper__v4t-corpus-tuned__batch__doc211_qa6__seed42
+  EXPECT=- | Q: Was the approach used in this work to detect fake news fully supervised?
+  GOLD: Yes
+  PRED: No, the approach used in this work was not fully supervised; it involved a neural recurrent model and various features rather than relying solely on supervised learning.
+[422] qid=qasper__v4t-corpus-tuned__batch__doc221_qa1__seed42
+  EXPECT=- | Q: Are the answers double (and not triple) annotated?
+  GOLD: Yes
+  PRED: No, the answers are triple annotated.
+[423] qid=qasper__v4t-corpus-tuned__batch__doc228_qa1__seed42
+  EXPECT=- | Q: Is the lexicon the same for all languages?
+  GOLD: Yes
+  PRED: No, the lexicon is not the same for all languages.
+[424] qid=qasper__v4t-corpus-tuned__batch__doc230_qa0__seed42
+  EXPECT=- | Q: Do they report results only on English data?
+  GOLD: Yes
+  PRED: No, they do not report results only on English data.
+[425] qid=qasper__v4t-corpus-tuned__batch__doc231_qa1__seed42
+  EXPECT=- | Q: Did they experiment with this new dataset?
+  GOLD: No
+  PRED: Yes, they conducted experiments designed to analyze the differences in cognitive processing between natural reading and annotation using the ZuCo 2.0 dataset.
+[426] qid=qasper__v4t-corpus-tuned__batch__doc236_qa0__seed42
+  EXPECT=- | Q: Do they report results only on English data?
+  GOLD: Yes
+  PRED: No, they analyze articles published in both ISIS's online English language publications and a Catholic forum dedicated to women.
+[427] qid=qasper__v4t-corpus-tuned__batch__doc240_qa0__seed42
+  EXPECT=- | Q: Are the images from a specific domain?
+  GOLD: Yes
+  PRED: No, the images are not from a specific domain; the evaluation framework is applied to a wide-ranging set of synthetic datasets.
+[428] qid=qasper__v4t-corpus-tuned__batch__doc244_qa0__seed42
+  EXPECT=- | Q: Do they use off-the-shelf NLP systems to build their assitant?
+  GOLD: No
+  PRED: Yes, they use off-the-shelf NLP systems to build their assistant.
+[429] qid=qasper__v4t-corpus-tuned__batch__doc253_qa5__seed42
+  EXPECT=- | Q: Is the data in CoVoST annotated for dialect?
+  GOLD: No
+  PRED: Yes, CoVoST is diversified with over 11,000 speakers and over 60 accents, indicating that it includes dialectal variations.
+[430] qid=qasper__v4t-corpus-tuned__batch__doc264_qa1__seed42
+  EXPECT=- | Q: Is jiant compatible with models in any programming language?
+  GOLD: Yes
+  PRED: No, jiant is specifically designed for English NLU tasks and supports models primarily in Python.
+[431] qid=qasper__v4t-corpus-tuned__batch__doc267_qa2__seed42
+  EXPECT=- | Q: Does BERT reach the best performance among all the algorithms compared?
+  GOLD: No
+  PRED: Yes, BERT outperforms all the compared algorithms in the experiments.
+[432] qid=qasper__v4t-corpus-tuned__batch__doc268_qa0__seed42
+  EXPECT=- | Q: Have they made any attempt to correct MRC gold standards according to their findings?
+  GOLD: Yes
+  PRED: No, they have not made any attempt to correct MRC gold standards according to their findings; they are focused on studying how to introduce modifiers and observing MRC models' performance on text containing them as a future research goal.
+[433] qid=qasper__v4t-corpus-tuned__batch__doc271_qa0__seed42
+  EXPECT=- | Q: Does the paper report the performance of the model for each individual language?
+  GOLD: Yes
+  PRED: No, the paper does not report the performance of the model for each individual language.
+[434] qid=qasper__v4t-corpus-tuned__batch__doc272_qa0__seed42
+  EXPECT=- | Q: Is the LSTM baseline a sub-word model?
+  GOLD: Yes
+  PRED: No, the LSTM baseline is not a sub-word model.
+[435] qid=qasper__v4t-corpus-tuned__batch__doc275_qa0__seed42
+  EXPECT=- | Q: Do they experiment with other tasks?
+  GOLD: No
+  PRED: Yes, they experiment with tasks like Relation Extraction and relevance detection.

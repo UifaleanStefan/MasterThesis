@@ -1,0 +1,12 @@
+[0] qid=qasper__bm25-corpus__batch__doc2_qa4__seed42
+  EXPECT=- | Q: Do they add one latent variable for each language pair in their Bayesian model?
+  GOLD: Yes
+  PRED: No, they do not add one latent variable for each language pair; they use additional crosslingual latent variables to couple the monolingual models.
+[1] qid=qasper__bm25-corpus__batch__doc28_qa4__seed42
+  EXPECT=- | Q: Did they collected the two datasets?
+  GOLD: No
+  PRED: Yes, they tested the proposed UTCNN on two different datasets: FBFans and CreateDebate.
+[2] qid=qasper__bm25-corpus__batch__doc29_qa2__seed42
+  EXPECT=- | Q: Do they test their framework performance on commonly used language pairs, such as English-to-German?
+  GOLD: Yes
+  PRED: No, they do not test their framework performance on commonly used language pairs like English-to-German.
