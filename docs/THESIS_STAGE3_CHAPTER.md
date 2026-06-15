@@ -1506,11 +1506,21 @@ questions, ~95% of which target docs not yet ingested). The decile-10
 spread is the discriminator: selective + tuned (attention-corpus-tuned
 0.70, v4t-corpus-tuned 0.68, RAG 0.62, BM25 0.57) holds within 0.30
 of the early-corpus ceiling; canonical-θ V4 (0.22), V5 (0.20), per-doc
-tuned (0.17), dump-all (0.13), semantic TF-IDF (0.10), and FlatMemory
+tuned (0.17), dump-all (0.13†), semantic TF-IDF (0.10), and FlatMemory
 (0.09) collapse to between 0.10 and 0.25. The trajectory chart in the
 interactive panel (`web/public/data/stage3_finbench_corpus.json` ›
 `calibration_data`) makes the two-cluster structure visually obvious:
 four lines stay in the upper band, six lines fall to the lower band.
+
+> † **Calibration note (the deferred dump-all caveat).** The dump-all
+> calibration trajectory (decile-10 = 0.13) was produced under the **pre-fix
+> 12-event truncation cap** and was *not* re-run uncapped, unlike the dump-all
+> Protocol-A condition (§6.5.1, online 0.689 / batch 0.607). It is retained
+> here only to keep the ten-config trajectory chart complete; it should **not**
+> be read as the calibration behaviour of a context-stuffing baseline that
+> actually receives the corpus. Re-running this 1,500-question cell uncapped is
+> disclosed as future work (it does not affect the headline, which rests on the
+> re-run Protocol-A numbers).
 
 > **Evaluator (two-tier protocol; revised in the June-12 audit).** Judging
 > used **two tiers**, not the uniform one-by-one pass an earlier draft of this
