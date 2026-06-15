@@ -1601,8 +1601,10 @@ allows it. §6.5.3 extends this finding to all five successful benchmarks.
 
 **Protocol B calibration — all six configs on QASPER.**
 All six Protocol B cells (6 × 2,410 entries; n=1,405 calib + n=1,005
-batch_calib per config) were hand-judged 1-by-1 with Claude Opus 4.7
-(14,460 total judgments with per-entry rationales). The calibration phase
+batch_calib per config) were judged under the **two-tier protocol** (content
+answers one-by-one by Claude; refusal/acknowledgment answers rule-assisted; the
+content-templated subset re-judged 1-by-1 in the June-12 pass) — 14,460 total
+judgments with per-entry rationales. The calibration phase
 samples 5 questions per doc-end during corpus ingestion, tagging each with
 `expected_behavior=acknowledge_missing` (source doc not yet ingested) or
 `expected_behavior=answer` (source doc already ingested). Full data in
@@ -1727,8 +1729,8 @@ the encoder change alone (shift scores {4,4,3,4,3} → {4,3,3,3,2}), so the
 architectural law. *(ii) The "Recall lift" column is in-sample.* It is the
 CMA-ES optimizer's own fitness (mean recall@k=8) on the very questions it
 tuned on — i.e. tuned-on-test — so it overstates generalization. The honest,
-held-out version of this evidence is in the appendix held-out splits
-(§ held-out): the FinanceBench corpus-tuned lift survives on unseen questions
+held-out version of this evidence is in **§6.5.4**: the FinanceBench
+corpus-tuned lift survives on unseen questions
 (+0.335, p_holm < 0.0001), CUAD survives (+0.135), and QASPER does not survive
 Holm correction.
 
@@ -1747,7 +1749,8 @@ the relevant earlier-session memories cleanly.
 All 9 CUAD Protocol A cells (1,188 Claude judgments) are now complete.
 Combined with the earlier QASPER, HotpotQA, LongMemEval, NarrativeQA, and
 FinanceBench cells, we have a full cross-benchmark picture (60 Claude-judged
-Protocol A cells, 4,134 hand-judged entries across 6 benchmarks —
+Protocol A cells, 4,134 Claude-judged entries across 6 benchmarks (two-tier
+protocol; see the §6.5.1 Evaluator note) —
 FB 12×150, QASPER 9×94, CUAD 9×132, HQA 9×10, LME 9×10, NQA 12×10):
 
 | Benchmark | V4-canonical batch | V4-corpus-tuned batch | Lift |
@@ -1913,14 +1916,46 @@ complete cross-benchmark verification within this thesis scope.
 
 ⁴ NarrativeQA Protocol A: 10 questions per cell, one literary work per
 corpus. V4t-canonical batch=0.400, corpus-tuned batch=0.400, BM25
-online=1.000 batch=0.850. CMA-ES tuning returned degenerate all-zeros θ
-(§6.5.3 footnote 3); "corpus-tuned" uses canonical θ. The equality
-confirms tuning adds nothing when BM25 is the ceiling.
+online=1.000 batch=0.850. CMA-ES tuning produces no meaningful θ for
+NarrativeQA because its recall objective is undefined by construction (the
+adapter emits no paragraph-level gold; §6.5.3 footnote 3), so "corpus-tuned"
+falls back to canonical θ. The batch equality therefore reflects "no tuning
+was applied," **not** a demonstration that tuning is unhelpful.
 
 Full data: `results/stage3/multi_corpus_summary.json`,
 `results/stage3/qasper_corpus_summary.json`,
 `results/stage3/cuad_corpus_summary.json`
 (per-benchmark configs, θ vectors, recall lifts, judge counts).
+
+### 6.5.4 Held-out splits — is the corpus lift tuned-on-test?
+
+A reviewer correctly flagged that corpus-cumulative CMA-ES tunes θ on
+questions the end-to-end QA evaluation later scores (the optimizer maximizes
+recall on `qa_pairs[0]` of the first `limit_docs` documents, and those same
+questions appear in the eval). To separate optimizer fitness from
+generalization, every FinanceBench / QASPER / CUAD cell is re-split into
+**tuned-on** (`doc_idx < limit_docs` and first QA per doc) versus **held-out**
+(every other question), with means recomputed under cluster-bootstrap 95% CIs
+and Holm-corrected paired exact tests
+(`scripts/build_holdout_split.py` → `results/stage3/holdout_split_summary.json`).
+
+The corpus-tuned advantage **survives on the held-out questions** — on
+FinanceBench it is if anything stronger on data the optimizer never saw:
+
+| FinanceBench · v4t-corpus-tuned | tuned-on | held-out | significance |
+|---|---:|---:|---|
+| online | 0.620 (n=50) | **0.708** (n=100, CI [0.623, 0.788]) | — |
+| batch (lift vs canonical) | — | **+0.335** | p_holm < 0.0001 |
+
+CUAD's held-out lift (**+0.135**) is also significant; QASPER's batch lift
+(+0.125) is **not** significant after Holm correction. The pooled means in the
+tables above are therefore mildly optimistic wherever tuned-on questions are
+included — most visibly on CUAD, where the tuned-on mean (0.575) far exceeds
+the held-out mean (0.152) — but the load-bearing claim, *corpus-cumulative
+tuning helps on questions the optimizer never saw*, holds for FinanceBench and
+CUAD and is not established for QASPER. Held-out **recall** for the corpus-tuned
+θ likewise holds (FB 0.98; HotpotQA 1.00 on 70 unseen questions; LongMemEval
+0.83).
 
 ### 6.6 Limitations (generic risks of the framework)
 
@@ -2180,9 +2215,11 @@ tuning protocol carries over directly. Worth one more CMA-ES sweep.
 is now Claude Opus 4.7 max (cross-vendor: Anthropic judge × OpenAI
 answerer). Specific completions:
 
-* **All 311 judge cells complete.** 311 cells, **82,866 Claude
-  judgments** (0 remaining, 0 duplicates, 100% Claude provenance,
-  audit green). Coverage: Phase 4 headline cells (k=8), k-sweep
+* **All 313 judge cells complete.** 313 cells, **83,163 judge lines**
+  under the two-tier protocol (one-by-one Claude content judgments +
+  rule-assisted refusal/acknowledgment scores; ~9,500 content-templated
+  entries re-judged 1-by-1 in the June-12 audit; 0 remaining, 0 duplicate
+  rationales, 100% Claude provenance, audit green). Coverage: Phase 4 headline cells (k=8), k-sweep
   variants (k=4/8/16/32, seeds 7/42/100), tier-b variants, all
   6 benchmarks' Protocol A corpus-mode cells, and Protocol B
   calibration cells (FB 6 configs + 4 extension, QASPER 6/6
@@ -2230,7 +2267,7 @@ What remains for future work (genuinely not done):
 * `tests/test_benchmark_{adapters, snapshots, smoke, adversarial}.py` — 4-layer test pyramid (146 tests, ~1,300 lines).
 * `scripts/run_corpus_qa.py` — Phase 1.9 corpus-mode runner (Protocol A + B, ~850 lines).
 * `scripts/build_{finbench,qasper,cuad}_corpus_qa_data.py` — per-benchmark Protocol B aggregators.
-* `scripts/audit_judge_provenance.py` — judge provenance auditor (verifies all 64,726 judge lines carry Claude provenance).
+* `scripts/audit_judge_provenance.py` — judge provenance auditor (verifies all 83,163 judge lines carry Claude provenance, 0 duplicate rationales, 313/313 cells queue-parity).
 * `evaluation/claude_judge_queue.py` — judge queue infrastructure (write/read/merge).
 * `evaluation/claude_judge_protocol.md` — 5-point rubric + Protocol B sub-rubric.
 * `scripts/_judge_phase19_*` — ~90+ hand-judging part-scripts (all 311 cells, all 1-by-1).
