@@ -1,0 +1,9 @@
+{
+  "cuad__attention-corpus-tuned__batch__doc0_qa1__seed42": [0.0, "Parties is an extraction category needing the party as the answer; gold is 'Distributor' but PRED is a no-partnership/agency disclaimer boilerplate (the recurring template non-answer) that merely mentions 'the Distributor'/'the Company' rather than extracting the party => 0."],
+  "cuad__attention-corpus-tuned__batch__doc1_qa3__seed42": [0.0, "Expiration Date gold anchors on 31 July 2013 (two-year term) or Maximum Distribution Commitment mechanism; PRED gives wrong literal date '1 August 2021' (bleed) => 0."],
+  "cuad__attention-corpus-tuned__batch__doc2_qa4__seed42": [0.0, "Warranty Duration full gold is a 7-day China Commodity Inspection Bureau claim/replacement provision for this sales contract; PRED '24 months after delivery to Distributor end-user' is bleed from a distribution template => 0."],
+  "cuad__attention-corpus-tuned__batch__doc4_qa1__seed42": [0.0, "Parties gold is 'Co-Trustee'; PRED is generic no-partnership/agency/joint-venture boilerplate that never names the Co-Trustee party, no correct value => 0."],
+  "cuad__attention-corpus-tuned__batch__doc5_qa1__seed42": [0.0, "Parties is extraction needing the party as the answer; gold is 'ADAMS GOLF' but PRED is a no-partnership disclaimer boilerplate (recurring template non-answer) that only mentions ADAMS GOLF/CONSULTANT rather than extracting the parties => 0, consistent with doc0_qa1."],
+  "cuad__attention-corpus-tuned__batch__doc7_qa2__seed42": [0.0, "Agreement Date gold is literal 'October 30, 2019'; PRED gives a different literal date 'March 7, 2016' (bleed) => 0."],
+  "cuad__attention-corpus-tuned__batch__doc9_qa3__seed42": [0.0, "Effective Date gold is literal 'August 10, 2007'; PRED gives wrong literal date 'October 15, 2009' (bleed) plus non-committal lawyer-review phrasing => 0."]
+}
