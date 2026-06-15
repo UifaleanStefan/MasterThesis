@@ -1,0 +1,28 @@
+{
+  "sample_n": 300,
+  "strata_n": {
+    "ACK1": 100,
+    "REF0": 100,
+    "MIXED": 100
+  },
+  "population": {
+    "ACK1": 11405,
+    "REF0": 18301,
+    "MIXED": 2681
+  },
+  "population_total": 32387,
+  "per_stratum_mean_abs_error": {
+    "ACK1": 0.0,
+    "REF0": 0.0125,
+    "MIXED": 0.2525
+  },
+  "per_stratum_agreement": {
+    "ACK1_exact": 1.0,
+    "REF0_exact": 0.98,
+    "MIXED_within0.25": 0.72
+  },
+  "ack_false_positive_rate": 0.0,
+  "ref_false_negative_rate": 0.02,
+  "population_weighted_mean_abs_error": 0.028,
+  "interpretation": "Rule-assisted refusal/ack scores carry ~0.028 mean score error per entry; ACK(1.0) and REF(0.0) buckets (96% of pop) are near-exact, error concentrated in the small MIXED borderline bucket."
+}

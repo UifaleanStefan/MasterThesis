@@ -1535,9 +1535,16 @@ four lines stay in the upper band, six lines fall to the lower band.
 > June-12 remediation the **~9,500 content-templated entries** that the
 > classifier or content templates had auto-scored were **re-judged one-by-one
 > by Claude with an independent adversarial second pass** (provenance
-> `judge_pass=2_manual`); the remaining ~22k genuine refusal/acknowledgment
-> entries keep rule-assisted scores and are disclosed as such (a stratified
-> hand-validation of that classifier is named as future work). **Blinding:** the
+> `judge_pass=2_manual`); the remaining ~32k genuine refusal/acknowledgment
+> entries keep rule-assisted scores and were **validated on a stratified 300-entry
+> sample** that Claude re-judged blind to the kept score
+> (`results/stage3/_judge_workdir/c2_validation_summary.json`). Agreement is
+> near-exact where it matters: honest-abstention entries credited 1.0 (ACK)
+> match Claude **100/100** (0% false positives), refusals scored 0.0 (REF) match
+> **98/100** (2% were partially answerable), and only the small borderline
+> bucket (≈8% of the rule-assisted pool) diverges (72% within 0.25). The
+> **population-weighted mean score error is 0.028 per rule-assisted entry**, so
+> the kept refusal scores do not materially move any cell mean. **Blinding:** the
 > judge saw the config name and the study hypothesis in context, so this is
 > *not* a blinded evaluation; the mitigations are the fixed rubric anchors, the
 > **cross-vendor split** (answerer GPT-4o-mini / OpenAI, judge Claude /
