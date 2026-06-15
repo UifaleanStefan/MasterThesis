@@ -1,0 +1,14 @@
+Chapter D sweep (batch 1): QASPER dump-all artifact, NQA footnote, four-shift, judge two-tier
+
+- 6.5.2: QASPER dump-all 0.037 disclosed as cap-bug artifact (not re-run
+  uncapped), not evidence context-stuffing fails on accuracy.
+- 6.5.3: NQA footnote corrected (recall objective undefined by construction --
+  adapter emits no paragraph gold -- not a convergence failure); four-shift
+  reframed as exploratory with two caveats (w_graph=0 ablation => load-bearing
+  change is a three-shift; recall-lift column is in-sample/tuned-on-test, held-
+  out survives only FB+CUAD).
+- Evaluator note: honest two-tier protocol (content one-by-one Claude vs
+  rule-assisted refusal classifier; ~9,500 re-judged, ~22k disclosed) + blinding
+  disclosure (judge saw config names/hypothesis).
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>

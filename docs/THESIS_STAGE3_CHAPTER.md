@@ -1490,16 +1490,27 @@ interactive panel (`web/public/data/stage3_finbench_corpus.json` ›
 `calibration_data`) makes the two-cluster structure visually obvious:
 four lines stay in the upper band, six lines fall to the lower band.
 
-> **Evaluator.** All **18,300 judgments** (Protocol A 12 cells × 150q
-> + Protocol B 12 cells × {1,500q + 150q} + Extension 8 cells ×
-> {1,500q + 150q}) were made by Claude Opus 4.7 max one-by-one against the
-> 5-point rubric in `evaluation/claude_judge_protocol.md` (5% numeric
-> tolerance, refusal counted against gold). This is a **cross-vendor
-> judge** — the answerer (GPT-4o-mini, OpenAI) and the judge (Claude
-> Opus 4.7 max, Anthropic) come from independent model families, so
-> the self-bias caveat that applies to the §5.4 Phase 4 automated
-> judge (GPT-4o-mini scoring GPT-4o-mini; see §6.7 point 12) does
-> not apply here. Per-cell aggregates in
+> **Evaluator (two-tier protocol; revised in the June-12 audit).** Judging
+> used **two tiers**, not the uniform one-by-one pass an earlier draft of this
+> note implied. **(a) Content answers** were scored one-by-one by Claude
+> (Opus-class, 1M context) against the 5-point rubric in
+> `evaluation/claude_judge_protocol.md` (5% numeric tolerance, refusal counted
+> against gold). **(b) Refusal / "I don't have that information" answers** — the
+> bulk of the early-corpus calibration deciles — were scored by a rule-assisted
+> refusal/acknowledgment classifier, not hand-judged. The original write-up
+> described *all* 18,300+ judgments as hand-made one-by-one; that was
+> inaccurate (~53% of the full 82,866-entry corpus was rule-assisted). In the
+> June-12 remediation the **~9,500 content-templated entries** that the
+> classifier or content templates had auto-scored were **re-judged one-by-one
+> by Claude with an independent adversarial second pass** (provenance
+> `judge_pass=2_manual`); the remaining ~22k genuine refusal/acknowledgment
+> entries keep rule-assisted scores and are disclosed as such (a stratified
+> hand-validation of that classifier is named as future work). **Blinding:** the
+> judge saw the config name and the study hypothesis in context, so this is
+> *not* a blinded evaluation; the mitigations are the fixed rubric anchors, the
+> **cross-vendor split** (answerer GPT-4o-mini / OpenAI, judge Claude /
+> Anthropic — independent families, so the §5.4 self-bias caveat in §6.7 point
+> 12 does not apply), and `audit_judge_provenance.py`. Per-cell aggregates in
 > `results/stage3/financebench_judge_summary.json`; consolidated
 > audit in `results/stage3/finbench_audit.json`. Question
 > categorisation ("multi-formula calc", "qualitative judgement", …)
@@ -1552,10 +1563,17 @@ lift in direction and same order of magnitude). BM25 is competitive on
 QASPER (0.404 vs 0.415, Δ +0.011) — sparse retrieval works well on NLP
 papers where the canonical paper-name vocabulary ("SemEval-2010",
 "BIBREF34", specific dataset names) gives BM25 strong matches. Attention
-memory is heavily compromised by API quota errors mid-run.² Dump-all
-collapses identically to FB: 0.037 on QASPER vs 0.038 on FB, despite a
-6× larger corpus. **Context-stuffing fails the same way at every scale we
-tested.**
+memory is heavily compromised by API quota errors mid-run.² The
+**dump-all 0.037 here is not a clean measurement.** Like FB's 0.038, it was
+produced under a since-fixed 12-event truncation cap
+(`agent/context_formatter.py`) that prevented the context-stuffing condition
+from ever receiving the corpus. When the FB dump-all condition was re-run with
+the cap removed (§6.5.1), it scored 0.607–0.689 — statistically tied with
+corpus-tuned on accuracy. The QASPER dump-all cell was **not** re-run uncapped,
+and for QASPER's much larger papers a full context-stuffing prompt may exceed
+the answerer's context window. The 0.037 should therefore be read as "not
+measured cleanly," **not** as evidence that context-stuffing fails on accuracy;
+the defensible claim is the cost one (selective retrieval is ~18× cheaper).
 
 **A new finding the online-vs-batch gap exposes.** The Claude judge
 also reveals which configs depend on recency:
@@ -1663,7 +1681,9 @@ corpus-cumulative CMA-ES tuning across **all six benchmarks**
 per-benchmark `θ_v4t_corpus` vectors that we can directly compare against
 the canonical grid-world θ.
 
-**Result — the four-shift replicates across 5 of 6 benchmarks:**
+**Result — the θ parameter shifts replicate across 5 of 6 benchmarks** (with
+two important caveats stated immediately below the table: the *load-bearing*
+change is a three-shift, and the "Recall lift" column is in-sample):
 
 | Benchmark | w_recency↓ | w_embed↑ | theta_store↓ | w_graph↑ | Score | Recall lift¹ |
 |---|---:|---:|---:|---:|:---:|---:|
@@ -1683,16 +1703,38 @@ events get stored may help retain the most salient clause-bearing
 paragraphs. The other three shifts (w_recency → 0, w_embed → 2.78,
 w_graph → 1.61) replicate strongly — CUAD's w_graph nearly matches FB's
 1.627, the highest of any benchmark.
-³ NarrativeQA's CMA-ES did not converge: the tuner returned all-zeros for
-the θ vector (no storage at all), which produced 0 recall at every
-generation. We attribute this to NarrativeQA's adversarial structure
-(books/screenplays of 50K+ tokens, sparse evidence over very long
-horizons) defeating the 6-generation budget. Resolving this is left to
-future work; the architectural claim is unaffected by N=5/6 success.
+³ **Correction:** NarrativeQA tuning does not produce a meaningful θ because
+the recall@k objective is **undefined by construction**, not because of a
+convergence/budget failure. The NarrativeQA adapter never emits
+`relevant_paragraphs` (it has no paragraph-level gold; see
+`evaluation/adapters/narrativeqa.py`), so every CMA-ES candidate scores 0
+recall regardless of θ — there is no signal to optimize. A larger generation
+budget cannot fix this. The earlier "tuner returned all-zeros θ / 6-generation
+budget" explanation was wrong. The architectural claim therefore rests on
+N=5 benchmarks; NarrativeQA contributes only end-to-end QA numbers, not a θ
+shift.
 
-**Recall@k lift validates the tuning empirically.** Beyond θ-vector
-inspection, the CMA-ES objective (mean recall@k=8 over evaluation
-questions) shows a substantial lift for every benchmark where tuning
+**Two honesty caveats on this table (added in the June-12 audit).**
+*(i) The fourth shift is not load-bearing — this is really a three-shift.*
+Although `w_graph` rises under tuning, an ablation that forces `w_graph = 0`
+while keeping the rest of the tuned θ changes end-to-end accuracy by ≈0 on
+every benchmark (QASPER actually *improves*, 0.508 vs 0.460), so the graph term
+carries no measurable retrieval load. The robust, load-bearing shifts are the
+three on `w_recency↓`, `w_embed↑`, and `theta_store↓`. Moreover, re-tuning the
+*same* grid task on the MiniLM encoder reproduces most shift directions from
+the encoder change alone (shift scores {4,4,3,4,3} → {4,3,3,3,2}), so the
+"four-shift" is best read as an **exploratory observation**, not a robust
+architectural law. *(ii) The "Recall lift" column is in-sample.* It is the
+CMA-ES optimizer's own fitness (mean recall@k=8) on the very questions it
+tuned on — i.e. tuned-on-test — so it overstates generalization. The honest,
+held-out version of this evidence is in the appendix held-out splits
+(§ held-out): the FinanceBench corpus-tuned lift survives on unseen questions
+(+0.335, p_holm < 0.0001), CUAD survives (+0.135), and QASPER does not survive
+Holm correction.
+
+**Recall@k lift validates the tuning empirically (in-sample).** Beyond θ-vector
+inspection, the CMA-ES objective (mean recall@k=8 over the tuning
+questions) shows a substantial in-sample lift for every benchmark where tuning
 converged. HotpotQA's lift is most extreme (+0.967, going from
 near-zero to perfect) because multi-hop Wikipedia paragraphs are
 sufficiently entity-rich for the tuned graph-prior to surface multiple
