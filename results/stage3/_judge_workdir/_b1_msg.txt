@@ -1,0 +1,10 @@
+B1 dump-all fix COMPLETE: judge fresh FB dump-all Protocol-A + rebuild FB aggregator
+
+The 12-event-cap fix means dump-all now receives full context. Honest result:
+dump-all online 0.689 / batch 0.607 (n=148/149, cost 2.68 USD) is statistically
+indistinguishable from v4t-corpus-tuned (0.678/0.645, 0.15 USD) -- CIs overlap.
+The original context-stuffing-collapses claim was a cap-bug artifact; the real
+case for selective retrieval is COST (~18x), not accuracy. 297 entries judged
+1-by-1 by Claude (Opus 4.8) + adversarial verify. Flag: rewrite chapter 6.5.1.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>

@@ -1,7 +1,7 @@
 {
   "_manifest": {
-    "git_sha": "c1addc9",
-    "timestamp_utc": "2026-05-25T12:32:48+00:00",
+    "git_sha": "ba3b505",
+    "timestamp_utc": "2026-06-15T10:17:37+00:00",
     "n_questions": 150,
     "k": 8,
     "model": "gpt-4o-mini",
@@ -165,21 +165,21 @@
     },
     "dump-all": {
       "online": {
-        "mean_judge": 0.735,
-        "ci_lower": 0.6667,
-        "ci_upper": 0.8,
+        "mean_judge": 0.6892,
+        "ci_lower": 0.6182,
+        "ci_upper": 0.7568,
         "mean_recall": 1.0,
-        "n": 150,
-        "cost_usd": 0.2182,
-        "in_doc_ratio": 0.035
+        "n": 148,
+        "cost_usd": 2.682,
+        "in_doc_ratio": 0.0354
       },
       "batch": {
-        "mean_judge": 0.0383,
-        "ci_lower": 0.0117,
-        "ci_upper": 0.0717,
+        "mean_judge": 0.6074,
+        "ci_lower": 0.5352,
+        "ci_upper": 0.6829,
         "mean_recall": 1.0,
-        "n": 150,
-        "cost_usd": 0.2182,
+        "n": 149,
+        "cost_usd": 2.682,
         "in_doc_ratio": 0.0067
       }
     },
@@ -342,17 +342,17 @@
       ]
     },
     "attention-corpus-tuned": {
-      "mean_judge": 0.829,
+      "mean_judge": 0.8295,
       "n": 1500,
       "deciles": [
         0.9533,
         0.91,
         0.8783,
-        0.84,
+        0.8433,
         0.8433,
         0.8017,
-        0.76,
-        0.805,
+        0.7583,
+        0.8083,
         0.7967,
         0.7017
       ]
@@ -374,13 +374,13 @@
       ]
     },
     "bm25-corpus": {
-      "mean_judge": 0.773,
+      "mean_judge": 0.7735,
       "n": 1500,
       "deciles": [
         0.9367,
         0.8983,
-        0.885,
-        0.7983,
+        0.8867,
+        0.8017,
         0.8033,
         0.7583,
         0.7267,
@@ -438,7 +438,7 @@
       ]
     },
     "flat-corpus": {
-      "mean_judge": 0.5218,
+      "mean_judge": 0.5212,
       "n": 1500,
       "deciles": [
         0.9417,
@@ -447,40 +447,40 @@
         0.665,
         0.575,
         0.39,
-        0.4283,
-        0.3117,
+        0.4267,
+        0.3067,
         0.19,
         0.0883
       ]
     },
     "v5t-corpus": {
-      "mean_judge": 0.5973,
+      "mean_judge": 0.5962,
       "n": 1500,
       "deciles": [
         0.9367,
         0.8867,
-        0.825,
+        0.8233,
         0.745,
         0.6017,
-        0.5133,
-        0.5383,
-        0.41,
+        0.5117,
+        0.535,
+        0.405,
         0.3133,
         0.2033
       ]
     },
     "semantic-corpus": {
-      "mean_judge": 0.5263,
+      "mean_judge": 0.5248,
       "n": 1500,
       "deciles": [
-        0.9333,
-        0.9067,
+        0.9317,
+        0.905,
         0.785,
-        0.69,
+        0.6883,
         0.565,
-        0.39,
-        0.37,
-        0.3183,
+        0.3883,
+        0.3667,
+        0.3133,
         0.2067,
         0.0983
       ]
@@ -592,12 +592,12 @@
       "family": "dump-all",
       "color": "#f43f5e",
       "mode": "online",
-      "in_doc_ratio": 0.035,
-      "mean_judge": 0.735,
+      "in_doc_ratio": 0.0354,
+      "mean_judge": 0.6892,
       "mean_recall": 1.0,
-      "ci_lower": 0.6667,
-      "ci_upper": 0.8,
-      "n": 150
+      "ci_lower": 0.6182,
+      "ci_upper": 0.7568,
+      "n": 148
     },
     {
       "config": "dump-all",
@@ -606,11 +606,11 @@
       "color": "#f43f5e",
       "mode": "batch",
       "in_doc_ratio": 0.0067,
-      "mean_judge": 0.0383,
+      "mean_judge": 0.6074,
       "mean_recall": 1.0,
-      "ci_lower": 0.0117,
-      "ci_upper": 0.0717,
-      "n": 150
+      "ci_lower": 0.5352,
+      "ci_upper": 0.6829,
+      "n": 149
     },
     {
       "config": "bm25-corpus",
@@ -754,25 +754,25 @@
     "category_method": "heuristic regex on question text; not human-coded",
     "counts": {
       "always_hard": [
-        18,
+        19,
         1,
         0,
         4,
-        12
+        11
       ],
       "always_easy": [
         7,
         2,
         0,
         6,
-        52
+        48
       ],
       "mid": [
-        16,
+        15,
         0,
         0,
         6,
-        26
+        31
       ]
     },
     "category_membership": {
@@ -961,14 +961,14 @@
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.735
+        "other": 0.6892
       },
       "dump-all__batch": {
         "multi-formula calc": 0.0,
         "qualitative judgement": 0.0,
         "list extraction": 0.0,
         "simple extraction": 0.0,
-        "other": 0.0383
+        "other": 0.6074
       },
       "bm25-corpus__online": {
         "multi-formula calc": 0.0,
@@ -1075,14 +1075,14 @@
         "qualitative judgement": 0,
         "list extraction": 0,
         "simple extraction": 0,
-        "other": 150
+        "other": 148
       },
       "dump-all__batch": {
         "multi-formula calc": 0,
         "qualitative judgement": 0,
         "list extraction": 0,
         "simple extraction": 0,
-        "other": 150
+        "other": 149
       },
       "bm25-corpus__online": {
         "multi-formula calc": 0,
@@ -1156,299 +1156,11 @@
       }
     },
     "always_hard_n": 35,
-    "always_easy_n": 67,
-    "mid_n": 48
+    "always_easy_n": 63,
+    "mid_n": 52
   },
   "drilldown_examples": {
     "always_hard": [
-      {
-        "doc_idx": 9,
-        "question": "What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard? Answer in units of percents and round to one decimal place. Calculate (or extract) the answer from the statement of income and the cash flow statement.",
-        "gold_answer": "1.9%",
-        "category": "simple extraction",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "3.5%",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The FY2017 - FY2019 3 year average of capital expenditures (capex) as a percentage of revenue for Activision Blizzard is 2.9%.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "3.5%",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 3.5%.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "5.0%",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The relevant passages do not contain information about Activision Blizzard's financials, including capital expenditures (capex) or revenue for FY2017 - FY2019. Therefore, I cannot provide the requested percentage.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "3.5%",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "6.0%",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 6.0%.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not contain information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot provide the requested percentage.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 6.0%.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for Activision Blizzard.",
-            "judge_score": 0.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "3.5%",
-            "judge_score": 0.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "The relevant passages do not contain information about Activision Blizzard's financials, including capital expenditures (capex) or revenue for FY2017 - FY2019. Therefore, I cannot provide the requested percentage.",
-            "judge_score": 0.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "The relevant passages do not contain information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot provide the requested percentage.",
-            "judge_score": 0.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "The relevant passages do not contain information about Activision Blizzard's financials, including capital expenditures (capex) or revenue for FY2017 - FY2019. Therefore, I cannot provide the requested answer.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 29,
-        "question": "How much was the Real change in Sales for AMCOR in FY 2023 vs FY 2022, if we exclude the impact of FX movement, passthrough costs and one-off items?",
-        "gold_answer": "The Real Growth was flat in FY 2023 vs FY 2022.",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The real change in sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The real change in sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The real change in sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 vs FY 2022.",
-            "judge_score": 0.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "The Real change in Sales for Amcor in FY 2023 vs FY 2022, excluding the impact of FX movement, passthrough costs, and one-off items, was a decrease of 5%.",
-            "judge_score": 0.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
-            "judge_score": 0.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales for FY 2023 or FY 2022.",
-            "judge_score": 0.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Amcor's earnings or sales changes for FY 2023 vs FY 2022.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 104,
-        "question": "What is the FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts? Answer in units of percents and round to one decimal place. Please utilize information provided primarily within the statement of cash flows and the statement of income.",
-        "gold_answer": "7.9%",
-        "category": "simple extraction",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "10.0%",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "-3.5%",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "10.0%",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "-3.5%",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "15.5%",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The information provided does not include data specific to MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts is 12.5%.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The relevant passages do not provide specific information regarding MGM Resorts' capital expenditures (capex) as a percentage of revenue for FY2018 - FY2020. Therefore, I cannot calculate the requested average.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The FY2018 - FY2020 3 year average of capex as a % of revenue for MGM Resorts is 10.5%.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain specific information regarding MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The 3-year average of capex as a % of revenue for MGM Resorts from FY2018 to FY2020 is 10.5%.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide specific information regarding MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
-            "judge_score": 0.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "-3.5%",
-            "judge_score": 0.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "The 3-year average of capital expenditures (capex) as a percentage of revenue for MGM Resorts from FY2018 to FY2020 is not available in the provided passages.",
-            "judge_score": 0.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "The information provided does not include the necessary data for MGM Resorts' capital expenditures (capex) or revenues for FY2018 - FY2020. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for MGM Resorts.",
-            "judge_score": 0.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "The relevant passages do not contain information about MGM Resorts' capital expenditures (capex) or revenue for FY2018 - FY2020. Therefore, I cannot provide the requested percentage.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 62,
-        "question": "Does Boeing have an improving gross margin profile as of FY2022? If gross margin is not a useful metric for a company like this, then state that and explain why.",
-        "gold_answer": "Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.",
-        "category": "multi-formula calc",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Gross margin is not a useful metric for Boeing due to the nature of its business, which involves significant costs associated with manufacturing and delivering complex products and services, making it more relevant to analyze total revenues and costs rather than gross margin alone.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "Gross margin is not a useful metric for Boeing due to the nature of its business, which involves significant costs associated with manufacturing and delivering complex products like aircraft, where total revenues and costs are more relevant for assessing financial performance.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "Gross margin is not a useful metric for Boeing as it operates in a capital-intensive industry with significant costs associated with production and services, making total revenues and net income more relevant indicators of financial performance.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile or financial performance for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile as of FY2022.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "Boeing does not have an improving gross margin profile as of FY2022, as the cost of products increased significantly compared to the revenue from sales of products, leading to a lower gross margin.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The provided passages do not include specific information about Boeing's gross margin profile for FY2022, so it cannot be determined whether Boeing has an improving gross margin profile. Additionally, the context does not provide enough information to assess the relevance of gross margin as a metric for Boeing.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "Gross margin is not a useful metric for Boeing as it primarily operates in the aerospace and defense sectors, where revenue is often recognized based on long-term contracts and project milestones rather than traditional product sales.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "Gross margin is not a useful metric for Boeing as it primarily operates in the aerospace and defense sectors, where revenue is often recognized based on long-term contracts and project milestones rather than traditional product sales.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile.",
-            "judge_score": 0.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
-            "judge_score": 0.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Boeing's gross margin profile or financial performance for FY2022.",
-            "judge_score": 0.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Boeing's gross margin profile for FY2022.",
-            "judge_score": 0.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile or its financial metrics for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile as of FY2022.",
-            "judge_score": 0.0
-          }
-        }
-      },
       {
         "doc_idx": 48,
         "question": "In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
@@ -1476,7 +1188,7 @@
             "judge_score": 0.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Best Buy's financials or net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question.",
+            "predicted": "3.5%",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -1522,289 +1234,145 @@
         }
       },
       {
-        "doc_idx": 17,
-        "question": "Based on the information provided primarily in the statement of financial position and the statement of income, what is AES's FY2022 return on assets (ROA)? ROA is defined as: FY2022 net income / (average total assets between FY2021 and FY2022). Round your answer to two decimal places.",
-        "gold_answer": "-0.02",
-        "category": "multi-formula calc",
+        "doc_idx": 2,
+        "question": "Is 3M a capital-intensive business based on FY2022 data?",
+        "gold_answer": "No, the company is managing its CAPEX and Fixed Assets pretty efficiently, which is evident from below key metrics:\nCAPEX/Revenue Ratio: 5.1%\nFixed assets/Total Assets: 20%\nReturn on Assets= 12.4%",
+        "category": "qualitative judgement",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "-1.42",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
             "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "-1.42",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by its significant investments in property, plant, and equipment totaling $26,459 million.",
             "judge_score": 0.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "-1.42",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
             "judge_score": 0.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "-1.42",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by its significant investments in property, plant, and equipment totaling $26,459 million.",
             "judge_score": 0.0
           },
           "dump-all__online": {
-            "predicted": "-1.42",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
             "judge_score": 0.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding AES Corporation's financial data, including net income or total assets for FY2022. Therefore, I cannot calculate the return on assets (ROA) for AES Corporation.",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment, totaling $1,749 million in capital expenditures.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "-1.42",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment (PP&E) totaling $1,749 million.",
             "judge_score": 0.0
           },
           "bm25-corpus__batch": {
-            "predicted": "-4.30%",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant purchases of property, plant, and equipment (PP&E) totaling $1,749 million.",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
-            "predicted": "-1.16",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by its significant investment in property, plant, and equipment totaling $25,998 million.",
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The relevant passages do not provide information about AES Corporation's net income or total assets for FY2022. Therefore, it is not possible to calculate AES's FY2022 return on assets (ROA) based on the provided context.",
+            "predicted": "The provided passages do not contain specific information regarding 3M's capital intensity or FY2022 data. Therefore, an answer cannot be determined from the given context.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
-            "predicted": "-2.29",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant expenditures on property, plant, and equipment (PP&E) and investments.",
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not provide information about AES Corporation's net income or total assets for FY2022. Therefore, it is not possible to calculate the return on assets (ROA) for AES Corporation based on the provided context.",
+            "predicted": "The provided passages do not contain specific information regarding 3M's capital intensity or FY2022 data. Therefore, an answer cannot be determined from the given context.",
             "judge_score": 0.0
           },
           "rag-corpus__batch": {
-            "predicted": "-1.42",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment totaling $26,459 million.",
             "judge_score": 0.0
           },
           "flat-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding AES Corporation's financial data for FY2022, including net income or total assets. Therefore, I cannot calculate the return on assets (ROA) for AES Corporation.",
+            "predicted": "The provided passages do not contain information about 3M or its capital intensity for FY2022.",
             "judge_score": 0.0
           },
           "v5t-corpus__batch": {
-            "predicted": "The relevant passages do not provide information about AES Corporation's FY2022 net income or total assets. Therefore, I cannot calculate the return on assets (ROA) for AES Corporation.",
+            "predicted": "The provided passages do not contain specific information regarding 3M's capital intensity or FY2022 data. Therefore, an answer cannot be determined from the given context.",
             "judge_score": 0.0
           },
           "semantic-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding AES Corporation's financial data, including net income or total assets for FY2022. Therefore, I cannot calculate the return on assets (ROA) for AES Corporation.",
+            "predicted": "Yes, 3M is a capital-intensive business based on FY2022 data, as indicated by significant investments in property, plant, and equipment, totaling $1,749 million.",
             "judge_score": 0.0
           }
         }
       },
       {
-        "doc_idx": 94,
-        "question": "Which of JPM's business segments had the lowest net revenue in 2021 Q1?",
-        "gold_answer": "Corporate. Its net revenue was -$473 million.",
+        "doc_idx": 50,
+        "question": "Are Best Buy's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
+        "gold_answer": "Yes, the margins have been consistent, there has been a minor decline of 1.1% in gross margins between FY2022 and FY2023.",
         "category": "other",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, indicating they are not historically consistent.",
             "judge_score": 0.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, as evidenced by the gross profit percentages of 21.4% in fiscal 2023, 22.5% in fiscal 2022, and 21.0% in fiscal 2021. Therefore, gross margins are not historically consistent.",
             "judge_score": 0.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, indicating they are not historically consistent.",
             "judge_score": 0.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, as evidenced by the changes in gross profit percentages over the fiscal years.",
             "judge_score": 0.0
           },
           "dump-all__online": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, indicating they are not historically consistent. For example, gross profit was $11,640 million in 2022 and $10,573 million in 2021, reflecting a significant change. Therefore, gross margins are a relevant metric for assessing the company's profitability and operational efficiency, as they indicate how well the company manages its pro",
             "judge_score": 0.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, indicating that they are not historically consistent. For example, the gross profit as a percentage of revenue was 21.4% in fiscal 2023, down from 22.5% in fiscal 2022, which reflects a significant change. Gross margins are relevant for a company like Best Buy as they indicate the efficiency of its operations and pricing strategy in ",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, with gross profit margins of 21.4% in 2023, 22.5% in 2022, and 22.4% in 2021.",
             "judge_score": 0.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Commercial Banking",
+            "predicted": "Best Buy's gross margins have fluctuated more than 2% each year, as indicated by the changes in gross profit and cost of sales over the fiscal years.",
             "judge_score": 0.0
           },
           "v4t-canonical__online": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Gross margins for Best Buy have fluctuated, with gross profit as a percentage of revenue showing variability over the years. Therefore, gross margins are not historically consistent.",
             "judge_score": 0.0
           },
           "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "predicted": "The provided passages do not contain information regarding Best Buy's gross margins or their historical consistency. Therefore, I cannot determine if Best Buy's gross margins are historically consistent.",
             "judge_score": 0.0
           },
           "v4t-tuned__online": {
-            "predicted": "Commercial Banking",
+            "predicted": "Gross margins for Best Buy have fluctuated, with gross profit as a percentage of revenue showing variability over the years. Therefore, they are not historically consistent within a 2% range.",
             "judge_score": 0.0
           },
           "v4t-tuned__batch": {
-            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "predicted": "The provided passages do not contain any information regarding Best Buy's gross margins or their historical consistency. Therefore, I cannot determine if Best Buy's gross margins are historically consistent.",
             "judge_score": 0.0
           },
           "rag-corpus__batch": {
-            "predicted": "Consumer & Community Banking",
+            "predicted": "Gross margins for Best Buy have fluctuated more than 2% each year, as evidenced by the changes in gross profit percentages over the fiscal years.",
             "judge_score": 0.0
           },
           "flat-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "predicted": "The provided passages do not contain information about Best Buy's gross margins or their historical consistency. Therefore, I cannot answer the question regarding Best Buy's gross margins.",
             "judge_score": 0.0
           },
           "v5t-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenues for 2021 Q1.",
+            "predicted": "The provided passages do not contain information regarding Best Buy's gross margins or their historical consistency. Therefore, I cannot determine if Best Buy's gross margins are historically consistent.",
             "judge_score": 0.0
           },
           "semantic-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net revenue for 2021 Q1.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 144,
-        "question": "Does Verizon have a reasonably healthy liquidity profile based on its quick ratio for FY 2022? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
-        "gold_answer": "No. The quick ratio was approximately 0.54 for Verizon. It indicated that Verizon does not have a healthy liquidity profile.",
-        "category": "multi-formula calc",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or its liquidity profile for FY 2022.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or its liquidity profile for FY 2022.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that metric.",
-            "judge_score": 0.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if Verizon has a reasonably healthy liquidity profile based on that measure.",
-            "judge_score": 0.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "The provided passages do not contain information regarding Verizon's quick ratio or liquidity profile for FY 2022. Therefore, I cannot determine if Verizon has a reasonably healthy liquidity profile based on its quick ratio.",
-            "judge_score": 0.0
-          }
-        }
-      },
-      {
-        "doc_idx": 81,
-        "question": "What is the FY2019 cash conversion cycle (CCC) for General Mills? CCC is defined as: DIO + DSO - DPO. DIO is defined as: 365 * (average inventory between FY2018 and FY2019) / (FY2019 COGS). DSO is defined as: 365 * (average accounts receivable between FY2018 and FY2019) / (FY2019 Revenue). DPO is de",
-        "gold_answer": "-3.7",
-        "category": "simple extraction",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 56.73 days.",
-            "judge_score": 0.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 66.73 days.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is not calculable with the provided information, as the necessary figures for COGS and Revenue are not included in the passages.",
-            "judge_score": 0.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "To calculate the cash conversion cycle (CCC) for General Mills for FY2019, we need the following information:\n\n1. **Cost of Goods Sold (COGS) for FY2019**: This is not directly provided in the passages, but we can infer it from the financial statements if available. However, since the specific COGS figure is not included in the provided context, we cannot calculate DIO, DSO, or DPO accurately.\n\n2.",
-            "judge_score": 0.0
-          },
-          "dump-all__online": {
-            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 56.73 days.",
-            "judge_score": 0.0
-          },
-          "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding General Mills' financial data, such as COGS, revenue, inventory, accounts receivable, or accounts payable for FY2019. Therefore, I cannot calculate the cash conversion cycle (CCC) for General Mills.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 36.73 days.",
-            "judge_score": 0.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "The provided passages do not contain the necessary financial data or specific line items from General Mills' 10-K for FY2019 to calculate the cash conversion cycle (CCC). Therefore, I cannot provide the CCC for General Mills.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 is 36.73 days.",
-            "judge_score": 0.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The provided passages do not contain any information regarding General Mills' financial data for FY2019, including COGS, revenue, or accounts payable. Therefore, the cash conversion cycle (CCC) cannot be calculated.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The cash conversion cycle (CCC) for General Mills in FY2019 cannot be calculated with the provided information, as the necessary data for average inventory, average accounts receivable, and average accounts payable is not included in the passages.",
-            "judge_score": 0.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The relevant passages do not contain information about General Mills' FY2019 cash conversion cycle (CCC), including details on average inventory, accounts receivable, accounts payable, COGS, or revenue. Therefore, I cannot provide an answer.",
-            "judge_score": 0.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "The FY2019 cash conversion cycle (CCC) for General Mills is 66.73 days.",
-            "judge_score": 0.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding General Mills' financial data, including cash conversion cycle (CCC), inventory, accounts receivable, or accounts payable for FY2019. Therefore, I cannot calculate the CCC for General Mills.",
-            "judge_score": 0.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "The relevant passages do not provide the necessary data to calculate the cash conversion cycle (CCC) for General Mills for FY2019.",
-            "judge_score": 0.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding General Mills' financial data for FY2019, including cash conversion cycle (CCC), inventory, accounts receivable, or accounts payable. Therefore, I cannot calculate the CCC for General Mills.",
+            "predicted": "The provided passages do not contain any information regarding Best Buy's gross margins or their historical consistency. Therefore, I cannot answer the question based on the given context.",
             "judge_score": 0.0
           }
         }
@@ -1832,11 +1400,11 @@
             "judge_score": 0.0
           },
           "dump-all__online": {
-            "predicted": "Common Shares (par value $0.20 per Share) with trading symbol AXP on the New York Stock Exchange.",
+            "predicted": "1.500% Notes due 2026  \n1.750% Notes due 2030  \n1.500% Notes due 2031",
             "judge_score": 0.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding American Express' debt securities registered to trade on a national securities exchange as of 2022.",
+            "predicted": "1.500% Notes due 2026  \n1.750% Notes due 2030  \n1.500% Notes due 2031",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -1880,153 +1448,441 @@
             "judge_score": 0.0
           }
         }
+      },
+      {
+        "doc_idx": 9,
+        "question": "What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard? Answer in units of percents and round to one decimal place. Calculate (or extract) the answer from the statement of income and the cash flow statement.",
+        "gold_answer": "1.9%",
+        "category": "simple extraction",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "3.5%",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "The FY2017 - FY2019 3 year average of capital expenditures (capex) as a percentage of revenue for Activision Blizzard is 2.9%.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "3.5%",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 3.5%.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "6.0%",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 6.0%.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "3.5%",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "6.0%",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 6.0%.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot provide the requested percentage.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard is 6.0%.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The relevant passages do not provide information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot calculate the 3-year average of capex as a percentage of revenue for Activision Blizzard.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "3.5%",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's financials, including capital expenditures (capex) or revenue for FY2017 - FY2019. Therefore, I cannot provide the requested percentage.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's FY2017 - FY2019 capital expenditures or revenues. Therefore, I cannot provide the requested percentage.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about Activision Blizzard's financials, including capital expenditures (capex) or revenue for FY2017 - FY2019. Therefore, I cannot provide the requested answer.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 31,
+        "question": "Does AMD have a reasonably healthy liquidity profile based on its quick ratio for FY22? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
+        "gold_answer": "Yes. The quick ratio is 1.57, calculated as (cash and cash equivalents+Short term investments+Accounts receivable, net+receivables from related parties)/ (current liabilities).",
+        "category": "multi-formula calc",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if AMD has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "The quick ratio is not relevant to measure liquidity in this context as the provided passages do not include sufficient information on current liabilities or the specific calculation of the quick ratio for AMD.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "The quick ratio is not relevant to measure liquidity in this context because the provided financial data does not include current liabilities or the specific components needed to calculate the quick ratio.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "The quick ratio is not relevant to measure liquidity in this context as the provided passages do not include sufficient information on current liabilities or the specific calculation of the quick ratio for AMD.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "The quick ratio is not provided in the AMD 10k 2022 document, so it cannot be determined if AMD has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The quick ratio is not provided in the context, so it cannot be determined if AMD has a reasonably healthy liquidity profile based on that metric. The quick ratio is typically calculated using current assets minus inventories divided by current liabilities, and without specific values for these components, an assessment cannot be made.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "The quick ratio is not provided in the AMD 10k 2022 document, so it cannot be determined if AMD has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding AMD's quick ratio or liquidity profile for FY22. Therefore, I cannot determine if AMD has a reasonably healthy liquidity profile based on its quick ratio.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The provided passages do not contain information regarding AMD's quick ratio or liquidity profile for FY22.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain information regarding AMD's quick ratio or liquidity profile for FY22.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The provided passages do not contain information about AMD's quick ratio or liquidity profile for FY22. Therefore, I cannot determine if AMD has a reasonably healthy liquidity profile based on its quick ratio.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding AMD's quick ratio or liquidity profile for FY22. Therefore, I cannot determine if AMD has a reasonably healthy liquidity profile based on its quick ratio.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The quick ratio is not relevant to measure liquidity in this context as the provided financial data does not include current liabilities necessary to calculate the quick ratio.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information about AMD's quick ratio or liquidity profile for FY22.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding AMD's quick ratio or liquidity profile for FY22.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain information about AMD's quick ratio or liquidity profile for FY22. Therefore, I cannot determine if AMD has a reasonably healthy liquidity profile based on its quick ratio.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 62,
+        "question": "Does Boeing have an improving gross margin profile as of FY2022? If gross margin is not a useful metric for a company like this, then state that and explain why.",
+        "gold_answer": "Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.",
+        "category": "multi-formula calc",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the nature of its business, which involves significant costs associated with manufacturing and delivering complex products and services, making it more relevant to analyze total revenues and costs rather than gross margin alone.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the nature of its business, which involves significant costs associated with manufacturing and delivering complex products like aircraft, where total revenues and costs are more relevant for assessing financial performance.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing as it operates in the aerospace and defense industry, where revenue and costs are heavily influenced by long-term contracts, project-based work, and significant fixed costs. Instead, total revenues and operating income are more relevant indicators of financial performance for Boeing.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "Boeing does not have an improving gross margin profile as of FY2022. The gross profit margin decreased from 10.5% in 2021 to 5.3% in 2022, indicating a decline in profitability relative to sales. This decline is primarily due to increased costs and operational challenges, which have negatively impacted the company's financial performance. In the context of Boeing, gross margin may not be the most ",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Boeing does not have an improving gross margin profile as of FY2022, as the cost of products increased significantly compared to the revenue from sales of products, leading to a lower gross margin.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not include specific information about Boeing's gross margin profile for FY2022, so it cannot be determined whether Boeing has an improving gross margin profile. Additionally, the context does not provide enough information to assess the relevance of gross margin as a metric for Boeing.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing as it primarily operates in the aerospace and defense sectors, where revenue is often recognized based on long-term contracts and project milestones rather than traditional product sales.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "Gross margin is not a useful metric for Boeing as it primarily operates in the aerospace and defense sectors, where revenue is often recognized based on long-term contracts and project milestones rather than traditional product sales.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Gross margin is not a useful metric for Boeing due to the cyclical nature of the airline industry and the significant variability in costs associated with production and services, which can lead to fluctuating profit margins.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Boeing's gross margin profile or financial performance for FY2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Boeing's gross margin profile for FY2022.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Boeing's gross margin profile or its financial metrics for FY2022. Therefore, I cannot determine if Boeing has an improving gross margin profile as of FY2022.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 123,
+        "question": "What is the FY2022 unadjusted EBITDA less capex for PepsiCo? Define unadjusted EBITDA as unadjusted operating income + depreciation and amortization [from cash flow statement]. Answer in USD millions. Respond to the question by assuming the perspective of an investment analyst who can only use the d",
+        "gold_answer": "$9068.00",
+        "category": "simple extraction",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "$12,275 million",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "$14,275 million",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "$13,275 million",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "$14,275 million",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "$14,275 million",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "$12,049 million",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "$14,275 million",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "$12,275 million",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "$14,389 million",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain specific information regarding PepsiCo's FY2022 unadjusted EBITDA or capital expenditures. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "$10,586 million",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The relevant passages do not provide specific information regarding PepsiCo's FY2022 unadjusted EBITDA or capital expenditures. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "$14,275 million",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The relevant passages do not contain information about PepsiCo's financials, including unadjusted EBITDA or capex. Therefore, I cannot provide an answer based on the provided context.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The relevant passages do not provide specific information regarding PepsiCo's FY2022 unadjusted EBITDA or capital expenditures. Therefore, I cannot provide an answer based on the given context.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The unadjusted EBITDA for PepsiCo in FY2022 is not provided in the passages. Therefore, I cannot calculate the unadjusted EBITDA less capex.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 13,
+        "question": "Does Adobe have an improving operating margin profile as of FY2022? If operating margin is not a useful metric for a company like this, then state that and explain why.",
+        "gold_answer": "No the operating margins of Adobe have recently declined from 36.8% in FY 2021 to 34.6% in FY2022. A drop by 2.2% in a year.",
+        "category": "multi-formula calc",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total revenue of $17,606 million, resulting in an operating margin of approximately 34.6%, which is an increase from previous years.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6.1 billion and total revenue of $17.6 billion, indicating a strong operating margin.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total revenue of $17,606 million, resulting in an operating margin of approximately 34.6%, which is an increase from previous years.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6.1 billion and total revenue of $17.6 billion, indicating a strong operating margin.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total revenue of $17,606 million, resulting in an operating margin of approximately 34.6%, which is an increase from previous years.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total operating expenses of $9,343 million, indicating a healthy operating margin. Operating margin is a useful metric for Adobe as it reflects the efficiency of its core business operations, particularly in a subscription-based model where managing costs relative to revenue is crucial",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6,098 million and total revenue of $17,606 million, resulting in an operating margin of approximately 34.6%, which is an increase from previous years.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Adobe's operating margin profile as of FY2022.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The provided passages do not include information about Adobe's operating margin profile for FY2022, so it cannot be determined if Adobe has an improving operating margin profile as of that fiscal year.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain information regarding Adobe's operating margin profile for FY2022. Therefore, I cannot determine if Adobe has an improving operating margin profile based on the available context.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The provided passages do not contain information about Adobe's operating margin profile for FY2022, so it cannot be determined if it is improving. Additionally, there is no explanation regarding the usefulness of operating margin as a metric for Adobe.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding Adobe's operating margin profile for FY2022. Therefore, I cannot determine if Adobe has an improving operating margin profile.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Yes, Adobe has an improving operating margin profile as of FY2022, with an operating income of $6.1 billion and total revenue of $17.6 billion, indicating a higher operating margin compared to previous years.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information about Adobe's operating margin profile for FY2022.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding Adobe's operating margin profile for FY2022. Therefore, it cannot be determined if Adobe has an improving operating margin profile based on the available context.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding Adobe's operating margin profile for FY2022.",
+            "judge_score": 0.0
+          }
+        }
+      },
+      {
+        "doc_idx": 5,
+        "question": "Does 3M have a reasonably healthy liquidity profile based on its quick ratio for Q2 of FY2023? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
+        "gold_answer": "No. The quick ratio for 3M was 0.96 by Jun'23 close, which needs a bit of an improvement to touch the 1x mark",
+        "category": "multi-formula calc",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, and therefore, it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "dump-all__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that measure.",
+            "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "The quick ratio is not provided in the available data, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric. The quick ratio is calculated using current assets minus inventories divided by current liabilities, and without specific values for these components, an assessment cannot be made.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding 3M's quick ratio or its liquidity profile for Q2 of FY2023. Therefore, I cannot determine if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "The provided passages do not contain information about 3M's quick ratio for Q2 of FY2023 or any details relevant to measuring liquidity. Therefore, I cannot determine if 3M has a reasonably healthy liquidity profile based on the quick ratio.",
+            "judge_score": 0.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "The provided passages do not contain information regarding 3M's quick ratio for Q2 of FY2023 or any details about its liquidity profile. Therefore, I cannot determine if 3M has a reasonably healthy liquidity profile based on the quick ratio.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "The provided passages do not include information about 3M's quick ratio for Q2 of FY2023, so it is not possible to determine if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "The provided passages do not contain information regarding 3M's quick ratio for Q2 of FY2023 or any details about its liquidity profile. Therefore, I cannot determine if 3M has a reasonably healthy liquidity profile based on the quick ratio.",
+            "judge_score": 0.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain information about 3M's quick ratio or liquidity profile for Q2 of FY2023.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "The provided passages do not contain information regarding 3M's quick ratio for Q2 of FY2023 or any details about its liquidity profile. Therefore, I cannot determine if 3M has a reasonably healthy liquidity profile based on the quick ratio.",
+            "judge_score": 0.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "The quick ratio is not provided in the relevant passages, so it cannot be determined if 3M has a reasonably healthy liquidity profile based on that metric.",
+            "judge_score": 0.0
+          }
+        }
       }
     ],
     "always_easy": [
-      {
-        "doc_idx": 90,
-        "question": "Which business segment of JnJ will be treated as a discontinued operation from August 30, 2023 onward?",
-        "gold_answer": "The Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Johnson & Johnson's Consumer Health business will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          },
-          "dump-all__online": {
-            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          },
-          "dump-all__batch": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "The Consumer Health segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
-            "judge_score": 1.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
-            "judge_score": 1.0
-          }
-        }
-      },
-      {
-        "doc_idx": 96,
-        "question": "Are JPM's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
-        "gold_answer": "Since JPM is a financial institution, gross margin is not a relevant metric.",
-        "category": "other",
-        "predictions": {
-          "v4t-corpus-tuned__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it primarily operates in financial services where net interest income and noninterest income are more significant indicators of performance than gross margins typically used in manufacturing or retail sectors.",
-            "judge_score": 1.0
-          },
-          "v4t-corpus-tuned__batch": {
-            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins associated with product sales.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it primarily operates in financial services where net interest income and noninterest income are more significant indicators of performance than gross margins.",
-            "judge_score": 1.0
-          },
-          "attention-corpus-tuned__batch": {
-            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins associated with product sales.",
-            "judge_score": 1.0
-          },
-          "dump-all__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where profitability is typically assessed through metrics like net income, return on equity, and revenue growth rather than gross margins.",
-            "judge_score": 1.0
-          },
-          "dump-all__batch": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins, which are more applicable to manufacturing or retail companies.",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__online": {
-            "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and such firms typically focus on metrics like net interest margin, return on equity, and other financial ratios rather than gross margins, which are more applicable to manufacturing or retail companies.",
-            "judge_score": 1.0
-          },
-          "bm25-corpus__batch": {
-            "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and its performance is typically evaluated using metrics such as return on equity, net interest margin, and efficiency ratio rather than gross margins.",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where net interest income and noninterest income are more critical indicators of performance than gross margins typically used in manufacturing or retail sectors.",
-            "judge_score": 1.0
-          },
-          "v4t-canonical__batch": {
-            "predicted": "Gross margins are not a relevant metric for JPMorgan as it is a financial services company, and its performance is better assessed through net revenue, noninterest expenses, and net income rather than traditional gross margins used in product-based industries.",
-            "judge_score": 1.0
-          },
-          "v4t-tuned__online": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where metrics such as net income, return on equity, and total assets are more significant indicators of performance rather than gross margins typically used in manufacturing or retail sectors.",
-            "judge_score": 1.0
-          },
-          "v4t-tuned__batch": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins.",
-            "judge_score": 1.0
-          },
-          "rag-corpus__batch": {
-            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan Chase, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins used in product-based companies.",
-            "judge_score": 1.0
-          },
-          "flat-corpus__batch": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins, which are more applicable to manufacturing or retail companies.",
-            "judge_score": 1.0
-          },
-          "v5t-corpus__batch": {
-            "predicted": "Gross margins are not a relevant metric for JPMorgan as it is a financial services company, and its performance is typically assessed using metrics such as net interest income, noninterest income, and return on equity rather than gross margins.",
-            "judge_score": 1.0
-          },
-          "semantic-corpus__batch": {
-            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins, which are more applicable to manufacturing or retail companies.",
-            "judge_score": 1.0
-          }
-        }
-      },
       {
         "doc_idx": 15,
         "question": "What is the quantity of restructuring costs directly outlined in AES Corporation's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
@@ -2126,8 +1982,8 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding the outcome of the shareholder vote on the shareholder proposal for a congruency report by PepsiCo on net-zero emissions policies at the AGM held on May 3, 2023.",
-            "judge_score": 0.0
+            "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "The shareholder proposal regarding a congruency report on net-zero emissions policies was defeated, with 19,718,780 votes for and 977,228,788 votes against.",
@@ -2172,74 +2028,218 @@
         }
       },
       {
-        "doc_idx": 145,
-        "question": "Is Verizon a capital intensive business based on FY 2022 data?",
-        "gold_answer": "Yes. Verizon's capital intensity ratio was approximately 2.774729. This means that it took approximately $2.77 of assets to generate $1 of revenue and thus, Verizon can be considered capital intensive.",
-        "category": "qualitative judgement",
+        "doc_idx": 90,
+        "question": "Which business segment of JnJ will be treated as a discontinued operation from August 30, 2023 onward?",
+        "gold_answer": "The Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
+        "category": "other",
         "predictions": {
           "v4t-corpus-tuned__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
-            "judge_score": 0.75
+            "predicted": "Johnson & Johnson's Consumer Health business will be treated as a discontinued operation from August 30, 2023 onward.",
+            "judge_score": 1.0
           },
           "v4t-corpus-tuned__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "attention-corpus-tuned__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment, totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "bm25-corpus__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "bm25-corpus__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "Johnson & Johnson's Consumer Health business segment will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-canonical__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-canonical__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment, totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-tuned__online": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investment in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
             "judge_score": 1.0
           },
           "v4t-tuned__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
             "judge_score": 1.0
           },
           "rag-corpus__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
-            "judge_score": 0.75
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
+            "judge_score": 1.0
           },
           "flat-corpus__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data.",
-            "judge_score": 0.75
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
+            "judge_score": 1.0
           },
           "v5t-corpus__batch": {
-            "predicted": "Yes, Verizon is a capital intensive business based on FY 2022 data, as indicated by its significant investments in property, plant, and equipment totaling $307,689 million.",
-            "judge_score": 0.75
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023 onward.",
+            "judge_score": 1.0
           },
           "semantic-corpus__batch": {
-            "predicted": "The provided passages do not contain any information regarding Verizon or its capital intensity for FY 2022.",
+            "predicted": "The Consumer Health business segment of Johnson & Johnson will be treated as a discontinued operation from August 30, 2023, onward.",
+            "judge_score": 1.0
+          }
+        }
+      },
+      {
+        "doc_idx": 96,
+        "question": "Are JPM's gross margins historically consistent (not fluctuating more than roughly 2% each year)? If gross margins are not a relevant metric for a company like this, then please state that and explain why.",
+        "gold_answer": "Since JPM is a financial institution, gross margin is not a relevant metric.",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it primarily operates in financial services where net interest income and noninterest income are more significant indicators of performance than gross margins typically used in manufacturing or retail sectors.",
+            "judge_score": 1.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins associated with product sales.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it primarily operates in financial services where net interest income and noninterest income are more significant indicators of performance than gross margins.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins associated with product sales.",
+            "judge_score": 1.0
+          },
+          "dump-all__online": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it is a financial services firm where profitability is typically assessed through metrics such as net interest margin, return on equity, and overall net income rather than gross margins, which are more applicable to product-based companies.",
             "judge_score": 0.0
+          },
+          "dump-all__batch": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it is a financial services firm primarily focused on banking, investment services, and asset management. Instead of gross margins, metrics such as net interest margin, return on equity, and efficiency ratios are more pertinent for evaluating its financial performance.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and such firms typically focus on metrics like net interest margin, return on equity, and other financial ratios rather than gross margins, which are more applicable to manufacturing or retail companies.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for JPMorgan Chase as it is a financial services firm, and its performance is typically evaluated using metrics such as return on equity, net interest margin, and efficiency ratio rather than gross margins.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where net interest income and noninterest income are more critical indicators of performance than gross margins typically used in manufacturing or retail sectors.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "Gross margins are not a relevant metric for JPMorgan as it is a financial services company, and its performance is better assessed through net revenue, noninterest expenses, and net income rather than traditional gross margins used in product-based industries.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan Chase, as it operates primarily in financial services where metrics such as net income, return on equity, and total assets are more significant indicators of performance rather than gross margins typically used in manufacturing or retail sectors.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins.",
+            "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for a financial services firm like JPMorgan Chase, as they primarily focus on net revenues, noninterest expenses, and net income rather than traditional gross margins used in product-based companies.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins, which are more applicable to manufacturing or retail companies.",
+            "judge_score": 1.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for JPMorgan as it is a financial services company, and its performance is typically assessed using metrics such as net interest income, noninterest income, and return on equity rather than gross margins.",
+            "judge_score": 1.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "Gross margins are not a relevant metric for a company like JPMorgan, as it is a financial services firm where profitability is typically assessed through metrics like net interest margin, return on equity, and return on assets rather than gross margins, which are more applicable to manufacturing or retail companies.",
+            "judge_score": 1.0
+          }
+        }
+      },
+      {
+        "doc_idx": 126,
+        "question": "By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
+        "gold_answer": "$400,000,000 increase.",
+        "category": "other",
+        "predictions": {
+          "v4t-corpus-tuned__online": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "v4t-corpus-tuned__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__online": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "attention-corpus-tuned__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "dump-all__online": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "dump-all__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__online": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "bm25-corpus__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__online": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "v4t-canonical__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__online": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "v4t-tuned__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "rag-corpus__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "flat-corpus__batch": {
+            "predicted": "The provided passages do not contain any information regarding PepsiCo's unsecured five-year revolving credit agreement or any related details.",
+            "judge_score": 0.0
+          },
+          "v5t-corpus__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $400,000,000, from $3,800,000,000 to $4,200,000,000.",
+            "judge_score": 1.0
+          },
+          "semantic-corpus__batch": {
+            "predicted": "PepsiCo increased its unsecured five year revolving credit agreement by $1.5 billion on May 26, 2023.",
+            "judge_score": 0.25
           }
         }
       }
@@ -2272,7 +2272,7 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding 3M's balance sheet or its net PPNE for FY2018. Therefore, I cannot provide an answer based on the given context.",
+            "predicted": "9.0 billion",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -2344,7 +2344,7 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Adobe's financial statements or operating cash flow ratio for FY2015. Therefore, I cannot provide an answer.",
+            "predicted": "The FY2015 operating cash flow ratio for Adobe is 1.29.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -2416,7 +2416,7 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The relevant passages do not contain information about Adobe's FY2017 operating cash flow or total current liabilities. Therefore, I cannot provide the operating cash flow ratio for Adobe.",
+            "predicted": "The operating cash flow for FY2017 is $1,693.954 million, and the total current liabilities are $3,527.457 million. \n\nOperating cash flow ratio = Cash from operations / Total current liabilities = $1,693.954 million / $3,527.457 million = 0.48.\n\nRounded to two decimal places, the operating cash flow ratio for Adobe in FY2017 is 0.48.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -2488,8 +2488,8 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding Amazon's FY2019 net income attributable to shareholders.",
-            "judge_score": 0.0
+            "predicted": "$11,588",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "11,588",
@@ -2556,12 +2556,12 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "1,615.9 million USD",
+            "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Amcor's financials, including its year-end FY2020 net accounts receivable (AR). Therefore, I cannot provide an answer based on the given context.",
-            "judge_score": 0.0
+            "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "Amcor's year end FY2020 net accounts receivable (AR) is $1,615.9 million.",
@@ -2628,12 +2628,12 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = (167 / 3991) * 100 = 4.18%.",
+            "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue for FY2015 is $3,991 million. The D&A % margin is calculated as follows:\n\nD&A % margin = (D&A / Net Revenue) * 100 = ($167 / $3,991) * 100 ≈ 4.18%.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The relevant passages do not provide information about AMD's financials, including depreciation and amortization for FY2015. Therefore, I cannot provide the requested percentage margin for AMD.",
-            "judge_score": 0.0
+            "predicted": "The FY2015 depreciation and amortization (D&A) amount for AMD is $167 million. The total revenue for FY2015 is $3,991 million. To calculate the D&A % margin, use the formula:\n\nD&A % Margin = (D&A / Total Revenue) * 100\n\nD&A % Margin = ($167 million / $3,991 million) * 100 = 4.18%\n\nTherefore, the FY2015 depreciation and amortization % margin for AMD is approximately 4.18%.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "The FY2015 depreciation and amortization (D&A) is $167 million, and the net revenue is $3,991 million. The D&A % margin is calculated as (D&A / Net Revenue) * 100 = ($167 / $3,991) * 100 = 4.18%.",
@@ -2700,12 +2700,12 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "$0.389 billion",
+            "predicted": "0.389 billion",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The relevant passages do not contain information about American Water Works or its cash dividends for FY2020. Therefore, I cannot provide an answer based on the provided context.",
-            "judge_score": 0.0
+            "predicted": "$0.389 billion",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "0.389 billion",
@@ -2776,8 +2776,8 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Best Buy's financials or inventories for FY2019. Therefore, I cannot provide an answer based on the given context.",
-            "judge_score": 0.0
+            "predicted": "5,409 million",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "5,409",
@@ -2844,12 +2844,12 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total cash provided of $1,824 million.",
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding Best Buy's cash flow for FY2023.",
-            "judge_score": 0.0
+            "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a net cash provided of $1,824 million.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "Operating activities brought in the most cash flow for Best Buy in FY2023, with a total of $1,824 million.",
@@ -2920,8 +2920,8 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding Best Buy's cash and cash equivalents for FY 2023 or Q2 of FY 2024.",
-            "judge_score": 0.0
+            "predicted": "Yes, there was a drop in Cash & Cash equivalents from $3,205 million at the end of FY 2023 to $2,253 million at the end of Q2 of FY 2024.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "Yes, cash and cash equivalents dropped from $1,874 million on January 28, 2023, to $1,093 million on July 29, 2023.",
@@ -2991,11 +2991,11 @@
           },
           "dump-all__online": {
             "predicted": "1,899",
-            "judge_score": 1.0
+            "judge_score": 0.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding American Water Works's financials, including its cash flow statement or income statement for FY2021. Therefore, I cannot provide the requested unadjusted operating income + depreciation and amortization for American Water Works.",
-            "judge_score": 0.0
+            "predicted": "$1,196 million (operating income) + $636 million (depreciation and amortization) = $1,832 million.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "1,829",
@@ -3062,12 +3062,12 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "102.0%",
-            "judge_score": 1.0
+            "predicted": "101.7%",
+            "judge_score": 0.75
           },
           "dump-all__batch": {
-            "predicted": "The relevant passages do not contain information about Block (formerly known as Square) or its financials. Therefore, I cannot provide the FY2019 - FY2020 total revenue growth rate for Block.",
-            "judge_score": 0.0
+            "predicted": "Total revenue for FY2019 was $4,713,500,000 and for FY2020 was $9,497,578,000. \n\nTo calculate the growth rate:\n1. Find the difference in revenue: $9,497,578,000 - $4,713,500,000 = $4,784,078,000.\n2. Divide the difference by the FY2019 revenue: $4,784,078,000 / $4,713,500,000 = 1.0149.\n3. Convert to percentage: 1.0149 * 100 = 101.5%.\n\nThe total revenue growth rate from FY2019 to FY2020 is 101.5%.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "The relevant passages do not provide information regarding Block's (formerly known as Square) total revenue growth rate for FY2019 - FY2020. Therefore, I cannot provide an answer based on the given context.",
@@ -3134,11 +3134,11 @@
             "judge_score": 0.0
           },
           "dump-all__online": {
-            "predicted": "Consumer & Community Banking",
-            "judge_score": 0.0
+            "predicted": "Consumer & Community Banking had the highest net income in 2022 Q2, with $3,100 million.",
+            "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding JPMorgan's business segments or their net income for Q2 2022.",
+            "predicted": "In 2022 Q2, the Asset & Wealth Management segment had the highest net income of $1,004 million.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -3206,12 +3206,12 @@
             "judge_score": 1.0
           },
           "dump-all__online": {
-            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023.",
-            "judge_score": 1.0
+            "predicted": "The total spend on stock repurchases for FY 2023 is not provided in the passages. Therefore, it is not possible to calculate the percent of total spend that occurred in Q4 of FY 2023.",
+            "judge_score": 0.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Ulta Beauty's earnings or stock repurchases for FY 2023.",
-            "judge_score": 0.0
+            "predicted": "Approximately 36.5% of Ulta Beauty's total spend on stock repurchases for FY 2023 occurred in Q4 of FY2023.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "21.8%",
@@ -3279,11 +3279,11 @@
           },
           "dump-all__online": {
             "predicted": "PepsiCo primarily operates in the following geographies as of FY2022: North America, Latin America, Europe, Africa, the Middle East and South Asia (AMESA), and Asia Pacific, Australia and New Zealand, and China Region (APAC).",
-            "judge_score": 1.0
+            "judge_score": 0.75
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding the geographies that PepsiCo primarily operates in as of FY2022.",
-            "judge_score": 0.0
+            "predicted": "PepsiCo primarily operates in the following geographies as of FY2022: United States, Europe, Latin America, Africa, the Middle East, South Asia, and Asia Pacific.",
+            "judge_score": 0.75
           },
           "bm25-corpus__online": {
             "predicted": "PepsiCo primarily operates in the United States, Canada, Latin America, and Europe.",
@@ -3350,11 +3350,11 @@
             "judge_score": 0.75
           },
           "dump-all__online": {
-            "predicted": "The provided passages do not contain information about major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
-            "judge_score": 0.75
+            "predicted": "The provided passages do not contain information regarding major acquisitions that Ulta Beauty has done in FY2023 and FY2022.",
+            "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain information regarding major acquisitions by Ulta Beauty in FY2023 and FY2022.",
+            "predicted": "In fiscal 2022, Ulta Beauty acquired Current Health Ltd., a care-at-home technology platform, for net cash consideration of $389 million. Additionally, they acquired Two Peaks, LLC d/b/a Yardbird Furniture, a direct-to-consumer outdoor furniture company, for net cash consideration of $79 million. There are no major acquisitions reported for fiscal 2023.",
             "judge_score": 0.0
           },
           "bm25-corpus__online": {
@@ -3426,8 +3426,8 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The document passages provided do not contain information regarding 3M's overall growth or the impact of M&A on its segments in 2022. Therefore, I cannot answer the question based on the provided context.",
-            "judge_score": 0.0
+            "predicted": "The Consumer segment has dragged down 3M's overall growth in 2022.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "Consumer segment",
@@ -3498,8 +3498,8 @@
             "judge_score": 1.0
           },
           "dump-all__batch": {
-            "predicted": "The provided passages do not contain any information regarding Best Buy's acquisitions in FY2023, FY2022, or FY2021.",
-            "judge_score": 0.0
+            "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd., a care-at-home technology platform, for net cash consideration of $389 million. They also acquired Two Peaks, LLC d/b/a Yardbird Furniture, a direct-to-consumer outdoor furniture company, for net cash consideration of $79 million. There are no major acquisitions reported for fiscal 2023 or fiscal 2021.",
+            "judge_score": 1.0
           },
           "bm25-corpus__online": {
             "predicted": "In fiscal 2022, Best Buy acquired Current Health Ltd. for $389 million and Two Peaks, LLC d/b/a Yardbird Furniture for $79 million. There are no major acquisitions mentioned for FY2023 or FY2021 in the provided context.",
