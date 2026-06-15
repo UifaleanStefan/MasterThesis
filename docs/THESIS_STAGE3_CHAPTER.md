@@ -1430,12 +1430,28 @@ On the FinanceBench end-to-end QA evaluation (n=150 questions per
 cell, manual Claude judge per `evaluation/claude_judge_protocol.md`,
 gpt-4o-mini answerer), the corpus-tuned θ produces **0.678** mean
 judge in online mode vs canonical's 0.490 (+0.188 lift) and per-doc
-tuned's 0.455. The sharpest single comparison is **dump-all batch**
-(all 188 paragraphs in the prompt, no retrieval — recall=1.0)
-collapsing to **0.038 judge**, while v4t-corpus-tuned batch (k=8
-selective, recall=0.97) holds at **0.645**. gpt-4o-mini drowns when
-all 188 paragraphs are concatenated; selective retrieval at k=8 is
-structurally necessary for this model and this context length.
+tuned's 0.455.
+
+**Correction (dump-all was a measurement artifact).** An earlier version
+of this section reported dump-all batch (all 188 paragraphs in the prompt,
+no retrieval) collapsing to **0.038 judge** versus v4t-corpus-tuned's
+0.645, and concluded that selective retrieval was "structurally necessary."
+That collapse was spurious: a 12-event truncation cap in
+`agent/context_formatter.py` silently trimmed every prompt to 12 events, so
+the dump-all condition never actually received the full corpus. With the cap
+removed and the dump-all Protocol-A condition re-run and re-judged
+one-by-one by Claude, dump-all is **competitive on accuracy**: **0.689
+online / 0.607 batch** (n=148 / 149) versus v4t-corpus-tuned's 0.678 / 0.645
+and attention-corpus-tuned's 0.708 / 0.657. The 95% bootstrap CIs overlap
+(dump-all online 0.618–0.757; v4t-corpus-tuned online 0.610–0.742), so the
+configurations are statistically indistinguishable on judge score at n≈150.
+What separates them is **cost**: a 150-question dump-all pass spends
+**$2.68** versus **$0.15** for k=8 selective retrieval — an ~18× premium for
+concatenating all 188 paragraphs into every prompt. The honest case for
+selective retrieval at this corpus scale is therefore *efficiency*, not an
+accuracy cliff. (The Protocol-B calibration trajectory reported later in
+this section still reflects the *pre-fix, capped* dump-all run and is flagged
+for re-execution; see the calibration note below.)
 
 The same low-`theta_store` / near-zero-`w_recency` configuration that
 wins on average also retrieves more cross-document context — batch
