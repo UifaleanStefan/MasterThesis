@@ -97,13 +97,13 @@
           "family": "baseline",
           "modes": {
             "online": {
-              "n": 150,
-              "claude_judge_mean": 0.735,
+              "n": 0,
+              "claude_judge_mean": null,
               "recall_at_k_8": 1.0
             },
             "batch": {
-              "n": 150,
-              "claude_judge_mean": 0.03833333333333333,
+              "n": 0,
+              "claude_judge_mean": null,
               "recall_at_k_8": 1.0
             }
           }
@@ -192,17 +192,6 @@
               "recall_at_k_8": 0.45054945054945056
             }
           }
-        },
-        "dump-all": {
-          "label": "Dump-all (context-stuffing)",
-          "family": "baseline",
-          "modes": {
-            "batch": {
-              "n": 94,
-              "claude_judge_mean": 0.03723404255319149,
-              "recall_at_k_8": 1.0
-            }
-          }
         }
       },
       "corpus_tuned_theta": {
@@ -286,17 +275,6 @@
               "n": 132,
               "claude_judge_mean": 0.32007575757575757,
               "recall_at_k_8": 0.4393939393939394
-            }
-          }
-        },
-        "dump-all": {
-          "label": "Dump-all (context-stuffing)",
-          "family": "baseline",
-          "modes": {
-            "batch": {
-              "n": 132,
-              "claude_judge_mean": 0.015151515151515152,
-              "recall_at_k_8": 1.0
             }
           }
         }
@@ -384,17 +362,6 @@
               "recall_at_k_8": 1.0
             }
           }
-        },
-        "dump-all": {
-          "label": "Dump-all (context-stuffing)",
-          "family": "baseline",
-          "modes": {
-            "batch": {
-              "n": 10,
-              "claude_judge_mean": 0.375,
-              "recall_at_k_8": 1.0
-            }
-          }
         }
       },
       "corpus_tuned_theta": {
@@ -477,17 +444,6 @@
             "batch": {
               "n": 10,
               "claude_judge_mean": 0.925,
-              "recall_at_k_8": 1.0
-            }
-          }
-        },
-        "dump-all": {
-          "label": "Dump-all (context-stuffing)",
-          "family": "baseline",
-          "modes": {
-            "batch": {
-              "n": 10,
-              "claude_judge_mean": 0.2,
               "recall_at_k_8": 1.0
             }
           }
@@ -578,22 +534,6 @@
             "online": {
               "n": 10,
               "claude_judge_mean": 0.3,
-              "recall_at_k_8": null
-            },
-            "batch": {
-              "n": 10,
-              "claude_judge_mean": 0.25,
-              "recall_at_k_8": null
-            }
-          }
-        },
-        "dump-all": {
-          "label": "Dump-all (context-stuffing)",
-          "family": "baseline",
-          "modes": {
-            "online": {
-              "n": 10,
-              "claude_judge_mean": 0.35,
               "recall_at_k_8": null
             },
             "batch": {

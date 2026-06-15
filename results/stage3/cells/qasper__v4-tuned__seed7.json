@@ -57,7 +57,9 @@
         13
       ],
       "prompt_tokens_estimated": 935,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'n-gram + self-attention' WRONG; gold=Bi-LSTM-CRF."
     },
     {
       "doc_idx": 1,
@@ -80,7 +82,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 1131,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not specify' matches gold unanswerable."
     },
     {
       "doc_idx": 2,
@@ -131,7 +135,9 @@
         46
       ],
       "prompt_tokens_estimated": 1389,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'fine-tuned on un-translated better' partial."
     },
     {
       "doc_idx": 3,
@@ -157,7 +163,9 @@
         61
       ],
       "prompt_tokens_estimated": 401,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'BIBREF9 and BIBREF8' includes gold."
     },
     {
       "doc_idx": 4,
@@ -182,7 +190,9 @@
         50
       ],
       "prompt_tokens_estimated": 349,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'F-score and Kappa' includes gold F-score."
     },
     {
       "doc_idx": 5,
@@ -223,7 +233,9 @@
         22
       ],
       "prompt_tokens_estimated": 1330,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'vector dim + algo + lr + epochs + window + vocab' matches most of gold."
     },
     {
       "doc_idx": 6,
@@ -248,7 +260,9 @@
         9
       ],
       "prompt_tokens_estimated": 918,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'Yes only English' matches gold='Yes'."
     },
     {
       "doc_idx": 7,
@@ -273,7 +287,9 @@
         11
       ],
       "prompt_tokens_estimated": 518,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'annotated using crowdsourcing' matches gold."
     },
     {
       "doc_idx": 8,
@@ -296,7 +312,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 934,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'No does not optimize' hallucinated; gold unanswerable."
     },
     {
       "doc_idx": 9,
@@ -321,7 +339,9 @@
         10
       ],
       "prompt_tokens_estimated": 1368,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'individuals in US on BIBREF22' partial."
     },
     {
       "doc_idx": 10,
@@ -358,7 +378,9 @@
         59
       ],
       "prompt_tokens_estimated": 301,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'plain stacked LSTMs' matches gold='Stacked LSTMs'."
     },
     {
       "doc_idx": 11,
@@ -384,7 +406,9 @@
         21
       ],
       "prompt_tokens_estimated": 231,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED refuses; gold=LSTM+VGG16."
     },
     {
       "doc_idx": 12,
@@ -494,7 +518,9 @@
         112
       ],
       "prompt_tokens_estimated": 1094,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED refuses; gold='Yes'."
     },
     {
       "doc_idx": 13,
@@ -521,7 +547,9 @@
         43
       ],
       "prompt_tokens_estimated": 346,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'not detailed' refusal; gold=crawling OSG web forum."
     },
     {
       "doc_idx": 14,
@@ -529,7 +557,7 @@
       "n_paragraphs": 103,
       "question": "What are the 18 propaganda techniques?",
       "gold_answer": "Loaded language",
-      "predicted": "1. Straw man  \n2. Obfuscation, intentional vagueness, confusion  \n3. Thought-terminating clich\u00e9  \n4. Slogans  \n5. Appeal to fear/prejudice  \n6. Doubt  \n7. (Additional techniques not provided in the context)",
+      "predicted": "1. Straw man  \n2. Obfuscation, intentional vagueness, confusion  \n3. Thought-terminating cliché  \n4. Slogans  \n5. Appeal to fear/prejudice  \n6. Doubt  \n7. (Additional techniques not provided in the context)",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -583,7 +611,9 @@
         47
       ],
       "prompt_tokens_estimated": 189,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED lists techniques but 'Loaded language' not in PRED list."
     },
     {
       "doc_idx": 15,
@@ -609,7 +639,9 @@
         42
       ],
       "prompt_tokens_estimated": 505,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'Overall Results' vague; gold=antonym/synonym pairs."
     },
     {
       "doc_idx": 16,
@@ -634,7 +666,9 @@
         27
       ],
       "prompt_tokens_estimated": 828,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'Hindi-tuned rules' hallucinated; gold unanswerable."
     },
     {
       "doc_idx": 17,
@@ -705,7 +739,9 @@
         70
       ],
       "prompt_tokens_estimated": 938,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'SimpleQuestions and WebQSP' includes gold."
     },
     {
       "doc_idx": 18,
@@ -780,7 +816,9 @@
         76
       ],
       "prompt_tokens_estimated": 688,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'augmentation and weighting boost' vague."
     },
     {
       "doc_idx": 19,
@@ -803,7 +841,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 509,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not provide info' matches gold unanswerable."
     },
     {
       "doc_idx": 20,
@@ -830,7 +870,9 @@
         22
       ],
       "prompt_tokens_estimated": 768,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'conv + NIN + LSTM with attention' matches gold's CNN+NIN+BLSTM."
     },
     {
       "doc_idx": 21,
@@ -855,7 +897,9 @@
         11
       ],
       "prompt_tokens_estimated": 403,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'Yes attention' matches gold='Yes'."
     },
     {
       "doc_idx": 22,
@@ -878,7 +922,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 631,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not specify quantifiable' matches gold unanswerable."
     },
     {
       "doc_idx": 23,
@@ -903,7 +949,9 @@
         32
       ],
       "prompt_tokens_estimated": 697,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'username + display + image + location + description' includes gold."
     },
     {
       "doc_idx": 24,
@@ -929,7 +977,9 @@
         12
       ],
       "prompt_tokens_estimated": 886,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not mention seasonality' matches gold unanswerable."
     },
     {
       "doc_idx": 25,
@@ -956,7 +1006,9 @@
         78
       ],
       "prompt_tokens_estimated": 482,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'considerable improvement vs all baselines' matches gold."
     },
     {
       "doc_idx": 26,
@@ -981,7 +1033,9 @@
         4
       ],
       "prompt_tokens_estimated": 522,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'Yes word segmentation + spelling errors' matches gold='Yes'."
     },
     {
       "doc_idx": 27,
@@ -1024,7 +1078,9 @@
         29
       ],
       "prompt_tokens_estimated": 1765,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'maximum abs' partial; gold=tSNE plots."
     },
     {
       "doc_idx": 28,
@@ -1083,7 +1139,9 @@
         68
       ],
       "prompt_tokens_estimated": 586,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'higher or comparable' vague; gold=specific F1 scores."
     },
     {
       "doc_idx": 29,
@@ -1109,7 +1167,9 @@
         21
       ],
       "prompt_tokens_estimated": 914,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED '22,880 users' exact match."
     },
     {
       "doc_idx": 30,
@@ -1134,7 +1194,9 @@
         6
       ],
       "prompt_tokens_estimated": 518,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not provide info' matches gold unanswerable."
     },
     {
       "doc_idx": 31,
@@ -1160,7 +1222,9 @@
         36
       ],
       "prompt_tokens_estimated": 571,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'not provide specific info' refusal; gold=PDTB taggers."
     },
     {
       "doc_idx": 32,
@@ -1186,7 +1250,9 @@
         38
       ],
       "prompt_tokens_estimated": 792,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'max turn length 160' WRONG; gold=two previous turns."
     },
     {
       "doc_idx": 33,
@@ -1209,7 +1275,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 473,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'RMSE between scores' hallucinated; gold unanswerable."
     },
     {
       "doc_idx": 34,
@@ -1252,7 +1320,9 @@
         28
       ],
       "prompt_tokens_estimated": 976,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'KG-A2C outperform A2C' partial; gold has specific reward numbers."
     },
     {
       "doc_idx": 35,
@@ -1277,7 +1347,9 @@
         61
       ],
       "prompt_tokens_estimated": 678,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'expert annotations superior' partial."
     },
     {
       "doc_idx": 36,
@@ -1303,7 +1375,9 @@
         67
       ],
       "prompt_tokens_estimated": 1273,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'Yes inspect' matches gold='Yes'."
     },
     {
       "doc_idx": 37,
@@ -1328,7 +1402,9 @@
         9
       ],
       "prompt_tokens_estimated": 600,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'EM and Macro F1' includes gold Exact Match."
     },
     {
       "doc_idx": 38,
@@ -1356,7 +1432,9 @@
         17
       ],
       "prompt_tokens_estimated": 1110,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'CNN-RNN + seq2seq' partial."
     },
     {
       "doc_idx": 39,
@@ -1382,7 +1460,9 @@
         19
       ],
       "prompt_tokens_estimated": 1251,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'hierarchical layers' WRONG; gold=BERT 512 + position embeddings."
     },
     {
       "doc_idx": 40,
@@ -1410,15 +1490,17 @@
         78
       ],
       "prompt_tokens_estimated": 710,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'Mainstream news and disinformation news' matches gold."
     },
     {
       "doc_idx": 41,
       "doc_fingerprint": "sha256:94f55a04ff0df7c09fb3c7a658461fdfe472e84319aaa0c145c8659161802493",
       "n_paragraphs": 59,
       "question": "What languages pairs are used in machine translation?",
-      "gold_answer": "German\u2013English",
-      "predicted": "German\u2013English",
+      "gold_answer": "German–English",
+      "predicted": "German–English",
       "judge_score": 1.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -1435,7 +1517,9 @@
         44
       ],
       "prompt_tokens_estimated": 715,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'German-English' exact match."
     },
     {
       "doc_idx": 42,
@@ -1461,7 +1545,9 @@
         27
       ],
       "prompt_tokens_estimated": 727,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'expected unique outputs from perturbations' matches gold."
     },
     {
       "doc_idx": 43,
@@ -1486,7 +1572,9 @@
         7
       ],
       "prompt_tokens_estimated": 922,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'BERT from BIBREF12' WRONG; gold=MaxEnt + SVMs."
     },
     {
       "doc_idx": 44,
@@ -1511,7 +1599,9 @@
         23
       ],
       "prompt_tokens_estimated": 542,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'original + validation answer scores' WRONG; gold=BLEU-1."
     },
     {
       "doc_idx": 45,
@@ -1534,7 +1624,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 584,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'Yes MTL' but gold='No' — Y/N flip."
     },
     {
       "doc_idx": 46,
@@ -1602,7 +1694,9 @@
         70
       ],
       "prompt_tokens_estimated": 742,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'do not mention' matches gold='No' implicitly."
     },
     {
       "doc_idx": 47,
@@ -1627,7 +1721,9 @@
         3
       ],
       "prompt_tokens_estimated": 660,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'over 45,000 articles + COVID-19' matches gold exactly."
     },
     {
       "doc_idx": 48,
@@ -1654,7 +1750,9 @@
         8
       ],
       "prompt_tokens_estimated": 1595,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'LAN+P600 + ELAN+P600' alternate answer to gold's pairs."
     },
     {
       "doc_idx": 49,
@@ -1677,7 +1775,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 493,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'No does not exhibit drops' matches gold='No'."
     },
     {
       "doc_idx": 50,
@@ -1702,7 +1802,9 @@
         49
       ],
       "prompt_tokens_estimated": 910,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'No multiple pairs' but gold='Yes' — Y/N flip."
     },
     {
       "doc_idx": 51,
@@ -1728,7 +1830,9 @@
         37
       ],
       "prompt_tokens_estimated": 595,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'Yes only English' hallucinated; gold unanswerable."
     },
     {
       "doc_idx": 52,
@@ -1754,7 +1858,9 @@
         17
       ],
       "prompt_tokens_estimated": 942,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'Czech French Italian English Danish' partial (5 of 16)."
     },
     {
       "doc_idx": 53,
@@ -1801,7 +1907,9 @@
         58
       ],
       "prompt_tokens_estimated": 399,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'grammaticality + perplexity' WRONG; gold=INLINEFORM0."
     },
     {
       "doc_idx": 54,
@@ -1824,7 +1932,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 290,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'outperformed previous methods' hallucinated; gold unanswerable."
     },
     {
       "doc_idx": 55,
@@ -1865,7 +1975,9 @@
         33
       ],
       "prompt_tokens_estimated": 944,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'lattice-free MMI' WRONG; gold=CNN-DNN-BLSTM-HMM."
     },
     {
       "doc_idx": 56,
@@ -1890,7 +2002,9 @@
         87
       ],
       "prompt_tokens_estimated": 352,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'not provide specific details' refusal; gold has specific improvement."
     },
     {
       "doc_idx": 57,
@@ -1913,7 +2027,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 751,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not contain info' matches gold unanswerable."
     },
     {
       "doc_idx": 58,
@@ -1938,7 +2054,9 @@
         22
       ],
       "prompt_tokens_estimated": 547,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'previous encoder-only RoBERTa' matches gold='RoBERTa'."
     },
     {
       "doc_idx": 59,
@@ -1963,7 +2081,9 @@
         26
       ],
       "prompt_tokens_estimated": 768,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'NO-MOVE 30.3% + 0.3%' matches gold exactly."
     },
     {
       "doc_idx": 60,
@@ -1990,7 +2110,9 @@
         33
       ],
       "prompt_tokens_estimated": 503,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'do not provide statistics' refusal; gold has specific stats."
     },
     {
       "doc_idx": 61,
@@ -2042,7 +2164,9 @@
         38
       ],
       "prompt_tokens_estimated": 908,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'demographics + diagnosis + symptoms/signs' partial match to gold's topics."
     },
     {
       "doc_idx": 62,
@@ -2067,7 +2191,9 @@
         38
       ],
       "prompt_tokens_estimated": 211,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'Existing Approaches' vague; gold=CDA."
     },
     {
       "doc_idx": 63,
@@ -2094,7 +2220,9 @@
         17
       ],
       "prompt_tokens_estimated": 1115,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'transcribed text + ASR' partial; gold=text transcription only."
     },
     {
       "doc_idx": 64,
@@ -2119,7 +2247,9 @@
         4
       ],
       "prompt_tokens_estimated": 697,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED refuses; gold=EI-Reg + EI-Oc + V-Reg + V-Oc."
     },
     {
       "doc_idx": 65,
@@ -2215,7 +2345,9 @@
         84
       ],
       "prompt_tokens_estimated": 1122,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'No combining votes + speeches' matches gold='No'."
     },
     {
       "doc_idx": 66,
@@ -2240,7 +2372,9 @@
         4
       ],
       "prompt_tokens_estimated": 733,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'limited monolingual + Hindi has less' partial."
     },
     {
       "doc_idx": 67,
@@ -2263,7 +2397,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 610,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not contain info' matches gold unanswerable."
     },
     {
       "doc_idx": 68,
@@ -2289,7 +2425,9 @@
         15
       ],
       "prompt_tokens_estimated": 916,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'Yes ShapeWorld' matches gold='Yes'."
     },
     {
       "doc_idx": 69,
@@ -2339,7 +2477,9 @@
         50
       ],
       "prompt_tokens_estimated": 461,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'No no benefit' but gold='Yes' — Y/N flip."
     },
     {
       "doc_idx": 70,
@@ -2365,7 +2505,9 @@
         42
       ],
       "prompt_tokens_estimated": 667,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'text structure + typography + images' partial; gold=paragraphs."
     },
     {
       "doc_idx": 71,
@@ -2388,7 +2530,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 932,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'split into sentences' hallucinated; gold unanswerable."
     },
     {
       "doc_idx": 72,
@@ -2414,7 +2558,9 @@
         48
       ],
       "prompt_tokens_estimated": 753,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'Libertarianism + Anarcho + ronpaul' WRONG topics."
     },
     {
       "doc_idx": 73,
@@ -2437,7 +2583,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 722,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not specify' matches gold unanswerable."
     },
     {
       "doc_idx": 74,
@@ -2468,7 +2616,9 @@
         37
       ],
       "prompt_tokens_estimated": 772,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'CSAT 20newsgroups Fisher' includes gold CSAT."
     },
     {
       "doc_idx": 75,
@@ -2493,7 +2643,9 @@
         32
       ],
       "prompt_tokens_estimated": 347,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'neural models' vague; gold=linear SVM."
     },
     {
       "doc_idx": 76,
@@ -2542,7 +2694,9 @@
         64
       ],
       "prompt_tokens_estimated": 416,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'not specified' matches gold unanswerable."
     },
     {
       "doc_idx": 77,
@@ -2587,7 +2741,9 @@
         49
       ],
       "prompt_tokens_estimated": 908,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not specify' matches gold unanswerable."
     },
     {
       "doc_idx": 78,
@@ -2610,7 +2766,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 316,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not specify' matches gold unanswerable."
     },
     {
       "doc_idx": 79,
@@ -2688,7 +2846,9 @@
         114
       ],
       "prompt_tokens_estimated": 318,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "Gold is yes (paper does report per-language performance) but PRED answers no, directly contradicting gold on a yes/no question."
     },
     {
       "doc_idx": 80,
@@ -2713,7 +2873,9 @@
         35
       ],
       "prompt_tokens_estimated": 853,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED '0.94 + 0.94 + 0.95 + 98%' matches gold exactly."
     },
     {
       "doc_idx": 81,
@@ -2740,7 +2902,9 @@
         57
       ],
       "prompt_tokens_estimated": 1329,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'lack of powerful tool' partial; gold=ambiguous words."
     },
     {
       "doc_idx": 82,
@@ -2748,7 +2912,7 @@
       "n_paragraphs": 55,
       "question": "what is the state of the art?",
       "gold_answer": "Babelfy, DBpedia Spotlight, Entityclassifier.eu, FOX, LingPipe MUC-7, NERD-ML, Stanford NER, TagMe 2",
-      "predicted": "F1 scores between 84\u201394% when using bidirectional multi-layered LSTMs, letter-trigram word hashing, and surface form features on only a few hundred training examples.",
+      "predicted": "F1 scores between 84–94% when using bidirectional multi-layered LSTMs, letter-trigram word hashing, and surface form features on only a few hundred training examples.",
       "judge_score": 0.0,
       "recall_at_k": 1.0,
       "retrieved_steps": [
@@ -2794,7 +2958,9 @@
         54
       ],
       "prompt_tokens_estimated": 358,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'F1 84-94% LSTMs' WRONG; gold lists specific SOTA tools."
     },
     {
       "doc_idx": 83,
@@ -2817,7 +2983,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 468,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'do not mention error analysis' matches gold='No' implicitly."
     },
     {
       "doc_idx": 84,
@@ -2933,7 +3101,9 @@
         183
       ],
       "prompt_tokens_estimated": 621,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'do not specify' matches gold unanswerable."
     },
     {
       "doc_idx": 85,
@@ -2958,7 +3128,9 @@
         34
       ],
       "prompt_tokens_estimated": 1297,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'IMDB + Yelp + imdb400 + yelp50 + yelp200' more detailed but matches."
     },
     {
       "doc_idx": 86,
@@ -2984,7 +3156,9 @@
         42
       ],
       "prompt_tokens_estimated": 1188,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED '14% size of training' matches gold's 1000 hours concept."
     },
     {
       "doc_idx": 87,
@@ -3011,7 +3185,9 @@
         19
       ],
       "prompt_tokens_estimated": 488,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'do not specify deep learning' implicit match to gold='No'."
     },
     {
       "doc_idx": 88,
@@ -3036,7 +3212,9 @@
         11
       ],
       "prompt_tokens_estimated": 1221,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED '45,821 characters' exact match."
     },
     {
       "doc_idx": 89,
@@ -3061,7 +3239,9 @@
         5
       ],
       "prompt_tokens_estimated": 794,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED refuses; gold='Yes'."
     },
     {
       "doc_idx": 90,
@@ -3086,7 +3266,9 @@
         66
       ],
       "prompt_tokens_estimated": 739,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'TAC2010 + WW + ACE + AQUAINT + CoNLL' partial; gold=CoNLL-YAGO."
     },
     {
       "doc_idx": 91,
@@ -3115,7 +3297,9 @@
         67
       ],
       "prompt_tokens_estimated": 160,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'transformation ironic to non-ironic' partial; gold=Irony Classifier."
     },
     {
       "doc_idx": 92,
@@ -3140,7 +3324,9 @@
         37
       ],
       "prompt_tokens_estimated": 1126,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'Yes unsupervised LDA' but gold='No' — Y/N flip."
     },
     {
       "doc_idx": 93,
@@ -3168,7 +3354,9 @@
         20
       ],
       "prompt_tokens_estimated": 702,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.75,
+      "claude_judge_rationale": "PRED 'PPMI CPMI NNEGPMI' includes gold."
     },
     {
       "doc_idx": 94,
@@ -3197,7 +3385,9 @@
         57
       ],
       "prompt_tokens_estimated": 531,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED '145 annotators 1888 pairs' partial; gold has specific score guideline."
     },
     {
       "doc_idx": 95,
@@ -3222,7 +3412,9 @@
         5
       ],
       "prompt_tokens_estimated": 1204,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'ASR + MT + ST' WRONG; gold=no specific domain."
     },
     {
       "doc_idx": 96,
@@ -3247,7 +3439,9 @@
         41
       ],
       "prompt_tokens_estimated": 660,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.0,
+      "claude_judge_rationale": "PRED 'Nearest Number + Random Top-3' WRONG; gold=QA PGNet."
     },
     {
       "doc_idx": 97,
@@ -3270,7 +3464,9 @@
       ],
       "relevant_paragraphs": [],
       "prompt_tokens_estimated": 868,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 1.0,
+      "claude_judge_rationale": "PRED 'No do not compare' matches gold='No'."
     },
     {
       "doc_idx": 98,
@@ -3336,7 +3532,9 @@
         94
       ],
       "prompt_tokens_estimated": 734,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.5,
+      "claude_judge_rationale": "PRED 'fifteen celebrities various domains' partial; gold lists specific names."
     },
     {
       "doc_idx": 99,
@@ -3370,7 +3568,13 @@
         58
       ],
       "prompt_tokens_estimated": 494,
-      "projected_cost_usd": 0.0
+      "projected_cost_usd": 0.0,
+      "claude_judge_score": 0.25,
+      "claude_judge_rationale": "PRED 'seven SentEval tasks' vague; gold=MR."
     }
-  ]
+  ],
+  "mean_claude_judge_score": 0.5,
+  "n_with_claude_judge": 100,
+  "claude_minus_gpt4omini_delta": 0.26,
+  "queue_dir_used": "p4_main__qasper__v4-tuned__seed7"
 }
