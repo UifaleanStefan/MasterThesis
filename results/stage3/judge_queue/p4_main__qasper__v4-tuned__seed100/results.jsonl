@@ -31,7 +31,7 @@
 {"qid": "p4_main__qasper__v4-tuned__seed100__q030", "judge_score": 0.5, "rationale": "PRED 'viral tweets URLs' partial; gold lists multiple categories.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q031", "judge_score": 0.0, "rationale": "PRED refuses; gold='Yes'.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q032", "judge_score": 0.25, "rationale": "PRED 'fine-tuned on un-translated' partial.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__v4-tuned__seed100__q033", "judge_score": 0.0, "rationale": "PRED 'Yes' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__v4-tuned__seed100__q033", "judge_score": 0.0, "rationale": "Gold is 'No' (car-speak is not a collection of abstract features the classifier trains on); PRED says 'Yes', directly contradicting the yes/no gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q034", "judge_score": 1.0, "rationale": "PRED 'intentional multicast communication' matches gold exactly.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q035", "judge_score": 0.75, "rationale": "PRED 'RoBERTa with language modeling' matches gold='RoBERTa'.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q036", "judge_score": 0.25, "rationale": "PRED 'higher or comparable' vague; gold=specific F1 numbers.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -39,7 +39,7 @@
 {"qid": "p4_main__qasper__v4-tuned__seed100__q038", "judge_score": 0.0, "rationale": "PRED 'original answer + validation answer scores' WRONG; gold=BLEU-1.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q039", "judge_score": 1.0, "rationale": "PRED 'do not specify quantifiable' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q040", "judge_score": 0.75, "rationale": "PRED 'SimpleQuestions and WebQSP' includes gold SimpleQuestions.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__v4-tuned__seed100__q041", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__v4-tuned__seed100__q041", "judge_score": 0.0, "rationale": "Gold is 'Yes' (they report results only on English data); PRED says 'No', the opposite of the yes/no gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q042", "judge_score": 0.0, "rationale": "PRED 'loss function + validation' WRONG; gold=MAP.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q043", "judge_score": 0.75, "rationale": "PRED 'RNN-based NMT and Transformer' includes gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed100__q044", "judge_score": 0.75, "rationale": "PRED 'F-score and Kappa' includes gold F-score.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

@@ -20,7 +20,7 @@
 {"qid": "qasper__v4t-tuned__batch__doc4_qa1__seed42", "judge_score": 0.5, "rationale": "PRED 'head-modifier through dependency parsing' partial.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc5_qa0__seed42", "judge_score": 0.0, "rationale": "PRED refuses ('do not provide specific information').", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc5_qa1__seed42", "judge_score": 0.0, "rationale": "PRED refuses ('do not contain information').", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "qasper__v4t-tuned__batch__doc6_qa0__seed42", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "qasper__v4t-tuned__batch__doc6_qa0__seed42", "judge_score": 0.0, "rationale": "Gold yes/no is 'Yes' (authors report results only on English data) but PRED says 'No', directly contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "qasper__v4t-tuned__batch__doc6_qa1__seed42", "judge_score": 0.0, "rationale": "PRED 'keyphrase density in title/abstract' WRONG context.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc6_qa2__seed42", "judge_score": 0.0, "rationale": "PRED refuses ('do not provide information').", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc6_qa3__seed42", "judge_score": 0.0, "rationale": "PRED refuses ('do not provide information').", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -30,7 +30,7 @@
 {"qid": "qasper__v4t-tuned__batch__doc8_qa0__seed42", "judge_score": 0.0, "rationale": "PRED 'dogmatism + frequency/breadth' WRONG context.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc8_qa1__seed42", "judge_score": 0.0, "rationale": "PRED 'CreateDebate' WRONG; gold=Intelligence Squared Debates.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc9_qa0__seed42", "judge_score": 0.0, "rationale": "PRED 'Damerau-Levenshtein matches' WRONG; gold=Accuracy.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "qasper__v4t-tuned__batch__doc10_qa0__seed42", "judge_score": 0.0, "rationale": "PRED 'Yes' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "qasper__v4t-tuned__batch__doc10_qa0__seed42", "judge_score": 0.0, "rationale": "Gold yes/no is 'No' (paper is not an unsupervised spam-detection approach) but PRED says 'Yes', directly contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "qasper__v4t-tuned__batch__doc10_qa1__seed42", "judge_score": 0.75, "rationale": "PRED 'Social Honeypot, 19,276/22,223, high quality' detailed match for 1 of 2 datasets.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc10_qa2__seed42", "judge_score": 0.75, "rationale": "PRED 'LDA-based novel classification, topic patterns' matches gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc11_qa0__seed42", "judge_score": 1.0, "rationale": "PRED 'Yes informal language/spelling errors/etc' matches gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -89,6 +89,6 @@
 {"qid": "qasper__v4t-tuned__batch__doc28_qa4__seed42", "judge_score": 0.0, "rationale": "PRED 'Yes FBFans + CreateDebate' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc28_qa5__seed42", "judge_score": 0.25, "rationale": "PRED 'Majority/SVM/CNN/RCNN' partial; missing n-gram features.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__v4t-tuned__batch__doc29_qa0__seed42", "judge_score": 0.0, "rationale": "PRED 'No' definitive when gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "qasper__v4t-tuned__batch__doc29_qa1__seed42", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "qasper__v4t-tuned__batch__doc29_qa2__seed42", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "qasper__v4t-tuned__batch__doc29_qa1__seed42", "judge_score": 0.0, "rationale": "Gold yes/no is 'Yes' (framework always generates purely attention-based models) but PRED says 'No', directly contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
+{"qid": "qasper__v4t-tuned__batch__doc29_qa2__seed42", "judge_score": 0.0, "rationale": "Gold yes/no is 'Yes' (they do test on common pairs like English-to-German) but PRED says 'No', directly contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "qasper__v4t-tuned__batch__doc29_qa3__seed42", "judge_score": 0.0, "rationale": "PRED refuses ('not mentioned'); gold=English.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

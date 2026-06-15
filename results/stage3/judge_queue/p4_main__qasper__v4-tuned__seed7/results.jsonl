@@ -77,7 +77,7 @@
 {"qid": "p4_main__qasper__v4-tuned__seed7__q076", "judge_score": 1.0, "rationale": "PRED 'not specified' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed7__q077", "judge_score": 1.0, "rationale": "PRED 'do not specify' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed7__q078", "judge_score": 1.0, "rationale": "PRED 'do not specify' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__v4-tuned__seed7__q079", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__v4-tuned__seed7__q079", "judge_score": 0.0, "rationale": "Gold is yes (paper does report per-language performance) but PRED answers no, directly contradicting gold on a yes/no question.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__v4-tuned__seed7__q080", "judge_score": 1.0, "rationale": "PRED '0.94 + 0.94 + 0.95 + 98%' matches gold exactly.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed7__q081", "judge_score": 0.25, "rationale": "PRED 'lack of powerful tool' partial; gold=ambiguous words.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__v4-tuned__seed7__q082", "judge_score": 0.0, "rationale": "PRED 'F1 84-94% LSTMs' WRONG; gold lists specific SOTA tools.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

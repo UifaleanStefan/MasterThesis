@@ -77,7 +77,7 @@
 {"qid": "p4_k16__qasper__v4-canonical__seed7__q076", "judge_score": 1.0, "rationale": "PRED 'not specified' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-canonical__seed7__q077", "judge_score": 1.0, "rationale": "PRED 'do not specify languages' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-canonical__seed7__q078", "judge_score": 1.0, "rationale": "PRED 'do not specify' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_k16__qasper__v4-canonical__seed7__q079", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_k16__qasper__v4-canonical__seed7__q079", "judge_score": 0.0, "rationale": "Gold is yes/no answer 'Yes' (paper does report per-language performance) but PRED answers 'No', a direct contradiction.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_k16__qasper__v4-canonical__seed7__q080", "judge_score": 1.0, "rationale": "PRED '0.94 + 0.94 + 0.95 + 98%' matches gold's specific F1 scores.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-canonical__seed7__q081", "judge_score": 0.75, "rationale": "PRED 'ambiguous + unknown words' includes gold ambiguous words.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-canonical__seed7__q082", "judge_score": 0.75, "rationale": "PRED 'Stanford NER + DATEXIS-NER' includes gold Stanford NER.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

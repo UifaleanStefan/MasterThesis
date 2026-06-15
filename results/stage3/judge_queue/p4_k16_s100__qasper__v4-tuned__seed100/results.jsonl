@@ -39,7 +39,7 @@
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q038", "judge_score": 0.0, "rationale": "PRED 'original + validation answer references' WRONG; gold=BLEU-1.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q039", "judge_score": 1.0, "rationale": "PRED 'do not specify quantifiable improvement' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q040", "judge_score": 0.75, "rationale": "PRED 'SimpleQuestions + WebQSP' includes gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q041", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q041", "judge_score": 0.0, "rationale": "Gold is yes/no 'Yes' (results reported only on English data); PRED says 'No, they do not report results only on English data', the opposite stance, so it contradicts gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q042", "judge_score": 0.25, "rationale": "PRED 'loss function + validation' partial.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q043", "judge_score": 0.75, "rationale": "PRED 'RNN-based NMT + Transformer' matches gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q044", "judge_score": 0.75, "rationale": "PRED 'F-score + Kappa' includes gold F-score.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -55,7 +55,7 @@
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q054", "judge_score": 0.75, "rationale": "PRED 'size in MB' matches gold's file size.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q055", "judge_score": 1.0, "rationale": "PRED 'Yes use attention' matches gold='Yes'.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q056", "judge_score": 0.5, "rationale": "PRED 'ineffective for different vocabulary' partial.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q057", "judge_score": 0.0, "rationale": "PRED 'Yes' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q057", "judge_score": 0.0, "rationale": "Gold is yes/no 'No' (datasets not subject to quality control); PRED says 'Yes, ... subject to quality control', the opposite, contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q058", "judge_score": 1.0, "rationale": "PRED 'specific words user desires' matches gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q059", "judge_score": 0.25, "rationale": "PRED 'subset training data' partial.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16_s100__qasper__v4-tuned__seed100__q060", "judge_score": 0.0, "rationale": "PRED 'large-scale + qualitative' WRONG; gold=domain experts feedback.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

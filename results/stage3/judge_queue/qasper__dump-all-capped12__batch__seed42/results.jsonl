@@ -89,6 +89,6 @@
 {"qid": "qasper__dump-all__batch__doc28_qa4__seed42", "judge_score": 0.0, "rationale": "PRED refuses ('do not contain information').", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__dump-all__batch__doc28_qa5__seed42", "judge_score": 0.0, "rationale": "PRED refuses ('do not contain information').", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__dump-all__batch__doc29_qa0__seed42", "judge_score": 1.0, "rationale": "PRED 'do not mention' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "qasper__dump-all__batch__doc29_qa1__seed42", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "qasper__dump-all__batch__doc29_qa1__seed42", "judge_score": 0.0, "rationale": "Gold is the yes/no answer 'Yes' but PRED answers 'No, their framework does not always generate purely attention-based models', directly contradicting the gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "qasper__dump-all__batch__doc29_qa2__seed42", "judge_score": 0.0, "rationale": "PRED 'No, focus on zero-resourced' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "qasper__dump-all__batch__doc29_qa3__seed42", "judge_score": 0.0, "rationale": "PRED 'German and French' WRONG; gold=English.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

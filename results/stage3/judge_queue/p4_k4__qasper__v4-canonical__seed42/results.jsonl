@@ -81,7 +81,7 @@
 {"qid": "p4_k4__qasper__v4-canonical__seed42__q074", "judge_score": 0.0, "rationale": "PRED refuses; gold=Reuters-8 without stop words.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-canonical__seed42__q075", "judge_score": 0.0, "rationale": "PRED refuses; gold=Back Translation.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-canonical__seed42__q076", "judge_score": 0.0, "rationale": "PRED refuses; gold=SGD, naive bayes, decision tree.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_k4__qasper__v4-canonical__seed42__q080", "judge_score": 0.0, "rationale": "PRED 'Yes' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_k4__qasper__v4-canonical__seed42__q080", "judge_score": 0.0, "rationale": "Yes/no gold is 'No' but PRED answers 'Yes, car-speak is a collection of features classifiers are trained on', directly contradicting gold, so 0.0.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_k4__qasper__v4-canonical__seed42__q081", "judge_score": 0.0, "rationale": "PRED 'CNN' WRONG; gold=Bi-LSTM-CRF.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-canonical__seed42__q083", "judge_score": 0.25, "rationale": "PRED 'lack of powerful tool' partial; gold=ambiguous words.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-canonical__seed42__q084", "judge_score": 0.0, "rationale": "PRED hallucinated WER; gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

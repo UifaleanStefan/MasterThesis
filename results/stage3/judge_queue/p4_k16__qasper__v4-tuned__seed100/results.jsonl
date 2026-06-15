@@ -39,7 +39,7 @@
 {"qid": "p4_k16__qasper__v4-tuned__seed100__q038", "judge_score": 0.75, "rationale": "PRED 'BLEU-1 + Meteor + Rouge-L' includes gold BLEU-1.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-tuned__seed100__q039", "judge_score": 1.0, "rationale": "PRED 'do not provide quantitative' matches gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-tuned__seed100__q040", "judge_score": 0.75, "rationale": "PRED 'SimpleQuestions and WebQSP' includes gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_k16__qasper__v4-tuned__seed100__q041", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_k16__qasper__v4-tuned__seed100__q041", "judge_score": 0.0, "rationale": "Gold is yes/no 'Yes' (they report results only on English data) but PRED answers 'No, they do not report results only on English data', the direct opposite of gold, so 0.0.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_k16__qasper__v4-tuned__seed100__q042", "judge_score": 0.25, "rationale": "PRED 'loss function + validation perf' partial.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-tuned__seed100__q043", "judge_score": 0.75, "rationale": "PRED 'RNN-based NMT + Transformer-based NMT' matches gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k16__qasper__v4-tuned__seed100__q044", "judge_score": 0.75, "rationale": "PRED 'F-score + Kappa statistics' includes gold F-score.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

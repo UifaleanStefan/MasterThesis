@@ -39,7 +39,7 @@
 {"qid": "p4_main__qasper__flat-50__seed100__q038", "judge_score": 0.0, "rationale": "PRED refuses; gold=BLEU-1.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q039", "judge_score": 0.75, "rationale": "PRED 'does not specify' implicit match to gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q040", "judge_score": 0.75, "rationale": "PRED 'SimpleQuestions and WebQSP' includes gold=SimpleQuestions.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__flat-50__seed100__q041", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__flat-50__seed100__q041", "judge_score": 0.0, "rationale": "Gold yes/no is 'Yes' (results only on English data) but PRED says 'No', directly contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__flat-50__seed100__q042", "judge_score": 0.0, "rationale": "PRED 'loss function, validation' doesn't mention MAP; gold=MAP only.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q043", "judge_score": 0.75, "rationale": "PRED 'RNN-based NMT and Transformer' includes gold=RNN-based NMT.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q044", "judge_score": 0.0, "rationale": "PRED refuses; gold=F-score.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -83,7 +83,7 @@
 {"qid": "p4_main__qasper__flat-50__seed100__q082", "judge_score": 0.0, "rationale": "PRED 'ranked 3rd FLC, 4th SLC' WRONG; gold=specific team names and scores.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q083", "judge_score": 0.25, "rationale": "PRED 'Slavic + English' partial; gold=full UD1.2 16-language list.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q084", "judge_score": 0.75, "rationale": "PRED 'does not mention seasonality' implicit match to gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__flat-50__seed100__q085", "judge_score": 0.0, "rationale": "PRED 'Yes' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__flat-50__seed100__q085", "judge_score": 0.0, "rationale": "Gold yes/no is 'No' but PRED says 'Yes, they use votes', directly contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__flat-50__seed100__q086", "judge_score": 0.5, "rationale": "PRED 'SVM' partial; gold=word2vec features as input to SVM.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q087", "judge_score": 0.75, "rationale": "PRED 'does not specify' implicit match to gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__flat-50__seed100__q088", "judge_score": 0.0, "rationale": "PRED 'Yes, English only' hallucinated; gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

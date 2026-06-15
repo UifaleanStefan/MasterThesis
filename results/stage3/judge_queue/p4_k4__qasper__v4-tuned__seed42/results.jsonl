@@ -53,7 +53,7 @@
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q024", "judge_score": 0.0, "rationale": "PRED 'relies less on shallow position' WRONG; gold=extra BERT position embeddings.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q025", "judge_score": 0.0, "rationale": "PRED 'limited amount, Hindi' WRONG; gold=No data, pretrained model.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q026", "judge_score": 0.75, "rationale": "PRED 'from CoNLL 2003 data' partial match to gold ceccarelli2013learning from CoNLL 2003.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_k4__qasper__v4-tuned__seed42__q027", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_k4__qasper__v4-tuned__seed42__q027", "judge_score": 0.0, "rationale": "Gold yes/no answer is 'Yes' but PRED says 'No, pre-training is not effective', the opposite of gold so contradictory.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q028", "judge_score": 0.0, "rationale": "PRED 'BERT from Khandelwal' WRONG; gold=MaxEnt to SVMs.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q029", "judge_score": 0.0, "rationale": "PRED 'Additional experiments' vague; gold=Irony Classifier specifically.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q030", "judge_score": 0.0, "rationale": "PRED 'may not easily generalize' implies No; gold='Yes'.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -84,7 +84,7 @@
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q076", "judge_score": 0.0, "rationale": "PRED refuses; gold=SGD, naive bayes, decision tree.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q077", "judge_score": 0.0, "rationale": "PRED '-PMI and +PPMI' WRONG; gold=clipped PMI, NNEGPMI.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q079", "judge_score": 0.0, "rationale": "PRED refuses; gold=four MT tasks DE-EN, JA-EN, RO-EN, EN-DE.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_k4__qasper__v4-tuned__seed42__q080", "judge_score": 0.0, "rationale": "PRED 'Yes' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_k4__qasper__v4-tuned__seed42__q080", "judge_score": 0.0, "rationale": "Gold yes/no answer is 'No' but PRED says 'Yes, car-speak is a collection of data that classifiers are trained on', directly contradicting gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q082", "judge_score": 0.0, "rationale": "PRED 'biLSTM F1 84-94%' WRONG; gold=list of 8 named NER systems.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q084", "judge_score": 0.0, "rationale": "PRED hallucinated WER; gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_k4__qasper__v4-tuned__seed42__q085", "judge_score": 0.75, "rationale": "PRED 'LORELEI, Switchboard, Uzbek, Mandarin' includes gold Switchboard.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}

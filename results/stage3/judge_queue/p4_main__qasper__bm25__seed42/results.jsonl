@@ -44,7 +44,7 @@
 {"qid": "p4_main__qasper__bm25__seed42__q025", "judge_score": 0.0, "rationale": "PRED 'monolingual data from non-English' WRONG; gold=No data, pretrained model.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q027", "judge_score": 1.0, "rationale": "PRED 'Yes' matches gold='Yes'.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q029", "judge_score": 0.5, "rationale": "PRED 'ironic to non-ironic and vice versa' partial; gold=Irony Classifier specifically.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__bm25__seed42__q030", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__bm25__seed42__q030", "judge_score": 0.0, "rationale": "Gold is yes/no 'Yes' but PRED says 'No' on generalizability, directly contradicting gold => 0.0.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__bm25__seed42__q032", "judge_score": 0.75, "rationale": "PRED 'raw text, text cleaning, keyphrase sparse' includes gold=raw text.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q033", "judge_score": 0.75, "rationale": "PRED 'unresolved ambiguities, irrelevant entities' close to gold=ambiguous/too common.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q034", "judge_score": 0.75, "rationale": "PRED 'BIBREF8 and BIBREF9' includes gold BIBREF9.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -67,7 +67,7 @@
 {"qid": "p4_main__qasper__bm25__seed42__q056", "judge_score": 0.75, "rationale": "PRED 'does not specify' implicit match to gold unanswerable.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q057", "judge_score": 1.0, "rationale": "PRED 'five text classification + semantic matching' matches gold.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q058", "judge_score": 0.75, "rationale": "PRED 'UMA, MRR, BPE PPL, BLEU-1/4, ROUGE-L, Distinct-1/2' matches 8/9 gold metrics; missing PP.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__bm25__seed42__q059", "judge_score": 0.0, "rationale": "PRED 'No' but gold='Yes' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__bm25__seed42__q059", "judge_score": 0.0, "rationale": "Gold is yes/no 'Yes' but PRED says 'No, the authors do not conduct experiments', opposite of gold => 0.0.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__bm25__seed42__q060", "judge_score": 1.0, "rationale": "PRED 'No' matches gold='No'.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q061", "judge_score": 0.75, "rationale": "PRED 'BOW, TFIDF, LR, RF, TextCNN' matches gold components BOW-LR, BOW-RF, TFIDF-RF, TextCNN.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q063", "judge_score": 0.25, "rationale": "PRED 'narrow margin' vague; gold has specific per-dataset Rouge/Meteor numbers.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
@@ -82,7 +82,7 @@
 {"qid": "p4_main__qasper__bm25__seed42__q076", "judge_score": 0.0, "rationale": "PRED 'Reddit comment analysis' WRONG; gold=SGD, naive bayes, decision tree.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q077", "judge_score": 0.25, "rationale": "PRED '-PMI spectrum variants' vague; gold=clipped PMI, NNEGPMI specifically.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q079", "judge_score": 1.0, "rationale": "PRED 'ro→en, en→de, de→en, ja→en' matches gold four MT tasks.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
-{"qid": "p4_main__qasper__bm25__seed42__q080", "judge_score": 0.0, "rationale": "PRED 'Yes' but gold='No' — Y/N flip.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
+{"qid": "p4_main__qasper__bm25__seed42__q080", "judge_score": 0.0, "rationale": "Gold is yes/no 'No' but PRED says 'Yes', affirming the negated claim and contradicting gold => 0.0.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1", "judge_pass": "2_manual"}
 {"qid": "p4_main__qasper__bm25__seed42__q081", "judge_score": 0.0, "rationale": "PRED 'local n-gram + self-attention' WRONG; gold=Bi-LSTM-CRF.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q082", "judge_score": 0.25, "rationale": "PRED 'GENIA chunker, DATEXIS-NER, Stanford NER' partial; gold=8 named systems.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
 {"qid": "p4_main__qasper__bm25__seed42__q083", "judge_score": 0.25, "rationale": "PRED 'lack of powerful tool' partial; gold=ambiguous words.", "judge_model": "claude-opus-4.7-1m", "judge_protocol": "v1"}
