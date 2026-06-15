@@ -128,7 +128,19 @@ optimal `w_graph` is open and deferred to Stage 3 / future work.
 | #10 | FlatWindow | 0.000 | 0.028 | |
 | #11 | SummaryMemory | 0.000 | 0.010 | |
 
-**GraphMemoryV4 is now the top-performing system on MultiHopKeyDoor**, surpassing EpisodicSemantic (0.178 vs 0.173) and achieving near-perfect retrieval precision (0.997 vs 1.000).
+**GraphMemoryV4 ties EpisodicSemantic for the top reward on MultiHopKeyDoor**
+(0.178 vs 0.173) at near-perfect retrieval precision (0.997 vs 1.000).
+
+> **Statistical caveat (June-12 audit).** The 0.005 reward gap is **not a
+> statistically supported "#1" finding.** It is a single-seed point estimate
+> over 200 episodes, and EpisodicSemantic's 95% bootstrap CI is [0.120, 0.220]
+> (see `docs/BENCHMARK_RESULTS.md`) — which fully contains V4's 0.178. The two
+> systems are a **statistical tie** on this task. Moreover, the ranking is not
+> robust to the retrieval backend: re-tuning V4 on the MiniLM encoder
+> (`results/graphmemory_v4_cmaes_results.json`) does not preserve a V4-over-
+> EpisodicSemantic ordering. The defensible Stage-2 claim is that the 10-D V4
+> parameterization **reaches the top cluster** (a +75% jump from its untuned
+> #8 position), not that it is uniquely #1.
 
 ---
 

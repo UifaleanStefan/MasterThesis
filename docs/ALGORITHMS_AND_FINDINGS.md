@@ -514,7 +514,10 @@ Putting both experiments together:
 
 ### GraphMemoryV4 CMA-ES (DONE)
 
-**Result:** reward=0.178, precision=0.997, #1 on MultiHopKeyDoor. See `docs/GRAPHMEMORY_V4_RESULTS.md`.
+**Result:** reward=0.178, precision=0.997 on MultiHopKeyDoor — a **statistical
+tie** with EpisodicSemantic (0.173, CI [0.120, 0.220]), not a clean #1; the
+defensible claim is "reaches the top cluster, +75% from untuned." See
+`docs/GRAPHMEMORY_V4_RESULTS.md` (statistical caveat).
 
 ### V4 Ablation Study (DONE)
 

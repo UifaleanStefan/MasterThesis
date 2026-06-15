@@ -657,6 +657,20 @@ and per-document fingerprints. The `scripts/audit_determinism.py`
 orthogonal check guarantees V4 retrieval is bit-identical across
 repeated runs at the same seed.
 
+**Two honest caveats on reproducibility (June-12 audit).** *(i) Manifests are
+marked `git_dirty = true`.* The corpus-mode runs were executed from a working
+tree with uncommitted changes, so `git_sha` alone does not fully pin the code
+that produced them; the committed results files plus this branch's commit
+history are the authoritative record. *(ii) Embedding-backend fallback.* The
+corpus pipeline uses `sentence-transformers/all-MiniLM-L6-v2`; if that model
+cannot load, the code path can fall back to a TF-IDF backend, which silently
+changes retrieval semantics (and was the root cause of the legacy "embedding
+artifact" θ noted in `evaluation/benchmark.py`). Every corpus-mode number
+reported here was produced with the MiniLM backend (recorded per cell in
+`_manifest.embedding_backend`); a TF-IDF fallback should be treated as a hard
+error / explicit opt-in (`EMBEDDING_BACKEND=tfidf`), not a silent substitution,
+and no TF-IDF-backed cell contributes to the results above.
+
 Reproducing the full Phase 1+1.5 pipeline:
 
 ```
