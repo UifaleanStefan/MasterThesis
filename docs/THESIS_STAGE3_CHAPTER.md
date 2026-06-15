@@ -2258,7 +2258,9 @@ answerer). Specific completions:
   under the two-tier protocol (one-by-one Claude content judgments +
   rule-assisted refusal/acknowledgment scores; ~9,500 content-templated
   entries re-judged 1-by-1 in the June-12 audit; 0 remaining, 0 duplicate
-  rationales, 100% Claude provenance, audit green). Coverage: Phase 4 headline cells (k=8), k-sweep
+  qids, 100% Claude provenance, audit green; the audit also reports the
+  rule-assisted refusal/ack share — 40.1% of lines — rather than implying
+  every line is a bespoke judgment). Coverage: Phase 4 headline cells (k=8), k-sweep
   variants (k=4/8/16/32, seeds 7/42/100), tier-b variants, all
   6 benchmarks' Protocol A corpus-mode cells, and Protocol B
   calibration cells (FB 6 configs + 4 extension, QASPER 6/6
@@ -2306,7 +2308,7 @@ What remains for future work (genuinely not done):
 * `tests/test_benchmark_{adapters, snapshots, smoke, adversarial}.py` — 4-layer test pyramid (146 tests, ~1,300 lines).
 * `scripts/run_corpus_qa.py` — Phase 1.9 corpus-mode runner (Protocol A + B, ~850 lines).
 * `scripts/build_{finbench,qasper,cuad}_corpus_qa_data.py` — per-benchmark Protocol B aggregators.
-* `scripts/audit_judge_provenance.py` — judge provenance auditor (verifies all 83,163 judge lines carry Claude provenance, 0 duplicate rationales, 313/313 cells queue-parity).
+* `scripts/audit_judge_provenance.py` — judge provenance auditor (verifies all 83,163 judge lines carry Claude provenance, 0 duplicate qids, 313/313 cells queue-parity, and discloses the rule-assisted refusal/ack share, 40.1% of lines).
 * `evaluation/claude_judge_queue.py` — judge queue infrastructure (write/read/merge).
 * `evaluation/claude_judge_protocol.md` — 5-point rubric + Protocol B sub-rubric.
 * `scripts/_judge_phase19_*` — ~90+ hand-judging part-scripts (all 311 cells, all 1-by-1).

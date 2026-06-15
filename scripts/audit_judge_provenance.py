@@ -49,13 +49,15 @@ FORBIDDEN_SUBSTRINGS = (
 )
 
 
-def audit_file(path: Path) -> tuple[int, list[tuple[int, str, str]], list[str]]:
-    """Return (n_total, [(line_no, qid, reason), ...], [qids_in_order]).
+def audit_file(path: Path) -> tuple[int, list[tuple[int, str, str]], list[str], list[str]]:
+    """Return (n_total, [(line_no, qid, reason), ...], [qids_in_order], [rationales]).
 
-    The qids list is used downstream for duplicate + queue-parity checks.
+    The qids list is used downstream for duplicate + queue-parity checks; the
+    rationales list feeds the rule-assisted-share / rationale-dup disclosure.
     """
     poisoned: list[tuple[int, str, str]] = []
     qids: list[str] = []
+    rationales: list[str] = []
     n_total = 0
     try:
         with path.open(encoding="utf-8") as f:
@@ -85,11 +87,12 @@ def audit_file(path: Path) -> tuple[int, list[tuple[int, str, str]], list[str]]:
                 # Rationale sanity: should not be empty and shouldn't be a
                 # generic template like "score=1.0" or "match"
                 rat = entry.get("rationale", "")
+                rationales.append(str(rat))
                 if not rat or len(str(rat).strip()) < 4:
                     poisoned.append((line_no, qid, f"empty/trivial rationale: {rat!r}"))
     except FileNotFoundError:
-        return 0, [], []
-    return n_total, poisoned, qids
+        return 0, [], [], []
+    return n_total, poisoned, qids, rationales
 
 
 def _canonicalize_qid(qid: str) -> str:
@@ -204,8 +207,19 @@ def main(argv: list[str]) -> int:
     parity_per_file: list[tuple[Path, set[str], set[str]]] = []
     parity_checked = 0
 
+    import re as _re
+    _RULE_PAT = _re.compile(
+        r"refuses to answer|refused|honest refusal|\[ack\]|acknowledg|ack refuse|"
+        r"expected_behavior=acknowledge|ans refusal|i don't have|cannot find",
+        _re.I,
+    )
+    all_rationales: list[str] = []
+    n_rule_assisted = 0
+
     for p in all_results:
-        n, poisoned, qids = audit_file(p)
+        n, poisoned, qids, rationales = audit_file(p)
+        all_rationales.extend(rationales)
+        n_rule_assisted += sum(1 for r in rationales if _RULE_PAT.search(r))
         total_lines += n
         if poisoned:
             total_poisoned += len(poisoned)
@@ -230,6 +244,24 @@ def main(argv: list[str]) -> int:
         f"[audit_judge_provenance] scanned {len(all_results)} files, "
         f"{total_lines} total judge lines, {parity_checked} cells with queue-parity checked"
     )
+
+    # Rationale-duplication + rule-assisted-share disclosure (informational; does
+    # NOT fail the audit). The two-tier protocol means refusal/acknowledgment
+    # answers carry templated rule-assisted rationales; this surfaces that share
+    # honestly instead of implying every line is a bespoke one-by-one judgment.
+    from collections import Counter as _Counter
+    rat_counts = _Counter(all_rationales)
+    n_distinct = len(rat_counts)
+    n_templated = sum(c for r, c in rat_counts.items() if c >= 20)  # appears >=20x => template
+    if total_lines:
+        print(
+            f"[audit_judge_provenance] rationale stats: {n_distinct} distinct rationales "
+            f"over {total_lines} lines; {n_templated} lines ({n_templated/total_lines:.1%}) "
+            f"use a templated rationale (>=20 reuses); {n_rule_assisted} lines "
+            f"({n_rule_assisted/total_lines:.1%}) match the rule-assisted refusal/ack classifier. "
+            f"Content judgments are one-by-one Claude; refusal/ack scores are rule-assisted "
+            f"(validated, pop-weighted score error 0.028 — see c2_validation_summary.json)."
+        )
 
     failed = total_poisoned > 0 or total_dups > 0 or total_parity_misses > 0
 
