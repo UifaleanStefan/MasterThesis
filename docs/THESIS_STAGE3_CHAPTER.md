@@ -621,12 +621,20 @@ GraphMemory lineage:
 | | `v3-corpus` | V2 + importance-scored storage | The V3→V4 step (V4 adds Bayesian decay) |
 | | `v5t-corpus` | V4 + attention-based storage gating | Ablation: does attention gate beat θ_store? |
 | **Attention** | `attention-corpus` | AttentionMemory(τ=0.5) default | |
-| | `attention-corpus-tuned` | AttentionMemory(τ=2.60) per-bench | Phase 1.7's CUAD winner |
+| | `attention-corpus-tuned`† | AttentionMemory(τ=2.60), τ from Phase-1.7 per-benchmark tuning | Phase 1.7's CUAD winner |
 | **Retrieval** | `rag-corpus` | RAGMemory (dense MiniLM cosine top-k) | Standard dense baseline |
 | | `semantic-corpus` | SemanticMemory (TF-IDF cosine top-k) | Hashing-style sparse baseline |
 | | `bm25-corpus` | BM25Memory (Okapi BM25 top-k) | Industry-standard sparse retrieval |
 | | `flat-corpus` | FlatMemory(window=50) sliding | Naive baseline |
 | | `dump-all` | All events into LLM context | Upper bound (small corpora only) |
+
+† **Naming caveat:** despite the `-corpus-tuned` suffix, `attention-corpus-tuned`
+was **not** re-tuned on the corpus-cumulative objective the way `v4t-corpus-tuned`
+was. Its τ=2.60 comes from Phase-1.7 per-benchmark tuning; only the V4ₜ
+configuration receives corpus-cumulative CMA-ES θ. Read its corpus-mode results
+as "Phase-1.7-tuned attention run in corpus mode," not as a corpus-tuned
+counterpart to V4ₜ. (Renaming the config key everywhere would break the
+committed result files, so the label is kept but flagged here.)
 
 All V1/V2/V3/V5 graph systems were updated to use the text-mode
 auto-dispatch entity extractor; their grid-world behavior is
