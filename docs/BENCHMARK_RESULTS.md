@@ -5,6 +5,17 @@
 **Raw data:** `results/benchmark_results.json`  
 **Figures:** `docs/figures/fig5*.png`
 
+> **⚠️ Currency note (June 2026).** The MultiHop-KeyDoor ranking in this document
+> predates a regeneration of `results/benchmark_results.json` under the **MiniLM
+> (sentence-transformers)** backend. The current per-system rewards — shown in
+> `fig5_memory_comparison.png` — differ from the table here and include
+> **GraphMemoryV4 (≈0.107) and GraphMemoryV5 (≈0.127)**, which this older table
+> omits. Use the JSON / figure for current numbers. The headline Stage-2
+> conclusion — the 10-D V4 parameterization (after CMA-ES tuning) reaches the
+> **top performance cluster**, a *statistical tie* with EpisodicSemantic rather
+> than a clean #1 — is stated authoritatively in `THESIS.md` and
+> `GRAPHMEMORY_V4_RESULTS.md`.
+
 ---
 
 ## 1. Experiment Setup

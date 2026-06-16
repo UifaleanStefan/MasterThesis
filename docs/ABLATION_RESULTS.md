@@ -7,6 +7,22 @@
 **Figure:** `docs/figures/fig08_ablation_v4.png`  
 **Raw data:** `results/ablation_results.json`
 
+> **⚠️ Currency note (June 2026).** The tables below report the **original
+> Stage-2 ablation under the TF-IDF retrieval backend** (and the θ shown is the
+> TF-IDF-era vector with `theta_novel=0.908`, `w_graph=0.000`, `w_recency=3.777`).
+> The committed `results/ablation_results.json` and the figures
+> (`fig08_ablation_v4.png`, `fig_ablation_ranked.png`) were regenerated under the
+> later **MiniLM (sentence-transformers)** backend with the re-tuned θ
+> (`theta_novel=0.442`, `w_graph=1.188`, `w_recency=1.207`), so the per-row
+> reward / precision / degradation values — and some orderings — differ from this
+> text; use the JSON and figures for current numbers. `THESIS.md` and
+> `PROFESSOR_MEMO_2026_06_12.md` hold the authoritative synthesis. The
+> qualitative headline is unchanged: **`theta_novel` is the dominant,
+> load-bearing dimension** (zeroing it collapses reward to 0). Under the MiniLM
+> re-tune the recency and graph terms carry little measurable load on
+> MultiHopKeyDoor — consistent with the four-shift→three-shift correction in the
+> memo (the graph term in particular is near-zero-load).
+
 ---
 
 ## Setup

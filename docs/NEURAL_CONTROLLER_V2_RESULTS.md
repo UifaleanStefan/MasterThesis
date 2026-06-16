@@ -6,6 +6,17 @@
 **Raw data:** `results/neural_controller_v2_results.json`  
 **Figures:** `docs/figures/fig_neural_v2_curves.png`, `docs/figures/fig_neural_analysis.png`, `docs/figures/fig_neural_transfer.png`
 
+> **⚠️ Currency note (June 2026).** The neural-controller results match
+> `results/neural_controller_v2_results.json`. The **"GraphMemoryV4 (scalar)"
+> comparison columns** (e.g. 0.178 / precision 0.997) are the **TF-IDF-era** V4
+> numbers; under the current MiniLM re-tune the scalar-V4 baseline is lower (see
+> the `v4_scalar_comparison` block of the JSON, ≈0.089), so the neural-vs-V4
+> margin is *larger* than the "+0.012" stated in places below. Architecture
+> note: the run uses the **1,962-parameter** 50→32→10 variant (one mention of a
+> "5,578-param" net is a stale draft figure). The qualitative finding — a small
+> (~2k-param) neural controller matches or slightly exceeds the scalar V4 with a
+> large CMA-ES budget, and both fail zero-shot on MegaQuestRoom — is unchanged.
+
 ---
 
 ## 200-generation run (March 2026)

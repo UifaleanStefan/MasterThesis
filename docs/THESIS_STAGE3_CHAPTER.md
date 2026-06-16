@@ -401,7 +401,7 @@ everything. We disclose this honestly: the corpus-mode runs use a
 variant called **V4ₜ** that bypasses the Bayesian gate
 (`MemoryParamsV4.text_mode_entities=True`). All other θ parameters
 are unchanged. Section §5's per-document numbers retain the original
-V4 (gate enabled); only §5.8's corpus-mode numbers use V4ₜ.
+V4 (gate enabled); only §6.5's corpus-mode numbers use V4ₜ.
 
 **Benchmark categorization.** Of the six benchmarks, three have
 **domain-coherent** corpora where cross-doc accumulation is
@@ -880,9 +880,12 @@ attention-tuned single-seed result (seed=42: 0.463) was an outlier — the
 seed=7: 0.122) signals that the original attention-tuned QASPER "win" was
 a sampling artifact. V4-tuned (0.420) leads the QASPER table under
 3-seed Claude judging. The chapter's narrowed claim (§5.4 final paragraph)
-was "tuning matters more than architecture among parameterized memories";
-this is reinforced on CUAD (attention wins multi-seed, §5.4 sub-table) but
-reversed on QASPER when properly multi-seeded.
+was "tuning matters more than architecture among parameterized memories"; the
+Phase-1.7 evidence for it (attention-tuned beating V4-tuned on CUAD) does **not**
+survive cross-vendor judging — under Claude 3-seed means V4-tuned wins both CUAD
+(0.383 vs 0.294, §5.4 sub-table) and QASPER (0.420 vs 0.235), so the result is
+better read as "a well-tuned 10-D V4 is at least as strong as a tuned
+single-scalar attention memory" than as architecture being irrelevant.
 
 § **FinanceBench Phase 4 row** is the per-document RAG regime
 (median 7 paragraphs per doc, very short haystack at this benchmark's
