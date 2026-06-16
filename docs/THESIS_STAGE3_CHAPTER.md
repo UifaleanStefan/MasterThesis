@@ -1795,11 +1795,23 @@ FB 12×150, QASPER 9×94, CUAD 9×132, HQA 9×10, LME 9×10, NQA 12×10):
 | Benchmark | V4-canonical batch | V4-corpus-tuned batch | Lift |
 |---|---:|---:|---:|
 | FinanceBench (§6.5.1) | 0.243 | 0.645 | **+0.402** |
-| HotpotQA | 0.200 | **1.000** | **+0.800** |
+| HotpotQA (n=100)⁵ | 0.215 | **0.755** | **+0.540** |
 | QASPER (§6.5.2) | 0.250 | 0.415 | **+0.165** |
 | **CUAD (n=132, full)** | **0.023** | **0.184** | **+0.161** |
-| LongMemEval | 0.500 | 0.600 | **+0.100** |
+| LongMemEval (n=100)⁵ | 0.165 | 0.330 | **+0.165** |
 | NarrativeQA | 0.400 | 0.400 | 0.000⁴ |
+
+⁵ **HotpotQA and LongMemEval were re-run at 100-document held-out scale in the
+June-12 audit**, replacing the earlier underpowered n=10 cells (which had read
+HQA 0.200→1.000 and LME 0.500→0.600 — single-question noise). At n=100 the
+batch (end-of-corpus) lift is HQA **+0.540** and LME **+0.165**. Note the
+mechanism shows cleanly in the online/batch contrast: corpus-tuning helps
+specifically in *batch* (no recency advantage), while *online* (current doc
+fresh) the recency-heavy canonical θ is competitive or better (HQA online
+0.828 ≈ 0.825; LME online canonical 0.358 > corpus-tuned 0.273). HQA and LME
+were pre-registered as domain-incoherent *controls*; the honest reading is that
+corpus-tuning still transfers a batch-mode lift to them, not that they are
+clean wins.
 
 CUAD's lift (+0.161) holds at roughly the same level as QASPER (+0.165)
 despite the batch mode facing a severe **context-bleed problem**: the
@@ -1833,15 +1845,16 @@ attention cell. For CUAD, attention's explicit paragraph-gating selects
 clause-bearing paragraphs that are uniquely identifying per contract,
 partially sidestepping the EKR/PPI bleed.
 
-HotpotQA's lift is extraordinary: canonical θ refuses 8/10 multi-hop
-questions ("the provided passages do not contain..."), while
-corpus-tuned θ answers **all 10 correctly** — including 3-way
-person-comparison ("Who is older, X or Y?"), nationality joins
-("Were X and Y of the same nationality?"), and entity-name lookups
-("What science fantasy series..."). This is the cleanest possible
-behavioural demonstration of the four-shift's effect: corpus-tuned θ
-with `w_recency → 0`, `w_embed ↑↑↑`, and `w_graph ↑` produces a
-memory that supports multi-hop joins without recency bias, exactly
+HotpotQA's batch lift is the largest in the table: at 100-document held-out
+scale, canonical θ scores **0.215** (it refuses most multi-hop questions —
+"the provided passages do not contain...") while corpus-tuned θ reaches
+**0.755**, correctly handling 3-way person-comparisons ("Who is older, X or
+Y?"), nationality joins ("Were X and Y of the same nationality?"), and
+entity-name lookups ("What science fantasy series..."). This is a clean
+behavioural demonstration of the load-bearing shifts' effect: corpus-tuned θ
+with `w_recency → 0` and `w_embed ↑↑↑` (the `w_graph` rise carries no
+measurable load, §6.5.3) produces a memory that supports multi-hop joins
+without recency bias, exactly
 the regime HotpotQA tests.
 
 **Interpretation across N=5 benchmarks.** The four-shift is no longer
