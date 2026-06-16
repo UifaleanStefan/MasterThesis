@@ -1,7 +1,15 @@
 {
   "benchmark": "cuad",
-  "n_docs_ingested": 10,
-  "n_questions_per_cell": 132,
+  "n_docs_ingested": {
+    "v4t-canonical": 50,
+    "v4t-corpus-tuned": 50,
+    "_other_configs": 10
+  },
+  "n_questions_per_cell": {
+    "v4t-canonical": 644,
+    "v4t-corpus-tuned": 644,
+    "_other_configs": 132
+  },
   "n_cells": 9,
   "judge_model": "claude-opus-4.7-1m",
   "judge_protocol": "v1",
@@ -12,14 +20,14 @@
       "family": "v4",
       "modes": {
         "online": {
-          "n": 132,
-          "claude_judge_mean": 0.21212121212121213,
-          "recall_at_k_8": 0.19696969696969696
+          "n": 644,
+          "claude_judge_mean": 0.2954192546583851,
+          "recall_at_k_8": 0.296583850931677
         },
         "batch": {
-          "n": 132,
-          "claude_judge_mean": 0.022727272727272728,
-          "recall_at_k_8": 0.0
+          "n": 644,
+          "claude_judge_mean": 0.027950310559006212,
+          "recall_at_k_8": 0.013975155279503106
         }
       }
     },
@@ -44,14 +52,14 @@
       "family": "v4",
       "modes": {
         "online": {
-          "n": 132,
-          "claude_judge_mean": 0.26136363636363635,
-          "recall_at_k_8": 0.2727272727272727
+          "n": 644,
+          "claude_judge_mean": 0.390139751552795,
+          "recall_at_k_8": 0.45962732919254656
         },
         "batch": {
-          "n": 132,
-          "claude_judge_mean": 0.18371212121212122,
-          "recall_at_k_8": 0.17424242424242425
+          "n": 644,
+          "claude_judge_mean": 0.171972049689441,
+          "recall_at_k_8": 0.06521739130434782
         }
       }
     },
@@ -91,17 +99,17 @@
   },
   "judge_table_flat": {
     "online": {
-      "v4t-canonical": 0.21212121212121213,
+      "v4t-canonical": 0.2954192546583851,
       "v4t-tuned": 0.4090909090909091,
-      "v4t-corpus-tuned": 0.26136363636363635,
+      "v4t-corpus-tuned": 0.390139751552795,
       "bm25-corpus": null,
       "attention-corpus-tuned": null,
       "dump-all": null
     },
     "batch": {
-      "v4t-canonical": 0.022727272727272728,
+      "v4t-canonical": 0.027950310559006212,
       "v4t-tuned": 0.125,
-      "v4t-corpus-tuned": 0.18371212121212122,
+      "v4t-corpus-tuned": 0.171972049689441,
       "bm25-corpus": 0.2689393939393939,
       "attention-corpus-tuned": 0.32007575757575757,
       "dump-all": null
@@ -109,17 +117,17 @@
   },
   "recall_at_k_8_flat": {
     "online": {
-      "v4t-canonical": 0.19696969696969696,
+      "v4t-canonical": 0.296583850931677,
       "v4t-tuned": 0.5151515151515151,
-      "v4t-corpus-tuned": 0.2727272727272727,
+      "v4t-corpus-tuned": 0.45962732919254656,
       "bm25-corpus": null,
       "attention-corpus-tuned": null,
       "dump-all": null
     },
     "batch": {
-      "v4t-canonical": 0.0,
+      "v4t-canonical": 0.013975155279503106,
       "v4t-tuned": 0.16666666666666666,
-      "v4t-corpus-tuned": 0.17424242424242425,
+      "v4t-corpus-tuned": 0.06521739130434782,
       "bm25-corpus": 0.3712121212121212,
       "attention-corpus-tuned": 0.4393939393939394,
       "dump-all": null
@@ -155,10 +163,10 @@
           "w_recency": 3.777
         },
         "corpus_tuned": {
-          "theta_store": 0.3116632543637187,
-          "w_graph": 1.6076931475206038,
-          "w_embed": 2.779934615187323,
-          "w_recency": 9.567803081737357e-05
+          "theta_store": 0.0381939516473107,
+          "w_graph": 1.9847941756760845,
+          "w_embed": 1.535553576816984,
+          "w_recency": 0.003205483917621234
         }
       }
     },
@@ -170,11 +178,11 @@
     }
   },
   "v4_corpus_tuned_advantage": {
-    "v4t-corpus-tuned vs v4t-canonical (batch)": 0.161,
-    "v4t-corpus-tuned vs v4t-tuned (batch)": 0.0587,
-    "v4t-corpus-tuned vs bm25-corpus (batch)": -0.0852,
-    "v4t-corpus-tuned vs attention-corpus-tuned (batch)": -0.1364,
-    "v4t-tuned vs v4t-canonical (online)": 0.197,
+    "v4t-corpus-tuned vs v4t-canonical (batch)": 0.144,
+    "v4t-corpus-tuned vs v4t-tuned (batch)": 0.047,
+    "v4t-corpus-tuned vs bm25-corpus (batch)": -0.097,
+    "v4t-corpus-tuned vs attention-corpus-tuned (batch)": -0.1481,
+    "v4t-tuned vs v4t-canonical (online)": 0.1137,
     "online vs batch advantage (v4t-tuned)": 0.2841
   },
   "best_online_config": {
@@ -14357,11 +14365,11 @@
   },
   "fb_comparison": {
     "fb_v4t_corpus_tuned_batch": 0.665,
-    "cuad_v4t_corpus_tuned_batch": 0.18371212121212122,
+    "cuad_v4t_corpus_tuned_batch": 0.171972049689441,
     "fb_v4t_canonical_batch": 0.45,
-    "cuad_v4t_canonical_batch": 0.022727272727272728,
+    "cuad_v4t_canonical_batch": 0.027950310559006212,
     "fb_lift_corpus_vs_canonical_batch": 0.215,
-    "cuad_lift_corpus_vs_canonical_batch": 0.161
+    "cuad_lift_corpus_vs_canonical_batch": 0.144
   },
   "notes": {
     "dump-all_batch": "Near-total failure (mean=0.015). Model retrieves EKR/PPI promissory note context for all 10 contracts. Only doc9 (EKR/SkyePharma, the actual EKR contract) scores >0.",

@@ -234,8 +234,11 @@ def main() -> None:
 
     out = {
         "benchmark": "cuad",
-        "n_docs_ingested": 10,
-        "n_questions_per_cell": 132,
+        # Mixed scale: the headline pair (v4t-canonical, v4t-corpus-tuned) was
+        # scaled to 50 contracts (n=644); the other configs remain at the 10-doc
+        # pilot (n=132). Per-cell n is in config_table[cfg].modes[mode].n.
+        "n_docs_ingested": {"v4t-canonical": 50, "v4t-corpus-tuned": 50, "_other_configs": 10},
+        "n_questions_per_cell": {"v4t-canonical": 644, "v4t-corpus-tuned": 644, "_other_configs": 132},
         "n_cells": sum(len(c["available_modes"]) for c in CONFIGS),
         "judge_model": "claude-opus-4.7-1m",
         "judge_protocol": "v1",
@@ -279,7 +282,8 @@ def main() -> None:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Wrote {OUT.relative_to(ROOT)} ({OUT.stat().st_size} bytes)")
-    print(f"Cells: {out['n_cells']} | Q/cell: 132 | Total judgments: {out['n_cells'] * 132}")
+    print(f"Cells: {out['n_cells']} | per-cell n in config_table "
+          f"(headline pair=644 @ 50 docs, others=132 @ 10 docs)")
     print(f"Key advantages:")
     for k, v in deltas.items():
         print(f"  {k:>50} = {v:+.4f}")
