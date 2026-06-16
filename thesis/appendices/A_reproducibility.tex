@@ -1,10 +1,16 @@
 \chapter{Reproducibility}
 \label{app:repro}
 
-All experiments are seeded and reproducible from the accompanying code
-repository. Every result carries a provenance manifest recording the commit
-identifier, the embedding backend (\texttt{all-MiniLM-L6-v2} unless a TF-IDF
-backend is selected explicitly), and a dataset fingerprint.
+All code, data-preparation scripts, result artifacts, and the source of this
+document are maintained in a public Git repository, which is the authoritative
+source of truth for everything reported here:
+\begin{center}
+\url{https://github.com/UifaleanStefan/MasterThesis}
+\end{center}
+All experiments are seeded and reproducible from that repository. Every result
+carries a provenance manifest recording the commit identifier, the embedding
+backend (\texttt{all-MiniLM-L6-v2} unless a TF-IDF backend is selected
+explicitly), and a dataset fingerprint.
 
 \section*{Key commands}
 \begin{itemize}[leftmargin=1.4em]

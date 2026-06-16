@@ -24,7 +24,7 @@ Environment & Learned $\thetavec$ & Baseline & Learned \\
 \midrule
 Key-Door          & $(0.116,\,0.000,\,0.819)$ & 17.5\% & 30.0\% \\
 Goal-Room         & $(1.000,\,0.220,\,1.000)$ & 70.0\% & 80.0\% \\
-MultiHop-KeyDoor  & $(1.000,\,0.487,\,0.843)$ & \textbf{2.5\%} & \textbf{27.5\%} \\
+MultiHopKeyDoor   & $(1.000,\,0.487,\,0.843)$ & \textbf{2.5\%} & \textbf{27.5\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -96,7 +96,7 @@ engine.
 \end{figure}
 
 \paragraph{Transfer and sensitivity.} A $\thetavec$ tuned on one environment
-transfers strongly to a structurally similar one (GoalRoom $0.69$, HardKeyDoor
+transfers strongly to a structurally similar one (Goal-Room $0.69$, HardKeyDoor
 $0.17$) but fails completely on a larger out-of-distribution task
 (MegaQuestRoom $0.00$), even though its retrieval there is high-precision ---
 the failure is task scale, not memory quality (Figure~\ref{fig:transfer}). The
@@ -164,7 +164,7 @@ they touch for LME. ``Survives'' = held-out lift significant after Holm.}
 Benchmark & $n$ & canonical [95\% CI] & corpus-tuned [95\% CI] & lift & held-out \\
 \midrule
 \multicolumn{6}{l}{\textit{Confirmatory (domain-coherent)}}\\
-\FB{}  & 150 & 0.243 [0.18,\,0.31] & 0.645 [0.57,\,0.72] & $+0.402$ & \textbf{survives}, $p_{\mathrm{holm}}{<}10^{-4}$ \\
+\FB{}  & 150 & 0.243 [0.18,\,0.31] & 0.645 [0.57,\,0.72] & $+0.402$ & \textbf{survives}, $p_{\mathrm{holm}}<10^{-4}$ \\
 CUAD   & 644 & 0.028 [0.02,\,0.04] & 0.172 [0.15,\,0.20] & $+0.144$ & \textbf{survives} ($+0.135$) \\
 QASPER & 94  & 0.250 [0.18,\,0.32] & 0.415 [0.34,\,0.50] & $+0.165$ & \emph{n.s.} after Holm \\
 \midrule
@@ -240,8 +240,8 @@ benchmark $0.39$--$0.84$), and questions for which the gold evidence \emph{is}
 retrieved are judged correct far more often than those where it is missed (mean
 judge $0.62$ vs.\ $0.10$, Figure~\ref{fig:recalljudge}). The causal chain behind
 the headline is therefore intact: corpus tuning raises recall \emph{and} judge
-score together on every benchmark (e.g.\ FinanceBench recall $0.22\to0.97$, judge
-$0.243\to0.645$; HotpotQA recall $0.11\to1.0$, judge $0.215\to0.755$). QASPER is
+score together on every benchmark (e.g.\ FinanceBench recall $0.22\rightarrow0.97$, judge
+$0.243\rightarrow0.645$; HotpotQA recall $0.11\rightarrow1.00$, judge $0.215\rightarrow0.755$). QASPER is
 the weakest link ($\rho=0.39$), consistent with its being the only coherent
 benchmark whose lift does not survive Holm correction.
 
@@ -261,7 +261,7 @@ not an artifact of a tiny corpus, the headline pair was re-run and re-judged
 one-by-one at 50 contracts ($n{=}644$ questions per cell, up from $132$). The
 batch lift \emph{holds}: canonical $0.028 \rightarrow$ corpus-tuned $0.172$
 ($+0.144$, versus $+0.161$ at 10 contracts). Canonical batch stays near-zero
-because, with fifty contracts in memory, its recency-heavy retrieval pulls
+because, with 50 contracts in memory, its recency-heavy retrieval pulls
 clauses from the wrong contract; the corpus-tuned $\thetavec$ (with \wrec{}
 $\approx 0$) recovers by matching on semantic similarity. The online-vs-batch
 contrast is the sharpest of any benchmark
@@ -308,7 +308,7 @@ unlike dump-all, does not break when the corpus exceeds the context window.
   \centering
   \includegraphics[width=0.78\linewidth]{fig_stage3_cost.png}
   \caption{FinanceBench accuracy vs.\ cost. Dump-all is statistically tied with
-  corpus-tuned selective memory on accuracy but $\approx$18$\times$ more
+  corpus-tuned selective memory on accuracy but $\approx 18\times$ more
   expensive; corpus-tuned sits in the cheap, accurate corner.}
   \label{fig:cost}
 \end{figure}
@@ -318,11 +318,11 @@ The efficiency argument is not merely about cost --- past a corpus size, dump-al
 \emph{cannot run at all}, while selective retrieval is unaffected. We measure this
 directly on CUAD (Figure~\ref{fig:scalability}). Each contract averages
 $\sim$10.9K tokens, so the concatenated dump-all prompt grows $O(N)$ and crosses
-\texttt{gpt-4o-mini}'s 128K-token context window at just \textbf{$N\approx 11$
-contracts}; at the full $N{=}510$ it would require \textbf{5.55M tokens,
-$\approx$43$\times$ the limit}, forcing truncation that discards most of the
+\texttt{gpt-4o-mini}'s 128K-token context window at just $N \approx 11$
+contracts; at the full $N{=}510$ it would require \textbf{5.55M tokens}
+($\approx 43\times$ the limit), forcing truncation that discards most of the
 evidence. Selective retrieval ($k{=}8$) holds its prompt at a measured mean of
-\textbf{704 tokens regardless of $N$}. This is the structural case for learned
+\textbf{704 tokens} regardless of $N$. This is the structural case for learned
 selective memory: beyond a few documents, retrieving the right $k$ items is not an
 optimization but a necessity, and the only open question is how good the retrieval
 policy is --- which is exactly what $\thetavec$ tunes.
@@ -332,7 +332,7 @@ policy is --- which is exactly what $\thetavec$ tunes.
   \includegraphics[width=0.85\linewidth]{fig_stage3_scalability.png}
   \caption{Answer-prompt size versus corpus size on CUAD (log scale). The
   full-context dump-all prompt grows linearly and exceeds the answerer's
-  128K-token context at $N\approx 11$ contracts (reaching $\approx$43$\times$ the
+  128K-token context at $N\approx 11$ contracts (reaching $\approx 43\times$ the
   limit at $N{=}510$); selective retrieval stays flat at $\sim$704 tokens. Beyond
   $N\approx 11$, dump-all must truncate and lose evidence; selective memory is
   unaffected.}

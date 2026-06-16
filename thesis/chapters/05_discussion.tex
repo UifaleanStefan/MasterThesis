@@ -116,9 +116,9 @@ Corpus tuning lifts end-of-corpus accuracy (FinanceBench) & \textbf{Rock-solid}
 The same lift holds on CUAD, including at 50 contracts & \textbf{Significant}
 & Held-out $+0.135$; 50-doc batch $+0.144$ \\
 The optimal $\thetavec$ is task-dependent (visibly different per task) &
-\textbf{Solid} & Stage-1 vectors; within- vs across-family transfer \\
-Selective memory matches dump-all accuracy at $\sim$1/18 the cost &
-\textbf{Solid} & FB dump-all $0.607$--$0.689$, CIs overlap; cost \$2.68 vs \$0.15 \\
+\textbf{Solid} & Stage-1 vectors; within- vs.\ across-family transfer \\
+Selective memory matches dump-all accuracy at $\sim 1/18$ the cost &
+\textbf{Solid} & FinanceBench dump-all $0.607$--$0.689$, CIs overlap; cost \$2.68 vs.\ \$0.15 \\
 Selective memory scales where dump-all structurally fails &
 \textbf{Rock-solid} & dump-all exceeds 128K context at $N{\approx}11$ CUAD
 contracts ($43\times$ at $N{=}510$); selective flat at 704 tok \\

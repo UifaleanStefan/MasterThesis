@@ -153,9 +153,9 @@ $\thetavec$ induces.
 \Require memory $M$, incoming document $d$, parameters $\thetavec$
 \For{each event $e$ extracted from $d$}
   \State $\text{nov}(e) \gets 1 - \max_{e'\in M}\cos(\mathrm{emb}(e),\mathrm{emb}(e'))$ \Comment{novelty vs.\ stored}
-  \If{$\theta_{\text{store}} + \theta_{\text{novel}}\cdot\text{nov}(e) + \theta_{\text{surprise}}\cdot\text{surp}(e) > 0$}
+  \If{$\theta_{\mathrm{store}} + \theta_{\mathrm{novel}}\cdot\mathrm{nov}(e) + \theta_{\mathrm{surprise}}\cdot\mathrm{surp}(e) > 0$}
     \State add $e$ to $M$ with timestamp; link typed edges (entity / temporal) into the graph
-    \State apply decay $w \gets w\cdot e^{-\theta_{\text{decay}}\,\Delta t}$ to existing nodes
+    \State apply decay $w \gets w\cdot e^{-\theta_{\mathrm{decay}}\,\Delta t}$ to existing nodes
   \EndIf
 \EndFor
 \State \textbf{at retrieval} for query $q$, score each $e\in M$:
