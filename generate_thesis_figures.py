@@ -502,8 +502,12 @@ def fig_neural_analysis():
             plateau_start = gens[i-1]
             break
 
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(15, 5))
-    fig.subplots_adjust(wspace=0.35)
+    # Taller canvas + reserved top margin so the suptitle clears the three
+    # two-line subplot titles, and reserved bottom margin for the two-line
+    # x-tick labels. Previously (15x5, default margins) the suptitle collided
+    # with the subplot titles and the centred annotation sat on top of the bars.
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(16, 6.2))
+    fig.subplots_adjust(wspace=0.42, top=0.80, bottom=0.13)
 
     # ── left: training curve ──
     ax1.plot(gens, fits, color=PURPLE, linewidth=2.0, marker="o", markersize=3)
@@ -539,8 +543,10 @@ def fig_neural_analysis():
     ax2_right.set_ylabel("Retrieval Precision", color=GRAY)
     ax2_left.tick_params(axis="y", labelcolor=PURPLE)
     ax2_right.tick_params(axis="y", labelcolor=GRAY)
-    ax2_left.set_ylim(0, max(rewards_c) * 1.4)
-    ax2_right.set_ylim(0, 1.15)
+    # Extra headroom so the tallest bars top out well below the centred
+    # annotation box (which lives at the top of the panel).
+    ax2_left.set_ylim(0, max(rewards_c) * 1.8)
+    ax2_right.set_ylim(0, 1.5)
     ax2_left.set_xticks(x)
     ax2_left.set_xticklabels(systems_c, fontsize=8.5)
     ax2_left.set_title("Performance Comparison\n(MultiHopKeyDoor)")
@@ -555,13 +561,13 @@ def fig_neural_analysis():
                        f"{val:.3f}", ha="center", va="bottom", fontsize=7.5)
     # Data-driven annotation: neural can match or exceed V4 with enough budget
     if neural_multihop >= v4_scalar:
-        ax2.text(0.5, 0.97,
+        ax2.text(0.5, 0.92,
                  "Neural matches or exceeds\nscalar V4 with sufficient\ntraining budget (200 gens)",
                  transform=ax2.transAxes, ha="center", va="top", fontsize=8,
                  bbox=dict(boxstyle="round,pad=0.3", facecolor="#DCFCE7", edgecolor=GREEN, alpha=0.9))
     else:
         pct = (v4_scalar - neural_multihop) / (v4_scalar + 1e-9) * 100
-        ax2.text(0.5, 0.97,
+        ax2.text(0.5, 0.92,
                  f"Neural is {pct:.0f}% worse than\nscalar V4 — expressivity\nvs trainability tradeoff",
                  transform=ax2.transAxes, ha="center", va="top", fontsize=8,
                  bbox=dict(boxstyle="round,pad=0.3", facecolor="#FEF2F2", edgecolor=RED, alpha=0.9))
@@ -597,7 +603,7 @@ def fig_neural_analysis():
              style="italic")
 
     fig.suptitle("NeuralMemoryControllerV2Small — Training Analysis & Comparison",
-                 fontsize=12, fontweight="bold")
+                 fontsize=12, fontweight="bold", y=0.97)
     out = os.path.join(FIGS_DIR, "fig_neural_analysis.png")
     fig.savefig(out)
     plt.close(fig)

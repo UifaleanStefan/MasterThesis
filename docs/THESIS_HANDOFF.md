@@ -189,10 +189,10 @@ deferred to Stage 3 / future work.
 
 | Environment | Mean Reward | Mean Tokens | Notes |
 |---|---|---|---|
-| MultiHopKeyDoor (source) | 0.163 | 1,745 | In-distribution |
+| MultiHopKeyDoor (source) | 0.140 | 1,553 | In-distribution |
 | GoalRoom | **0.690** | 47 | Strong positive transfer |
-| HardKeyDoor | 0.160 | 1,382 | Moderate transfer |
-| MegaQuestRoom | **0.000** | 7,908 | Complete failure (OOD) |
+| HardKeyDoor | 0.173 | 1,427 | Moderate transfer |
+| MegaQuestRoom | **0.000** | 7,533 | Complete failure (OOD) |
 
 **Key finding:** V4 theta transfers well to simpler/similar tasks but fails completely on harder OOD tasks. Confirms task-dependence hypothesis.
 

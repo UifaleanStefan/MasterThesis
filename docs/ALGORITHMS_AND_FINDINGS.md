@@ -535,12 +535,12 @@ See `docs/ABLATION_RESULTS.md`.
 ### V4 Zero-Shot Transfer (DONE)
 
 **Key findings:**
-- MultiHopKeyDoor (in-dist): 0.163 reward, 0.999 precision
+- MultiHopKeyDoor (in-dist): 0.140 reward, 1.000 precision
 - GoalRoom (zero-shot): 0.690 reward — strong positive transfer (simpler task)
-- HardKeyDoor (zero-shot): 0.160 reward — near-identical (similar task structure)
+- HardKeyDoor (zero-shot): 0.173 reward — comparable (similar task structure)
 - MegaQuestRoom (zero-shot): 0.000 reward — complete failure (harder OOD task)
 
-**Conclusion:** Task-dependence hypothesis confirmed. The theta optimized for MultiHop fails on MegaQuestRoom because the memory management strategy doesn't scale to 1000-step episodes.
+**Conclusion:** Task-dependence hypothesis confirmed. The theta optimized for MultiHop fails on MegaQuestRoom on the task's scale/structure (20×20 grid, 6 doors, 1000-step horizon) — not memory pollution (only ~13 events stored, precision 0.96).
 
 See `docs/TRANSFER_RESULTS.md`.
 

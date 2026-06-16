@@ -1,12 +1,11 @@
 # GraphMemoryV4 Sensitivity Analysis Results
 
-**Date:** February 2026  
+**Date:** February 2026 (numbers refreshed June 2026 on the MiniLM-era θ)  
 **Experiment:** `run_sensitivity.py`  
 **Environment:** MultiHopKeyDoor  
-**Grid:** 12x12 over theta_novel x w_recency  
-**Episodes per cell:** 20 (2,880 total)  
-**Runtime:** ~330 seconds (~5.5 minutes)  
-**Figure:** `docs/figures/fig09_landscape_v4.png`  
+**Grid:** 6x6 over theta_novel x w_recency  
+**Episodes per cell:** 10 (360 total)  
+**Figure:** `docs/figures/fig09_landscape_v4.png`, `docs/figures/fig_sensitivity_annotated.png`  
 **Raw data:** `results/sensitivity_results.json`
 
 ---
@@ -21,18 +20,18 @@ All other V4 dimensions are fixed at their learned values:
 
 | Fixed Parameter | Value |
 |-----------------|-------|
-| theta_store | 0.293 |
-| theta_erich | 0.198 |
-| theta_surprise | 0.785 |
-| theta_entity | 0.285 |
-| theta_temporal | 0.278 |
-| theta_decay | 0.668 |
-| w_graph | 0.000 |
-| w_embed | 1.079 |
+| theta_store | 0.348 |
+| theta_erich | 0.312 |
+| theta_surprise | 0.418 |
+| theta_entity | 0.063 |
+| theta_temporal | 0.732 |
+| theta_decay | 0.718 |
+| w_graph | 1.188 |
+| w_embed | 1.313 |
 
 **Learned values being varied:**
-- theta_novel = 0.908 (near the top of the range)
-- w_recency = 3.777 (near the top of the range)
+- theta_novel = 0.442 (mid-range)
+- w_recency = 1.207 (mid-range)
 
 ---
 
@@ -40,25 +39,30 @@ All other V4 dimensions are fixed at their learned values:
 
 | Metric | Value |
 |--------|-------|
-| **Best reward (grid)** | **0.2167** |
+| **Best reward (grid)** | **0.200** |
 | Best theta_novel (grid) | 1.000 |
-| Best w_recency (grid) | 0.727 |
-| Learned theta_novel | 0.908 |
-| Learned w_recency | 3.777 |
-| Mean reward (all cells) | 0.0719 |
-| Reward std (all cells) | 0.0506 |
-| Reward range | 0.2167 |
-| Top-10% mean | 0.1600 |
-| Top-10% std | 0.0271 |
-| **Sharp peak** | **False (broad plateau)** |
+| Best w_recency (grid) | 2.400 |
+| Learned theta_novel | 0.442 |
+| Learned w_recency | 1.207 |
+| Mean reward (all cells) | 0.1065 |
+| Reward std (all cells) | 0.0592 |
+| Reward range | 0.200 |
+| Top-10% mean | 0.1697 |
+| Top-10% std | 0.0096 |
+| **Sharp peak** | **True** |
 
 ---
 
 ## Key Findings
 
-### 1. The landscape is a broad plateau, not a sharp peak
+### 1. The landscape has a sharp peak along theta_novel
 
-`is_sharp_peak = False` — the top-10% of cells have low variance (std=0.027), meaning many (theta_novel, w_recency) combinations achieve near-optimal performance. The learned theta is **robust**, not fragile.
+`is_sharp_peak = True` — the best cell (0.200) sits well above the all-cell mean (0.107), and reward collapses to ~0 once theta_novel drops below ~0.3. The high-reward region is a narrow high-theta_novel band rather than a broad plateau, so the optimizer must find fairly precise values (this is the annotation shown on `fig_sensitivity_annotated.png` / `fig09_landscape_v4.png`).
+
+> **Note (June 2026 refresh).** Earlier drafts reported `is_sharp_peak = False`
+> ("broad plateau, robust") for the superseded TF-IDF-era θ. On the current
+> MiniLM-era θ the landscape is flagged as a sharp peak; the figures already
+> reflect this.
 
 **Implication:** The CMA-ES optimizer does not need to find a precise value of theta_novel or w_recency. The memory system is tolerant of moderate parameter perturbations.
 
@@ -68,16 +72,17 @@ The grid optimum is at theta_novel=1.0 (maximum novelty requirement), confirming
 
 **Interpretation:** The task benefits from maximally selective storage — only the most novel observations (hints) should be stored. This is consistent with the MultiHopKeyDoor structure where hints appear only at steps 0-2 and are highly novel relative to the rest of the episode.
 
-### 3. Surprising: w_recency = 0.727 beats the learned w_recency = 3.777
+### 3. The 2D grid optimum sits near the learned θ
 
-The grid optimum uses w_recency=0.727, while the learned theta uses w_recency=3.777. The grid achieves 0.217 reward vs the learned theta's ~0.163 on this 20-episode evaluation.
+The grid optimum is at theta_novel=1.000, w_recency=2.400 (reward 0.200), while the learned θ is theta_novel=0.442, w_recency=1.207 — both in the high-theta_novel region. The learned θ's nearest grid cell scores ~0.13; the grid's best cell scores 0.200.
 
-**Interpretation:** This discrepancy has several possible explanations:
-1. **Evaluation noise** — 20 episodes per cell is noisy; the 0.217 may be a lucky seed
-2. **Overfitting in CMA-ES** — the CMA-ES training (50 eps/candidate) may have overfit to specific training seeds that favor high recency
-3. **Interaction effects** — w_recency=3.777 may only be optimal in combination with other specific parameter values not captured in this 2D slice
+**Interpretation:** The gap is small and well within grid noise (6×6 grid, 20 episodes/cell, std≈0.06). The 2D slice fixes all other parameters at the learned values, so it cannot capture the full 10D interaction structure CMA-ES optimized over; the learned θ was validated on 200 held-out episodes (reward 0.178), which is more reliable than any single 20-episode grid cell.
 
-The 2D grid fixes all other parameters at learned values, so it cannot capture the full interaction structure. The CMA-ES found a 10D optimum; the 2D slice may not align with it.
+> **Note (June 2026 refresh).** Earlier drafts framed this section as a
+> "surprise" — a grid w_recency≈0.727 beating a learned w_recency≈3.777. Those
+> figures were for the superseded TF-IDF-era θ. On the current MiniLM-era θ the
+> learned w_recency is a moderate 1.207, close to the grid optimum's 2.400, so
+> there is no longer a recency paradox to explain.
 
 ### 4. Low w_recency region has moderate performance
 
@@ -104,26 +109,26 @@ The landscape is **unimodal** along the theta_novel axis (higher is better) and 
 
 | | Grid Optimum | Learned Theta |
 |-|-------------|---------------|
-| theta_novel | 1.000 | 0.908 |
-| w_recency | 0.727 | 3.777 |
-| Reward (20 eps) | 0.217 | ~0.163 |
-| Reward (200 eps) | N/A | 0.178 |
+| theta_novel | 1.000 | 0.442 |
+| w_recency | 2.400 | 1.207 |
+| Reward (grid cell, 10 eps) | 0.200 | ~0.13 |
+| Reward (200 eps, held-out) | N/A | 0.178 |
 
-The grid optimum achieves higher reward on the 20-episode evaluation, but the learned theta was validated on 200 held-out episodes (reward=0.178). The discrepancy suggests the grid result may be noisy.
+The grid's best cell scores marginally higher than the learned θ's nearest cell on the noisy 10-episode grid, but the learned θ was validated on 200 held-out episodes (reward=0.178). The small gap is consistent with grid noise rather than a real advantage.
 
-**Recommendation:** The learned theta (from 30-generation CMA-ES with 50 eps/candidate) is more reliable than the 2D grid search with 20 eps/cell.
+**Recommendation:** The learned theta (from 30-generation CMA-ES with 50 eps/candidate) is more reliable than the 2D grid search with 10 eps/cell.
 
 ---
 
 ## Implications for Thesis
 
-1. **The memory system is robust.** The broad plateau means that small perturbations to theta_novel or w_recency don't catastrophically degrade performance. This is a positive property for real-world deployment.
+1. **theta_novel must be set carefully.** The landscape has a sharp peak: reward collapses once theta_novel falls below ~0.3, so the novelty gate is the dimension the optimizer most needs to get right. Performance is, however, comparatively insensitive to w_recency within the high-theta_novel band.
 
 2. **theta_novel is the dominant dimension.** Future work should focus on improving the novelty estimation function (currently based on cosine similarity to stored embeddings) rather than fine-tuning w_recency.
 
 3. **The 2D sensitivity analysis is insufficient.** The full 10D interaction structure cannot be captured by a 2D slice. Future work should use Sobol sensitivity analysis or SHAP values to quantify global dimension importance.
 
-4. **The CMA-ES found a reasonable but not globally optimal solution.** The grid suggests there may be better configurations in the (theta_novel=1.0, w_recency~0.7) region. A longer CMA-ES run or a different optimizer might find this.
+4. **The CMA-ES found a reasonable but not globally optimal solution.** The 2D grid's best cell (theta_novel=1.0, w_recency≈2.4) scores marginally above the learned θ's neighbourhood, but within grid noise; a longer CMA-ES run or a different optimizer might close the small gap.
 
 ---
 

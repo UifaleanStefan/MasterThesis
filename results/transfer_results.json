@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "02e2041",
+    "git_sha": "568b0c3",
     "git_dirty": true,
-    "timestamp_utc": "2026-04-25T17:29:00+00:00",
+    "timestamp_utc": "2026-06-16T09:15:44+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -10,13 +10,13 @@
     "embedding_backend": "sentence-transformers",
     "seed": 42,
     "experiment": "graphmemory_v4_transfer",
-    "n_episodes_per_target": 30,
+    "n_episodes_per_target": 100,
     "k": 8,
     "in_distribution_cmaes": false
   },
   "experiment": "graphmemory_v4_transfer",
   "config": {
-    "n_episodes": 30,
+    "n_episodes": 100,
     "k": 8,
     "seed": 42,
     "in_distribution_cmaes": false
@@ -36,64 +36,38 @@
   "matrix": {
     "MultiHop_V4_zeroshot": {
       "MultiHopKeyDoor": {
-        "mean_reward": 0.15555555555555556,
-        "std_reward": 0.19044882124112195,
-        "mean_tokens": 1585.7,
-        "mean_memory_size": 8.933333333333334,
+        "mean_reward": 0.13999999999999999,
+        "std_reward": 0.1905747700652152,
+        "mean_tokens": 1552.66,
+        "mean_memory_size": 9.12,
         "mean_precision": 1.0,
-        "n_episodes": 30
+        "n_episodes": 100
       },
       "GoalRoom": {
-        "mean_reward": 0.6666666666666666,
-        "std_reward": 0.47946330148538413,
-        "mean_tokens": 51.1,
-        "mean_memory_size": 1.6666666666666667,
+        "mean_reward": 0.69,
+        "std_reward": 0.4648231987117317,
+        "mean_tokens": 47.29,
+        "mean_memory_size": 1.69,
         "mean_precision": null,
-        "n_episodes": 30
+        "n_episodes": 100
       },
       "HardKeyDoor": {
-        "mean_reward": 0.14444444444444443,
-        "std_reward": 0.16800231099791027,
-        "mean_tokens": 1361.5,
-        "mean_memory_size": 6.233333333333333,
+        "mean_reward": 0.1733333333333333,
+        "std_reward": 0.18028534559453013,
+        "mean_tokens": 1426.59,
+        "mean_memory_size": 6.66,
         "mean_precision": null,
-        "n_episodes": 30
+        "n_episodes": 100
       },
       "MegaQuestRoom": {
         "mean_reward": 0.0,
         "std_reward": 0.0,
-        "mean_tokens": 7584.433333333333,
-        "mean_memory_size": 13.133333333333333,
-        "mean_precision": 0.9432836496667633,
-        "n_episodes": 30
-      }
-    },
-    "MegaQuest_w_recency_clamp": {
-      "w_recency=0.50": {
-        "mean_reward": 0.0,
-        "std_reward": 0.0,
-        "mean_tokens": 7423.633333333333,
-        "mean_memory_size": 11.533333333333333,
-        "mean_precision": 0.9927587620414019,
-        "n_episodes": 30
-      },
-      "w_recency=1.00": {
-        "mean_reward": 0.0,
-        "std_reward": 0.0,
-        "mean_tokens": 7615.566666666667,
-        "mean_memory_size": 13.3,
-        "mean_precision": 0.93552611626779,
-        "n_episodes": 30
-      },
-      "w_recency=2.00": {
-        "mean_reward": 0.0,
-        "std_reward": 0.0,
-        "mean_tokens": 7515.533333333334,
-        "mean_memory_size": 12.933333333333334,
-        "mean_precision": 0.9779437470204989,
-        "n_episodes": 30
+        "mean_tokens": 7533.45,
+        "mean_memory_size": 12.65,
+        "mean_precision": 0.9616064503002855,
+        "n_episodes": 100
       }
     }
   },
-  "elapsed_s": 32.58956027030945
+  "elapsed_s": 32.188955307006836
 }
