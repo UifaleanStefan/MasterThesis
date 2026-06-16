@@ -54,7 +54,7 @@ construction is a learnable, task-adaptive object}. Concretely, this thesis:
   rather than raw accuracy.
 \end{itemize}
 
-\section{The central finding, stated honestly}
+\section{The central finding}
 Across the three stages the same claim holds: \emph{what an agent stores and how
 it scores retrieval can be learned, and the learned optimum is task-dependent}.
 In the grids the optimizer recovers visibly different $\thetavec$ per task and
@@ -63,18 +63,19 @@ ten-dimensional learnable memory reaches the top performance cluster, and a
 $\thetavec$ tuned for one long-haystack task generalizes within that task family
 but not across families. On six real long-context benchmarks, re-tuning
 $\thetavec$ on a corpus-cumulative objective yields a recency-independent memory
-whose end-of-corpus accuracy lift \textbf{survives on held-out questions for four
-of six benchmarks}, is honestly reported as non-significant on one, and is
-undefined-by-construction on another.
+whose end-of-corpus accuracy lift \textbf{survives held-out testing on two of the
+three domain-coherent benchmarks} (FinanceBench and CUAD; QASPER is
+non-significant); two further benchmarks serve as pre-registered
+domain-incoherent controls, and NarrativeQA's objective is undefined by
+construction.
 
-The single most important methodological lesson is the one the thesis applies to
-itself: a fixed full-context baseline (``dump everything into the prompt'') is,
-once measured correctly, \emph{accuracy-competitive} with learned selective
-memory. The honest argument for learnable, task-adaptive memory at this corpus
-scale is therefore \textbf{cost and scalability} --- it matches accuracy at
-roughly one-eighteenth of the token spend and does not break when the corpus
-exceeds the context window --- not a claim that selective retrieval is uniquely
-accurate.
+A second methodological result emerges from comparing learned selective memory
+against a fixed full-context baseline (``dump everything into the prompt''): once
+measured correctly, the two are \emph{accuracy-competitive}. The argument for
+learnable, task-adaptive memory at this corpus scale is therefore \textbf{cost
+and scalability} --- it matches accuracy at roughly one-eighteenth of the token
+spend and does not break when the corpus exceeds the context window --- rather
+than a claim that selective retrieval is uniquely accurate.
 
 \section{Thesis outline}
 Chapter~\ref{ch:background} reviews long-context retrieval, agent-memory
@@ -84,5 +85,5 @@ experimental settings, and the evaluation protocol. Chapter~\ref{ch:results}
 reports the experiments stage by stage. Chapter~\ref{ch:discussion} interprets
 the results, discusses threats to validity, and summarizes the adversarial
 self-audit. Chapter~\ref{ch:conclusion} concludes and lists future work. Four
-appendices give the reproducibility material, the full honesty audit, the
+appendices give the reproducibility material, the adversarial self-audit, the
 complete per-benchmark tables, and the data-preparation and judging details.

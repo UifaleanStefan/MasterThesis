@@ -87,7 +87,7 @@ link consecutive retained events and \emph{mention} edges link events to the
 entities they reference. Retrieval embeds the query, scores every node by
 Equation~\eqref{eq:score}, and returns the top $k$ (we use $k=8$ throughout
 unless stated). In the Stage-3 text variant \Vt{} the Bayesian entity gate is
-bypassed (\texttt{text\_mode\_entities=True}) so that document text is treated
+bypassed so that document text is treated
 uniformly; all other $\thetavec$ components are unchanged.
 Figure~\ref{fig:memgraph} illustrates how a learned $\thetavec$ produces a
 sparse, entity-centric graph where the fixed baseline produces a dense,
@@ -202,7 +202,6 @@ independent blind second pass over a stratified 180-question sample
 (\emph{substantial} agreement; $87.8\%$ of scores agree within one rubric level).
 Because both passes are Claude-class, this measures judge \emph{self-consistency}
 rather than cross-vendor or human agreement.
-All runs are seeded; every result
-JSON carries a provenance manifest (git SHA, embedding backend, dataset
-fingerprint), and a provenance auditor verifies queue-to-results parity for every
-cell.
+All runs are seeded, and every result carries a provenance record (commit
+identifier, embedding backend, and dataset fingerprint) that is automatically
+checked for consistency between the evaluation inputs and the reported outputs.

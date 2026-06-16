@@ -1,4 +1,4 @@
-% ---- Title page (Bocconi-style; fill the placeholders marked %% TODO) ----
+% ---- Title page ----
 \begin{titlepage}
 \centering
 {\scshape\large Bocconi University \par}
@@ -30,10 +30,10 @@ across grid worlds and six real long-context benchmarks. \par}
 \section*{Declaration}
 \noindent I declare that this thesis is my own work. All experiments are
 seeded and reproducible; every result reported here is backed by a committed
-result artifact with a provenance manifest (git SHA, embedding backend, dataset
-fingerprint). An adversarial self-audit (Appendix~\ref{app:honesty}) was run on
-the headline evaluation, and the corrected numbers are the ones reported
-throughout.
+artifact with a provenance manifest (commit identifier, embedding backend,
+dataset fingerprint). An adversarial self-audit (Appendix~\ref{app:honesty}) was
+applied to the headline evaluation, and the corrected numbers are the ones
+reported throughout.
 \vspace{20pt}
 
 \noindent Stefan Uifalean \\
@@ -68,10 +68,10 @@ zero-shot $\thetavec$-transfer, and sensitivity analysis; the ten-dimensional
 long-haystack task transfers to another but not across task families.
 \textbf{Stage~3} moves to real LLMs (a \texttt{gpt-4o-mini} answerer)
 doing corpus-cumulative question answering over \textbf{six} real long-context
-benchmarks, with a corpus-mode CMA-ES re-tuning of $\thetavec$ and an
-independent Claude cross-vendor judge.
+benchmarks, with a corpus-mode CMA-ES re-tuning of $\thetavec$ and a
+Claude cross-vendor judge.
 
-The central Stage-3 finding, stated honestly after an adversarial self-audit, is
+The central Stage-3 finding, established after an adversarial self-audit, is
 that \textbf{corpus-cumulative tuning shifts $\thetavec$ toward
 recency-independent, embedding-driven retrieval, producing an end-of-corpus
 accuracy lift that survives Holm-corrected held-out testing on two of the three
@@ -79,7 +79,7 @@ domain-coherent benchmarks} (FinanceBench, CUAD; QASPER is non-significant),
 while two pre-registered domain-incoherent controls also lift and NarrativeQA is
 undefined by construction. The tuning objective is a validated proxy for answer
 quality (recall@8 vs.\ judge score, pooled Spearman $\rho=0.69$). A full-context
-``dump-all'' baseline, once a truncation bug was fixed, is
-\emph{statistically tied} with selective retrieval on accuracy but roughly 18$\times$
-more expensive --- so the honest case for learned, task-adaptive memory at this
-scale is \textbf{efficiency and scalability}, not an accuracy cliff.
+``dump-all'' baseline is \emph{statistically tied} with selective retrieval on
+accuracy but roughly 18$\times$ more expensive --- so the case for learned,
+task-adaptive memory at this scale is \textbf{efficiency and scalability}, not an
+accuracy cliff.

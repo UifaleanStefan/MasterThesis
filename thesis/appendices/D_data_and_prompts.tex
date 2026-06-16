@@ -11,8 +11,8 @@ HotpotQA (\texttt{distractor} config), QASPER, CUAD (SQuAD-v2 JSON form),
 NarrativeQA (full books/screenplays), FinanceBench (SEC filings), LongMemEval
 (multi-session dialogue with session ids). NarrativeQA provides no
 paragraph-level gold relevance, so its \recallk{} tuning objective is undefined
-by construction. Full adapter notes and per-benchmark workarounds are in
-\texttt{docs/STAGE3\_DATA\_PREP.md}.
+by construction. Full adapter notes and per-benchmark workarounds are provided in
+the accompanying code repository.
 
 \section{Online and batch protocols}
 In \emph{online} (Protocol A) mode, after each document is ingested the agent is
@@ -20,7 +20,8 @@ asked that document's own questions, so the relevant text is recent. In
 \emph{batch} mode the same questions are re-asked at the end of the corpus
 against the full accumulated memory with $k{=}8$ selective retrieval, removing any
 recency cue. A separate calibration protocol (Protocol B) samples random
-questions at each document boundary to test when the agent honestly abstains.
+questions at each document boundary to test whether the agent abstains rather
+than fabricating an answer.
 
 \section{Judge rubric}
 The Claude cross-vendor judge scores each answer on a five-point scale,

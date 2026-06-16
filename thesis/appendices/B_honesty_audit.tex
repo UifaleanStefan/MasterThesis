@@ -1,10 +1,10 @@
-\chapter{Honesty and Corrections Audit}
+\chapter{Adversarial Self-Audit}
 \label{app:honesty}
 
-In June 2026 the Stage-3 evaluation was subjected to an adversarial self-audit.
-Five material issues were found and corrected in both the data and the write-up;
-the numbers reported in this thesis are the corrected ones. This appendix
-summarizes them; the full memo is \texttt{docs/PROFESSOR\_MEMO\_2026\_06\_12.md}.
+The Stage-3 evaluation was stress-tested with an adversarial self-audit that
+re-examined the headline claims, the data pipeline, and the statistical
+reporting. Five points required revision; the values reported throughout this
+thesis reflect those revisions, summarized below.
 
 \begin{enumerate}[leftmargin=1.6em]
   \item \textbf{Stage-2 ``\#1'' overclaim.} \Vfour{} at $0.178$ versus
@@ -37,9 +37,10 @@ one-by-one during the audit). Refusal and acknowledgment answers keep a
 rule-assisted score; the classifier was validated on a stratified 300-entry
 hand-checked sample (ACK $100/100$; refusal $98/100$; population-weighted
 score error $0.028$ over the rule-assisted pool). The provenance auditor reports
-the rule-assisted share ($\sim$40\% of lines) rather than implying every line is
-a bespoke judgment, and confirms zero duplicate question ids and
-queue-to-results parity for every cell.
+the rule-assisted share ($\sim$40\% of answers) rather than implying every answer
+is a bespoke judgment, and confirms no duplicate question identifiers and full
+consistency between evaluation inputs and reported scores for every
+configuration.
 
 \section*{Inter-rater reliability of the judge}
 To bound judge noise, a stratified 180-question sample (30 per benchmark,
@@ -52,6 +53,5 @@ $0.17$), so the residual disagreement is overwhelmingly one-level (e.g.\ $0.5$
 vs $0.75$) rather than gross. Both passes are Claude Opus-class 1M-context, so
 this measures judge \emph{test--retest reliability / self-consistency}, not
 cross-vendor agreement; a fully independent second-vendor or human rater remains
-future work. Reproduce with \texttt{python scripts/\_kappa\_sample.py} then
-\texttt{python evaluation/inter\_rater.py}
-(\texttt{results/stage3/kappa\_results.json}).
+future work. The sampling and inter-rater computation are reproducible from the
+accompanying code repository (\texttt{evaluation/inter\_rater.py}).

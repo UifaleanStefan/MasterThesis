@@ -1,10 +1,10 @@
 \chapter{Reproducibility}
 \label{app:repro}
 
-All experiments are seeded and reproducible from the public repository. Every
-result JSON carries a \texttt{\_manifest} sibling recording the git SHA, the
-embedding backend (\texttt{sentence-transformers/all-MiniLM-L6-v2} unless
-\texttt{EMBEDDING\_BACKEND=tfidf} is set explicitly), and a dataset fingerprint.
+All experiments are seeded and reproducible from the accompanying code
+repository. Every result carries a provenance manifest recording the commit
+identifier, the embedding backend (\texttt{all-MiniLM-L6-v2} unless a TF-IDF
+backend is selected explicitly), and a dataset fingerprint.
 
 \section*{Key commands}
 \begin{itemize}[leftmargin=1.4em]
@@ -18,7 +18,7 @@ embedding backend (\texttt{sentence-transformers/all-MiniLM-L6-v2} unless
   --benchmark <name> --config <cfg> --limit-docs <n>}; CMA-ES corpus tuning via
   \texttt{tuning/tune\_v4t\_corpus.py}.
   \item \textbf{Figures:} \texttt{python generate\_thesis\_figures.py}
-  (deterministic from the result JSONs).
+  (deterministic from the committed result files).
 \end{itemize}
 
 \section*{Verification}
@@ -28,8 +28,9 @@ embedding backend (\texttt{sentence-transformers/all-MiniLM-L6-v2} unless
   \item \texttt{python scripts/audit\_determinism.py} --- re-runs seeded
   evaluations and checks reproducibility.
   \item \texttt{python scripts/audit\_judge\_provenance.py} --- verifies every
-  judge line carries Claude provenance, zero duplicate question ids,
-  queue-to-results parity for every cell, and reports the rule-assisted share.
+  judged answer carries Claude provenance and no duplicate question identifiers,
+  checks consistency between evaluation inputs and reported scores for every
+  configuration, and reports the rule-assisted share.
 \end{itemize}
-A full command-by-command walkthrough is in \texttt{docs/THESIS\_HANDOFF.md}; the
-submission checklist is in \texttt{docs/FINALIZATION\_CHECKLIST.md}.
+A full command-by-command walkthrough is provided in the accompanying code
+repository.

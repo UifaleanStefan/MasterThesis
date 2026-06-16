@@ -14,17 +14,17 @@ memory whose end-of-corpus lift survives held-out testing on two of the three
 domain-coherent benchmarks (FinanceBench, CUAD), and the CUAD result holds when
 the corpus is scaled five-fold.
 
-\section{Efficiency, not accuracy, is the honest contribution}
-The most important lesson is the one the thesis applies to itself. The original
-narrative implied that selective retrieval was \emph{structurally necessary}
-because a full-context baseline ``collapsed'' at scale. The adversarial audit
-(Section~\ref{sec:threats}) traced that collapse to a truncation bug: the
-dump-all baseline had never actually received the full corpus. Once fixed,
+\section{Efficiency, not accuracy, is the central contribution}
+A natural hypothesis is that selective retrieval is \emph{structurally necessary}
+because a full-context baseline collapses at scale. The adversarial audit
+(Section~\ref{sec:threats}) shows this is not so: the apparent collapse was an
+artifact of a truncation bug in which the dump-all baseline never received the
+full corpus. Once corrected,
 dump-all is \emph{accuracy-competitive} with corpus-tuned selective memory. The
 defensible contribution is therefore that a small, learned, task-adaptive memory
 \emph{matches} full-context accuracy at roughly $1/18$th the token cost and
 degrades gracefully past the context window --- an efficiency-and-scalability
-argument, which is both more honest and more practically relevant than an
+argument, which is more practically relevant than an
 accuracy-cliff claim.
 
 \section{Why transfer fails across families}
@@ -53,13 +53,14 @@ designs.
 
 \section{Threats to validity and the adversarial self-audit}
 \label{sec:threats}
-A June-2026 adversarial self-audit found five material issues in the headline
+An adversarial self-audit found five material issues in the headline
 evaluation and corrected all of them; the full account is in
 Appendix~\ref{app:honesty}. In summary: (i) the Stage-2 ``\#1'' claim is a
 statistical tie and is reported as such; (ii) some headline cells were tuned on
 questions later reused at evaluation, so held-out splits were recomputed and the
 surviving lifts re-reported (FinanceBench survives at $+0.335$,
-$p_{\mathrm{holm}}<10^{-4}$; QASPER does not survive Holm correction); (iii) the
+$p_{\mathrm{holm}}<10^{-4}$, and CUAD at $+0.135$; QASPER does not survive Holm
+correction); (iii) the
 dump-all truncation bug was fixed, collapsing the accuracy claim to a tie; (iv)
 the ``four-shift'' signature is, after a \wgraph{} ablation, a three-shift; and
 (v) under-powered $n{=}10$ cells (HotpotQA, LongMemEval) were re-run at
@@ -78,11 +79,13 @@ tuning raises recall \emph{and} judge score together on every benchmark. The
 objective is therefore a valid proxy for answer quality; the residual gap (e.g.\
 QASPER, $\rho=0.39$) is where retrieved evidence is present but the answerer
 fails to use it.
-\textbf{Judge reliability:} answers are scored by a single (cross-vendor) Claude
-judge. An independent blind second pass over a stratified 180-question sample
-gives quadratic-weighted Cohen's $\kappa = 0.66$ (\emph{substantial} agreement;
-Appendix~\ref{app:honesty}), bounding judge noise; a fully independent
-second-vendor or human judge remains future work.
+\textbf{Judge reliability:} answers are scored by a single Claude judge
+(cross-vendor relative to the \texttt{gpt-4o-mini} answerer). A blind second pass
+over a stratified 180-question sample gives quadratic-weighted Cohen's
+$\kappa = 0.66$ (\emph{substantial}; Appendix~\ref{app:honesty}); because both
+passes are Claude-class, this bounds judge \emph{self-consistency} (test--retest),
+not independent inter-rater agreement. A second-vendor or human judge remains
+future work.
 \textbf{Model and encoder diversity:} the answerer is \texttt{gpt-4o-mini} and
 the embedding backend is MiniLM throughout; whether the efficiency advantage
 persists with a stronger answerer or a different encoder is untested.
@@ -93,9 +96,9 @@ would tighten confidence intervals rather than move point estimates.
 
 \section{Summary of claims and evidence strength}
 \label{sec:claims}
-To make the honest reading legible at a glance, Table~\ref{tab:claims} tiers the
-thesis's claims by the strength of the evidence behind them. We lead with the
-rock-solid results and report the weaker ones as exactly that.
+To make the evidence strength legible at a glance, Table~\ref{tab:claims} tiers
+the thesis's claims by the strength of the evidence behind them, leading with the
+rock-solid results and reporting the weaker ones as exactly that.
 
 \begin{table}[t]
 \centering
@@ -127,7 +130,7 @@ Corpus tuning helps on QASPER & \textbf{Not significant} & $+0.165$,
 \emph{n.s.} after Holm \\
 Corpus tuning helps on NarrativeQA & \textbf{Null by construction} & no
 paragraph-level gold; objective undefined \\
-The graph-traversal term carries retrieval load & \textbf{Refuted (honest)} &
+The graph-traversal term carries retrieval load & \textbf{Refuted} &
 \wgraph{} sweep flat; reframed as scaffold \\
 \bottomrule
 \end{tabular}

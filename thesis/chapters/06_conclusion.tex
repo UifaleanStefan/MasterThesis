@@ -21,7 +21,7 @@ correlate at pooled Spearman $\rho=0.69$.
 
 The work's distinctive feature is that it audits itself. The headline that a
 full-context baseline ``collapses'' was traced to a bug and corrected to an
-honest accuracy \emph{tie}; the contribution of learned, task-adaptive memory at
+accuracy \emph{tie}; the contribution of learned, task-adaptive memory at
 this scale is therefore reframed as one of \textbf{efficiency and scalability}
 --- matching full-context accuracy at roughly $1/18$th the cost --- rather than
 raw accuracy. Concretely, on FinanceBench the dump-all and selective answers are
@@ -65,7 +65,7 @@ out-of-distribution tasks where a fixed $\thetavec$ fails.
 \section{Closing}
 Memory for LLM agents need not be hand-designed and frozen. A small parameter
 vector that governs what to store and how to retrieve can be \emph{learned}, its
-optimum is \emph{task-dependent}, and --- measured honestly --- it buys
-efficiency and graceful scaling rather than a free accuracy lunch. That is a
+optimum is \emph{task-dependent}, and --- measured carefully --- it buys
+efficiency and graceful scaling rather than a free accuracy gain. That is a
 modest but defensible step toward agents that adapt not just their actions but
 the structure of their own memory.

@@ -34,7 +34,7 @@ Key-Door discards most events ($\theta_{\mathrm{store}}{=}0.12$) but preserves
 temporal order; Goal-Room stores everything. This is the first, cleanest
 evidence that the optimal memory structure is task-dependent
 (Figure~\ref{fig:stage1theta}). On the hardest task the learned rule lifts
-success from $2.5\%$ to $27.5\%$; we report this honestly as an absolute lift of
+success from $2.5\%$ to $27.5\%$; we report this as an absolute lift of
 $\sim$25 points (the baseline is near-zero, so a percentage-ratio framing would
 overstate it), on a single-seed proof of concept.
 
@@ -72,12 +72,12 @@ own untuned starting point, not that it is uniquely best.
 \paragraph{Ablation.} Removing each $\thetavec$ component one at a time
 (Figure~\ref{fig:ablation}) shows that $\theta_{\mathrm{novel}}$ is the
 dominant, load-bearing dimension: zeroing it collapses reward to $0$ (it gates
-the entire storage pipeline). Other components carry less, and---honestly---a
+the entire storage pipeline). Other components carry less, and a
 \wgraph{} sweep (Figure~\ref{fig:wgraph}) shows the graph-traversal term carries
-\emph{no} measurable load on this task: zeroing it barely changes reward. What
-was initially described as a ``four-shift'' signature of corpus tuning is, after
-this ablation, more accurately a three-shift; the graph term behaves as a typed
-storage scaffold rather than a relational retrieval engine.
+\emph{no} measurable load on this task: zeroing it barely changes reward. The
+corpus-tuning signature is therefore a three-shift rather than a four-shift; the
+graph term behaves as a typed storage scaffold rather than a relational retrieval
+engine.
 
 \begin{figure}[t]
   \centering
@@ -147,8 +147,9 @@ Of the three \emph{domain-coherent} benchmarks (where the hypothesis predicts a
 lift), two --- FinanceBench and CUAD --- show a held-out lift that survives Holm
 correction; QASPER does not. HotpotQA and LongMemEval are pre-registered
 \emph{domain-incoherent controls} (no lift predicted), and NarrativeQA's tuning
-objective is undefined by construction. We therefore lead with the honest count:
-\textbf{two of three coherent benchmarks show a significant end-of-corpus lift}.
+objective is undefined by construction. We therefore lead with the count that the
+design supports: \textbf{two of three coherent benchmarks show a significant
+end-of-corpus lift}.
 
 \begin{table}[t]
 \centering
@@ -196,7 +197,7 @@ competitive or better, so the lift is genuinely a batch-mode effect
   \label{fig:stage3lift}
 \end{figure}
 
-\paragraph{Per-benchmark reading (honest tiering).} The benchmarks do not all
+\paragraph{Per-benchmark reading.} The benchmarks do not all
 tell the same story, and we report them as tiered evidence rather than a uniform
 win. \textbf{FinanceBench} is the cleanest result: a held-out batch lift of
 $+0.335$ with $p_{\mathrm{holm}}<10^{-4}$, on questions the CMA-ES tuner never
@@ -207,7 +208,7 @@ pre-registered as domain-incoherent \emph{controls}; their batch lifts
 clean wins. \textbf{QASPER}'s pooled lift ($+0.165$) does \emph{not} survive Holm
 correction and is reported as non-significant. \textbf{NarrativeQA} has no
 paragraph-level gold, so the tuning objective is undefined and both
-configurations score identically by construction. The honest summary is
+configurations score identically by construction. In summary,
 \emph{two of three domain-coherent benchmarks (FinanceBench, CUAD) show a
 significant held-out lift}; the two domain-incoherent controls also lift (a point
 we return to in the Discussion), and NarrativeQA is null by construction --- one
@@ -222,8 +223,8 @@ tuned memory stores selectively and retrieves by \emph{semantic match}, not
 recency. This is precisely what end-of-corpus QA requires --- the answer was
 seen long ago, so a recency-driven retriever fetches the wrong (recent) document.
 The same direction of shift recurs across the benchmarks that improve, which is
-why we describe it as a \emph{signature} rather than a per-benchmark accident. We
-note honestly that a fourth apparent shift --- the graph weight rising
+why we describe it as a \emph{signature} rather than a per-benchmark accident. A
+fourth apparent shift --- the graph weight rising
 (\wgraph{}: $0 \rightarrow 1.6$) --- is \emph{not} load-bearing: the \wgraph{}
 ablation (Section~\ref{sec:stage2}) shows zeroing it barely changes accuracy, so
 the operative signature is a three-component shift (down-weight recency,
@@ -293,12 +294,12 @@ Configuration & Online & Batch & Gap \\
 \end{figure}
 
 \paragraph{The dump-all baseline: accuracy parity, not a cliff.} A full-context
-``dump-all'' baseline concatenates the entire accumulated corpus into the prompt.
-After fixing a truncation bug that had silently capped it at 12 events, dump-all
-on \FB{} scores $0.689$ online / $0.607$ batch --- \emph{statistically
+``dump-all'' baseline concatenates the entire accumulated corpus into the prompt,
+truncated only when it exceeds the context window. On \FB{} it scores $0.689$
+online / $0.607$ batch --- \emph{statistically
 indistinguishable} from corpus-tuned ($0.678$ / $0.645$; confidence intervals
 overlap heavily) --- but at roughly $18\times$ the token cost (\$2.68 vs.\ \$0.15
-per 150 questions). The honest conclusion is that the value of learned selective
+per 150 questions). The conclusion is that the value of learned selective
 memory at this corpus scale is \textbf{efficiency and scalability}, not a raw
 accuracy advantage: it matches dump-all's accuracy at a fraction of the cost and,
 unlike dump-all, does not break when the corpus exceeds the context window.
