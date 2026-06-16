@@ -209,3 +209,29 @@ per 150 questions). The honest conclusion is that the value of learned selective
 memory at this corpus scale is \textbf{efficiency and scalability}, not a raw
 accuracy advantage: it matches dump-all's accuracy at a fraction of the cost and,
 unlike dump-all, does not break when the corpus exceeds the context window.
+
+\paragraph{Scalability: dump-all structurally breaks; selective memory does not.}
+The efficiency argument is not merely about cost --- past a corpus size, dump-all
+\emph{cannot run at all}, while selective retrieval is unaffected. We measure this
+directly on CUAD (Figure~\ref{fig:scalability}). Each contract averages
+$\sim$10.9K tokens, so the concatenated dump-all prompt grows $O(N)$ and crosses
+\texttt{gpt-4o-mini}'s 128K-token context window at just \textbf{$N\approx 11$
+contracts}; at the full $N{=}510$ it would require \textbf{5.55M tokens,
+$\approx$43$\times$ the limit}, forcing truncation that discards most of the
+evidence. Selective retrieval ($k{=}8$) holds its prompt at a measured mean of
+\textbf{704 tokens regardless of $N$}. This is the structural case for learned
+selective memory: beyond a few documents, retrieving the right $k$ items is not an
+optimization but a necessity, and the only open question is how good the retrieval
+policy is --- which is exactly what $\thetavec$ tunes.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig_stage3_scalability.png}
+  \caption{Answer-prompt size versus corpus size on CUAD (log scale). The
+  full-context dump-all prompt grows linearly and exceeds the answerer's
+  128K-token context at $N\approx 11$ contracts (reaching $\approx$43$\times$ the
+  limit at $N{=}510$); selective retrieval stays flat at $\sim$704 tokens. Beyond
+  $N\approx 11$, dump-all must truncate and lose evidence; selective memory is
+  unaffected.}
+  \label{fig:scalability}
+\end{figure}
