@@ -5,6 +5,42 @@
 
 ---
 
+## -25. Adversarial self-audit + remediation (June 12 2026)
+
+A 45-agent adversarial critique of the entire Stage-3 evaluation found 5 material
+issues; all addressed in data + write-up. **This entry supersedes the "82,866
+hand-judged" / "dump-all 0.037" / "four-shift" framing in the older entries
+below — those describe the pre-audit state.** Corrected, honest state:
+
+- **Judging is two-tier, not all hand-done.** ~53% of the (now 83,883) judge
+  lines were rule-assisted (refusal/ack classifier). The **~9,500
+  content-templated entries were re-judged one-by-one by Claude** (Opus-class,
+  1M) with an adversarial verifier (`judge_pass=2_manual`); the ~32k
+  refusal/ack entries keep rule-assisted scores, **validated on a 300-sample**
+  (ACK 100/100, REF 98/100, population-weighted error **0.028**;
+  `results/stage3/_judge_workdir/c2_validation_summary.json`).
+- **Dump-all "collapse" was a cap bug.** `agent/context_formatter.py` capped
+  prompts at 12 events. Fixed + re-run: FB dump-all **0.607–0.689**,
+  statistically tied with corpus-tuned on accuracy, ~18× costlier. Headline
+  reframed to cost, not accuracy. (QASPER dump-all 0.037 disclosed as the same
+  uncorrected cap artifact; Protocol-B dump-all calibration not re-run, disclosed.)
+- **Contamination → held-out splits.** Corpus-tuning lift recomputed on held-out
+  questions: survives FB (+0.335 p_holm<1e-4), CUAD (+0.135), HotpotQA (+0.540),
+  LongMemEval (+0.165); **n.s. on QASPER** (`holdout_split_summary.json`).
+- **Four-shift → three-shift.** `w_graph=0` ablation: graph term carries ~no
+  retrieval load; MiniLM re-tune reproduces most shifts from the encoder alone.
+- **n=10 → n=100.** HotpotQA/LongMemEval re-tuned + re-run at 100-document scale.
+- **Stage-2 demotion.** "GraphMemoryV4 #1 (0.178 vs 0.173)" → statistical tie.
+- **Audit hardened.** `audit_judge_provenance.py` now reports the rule-assisted
+  share (~40%); checks 0 duplicate *qids* (rationales are templated for the
+  refusal tier, by design).
+- **Docs.** New `THESIS.md` master spine (abstract + 3-stage synthesis +
+  conclusion); `PROFESSOR_MEMO_2026_06_12.md` (supersedes June-10);
+  chapter §6.5/§4.4/§6.5.3/§6.5.4 + Stage-2 result docs corrected.
+
+Verification: pytest 214/214, determinism OK, provenance audit green (83,883
+lines, 0 dup qids, 313 cells parity).
+
 ## -24. Chapter §7.5: correct judge count 64,726→82,866 + CUAD Protocol B final status (June 10 2026)
 
 **§7.5 stale numbers fixed.** Two errors in the §7.5 "What shipped" bullet corrected:

@@ -1,3 +1,8 @@
+> **⚠️ SUPERSEDED (two generations old).** This May-28 memo predates the final
+> evaluation and the June-12 honesty audit. Its "four-shift" and judge-count
+> figures are outdated. Read `PROFESSOR_MEMO_2026_06_12.md` (current) and
+> `THESIS.md` for the corrected numbers.
+
 # Bocconi Master's Thesis — Stage 3 Memo
 
 **To:** Prof. [Professor name]
