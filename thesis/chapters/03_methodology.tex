@@ -46,7 +46,37 @@ $\thetavec \approx (\theta_{\mathrm{store}}{=}0.35,\,
 \theta_{\mathrm{novel}}{=}0.44,\, \theta_{\mathrm{temporal}}{=}0.73,\,
 \theta_{\mathrm{decay}}{=}0.72,\, w_{\mathrm{graph}}{=}1.19,\,
 w_{\mathrm{embed}}{=}1.31,\, w_{\mathrm{recency}}{=}1.21)$ (remaining components
-omitted for brevity).
+omitted for brevity). Table~\ref{tab:notation} summarizes the full notation used
+throughout the thesis.
+
+\begin{table}[t]
+\centering
+\caption{Notation. The first ten rows are the components of $\thetavec$ (jointly
+optimized); the remainder are evaluation symbols.}
+\label{tab:notation}
+\small
+\begin{tabular}{l p{0.66\linewidth}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\theta_{\mathrm{store}}$ & base storage propensity (bias on the write decision) \\
+$\theta_{\mathrm{novel}}$ & weight on novelty (distance from already-stored events) in the write decision \\
+$\theta_{\mathrm{surprise}}$ & weight on prediction-surprise in the write decision \\
+$\theta_{\mathrm{erich}}$ & weight on the learned importance/enrichment score \\
+$\theta_{\mathrm{entity}}$ & entity-node creation threshold \\
+$\theta_{\mathrm{temporal}}$ & temporal-edge creation probability \\
+$\theta_{\mathrm{decay}}$ & exponential decay rate applied to node weights over time \\
+$w_{\mathrm{graph}}$ & retrieval weight on the graph-traversal signal $g$ \\
+$w_{\mathrm{embed}}$ & retrieval weight on embedding cosine similarity \\
+$w_{\mathrm{recency}}$ & retrieval weight on the recency term $\rho$ \\
+\midrule
+$\thetavec$ & the full 10-D parameter vector (all rows above) \\
+$s(e,q)$ & retrieval score of event $e$ for query $q$ (Eq.~\ref{eq:score}) \\
+recall@$k$ & fraction of gold evidence retrieved in the top $k$ (CMA-ES objective) \\
+\Vt{} & the corpus-mode text variant of \Vfour{} used in Stage~3 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Graph-memory architecture}
 \label{sec:graphmem}

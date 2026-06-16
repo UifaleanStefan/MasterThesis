@@ -13,15 +13,24 @@ $27.5\%$ success. On a twelve-system benchmark a ten-dimensional learnable memor
 reached the top performance cluster, and a tuned $\thetavec$ generalized within
 but not across task families. On six real long-context LLM benchmarks,
 corpus-cumulative tuning produced a recency-independent memory whose
-end-of-corpus accuracy lift survived held-out testing on four of six benchmarks
-and held when CUAD was scaled from ten to fifty contracts.
+end-of-corpus accuracy lift survived held-out testing on two of the three
+domain-coherent benchmarks (FinanceBench, CUAD; QASPER did not survive Holm
+correction) and held when CUAD was scaled from ten to fifty contracts. The
+tuning objective is a valid proxy for answer quality: recall@8 and judge score
+correlate at pooled Spearman $\rho=0.69$.
 
 The work's distinctive feature is that it audits itself. The headline that a
 full-context baseline ``collapses'' was traced to a bug and corrected to an
 honest accuracy \emph{tie}; the contribution of learned, task-adaptive memory at
 this scale is therefore reframed as one of \textbf{efficiency and scalability}
 --- matching full-context accuracy at roughly $1/18$th the cost --- rather than
-raw accuracy.
+raw accuracy. Concretely, on FinanceBench the dump-all and selective answers are
+statistically non-inferior (overlapping bootstrap CIs, $0.607$--$0.689$ vs.\ the
+tuned cell) while the selective prompt stays flat at $\sim$704 tokens where
+dump-all exceeds the 128K context window at $N{\approx}11$ CUAD contracts and
+reaches $43\times$ the tokens at the full $N{=}510$. The one-time CMA-ES tuning
+cost --- no LLM in the loop, only \recallk{} --- was approximately \$18.5 of
+compute per benchmark, amortized over all subsequent queries.
 
 \section{Limitations}
 The Stage-1 results are single-seed. Several Stage-3 cells are single-seed
@@ -30,10 +39,16 @@ replication of the larger benchmarks remains future work; corpus-mode evaluation
 is near-deterministic at temperature~0, so the gain would be CI tightening, not a
 point-estimate change). CUAD is now evaluated on 50 of its 510 contracts for the
 headline pair; the auxiliary baselines remain at the 10-contract pilot scale.
-Answers are judged by a single (cross-vendor) Claude judge; a second independent
-judge and an inter-judge agreement coefficient remain future work, and
-refusal/acknowledgment answers carry validated rule-assisted scores rather than
-one-by-one judgments.
+Answers are judged by a single (cross-vendor) Claude judge; an independent blind
+second pass over a stratified 180-question sample gives quadratic-weighted
+Cohen's $\kappa=0.66$ (\emph{substantial}), but because both passes are
+Claude-class this bounds judge \emph{self-consistency}, not cross-vendor or human
+agreement --- a fully independent second-vendor or human rater remains future
+work. Refusal/acknowledgment answers carry validated rule-assisted scores
+(population-weighted error $0.028$ on a 300-entry hand-checked sample) rather
+than one-by-one judgments. Finally, all Stage-3 results use a single answerer
+(\texttt{gpt-4o-mini}) and a single encoder (MiniLM); generalization across
+models and encoders is untested.
 
 \section{Future work}
 Natural extensions are: (i) multi-seed replication of the larger Stage-3 cells;
