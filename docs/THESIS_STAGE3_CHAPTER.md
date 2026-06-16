@@ -1800,7 +1800,7 @@ FB 12×150, QASPER 9×94, CUAD 9×132, HQA 9×10, LME 9×10, NQA 12×10):
 | FinanceBench (§6.5.1) | 0.243 | 0.645 | **+0.402** |
 | HotpotQA (n=100)⁵ | 0.215 | **0.755** | **+0.540** |
 | QASPER (§6.5.2) | 0.250 | 0.415 | **+0.165** |
-| **CUAD (n=132, full)** | **0.023** | **0.184** | **+0.161** |
+| **CUAD (n=644, 50 contracts)** | **0.028** | **0.172** | **+0.144** |
 | LongMemEval (n=100)⁵ | 0.165 | 0.330 | **+0.165** |
 | NarrativeQA | 0.400 | 0.400 | 0.000⁴ |
 
@@ -1816,21 +1816,23 @@ were pre-registered as domain-incoherent *controls*; the honest reading is that
 corpus-tuning still transfers a batch-mode lift to them, not that they are
 clean wins.
 
-CUAD's lift (+0.161) holds at roughly the same level as QASPER (+0.165)
-despite the batch mode facing a severe **context-bleed problem**: the
-v4t-canonical batch mean (0.023) is near-zero because the memory system,
-after ingesting all 10 contracts, retrieves EKR/PPI promissory note context
-for unrelated contracts (doc0–doc7). Corpus-tuned θ — with its `w_embed`
-boost and near-zero `w_recency` — partially corrects this by favouring
-semantic similarity over recency, recovering to 0.184.
+CUAD's lift (+0.144, now measured at the **50-contract scale**, n=644) holds at
+roughly the same level as QASPER (+0.165) despite the batch mode facing a severe
+**context-bleed problem**: the v4t-canonical batch mean (0.028) is near-zero
+because the memory system, after ingesting all 50 contracts, retrieves
+promissory-note / wrong-contract context for unrelated contracts. Corpus-tuned θ
+— with its `w_embed` boost and near-zero `w_recency` — partially corrects this by
+favouring semantic similarity over recency, recovering to 0.172. (The lift was
++0.161 at the earlier 10-contract scale, so it holds at 5× the corpus; see the
+scalability analysis.)
 
 **CUAD's most striking finding is the online-vs-batch gap:**
 
 | Config | Online | Batch | Gap |
 |---|---:|---:|---:|
-| V4ₜ canonical | 0.212 | 0.023 | +0.189 |
+| V4ₜ canonical | 0.295 | 0.028 | +0.267 |
 | V4ₜ per-doc tuned | **0.409** | 0.125 | +0.284 |
-| V4ₜ corpus-tuned | 0.261 | 0.184 | +0.077 |
+| V4ₜ corpus-tuned | 0.390 | 0.172 | +0.218 |
 
 The online mode gap is far larger on CUAD than on any other benchmark.
 When the memory system processes each contract individually (online mode),

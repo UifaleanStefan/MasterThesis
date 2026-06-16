@@ -197,6 +197,22 @@ paragraph-level gold, so the tuning objective is undefined and both
 configurations score identically by construction. The honest summary is
 \emph{four of six survive}, with one consistent mechanism throughout.
 
+\paragraph{The corpus-tuning signature.} The lift has a clear mechanistic
+explanation in how $\thetavec$ shifts under corpus-cumulative tuning. On
+FinanceBench the recency weight collapses (\wrec{}: $3.78 \rightarrow 0.003$),
+the embedding weight rises (\wembed{}: $1.08 \rightarrow 2.63$), and the storage
+threshold tightens ($\theta_{\mathrm{store}}$: $0.29 \rightarrow 0.01$): the
+tuned memory stores selectively and retrieves by \emph{semantic match}, not
+recency. This is precisely what end-of-corpus QA requires --- the answer was
+seen long ago, so a recency-driven retriever fetches the wrong (recent) document.
+The same direction of shift recurs across the benchmarks that improve, which is
+why we describe it as a \emph{signature} rather than a per-benchmark accident. We
+note honestly that a fourth apparent shift --- the graph weight rising
+(\wgraph{}: $0 \rightarrow 1.6$) --- is \emph{not} load-bearing: the \wgraph{}
+ablation (Section~\ref{sec:stage2}) shows zeroing it barely changes accuracy, so
+the operative signature is a three-component shift (down-weight recency,
+up-weight embedding, tighten storage), with the graph term inert.
+
 \paragraph{CUAD scaled from 10 to 50 contracts.} To check that the CUAD lift is
 not an artifact of a tiny corpus, the headline pair was re-run and re-judged
 one-by-one at 50 contracts ($n{=}644$ questions per cell, up from $132$). The
