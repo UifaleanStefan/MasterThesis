@@ -141,6 +141,16 @@ optimal `w_graph` is open and deferred to Stage 3 / future work.
 > EpisodicSemantic ordering. The defensible Stage-2 claim is that the 10-D V4
 > parameterization **reaches the top cluster** (a +75% jump from its untuned
 > #8 position), not that it is uniquely #1.
+>
+> **θ currency.** The "best θ" table and the `w_graph = 0` analysis in this
+> document report the **TF-IDF-era** θ (`theta_novel=0.908`, `w_graph=0.000`,
+> `w_recency=3.777`). The committed `results/graphmemory_v4_cmaes_results.json`
+> is the later **MiniLM** re-tune (`theta_novel=0.442`, `w_graph=1.188`,
+> `w_recency=1.207`), so the specific value "`w_graph` optimizes to exactly 0"
+> is TF-IDF-specific. The *finding* that the graph term carries ≈0 measurable
+> load survives — zeroing it via ablation barely changes reward (the
+> four-shift→three-shift correction in `PROFESSOR_MEMO_2026_06_12.md`) — but
+> the MiniLM optimum does not set it to zero.
 
 ---
 
