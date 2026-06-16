@@ -75,7 +75,15 @@ undifferentiated one.
 
 \section{Optimization}
 Because storage is discrete and the objective is non-differentiable, we optimize
-$\thetavec$ with a derivative-free search. Stage~1 uses a simple Evolution
+$\thetavec$ with a derivative-free search. CMA-ES \citep{hansen2016cmaes} is
+well-suited to this regime: the search space is low-dimensional (ten continuous
+parameters), the objective is noisy (stochastic episodes and sampled questions)
+and non-differentiable (storage is a discrete write decision), and each
+evaluation is moderately expensive. Gradient methods do not apply; Bayesian
+optimization \citep{snoek2012bayesopt} offers little advantage at this
+dimensionality, whereas CMA-ES's covariance adaptation copes with the
+anisotropic, sharply-peaked landscape we observe empirically in the sensitivity
+analysis (Section~\ref{sec:stage2}). Stage~1 uses a simpler Evolution
 Strategy (12 generations $\times$ 6 candidates $\times$ 40 episodes). Stages~2--3
 use CMA-ES \citep{hansen2016cmaes} (30 generations $\times$ 50 episodes per
 candidate for the benchmark; a corpus-mode variant for Stage~3). In Stage~3 the

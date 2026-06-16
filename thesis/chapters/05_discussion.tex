@@ -66,6 +66,60 @@ $n{=}100$ and re-framed as pre-registered domain-incoherent controls.
 Judging is two-tier and disclosed: content answers are judged one-by-one by the
 Claude cross-vendor judge, while refusal/acknowledgment answers keep a validated
 rule-assisted score (population-weighted error $0.028$ on a stratified 300-entry
-hand-checked sample). Remaining limitations --- single-seed cells, a single
-judge, and a subset-of-corpus scope on some benchmarks --- are listed as future
-work in Chapter~\ref{ch:conclusion}.
+hand-checked sample). Beyond those five, four further threats are stated plainly. \textbf{Construct
+validity:} CMA-ES is tuned on a \recallk{} retrieval objective, while the
+headline is LLM answer quality; the two are correlated but not identical, so a
+$\thetavec$ that maximizes recall need not maximize answer accuracy.
+\textbf{Judge diversity:} answers are scored by a single (cross-vendor) Claude
+judge; inter-rater reliability against a second rater (Cohen's $\kappa$ on a
+stratified sample) is reported in Appendix~\ref{app:honesty} where available and
+is otherwise flagged as the principal outstanding rigor item.
+\textbf{Model and encoder diversity:} the answerer is \texttt{gpt-4o-mini} and
+the embedding backend is MiniLM throughout; whether the efficiency advantage
+persists with a stronger answerer or a different encoder is untested.
+\textbf{Statistical power:} Stage~1--2 and several Stage-3 corpus cells are
+single-seed (HotpotQA and LongMemEval were re-run at $n{=}100$); the corpus-mode
+evaluation is near-deterministic at temperature~0, so multi-seed replication
+would tighten confidence intervals rather than move point estimates.
+
+\section{Summary of claims and evidence strength}
+\label{sec:claims}
+To make the honest reading legible at a glance, Table~\ref{tab:claims} tiers the
+thesis's claims by the strength of the evidence behind them. We lead with the
+rock-solid results and report the weaker ones as exactly that.
+
+\begin{table}[t]
+\centering
+\caption{The thesis's claims, tiered by evidence strength. ``Held-out''
+means evaluated on questions the CMA-ES tuner never saw; ``Holm'' denotes
+family-wise multiple-comparison correction.}
+\label{tab:claims}
+\small
+\begin{tabular}{p{0.40\linewidth} l p{0.32\linewidth}}
+\toprule
+Claim & Strength & Evidence \\
+\midrule
+Corpus tuning lifts end-of-corpus accuracy (FinanceBench) & \textbf{Rock-solid}
+& Held-out $+0.335$, $p_{\mathrm{holm}}<10^{-4}$ \\
+The same lift holds on CUAD, including at 50 contracts & \textbf{Significant}
+& Held-out $+0.135$; 50-doc batch $+0.144$ \\
+The optimal $\thetavec$ is task-dependent (visibly different per task) &
+\textbf{Solid} & Stage-1 vectors; within- vs across-family transfer \\
+Selective memory matches dump-all accuracy at $\sim$1/18 the cost &
+\textbf{Solid} & FB dump-all $0.607$--$0.689$, CIs overlap; cost \$2.68 vs \$0.15 \\
+The 10-D parameterization reaches the top cluster (Stage 2) &
+\textbf{Qualified} & $0.178$ vs $0.173$: a statistical tie, CIs overlap \\
+Corpus tuning helps on HotpotQA / LongMemEval &
+\textbf{Directional} & $n{=}100$; pre-registered domain-incoherent controls \\
+Corpus tuning helps on QASPER & \textbf{Not significant} & $+0.165$,
+\emph{n.s.} after Holm \\
+Corpus tuning helps on NarrativeQA & \textbf{Null by construction} & no
+paragraph-level gold; objective undefined \\
+The graph-traversal term carries retrieval load & \textbf{Refuted (honest)} &
+\wgraph{} sweep flat; reframed as scaffold \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Remaining limitations are carried forward as future work in
+Chapter~\ref{ch:conclusion}.
