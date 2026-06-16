@@ -117,13 +117,27 @@ it against the MiniLM-era baseline with a noise floor.
 
 ---
 
+## Completed since the first draft of this memo
+
+- **Refusal-classifier sample validation (done).** A stratified 300-entry
+  sample, re-judged by Claude blind to the kept score, gives near-exact
+  agreement (ACK abstentions 100/100, refusals 98/100) and a
+  **population-weighted score error of 0.028** over the ~32k rule-assisted
+  entries — they do not materially move any cell mean.
+- **HotpotQA / LongMemEval held-out (done).** θ re-tuned at 100 documents and
+  re-run on the larger held-out set, replacing the underpowered n=10 cells. The
+  batch (end-of-corpus) lift holds: **HotpotQA 0.215→0.755 (+0.540), LongMemEval
+  0.165→0.330 (+0.165)**; online (recency-favoring) is a tie/slight loss,
+  confirming the gain is a batch-mode effect, not a uniform win. Reported as
+  what these domain-incoherent controls actually show.
+- **Audit hardened (done).** `audit_judge_provenance.py` now reports the
+  rule-assisted refusal/ack share (≈40%) and templated-rationale rate rather
+  than implying every line is bespoke.
+
 ## Remaining / future work (disclosed, not hidden)
 
-- **Refusal-classifier sample validation** — hand-judge a stratified 300-entry
-  sample of the kept rule-assisted scores to bound their error.
-- **HotpotQA / LongMemEval held-out** — re-tune θ at 100 docs and re-run on
-  disjoint documents for a clean (non-incoherent-control) held-out number.
-- **Dump-all Protocol-B calibration re-run** (deferred, disclosed).
+- **Dump-all Protocol-B calibration re-run** (deferred, disclosed — does not
+  affect the headline, which rests on the re-run Protocol-A numbers).
 - **Multi-seed corpus replication** (compute is cheap; judging volume is the
   constraint).
 
