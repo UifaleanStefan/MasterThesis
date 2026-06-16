@@ -342,11 +342,18 @@ def fig_transfer_annotated():
     rewards = [matrix[e]["mean_reward"] for e in envs]
     tokens  = [matrix[e]["mean_tokens"] for e in envs]
 
-    annotations = {
-        "MultiHopKeyDoor": "In-distribution\n(training env)",
-        "GoalRoom":        "Strong transfer\n(simpler task)",
-        "HardKeyDoor":     "Moderate transfer\n(similar difficulty)",
-        "MegaQuestRoom":   "Complete failure\n(OOD: 10x harder)",
+    # Short interpretive labels, shown INSIDE each cell stacked under the value.
+    # They are not placed under the x-axis: the columns are only ~1.4in wide, so
+    # a phrase like "complete failure (OOD)" rendered as a tick label overflows
+    # and collides with the neighbouring column. The cell itself spans the full
+    # panel height, so stacking the phrase below the value is overflow-safe.
+    # Phrases are pre-wrapped to short stacked lines (longest line ~13 chars) so
+    # they fit within the ~1.1in column width and never run into a neighbour.
+    short_annot = {
+        "MultiHopKeyDoor": "in-\ndistribution",
+        "GoalRoom":        "strong\ntransfer",
+        "HardKeyDoor":     "moderate\ntransfer",
+        "MegaQuestRoom":   "complete\nfailure (OOD)",
     }
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
@@ -358,16 +365,28 @@ def fig_transfer_annotated():
     im = ax1.imshow(reward_arr, cmap=cmap, vmin=0, vmax=max(rewards) * 1.1,
                     aspect="auto")
     ax1.set_xticks(range(len(envs)))
-    ax1.set_xticklabels([e.replace("KeyDoor", "\nKeyDoor") for e in envs], fontsize=9)
+
+    def _wrap_env(e):
+        return e.replace("KeyDoor", "\nKeyDoor").replace("QuestRoom", "\nQuestRoom")
+
+    # x-axis carries only the (wrapped) environment name.
+    ax1.set_xticklabels([_wrap_env(e) for e in envs], fontsize=9)
     ax1.set_yticks([0])
     ax1.set_yticklabels(["V4 theta\n(MultiHop)"], fontsize=9)
     ax1.set_title("Zero-Shot Transfer — Mean Reward")
     plt.colorbar(im, ax=ax1, label="Mean Reward", shrink=0.6)
 
+    # Each cell: large reward value, with the short interpretive phrase stacked
+    # just below it. Value sits slightly above the row centre, phrase below —
+    # both centred horizontally, so nothing overflows into adjacent columns.
     for j, (env, r) in enumerate(zip(envs, rewards)):
-        ax1.text(j, 0, f"{r:.3f}\n\n{annotations[env]}",
-                 ha="center", va="center", fontsize=8.5,
-                 color="white" if r < 0.15 else "black", fontweight="bold")
+        txt_color = "white" if r < 0.15 else "black"
+        ax1.text(j, -0.15, f"{r:.3f}",
+                 ha="center", va="center", fontsize=15,
+                 color=txt_color, fontweight="bold")
+        ax1.text(j, 0.20, short_annot[env],
+                 ha="center", va="center", fontsize=8,
+                 color=txt_color, linespacing=1.15)
 
     # ── right: token cost bar ──
     bar_colors = [GREEN if e != "MegaQuestRoom" else RED for e in envs]
