@@ -1,0 +1,115 @@
+{
+  "n_pairs": 2170,
+  "pooled_spearman": 0.685,
+  "pooled_pearson": 0.579,
+  "per_benchmark": {
+    "CUAD": {
+      "n": 1288,
+      "spearman": 0.638
+    },
+    "FinanceBench": {
+      "n": 300,
+      "spearman": 0.615
+    },
+    "HotpotQA": {
+      "n": 200,
+      "spearman": 0.84
+    },
+    "LongMemEval": {
+      "n": 200,
+      "spearman": 0.601
+    },
+    "QASPER": {
+      "n": 182,
+      "spearman": 0.388
+    }
+  },
+  "binned_mean_judge_by_recall": {
+    "0": {
+      "mean_judge": 0.1,
+      "n": 1686
+    },
+    "(0,.25]": {
+      "mean_judge": null,
+      "n": 0
+    },
+    "(.25,.5]": {
+      "mean_judge": null,
+      "n": 0
+    },
+    "(.5,.75]": {
+      "mean_judge": null,
+      "n": 0
+    },
+    "(.75,1)": {
+      "mean_judge": null,
+      "n": 0
+    },
+    "1.0": {
+      "mean_judge": 0.619,
+      "n": 484
+    }
+  },
+  "causal_chain_canonical_to_corpus_tuned": {
+    "CUAD": {
+      "canonical": {
+        "recall": 0.013975155279503106,
+        "judge": 0.027950310559006212,
+        "n": 644
+      },
+      "corpus-tuned": {
+        "recall": 0.06521739130434782,
+        "judge": 0.171972049689441,
+        "n": 644
+      }
+    },
+    "FinanceBench": {
+      "canonical": {
+        "recall": 0.22,
+        "judge": 0.24333333333333335,
+        "n": 150
+      },
+      "corpus-tuned": {
+        "recall": 0.9666666666666667,
+        "judge": 0.645,
+        "n": 150
+      }
+    },
+    "HotpotQA": {
+      "canonical": {
+        "recall": 0.11,
+        "judge": 0.215,
+        "n": 100
+      },
+      "corpus-tuned": {
+        "recall": 1.0,
+        "judge": 0.755,
+        "n": 100
+      }
+    },
+    "LongMemEval": {
+      "canonical": {
+        "recall": 0.1,
+        "judge": 0.165,
+        "n": 100
+      },
+      "corpus-tuned": {
+        "recall": 0.88,
+        "judge": 0.33,
+        "n": 100
+      }
+    },
+    "QASPER": {
+      "canonical": {
+        "recall": 0.0989010989010989,
+        "judge": 0.24725274725274726,
+        "n": 91
+      },
+      "corpus-tuned": {
+        "recall": 0.4065934065934066,
+        "judge": 0.4065934065934066,
+        "n": 91
+      }
+    }
+  }
+}

@@ -10,8 +10,9 @@ memory is competitive on a real benchmark and that the parameters are
 interpretable: $\theta_{\mathrm{novel}}$ gates storage, \wrec{} and \wembed{}
 trade off recency against semantics. Stage~3 shows the idea survives contact with
 real LLMs and real corpora: corpus-cumulative tuning yields a recency-independent
-memory whose end-of-corpus lift survives held-out testing on four of six
-benchmarks, and the CUAD result holds when the corpus is scaled five-fold.
+memory whose end-of-corpus lift survives held-out testing on two of the three
+domain-coherent benchmarks (FinanceBench, CUAD), and the CUAD result holds when
+the corpus is scaled five-fold.
 
 \section{Efficiency, not accuracy, is the honest contribution}
 The most important lesson is the one the thesis applies to itself. The original
@@ -68,8 +69,15 @@ Claude cross-vendor judge, while refusal/acknowledgment answers keep a validated
 rule-assisted score (population-weighted error $0.028$ on a stratified 300-entry
 hand-checked sample). Beyond those five, four further threats are stated plainly. \textbf{Construct
 validity:} CMA-ES is tuned on a \recallk{} retrieval objective, while the
-headline is LLM answer quality; the two are correlated but not identical, so a
-$\thetavec$ that maximizes recall need not maximize answer accuracy.
+headline is LLM answer quality. These are distinct constructs, but we verify the
+link directly rather than assume it: across $2{,}170$ questions in five
+benchmarks, recall@8 and judge score correlate at pooled Spearman $\rho=0.69$
+(Chapter~\ref{ch:results}, Figure~\ref{fig:recalljudge}), questions with full
+recall average a judge score of $0.62$ versus $0.10$ at zero recall, and corpus
+tuning raises recall \emph{and} judge score together on every benchmark. The
+objective is therefore a valid proxy for answer quality; the residual gap (e.g.\
+QASPER, $\rho=0.39$) is where retrieved evidence is present but the answerer
+fails to use it.
 \textbf{Judge reliability:} answers are scored by a single (cross-vendor) Claude
 judge. An independent blind second pass over a stratified 180-question sample
 gives quadratic-weighted Cohen's $\kappa = 0.66$ (\emph{substantial} agreement;
