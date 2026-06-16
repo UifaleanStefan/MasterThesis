@@ -62,3 +62,13 @@ data/benchmarks/
 results/stage3/corpus_traces/qasper__*__calibration/
 # Large QASPER dump-all queue files (106+ MB, exceed GitHub limit)
 results/stage3/judge_queue/qasper__dump-all__*calib*/queue.jsonl
+
+# Stray log files (e.g. accidental redirects)
+*.log
+# Local Claude Code session/settings + git worktrees — never part of the repo
+.claude/
+# Local submission deliverables (the PDF lives at thesis/main.pdf; these are
+# packaged copies + zip, regenerated on demand)
+/submission/
+/Uifalean_Stefan_3310360_MSc_AI_Thesis_submission/
+/Uifalean_Stefan_3310360_MSc_AI_Thesis_submission.zip

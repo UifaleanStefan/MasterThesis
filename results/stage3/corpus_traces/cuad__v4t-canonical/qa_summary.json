@@ -1,8 +1,8 @@
 {
   "_manifest": {
-    "git_sha": "ad21c23",
+    "git_sha": "568b0c3",
     "git_dirty": true,
-    "timestamp_utc": "2026-06-08T11:47:16+00:00",
+    "timestamp_utc": "2026-06-16T09:13:54+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.22631-SP0",
     "numpy_version": "2.3.5",
@@ -20,35 +20,42 @@
   "model": "gpt-4o-mini",
   "seed": 42,
   "k": 8,
-  "n_docs": 10,
-  "limit_docs": 10,
-  "n_qa_total": 132,
+  "n_docs": 50,
+  "limit_docs": 50,
+  "n_qa_total": 644,
   "protocol": "online_batch",
   "do_online": true,
   "do_batch": true,
   "online": {
-    "n": 132,
+    "n": 644,
     "mean_judge": null,
-    "mean_recall_at_k": 0.19696969696969696,
+    "mean_recall_at_k": 0.296583850931677,
     "n_with_judge": 0,
-    "n_with_recall": 132,
-    "elapsed_seconds": 204.74543809890747
+    "n_with_recall": 644,
+    "n_context_overflow": 0,
+    "n_answer_fallback": 0,
+    "mean_prompt_tokens_actual": 1563.7189440993789,
+    "elapsed_seconds": 788.5835521221161
   },
   "batch": {
-    "n": 132,
+    "n": 644,
     "mean_judge": null,
-    "mean_recall_at_k": 0.0,
+    "mean_recall_at_k": 0.013975155279503106,
     "n_with_judge": 0,
-    "n_with_recall": 132,
-    "elapsed_seconds": 182.89913201332092
+    "n_with_recall": 644,
+    "n_context_overflow": 0,
+    "n_answer_fallback": 0,
+    "mean_prompt_tokens_actual": 1054.052795031056,
+    "elapsed_seconds": 900.619372844696
   },
-  "total_cost_usd": 0.03305849999999998,
+  "uncapped_context": false,
+  "total_cost_usd": 0.2855923500000003,
   "online_vs_batch_recall": {
-    "n_paired": 132,
-    "online_recall_mean": 0.19696969696969696,
-    "batch_recall_mean": 0.0,
-    "diff_mean": -0.19696969696969696,
-    "diff_std": 0.39922432308592987,
-    "agreement_rate": 0.803030303030303
+    "n_paired": 644,
+    "online_recall_mean": 0.296583850931677,
+    "batch_recall_mean": 0.013975155279503106,
+    "diff_mean": -0.2826086956521739,
+    "diff_std": 0.4540558837347316,
+    "agreement_rate": 0.7142857142857143
   }
 }

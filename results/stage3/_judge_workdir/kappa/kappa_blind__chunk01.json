@@ -1,0 +1,443 @@
+[
+ {
+  "qid": "financebench__v4t-canonical__calibration__doc3_qa0__after13__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding 3M 10k 2022] What drove operating margin change as of FY2022 for 3M? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
+  "gold": "Operating Margin for 3M in FY2022 has decreased by 1.7% primarily due to: \n-Decrease in gross Margin\n-mostly one-off charges including Combat Arms Earplugs litigation, impairment related to exiting PFAS manufacturing, costs related to exiting Russia and divestiture-related restructuring\ncharges",
+  "pred": "Operating margin changes for 3M in FY2022 were driven by increased special item costs related to significant litigation, impairment costs from exiting PFAS manufacturing, costs associated with exiting Russia, and divestiture-related restructuring charges, which were partially offset by restructuring benefits and ongoing cost management."
+ },
+ {
+  "qid": "qasper__attention-corpus-tuned__calibration__doc39_qa3__after255__seed42",
+  "benchmark": "QASPER",
+  "question": "[Regarding QASPER: Learning Concept Embeddings for Efficient Bag-of-Concepts Densification] What is the degree of dimension reduction of the efficient aggregation method?",
+  "gold": "The number of dimensions can be reduced by up to 212 times.",
+  "pred": "The efficient aggregation method allows achieving the same or better accuracy with much less dimensions (few in most cases)."
+ },
+ {
+  "qid": "p4_main__longmemeval__flat-50__seed7__q065",
+  "benchmark": "LongMemEval",
+  "question": "What time did I reach the clinic on Monday?",
+  "gold": "9:00 AM",
+  "pred": "You reached the clinic around 1:00 PM on Monday."
+ },
+ {
+  "qid": "financebench__v4t-canonical__batch__doc146_qa0__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Verizon 10k 2022] Has Verizon increased its debt on balance sheet between 2022 and the 2021 fiscal period?",
+  "gold": "No. Verizon's debt decreased by $229 million.",
+  "pred": "Yes, Verizon increased its debt maturing within one year from $7,443 million in 2021 to $9,963 million in 2022."
+ },
+ {
+  "qid": "p4_tierb__longmemeval__v4-tuned__seed100__q018",
+  "benchmark": "LongMemEval",
+  "question": "I'm planning to revisit Orlando. I was wondering if you could remind me of that unique dessert shop with the giant milkshakes we talked about last time?",
+  "gold": "The Sugar Factory at Icon Park.",
+  "pred": "The Sugar Factory."
+ },
+ {
+  "qid": "qasper__dump-all__calibration__doc29_qa3__after79__seed42",
+  "benchmark": "QASPER",
+  "question": "[Regarding QASPER: Toward Multilingual Neural Machine Translation with Universal Encoder and Decoder] Which languages do they test on for the under-resourced scenario?",
+  "gold": "English",
+  "pred": "The relevant passages do not provide information about the languages tested in the under-resourced scenario for QASPER."
+ },
+ {
+  "qid": "p4_k8__hotpotqa__flat-50__seed42__q031",
+  "benchmark": "HotpotQA",
+  "question": "In the NASA mission where Moon trees were taken into space, what was the nickname of the Command Module?",
+  "gold": "\"Kitty Hawk\"",
+  "pred": "Kitty Hawk"
+ },
+ {
+  "qid": "p4_k16__hotpotqa__v4-canonical__seed42__q018",
+  "benchmark": "HotpotQA",
+  "question": "What class of instrument does Apatim Majumdar play?",
+  "gold": "strings",
+  "pred": "Sarod"
+ },
+ {
+  "qid": "p4_main__hotpotqa__v4-tuned__seed42__q023",
+  "benchmark": "HotpotQA",
+  "question": "what language did the ethnic group which Torstein Ellingsen was its drumer  speaks",
+  "gold": "Norwegian language",
+  "pred": "Norwegian"
+ },
+ {
+  "qid": "hotpotqa__bm25-corpus__batch__doc4_qa0__seed42",
+  "benchmark": "HotpotQA",
+  "question": "[Regarding HotpotQA dev #4: 5a8e3ea95542995a26add48d] The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+  "gold": "Greenwich Village, New York City",
+  "pred": "The director of \"Big Stone Gap,\" Adriana Trigiani, is based in New York City."
+ },
+ {
+  "qid": "cuad__v4t-tuned__calibration__doc119_qa6__after483__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: XLITECHNOLOGIES,INC_12_11_2015-EX-10.1-Sponsorship Agreement] Highlight the parts (if any) of this contract related to \"License Grant\" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?",
+  "gold": "1.1.2 XLI grants WCC a limited, non-exclusive, royalty-free license to use the registered trademark \"Light Sheets\" during the term of this Agreement in connection with national, regional or local print advertising, together with Internet, television, video and on-site advertising, for WCC and its Event(s) during the term of this Agreement, subject to all of the terms and conditions hereof.",
+  "pred": "The provided passages do not contain any information regarding a \"License Grant\" in the contract related to CUAD: XLITECHNOLOGIES,INC_12_11_2015-EX-10.1-Sponsorship Agreement."
+ },
+ {
+  "qid": "p4_k8__longmemeval__flat-50__seed42__q007",
+  "benchmark": "LongMemEval",
+  "question": "How many movie festivals that I attended?",
+  "gold": "I attended four movie festivals.",
+  "pred": "You mentioned attending the Portland Film Festival and the Seattle International Film Festival."
+ },
+ {
+  "qid": "longmemeval__dump-all__batch__doc8_qa0__seed42",
+  "benchmark": "LongMemEval",
+  "question": "[Regarding LongMemEval 2a1811e2 (temporal-reasoning)] How many days had passed between the Hindu festival of Holi and the Sunday mass at St. Mary's Church?",
+  "gold": "21 days. 22 days (including the last day) is also acceptable.",
+  "pred": "The Hindu festival of Holi was celebrated on February 26th, and the Sunday mass at St. Mary's Church was attended on March 19th. \n\nTo calculate the number of days between these two dates:\n\n- From February 26 to February 28: 2 days (February has 28 days)\n- March 1 to March 19: 19 days\n\nTotal: 2 + 19 = 21 days\n\nSo, 21 days had passed between the Hindu festival of Holi and the Sunday mass at St. Mary's Church."
+ },
+ {
+  "qid": "financebench__dump-all__batch__doc86_qa0__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Johnson & Johnson 10k 2022] What drove gross margin change as of FY2022 for JnJ? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
+  "gold": "For FY22, JnJ had changes in gross margin due to: One-time COVID-19 vaccine manufacturing exit related costs, Currency impacts in the Pharmaceutical segment, Commodity inflation in the MedTech and Consumer Health segments, partially offset by Supply chain benefits in the Consumer Health segment.",
+  "pred": "The change in gross margin for Johnson & Johnson in FY2022 was driven by one-time COVID-19 vaccine manufacturing exit related costs, currency impacts in the Pharmaceutical segment, and commodity inflation in the MedTech and Consumer Health segments, partially offset by supply chain benefits in the Consumer Health segment. Gross margin can be a useful metric for companies like Johnson & Johnson as it reflects the efficiency of production and pricing strategies, but it may not capture the full picture due to the diverse nature of their product lines and the impact of external factors like curren"
+ },
+ {
+  "qid": "financebench__attention-corpus-tuned__calibration__doc27_qa0__after122__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Amcor 10q 2023] What is the nature & purpose of AMCOR's restructuring liability as oF Q2 of FY2023 close?",
+  "gold": "87% of the total restructuring liability is related Employee liabilities.",
+  "pred": "The restructuring liability as of Q2 of FY2023 is related to employee costs, fixed asset-related costs, and other costs, totaling $93 million."
+ },
+ {
+  "qid": "p4_k8__longmemeval__v4-tuned__seed42__q097",
+  "benchmark": "LongMemEval",
+  "question": "What game did I finally beat last weekend?",
+  "gold": "Dark Souls 3 DLC",
+  "pred": "Dark Souls 3."
+ },
+ {
+  "qid": "financebench__dump-all__online__doc66_qa0__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Boeing 10k 2022] How does Boeing's effective tax rate in FY2022 compare to FY2021?",
+  "gold": "Effective tax rate in FY2022 was 0.62%, compared to  -14.76% in FY2021.",
+  "pred": "Boeing's effective tax rate in FY2022 was significantly lower than in FY2021, with an income tax expense of $(31) million in 2022 compared to a benefit of $743 million in 2021."
+ },
+ {
+  "qid": "financebench__flat-corpus__calibration__doc126_qa0__after137__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding PepsiCo 8k 2023] By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
+  "gold": "$400,000,000 increase.",
+  "pred": "The provided context does not contain information regarding PepsiCo's unsecured five-year revolving credit agreement or any related increase."
+ },
+ {
+  "qid": "cuad__v4t-tuned__batch__doc322_qa0__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: PaperexchangeComInc_20000322_S-1A_EX-10.4_5202103_EX-10.4_Co-Branding Agreement] Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+  "gold": "CO-BRANDING AGREEMENT",
+  "pred": "The relevant contract to be reviewed by a lawyer is the \"Co-Branding Agreement.\""
+ },
+ {
+  "qid": "financebench__rag-corpus__calibration__doc80_qa0__after95__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Foot Locker 8k 2022] Were there any board member nominees who had substantially more votes against joining than the other nominees?",
+  "gold": "Yes, his name is Richard A. Johnson",
+  "pred": "Yes, Richard A. Johnson had substantially more votes against joining than the other nominees, with 16,105,005 votes against."
+ },
+ {
+  "qid": "cuad__v4t-corpus-tuned__batch__doc50_qa6__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: ConformisInc_20191101_10-Q_EX-10.6_11861402_EX-10.6_Development Agreement] Highlight the parts (if any) of this contract related to \"Exclusivity\" that should be reviewed by a lawyer. Details: Is there an exclusive dealing  commitment with the counterparty? This includes a commitment to procure all “requirements” from one party of certain technology, goods, or services or a prohibi",
+  "gold": "Except as specifically provided in the Distribution Agreement, Conformis shall be prohibited from   developing or assisting another in developing, or causing another to develop, Patient-Specific Instrumentation for Off-The-Shelf   Knee Implants for any Third Party in the field of orthopedics until January 1, 2032 (or earlier, to the extent set forth in Section   2.3.3.4 or Section 2.3.5 of the Distribution Agreement), with the exception that Conformis (including any entity involved in a   Change of Control of Conformis, any such entity an \"Acquirer\"), may develop Patient-Specific Instrumentation for any Off-The-   Shelf Implants of Conformis, an Acquirer or any of their Affiliates.",
+  "pred": "The relevant passage regarding \"Exclusivity\" is found in the section titled \"Grant of License and Exclusivity,\" which should be reviewed by a lawyer to determine if there is an exclusive dealing commitment with the counterparty, including any obligations to procure all requirements from one party or prohibitions on licensing or collaborating with third parties."
+ },
+ {
+  "qid": "p4_k4__hotpotqa__v4-tuned__seed42__q050",
+  "benchmark": "HotpotQA",
+  "question": "Who created the NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson?",
+  "gold": "Justin Spitzer",
+  "pred": "The relevant passages do not provide information about the creator of the NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson."
+ },
+ {
+  "qid": "p4_k16__qasper__v4-canonical__seed42__q022",
+  "benchmark": "QASPER",
+  "question": "What word embeddings do they test?",
+  "gold": "Bernoulli embeddings (b-emb) BIBREF1 , continuous bag-of-words (CBOW) BIBREF5 , Distributed Memory version of Paragraph Vector (PV-DM) BIBREF11 and the Global Vectors (GloVe) BIBREF6 model",
+  "pred": "They test CBOW, PV-DM, GloVe, and EqEmb."
+ },
+ {
+  "qid": "hotpotqa__attention-corpus-tuned__calibration__doc9_qa0__after7__seed42",
+  "benchmark": "HotpotQA",
+  "question": "[Regarding HotpotQA dev #9: 5a8db19d5542994ba4e3dd00] Are Local H and For Against both from the United States?",
+  "gold": "yes",
+  "pred": "Yes, both Local H and For Against are from the United States."
+ },
+ {
+  "qid": "hotpotqa__v4t-canonical__batch__doc41_qa0__seed42",
+  "benchmark": "HotpotQA",
+  "question": "[Regarding HotpotQA dev #41: 5a74106b55429979e288289e] Where is the company that Sachin Warrier worked for as a software engineer headquartered?",
+  "gold": "Mumbai",
+  "pred": "The provided context does not contain information about Sachin Warrier or the company he worked for."
+ },
+ {
+  "qid": "financebench__dump-all__batch__doc48_qa0__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Best Buy 10k 2017] In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
+  "gold": "2.8%",
+  "pred": "The provided passages do not contain any information regarding Best Buy's financials or net profit margin for FY2015 - FY2017. Therefore, I cannot provide an answer to the question."
+ },
+ {
+  "qid": "p4_k32__narrativeqa__v4-canonical__seed42__q095",
+  "benchmark": "NarrativeQA",
+  "question": "How does Esther attempt to kill Daniel a second time?",
+  "gold": [
+   "By suffocating him with a pillow",
+   "smothers him with a pillow"
+  ],
+  "pred": "Esther attempts to kill Daniel a second time by using a gun."
+ },
+ {
+  "qid": "p4_k4__hotpotqa__flat-50__seed42__q045",
+  "benchmark": "HotpotQA",
+  "question": "Who has released more solo albums, Nick Carter or Brady Seals?",
+  "gold": "Brady Seals",
+  "pred": "Nick Carter has released more solo albums."
+ },
+ {
+  "qid": "qasper__v4t-corpus-tuned__batch__doc195_qa0__seed42",
+  "benchmark": "QASPER",
+  "question": "[Regarding QASPER: A Neural Approach to Irony Generation] What experiments are conducted?",
+  "gold": "Irony Classifier",
+  "pred": "Experimental results demonstrate that the model outperforms other generative models in terms of irony accuracy, sentiment preservation, and content preservation."
+ },
+ {
+  "qid": "cuad__v4t-corpus-tuned__batch__doc408_qa16__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: Monsanto Company - SECOND A_R EXCLUSIVE AGENCY AND MARKETING AGREEMENT] Highlight the parts (if any) of this contract related to \"Non-Transferable License\" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?",
+  "gold": "sublicense, except as specifically set forth in Section 6.11(h)) to use the Additional Roundup Products Formulation Data for the purpose of and to the limited extent necessary to register each of the Additional Roundup Products with federal, state, or territorial government authorities (as may be required by law) in the United States and its territories.",
+  "pred": "The contract states that \"this Agreement and the rights granted herein shall not be assignable by either party hereto without the prior written consent of the other party.\" This indicates that the ability to transfer the license to a third party is limited and requires consent, which should be reviewed by a lawyer."
+ },
+ {
+  "qid": "hotpotqa__v4t-canonical__online__doc0_qa0__seed42",
+  "benchmark": "HotpotQA",
+  "question": "[Regarding HotpotQA dev #0: 5a8b57f25542995d1e6f1371] Were Scott Derrickson and Ed Wood of the same nationality?",
+  "gold": "yes",
+  "pred": "No, Scott Derrickson is American, and Ed Wood was also American."
+ },
+ {
+  "qid": "p4_main__hotpotqa__bm25__seed42__q018",
+  "benchmark": "HotpotQA",
+  "question": "What class of instrument does Apatim Majumdar play?",
+  "gold": "strings",
+  "pred": "Sarod"
+ },
+ {
+  "qid": "p4_tierb__narrativeqa__flat-50__seed7__q036",
+  "benchmark": "NarrativeQA",
+  "question": "Who is Mary's blind date, and what is his job?",
+  "gold": [
+   "Steve Miller, a cameraman.",
+   "Steve Miller, he is a cameraman"
+  ],
+  "pred": "Mary's blind date is Howard, and his job is not specified in the provided context."
+ },
+ {
+  "qid": "cuad__v4t-corpus-tuned__calibration__doc36_qa7__after505__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: LOYALTYPOINTINC_11_16_2004-EX-10.2-RESELLER AGREEMENT] Highlight the parts (if any) of this contract related to \"Anti-Assignment\" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?",
+  "gold": "No right or interest in this Agreement shall be assigned by                   Schoolpop without prior written permission of AEIS, which                   shall not be unreasonably withheld.",
+  "pred": "The contract states that it is not assignable by any party without the prior written consent of the other parties. Therefore, consent is required if the contract is assigned to a third party."
+ },
+ {
+  "qid": "cuad__v4t-corpus-tuned__batch__doc268_qa0__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: SigaTechnologiesInc_20190603_8-K_EX-10.1_11695818_EX-10.1_Promotion Agreement] Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+  "gold": "PROMOTION AGREEMENT",
+  "pred": "The relevant contract to be reviewed by a lawyer is the \"Promotion Agreement.\""
+ },
+ {
+  "qid": "p4_k4__narrativeqa__v4-canonical__seed42__q065",
+  "benchmark": "NarrativeQA",
+  "question": "What are the only companions of the Ex-Main force Patrol officer?",
+  "gold": [
+   "Australian Cattle Dog and rare functioning firearm- Sawn off shotgun",
+   "A dog and a sawed-off shotgun."
+  ],
+  "pred": "The only companions of the Ex-Main Force Patrol officer are a dog and a group of survivors."
+ },
+ {
+  "qid": "financebench__v4t-canonical__calibration__doc20_qa0__after61__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Amazon 10k 2019] By drawing conclusions from the information stated only in the income statement, what is Amazon's FY2019 net income attributable to shareholders (in USD millions)?",
+  "gold": "$11588.00",
+  "pred": "The provided passages do not contain any information regarding Amazon's FY2019 net income attributable to shareholders."
+ },
+ {
+  "qid": "cuad__v4t-tuned__batch__doc270_qa0__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: AIRTECHINTERNATIONALGROUPINC_05_08_2000-EX-10.4-FRANCHISE AGREEMENT] Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+  "gold": "FRANCHISE AGREEMENT",
+  "pred": "The relevant contract to be reviewed by a lawyer is the \"Franchise Agreement.\""
+ },
+ {
+  "qid": "qasper__v4t-canonical__calibration__doc28_qa5__after88__seed42",
+  "benchmark": "QASPER",
+  "question": "[Regarding QASPER: UTCNN: a Deep Learning Model of Stance Classificationon on Social Media Text] What are the baselines?",
+  "gold": "SVM with unigram, bigram, and trigram features",
+  "pred": "The document does not provide specific information about the baselines for the QASPER: UTCNN model."
+ },
+ {
+  "qid": "cuad__v4t-tuned__calibration__doc115_qa13__after15__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: BELLICUMPHARMACEUTICALS,INC_05_07_2019-EX-10.1-Supply Agreement] Highlight the parts (if any) of this contract related to \"Audit Rights\" that should be reviewed by a lawyer. Details: Does a party have the right to  audit the books, records, or physical locations of the counterparty to ensure compliance with the contract?",
+  "gold": "All audits shall be conducted in a manner that is intended to minimize disruption to the operations at such Facilities.",
+  "pred": "The provided passages do not contain any information regarding \"Audit Rights\" related to the contract for BELLICUM PHARMACEUTICALS, INC. Therefore, there are no specific parts to highlight for review by a lawyer."
+ },
+ {
+  "qid": "p4_k4__narrativeqa__flat-50__seed42__q086",
+  "benchmark": "NarrativeQA",
+  "question": "Who does the Christian mob blame for the unrest in the city?",
+  "gold": [
+   "The mob blames Hypatia.",
+   "Hypatia."
+  ],
+  "pred": "The Christian mob blames Hypatia for the unrest in the city."
+ },
+ {
+  "qid": "cuad__v4t-tuned__batch__doc14_qa5__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: CerenceInc_20191002_8-K_EX-10.4_11827494_EX-10.4_Intellectual Property Agreement] Highlight the parts (if any) of this contract related to \"Termination For Convenience\" that should be reviewed by a lawyer. Details: Can a party terminate this  contract without cause (solely by giving a notice and allowing a waiting  period to expire)?",
+  "gold": "This Agreement may be terminated by Nuance at any time, in its sole discretion, prior to the Distribution; provided, however, that this Agreement shall automatically terminate upon the termination of the Separation Agreement in accordance with its terms.",
+  "pred": "Yes, either party may terminate this Agreement for any or no reason upon fifteen (15) days advance notice to the other."
+ },
+ {
+  "qid": "p4_tierb__hotpotqa__flat-50__seed100__q018",
+  "benchmark": "HotpotQA",
+  "question": "At what university can the building that served as the fictional household that includes Gomez and Morticia be found?",
+  "gold": "Syracuse University",
+  "pred": "Syracuse University"
+ },
+ {
+  "qid": "p4_k32__longmemeval__v4-canonical__seed42__q097",
+  "benchmark": "LongMemEval",
+  "question": "What game did I finally beat last weekend?",
+  "gold": "Dark Souls 3 DLC",
+  "pred": "Dark Souls 3."
+ },
+ {
+  "qid": "p4_k32__hotpotqa__v4-tuned__seed42__q007",
+  "benchmark": "HotpotQA",
+  "question": "which Mexican and American film actress is Ethel Houbiers  French voice of",
+  "gold": "Salma Hayek Pinault",
+  "pred": "Salma Hayek"
+ },
+ {
+  "qid": "p4_main__narrativeqa__v4-canonical__seed100__q007",
+  "benchmark": "NarrativeQA",
+  "question": "Who does Rebecca go to live with?",
+  "gold": [
+   "Her aunts",
+   "Miranda and Jane Sawyer"
+  ],
+  "pred": "Rebecca goes to live with her aunt Miranda."
+ },
+ {
+  "qid": "p4_main__longmemeval__flat-50__seed42__q006",
+  "benchmark": "LongMemEval",
+  "question": "How many total pieces of writing have I completed since I started writing again three weeks ago, including short stories, poems, and pieces for the writing challenge?",
+  "gold": "23",
+  "pred": "You have completed a total of 22 pieces of writing since you started writing again three weeks ago, including 5 short stories, 17 poems, and pieces for the writing challenge."
+ },
+ {
+  "qid": "p4_main__qasper__flat-50__seed100__q078",
+  "benchmark": "QASPER",
+  "question": "How do they measure style transfer success?",
+  "gold": "(unanswerable per source)",
+  "pred": "They measure style transfer success by evaluating meaning preservation and output fluency, as well as the model's ability to reliably transfer style for English contractions, lexical choice, and grammatical constructions."
+ },
+ {
+  "qid": "p4_main__hotpotqa__v4-canonical__seed42__q042",
+  "benchmark": "HotpotQA",
+  "question": "Which Victorian poet was born in a 15th-century castle home to the Earl of Southesk?",
+  "gold": "Charlotte Carnegie",
+  "pred": "Lady Charlotte Elliot"
+ },
+ {
+  "qid": "financebench__bm25-corpus__calibration__doc60_qa0__after137__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding Boeing 10k 2022] Are there any product categories / service categories that represent more than 20% of Boeing's revenue for FY2022?",
+  "gold": "Yes. Boeing has product and service categories that represent more than 20% of Boeing's revenue for FY2022. These categories are Commercial Airplanes which comprises 39% of total revenue, Defence which comprises 35% of total revenue and Services which comprises 26% of total revenue.",
+  "pred": "Yes, the Commercial Airplanes category represents more than 20% of Boeing's revenue for FY2022, with revenues of $25,867 million."
+ },
+ {
+  "qid": "p4_k16__cuad__v4-canonical__seed42__q096",
+  "benchmark": "CUAD",
+  "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer. Details: The name of the contract",
+  "gold": "PROMOTION AGREEMENT",
+  "pred": "Promotion Agreement"
+ },
+ {
+  "qid": "qasper__attention-corpus-tuned__batch__doc157_qa2__seed42",
+  "benchmark": "QASPER",
+  "question": "[Regarding QASPER: Conflict as an Inverse of Attention in Sequence Relationship] On which tasks do they test their conflict method?",
+  "gold": "Task 1: Quora Duplicate Question Pair Detection",
+  "pred": "They test their conflict method on Task 1."
+ },
+ {
+  "qid": "p4_k8__longmemeval__v4-canonical__seed42__q032",
+  "benchmark": "LongMemEval",
+  "question": "How many music albums or EPs have I purchased or downloaded?",
+  "gold": "3",
+  "pred": "You mentioned purchasing \"Midnight Sky\" by The Whiskey Wanderers at the festival, but since they don't exist, I can't provide a specific number of albums or EPs you've purchased or downloaded. If you have other albums or EPs in mind, feel free to share!"
+ },
+ {
+  "qid": "p4_k4__qasper__v4-tuned__seed42__q068",
+  "benchmark": "QASPER",
+  "question": "What was the baseline?",
+  "gold": "(unanswerable per source)",
+  "pred": "The provided passages do not specify a baseline."
+ },
+ {
+  "qid": "hotpotqa__v4t-tuned__calibration__doc4_qa0__after6__seed42",
+  "benchmark": "HotpotQA",
+  "question": "[Regarding HotpotQA dev #4: 5a8e3ea95542995a26add48d] The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+  "gold": "Greenwich Village, New York City",
+  "pred": "The director of \"Big Stone Gap,\" Adriana Trigiani, is based in New York City."
+ },
+ {
+  "qid": "p4_tierb__narrativeqa__flat-50__seed7__q099",
+  "benchmark": "NarrativeQA",
+  "question": "What does Socrates compare the creation of words too?",
+  "gold": [
+   "An artist's work.",
+   "work of an artist"
+  ],
+  "pred": "Socrates compares the creation of words to a process or flux, suggesting that if everything is in a state of transition, then knowledge and the nature of things cannot remain constant."
+ },
+ {
+  "qid": "longmemeval__v4t-corpus-tuned__batch__doc34_qa0__seed42",
+  "benchmark": "LongMemEval",
+  "question": "[Regarding LongMemEval d01c6aa8 (temporal-reasoning)] How old was I when I moved to the United States?",
+  "gold": "27",
+  "pred": "I'm sorry, but I don't have any information about your age or when you moved to the United States. If you provide me with your age or the year you moved, I can help you calculate your age at that time."
+ },
+ {
+  "qid": "cuad__v4t-corpus-tuned__batch__doc38_qa13__seed42",
+  "benchmark": "CUAD",
+  "question": "[Regarding CUAD: ENERGOUSCORP_03_16_2017-EX-10.24-STRATEGIC ALLIANCE AGREEMENT] Highlight the parts (if any) of this contract related to \"Termination For Convenience\" that should be reviewed by a lawyer. Details: Can a party terminate this  contract without cause (solely by giving a notice and allowing a waiting  period to expire)?",
+  "gold": "ENERGOUS may, at any time after the third anniversary of the Effective Date, terminate this Agreement with or without cause upon not less than one hundred and eighty (180) days prior written notice to DIALOG.",
+  "pred": "Yes, either party may terminate this Agreement for any or no reason upon fifteen (15) days advance notice to the other."
+ },
+ {
+  "qid": "p4_tierb__narrativeqa__v4-canonical__seed100__q015",
+  "benchmark": "NarrativeQA",
+  "question": "Who is Elizabeth attracted to?",
+  "gold": [
+   "Walter Raleigh",
+   "Sir Walter Raleigh"
+  ],
+  "pred": "Elizabeth is attracted to Raleigh."
+ },
+ {
+  "qid": "financebench__v5t-corpus__calibration__doc95_qa0__after145__seed42",
+  "benchmark": "FinanceBench",
+  "question": "[Regarding JPMorgan 10q 2021] If JPM went bankrupted by the end by 2021 Q1 and liquidated all of its assets to pay its shareholders, how much could each shareholder get?",
+  "gold": "They could receive $66.56 per share.",
+  "pred": "The provided passages do not contain any information regarding JPMorgan's assets, liabilities, or shareholder equity necessary to calculate how much each shareholder could get in the event of bankruptcy and liquidation."
+ }
+]
