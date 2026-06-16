@@ -91,6 +91,49 @@ CMA-ES objective is pure \recallk{} of the gold evidence --- \emph{no LLM is in
 the optimization loop} --- so tuning is inexpensive and the LLM is used only at
 evaluation time.
 
+Algorithm~\ref{alg:cmaes} states the corpus-cumulative tuning loop and
+Algorithm~\ref{alg:memory} the per-event memory update that each candidate
+$\thetavec$ induces.
+
+\begin{algorithm}[t]
+\caption{Corpus-cumulative CMA-ES tuning of $\thetavec$ (Stage 3)}
+\label{alg:cmaes}
+\begin{algorithmic}[1]
+\Require corpus $\mathcal{D}=(d_1,\dots,d_T)$, tuning questions $\mathcal{Q}_{\text{tune}}$, generations $G$, population $\lambda$
+\State initialize CMA-ES mean $\boldsymbol{m}\gets\thetavec_0$, step size $\sigma$, covariance $C\gets I$
+\For{$g = 1 \dots G$}
+  \For{$i = 1 \dots \lambda$} \Comment{evaluate one candidate}
+    \State sample $\thetavec_i \sim \mathcal{N}(\boldsymbol{m}, \sigma^2 C)$
+    \State $M \gets \emptyset$ \Comment{empty memory}
+    \For{$t = 1 \dots T$} \Comment{ingest corpus cumulatively}
+      \State $M \gets \textsc{MemoryUpdate}(M, d_t, \thetavec_i)$ \Comment{Algorithm~\ref{alg:memory}}
+    \EndFor
+    \State $f_i \gets \frac{1}{|\mathcal{Q}_{\text{tune}}|}\sum_{q\in\mathcal{Q}_{\text{tune}}} \textsc{Recall@}k\big(\textsc{Retrieve}(M,q,\thetavec_i),\ \text{gold}(q)\big)$
+  \EndFor
+  \State update $\boldsymbol{m},\sigma,C$ from the $\mu$ best $\{(\thetavec_i,f_i)\}$ \Comment{standard CMA-ES recombination}
+\EndFor
+\State \Return $\thetavec^\star=\arg\max_i f_i$ over all generations
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{\textsc{MemoryUpdate}: per-event store / abstract / score, governed by $\thetavec$}
+\label{alg:memory}
+\begin{algorithmic}[1]
+\Require memory $M$, incoming document $d$, parameters $\thetavec$
+\For{each event $e$ extracted from $d$}
+  \State $\text{nov}(e) \gets 1 - \max_{e'\in M}\cos(\mathrm{emb}(e),\mathrm{emb}(e'))$ \Comment{novelty vs.\ stored}
+  \If{$\theta_{\text{store}} + \theta_{\text{novel}}\cdot\text{nov}(e) + \theta_{\text{surprise}}\cdot\text{surp}(e) > 0$}
+    \State add $e$ to $M$ with timestamp; link typed edges (entity / temporal) into the graph
+    \State apply decay $w \gets w\cdot e^{-\theta_{\text{decay}}\,\Delta t}$ to existing nodes
+  \EndIf
+\EndFor
+\State \textbf{at retrieval} for query $q$, score each $e\in M$:
+\State \quad $s(e,q) = w_{\mathrm{graph}}\cdot\mathrm{graph}(e,q) + w_{\mathrm{embed}}\cdot\cos(\mathrm{emb}(e),\mathrm{emb}(q)) + w_{\mathrm{recency}}\cdot\mathrm{recency}(e)$
+\State \Return top-$k$ events by $s(\cdot,q)$
+\end{algorithmic}
+\end{algorithm}
+
 \section{The three experimental settings}
 \paragraph{Stage 1 --- grid worlds.} Four grid environments (Key-Door,
 Goal-Room, MultiHopKeyDoor, MegaQuestRoom) of increasing difficulty. The agent

@@ -89,3 +89,30 @@ relevance signals, cross-vendor LLM judging, held-out significance testing, and 
 disclosed adversarial self-audit. To our knowledge, no prior system tunes a
 memory-construction policy per task with a derivative-free optimizer and reports
 its transfer and its honest comparison against a full-context baseline.
+
+Table~\ref{tab:related} places the contribution against the most relevant prior
+systems along four axes: what the system optimizes, whether that adaptation is
+\emph{per task}, whether the memory policy is exposed as tunable parameters (as
+opposed to a fixed hand-designed pipeline), and the evaluation scope.
+
+\begin{table}[t]
+\centering
+\caption{Positioning against representative prior memory / retrieval systems.
+``Task-adaptive'' = the policy is re-fit per task rather than fixed;
+``Parametric policy'' = the storage/retrieval behaviour is governed by exposed
+numeric parameters that can be optimized.}
+\label{tab:related}
+\small
+\begin{tabular}{l p{0.30\linewidth} c c p{0.22\linewidth}}
+\toprule
+System & What it optimizes & Task-adaptive? & Parametric policy? & Evaluation \\
+\midrule
+Dense / BM25 RAG & retrieval ranking only & no & no (fixed scorer) & QA benchmarks \\
+MemGPT \citep{packer2023memgpt} & paging policy (hand-designed) & no & no & dialog / docs \\
+HippoRAG \citep{gutierrez2024hipporag} & graph-indexed retrieval & no & no & multi-hop QA \\
+Reflexion \citep{shinn2023reflexion} & verbal self-feedback & per episode & no & agent tasks \\
+\midrule
+\textbf{This thesis} & storage \emph{and} abstraction \emph{and} retrieval scoring (one $\thetavec$) & \textbf{yes} (CMA-ES per task) & \textbf{yes} (10-D $\thetavec$) & six corpus-cumulative benchmarks, held-out + audited \\
+\bottomrule
+\end{tabular}
+\end{table}
