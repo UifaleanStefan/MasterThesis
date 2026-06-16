@@ -1179,7 +1179,7 @@ results across every memory configuration we tested.
 | Benchmark | Range of mean judge (across all configs) | Why no differentiation |
 |---|---:|---|
 | **LongMemEval** | 0.37–0.40 | Short haystacks (median 2 sessions per question) — recall saturates at k=8 for every system, and the LLM's answer-quality is bottlenecked by the question's temporal-reasoning difficulty, not by which sessions were retrieved. |
-| **FinanceBench (per-doc Phase 4 regime)** | 0.42–0.60 (Claude-judged) | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). Under GPT-4o-mini auto-judge no differentiation appeared; under Claude Opus 4.7 max cross-vendor judging (all 10 Phase 4 cells re-judged 1-by-1, ~1,000 entries), BM25 (0.675) outperforms flat-50 (0.454) by +0.22 — the original numbers under-counted substantively-correct predictions. All Phase 4 FB cells are now Claude-judged; results in `results/stage3/finbench_phase4_claude_summary.json`. Separately, the corpus-cumulative regime in §6.5.1 differentiates strongly (v4t-corpus-tuned 0.697 vs v4t-canonical 0.455 online, Claude-judged). |
+| **FinanceBench (per-doc Phase 4 regime)** | 0.42–0.60 (Claude-judged) | "Haystack" is itself the evidence excerpts (1–3 small paragraphs per question). Under GPT-4o-mini auto-judge no differentiation appeared; under Claude Opus 4.7 max cross-vendor judging (all 10 Phase 4 cells re-judged 1-by-1, ~1,000 entries), BM25 (0.675) outperforms flat-50 (0.454) by +0.22 — the original numbers under-counted substantively-correct predictions. All Phase 4 FB cells are now Claude-judged; results in `results/stage3/finbench_phase4_claude_summary.json`. Separately, the corpus-cumulative regime in §6.5.1 differentiates strongly (v4t-corpus-tuned 0.678 vs v4t-canonical 0.490 online, Claude-judged). |
 | **NarrativeQA** | 0.16–0.20 (V4/flat-50); BM25 = **0.575** | 800+ paragraph books with no paragraph-level gold relevance signal. At k=8 of 800, V4/flat-50 retrieval is essentially random and the LLM produces low-quality answers (judge ~0.18). **Phase 1.7 counter-finding**: BM25 scores judge=0.575 on the same benchmark — 3× higher than V4 or flat-50. Sparse lexical retrieval finds entity/place-name matches in narrative text that dense embeddings miss; the LLM uses those better-matched paragraphs to construct plausible answers. NarrativeQA therefore *does* differentiate memory systems — but the differentiator is lexical retrieval quality, not parameterized graph memory. |
 
 The chapter does **not** claim a methodological contribution from
@@ -1600,8 +1600,8 @@ the directional signature is identical.
 | Attention memory (corpus-tuned)¹ | 0.157 | 0.450 |
 | Dump-all (context-stuffing) | **0.037** | 1.000 |
 
-V4-corpus-tuned wins by **+0.165** over V4-canonical (matches FB's +0.215
-lift in direction and same order of magnitude). BM25 is competitive on
+V4-corpus-tuned wins by **+0.165** over V4-canonical (matches FB's +0.188
+online lift in direction and order of magnitude). BM25 is competitive on
 QASPER (0.404 vs 0.415, Δ +0.011) — sparse retrieval works well on NLP
 papers where the canonical paper-name vocabulary ("SemEval-2010",
 "BIBREF34", specific dataset names) gives BM25 strong matches. Attention
