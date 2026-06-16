@@ -61,8 +61,8 @@ complete system, \Vfour{}) and optimize $\thetavec$ --- not the policy, not the
 value function --- by black-box search (Evolution Strategy, then CMA-ES). The
 work proceeds in three stages of increasing realism. \textbf{Stage~1} (grid
 proof-of-concept) shows the optimizer recovers \emph{different} $\thetavec$ for
-different tasks and that adaptive $\thetavec$ beats the fixed-memory baseline
-(MultiHopKeyDoor success $2.5\% \rightarrow 27.5\%$). \textbf{Stage~2} scales to
+different tasks and that adaptive $\thetavec$ improves over the fixed-memory
+baseline (MultiHopKeyDoor success $2.5\% \rightarrow 27.5\%$). \textbf{Stage~2} scales to
 a twelve-memory-system $\times$ four-environment benchmark with ablation,
 zero-shot $\thetavec$-transfer, and sensitivity analysis; the ten-dimensional
 \Vfour{} reaches the top performance cluster, and $\thetavec$ tuned for one
@@ -75,9 +75,12 @@ independent Claude cross-vendor judge.
 The central Stage-3 finding, stated honestly after an adversarial self-audit, is
 that \textbf{corpus-cumulative tuning shifts $\thetavec$ toward
 recency-independent, embedding-driven retrieval, producing an end-of-corpus
-accuracy lift that survives on held-out questions for four of six benchmarks}
-and is reported as non-significant or undefined-by-construction on the other
-two. A full-context ``dump-all'' baseline, once a truncation bug was fixed, is
+accuracy lift that survives Holm-corrected held-out testing on two of the three
+domain-coherent benchmarks} (FinanceBench, CUAD; QASPER is non-significant),
+while two pre-registered domain-incoherent controls also lift and NarrativeQA is
+undefined by construction. The tuning objective is a validated proxy for answer
+quality (recall@8 vs.\ judge score, pooled Spearman $\rho=0.69$). A full-context
+``dump-all'' baseline, once a truncation bug was fixed, is
 \emph{statistically tied} with selective retrieval on accuracy but roughly 18$\times$
 more expensive --- so the honest case for learned, task-adaptive memory at this
 scale is \textbf{efficiency and scalability}, not an accuracy cliff.
