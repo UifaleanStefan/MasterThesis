@@ -17,7 +17,20 @@ The thesis contribution is **not** a better RL policy. It is a parameterized gra
 The project has a clear narrative arc:
 - **Stage 1 (DONE):** POC — grid worlds, scalar 3D θ, Evolution Strategy, 6-system comparison
 - **Stage 2 (DONE):** Full benchmark — 12 memory systems × 4 environments (incl. MegaQuestRoom), GraphMemoryV4/V5, CMA-ES, ablation, transfer, sensitivity, DocumentQA memory recall@k (no LLM), neural meta-controller
-- **Stage 3 (PENDING):** Real LLM — GPT-4o + DocumentQA, optimize J = QA_score − λ × cost_usd
+- **Stage 3 (DONE):** Real LLM (gpt-4o-mini answerer) corpus-cumulative QA over **six** real long-context benchmarks (FinanceBench, QASPER, CUAD, HotpotQA, LongMemEval, NarrativeQA), corpus-mode CMA-ES θ tuning, Claude cross-vendor judging, calibration (Protocol B). Full write-up in `docs/THESIS_STAGE3_CHAPTER.md`.
+
+> **June-12 2026 honesty pass.** An adversarial self-audit of the Stage-3
+> evaluation found and fixed five material issues; see
+> `docs/PROFESSOR_MEMO_2026_06_12.md` for the corrected, honest numbers. In
+> brief: ~9,500 content judgments were re-judged one-by-one (the rest are
+> rule-assisted refusal/ack scores, disclosed and sample-validated, error
+> 0.028); the "dump-all collapse" was a truncation-cap bug (fixed → dump-all is
+> accuracy-competitive, ~18× costlier); the corpus-tuning lift was re-checked on
+> held-out questions (survives on FinanceBench/CUAD/HotpotQA/LongMemEval, n.s.
+> on QASPER); the "four-shift in θ" is functionally a three-shift; and the
+> single-seed HotpotQA/LongMemEval cells were re-run at 100-document scale. This
+> handoff predates that pass — trust the June-12 memo and the chapter over the
+> older numbers below.
 
 ---
 

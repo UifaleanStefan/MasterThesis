@@ -2,6 +2,16 @@
 
 *Last updated: Mar 2026 (Phase A–F + Bug Fix + Learning Curves). Includes fixed efficiency reporting, per-generation ES learning curves, and final cross-environment results. This document captures the full research narrative, what has been built, what the results show, and what comes next.*
 
+> **⚠️ Currency note (June 2026).** This narrative covers **Stages 1–2** (grid
+> worlds + the 12-system / 4-environment benchmark) and predates **Stage 3**,
+> which scaled the thesis to six real long-context LLM benchmarks
+> (`docs/THESIS_STAGE3_CHAPTER.md`), and a June-12 honesty audit that corrected
+> several Stage-2/3 claims. For the current, defensible synthesis read
+> `docs/THESIS.md` (master overview) and `docs/PROFESSOR_MEMO_2026_06_12.md`.
+> Specific Stage-2 correction relevant here: the "GraphMemoryV4 is #1 on
+> MultiHopKeyDoor (0.178 vs 0.173)" framing is a **statistical tie**, not a
+> clean win (single seed; EpisodicSemantic CI [0.120, 0.220] contains 0.178).
+
 ---
 
 ## 1. The Core Claim
