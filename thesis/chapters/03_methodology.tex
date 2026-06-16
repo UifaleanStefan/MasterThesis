@@ -123,7 +123,11 @@ $\{0,0.25,0.5,0.75,1\}$. Judging is two-tier: content answers are scored
 one-by-one by the Claude judge, while refusals and ``I don't know''
 acknowledgments are scored by a validated rule-assisted classifier (precision/
 recall reported in Appendix~\ref{app:honesty}; population-weighted score error
-$0.028$ on a 300-entry hand-checked sample). All runs are seeded; every result
+$0.028$ on a 300-entry hand-checked sample). Inter-rater reliability of the judge
+is quantified by an independent blind second pass over a stratified 180-question
+sample (Appendix~\ref{app:honesty}): quadratic-weighted Cohen's $\kappa = 0.66$
+(\emph{substantial} agreement; $87.8\%$ of scores agree within one rubric level).
+All runs are seeded; every result
 JSON carries a provenance manifest (git SHA, embedding backend, dataset
 fingerprint), and a provenance auditor verifies queue-to-results parity for every
 cell.

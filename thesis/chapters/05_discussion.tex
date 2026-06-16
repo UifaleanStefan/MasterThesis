@@ -70,10 +70,11 @@ hand-checked sample). Beyond those five, four further threats are stated plainly
 validity:} CMA-ES is tuned on a \recallk{} retrieval objective, while the
 headline is LLM answer quality; the two are correlated but not identical, so a
 $\thetavec$ that maximizes recall need not maximize answer accuracy.
-\textbf{Judge diversity:} answers are scored by a single (cross-vendor) Claude
-judge; inter-rater reliability against a second rater (Cohen's $\kappa$ on a
-stratified sample) is reported in Appendix~\ref{app:honesty} where available and
-is otherwise flagged as the principal outstanding rigor item.
+\textbf{Judge reliability:} answers are scored by a single (cross-vendor) Claude
+judge. An independent blind second pass over a stratified 180-question sample
+gives quadratic-weighted Cohen's $\kappa = 0.66$ (\emph{substantial} agreement;
+Appendix~\ref{app:honesty}), bounding judge noise; a fully independent
+second-vendor or human judge remains future work.
 \textbf{Model and encoder diversity:} the answerer is \texttt{gpt-4o-mini} and
 the embedding backend is MiniLM throughout; whether the efficiency advantage
 persists with a stronger answerer or a different encoder is untested.

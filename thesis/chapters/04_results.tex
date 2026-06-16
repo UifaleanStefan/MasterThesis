@@ -170,7 +170,32 @@ The mechanism is consistent across benchmarks: corpus tuning drives \wrec{}
 toward $0$ and \wembed{} up, producing a memory that does \emph{not} depend on
 the queried document being recent --- exactly what end-of-corpus QA needs. In
 \emph{online} mode (fresh document) the recency-heavy canonical $\thetavec$ is
-competitive or better, so the lift is genuinely a batch-mode effect.
+competitive or better, so the lift is genuinely a batch-mode effect
+(Figure~\ref{fig:stage3lift}).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{fig_stage3_lift.png}
+  \caption{Stage~3 end-of-corpus (batch) judge means, canonical vs.\
+  corpus-tuned $\thetavec$, across the six benchmarks. The lift survives held-out
+  testing on four of six; QASPER is not significant after Holm correction and
+  NarrativeQA is undefined-by-construction.}
+  \label{fig:stage3lift}
+\end{figure}
+
+\paragraph{Per-benchmark reading (honest tiering).} The benchmarks do not all
+tell the same story, and we report them as tiered evidence rather than a uniform
+win. \textbf{FinanceBench} is the cleanest result: a held-out batch lift of
+$+0.335$ with $p_{\mathrm{holm}}<10^{-4}$, on questions the CMA-ES tuner never
+saw. \textbf{CUAD} survives held-out ($+0.135$) and the lift holds at the
+50-contract scale (below). \textbf{HotpotQA} and \textbf{LongMemEval} were
+pre-registered as domain-incoherent \emph{controls}; their batch lifts
+($+0.540$, $+0.165$ at $n{=}100$) are reported as what the controls show, not as
+clean wins. \textbf{QASPER}'s pooled lift ($+0.165$) does \emph{not} survive Holm
+correction and is reported as non-significant. \textbf{NarrativeQA} has no
+paragraph-level gold, so the tuning objective is undefined and both
+configurations score identically by construction. The honest summary is
+\emph{four of six survive}, with one consistent mechanism throughout.
 
 \paragraph{CUAD scaled from 10 to 50 contracts.} To check that the CUAD lift is
 not an artifact of a tiny corpus, the headline pair was re-run and re-judged
@@ -199,6 +224,16 @@ Configuration & Online & Batch & Gap \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\linewidth]{fig_stage3_online_batch.png}
+  \caption{CUAD online vs.\ batch judge means at 50 contracts. Both
+  configurations are far stronger online (the source contract is recent); the
+  recency-heavy canonical $\thetavec$ collapses at end-of-corpus, while the
+  corpus-tuned $\thetavec$ recovers most of the gap.}
+  \label{fig:onlinebatch}
+\end{figure}
+
 \paragraph{The dump-all baseline: accuracy parity, not a cliff.} A full-context
 ``dump-all'' baseline concatenates the entire accumulated corpus into the prompt.
 After fixing a truncation bug that had silently capped it at 12 events, dump-all
@@ -209,6 +244,15 @@ per 150 questions). The honest conclusion is that the value of learned selective
 memory at this corpus scale is \textbf{efficiency and scalability}, not a raw
 accuracy advantage: it matches dump-all's accuracy at a fraction of the cost and,
 unlike dump-all, does not break when the corpus exceeds the context window.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.78\linewidth]{fig_stage3_cost.png}
+  \caption{FinanceBench accuracy vs.\ cost. Dump-all is statistically tied with
+  corpus-tuned selective memory on accuracy but $\approx$18$\times$ more
+  expensive; corpus-tuned sits in the cheap, accurate corner.}
+  \label{fig:cost}
+\end{figure}
 
 \paragraph{Scalability: dump-all structurally breaks; selective memory does not.}
 The efficiency argument is not merely about cost --- past a corpus size, dump-all
