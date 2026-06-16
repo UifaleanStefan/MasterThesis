@@ -1,0 +1,88 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+\section{Motivation}
+Large language model (LLM) agents are increasingly deployed on tasks whose
+relevant information far exceeds a single prompt: answering a question that
+spans hundreds of pages of financial filings, recalling a fact stated five
+conversational sessions ago, or chaining evidence across several documents. The
+dominant response is to bolt on a \emph{memory}: a context window of a fixed
+size, a retrieval-augmented generation (RAG) index with a fixed chunking and
+scoring rule, or a vector store that treats every observation alike.
+
+What these solutions share is that the memory is \textbf{fixed}. The decision of
+\emph{what to store}, \emph{which concepts to track}, and \emph{how to score a
+retrieval} is hand-designed once and frozen. Yet different tasks plainly demand
+different memory structures. A multi-hop question needs entity relations; a
+navigation task needs spatial and temporal transitions; an end-of-corpus
+question, asked after the agent has ingested an entire corpus, needs
+\emph{recency-independent} recall, because the relevant fact may have been seen
+long ago. A memory rule that is optimal for one of these is often actively
+harmful for another.
+
+\section{Research question}
+This thesis asks a single question:
+\begin{quote}
+\itshape Can an agent \textbf{learn how to construct its own memory} --- what to
+store, which concepts to track as nodes, and how to score retrieval --- and is
+the learned optimum \textbf{task-dependent}?
+\end{quote}
+We make the construction of memory itself a learnable object. A small parameter
+vector $\thetavec$ governs storage, abstraction, and retrieval; we then
+\emph{optimize $\thetavec$} --- not the agent's policy and not the LLM's
+weights --- with black-box search, and we ask whether the recovered $\thetavec$
+differs by task and whether adapting it improves end-task performance.
+
+\section{Contributions}
+The contribution is \textbf{not} a better reinforcement-learning policy or a new
+language model. It is the claim and the demonstration that \emph{memory
+construction is a learnable, task-adaptive object}. Concretely, this thesis:
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Formalizes memory construction as a parameter vector
+  $\thetavec$} (storage probability, entity/temporal thresholds, and learnable
+  retrieval weights \wgraph{}/\wembed{}/\wrec{}, up to ten dimensions in the most
+  complete system, \Vfour{}) and optimizes it by Evolution Strategy and CMA-ES.
+  \item \textbf{Shows task-dependence at three increasing levels of realism}:
+  grid worlds (Stage~1), a twelve-system $\times$ four-environment benchmark with
+  ablation, transfer, and sensitivity analysis (Stage~2), and corpus-cumulative
+  question answering with real LLMs over six long-context benchmarks (Stage~3).
+  \item \textbf{Subjects its own headline results to an adversarial self-audit}
+  and reports the corrected numbers --- including the finding that a
+  full-context ``dump-all'' baseline, once a truncation bug was fixed, is
+  statistically tied with selective retrieval on accuracy, which reframes the
+  contribution of learned memory at this scale as one of \emph{efficiency}
+  rather than raw accuracy.
+\end{itemize}
+
+\section{The central finding, stated honestly}
+Across the three stages the same claim holds: \emph{what an agent stores and how
+it scores retrieval can be learned, and the learned optimum is task-dependent}.
+In the grids the optimizer recovers visibly different $\thetavec$ per task and
+lifts the hardest task from $2.5\%$ to $27.5\%$ success. On the benchmark suite a
+ten-dimensional learnable memory reaches the top performance cluster, and a
+$\thetavec$ tuned for one long-haystack task generalizes within that task family
+but not across families. On six real long-context benchmarks, re-tuning
+$\thetavec$ on a corpus-cumulative objective yields a recency-independent memory
+whose end-of-corpus accuracy lift \textbf{survives on held-out questions for four
+of six benchmarks}, is honestly reported as non-significant on one, and is
+undefined-by-construction on another.
+
+The single most important methodological lesson is the one the thesis applies to
+itself: a fixed full-context baseline (``dump everything into the prompt'') is,
+once measured correctly, \emph{accuracy-competitive} with learned selective
+memory. The honest argument for learnable, task-adaptive memory at this corpus
+scale is therefore \textbf{cost and scalability} --- it matches accuracy at
+roughly one-eighteenth of the token spend and does not break when the corpus
+exceeds the context window --- not a claim that selective retrieval is uniquely
+accurate.
+
+\section{Thesis outline}
+Chapter~\ref{ch:background} reviews long-context retrieval, agent-memory
+systems, and black-box optimization, and positions this work. Chapter~\ref{ch:method}
+formalizes $\thetavec$, the graph-memory architecture, the optimizers, the three
+experimental settings, and the evaluation protocol. Chapter~\ref{ch:results}
+reports the experiments stage by stage. Chapter~\ref{ch:discussion} interprets
+the results, discusses threats to validity, and summarizes the adversarial
+self-audit. Chapter~\ref{ch:conclusion} concludes and lists future work. Four
+appendices give the reproducibility material, the full honesty audit, the
+complete per-benchmark tables, and the data-preparation and judging details.

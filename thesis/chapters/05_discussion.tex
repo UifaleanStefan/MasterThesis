@@ -1,0 +1,71 @@
+\chapter{Discussion}
+\label{ch:discussion}
+
+\section{What the three stages establish}
+The three stages converge on one claim: \emph{what an agent stores and how it
+scores retrieval can be learned, and the learned optimum is task-dependent}.
+Stage~1 shows it most transparently --- the recovered $\thetavec$ vectors are
+visibly different per task (Table~\ref{tab:stage1}). Stage~2 shows the learned
+memory is competitive on a real benchmark and that the parameters are
+interpretable: $\theta_{\mathrm{novel}}$ gates storage, \wrec{} and \wembed{}
+trade off recency against semantics. Stage~3 shows the idea survives contact with
+real LLMs and real corpora: corpus-cumulative tuning yields a recency-independent
+memory whose end-of-corpus lift survives held-out testing on four of six
+benchmarks, and the CUAD result holds when the corpus is scaled five-fold.
+
+\section{Efficiency, not accuracy, is the honest contribution}
+The most important lesson is the one the thesis applies to itself. The original
+narrative implied that selective retrieval was \emph{structurally necessary}
+because a full-context baseline ``collapsed'' at scale. The adversarial audit
+(Section~\ref{sec:threats}) traced that collapse to a truncation bug: the
+dump-all baseline had never actually received the full corpus. Once fixed,
+dump-all is \emph{accuracy-competitive} with corpus-tuned selective memory. The
+defensible contribution is therefore that a small, learned, task-adaptive memory
+\emph{matches} full-context accuracy at roughly $1/18$th the token cost and
+degrades gracefully past the context window --- an efficiency-and-scalability
+argument, which is both more honest and more practically relevant than an
+accuracy-cliff claim.
+
+\section{Why transfer fails across families}
+$\thetavec$ transfers within a task family (one long-haystack QA task to another;
+one key-door variant to another) but not across families (grid to document QA, or
+a small grid to a much larger one). This is consistent with the parameters'
+meaning: a $\thetavec$ that has learned, say, that recency is nearly worthless
+and embedding similarity is decisive encodes a property of the \emph{task
+structure} (end-of-corpus retrieval over semantically distinct documents), not a
+universal memory rule. When the task structure changes --- shorter horizons,
+spatial rather than semantic similarity --- the encoded trade-off no longer
+applies. Task-dependence is thus not a nuisance but the central finding:
+there is no single best memory, which is exactly why learning $\thetavec$ per
+task matters.
+
+\section{Parameter interpretation}
+The corpus-tuning signature is a shift of \wrec{} toward $0$ and \wembed{}
+upward, with $\theta_{\mathrm{store}}$ falling (store less, but store the right
+things). Intuitively, end-of-corpus questions cannot rely on the answer being
+recent, so a memory that down-weights recency and up-weights semantic match
+retrieves the correct (possibly old) evidence. The graph-traversal weight
+\wgraph{}, by contrast, carries no measurable retrieval load in our ablation;
+the graph functions as typed scaffolding for storage and abstraction rather than
+as a relational retrieval engine, which is a useful negative result for future
+designs.
+
+\section{Threats to validity and the adversarial self-audit}
+\label{sec:threats}
+A June-2026 adversarial self-audit found five material issues in the headline
+evaluation and corrected all of them; the full account is in
+Appendix~\ref{app:honesty}. In summary: (i) the Stage-2 ``\#1'' claim is a
+statistical tie and is reported as such; (ii) some headline cells were tuned on
+questions later reused at evaluation, so held-out splits were recomputed and the
+surviving lifts re-reported (FinanceBench survives at $+0.335$,
+$p_{\mathrm{holm}}<10^{-4}$; QASPER does not survive Holm correction); (iii) the
+dump-all truncation bug was fixed, collapsing the accuracy claim to a tie; (iv)
+the ``four-shift'' signature is, after a \wgraph{} ablation, a three-shift; and
+(v) under-powered $n{=}10$ cells (HotpotQA, LongMemEval) were re-run at
+$n{=}100$ and re-framed as pre-registered domain-incoherent controls.
+Judging is two-tier and disclosed: content answers are judged one-by-one by the
+Claude cross-vendor judge, while refusal/acknowledgment answers keep a validated
+rule-assisted score (population-weighted error $0.028$ on a stratified 300-entry
+hand-checked sample). Remaining limitations --- single-seed cells, a single
+judge, and a subset-of-corpus scope on some benchmarks --- are listed as future
+work in Chapter~\ref{ch:conclusion}.

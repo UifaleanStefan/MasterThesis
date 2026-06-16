@@ -1,0 +1,121 @@
+\chapter{Methodology}
+\label{ch:method}
+
+\section{Problem formulation}
+We treat memory construction as a function parameterized by a vector
+$\thetavec$. As the agent observes a stream of events, $\thetavec$ governs three
+decisions: \emph{storage} (is this event written to memory?), \emph{abstraction}
+(does it create or update an entity node, a temporal edge?), and \emph{retrieval
+scoring} (how is a stored item ranked against a query?). Crucially, we do
+\emph{not} learn the agent's policy or the language model's weights; we learn
+only $\thetavec$, holding everything else fixed. This isolates the question of
+interest --- is the optimal memory-construction rule task-dependent? --- from
+confounds in policy learning.
+
+Let $R(\thetavec; \mathcal{T})$ be the agent's mean performance on task
+$\mathcal{T}$ when its memory is built with $\thetavec$. We seek
+$\thetavec^\star_{\mathcal{T}} = \arg\max_{\thetavec} R(\thetavec; \mathcal{T})$
+for each task, and ask (i) whether $\thetavec^\star_{\mathcal{T}}$ visibly
+differs across tasks, and (ii) whether $\thetavec^\star_{\mathcal{T}}$ transfers
+to a related task $\mathcal{T}'$.
+
+\section{The parameter vector and the V1$\rightarrow$V4 progression}
+\label{sec:theta}
+The memory is a graph (Section~\ref{sec:graphmem}). The earliest version (V1)
+exposes three parameters: $\theta_{\mathrm{store}}$ (storage probability),
+$\theta_{\mathrm{entity}}$ (entity-creation threshold), and
+$\theta_{\mathrm{temporal}}$ (temporal-edge probability); the default
+$(1,0,1)$ reproduces a fixed store-everything baseline. The most complete system,
+\Vfour{}, extends this to ten dimensions by adding a learned importance score and
+three learnable retrieval weights. An item's retrieval score against a query is
+\begin{equation}
+s(\text{item}, q) \;=\;
+w_{\mathrm{graph}}\, g(\text{item}, q) \;+\;
+w_{\mathrm{embed}}\, \cos(e_{\text{item}}, e_q) \;+\;
+w_{\mathrm{recency}}\, \rho(\text{item}),
+\label{eq:score}
+\end{equation}
+where $g$ is a graph-traversal signal, $\cos(\cdot)$ is embedding similarity, and
+$\rho$ is a recency term; the storage/abstraction parameters
+$(\theta_{\mathrm{store}}, \theta_{\mathrm{novel}}, \theta_{\mathrm{entity}},
+\theta_{\mathrm{temporal}}, \theta_{\mathrm{surprise}}, \theta_{\mathrm{erich}},
+\theta_{\mathrm{decay}})$ gate what enters the graph and how it decays. All ten
+components live in $\thetavec$ and are optimized jointly. The MiniLM-era \Vfour{}
+optimum used in Stages~2--3 is
+$\thetavec \approx (\theta_{\mathrm{store}}{=}0.35,\,
+\theta_{\mathrm{novel}}{=}0.44,\, \theta_{\mathrm{temporal}}{=}0.73,\,
+\theta_{\mathrm{decay}}{=}0.72,\, w_{\mathrm{graph}}{=}1.19,\,
+w_{\mathrm{embed}}{=}1.31,\, w_{\mathrm{recency}}{=}1.21)$ (remaining components
+omitted for brevity).
+
+\section{Graph-memory architecture}
+\label{sec:graphmem}
+Memory is a directed graph built with NetworkX \citep{hagberg2008networkx}.
+\emph{Event} nodes hold observations; \emph{entity} nodes are created when an
+observation's novelty exceeds $\theta_{\mathrm{novel}}$; \emph{temporal} edges
+link consecutive retained events and \emph{mention} edges link events to the
+entities they reference. Retrieval embeds the query, scores every node by
+Equation~\eqref{eq:score}, and returns the top $k$ (we use $k=8$ throughout
+unless stated). In the Stage-3 text variant \Vt{} the Bayesian entity gate is
+bypassed (\texttt{text\_mode\_entities=True}) so that document text is treated
+uniformly; all other $\thetavec$ components are unchanged.
+Figure~\ref{fig:memgraph} illustrates how a learned $\thetavec$ produces a
+sparse, entity-centric graph where the fixed baseline produces a dense,
+undifferentiated one.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig1_memory_graphs_key_door.png}
+  \caption{Memory graph for one Key-Door episode under the fixed baseline
+  $\thetavec=(1,0,1)$ (left, dense) versus a learned $\thetavec$ (right,
+  sparse and entity-centric). The learned rule stores far fewer events but
+  keeps temporal structure.}
+  \label{fig:memgraph}
+\end{figure}
+
+\section{Optimization}
+Because storage is discrete and the objective is non-differentiable, we optimize
+$\thetavec$ with a derivative-free search. Stage~1 uses a simple Evolution
+Strategy (12 generations $\times$ 6 candidates $\times$ 40 episodes). Stages~2--3
+use CMA-ES \citep{hansen2016cmaes} (30 generations $\times$ 50 episodes per
+candidate for the benchmark; a corpus-mode variant for Stage~3). In Stage~3 the
+CMA-ES objective is pure \recallk{} of the gold evidence --- \emph{no LLM is in
+the optimization loop} --- so tuning is inexpensive and the LLM is used only at
+evaluation time.
+
+\section{The three experimental settings}
+\paragraph{Stage 1 --- grid worlds.} Four grid environments (Key-Door,
+Goal-Room, MultiHopKeyDoor, MegaQuestRoom) of increasing difficulty. The agent
+reads hint signs, must remember which key opens which door, and is rewarded for
+reaching the goal. These are deliberately simple so that the learned $\thetavec$
+can be inspected directly.
+
+\paragraph{Stage 2 --- benchmark suite.} Twelve memory systems (including
+\Vfour{}, a neural-controller variant, and standard baselines such as
+working-memory, episodic-semantic, summary, attention, and RAG memories) are
+evaluated on the four environments, with ablation of each $\thetavec$ component,
+zero-shot $\thetavec$-transfer across environments, and a 2-D sensitivity sweep.
+
+\paragraph{Stage 3 --- corpus-cumulative LLM QA.} Six published long-context
+benchmarks (Section~\ref{sec:gap}) are ingested document-by-document into the
+\Vt{} memory. Questions are answered in two regimes: \emph{online} (immediately
+after the source document is ingested, so it is recent) and \emph{batch} (at the
+end of the corpus, against the full accumulated memory). $\thetavec$ is re-tuned
+per benchmark on the corpus-cumulative \recallk{} objective.
+
+\section{Evaluation protocol}
+\label{sec:eval}
+Two metrics are used. \emph{Retrieval} quality is measured by \recallk{} of the
+gold evidence paragraphs, which requires no LLM and drives CMA-ES.
+\emph{Answer} quality is measured by an LLM-as-judge protocol: a
+\texttt{gpt-4o-mini} answerer produces an answer from the $k$ retrieved items,
+and an independent \textbf{Claude} judge (cross-vendor, to avoid self-preference
+bias; cf.\ \citealp{zheng2023judge}) scores it on a five-point rubric
+$\{0,0.25,0.5,0.75,1\}$. Judging is two-tier: content answers are scored
+one-by-one by the Claude judge, while refusals and ``I don't know''
+acknowledgments are scored by a validated rule-assisted classifier (precision/
+recall reported in Appendix~\ref{app:honesty}; population-weighted score error
+$0.028$ on a 300-entry hand-checked sample). All runs are seeded; every result
+JSON carries a provenance manifest (git SHA, embedding backend, dataset
+fingerprint), and a provenance auditor verifies queue-to-results parity for every
+cell.

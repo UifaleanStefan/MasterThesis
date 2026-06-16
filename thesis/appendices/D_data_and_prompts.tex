@@ -1,0 +1,35 @@
+\chapter{Data Preparation and Judging Protocol}
+\label{app:data}
+
+\section{Benchmark adapters}
+Each of the six benchmarks is wrapped by an adapter that converts its native
+format into a common corpus-cumulative representation: an ordered list of
+documents, each split into paragraph-level passages with a global step index, and
+a set of questions each carrying gold answer text and (where available)
+gold-evidence paragraph indices used for the \recallk{} objective. Sources:
+HotpotQA (\texttt{distractor} config), QASPER, CUAD (SQuAD-v2 JSON form),
+NarrativeQA (full books/screenplays), FinanceBench (SEC filings), LongMemEval
+(multi-session dialogue with session ids). NarrativeQA provides no
+paragraph-level gold relevance, so its \recallk{} tuning objective is undefined
+by construction. Full adapter notes and per-benchmark workarounds are in
+\texttt{docs/STAGE3\_DATA\_PREP.md}.
+
+\section{Online and batch protocols}
+In \emph{online} (Protocol A) mode, after each document is ingested the agent is
+asked that document's own questions, so the relevant text is recent. In
+\emph{batch} mode the same questions are re-asked at the end of the corpus
+against the full accumulated memory with $k{=}8$ selective retrieval, removing any
+recency cue. A separate calibration protocol (Protocol B) samples random
+questions at each document boundary to test when the agent honestly abstains.
+
+\section{Judge rubric}
+The Claude cross-vendor judge scores each answer on a five-point scale,
+$\{0,0.25,0.5,0.75,1\}$: $1.0$ fully correct; $0.75$ substantially correct with a
+minor omission; $0.5$ partially correct or the right provision incompletely
+captured; $0.25$ weakly related / right category but wrong specific value; $0.0$
+wrong, irrelevant, or a refusal when a real answer exists. For the legal
+extraction benchmark (CUAD) the rubric is specialized: wrong extracted values
+(dates, governing law, parties, names) score $0.0$, while direction-correct
+yes/no-flavored clauses that cite the wrong clause score $0.25$. The verbatim
+rubric is \texttt{evaluation/claude\_judge\_protocol.md}; the answerer is
+\texttt{gpt-4o-mini} and the judge is a Claude Opus-class 1M-context model.

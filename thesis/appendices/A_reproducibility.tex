@@ -1,0 +1,35 @@
+\chapter{Reproducibility}
+\label{app:repro}
+
+All experiments are seeded and reproducible from the public repository. Every
+result JSON carries a \texttt{\_manifest} sibling recording the git SHA, the
+embedding backend (\texttt{sentence-transformers/all-MiniLM-L6-v2} unless
+\texttt{EMBEDDING\_BACKEND=tfidf} is set explicitly), and a dataset fingerprint.
+
+\section*{Key commands}
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Stage 1 (grids):} \texttt{python run\_poc.py} (Evolution
+  Strategy, 12 gen $\times$ 6 cand $\times$ 40 ep).
+  \item \textbf{Stage 2 (benchmark / ablation / transfer / sensitivity):}
+  \texttt{python run\_benchmark.py}, \texttt{run\_ablation.py},
+  \texttt{run\_transfer.py --episodes 100 --seed 42}, \texttt{run\_sensitivity.py}.
+  Transfer is deterministic given the seed and episode count.
+  \item \textbf{Stage 3 (corpus QA):} \texttt{python scripts/run\_corpus\_qa.py
+  --benchmark <name> --config <cfg> --limit-docs <n>}; CMA-ES corpus tuning via
+  \texttt{tuning/tune\_v4t\_corpus.py}.
+  \item \textbf{Figures:} \texttt{python generate\_thesis\_figures.py}
+  (deterministic from the result JSONs).
+\end{itemize}
+
+\section*{Verification}
+\begin{itemize}[leftmargin=1.4em]
+  \item \texttt{python -m pytest tests/ -q} --- 214-test regression suite (all
+  passing).
+  \item \texttt{python scripts/audit\_determinism.py} --- re-runs seeded
+  evaluations and checks reproducibility.
+  \item \texttt{python scripts/audit\_judge\_provenance.py} --- verifies every
+  judge line carries Claude provenance, zero duplicate question ids,
+  queue-to-results parity for every cell, and reports the rule-assisted share.
+\end{itemize}
+A full command-by-command walkthrough is in \texttt{docs/THESIS\_HANDOFF.md}; the
+submission checklist is in \texttt{docs/FINALIZATION\_CHECKLIST.md}.

@@ -1,0 +1,83 @@
+% ---- Title page (Bocconi-style; fill the placeholders marked %% TODO) ----
+\begin{titlepage}
+\centering
+{\scshape\large Bocconi University \par}
+\vspace{4pt}
+{\scshape Master of Science %% TODO: exact programme name
+\par}
+\vspace{40pt}
+{\large\itshape Master's Thesis \par}
+\vspace{30pt}
+{\Huge\bfseries Learnable, Task-Adaptive Structured Memory for LLM Agents \par}
+\vspace{18pt}
+{\large\itshape Learning \emph{what to store} and \emph{how to retrieve}:
+a parameter vector $\thetavec$, optimized by black-box search,
+across grid worlds and six real long-context benchmarks. \par}
+\vspace{50pt}
+\begin{flushleft}
+\large
+\textbf{Candidate:} Stefan Uifalean \\[4pt]
+\textbf{Student ID:} %% TODO \\[4pt]
+\textbf{Supervisor:} %% TODO \\[4pt]
+\textbf{Co-supervisor:} %% TODO (if any) \\[4pt]
+\end{flushleft}
+\vfill
+{\large Academic Year 2025--2026 \par}
+\end{titlepage}
+
+% ---- Declaration ----
+\cleardoublepage
+\thispagestyle{empty}
+\section*{Declaration}
+\noindent I declare that this thesis is my own work. All experiments are
+seeded and reproducible; every result reported here is backed by a committed
+result artifact with a provenance manifest (git SHA, embedding backend, dataset
+fingerprint). An adversarial self-audit (Appendix~\ref{app:honesty}) was run on
+the headline evaluation, and the corrected numbers are the ones reported
+throughout.
+\vspace{20pt}
+
+\noindent Stefan Uifalean \\
+Milan, June 2026
+
+% ---- Abstract ----
+\cleardoublepage
+\thispagestyle{empty}
+\section*{Abstract}
+\noindent
+Memory in LLM-based agents is almost always \emph{fixed}: a context window of a
+given size, a RAG index with a fixed chunking and retrieval rule, or a vector
+store that treats every event alike. Yet different tasks demand different memory
+structures --- a multi-hop question needs entity relations, a navigation task
+needs spatial transitions, an end-of-corpus question needs recency-independent
+recall. This thesis asks whether an agent can \textbf{learn how to construct its
+own memory} --- what to store, which concepts to track as nodes, and how to
+score retrieval --- and whether that learned structure is \textbf{task-dependent}.
+
+We parameterize memory construction by a vector $\thetavec$ (storage
+probability, entity-creation threshold, temporal-edge probability, and learnable
+retrieval weights \wgraph{}/\wembed{}/\wrec{}, up to ten dimensions in the most
+complete system, \Vfour{}) and optimize $\thetavec$ --- not the policy, not the
+value function --- by black-box search (Evolution Strategy, then CMA-ES). The
+work proceeds in three stages of increasing realism. \textbf{Stage~1} (grid
+proof-of-concept) shows the optimizer recovers \emph{different} $\thetavec$ for
+different tasks and that adaptive $\thetavec$ beats the fixed-memory baseline
+(MultiHopKeyDoor success $2.5\% \rightarrow 27.5\%$). \textbf{Stage~2} scales to
+a twelve-memory-system $\times$ four-environment benchmark with ablation,
+zero-shot $\thetavec$-transfer, and sensitivity analysis; the ten-dimensional
+\Vfour{} reaches the top performance cluster, and $\thetavec$ tuned for one
+long-haystack task transfers to another but not across task families.
+\textbf{Stage~3} moves to real LLMs (a \texttt{gpt-4o-mini} answerer)
+doing corpus-cumulative question answering over \textbf{six} real long-context
+benchmarks, with a corpus-mode CMA-ES re-tuning of $\thetavec$ and an
+independent Claude cross-vendor judge.
+
+The central Stage-3 finding, stated honestly after an adversarial self-audit, is
+that \textbf{corpus-cumulative tuning shifts $\thetavec$ toward
+recency-independent, embedding-driven retrieval, producing an end-of-corpus
+accuracy lift that survives on held-out questions for four of six benchmarks}
+and is reported as non-significant or undefined-by-construction on the other
+two. A full-context ``dump-all'' baseline, once a truncation bug was fixed, is
+\emph{statistically tied} with selective retrieval on accuracy but roughly 18$\times$
+more expensive --- so the honest case for learned, task-adaptive memory at this
+scale is \textbf{efficiency and scalability}, not an accuracy cliff.

@@ -1,0 +1,56 @@
+\chapter{Conclusion and Future Work}
+\label{ch:conclusion}
+
+\section{Summary of contributions}
+This thesis asked whether an agent can learn how to construct its own memory and
+whether the learned optimum is task-dependent. The answer, established across
+three stages of increasing realism, is yes. We parameterized memory construction
+--- storage, abstraction, and retrieval scoring --- by a single vector
+$\thetavec$ and optimized it by black-box search, leaving the policy and the
+language model untouched. In grid worlds the optimizer recovered visibly
+different $\thetavec$ per task and lifted the hardest task from $2.5\%$ to
+$27.5\%$ success. On a twelve-system benchmark a ten-dimensional learnable memory
+reached the top performance cluster, and a tuned $\thetavec$ generalized within
+but not across task families. On six real long-context LLM benchmarks,
+corpus-cumulative tuning produced a recency-independent memory whose
+end-of-corpus accuracy lift survived held-out testing on four of six benchmarks
+and held when CUAD was scaled from ten to fifty contracts.
+
+The work's distinctive feature is that it audits itself. The headline that a
+full-context baseline ``collapses'' was traced to a bug and corrected to an
+honest accuracy \emph{tie}; the contribution of learned, task-adaptive memory at
+this scale is therefore reframed as one of \textbf{efficiency and scalability}
+--- matching full-context accuracy at roughly $1/18$th the cost --- rather than
+raw accuracy.
+
+\section{Limitations}
+The Stage-1 results are single-seed. Several Stage-3 cells are single-seed
+(HotpotQA and LongMemEval were re-run at 100-document scale, but multi-seed
+replication of the larger benchmarks remains future work; corpus-mode evaluation
+is near-deterministic at temperature~0, so the gain would be CI tightening, not a
+point-estimate change). CUAD is now evaluated on 50 of its 510 contracts for the
+headline pair; the auxiliary baselines remain at the 10-contract pilot scale.
+Answers are judged by a single (cross-vendor) Claude judge; a second independent
+judge and an inter-judge agreement coefficient remain future work, and
+refusal/acknowledgment answers carry validated rule-assisted scores rather than
+one-by-one judgments.
+
+\section{Future work}
+Natural extensions are: (i) multi-seed replication of the larger Stage-3 cells;
+(ii) scaling CUAD and the other benchmarks to their full corpora and all
+configurations; (iii) a second independent judge with Cohen's $\kappa$; (iv)
+revisiting the neural memory controller with a larger optimization budget, now
+that the scalar \Vfour{} sets a strong, cheap baseline; (v) larger answerer
+models, to test whether the efficiency advantage of learned selective memory
+persists when the answerer is stronger; and (vi) making $\thetavec$ itself
+adaptive \emph{within} an episode (a per-step controller) rather than fixed per
+task, which the present grid results suggest could help on long-horizon
+out-of-distribution tasks where a fixed $\thetavec$ fails.
+
+\section{Closing}
+Memory for LLM agents need not be hand-designed and frozen. A small parameter
+vector that governs what to store and how to retrieve can be \emph{learned}, its
+optimum is \emph{task-dependent}, and --- measured honestly --- it buys
+efficiency and graceful scaling rather than a free accuracy lunch. That is a
+modest but defensible step toward agents that adapt not just their actions but
+the structure of their own memory.

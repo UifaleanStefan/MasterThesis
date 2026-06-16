@@ -1,0 +1,37 @@
+\chapter{Supplementary Results}
+\label{app:tables}
+
+This appendix collects secondary results referenced from the main text. Complete
+per-benchmark, per-configuration tables (including all baselines: BM25, dense
+RAG, attention memory, and the per-document-tuned \Vt{}) are in the repository
+under \texttt{docs/BENCHMARK\_RESULTS.md}, \texttt{docs/ABLATION\_RESULTS.md},
+\texttt{docs/TRANSFER\_RESULTS.md}, \texttt{docs/SENSITIVITY\_RESULTS.md}, and
+the per-benchmark \texttt{*\_corpus\_summary.json} aggregates.
+
+\section{Neural memory controller (exploratory)}
+A neural variant replaced the ten scalar parameters with a small MLP
+($50\rightarrow32\rightarrow10$, $\sim$1{,}962 parameters) tuned by the same
+CMA-ES budget. On MultiHopKeyDoor it reaches a best fitness of $0.233$ and a
+held-out reward of $\sim$0.19 --- matching or slightly exceeding the scalar
+\Vfour{} --- but with far more parameters and no clear robustness advantage, and
+it fails zero-shot on the larger out-of-distribution task just as the scalar
+version does. The conclusion is that the extra expressivity of a neural
+controller is not needed at this scale; the ten-scalar parameterization is a
+strong, cheap baseline. Details: \texttt{docs/NEURAL\_CONTROLLER\_V2\_RESULTS.md}.
+
+\section{Verbal self-reflection (negative result)}
+A Reflexion-style \citep{shinn2023reflexion} augmentation, in which the agent
+writes verbal self-feedback into memory between attempts, did not improve
+end-task performance in our setting: the learned-memory parameters already
+capture the useful signal, and free-text reflections added noise rather than
+durable structure. We report this as an honest negative result; details in
+\texttt{docs/REFLEXION\_RESULTS.md}.
+
+\section{Stage-2 detail}
+The full twelve-system rankings per environment, the per-component ablation
+table, the cross-environment transfer matrix, and the 2-D sensitivity grid are
+reproduced from the committed result JSONs by
+\texttt{python generate\_thesis\_figures.py}. Note that the Stage-2 detail
+documents report the original TF-IDF-era $\thetavec$; the committed JSONs and the
+figures in this thesis use the later MiniLM re-tune, which is why specific values
+differ. The headline conclusion (top cluster; statistical tie) is unchanged.

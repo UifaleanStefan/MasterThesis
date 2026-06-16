@@ -1,0 +1,42 @@
+% ============================================================================
+% main.tex — Master's thesis
+% "Learnable, Task-Adaptive Structured Memory for LLM Agents"
+% Build:  pdflatex main  ->  bibtex main  ->  pdflatex main  ->  pdflatex main
+%   (or:  latexmk -pdf main)
+% ============================================================================
+\documentclass[12pt,a4paper,oneside]{report}
+\input{preamble}
+
+\begin{document}
+
+% ---- Front matter ----
+\input{frontmatter/title}
+
+\cleardoublepage
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\listoftables
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ---- Body ----
+\include{chapters/01_introduction}
+\include{chapters/02_background}
+\include{chapters/03_methodology}
+\include{chapters/04_results}
+\include{chapters/05_discussion}
+\include{chapters/06_conclusion}
+
+% ---- References ----
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+% ---- Appendices ----
+\appendix
+\include{appendices/A_reproducibility}
+\include{appendices/B_honesty_audit}
+\include{appendices/C_full_tables}
+\include{appendices/D_data_and_prompts}
+
+\end{document}

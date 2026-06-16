@@ -1,0 +1,211 @@
+\chapter{Experiments and Results}
+\label{ch:results}
+
+The three stages answer the research question at increasing realism. Stage~1
+shows the optimum is task-dependent; Stage~2 shows a learnable memory is
+competitive and characterizes what each parameter does; Stage~3 tests the idea
+on real LLMs over six long-context corpora.
+
+\section{Stage 1 --- task-dependent \texorpdfstring{$\thetavec$}{theta} in grid worlds}
+\label{sec:stage1}
+An Evolution Strategy optimizes the three-dimensional $\thetavec$ separately on
+each grid environment. Table~\ref{tab:stage1} reports the recovered vectors and
+the success rate against the fixed-memory baseline.
+
+\begin{table}[t]
+\centering
+\caption{Stage~1: learned $\thetavec=(\theta_{\mathrm{store}},
+\theta_{\mathrm{entity}}, \theta_{\mathrm{temporal}})$ per environment, and
+baseline vs.\ learned success. The vectors are visibly different per task.}
+\label{tab:stage1}
+\begin{tabular}{lccc}
+\toprule
+Environment & Learned $\thetavec$ & Baseline & Learned \\
+\midrule
+Key-Door          & $(0.116,\,0.000,\,0.819)$ & 17.5\% & 30.0\% \\
+Goal-Room         & $(1.000,\,0.220,\,1.000)$ & 70.0\% & 80.0\% \\
+MultiHop-KeyDoor  & $(1.000,\,0.487,\,0.843)$ & \textbf{2.5\%} & \textbf{27.5\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The headline is the \emph{difference} between the recovered vectors:
+Key-Door discards most events ($\theta_{\mathrm{store}}{=}0.12$) but preserves
+temporal order; Goal-Room stores everything. This is the first, cleanest
+evidence that the optimal memory structure is task-dependent
+(Figure~\ref{fig:stage1theta}). On the hardest task the learned rule lifts
+success from $2.5\%$ to $27.5\%$; we report this honestly as an absolute lift of
+$\sim$25 points (the baseline is near-zero, so a percentage-ratio framing would
+overstate it), on a single-seed proof of concept.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{fig3_theta_trajectory.png}
+  \caption{Stage~1: $\thetavec$ trajectories over Evolution-Strategy generations
+  for three environments. The optimizer converges to visibly different vectors,
+  which is the central Stage-1 claim.}
+  \label{fig:stage1theta}
+\end{figure}
+
+\section{Stage 2 --- benchmark, ablation, transfer, sensitivity}
+\label{sec:stage2}
+
+\paragraph{Top-cluster performance.} On the hardest grid task
+(MultiHopKeyDoor), the CMA-ES-tuned ten-dimensional \Vfour{} reaches the top
+performance cluster (Figure~\ref{fig:stage2bench}): mean reward $0.178$ versus
+the prior best EpisodicSemantic at $0.173$. We state this as a
+\emph{statistical tie}, not a clean ``\#1'': it is a single-seed point estimate
+and EpisodicSemantic's $95\%$ bootstrap confidence interval $[0.120, 0.220]$
+contains $0.178$. The defensible claim is that the ten-dimensional
+parameterization \emph{reaches the top cluster}, a $+75\%$ improvement over its
+own untuned starting point, not that it is uniquely best.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig5_memory_comparison.png}
+  \caption{Stage~2: twelve memory systems on MultiHopKeyDoor (task performance
+  with $95\%$ bootstrap CIs, retrieval precision, token efficiency). \Vfour{}
+  sits in the top cluster, statistically tied with the strongest baselines.}
+  \label{fig:stage2bench}
+\end{figure}
+
+\paragraph{Ablation.} Removing each $\thetavec$ component one at a time
+(Figure~\ref{fig:ablation}) shows that $\theta_{\mathrm{novel}}$ is the
+dominant, load-bearing dimension: zeroing it collapses reward to $0$ (it gates
+the entire storage pipeline). Other components carry less, and---honestly---a
+\wgraph{} sweep (Figure~\ref{fig:wgraph}) shows the graph-traversal term carries
+\emph{no} measurable load on this task: zeroing it barely changes reward. What
+was initially described as a ``four-shift'' signature of corpus tuning is, after
+this ablation, more accurately a three-shift; the graph term behaves as a typed
+storage scaffold rather than a relational retrieval engine.
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{fig_ablation_ranked.png}
+    \caption{Per-component degradation ranking.}
+    \label{fig:ablation}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{fig_w_graph_ablation.png}
+    \caption{\wgraph{} sweep: flat (no load).}
+    \label{fig:wgraph}
+  \end{subfigure}
+  \caption{Stage~2 ablation. $\theta_{\mathrm{novel}}$ is load-bearing; the graph
+  term carries no measurable retrieval load.}
+\end{figure}
+
+\paragraph{Transfer and sensitivity.} A $\thetavec$ tuned on one environment
+transfers strongly to a structurally similar one (GoalRoom $0.69$, HardKeyDoor
+$0.17$) but fails completely on a larger out-of-distribution task
+(MegaQuestRoom $0.00$), even though its retrieval there is high-precision ---
+the failure is task scale, not memory quality (Figure~\ref{fig:transfer}). The
+2-D sensitivity landscape (Figure~\ref{fig:sensitivity}) shows a \emph{sharp
+peak}: reward collapses once $\theta_{\mathrm{novel}}$ drops below $\sim$0.3, so
+the optimizer must find a fairly precise value. A neural-controller variant
+(a $\sim$2{,}000-parameter MLP tuned by the same CMA-ES budget) matches but does
+not clearly exceed the ten-scalar \Vfour{}; details are in
+Appendix~\ref{app:tables}. The Pareto view (Figure~\ref{fig:pareto}) confirms
+\Vfour{} is on the reward-vs-cost frontier.
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{fig_transfer_annotated.png}
+    \caption{Zero-shot $\thetavec$-transfer.}
+    \label{fig:transfer}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{fig_sensitivity_annotated.png}
+    \caption{Sensitivity landscape (sharp peak).}
+    \label{fig:sensitivity}
+  \end{subfigure}
+  \caption{Stage~2 transfer and sensitivity.}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{fig11_pareto.png}
+  \caption{Stage~2: reward versus token cost. \Vfour{} sits on the efficient
+  frontier (high reward, low retrieval cost).}
+  \label{fig:pareto}
+\end{figure}
+
+\section{Stage 3 --- six real long-context benchmarks}
+\label{sec:stage3}
+Each benchmark is ingested document-by-document into the \Vt{} memory; questions
+are answered \emph{online} and \emph{batch} and scored by the cross-vendor
+Claude judge (Section~\ref{sec:eval}). $\thetavec$ is re-tuned per benchmark on
+the corpus-cumulative \recallk{} objective.
+
+\paragraph{Headline: end-of-corpus accuracy lift.}
+Table~\ref{tab:stage3} reports the batch (end-of-corpus) judge means under the
+canonical (grid-tuned) $\thetavec$ and the corpus-tuned $\thetavec$, with the
+held-out significance verdict.
+
+\begin{table}[t]
+\centering
+\caption{Stage~3 end-of-corpus (batch) judge means, canonical vs.\ corpus-tuned
+$\thetavec$, with held-out significance. CUAD is reported at the 50-contract
+scale (see below); the other rows at their stated $n$.}
+\label{tab:stage3}
+\begin{tabular}{lccc l}
+\toprule
+Benchmark & canonical & corpus-tuned & lift & held-out significance \\
+\midrule
+\FB{}              & 0.243 & 0.645 & $+0.402$ & survives, $p_{\mathrm{holm}}<10^{-4}$ \\
+\HQA{} ($n{=}100$) & 0.215 & 0.755 & $+0.540$ & survives \\
+QASPER             & 0.250 & 0.415 & $+0.165$ & \emph{n.s.} after Holm \\
+CUAD ($n{=}644$)   & 0.028 & 0.172 & $+0.144$ & survives ($+0.135$, 10-doc) \\
+\LME{} ($n{=}100$) & 0.165 & 0.330 & $+0.165$ & survives \\
+\NQA{}             & 0.400 & 0.400 & $0.000$ & objective undefined\footnotemark \\
+\bottomrule
+\end{tabular}
+\end{table}
+\footnotetext{NarrativeQA's adapter emits no paragraph-level gold, so the
+\recallk{} tuning objective is undefined by construction; ``corpus-tuned'' there
+falls back to canonical $\thetavec$.}
+
+The mechanism is consistent across benchmarks: corpus tuning drives \wrec{}
+toward $0$ and \wembed{} up, producing a memory that does \emph{not} depend on
+the queried document being recent --- exactly what end-of-corpus QA needs. In
+\emph{online} mode (fresh document) the recency-heavy canonical $\thetavec$ is
+competitive or better, so the lift is genuinely a batch-mode effect.
+
+\paragraph{CUAD scaled from 10 to 50 contracts.} To check that the CUAD lift is
+not an artifact of a tiny corpus, the headline pair was re-run and re-judged
+one-by-one at 50 contracts ($n{=}644$ questions per cell, up from $132$). The
+batch lift \emph{holds}: canonical $0.028 \rightarrow$ corpus-tuned $0.172$
+($+0.144$, versus $+0.161$ at 10 contracts). Canonical batch stays near-zero
+because, with fifty contracts in memory, its recency-heavy retrieval pulls
+clauses from the wrong contract; the corpus-tuned $\thetavec$ (with \wrec{}
+$\approx 0$) recovers by matching on semantic similarity. The online-vs-batch
+contrast is the sharpest of any benchmark
+(Table~\ref{tab:cuadonline}): every configuration is far better online (the
+right contract is fresh) than batch, and corpus tuning closes most of that gap.
+
+\begin{table}[t]
+\centering
+\caption{CUAD online-vs-batch judge means at 50 contracts ($n{=}644$). The
+online--batch gap is the largest of any benchmark; corpus tuning narrows it.}
+\label{tab:cuadonline}
+\begin{tabular}{lccc}
+\toprule
+Configuration & Online & Batch & Gap \\
+\midrule
+\Vt{} canonical     & 0.295 & 0.028 & $+0.267$ \\
+\Vt{} corpus-tuned  & 0.390 & 0.172 & $+0.218$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The dump-all baseline: accuracy parity, not a cliff.} A full-context
+``dump-all'' baseline concatenates the entire accumulated corpus into the prompt.
+After fixing a truncation bug that had silently capped it at 12 events, dump-all
+on \FB{} scores $0.689$ online / $0.607$ batch --- \emph{statistically
+indistinguishable} from corpus-tuned ($0.678$ / $0.645$; confidence intervals
+overlap heavily) --- but at roughly $18\times$ the token cost (\$2.68 vs.\ \$0.15
+per 150 questions). The honest conclusion is that the value of learned selective
+memory at this corpus scale is \textbf{efficiency and scalability}, not a raw
+accuracy advantage: it matches dump-all's accuracy at a fraction of the cost and,
+unlike dump-all, does not break when the corpus exceeds the context window.

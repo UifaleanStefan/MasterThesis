@@ -1,0 +1,45 @@
+% ============================================================================
+% preamble.tex — packages, formatting, and macros for the thesis
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{siunitx}
+\sisetup{detect-all, round-mode=places, round-precision=3}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{csquotes}
+\usepackage[round,authoryear]{natbib}
+\usepackage{enumitem}
+\usepackage{setspace}
+\onehalfspacing
+
+% --- Notation macros -------------------------------------------------------
+\newcommand{\thetavec}{\boldsymbol{\theta}}            % the memory parameter vector
+\newcommand{\Vfour}{GraphMemoryV4}
+\newcommand{\Vt}{V4\textsubscript{t}}                  % the corpus-mode text variant
+\newcommand{\wgraph}{$w_{\mathrm{graph}}$}
+\newcommand{\wembed}{$w_{\mathrm{embed}}$}
+\newcommand{\wrec}{$w_{\mathrm{recency}}$}
+\newcommand{\thstore}{$\theta_{\mathrm{store}}$}
+\newcommand{\thnovel}{$\theta_{\mathrm{novel}}$}
+\newcommand{\recallk}{recall@$k$}
+
+% --- Benchmark shorthands --------------------------------------------------
+\newcommand{\FB}{FinanceBench}
+\newcommand{\HQA}{HotpotQA}
+\newcommand{\LME}{LongMemEval}
+\newcommand{\NQA}{NarrativeQA}
+
+\captionsetup{font=small,labelfont=bf}

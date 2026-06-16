@@ -129,7 +129,7 @@ recall objective (CMA-ES, no LLM in the loop).
 | FinanceBench | 0.243 | 0.645 | **+0.402** | survives, p_holm < 0.0001 |
 | HotpotQA (n=100) | 0.215 | 0.755 | **+0.540** | survives |
 | QASPER | 0.250 | 0.415 | +0.165 | **n.s. after Holm** |
-| CUAD | 0.023 | 0.184 | +0.161 | survives (+0.135) |
+| CUAD (n=644, 50 contracts) | 0.028 | 0.172 | +0.144 | survives (held-out +0.135) |
 | LongMemEval (n=100) | 0.165 | 0.330 | +0.165 | survives |
 | NarrativeQA | 0.400 | 0.400 | 0.000 | tuning objective undefined¹ |
 
@@ -182,8 +182,10 @@ claim that selective retrieval is uniquely accurate.
   the larger benchmarks is future work (corpus-mode online/batch eval is
   near-deterministic at temperature 0, so the gain would be CI tightening, not
   point-estimate change).
-- **Corpus scope.** CUAD currently evaluates a subset of its 510 contracts;
-  scaling the contract count is in progress.
+- **Corpus scope.** CUAD's headline pair (canonical vs corpus-tuned) is now
+  evaluated on 50 of its 510 contracts (n=644 questions/cell, judged 1-by-1);
+  the batch lift holds at this 5× scale (+0.144). Scaling the auxiliary
+  baselines and the full 510-contract corpus is future work.
 - **Judge.** Content answers are judged one-by-one by Claude; refusal /
   acknowledgment answers keep rule-assisted scores, disclosed and validated on a
   300-entry sample (population-weighted error 0.028). A second independent judge

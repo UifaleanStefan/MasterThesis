@@ -1,0 +1,42 @@
+\chapter{Honesty and Corrections Audit}
+\label{app:honesty}
+
+In June 2026 the Stage-3 evaluation was subjected to an adversarial self-audit.
+Five material issues were found and corrected in both the data and the write-up;
+the numbers reported in this thesis are the corrected ones. This appendix
+summarizes them; the full memo is \texttt{docs/PROFESSOR\_MEMO\_2026\_06\_12.md}.
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Stage-2 ``\#1'' overclaim.} \Vfour{} at $0.178$ versus
+  EpisodicSemantic at $0.173$ is a single-seed point estimate inside the
+  baseline's $95\%$ bootstrap CI $[0.120,0.220]$; it is reported as a
+  \emph{statistical tie}, and the ranking does not survive a change of retrieval
+  backend.
+  \item \textbf{Tuned-on-test.} Some headline cells were tuned (CMA-ES on
+  \recallk{}) on questions later reused at evaluation. Held-out splits were
+  recomputed; the surviving lifts are re-reported (FinanceBench held-out
+  $+0.335$, $p_{\mathrm{holm}}<10^{-4}$; CUAD $+0.135$ significant; QASPER
+  $+0.125$, \emph{not} significant after Holm correction).
+  \item \textbf{Dump-all truncation bug.} A 12-event cap meant the full-context
+  baseline never received the full corpus, which had produced a spurious
+  ``collapse.'' After the fix, dump-all is statistically tied with corpus-tuned
+  selective memory on accuracy at $\sim$18$\times$ the cost; the headline was
+  reframed from accuracy to efficiency.
+  \item \textbf{Four-shift $\rightarrow$ three-shift.} A \wgraph{} ablation shows
+  the graph-traversal term carries no measurable retrieval load, so one of the
+  four claimed corpus-tuning ``shifts'' is not load-bearing.
+  \item \textbf{Under-powered cells.} HotpotQA and LongMemEval $n{=}10$ cells
+  were re-run at $n{=}100$ and re-framed as pre-registered domain-incoherent
+  controls rather than clean wins.
+\end{enumerate}
+
+\section*{Judging provenance and validation}
+Judging is two-tier. Content answers are scored one-by-one by the Claude
+cross-vendor judge ($\sim$9{,}500 content-templated entries were re-judged
+one-by-one during the audit). Refusal and acknowledgment answers keep a
+rule-assisted score; the classifier was validated on a stratified 300-entry
+hand-checked sample (ACK $100/100$; refusal $98/100$; population-weighted
+score error $0.028$ over the rule-assisted pool). The provenance auditor reports
+the rule-assisted share ($\sim$40\% of lines) rather than implying every line is
+a bespoke judgment, and confirms zero duplicate question ids and
+queue-to-results parity for every cell.
