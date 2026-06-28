@@ -1,0 +1,67 @@
+{
+  "benchmark": "longmemeval",
+  "status": "ok",
+  "variant": "attention_corpus",
+  "limit_docs": 50,
+  "k": 8,
+  "n_eval_questions": 50,
+  "canonical_temperature": 0.5,
+  "canonical_recall": 0.96,
+  "tuned_temperature": 0.5,
+  "tuned_recall": 0.96,
+  "improvement": 0.0,
+  "grid": [
+    {
+      "tau": 0.1,
+      "recall": 0.96
+    },
+    {
+      "tau": 0.25,
+      "recall": 0.96
+    },
+    {
+      "tau": 0.5,
+      "recall": 0.96
+    },
+    {
+      "tau": 0.75,
+      "recall": 0.96
+    },
+    {
+      "tau": 1.0,
+      "recall": 0.96
+    },
+    {
+      "tau": 1.5,
+      "recall": 0.96
+    },
+    {
+      "tau": 2.0,
+      "recall": 0.96
+    },
+    {
+      "tau": 3.0,
+      "recall": 0.96
+    },
+    {
+      "tau": 4.0,
+      "recall": 0.96
+    }
+  ],
+  "elapsed_seconds": 0.11158537864685059,
+  "_manifest": {
+    "git_sha": "ad65054",
+    "git_dirty": true,
+    "timestamp_utc": "2026-06-28T14:54:11+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_attention_corpus_tuning",
+    "benchmark": "longmemeval",
+    "limit_docs": 50,
+    "k": 8
+  }
+}
