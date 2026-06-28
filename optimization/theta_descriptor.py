@@ -67,6 +67,15 @@ def extract_descriptors(benchmark: str, limit_docs: int = 50) -> dict:
     """
     adapter = get_adapter(benchmark)
     docs = list(adapter.iter_documents(limit=limit_docs))
+    d = descriptors_from_docs(docs)
+    d["benchmark"] = benchmark
+    return d
+
+
+def descriptors_from_docs(docs: list) -> dict:
+    """Core descriptor computation over an arbitrary list of docs (so it works
+    on random sub-samples, not just a benchmark's first-N). Same features as
+    extract_descriptors, minus the 'benchmark' label."""
     n_docs = len(docs)
     paras_per_doc, para_words = [], []
     vocab, total_tokens = set(), 0
@@ -101,7 +110,6 @@ def extract_descriptors(benchmark: str, limit_docs: int = 50) -> dict:
         return float(math.sqrt(sum((x - m) ** 2 for x in xs) / len(xs)))
 
     return {
-        "benchmark": benchmark,
         "n_docs": float(n_docs),
         "mean_paras_per_doc": _mean(paras_per_doc),
         "mean_para_words": _mean(para_words),
