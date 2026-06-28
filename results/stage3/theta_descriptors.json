@@ -1,0 +1,128 @@
+{
+  "benchmarks": [
+    "cuad",
+    "financebench",
+    "hotpotqa",
+    "longmemeval",
+    "qasper"
+  ],
+  "n_benchmarks": 5,
+  "n_pairs": 10,
+  "descriptors": {
+    "cuad": {
+      "benchmark": "cuad",
+      "n_docs": 50.0,
+      "mean_paras_per_doc": 124.86,
+      "mean_para_words": 63.65289123818677,
+      "type_token_ratio": 0.028003070070586458,
+      "mean_q_words": 37.65683229813665,
+      "mean_gold_per_q": 1.5419254658385093,
+      "mean_gold_rel_pos": 0.39644964617994416,
+      "gold_pos_dispersion": 0.27303875171649744,
+      "capword_ratio": 0.15992802949280924
+    },
+    "financebench": {
+      "benchmark": "financebench",
+      "n_docs": 50.0,
+      "mean_paras_per_doc": 1.24,
+      "mean_para_words": 228.09677419354838,
+      "type_token_ratio": 0.12904822514495828,
+      "mean_q_words": 27.58,
+      "mean_gold_per_q": 1.24,
+      "mean_gold_rel_pos": 0.0967741935483871,
+      "gold_pos_dispersion": 0.19979466855980704,
+      "capword_ratio": 0.16277754207325695
+    },
+    "hotpotqa": {
+      "benchmark": "hotpotqa",
+      "n_docs": 50.0,
+      "mean_paras_per_doc": 9.84,
+      "mean_para_words": 105.92073170731707,
+      "type_token_ratio": 0.16448870723236045,
+      "mean_q_words": 16.24,
+      "mean_gold_per_q": 2.0,
+      "mean_gold_rel_pos": 0.48500000000000026,
+      "gold_pos_dispersion": 0.2779838124783528,
+      "capword_ratio": 0.28474660833189414
+    },
+    "longmemeval": {
+      "benchmark": "longmemeval",
+      "n_docs": 50.0,
+      "mean_paras_per_doc": 2.26,
+      "mean_para_words": 2412.1238938053098,
+      "type_token_ratio": 0.04622298859008695,
+      "mean_q_words": 15.8,
+      "mean_gold_per_q": 2.26,
+      "mean_gold_rel_pos": 0.27876106194690264,
+      "gold_pos_dispersion": 0.26239431348696945,
+      "capword_ratio": 0.12466889239461423
+    },
+    "qasper": {
+      "benchmark": "qasper",
+      "n_docs": 50.0,
+      "mean_paras_per_doc": 66.22,
+      "mean_para_words": 60.315916641498035,
+      "type_token_ratio": 0.04870159133926873,
+      "mean_q_words": 8.343558282208589,
+      "mean_gold_per_q": 7.490196078431373,
+      "mean_gold_rel_pos": 0.47179720604707026,
+      "gold_pos_dispersion": 0.28785274158885676,
+      "capword_ratio": 0.07505533133706549
+    }
+  },
+  "descriptor_distance_vs_theta_distance_spearman": -0.382,
+  "pairs": [
+    {
+      "pair": "cuad~financebench",
+      "descriptor_dist": 4.569,
+      "theta_dist": 0.916
+    },
+    {
+      "pair": "cuad~hotpotqa",
+      "descriptor_dist": 4.49,
+      "theta_dist": 1.147
+    },
+    {
+      "pair": "cuad~longmemeval",
+      "descriptor_dist": 4.32,
+      "theta_dist": 1.548
+    },
+    {
+      "pair": "cuad~qasper",
+      "descriptor_dist": 4.277,
+      "theta_dist": 1.241
+    },
+    {
+      "pair": "financebench~hotpotqa",
+      "descriptor_dist": 4.286,
+      "theta_dist": 0.928
+    },
+    {
+      "pair": "financebench~longmemeval",
+      "descriptor_dist": 3.925,
+      "theta_dist": 1.076
+    },
+    {
+      "pair": "financebench~qasper",
+      "descriptor_dist": 5.576,
+      "theta_dist": 0.767
+    },
+    {
+      "pair": "hotpotqa~longmemeval",
+      "descriptor_dist": 4.337,
+      "theta_dist": 1.257
+    },
+    {
+      "pair": "hotpotqa~qasper",
+      "descriptor_dist": 4.636,
+      "theta_dist": 1.126
+    },
+    {
+      "pair": "longmemeval~qasper",
+      "descriptor_dist": 4.103,
+      "theta_dist": 1.22
+    }
+  ],
+  "interpretation": "positive rho => similar corpora want similar theta (meta-learning plausible); rho near 0 or negative => theta is task-idiosyncratic, reinforcing task-dependence.",
+  "power_caveat": "only 5 benchmarks => 10 pairs; this is a directional pre-check, NOT a fitted model. A credible predictor needs many (descriptor, theta) pairs from corpus sub-samples (see plan Phase 4)."
+}
