@@ -150,17 +150,24 @@ def load_config_params(config_name: str, benchmark: str) -> MemoryParamsV4:
 
 
 def _load_tuned_attention_temp(benchmark: str) -> float:
-    """Block 12-configs / critique #2: load Phase 1.7's per-benchmark
-    tuned AttentionMemory temperature. Falls back to 0.5 if missing."""
-    path = ROOT / "results" / "stage3" / f"tuned_temperature_{benchmark}.json"
-    if not path.exists():
-        print(f"  [WARN] no tuned tau for {benchmark!r}; using default 0.5")
-        return 0.5
-    try:
-        data = json.loads(path.read_text())
-        return float(data.get("tuned_temperature", 0.5))
-    except Exception:
-        return 0.5
+    """Load the tuned AttentionMemory temperature τ.
+
+    Prefers the corpus-mode τ (tuned on the same corpus-cumulative recall@k
+    objective as V4ₜ — fairness, audit B6; tuning/tune_attention_corpus.py),
+    then falls back to the older per-doc τ (Phase 1.7), then 0.5."""
+    for fname in (
+        f"tuned_attention_corpus_{benchmark}.json",
+        f"tuned_temperature_{benchmark}.json",
+    ):
+        path = ROOT / "results" / "stage3" / fname
+        if path.exists():
+            try:
+                data = json.loads(path.read_text())
+                return float(data.get("tuned_temperature", 0.5))
+            except Exception:
+                continue
+    print(f"  [WARN] no tuned tau for {benchmark!r}; using default 0.5")
+    return 0.5
 
 
 def build_memory(config_name: str, benchmark: str) -> Any:
@@ -230,6 +237,18 @@ def build_memory(config_name: str, benchmark: str) -> Any:
         return SemanticMemory(), None
     if config_name == "bm25-corpus":
         return BM25Memory(), None
+    if config_name == "bm25-corpus-tuned":
+        # Fairness (audit B6): BM25 with (k1, b) tuned on the same
+        # corpus-cumulative recall@k objective as V4ₜ. See
+        # tuning/tune_bm25_corpus.py.
+        path = ROOT / "results" / "stage3" / f"tuned_bm25_corpus_{benchmark}.json"
+        if not path.exists():
+            raise FileNotFoundError(
+                f"No corpus-tuned BM25 for {benchmark!r}. "
+                f"Run `python -m tuning.tune_bm25_corpus --benchmarks {benchmark}` first."
+            )
+        data = json.loads(path.read_text())
+        return BM25Memory(k1=float(data["k1"]), b=float(data["b"])), None
     if config_name == "flat-corpus":
         return FlatMemory(window_size=50), None
     if config_name == "dump-all":
@@ -935,6 +954,7 @@ def main() -> int:
             "attention-corpus", "attention-corpus-tuned",
             # Retrieval baselines
             "rag-corpus", "semantic-corpus", "bm25-corpus",
+            "bm25-corpus-tuned",
             "flat-corpus", "dump-all",
             # Legacy aliases
             "v4-tuned", "v4-canonical",

@@ -54,7 +54,12 @@ class BM25Memory:
     template).
     """
 
-    def __init__(self) -> None:
+    def __init__(self, k1: float = 1.5, b: float = 0.75) -> None:
+        # k1, b are the Okapi BM25 hyperparameters (rank-bm25 defaults 1.5/0.75).
+        # Exposed so the baseline can be corpus-tuned on the same recall@k
+        # objective as V4ₜ (fairness; see tuning/tune_bm25_corpus.py).
+        self._k1 = float(k1)
+        self._b = float(b)
         self._events: list[Event] = []
         self._tokens: list[list[str]] = []
         self._bm25 = None  # built lazily on first retrieval
@@ -77,7 +82,7 @@ class BM25Memory:
             return
         # Avoid all-empty token lists (would crash BM25).
         safe = [t if t else ["__empty__"] for t in self._tokens]
-        self._bm25 = BM25Okapi(safe)
+        self._bm25 = BM25Okapi(safe, k1=self._k1, b=self._b)
 
     def get_relevant_events(
         self, observation: str, current_step: int, k: int = 8,
