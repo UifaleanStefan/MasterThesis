@@ -20,6 +20,23 @@ question, asked after the agent has ingested an entire corpus, needs
 long ago. A memory rule that is optimal for one of these is often actively
 harmful for another.
 
+A single parameter makes the tension concrete. Consider how much a retriever
+should favour \emph{recent} evidence. A conversational assistant answering
+``what did I just ask you to change?'' wants recency weighted heavily --- the
+answer is almost always in the last few turns. An agent answering ``what is the
+governing-law clause?'' after ingesting a five-hundred-page contract wants recency
+weighted at essentially \emph{zero} --- the relevant clause was read hundreds of
+pages ago, and a recency-biased retriever will confidently surface the most
+recent (wrong) clause instead. The same is true of how aggressively to store
+(store everything, and retrieval drowns in noise; store too little, and the
+answer was never kept) and of how much to trust embedding similarity versus exact
+lexical overlap. No single setting of these knobs is good everywhere; the right
+setting is a property of the task. In practice this is ``solved'' by an engineer
+hand-tuning the memory for each deployment --- ad hoc, unmeasured, and rarely
+revisited. The premise of this thesis is that those knobs can instead be written
+down explicitly and \emph{learned} per task, and that doing so both improves
+retrieval and makes the task-dependence measurable rather than anecdotal.
+
 \section{Research question}
 This thesis asks a single question:
 \begin{quote}
