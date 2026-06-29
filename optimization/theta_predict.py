@@ -76,22 +76,48 @@ def main() -> int:
     thetas = np.array([p["tuned_theta_vec"] for p in pairs], dtype=float)
     pair_bench = [p["benchmark"] for p in pairs]
 
-    # cache adapter doc pools (reconstruct held-out slices for recall eval)
-    pools = {b: list(get_adapter(b).iter_documents(limit=args.pool)) for b in benches}
+    # Resumable per-slice cache (host is restart-prone; each completed slice is
+    # persisted immediately so a teardown only costs the in-flight slice).
+    SLICES = ROOT / "results" / "stage3" / "_theta_predict_slices.jsonl"
+    done = {}
+    if SLICES.exists():
+        for l in SLICES.read_text(encoding="utf-8").splitlines():
+            if l.strip():
+                r = json.loads(l)
+                done[(r["benchmark"], r["slice_idx"])] = r
+    print(f"Resuming: {len(done)} slices already evaluated.")
+
+    # cache adapter doc pools lazily (reconstruct held-out slices for recall eval)
+    pools = {}
+
+    # Process cheapest benchmarks first (by mean paragraphs/doc) so a host
+    # teardown banks the most completed slices; the slow large-doc corpora
+    # (e.g. CUAD contracts) go last.
+    cost = {}
+    for p in pairs:
+        cost.setdefault(p["benchmark"], p["descriptor"].get("mean_paras_per_doc", 0.0))
+    held_order = sorted(benches, key=lambda b: cost.get(b, 0.0))
+    print(f"Eval order (cheap->expensive): {held_order}")
 
     per_slice = []
-    for held in benches:
+    for held in held_order:
         tr = [i for i, b in enumerate(pair_bench) if b != held]
         te = [i for i, b in enumerate(pair_bench) if b == held]
         if not tr or not te:
             continue
         for i in te:
+            p = pairs[i]
+            key = (held, p["slice_idx"])
+            if key in done:
+                per_slice.append(done[key])
+                continue
             # k-NN predict theta from TRAINING descriptors
             d = np.linalg.norm(Xz[tr] - Xz[i], axis=1)
             nn = [tr[j] for j in np.argsort(d)[:args.k]]
             theta_pred = thetas[nn].mean(0)
 
-            p = pairs[i]
+            if held not in pools:
+                pools[held] = list(get_adapter(held).iter_documents(limit=args.pool))
             slice_docs = [pools[held][j] for j in p["slice_doc_indices"]]
             eval_fn, n_eval = make_slice_eval_fn(slice_docs, args.retr_k, seed=42)
             recall_pred = eval_fn(theta_pred)
@@ -99,13 +125,18 @@ def main() -> int:
             tuned = p["tuned_recall"]
             denom = tuned - canon
             frac = ((recall_pred - canon) / denom) if denom > 1e-9 else None
-            per_slice.append({
+            rec = {
                 "benchmark": held, "slice_idx": p["slice_idx"],
                 "recall_canonical": round(canon, 4),
                 "recall_tuned": round(tuned, 4),
                 "recall_predicted": round(float(recall_pred), 4),
                 "recovered_lift_fraction": (round(float(frac), 4) if frac is not None else None),
-            })
+            }
+            with SLICES.open("a", encoding="utf-8") as fh:
+                fh.write(json.dumps(rec) + "\n")
+            per_slice.append(rec)
+            print(f"  {held} slice {p['slice_idx']}: canon={canon:.3f} pred={recall_pred:.3f} "
+                  f"tuned={tuned:.3f} recovered={rec['recovered_lift_fraction']}")
 
     fracs = [s["recovered_lift_fraction"] for s in per_slice
              if s["recovered_lift_fraction"] is not None]
