@@ -21,6 +21,13 @@ def _benchmark_data_present() -> bool:
     return _BENCH_DATA.is_dir() and any(_BENCH_DATA.iterdir())
 
 
+# Tests that need the benchmark corpora on disk. Matched against the pytest
+# nodeid: whole modules (test_benchmark_*) plus individual data-dependent cases
+# in otherwise-unit-test modules (e.g. the corpus-ingestion smoke test, which
+# shells out to load a HuggingFace dataset).
+_DATA_DEPENDENT_NODEID_MARKERS = ("test_benchmark", "TestCorpusTracerSmoke")
+
+
 def pytest_collection_modifyitems(config, items):
     if _benchmark_data_present():
         return
@@ -29,7 +36,7 @@ def pytest_collection_modifyitems(config, items):
                "run `python scripts/prefetch_benchmarks.py` to enable these tests"
     )
     for item in items:
-        if "test_benchmark" in Path(str(item.fspath)).name:
+        if any(m in item.nodeid for m in _DATA_DEPENDENT_NODEID_MARKERS):
             item.add_marker(skip)
 
 
