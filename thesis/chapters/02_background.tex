@@ -24,6 +24,22 @@ in-domain supervision; none treats the storage-and-scoring rule as a small,
 task-adaptive parameter vector tuned by black-box search, which is the object of
 study here.
 
+Two properties of this literature motivate the present work. First, retrieval
+quality is not one knob but several interacting decisions --- what to index, how
+to chunk it, how to weight lexical versus semantic similarity, and how much to
+favour recent over old evidence --- and the optimal setting of those decisions
+depends on the task: a multi-hop question over short encyclopaedic paragraphs
+rewards aggressive semantic matching, whereas a single-fact lookup in a long
+filing rewards precise lexical overlap, and a dialogue-memory task rewards
+recency. Systems that fix these decisions globally must therefore compromise
+across tasks. Second, where the policy \emph{is} learned, it is typically learned
+by gradient descent on large in-domain question--passage supervision, which both
+requires that supervision and entangles the retrieval rule with the parameters of
+a specific reader. The alternative pursued here --- a handful of interpretable
+scalars optimized directly on a cheap retrieval objective, with no gradients and
+no reader in the loop --- is comparatively under-explored, and it is precisely
+what makes \emph{per-task} re-fitting practical.
+
 \section{Memory systems for LLM agents}
 A parallel line of work gives an agent a persistent, evolving memory rather than
 a one-shot retrieval index. MemGPT \citep{packer2023memgpt} organizes memory into
@@ -40,6 +56,23 @@ of what to write to memory and how to weight a retrieval is not itself
 optimized, and certainly not re-optimized per task. This thesis fills exactly
 that gap.
 
+It is worth being precise about \emph{where} each system places its intelligence,
+because that locates the gap. MemGPT's intelligence is in a hand-written control
+loop that decides when to page between tiers; the paging heuristics are fixed by
+the designer. HippoRAG's is in an offline knowledge-graph construction step plus a
+Personalized-PageRank traversal whose behaviour is determined by the graph and a
+fixed damping factor, not tuned to the task. MemoryLLM moves the memory inside the
+model's hidden state, so updating the policy means retraining the model.
+Practitioner frameworks (mem0, LangMem) expose engineering knobs --- retention
+windows, summary cadence --- but leave their values to manual configuration. In
+every case the \emph{construction policy} (what is stored, abstracted, and how
+candidates are scored at retrieval) is a fixed artifact of the system's design.
+The contribution here is orthogonal to all of them: it makes that policy a small
+optimized object, so the same memory architecture can be re-fit to a new task in
+minutes without touching the model or the control code. In principle the
+parameterization could be layered onto several of these systems, treating their
+retention and scoring heuristics as the free parameters.
+
 \section{Black-box optimization of structured objects}
 Because the storage decision is discrete and non-differentiable (an event is
 either written or not), gradient descent is awkward and a black-box optimizer is
@@ -52,6 +85,25 @@ alternative for expensive black-box objectives and has been used to tune
 retrieval and embedding hyper-parameters. The novelty here is not the optimizer
 but the \emph{object} it is pointed at: a memory-construction policy, tuned
 directly on a downstream recall objective.
+
+CMA-ES is a deliberate choice for this regime rather than an arbitrary one. The
+objective is noisy (it depends on sampled questions and, through the stochastic
+write decision, on a random seed), non-separable (the storage thresholds and the
+retrieval weights interact --- storing more only helps if the scorer can then
+surface it), and, as the Stage-2 sensitivity analysis shows, anisotropic and
+sharply ridged. CMA-ES is built for exactly these conditions: it maintains a full
+covariance matrix over the search distribution and adapts it each generation, so
+it learns the local correlation structure of the landscape and takes large steps
+along flat directions and small steps across sharp ones --- behaviour a
+coordinate-wise or fixed-step search cannot match. Bayesian optimization is the
+natural competitor for very expensive objectives where each evaluation must be
+hoarded, but its surrogate-model overhead buys little at ten dimensions with
+cheap (LLM-free) recall evaluations, and it copes less gracefully with the
+objective's noise. Gradient methods are inapplicable because the write decision is
+discrete. We therefore use a simpler Evolution Strategy for the small Stage-1
+search and CMA-ES for Stages~2--3; the recurring empirical observation that the
+optimizer drives several parameters to a boundary or to zero (notably the
+graph-traversal weight) is itself diagnostic of which components carry load.
 
 \section{Structured and graph memory}
 Representing memory as a graph of typed nodes (events, entities) and edges
@@ -72,10 +124,27 @@ expert-annotated legal-contract review \citep{hendrycks2021cuad}, NarrativeQA fo
 abstractive questions over full books \citep{kocisky2018narrativeqa}, FinanceBench
 for questions over SEC filings \citep{islam2023financebench}, and LongMemEval for
 long-term interactive dialogue memory \citep{wu2024longmemeval}. Answers are
-generated by \texttt{gpt-4o-mini} and scored by an independent Claude judge,
-following the LLM-as-judge methodology and its known biases
-\citep{zheng2023judge}; embeddings use the distilled MiniLM sentence encoder
-\citep{wang2020minilm,reimers2019sbert}.
+generated by \texttt{gpt-4o-mini} and scored by a Claude judge (cross-vendor
+relative to the answerer), following the LLM-as-judge methodology and its known
+biases \citep{zheng2023judge}; embeddings use the distilled MiniLM sentence
+encoder \citep{wang2020minilm,reimers2019sbert}.
+
+The six are not interchangeable, and the spread is the point. They differ in
+document length (a HotpotQA paragraph versus a full NarrativeQA book), in question
+style (lexical-overlap fact lookup in FinanceBench versus paraphrased
+information-seeking in QASPER), and in what ``memory'' even means (a single filing
+versus a multi-session dialogue history in LongMemEval). If the optimal
+$\thetavec$ were the same across such different corpora, the central
+task-dependence claim would be false; the diversity is therefore a test, not
+decoration. Three of the six --- FinanceBench, CUAD, QASPER --- are
+\emph{domain-coherent}: their questions target persistent facts that
+end-of-corpus retrieval should recover, so the hypothesis predicts a lift.
+HotpotQA and LongMemEval serve as pre-registered \emph{domain-incoherent
+controls} (their distractor / session structure means corpus-cumulative recall is
+not the natural objective), and NarrativeQA is included despite providing no
+paragraph-level gold, which makes its recall objective undefined by construction.
+This coherent/control/undefined partition, fixed before judging, is what lets the
+Stage-3 results be read as a test rather than a search for a favourable subset.
 
 \section{Positioning: what is new}
 \label{sec:gap}
