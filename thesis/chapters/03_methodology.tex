@@ -19,6 +19,24 @@ for each task, and ask (i) whether $\thetavec^\star_{\mathcal{T}}$ visibly
 differs across tasks, and (ii) whether $\thetavec^\star_{\mathcal{T}}$ transfers
 to a related task $\mathcal{T}'$.
 
+Two design choices make this formulation worth stating precisely. First, fixing
+the policy and the language model is what gives the experiment its
+\emph{attributive} power: any change in $R$ is caused by the memory-construction
+rule and nothing else, so a difference in $\thetavec^\star$ across tasks cannot be
+explained away as the policy adapting or the model being fine-tuned. The cost is
+that we measure the ceiling a \emph{learned memory} can reach under a fixed
+reader, not the ceiling of an end-to-end system --- an honest scoping we keep
+throughout. Second, the formulation is deliberately \emph{falsifiable}: if a
+single $\thetavec^\star$ were optimal for every task, question~(i) would return
+``no different'' and the thesis's central claim would be refuted; if
+$\thetavec^\star_{\mathcal{T}}$ always transferred, question~(ii) would make
+per-task tuning unnecessary. Neither outcome is assumed. We report
+$\thetavec^\star$ vectors side by side so a reader can see the task-dependence
+directly (Stage~1), measure transfer rather than assert it (Stage~2), and --- in
+the extension of this work --- ask the sharper question of whether
+$\thetavec^\star$ is \emph{predictable} from corpus statistics even when it is not
+constant (Section~\ref{sec:thetapredict}).
+
 \section{The parameter vector and the V1$\rightarrow$V4 progression}
 \label{sec:theta}
 The memory is a graph (Section~\ref{sec:graphmem}). The earliest version (V1)
