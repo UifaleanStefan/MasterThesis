@@ -338,3 +338,47 @@ policy is --- which is exactly what $\thetavec$ tunes.
   unaffected.}
   \label{fig:scalability}
 \end{figure}
+
+\section{Is \texorpdfstring{$\thetavec$}{theta} predictable from corpus statistics?}
+\label{sec:thetapredict}
+Section~\ref{ch:results} establishes that the optimal $\thetavec$ is
+task-dependent; a natural follow-up is whether it is nonetheless
+\emph{predictable} from cheap, LLM-free corpus statistics --- which would convert
+``re-tune per task'' into a one-shot prediction. We test this directly. We tune
+$\thetavec$ (CMA-ES on \recallk{}, no LLM) on $40$ random $30$-document slices,
+eight per benchmark, recording for each slice a nine-feature descriptor (corpus
+size, document and passage length, lexical diversity, question length, gold
+concentration, gold relative position, entity density) alongside its tuned
+$\thetavec$. We then run a \emph{leave-one-benchmark-out} test: a $k$-NN
+predictor ($k{=}3$) maps the held-out slice's descriptor to a $\thetavec$ using
+only the \emph{other} benchmarks' slices, and we evaluate \recallk{} under that
+predicted $\thetavec$ on the held-out slice.
+
+The predicted $\thetavec$ --- never tuned on the target benchmark --- recovers a
+mean $\mathbf{0.80}$ of the per-task tuning lift (bootstrap $95\%$ CI
+$[0.71, 0.87]$): mean recall climbs canonical $0.092 \rightarrow$ predicted
+$0.643 \rightarrow$ tuned $0.704$ (Figure~\ref{fig:thetatransfer}). Recovery is
+near-total on \HQA{} ($0.99$), \LME{} ($0.96$) and \FB{} ($0.93$), partial on
+QASPER ($0.74$), and lowest on \textbf{CUAD} ($0.37$) --- the most idiosyncratic
+corpus, where per-task tuning remains necessary. Two honest qualifications: (i)
+this is recovery of the \emph{retrieval objective} (\recallk{}), not of judged
+answer quality, though the two are correlated ($\rho{=}0.69$,
+Figure~\ref{fig:recalljudge}); and (ii) the high average is inflated by a
+pathological canonical default (mean canonical recall $0.092$), so the genuine
+per-task residual is the remaining $\sim$$20\%$ overall and $\sim$$63\%$ on CUAD.
+Notably, a naive pairwise descriptor-distance vs.\ $\thetavec$-distance check is
+uninformative ($\rho{=}-0.38$): two $\thetavec$ can be far apart in parameter
+space yet retrieval-equivalent (the objective is flat along inert directions such
+as \wgraph{}), so recall recovery --- not parameter proximity --- is the valid
+test.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.78\linewidth]{fig_theta_transfer.png}
+  \caption{Leave-one-benchmark-out: fraction of the per-task tuning lift in
+  \recallk{} recovered by a $\thetavec$ predicted (k-NN over corpus descriptors)
+  from the \emph{other} benchmarks. Mean $0.80$ (dashed; $95\%$ CI
+  $[0.71,0.87]$). Transfer is near-total except on CUAD ($0.37$), the hardest,
+  most idiosyncratic corpus.}
+  \label{fig:thetatransfer}
+\end{figure}

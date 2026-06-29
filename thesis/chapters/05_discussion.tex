@@ -40,6 +40,21 @@ applies. Task-dependence is thus not a nuisance but the central finding:
 there is no single best memory, which is exactly why learning $\thetavec$ per
 task matters.
 
+Crucially, task-dependence does not imply \emph{unpredictability}. A
+leave-one-benchmark-out test (Section~\ref{sec:thetapredict}) shows that a
+$\thetavec$ \emph{predicted} from cheap corpus descriptors --- never tuned on the
+target --- recovers a mean $0.80$ of the per-task tuning lift in retrieval recall
+($95\%$ CI $[0.71,0.87]$), near-total on most benchmarks and only partial on CUAD
+($0.37$). The reconciliation is that \emph{naive zero-shot transfer} (reusing one
+benchmark's exact $\thetavec$) fails, yet $\thetavec$ is a smooth function of
+corpus statistics that a predictor trained across benchmarks can approximate. The
+practical implication softens the per-task-tuning cost: a predicted $\thetavec$
+is a strong, tuning-free starting point, with per-task CMA-ES reserved for the
+hardest, most idiosyncratic corpora (CUAD). We flag two honest limits: the test
+measures the retrieval objective, not judged answer quality (correlated at
+$\rho{=}0.69$ but not identical), and the high average partly reflects how poor
+the canonical default is.
+
 \section{Parameter interpretation}
 The corpus-tuning signature is a shift of \wrec{} toward $0$ and \wembed{}
 upward, with $\theta_{\mathrm{store}}$ falling (store less, but store the right
@@ -117,6 +132,9 @@ The same lift holds on CUAD, including at 50 contracts & \textbf{Significant}
 & Held-out $+0.135$; 50-doc batch $+0.144$ \\
 The optimal $\thetavec$ is task-dependent (visibly different per task) &
 \textbf{Solid} & Stage-1 vectors; within- vs.\ across-family transfer \\
+$\thetavec$ is predictable from corpus descriptors (recall level) &
+\textbf{Solid} & LOBO: predicted $\thetavec$ recovers $0.80$ of tuning lift,
+CI $[0.71,0.87]$; CUAD the $0.37$ exception \\
 Selective memory matches dump-all accuracy at $\sim 1/18$ the cost &
 \textbf{Solid} & FinanceBench dump-all $0.607$--$0.689$, CIs overlap; cost \$2.68 vs.\ \$0.15 \\
 Selective memory scales where dump-all structurally fails &
