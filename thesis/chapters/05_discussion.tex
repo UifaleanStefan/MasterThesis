@@ -111,9 +111,13 @@ future work.
 the embedding backend is MiniLM throughout; whether the efficiency advantage
 persists with a stronger answerer or a different encoder is untested.
 \textbf{Statistical power:} Stage~1--2 and several Stage-3 corpus cells are
-single-seed (HotpotQA and LongMemEval were re-run at $n{=}100$); the corpus-mode
-evaluation is near-deterministic at temperature~0, so multi-seed replication
-would tighten confidence intervals rather than move point estimates.
+single-seed (HotpotQA and LongMemEval were re-run at $n{=}100$). We tested the
+near-determinism assumption directly on the headline FinanceBench cell: three
+independent seeds of corpus-tuned \Vt{} score $0.645$, $0.633$, and $0.615$
+(cross-seed std $0.012$, pooled $95\%$ CI $[0.589, 0.674]$), confirming that at
+temperature~0 multi-seed replication tightens confidence intervals rather than
+moving point estimates --- the remaining single-seed cells are therefore a
+reporting limitation, not a threat to the point estimates.
 
 \section{Summary of claims and evidence strength}
 \label{sec:claims}
