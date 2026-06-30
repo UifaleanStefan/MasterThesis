@@ -1,0 +1,43 @@
+{
+  "_manifest": {
+    "git_sha": "ee4fbf1",
+    "git_dirty": false,
+    "timestamp_utc": "2026-06-30T18:40:47+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_corpus_qa",
+    "benchmark": "qasper",
+    "config": "bm25-corpus-tuned",
+    "model": "gpt-4o-mini",
+    "protocol": "online_batch"
+  },
+  "benchmark": "qasper",
+  "config": "bm25-corpus-tuned",
+  "model": "gpt-4o-mini",
+  "seed": 42,
+  "k": 8,
+  "n_docs": 30,
+  "limit_docs": 30,
+  "n_qa_total": 94,
+  "protocol": "online_batch",
+  "do_online": false,
+  "do_batch": true,
+  "online": null,
+  "batch": {
+    "n": 94,
+    "mean_judge": null,
+    "mean_recall_at_k": 0.3626373626373626,
+    "n_with_judge": 0,
+    "n_with_recall": 91,
+    "n_context_overflow": 0,
+    "n_answer_fallback": 0,
+    "mean_prompt_tokens_actual": 1479.3297872340424,
+    "elapsed_seconds": 115.08151745796204
+  },
+  "uncapped_context": false,
+  "total_cost_usd": 0.022341150000000004
+}

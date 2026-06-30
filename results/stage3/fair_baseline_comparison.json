@@ -1,76 +1,4 @@
 {
-  "financebench": {
-    "status": "ok",
-    "configs": {
-      "v4t-corpus-tuned": {
-        "n": 150,
-        "mean": 0.645,
-        "ci": [
-          0.57,
-          0.715
-        ]
-      },
-      "bm25-corpus": {
-        "n": 150,
-        "mean": 0.5033,
-        "ci": [
-          0.43,
-          0.5817
-        ]
-      },
-      "attention-corpus-tuned": {
-        "n": 150,
-        "mean": 0.6567,
-        "ci": [
-          0.585,
-          0.73
-        ]
-      },
-      "dump-all": {
-        "n": 149,
-        "mean": 0.6074,
-        "ci": [
-          0.5352,
-          0.6829
-        ]
-      }
-    },
-    "paired_tests": [
-      {
-        "baseline": "bm25-corpus",
-        "n_paired": 150,
-        "learned_mean_minus_baseline": 0.1417,
-        "median_paired_diff": 0.0,
-        "p_two_sided": 8.961898566361981e-05,
-        "p_holm": 0.00027,
-        "significant_holm": true,
-        "scale_mismatch": false,
-        "verdict": "learned wins"
-      },
-      {
-        "baseline": "attention-corpus-tuned",
-        "n_paired": 150,
-        "learned_mean_minus_baseline": -0.0117,
-        "median_paired_diff": 0.0,
-        "p_two_sided": 0.5307758964212677,
-        "p_holm": 0.53078,
-        "significant_holm": false,
-        "scale_mismatch": false,
-        "verdict": "tie (n.s.)"
-      },
-      {
-        "baseline": "dump-all",
-        "n_paired": 149,
-        "learned_mean_minus_baseline": 0.0419,
-        "median_paired_diff": 0.0,
-        "p_two_sided": 0.24383777373941395,
-        "p_holm": 0.48768,
-        "significant_holm": false,
-        "scale_mismatch": false,
-        "verdict": "tie (n.s.)"
-      }
-    ]
-  },
   "qasper": {
     "status": "ok",
     "configs": {
@@ -80,6 +8,14 @@
         "ci": [
           0.3298,
           0.492
+        ]
+      },
+      "bm25-corpus-tuned": {
+        "n": 94,
+        "mean": 0.4255,
+        "ci": [
+          0.3511,
+          0.4973
         ]
       },
       "bm25-corpus": {
@@ -101,12 +37,23 @@
     },
     "paired_tests": [
       {
+        "baseline": "bm25-corpus-tuned",
+        "n_paired": 94,
+        "learned_mean_minus_baseline": -0.0106,
+        "median_paired_diff": 0.0,
+        "p_two_sided": 0.6424990845743088,
+        "p_holm": 1.0,
+        "significant_holm": false,
+        "scale_mismatch": false,
+        "verdict": "tie (n.s.)"
+      },
+      {
         "baseline": "bm25-corpus",
         "n_paired": 94,
         "learned_mean_minus_baseline": 0.0106,
         "median_paired_diff": 0.0,
         "p_two_sided": 0.759162973146448,
-        "p_holm": 0.75916,
+        "p_holm": 1.0,
         "significant_holm": false,
         "scale_mismatch": false,
         "verdict": "tie (n.s.)"
@@ -121,59 +68,6 @@
         "significant_holm": true,
         "scale_mismatch": false,
         "verdict": "learned wins"
-      }
-    ]
-  },
-  "cuad": {
-    "status": "ok",
-    "configs": {
-      "v4t-corpus-tuned": {
-        "n": 644,
-        "mean": 0.172,
-        "ci": [
-          0.1471,
-          0.1968
-        ]
-      },
-      "bm25-corpus": {
-        "n": 132,
-        "mean": 0.2689,
-        "ci": [
-          0.2083,
-          0.3409
-        ]
-      },
-      "attention-corpus-tuned": {
-        "n": 132,
-        "mean": 0.3201,
-        "ci": [
-          0.2481,
-          0.392
-        ]
-      }
-    },
-    "paired_tests": [
-      {
-        "baseline": "bm25-corpus",
-        "n_paired": 132,
-        "learned_mean_minus_baseline": -0.1591,
-        "median_paired_diff": 0.0,
-        "p_two_sided": 1.1387343515911752e-05,
-        "p_holm": 1e-05,
-        "significant_holm": true,
-        "scale_mismatch": true,
-        "verdict": "NOT COMPARABLE (different scale: learned n=644 vs baseline n=132) -- re-run baseline at matched scale"
-      },
-      {
-        "baseline": "attention-corpus-tuned",
-        "n_paired": 132,
-        "learned_mean_minus_baseline": -0.2102,
-        "median_paired_diff": 0.0,
-        "p_two_sided": 1.30608809101318e-07,
-        "p_holm": 0.0,
-        "significant_holm": true,
-        "scale_mismatch": true,
-        "verdict": "NOT COMPARABLE (different scale: learned n=644 vs baseline n=132) -- re-run baseline at matched scale"
       }
     ]
   }
