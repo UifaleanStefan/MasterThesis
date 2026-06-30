@@ -339,6 +339,50 @@ policy is --- which is exactly what $\thetavec$ tunes.
   \label{fig:scalability}
 \end{figure}
 
+\paragraph{Fair retrieval baselines: competitive, not dominant.} The dump-all
+comparison controls for context but not for \emph{retrieval tuning}: a skeptic
+could object that \Vt{} only wins because the classical baselines were left at
+their defaults. We therefore tuned the strongest lexical baseline (Okapi BM25,
+grid-searching $k_1$ and $b$) on the \emph{same} corpus-recall objective and
+budget as $\thetavec$, then judged its answers one-by-one at matched document
+scope. Table~\ref{tab:fairbaseline} reports the head-to-head, and the honest
+verdict is that learned selective memory is \textbf{competitive but
+benchmark-dependent}. It beats fairly-tuned BM25 on \FB{}
+($+0.132$, $p_{\mathrm{Holm}}{<}10^{-3}$), is statistically tied on QASPER
+($-0.011$, n.s.), and is \emph{beaten} on CUAD ($-0.131$,
+$p_{\mathrm{Holm}}{<}10^{-13}$, with non-overlapping confidence intervals). The
+CUAD reversal is not noise: it is consistent with the $\thetavec$-predictability
+analysis below (Section~\ref{sec:thetapredict}), where CUAD is the most
+idiosyncratic corpus and recovers the least tuning lift. Pure clause extraction
+rewards exact lexical matching --- which tuned BM25 performs directly and the
+graph, entity, and temporal machinery of \Vt{} does not. We therefore make no
+claim that learned memory dominates strong retrieval baselines in general: its
+accuracy advantage is specific to corpora where relevance is semantic or
+relational (financial and narrative QA) rather than lexical, and its
+\emph{domain-general} value remains the efficiency and scalability argument
+established above.
+
+\begin{table}[t]
+  \centering
+  \caption{Fair-baseline head-to-head: corpus-tuned \Vt{} versus Okapi BM25 tuned
+  on the \emph{same} corpus-recall budget, both judged one-by-one by Claude at
+  matched document scope (batch mode, seed~42). Cells are mean judge score with a
+  bootstrap $95\%$ CI; $\Delta$ is learned minus baseline; the verdict is from a
+  paired Wilcoxon signed-rank test, Holm-corrected across the baseline family.
+  Learned memory wins on one benchmark, ties on one, and loses on one.}
+  \label{tab:fairbaseline}
+  \footnotesize
+  \begin{tabular}{lccrl}
+    \toprule
+    Benchmark & \Vt{} corpus-tuned & BM25 (tuned) & $\Delta$ & Verdict \\
+    \midrule
+    \FB{} ($n{=}150$) & $\mathbf{0.645}$ {\scriptsize[0.57, 0.72]} & $0.513$ {\scriptsize[0.45, 0.59]} & $+0.132$ & learned wins \\
+    QASPER ($n{=}94$) & $0.415$ {\scriptsize[0.33, 0.49]} & $0.426$ {\scriptsize[0.35, 0.50]} & $-0.011$ & tie (n.s.) \\
+    CUAD ($n{=}644$) & $0.172$ {\scriptsize[0.15, 0.20]} & $\mathbf{0.303}$ {\scriptsize[0.27, 0.33]} & $-0.131$ & baseline wins \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Is \texorpdfstring{$\thetavec$}{theta} predictable from corpus statistics?}
 \label{sec:thetapredict}
 Section~\ref{ch:results} establishes that the optimal $\thetavec$ is

@@ -25,7 +25,13 @@ defensible contribution is therefore that a small, learned, task-adaptive memory
 \emph{matches} full-context accuracy at roughly $1/18$th the token cost and
 degrades gracefully past the context window --- an efficiency-and-scalability
 argument, which is more practically relevant than an
-accuracy-cliff claim.
+accuracy-cliff claim. The same restraint applies to the lexical baselines: when
+Okapi BM25 is tuned on the identical corpus-recall budget
+(Table~\ref{tab:fairbaseline}), learned memory wins on \FB{}, ties on QASPER, and
+is \emph{beaten} on CUAD's pure clause-extraction task. No accuracy claim against
+a strong, fairly-tuned retrieval baseline survives across all three benchmarks ---
+which is precisely why we rest the contribution on efficiency, scalability, and
+the learnability of task-dependent retrieval rather than on raw accuracy.
 
 \section{Why transfer fails across families}
 $\thetavec$ transfers within a task family (one long-haystack QA task to another;
