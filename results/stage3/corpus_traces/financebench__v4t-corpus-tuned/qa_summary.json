@@ -1,14 +1,14 @@
 {
   "_manifest": {
-    "git_sha": "c1addc9",
+    "git_sha": "b12f3de",
     "git_dirty": true,
-    "timestamp_utc": "2026-05-24T22:25:45+00:00",
+    "timestamp_utc": "2026-06-30T21:22:45+00:00",
     "python_version": "3.11.0",
-    "platform": "Windows-10-10.0.22631-SP0",
+    "platform": "Windows-10-10.0.26200-SP0",
     "numpy_version": "2.3.5",
     "scipy_version": "1.16.3",
     "embedding_backend": "sentence-transformers",
-    "seed": 42,
+    "seed": 7,
     "experiment": "stage3_corpus_qa",
     "benchmark": "financebench",
     "config": "v4t-corpus-tuned",
@@ -18,37 +18,26 @@
   "benchmark": "financebench",
   "config": "v4t-corpus-tuned",
   "model": "gpt-4o-mini",
-  "seed": 42,
+  "seed": 7,
   "k": 8,
   "n_docs": 150,
-  "limit_docs": null,
+  "limit_docs": 150,
   "n_qa_total": 150,
   "protocol": "online_batch",
-  "do_online": true,
+  "do_online": false,
   "do_batch": true,
-  "online": {
-    "n": 150,
-    "mean_judge": null,
-    "mean_recall_at_k": 1.0,
-    "n_with_judge": 0,
-    "n_with_recall": 150,
-    "elapsed_seconds": 213.53380155563354
-  },
+  "online": null,
   "batch": {
     "n": 150,
     "mean_judge": null,
     "mean_recall_at_k": 0.9666666666666667,
     "n_with_judge": 0,
     "n_with_recall": 150,
-    "elapsed_seconds": 164.59854412078857
+    "n_context_overflow": 0,
+    "n_answer_fallback": 0,
+    "mean_prompt_tokens_actual": 3135.66,
+    "elapsed_seconds": 174.82371282577515
   },
-  "total_cost_usd": 0.14970614999999995,
-  "online_vs_batch_recall": {
-    "n_paired": 150,
-    "online_recall_mean": 1.0,
-    "batch_recall_mean": 0.9666666666666667,
-    "diff_mean": -0.03333333333333333,
-    "diff_std": 0.18010685369303292,
-    "agreement_rate": 0.9666666666666667
-  }
+  "uncapped_context": false,
+  "total_cost_usd": 0.07273994999999996
 }
