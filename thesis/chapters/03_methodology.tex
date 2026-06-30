@@ -208,8 +208,9 @@ Two metrics are used. \emph{Retrieval} quality is measured by \recallk{} of the
 gold evidence paragraphs, which requires no LLM and drives CMA-ES.
 \emph{Answer} quality is measured by an LLM-as-judge protocol: a
 \texttt{gpt-4o-mini} answerer produces an answer from the $k$ retrieved items,
-and an independent \textbf{Claude} judge (cross-vendor, to avoid self-preference
-bias; cf.\ \citealp{zheng2023judge}) scores it on a five-point rubric
+and a \textbf{Claude} judge --- cross-vendor relative to the answerer, to avoid
+the self-preference bias a same-model judge would introduce
+\citep{zheng2023judge} --- scores it on a five-point rubric
 $\{0,0.25,0.5,0.75,1\}$. Judging is two-tier: content answers are scored
 one-by-one by the Claude judge, while refusals and ``I don't know''
 acknowledgments are scored by a validated rule-assisted classifier (precision/
@@ -223,3 +224,20 @@ rather than cross-vendor or human agreement.
 All runs are seeded, and every result carries a provenance record (commit
 identifier, embedding backend, and dataset fingerprint) that is automatically
 checked for consistency between the evaluation inputs and the reported outputs.
+
+\paragraph{Significance and held-out testing.} Because the headline comparison
+is a learned configuration against its own untuned baseline, two safeguards guard
+against over-fitting and small-sample noise. First, every reported lift is
+recomputed on a \emph{held-out} question split that the CMA-ES tuner never saw:
+the corpus is partitioned by a fixed, documented rule before tuning, $\thetavec$
+is optimized on the tuning split alone, and the lift is measured on the held-out
+split --- so a $\thetavec$ that merely memorized the tuning questions would show
+no held-out gain. Second, significance is assessed with non-parametric, paired
+tests appropriate to bounded judge scores: a Wilcoxon signed-rank test on the
+per-question (tuned $-$ canonical) differences, with Holm--Bonferroni correction
+across the benchmark family so that reporting six benchmarks does not inflate the
+false-positive rate. Effect sizes are reported as bootstrap (or, where questions
+cluster within documents, cluster-bootstrap) $95\%$ confidence intervals rather
+than point estimates alone. A lift is called ``significant'' only when it
+survives the held-out split \emph{and} the Holm-corrected test; everything weaker
+is reported as directional or non-significant, never rounded up.
