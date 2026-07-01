@@ -35,7 +35,8 @@ QUEUE = ROOT / "results" / "stage3" / "judge_queue"
 LEARNED = "v4t-corpus-tuned"
 # Baselines to compare against, in report order. Corpus-tuned variants are the
 # fair ones; the stock variants are kept for the before/after contrast.
-BASELINES = ["bm25-corpus-tuned", "bm25-corpus", "attention-corpus-tuned", "dump-all"]
+BASELINES = ["bm25-corpus-tuned", "bm25-corpus", "attention-corpus-tuned", "dump-all",
+             "hipporag-corpus", "letta-corpus"]
 BENCHMARKS = ["financebench", "qasper", "cuad", "hotpotqa", "longmemeval"]
 
 
