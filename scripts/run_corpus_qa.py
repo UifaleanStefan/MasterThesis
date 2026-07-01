@@ -253,6 +253,16 @@ def build_memory(config_name: str, benchmark: str) -> Any:
         return FlatMemory(window_size=50), None
     if config_name == "dump-all":
         return DumpAllMemory(), None
+    # Published-system head-to-heads (Phase 3): faithful reimplementations behind
+    # the same interface, so the comparison is retrieval-only under the identical
+    # gpt-4o-mini answerer + Claude judge (see memory/hipporag_memory.py,
+    # memory/letta_memory.py for the disclosed divergences).
+    if config_name == "hipporag-corpus":
+        from memory.hipporag_memory import HippoRAGMemory
+        return HippoRAGMemory(), None
+    if config_name == "letta-corpus":
+        from memory.letta_memory import LettaMemory
+        return LettaMemory(), None
 
     raise ValueError(
         f"Unknown config: {config_name!r}. Valid 12-config suite: "
@@ -956,6 +966,8 @@ def main() -> int:
             "rag-corpus", "semantic-corpus", "bm25-corpus",
             "bm25-corpus-tuned",
             "flat-corpus", "dump-all",
+            # Published-system head-to-heads (faithful reimplementations)
+            "hipporag-corpus", "letta-corpus",
             # Legacy aliases
             "v4-tuned", "v4-canonical",
         ],
