@@ -1,0 +1,43 @@
+{
+  "pooled_per_entry_error": 0.028,
+  "note": "error_upper_bound = rule_assisted_share * pooled_per_entry_error (conservative; ACK/REF buckets are near-exact).",
+  "per_benchmark": {
+    "financebench": {
+      "total": 19347,
+      "rule_assisted": 9063,
+      "rule_assisted_share": 0.4684,
+      "error_upper_bound": 0.01312
+    },
+    "qasper": {
+      "total": 19825,
+      "rule_assisted": 7976,
+      "rule_assisted_share": 0.4023,
+      "error_upper_bound": 0.01126
+    },
+    "cuad": {
+      "total": 36667,
+      "rule_assisted": 15822,
+      "rule_assisted_share": 0.4315,
+      "error_upper_bound": 0.01208
+    },
+    "hotpotqa": {
+      "total": 4210,
+      "rule_assisted": 362,
+      "rule_assisted_share": 0.086,
+      "error_upper_bound": 0.00241
+    },
+    "longmemeval": {
+      "total": 4210,
+      "rule_assisted": 377,
+      "rule_assisted_share": 0.0895,
+      "error_upper_bound": 0.00251
+    },
+    "narrativeqa": {
+      "total": 2220,
+      "rule_assisted": 0,
+      "rule_assisted_share": 0.0,
+      "error_upper_bound": 0.0
+    }
+  },
+  "unknown_cells_skipped": 10
+}

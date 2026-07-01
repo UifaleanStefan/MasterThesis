@@ -89,7 +89,10 @@ $n{=}100$ and re-framed as pre-registered domain-incoherent controls.
 Judging is two-tier and disclosed: content answers are judged one-by-one by the
 Claude cross-vendor judge, while refusal/acknowledgment answers keep a validated
 rule-assisted score (population-weighted error $0.028$ on a stratified 300-entry
-hand-checked sample). Beyond those five, four further threats are stated plainly. \textbf{Construct
+hand-checked sample). Broken down per benchmark, that rule-assisted share ranges
+from $0\%$ (NarrativeQA) and $\sim9\%$ (HotpotQA, LongMemEval) to $40$--$47\%$ on
+the abstention-heavy extraction tasks (FinanceBench, QASPER, CUAD), bounding each
+benchmark's inherited mean score error at $\le 0.013$. Beyond those five, four further threats are stated plainly. \textbf{Construct
 validity:} CMA-ES is tuned on a \recallk{} retrieval objective, while the
 headline is LLM answer quality. These are distinct constructs, but we verify the
 link directly rather than assume it: across $2{,}170$ questions in five
