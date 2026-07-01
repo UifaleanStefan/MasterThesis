@@ -127,5 +127,115 @@
         "verdict": "tie (n.s.)"
       }
     ]
+  },
+  "cuad": {
+    "status": "ok",
+    "configs": {
+      "v4t-corpus-tuned": {
+        "n": 644,
+        "mean": 0.172,
+        "ci": [
+          0.1471,
+          0.1968
+        ]
+      },
+      "bm25-corpus-tuned": {
+        "n": 644,
+        "mean": 0.3028,
+        "ci": [
+          0.2748,
+          0.3331
+        ]
+      },
+      "bm25-corpus": {
+        "n": 132,
+        "mean": 0.2689,
+        "ci": [
+          0.2083,
+          0.3409
+        ]
+      },
+      "attention-corpus-tuned": {
+        "n": 132,
+        "mean": 0.3201,
+        "ci": [
+          0.2481,
+          0.392
+        ]
+      },
+      "hipporag-corpus": {
+        "n": 644,
+        "mean": 0.222,
+        "ci": [
+          0.1949,
+          0.2523
+        ]
+      },
+      "letta-corpus": {
+        "n": 644,
+        "mean": 0.146,
+        "ci": [
+          0.1227,
+          0.1708
+        ]
+      }
+    },
+    "paired_tests": [
+      {
+        "baseline": "bm25-corpus-tuned",
+        "n_paired": 644,
+        "learned_mean_minus_baseline": -0.1308,
+        "median_paired_diff": 0.0,
+        "p_two_sided": 1.1501910535116622e-13,
+        "p_holm": 0.0,
+        "significant_holm": true,
+        "scale_mismatch": false,
+        "verdict": "baseline wins"
+      },
+      {
+        "baseline": "bm25-corpus",
+        "n_paired": 132,
+        "learned_mean_minus_baseline": -0.1591,
+        "median_paired_diff": 0.0,
+        "p_two_sided": 1.1387343515911752e-05,
+        "p_holm": 3e-05,
+        "significant_holm": true,
+        "scale_mismatch": true,
+        "verdict": "NOT COMPARABLE (different scale: learned n=644 vs baseline n=132) -- re-run baseline at matched scale"
+      },
+      {
+        "baseline": "attention-corpus-tuned",
+        "n_paired": 132,
+        "learned_mean_minus_baseline": -0.2102,
+        "median_paired_diff": 0.0,
+        "p_two_sided": 1.30608809101318e-07,
+        "p_holm": 0.0,
+        "significant_holm": true,
+        "scale_mismatch": true,
+        "verdict": "NOT COMPARABLE (different scale: learned n=644 vs baseline n=132) -- re-run baseline at matched scale"
+      },
+      {
+        "baseline": "hipporag-corpus",
+        "n_paired": 644,
+        "learned_mean_minus_baseline": -0.0501,
+        "median_paired_diff": 0.0,
+        "p_two_sided": 0.004460356038483493,
+        "p_holm": 0.00892,
+        "significant_holm": true,
+        "scale_mismatch": false,
+        "verdict": "baseline wins"
+      },
+      {
+        "baseline": "letta-corpus",
+        "n_paired": 644,
+        "learned_mean_minus_baseline": 0.026,
+        "median_paired_diff": 0.0,
+        "p_two_sided": 0.06242605167156334,
+        "p_holm": 0.06243,
+        "significant_holm": false,
+        "scale_mismatch": false,
+        "verdict": "tie (n.s.)"
+      }
+    ]
   }
 }

@@ -383,6 +383,77 @@ established above.
   \end{tabular}
 \end{table}
 
+\paragraph{Head-to-head against HippoRAG and MemGPT/Letta.} The fair-baseline
+comparison pits learned memory against tuned classical retrievers; a stronger test
+is against two prominent \emph{memory systems}. We compared \Vt{} corpus-tuned
+head-to-head with faithful reimplementations of HippoRAG's graph-topology
+retrieval \citep{gutierrez2024hipporag} and MemGPT/Letta's tiered archival
+retrieval \citep{packer2023memgpt}, both run under the identical corpus-cumulative
+harness, the same fixed \texttt{gpt-4o-mini} answerer, the same MiniLM encoder,
+and the same Claude one-by-one judge, so that only the \emph{retrieval} component
+varies (Table~\ref{tab:head2head}).
+
+The result mirrors --- and sharpens --- the benchmark-dependence of the fair
+baselines. On FinanceBench the learned memory ($0.645$) is statistically
+\emph{tied} with both systems: numerically ahead of HippoRAG ($0.563$; $+0.082$,
+$p_{\mathrm{Holm}}{=}0.06$) and even with Letta ($0.607$; $+0.038$, n.s.), all
+intervals overlapping. On CUAD the ranking \emph{inverts} and the gap turns
+against the learned memory: HippoRAG ($0.222$) \textbf{beats} \Vt{} ($0.172$) by a
+significant margin ($p_{\mathrm{Holm}}{<}0.01$), \Vt{} ties Letta ($0.146$;
+$+0.026$, n.s.), and both trail the tuned lexical retrievers ($0.303$ BM25,
+$0.320$ attention). The pattern is coherent with the task-structure argument of
+Section~\ref{sec:whybm25}: legal clause extraction rewards \emph{lexical and
+entity} matching, so HippoRAG's entity-seeded graph retrieval and BM25's term
+overlap both outrank a semantic memory, whereas Letta's embedding-plus-recency
+retrieval --- like \Vt{}'s semantics --- has the least to offer, and its recency
+core actively surfaces wrong-contract passages. No single retrieval mechanism
+dominates across both corpora: the learned memory is competitive where relevance
+is semantic and forfeits its edge where relevance is surface-lexical, exactly the
+regime in which a purpose-built lexical or entity retriever should win.
+
+\begin{table}[t]
+  \centering
+  \caption{External-system head-to-head: mean judged accuracy (bootstrap $95\%$
+  CI) under the identical answerer, encoder, and one-by-one Claude judge; only
+  retrieval varies. HippoRAG and MemGPT/Letta are faithful reimplementations of
+  the published \emph{retrieval mechanisms} (disclosed divergences below); the
+  tuned lexical retrievers are shown for reference. No mechanism dominates both
+  corpora.}
+  \label{tab:head2head}
+  \footnotesize
+  \begin{tabular}{lcc}
+    \toprule
+    Retrieval mechanism & FinanceBench ($n{=}150$) & CUAD ($n{=}644$) \\
+    \midrule
+    \Vt{} corpus-tuned (learned)   & $0.645$ {\scriptsize[0.57, 0.72]} & $0.172$ {\scriptsize[0.15, 0.20]} \\
+    HippoRAG (reimpl.)             & $0.563$ {\scriptsize[0.49, 0.64]} & $\mathbf{0.222}$ {\scriptsize[0.19, 0.25]} \\
+    MemGPT/Letta (reimpl.)         & $0.607$ {\scriptsize[0.53, 0.68]} & $0.146$ {\scriptsize[0.12, 0.17]} \\
+    \midrule
+    Okapi BM25 (tuned, ref.)       & $0.513$ {\scriptsize[0.45, 0.59]} & $0.303$ {\scriptsize[0.27, 0.33]} \\
+    Attention (tuned, ref.)        & $\mathbf{0.657}$ {\scriptsize[0.59, 0.73]} & $\mathbf{0.320}$ {\scriptsize[0.25, 0.39]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Both comparison systems are faithful in-repo reimplementations of the published
+\emph{retrieval mechanisms}, not wrappers around the authors' code, and each
+carries a disclosed divergence. The HippoRAG reimplementation preserves the
+system's defining mechanics --- a schemaless phrase/passage knowledge graph,
+embedding-synonymy edges above cosine $\tau{=}0.8$, node specificity
+$s_i{=}1/|P_i|$ as an IDF surrogate, Personalized PageRank (damping $0.5$) seeded
+on specificity-weighted query entities, and passage ranking by summed PPR mass ---
+but replaces the paper's LLM-based OpenIE triple extraction with the thesis's
+rule-based entity extractor and intra-passage co-occurrence edges, making zero LLM
+calls at ingest or query (which lowers its recall ceiling relative to the
+published system, whose own error analysis attributes most error to NER and OpenIE
+quality). The Letta reimplementation reproduces its tiered \emph{read} surface ---
+an always-on recency core unioned with an embedding-similarity archival search ---
+but not MemGPT's defining feature, the LLM agent that self-manages its memory; it
+therefore measures Letta's archival retrieval rather than its agentic memory
+management. Any measured difference thus reflects retrieval topology and ranking,
+not the generator, the encoder, or the LLM-driven stages the originals additionally
+employ.
+
 \section{Is \texorpdfstring{$\thetavec$}{theta} predictable from corpus statistics?}
 \label{sec:thetapredict}
 Section~\ref{ch:results} establishes that the optimal $\thetavec$ is
