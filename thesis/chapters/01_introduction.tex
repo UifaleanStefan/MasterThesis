@@ -37,6 +37,26 @@ revisited. The premise of this thesis is that those knobs can instead be written
 down explicitly and \emph{learned} per task, and that doing so both improves
 retrieval and makes the task-dependence measurable rather than anecdotal.
 
+\paragraph{Why hand-frozen policies are the wrong default.} The cost of freezing
+the memory policy is not merely that it is suboptimal; it is that the failure is
+\emph{silent and mis-attributed}. When a store-everything vector index buries the
+governing-law clause under five hundred pages of near-duplicate boilerplate, or a
+store-too-little heuristic never retained the one sentence that answered the
+question, the downstream LLM does not report ``my memory was mis-parameterized''
+--- it hallucinates a fluent, wrong answer, and the engineer blames the prompt or
+the model. The store-everything and store-too-little failure modes are two ends of
+a single dilemma: aggressive storage maximizes recall but destroys precision at
+retrieval time, while conservative storage protects precision but discards
+evidence irrecoverably. A hand-frozen policy commits to one point on this
+trade-off before the task is known, and there is no point that is safe for every
+task. The recency knob discussed above is the sharpest instance --- the same
+setting that a conversational assistant \emph{must} have is the setting an
+end-of-corpus legal query \emph{cannot} tolerate --- but the same logic applies to
+storage aggressiveness and to the lexical-versus-semantic weighting. The premise
+of this thesis is that the right response is not a better fixed default but the
+removal of the fixed default: expose the trade-off as parameters and let the task
+select the operating point.
+
 \section{Research question}
 This thesis asks a single question:
 \begin{quote}
@@ -71,6 +91,26 @@ construction is a learnable, task-adaptive object}. Concretely, this thesis:
   rather than raw accuracy.
 \end{itemize}
 
+In keeping with that self-audit, the thesis is careful to separate four claims
+that a less disciplined account would blur into one. \emph{First}, the accuracy
+of learned memory is \textbf{benchmark-dependent, not uniform}: against a
+same-budget tuned lexical baseline (Table~\ref{tab:fairbaseline}) the learned
+\Vt{} memory wins decisively on \FB{}, ties on QASPER, and \emph{loses} on
+CUAD's legal clause-extraction --- a result reported as such rather than averaged
+away, because the losing case pins down exactly where a single learned memory is
+the wrong tool. \emph{Second}, the tuning is \textbf{near-deterministic}: at
+temperature zero the corpus-tuned optimum is stable across random seeds
+(Section~\ref{sec:stage3}), so the reported lifts are properties of the objective
+and not of a lucky search. \emph{Third}, the task-optimal $\thetavec$ is
+\textbf{predictable from cheap corpus descriptors}: a leave-one-benchmark-out
+predictor recovers most of the per-task tuning benefit
+(Figure~\ref{fig:thetatransfer}, Section~\ref{sec:thetapredict}), which is what
+makes ``learn a memory per task'' operational rather than a per-deployment tuning
+chore. \emph{Fourth}, and most importantly, the demonstrated advantage at
+long-context scale is one of \textbf{efficiency and scalability, not raw
+accuracy} --- a distinction the thesis states plainly rather than letting an
+accuracy-competitive result masquerade as an accuracy win.
+
 \section{The central finding}
 Across the three stages the same claim holds: \emph{what an agent stores and how
 it scores retrieval can be learned, and the learned optimum is task-dependent}.
@@ -93,6 +133,27 @@ learnable, task-adaptive memory at this corpus scale is therefore \textbf{cost
 and scalability} --- it matches accuracy at roughly one-eighteenth of the token
 spend and does not break when the corpus exceeds the context window --- rather
 than a claim that selective retrieval is uniquely accurate.
+
+\paragraph{The honest scope of the accuracy claim.} It is worth stating precisely
+what is and is not established, because the temptation to overclaim is exactly
+what the self-audit was built to resist. The \emph{learnable, task-dependent}
+claim is the robust one: across all three stages a single vector $\thetavec$
+governs what is stored and how retrieval is scored, and its recovered optimum
+differs by task in a way that is measured, not asserted. The \emph{accuracy}
+claim is deliberately narrower. Learned memory is competitive rather than
+dominant: it wins where lexical structure is diffuse and recency is a trap, ties
+where a strong lexical baseline already suffices, and loses where the task is
+near-verbatim clause retrieval that a tuned lexical index does better
+(Table~\ref{tab:fairbaseline}). Where the held-out lifts survive multiple-testing
+correction they are reported as surviving, and where they do not --- QASPER --- the
+null result is reported as a null result (Table~\ref{tab:stage3}). Two further
+limitations bound the claim rather than being hidden by it: the accuracy judge is
+a single LLM, so the reported agreement is self-consistency and not human
+adjudication, and the probe of judged accuracy against corpus size was
+inconclusive, so no claim of flat accuracy scaling is made. The scalability
+argument (Figure~\ref{fig:scalability}) rests instead on token cost and on the
+structural fact that selective memory does not break when the corpus outgrows the
+context window, which is a property of the mechanism and not of the judge.
 
 \section{Thesis outline}
 Chapter~\ref{ch:background} reviews long-context retrieval, agent-memory
