@@ -1,8 +1,38 @@
 {
-  "n_groups": 1,
-  "n_replicated": 1,
+  "n_groups": 2,
+  "n_replicated": 2,
   "max_cross_seed_std": 0.0123,
   "groups": {
+    "financebench__v4t-canonical__batch": {
+      "n_seeds": 3,
+      "seeds": [
+        "100",
+        "42",
+        "7"
+      ],
+      "per_seed": {
+        "7": {
+          "n": 150,
+          "mean": 0.24
+        },
+        "42": {
+          "n": 150,
+          "mean": 0.2433
+        },
+        "100": {
+          "n": 150,
+          "mean": 0.245
+        }
+      },
+      "cross_seed_mean": 0.2428,
+      "cross_seed_std": 0.0021,
+      "cross_seed_spread": 0.005,
+      "pooled_n": 450,
+      "pooled_ci": {
+        "lower": 0.205,
+        "upper": 0.28
+      }
+    },
     "financebench__v4t-corpus-tuned__batch": {
       "n_seeds": 3,
       "seeds": [
