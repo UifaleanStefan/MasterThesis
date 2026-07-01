@@ -33,6 +33,47 @@ a strong, fairly-tuned retrieval baseline survives across all three benchmarks -
 which is precisely why we rest the contribution on efficiency, scalability, and
 the learnability of task-dependent retrieval rather than on raw accuracy.
 
+\subsection{Why the BM25 verdict flips with the benchmark}
+\label{sec:whybm25}
+The fact that learned memory wins on \FB{}, ties on QASPER, and loses on CUAD
+against an identically-budgeted BM25 (Table~\ref{tab:fairbaseline}) is not noise
+to be averaged away: the sign of the gap tracks a structural property of the
+retrieval task. CUAD is clause extraction --- the query names a legal provision
+(``governing law'', ``change of control'') whose answer span reuses that exact
+vocabulary, so a term-frequency retriever that rewards literal token overlap is
+nearly optimal by construction, and there is little relational or semantic slack
+for a learned scorer to exploit. \FB{}, by contrast, poses narrative financial
+questions whose evidence is phrased differently from the query and is scattered
+across a filing, so retrieval must bridge a lexical gap that BM25 cannot cross
+but that a memory up-weighting \wembed{} and down-weighting \wrec{} can. QASPER
+sits between the two --- part lexical, part semantic --- and lands on a tie. The
+learned memory therefore does not dominate a strong lexical baseline in general;
+it dominates \emph{where the task supplies a semantic gap to close}, and forfeits
+that edge where exact lexical match is already the ceiling. This reading is
+mutually reinforcing with the parameter interpretation of
+Section~\ref{sec:thetapredict}: the same $\thetavec$ that pushes recency to zero
+and semantics upward is precisely the configuration that helps on \FB{} and
+cannot help on a task where the answer token \emph{is} the query token.
+
+The benchmark-dependence also dovetails with the $\thetavec$-predictability
+result. Under the leave-one-benchmark-out test
+(Section~\ref{sec:thetapredict}), CUAD is the corpus whose tuning lift is
+\emph{least} recoverable from generic descriptors --- it is the most
+idiosyncratic of the three. Both facts point at the same underlying cause:
+CUAD's optimum lies where a learned semantic scorer has the least to add over
+literal matching, so its $\thetavec$ is neither well-approximated by a
+cross-corpus predictor nor competitive against a tuned lexical retriever. That
+these two independent probes --- a fairness-controlled baseline comparison and a
+transfer-recovery analysis --- single out the same benchmark is evidence that the
+CUAD loss reflects task structure, not an artifact of one experiment. We note the
+contrast in mechanism honestly: recovery is measured on the \recallk{} objective
+rather than judged answer quality (the two correlate at $\rho{=}0.69$, not
+perfectly), and the right diagnostic for transfer is recall recovery, not
+parameter proximity --- naive $\thetavec$-distance even points the wrong way ---
+so ``learned memory loses on CUAD'' and ``CUAD's $\thetavec$ transfers least''
+are two views of one benchmark that rewards lexical exactness over learned
+relational retrieval.
+
 \section{Why transfer fails across families}
 $\thetavec$ transfers within a task family (one long-haystack QA task to another;
 one key-door variant to another) but not across families (grid to document QA, or
@@ -71,6 +112,37 @@ retrieves the correct (possibly old) evidence. The graph-traversal weight
 the graph functions as typed scaffolding for storage and abstraction rather than
 as a relational retrieval engine, which is a useful negative result for future
 designs.
+
+\subsection{What the refuted \wgraph{} term implies for graph memory}
+\label{sec:graphnegative}
+The flatness of the \wgraph{} sweep deserves a sharper reading than ``one term
+did not help.'' The graph edges were available to the retriever, the ablation
+varied their weight across its full range, and judged accuracy did not respond;
+within this design the hypothesis that typed relations carry retrieval load is
+refuted, not merely unsupported. The constructive interpretation is that the
+graph earned its place in the architecture as \emph{storage-time} scaffolding ---
+it organizes what is written and how entities are abstracted --- while retrieval
+is carried by the recency and embedding terms. That is why the corpus-tuning
+signature is a three-shift and not a four-shift: the parameters that move under
+tuning are exactly the ones with retrieval leverage, and \wgraph{} is not among
+them.
+
+For graph-memory research the caution is specific rather than blanket. The result
+does not say graphs are useless for agent memory; it says that on
+retrieval-dominated, end-of-corpus QA over semantically distinct documents, a
+linear graph-traversal \emph{score} added to an embedding retriever buys nothing
+measurable --- the semantic similarity term already recovers the evidence the
+traversal was meant to reach. The tasks where a relational term should pay off
+are the ones this evaluation does not stress: multi-hop questions whose answer
+requires composing two entities no single passage co-mentions, where embedding
+similarity to the query underweights a bridging fact. Our own multi-hop control
+(HotpotQA) is only a directional $n{=}100$ signal and cannot adjudicate this, so
+the honest conclusion is scoped: the burden of proof now sits with graph-memory
+designs to demonstrate retrieval-time value on tasks that genuinely require
+composition, rather than assuming a relational score helps wherever a graph
+happens to exist. A term that is inert on the benchmarks it is tested against
+should be defended as scaffolding, or justified on a task that forces
+traversal --- not carried as a retrieval component on faith.
 
 \section{Threats to validity and the adversarial self-audit}
 \label{sec:threats}
@@ -121,6 +193,30 @@ independent seeds of corpus-tuned \Vt{} score $0.645$, $0.633$, and $0.615$
 temperature~0 multi-seed replication tightens confidence intervals rather than
 moving point estimates --- the remaining single-seed cells are therefore a
 reporting limitation, not a threat to the point estimates.
+
+\subsection{What near-determinism at temperature~0 buys the evaluation}
+\label{sec:determinism}
+The three-seed replication of the headline \FB{} cell does more than tighten a
+confidence interval; it changes what a single-seed number is allowed to mean. In
+a pipeline with a stochastic answerer, a lone point estimate is ambiguous between
+a stable property of the memory and a lucky draw, and that ambiguity would
+undermine every single-seed cell in the thesis at once. Because the corpus-tuned
+and canonical $\thetavec$ configurations each replicate with cross-seed spread an
+order of magnitude smaller than the effect they are being asked to detect (the
+held-out \FB{} lift is far larger than the seed-to-seed wobble), the point
+estimates behave as measurements of the configuration rather than as samples from
+a wide distribution. Two consequences follow for credibility. First, the many
+single-seed cells are demoted from a validity threat to a mere reporting gap:
+adding seeds would narrow intervals but is not expected to move the estimates,
+which is the assumption near-determinism licenses empirically rather than by
+fiat. Second, and more subtly, low run-to-run variance makes the corpus-tuning
+comparison a difference of two \emph{near-fixed} quantities rather than a contest
+between two noisy ones, so the surviving held-out lifts cannot be dismissed as
+seed-selection. The measurement is not free of variance --- it is small but
+nonzero, and we report it as such rather than claiming exact reproducibility ---
+but at temperature~0 the dominant uncertainty is the finite question sample, not
+the generator, which is the regime in which a fixed compute budget is best spent
+on more questions rather than more seeds.
 
 \section{Summary of claims and evidence strength}
 \label{sec:claims}

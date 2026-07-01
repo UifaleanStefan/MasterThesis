@@ -73,6 +73,30 @@ minutes without touching the model or the control code. In principle the
 parameterization could be layered onto several of these systems, treating their
 retention and scoring heuristics as the free parameters.
 
+\paragraph{Read/write asymmetry and the memory-tier taxonomy.}
+It helps to separate two axes that the systems above conflate. The first is the
+\emph{tier} structure --- most designs distinguish a small fast-access working
+context from a large slow archival store, with a promotion/eviction rule moving
+items between them; MemGPT's core/archival split \citep{packer2023memgpt} and
+StreamingLLM's sink-plus-window \citep{xiao2024streamingllm} are two points on
+this spectrum, and the retrieval-augmented setting of
+Section~\ref{sec:gap}\ is the degenerate case of a single archival tier with no
+promotion. The second, and the one this thesis targets, is the
+\emph{read/write asymmetry}: the write policy (what is committed to the store,
+at what granularity, and with what abstraction) is logically prior to and
+usually decoupled from the read policy (how a candidate is scored at query
+time), yet the two are jointly responsible for end-task recall. Committing more
+aggressively only pays off if the scorer can subsequently surface what was
+written, and a sharper scorer is wasted on a store that never recorded the
+relevant event. Existing systems fix each side independently and by hand; the
+single $\thetavec$ here spans both, so the optimizer can trade a laxer write
+threshold against a sharper retrieval weight rather than tuning either in
+isolation. That the same architecture, re-fit per corpus, wins decisively on one
+benchmark yet loses on another (Table~\ref{tab:fairbaseline}) is the empirical
+signature of this coupling: the best joint setting of write-and-read is genuinely
+corpus-specific, not a global constant that a hand-designed policy could have
+fixed once.
+
 \section{Black-box optimization of structured objects}
 Because the storage decision is discrete and non-differentiable (an event is
 either written or not), gradient descent is awkward and a black-box optimizer is
@@ -105,6 +129,33 @@ search and CMA-ES for Stages~2--3; the recurring empirical observation that the
 optimizer drives several parameters to a boundary or to zero (notably the
 graph-traversal weight) is itself diagnostic of which components carry load.
 
+\paragraph{Why a full-covariance ES, and why not the cheaper alternatives.}
+The deeper reason to prefer CMA-ES over the simpler evolution strategies of
+\citet{salimans2017es} is that those methods estimate only a diagonal or
+isotropic search distribution: they rescale each coordinate independently but
+cannot rotate the sampling ellipse to align with a diagonal ridge. When the
+storage thresholds and the retrieval weights trade off against one another, the
+profitable search directions are linear combinations of parameters, not single
+axes, and a diagonal method must zig-zag across the ridge instead of travelling
+along it. CMA-ES's rank-$\mu$ and rank-one covariance updates recover exactly
+that rotation from the successful samples of each generation, which is why it is
+the standard choice for low-dimensional, non-separable, noisy objectives
+\citep{hansen2016cmaes}. The noise deserves emphasis: because the write decision
+is sampled, a single $\thetavec$ does not map to a single score but to a
+distribution over scores, so the optimizer is really performing stochastic
+optimization, and the population-based estimate of the gradient of the
+expected objective is far more robust to this than a surrogate fit to a
+handful of noisy point evaluations. That the objective turns out to be
+near-deterministic at $T{=}0$ (Section~\ref{sec:gap}) is a convenient
+\emph{a posteriori} property, not something the choice of optimizer relied on;
+an optimizer that only worked on quiet objectives would have been the wrong
+tool for a discrete-write policy. Bayesian optimization \citep{snoek2012bayesopt}
+inverts the cost trade-off: it is designed to hoard information when each
+evaluation is enormously expensive, spending model-fitting compute to choose the
+next point wisely, but at ten cheap LLM-free recall evaluations the surrogate's
+overhead and its own noise assumptions buy little over simply sampling a
+population.
+
 \section{Structured and graph memory}
 Representing memory as a graph of typed nodes (events, entities) and edges
 (temporal, mention) is a recurring idea, from knowledge-graph RAG
@@ -115,6 +166,30 @@ embedding-similarity term, and a recency term, with weights that are part of
 $\thetavec$. A separate exploratory strand, verbal self-reflection
 (Reflexion, \citealp{shinn2023reflexion}), is discussed as a negative result in
 Appendix~\ref{app:tables}.
+
+\paragraph{Knowledge-graph retrieval and what a learnable scorer generalizes.}
+Graph-memory retrieval typically proceeds in two stages: an offline construction
+pass links passages to entities and lays down typed edges, and an online
+traversal ranks nodes by their graph-structural relevance to the query's seed
+entities. Personalized PageRank is the canonical traversal --- it diffuses
+probability mass from the seeds through the edge structure and reads relevance
+off the stationary distribution \citep{gutierrez2024hipporag} --- but its
+behaviour is fixed by the graph topology and a single damping constant that
+trades multi-hop reach against locality, and that constant is not tuned to the
+task. Our formulation subsumes this as one term among several: the learnable
+score combines a graph-traversal component, an embedding-similarity component,
+and a recency component in a single linear rule whose weights live in
+$\thetavec$. Setting the embedding and recency weights to zero recovers a
+pure structural ranker; letting the optimizer move them lets a corpus decide how
+much of its relevance signal is topological rather than semantic or temporal.
+The informative outcome is that the graph-traversal weight is repeatedly driven
+toward zero, which we read not as evidence that structure is useless but as
+evidence that on these corpora the entity-graph adds little \emph{beyond} what
+dense similarity already captures --- a scaffold rather than a load-bearing
+retrieval channel. That negative signal is only legible because the traversal
+weight is an exposed, optimized parameter rather than a hard-wired damping
+constant; a fixed-policy graph retriever cannot report that its own structure
+was redundant.
 
 \section{Benchmarks for long-context question answering}
 Stage~3 evaluates on six published benchmarks chosen to span disjoint domains:

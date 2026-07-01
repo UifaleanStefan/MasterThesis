@@ -42,6 +42,35 @@ is a bespoke judgment, and confirms no duplicate question identifiers and full
 consistency between evaluation inputs and reported scores for every
 configuration.
 
+That $\sim$40\% pool is not spread evenly: it concentrates on the
+abstention-heavy extraction and scientific-QA corpora and is near-absent on the
+narrative corpora (Table~\ref{tab:refusalshare}). Because the pooled per-entry
+error is $0.028$ and near-exact outside the small borderline bucket, an upper
+bound on each benchmark's \emph{inherited} mean-score error is its rule-assisted
+share times that pooled error; the bound is $\le 0.013$ for every benchmark, so
+no headline mean is materially perturbed by the rule-assisted path.
+
+\begin{table}[h]
+  \centering
+  \caption{Per-benchmark rule-assisted share (fraction of judged answers scored
+  by the validated refusal/acknowledgment classifier rather than the one-by-one
+  Claude judge) and the resulting conservative upper bound on inherited mean
+  score error ($\text{share}\times0.028$).}
+  \label{tab:refusalshare}
+  \begin{tabular}{lrr}
+    \toprule
+    Benchmark & Rule-assisted share & Error upper bound \\
+    \midrule
+    FinanceBench & $46.8\%$ & $0.013$ \\
+    QASPER       & $40.2\%$ & $0.011$ \\
+    CUAD         & $43.1\%$ & $0.012$ \\
+    HotpotQA     & $8.6\%$  & $0.002$ \\
+    LongMemEval  & $8.9\%$  & $0.003$ \\
+    NarrativeQA  & $0.0\%$  & $0.000$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section*{Inter-rater reliability of the judge}
 To bound judge noise, a stratified 180-question sample (30 per benchmark,
 balanced across the five score levels) was re-scored by an \emph{independent

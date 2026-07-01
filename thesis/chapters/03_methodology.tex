@@ -139,6 +139,31 @@ CMA-ES objective is pure \recallk{} of the gold evidence --- \emph{no LLM is in
 the optimization loop} --- so tuning is inexpensive and the LLM is used only at
 evaluation time.
 
+\subsection{Same-budget baseline tuning}
+\label{sec:budgettune}
+A learned memory that beats an \emph{untuned} retriever proves little: any
+configuration handed a search budget will outrun one handed none. The honest
+counterfactual is therefore not a fixed default but a classical retriever that is
+allowed to spend the \emph{same} corpus-mode tuning budget as $\thetavec$. We
+grant each baseline the identical resource $\thetavec$ receives --- the same
+corpus-cumulative ingestion, the same tuning-question split, and the same
+\recallk{} objective (Algorithm~\ref{alg:cmaes}) --- and search its free
+parameters on exactly that objective. Two tuners are run per benchmark. The first
+is a grid search over the Okapi BM25 term-saturation and
+length-normalization coefficients $(k_1, b)$, scored by corpus \recallk{} of the
+gold evidence, so the lexical baseline is placed at \emph{its own} corpus-fitted
+optimum rather than at library defaults. The second is a sweep of the
+attention-memory temperature $\tau$, which controls how sharply the softmax over
+candidate items concentrates mass; low $\tau$ approximates hard top-$k$ selection
+and high $\tau$ diffuses it, so the sweep locates the baseline's best
+precision/recall trade-off under the shared budget. Only after each baseline sits
+at its tuned optimum do we compare it to the tuned $\thetavec$
+(Table~\ref{tab:fairbaseline}). This construction converts the headline into a
+\emph{same-budget} contrast: whatever separation survives cannot be attributed to
+one side having been tuned and the other left at defaults, and a benchmark on
+which the tuned lexical baseline \emph{wins} is then genuine evidence about
+where learned memory does not help, not an artifact of an unfair baseline.
+
 Algorithm~\ref{alg:cmaes} states the corpus-cumulative tuning loop and
 Algorithm~\ref{alg:memory} the per-event memory update that each candidate
 $\thetavec$ induces.
@@ -224,6 +249,37 @@ rather than cross-vendor or human agreement.
 All runs are seeded, and every result carries a provenance record (commit
 identifier, embedding backend, and dataset fingerprint) that is automatically
 checked for consistency between the evaluation inputs and the reported outputs.
+
+\subsection{Two-tier judging and the rule-assisted refusal path}
+\label{sec:tworefusal}
+The two-tier design exists because a single scoring path would misprice the two
+kinds of output an answerer produces. A substantive answer requires reading the
+gold evidence and judging semantic adequacy --- an irreducibly LLM-shaped task,
+so those entries are scored one-by-one by the cross-vendor Claude judge. A
+refusal or an ``I don't know'' acknowledgment, by contrast, carries almost no
+content to weigh: the entire scoring decision is whether the abstention was
+warranted given that the evidence was (or was not) retrievable. Routing such
+entries through a generative judge would spend tokens on a near-deterministic
+call and, worse, expose an honest abstention to the judge's own answer
+preferences. We instead classify them with a rule-assisted refusal classifier and
+assign the score its label inherits.
+
+Because a share of every benchmark's scores flows through this cheaper path, the
+classifier is validated as a measurement instrument in its own right, not assumed
+correct. We hand-check a stratified sample of entries and report the classifier's
+precision and recall against those labels
+(Appendix~\ref{app:honesty}). The decisive quantity, however, is not
+classification accuracy but its \emph{effect on the reported metric}: because a
+mislabeled entry changes a benchmark's mean only by the score difference it
+induces, we propagate every classifier error into the aggregate and report the
+resulting per-benchmark mean-score perturbation, together with the pooled
+per-entry error rate. The rule-assisted share varies sharply by benchmark --- it
+is substantial on the corpora where terse ``not stated'' abstentions are common
+and near-zero on narrative corpora where answers are prose --- which is precisely
+why a single global error figure would be misleading and the per-benchmark
+breakdown (Appendix~\ref{app:honesty}) is the honest reporting unit. Only after
+confirming that the induced mean-score error is small on every benchmark do we
+treat the two paths as a single comparable metric in the headline tables.
 
 \paragraph{Significance and held-out testing.} Because the headline comparison
 is a learned configuration against its own untuned baseline, two safeguards guard
