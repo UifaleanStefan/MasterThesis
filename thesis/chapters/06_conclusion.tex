@@ -32,6 +32,30 @@ reaches $43\times$ the tokens at the full $N{=}510$. The one-time CMA-ES tuning
 cost --- no LLM in the loop, only \recallk{} --- was approximately \$18.5 of
 compute per benchmark, amortized over all subsequent queries.
 
+\paragraph{Three results sharpen what ``learnable, task-dependent memory'' buys.}
+First, held under a genuinely fair light --- against an Okapi BM25 baseline tuned
+on the \emph{same} corpus-recall budget and judged one-by-one at matched document
+scope --- the learned memory is competitive but its accuracy edge is
+\emph{benchmark-dependent} rather than universal (Table~\ref{tab:fairbaseline}):
+it wins on \FB{}, ties on QASPER, and \emph{loses} on CUAD, where relevance is
+lexical clause-extraction and a well-tuned sparse retriever is simply the right
+tool. The honest reading is that the learned optimum captures semantic and
+relational relevance well and offers no free lunch on tasks whose relevance is
+surface-lexical; on those, the durable contribution is the efficiency and
+scalability argument above, not raw accuracy. Second, the corpus-mode evaluation
+is near-deterministic: the replicated \FB{} cell has a cross-seed standard
+deviation of $0.012$ (and $0.002$ on the canonical configuration) at
+temperature~0, so cross-seed variance is small relative to the effects it
+brackets, and the point estimates are not seed artifacts. Third, the
+task-dependence of $\thetavec$ is not an obstacle to reuse: a leave-one-benchmark-out
+predictor maps cheap, LLM-free corpus statistics to a $\thetavec$ that recovers
+$0.80$ of the per-task tuning lift (Section~\ref{sec:thetapredict}),
+converting ``re-tune per task'' into a one-shot prediction on all
+but the most idiosyncratic corpus (CUAD, $0.37$). Together these establish the
+claim in its strongest defensible form: what an agent stores and how it scores
+retrieval \emph{can} be learned by a single $\thetavec$, the learned optimum is
+genuinely task-dependent, and that dependence is itself largely predictable.
+
 \section{Limitations}
 The Stage-1 results are single-seed. Several Stage-3 cells are single-seed
 (HotpotQA and LongMemEval were re-run at 100-document scale; the headline
@@ -64,6 +88,36 @@ persists when the answerer is stronger; and (vi) making $\thetavec$ itself
 adaptive \emph{within} an episode (a per-step controller) rather than fixed per
 task, which the present grid results suggest could help on long-horizon
 out-of-distribution tasks where a fixed $\thetavec$ fails.
+
+\paragraph{Sharper next steps, grounded in the specific gaps this thesis leaves open.}
+Beyond the replication and scaling items above, five extensions target the
+limitations that most constrain the present conclusions. (a) \emph{An
+independent, non-Claude judge.} Because both judging passes are Claude-class, the
+reported $\kappa$ bounds judge \emph{self-consistency}, not agreement with a
+different vendor or a human; a blind human or second-vendor rater on the same
+stratified sample is the single change that would most strengthen every
+accuracy claim, and would recalibrate the fair-baseline verdicts of
+Table~\ref{tab:fairbaseline} against a rater with no shared bias with the answerer.
+(b) \emph{A second answerer and encoder.} All Stage-3 results fix a single
+answerer (\texttt{gpt-4o-mini}) and a single encoder (MiniLM); swapping in a
+stronger answerer and an alternative embedding model would test whether the
+efficiency advantage of learned selective memory --- and the shape of the learned
+$\thetavec$ --- generalize, or merely fit one answerer--encoder pair. (c)
+\emph{Multi-hop tasks that actually stress a relational term.} The \wgraph{}
+component was \emph{refuted} as a retrieval-load feature on the present
+benchmarks and reframed as a storage scaffold; a fair test of a relational graph
+term requires tasks whose relevance is genuinely compositional (multi-hop
+bridging over stored entities), where a graph-scored retrieval could carry load
+that single-passage semantic matching cannot. (d) \emph{A cleaner
+accuracy-versus-$N$ probe.} The judged accuracy-versus-$N$ measurement here was
+inconclusive; a properly powered mixed-category probe --- controlled for question
+difficulty and gold position across scales --- is needed to state whether judged
+accuracy is flat under selective memory as $N$ grows, a claim the current data do
+\emph{not} support. (e) \emph{Scaling the $\thetavec$-predictor.} The
+leave-one-benchmark-out predictor learns from only forty tuned slices across five
+benchmarks; extending it to many more corpora, and to richer descriptors, would
+test whether corpus statistics predict $\thetavec$ well enough to retire per-task
+tuning entirely on all but adversarial domains like CUAD.
 
 \section{Closing}
 Memory for LLM agents need not be hand-designed and frozen. A small parameter
