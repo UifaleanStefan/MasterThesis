@@ -399,6 +399,65 @@ Configuration & Online & Batch & Gap \\
   \label{fig:onlinebatch}
 \end{figure}
 
+\paragraph{Full-corpus scaling: the lift holds at 510 contracts and 281 papers.}
+The headline numbers above were established at reduced corpus scopes --- CUAD at
+$50$ contracts, the fair baselines at a $94$-question QASPER subset --- to keep
+the one-by-one judging tractable. Because the corpus-cumulative harness holds the
+\emph{entire} corpus in memory for the end-of-corpus batch regardless of scope, we
+can read the already-judged batch cells at the \emph{complete} corpus --- all
+$510$ CUAD contracts ($n{=}6702$ questions) and all $281$ QASPER papers
+($n{=}1005$) --- and ask whether the conclusions survive
+(Table~\ref{tab:fullcorpus}). They do, and they sharpen. On CUAD the
+corpus-tuning lift is significant at every scale we measured and \emph{monotone}
+in the expected direction: $+0.161$ at $10$ contracts, $+0.144$ at $50$, and
+$+0.107$ at the full $510$ ($0.043 \rightarrow 0.150$, paired Wilcoxon
+$p<10^{-12}$, $n{=}6702$). The lift attenuates as the corpus grows --- more
+distractor contracts dilute retrieval --- but does not vanish, and the tuned
+$\thetavec$ stays clear of both the canonical start and the grid-tuned variant;
+the cross-\emph{method} comparison on this surface-lexical corpus (where a tuned
+sparse retriever still leads) is the separate question of
+Tables~\ref{tab:fairbaseline} and~\ref{tab:head2head}. On QASPER at its full
+$281$-paper corpus the learned memory is the \emph{single best} configuration of
+the six tested: corpus-tuned $\Vt{}$ ($0.351$) beats its own canonical start by
+$+0.218$, the full-context dump-all baseline by $+0.240$, stock Okapi BM25 by
+$+0.058$ ($p<10^{-4}$), and even the tuned attention retriever by $+0.023$
+($p{=}0.016$), every margin paired-Wilcoxon significant after Holm correction.
+The full-corpus view therefore \emph{strengthens} the reduced-scope headlines: the
+corpus-tuning effect is not an artifact of a small evaluation corpus, and on the
+semantically-matched scientific-paper domain the learned policy is best-in-class
+at the complete corpus.
+
+\begin{table}[t]
+\centering
+\caption{Full-corpus scaling. Judged end-of-corpus batch accuracy (bootstrap
+$95\%$ CI) at the \emph{complete} corpus, from the already-judged batch cells
+(mode batch, all questions asked once with the full corpus in memory). Deltas and
+$p$-values are versus \Vt{} corpus-tuned (paired Wilcoxon, Holm-corrected within
+benchmark). The CUAD block reports the learned-memory configurations (the
+corpus-tuning lift); the cross-method fairness comparison on CUAD is in
+Tables~\ref{tab:fairbaseline}--\ref{tab:head2head}.}
+\label{tab:fullcorpus}
+\footnotesize
+\begin{tabular}{lccl}
+\toprule
+Configuration & Judged accuracy & $\Delta$ vs.\ tuned & $p_{\mathrm{Holm}}$ \\
+\midrule
+\multicolumn{4}{l}{\emph{CUAD --- full 510 contracts ($n{=}6702$)}} \\
+\Vt{} corpus-tuned & $\mathbf{0.150}$ {\scriptsize[0.143, 0.156]} & --- & --- \\
+\Vt{} tuned (grid) & $0.129$ {\scriptsize[0.124, 0.135]} & $-0.020$ & $<10^{-6}$ \\
+\Vt{} canonical    & $0.043$ {\scriptsize[0.038, 0.047]} & $-0.107$ & $<10^{-6}$ \\
+\midrule
+\multicolumn{4}{l}{\emph{QASPER --- full 281 papers ($n{=}1005$)}} \\
+\Vt{} corpus-tuned & $\mathbf{0.351}$ {\scriptsize[0.327, 0.377]} & --- & --- \\
+Attention (tuned)  & $0.328$ {\scriptsize[0.302, 0.354]} & $-0.023$ & $0.016$ \\
+Okapi BM25 (stock) & $0.294$ {\scriptsize[0.269, 0.318]} & $-0.058$ & $<10^{-4}$ \\
+\Vt{} canonical    & $0.133$ {\scriptsize[0.115, 0.152]} & $-0.218$ & $<10^{-6}$ \\
+dump-all           & $0.111$ {\scriptsize[0.095, 0.128]} & $-0.240$ & $<10^{-6}$ \\
+\Vt{} tuned (grid) & $0.091$ {\scriptsize[0.073, 0.109]} & $-0.260$ & $<10^{-6}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \paragraph{The dump-all baseline: accuracy parity, not a cliff.} A full-context
 ``dump-all'' baseline concatenates the entire accumulated corpus into the prompt,
 truncated only when it exceeds the context window. On \FB{} it scores $0.689$

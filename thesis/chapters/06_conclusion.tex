@@ -15,7 +15,11 @@ but not across task families. On six real long-context LLM benchmarks,
 corpus-cumulative tuning produced a recency-independent memory whose
 end-of-corpus accuracy lift survived held-out testing on two of the three
 domain-coherent benchmarks (FinanceBench, CUAD; QASPER did not survive Holm
-correction) and held when CUAD was scaled from ten to fifty contracts. The
+correction) and held when CUAD was scaled from ten to fifty and on to the
+\emph{full} five hundred and ten contracts (the batch lift stays significant while
+attenuating with corpus size, $+0.161 \rightarrow +0.144 \rightarrow +0.107$ at
+$n{=}6702$; Table~\ref{tab:fullcorpus}), where at the full $281$-paper QASPER
+corpus the learned memory is the single best of six configurations. The
 tuning objective is a valid proxy for answer quality: recall@8 and judge score
 correlate at pooled Spearman $\rho=0.69$.
 
@@ -63,9 +67,11 @@ FinanceBench cell is now replicated across three seeds, with a cross-seed std of
 $0.012$, confirming corpus-mode evaluation is near-deterministic at
 temperature~0 --- so the remaining single-seed gaps are a matter of CI tightening,
 not point-estimate risk, and multi-seed replication of the other large benchmarks
-remains future work). CUAD is now evaluated on 50 of its 510 contracts for the
-headline pair \emph{and} the fairly-tuned BM25 baseline (Table~\ref{tab:fairbaseline});
-the auxiliary attention and stock-BM25 baselines remain at the 10-contract pilot scale.
+remains future work). The CUAD corpus-tuning lift is now measured at the
+\emph{full} 510-contract corpus for the learned-memory configurations
+($n{=}6702$, Table~\ref{tab:fullcorpus}); the reduced-scope tables retain the
+50-contract fairly-tuned BM25 comparison (Table~\ref{tab:fairbaseline}) and the
+cross-method CUAD baselines at full scale are being added incrementally.
 Answers are judged by a single (cross-vendor) Claude judge; an independent blind
 second pass over a stratified 180-question sample gives quadratic-weighted
 Cohen's $\kappa=0.66$ (\emph{substantial}), but because both passes are
