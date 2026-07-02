@@ -1,9 +1,46 @@
 # Recent Changes — Session Log
 
 **Purpose:** Record of work done on the thesis codebase (analysis, fixes, dashboard, figures).
-**Last updated:** June 2026
+**Last updated:** July 2026
 
 ---
+
+## -26. Post-submission research program: fair baselines, 3-corpus head-to-head, θ-predictor, prose (July 2026)
+
+Converted the thesis's stated "future work / limitations" into completed, honest,
+statistically-rigorous results and expanded the write-up. All judging remains
+1-by-1 by Claude (Opus-class, 1M); `judge_model=claude-opus-4.7-1m`; scores in
+{0,0.25,0.5,0.75,1.0}; provenance audit green throughout.
+
+- **Fair baselines (same-budget, corpus-tuned).** Added `bm25-corpus-tuned` /
+  `attention-corpus-tuned` and judged the FB/QASPER/CUAD triplet 1-by-1 against
+  \Vt{} (`tab:fairbaseline`). Honest verdict: **benchmark-dependent** — V4t wins
+  FB ($+0.132$, $p_{\mathrm{holm}}{<}10^{-3}$), ties QASPER, loses CUAD
+  ($-0.131$). Reported as-is (a baseline beating V4t is a success of the method).
+- **Head-to-head vs published memory systems, now across 3 corpora.** Faithful
+  in-repo reimplementations of HippoRAG (schemaless KG + Personalized PageRank)
+  and MemGPT/Letta (recency core ∪ embedding archival), run under the identical
+  answerer/encoder/judge; only retrieval varies (`tab:head2head`). Judged 1-by-1
+  via a parallel draft→adversarial-verify Workflow harness (`_h2h_dump.py` /
+  `_h2h_merge.py` / `_agg_qasper_h2h.py`). Result is a clean semantic/lexical
+  crossover: **V4t BEATS both on QASPER** (0.351 vs HippoRAG 0.286 $p_{\mathrm{holm}}{<}10^{-6}$,
+  vs Letta 0.319 $p_{\mathrm{holm}}{=}0.001$; n=1005), **ties both on FinanceBench**,
+  and **loses on CUAD** (HippoRAG 0.222 beats V4t 0.172). HippoRAG is the mirror
+  image — weakest on both semantic corpora, strongest on the lexical one. *No
+  fixed retrieval mechanism dominates all three corpora.*
+- **θ-from-task predictor.** Leave-one-benchmark-out predictor over 40 tuned
+  30-doc slices recovers ~0.80 of the per-task tuning lift (`sec:thetapredict`);
+  CUAD (0.37) is the idiosyncratic outlier — task-dependence is itself largely
+  predictable.
+- **Multi-seed + determinism.** FB replicated across seeds {7,42,100}: cross-seed
+  std ≤ 0.012 (0.002 canonical) at T=0 — point estimates are not seed artifacts.
+- **Prose expansion.** Body ~9.2k → ~14.8k words / **64 pages**; Related Work
+  now empirically positioned against the head-to-head; Stage-1/Stage-2 deep-dives;
+  five grounded next steps. Fixed a self-wrapping-macro compile error
+  (`\wrec`/`\wembed`/`\wgraph`/`\recallk` were double-`$`-wrapped). Compiles
+  clean, 0 undefined refs.
+- **Audit state.** 329 cells, 91,077 judge_score lines, all Claude provenance,
+  0 duplicate qids, queue-parity green.
 
 ## -25. Adversarial self-audit + remediation (June 12 2026)
 
