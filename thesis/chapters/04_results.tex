@@ -38,6 +38,50 @@ success from $2.5\%$ to $27.5\%$; we report this as an absolute lift of
 $\sim$25 points (the baseline is near-zero, so a percentage-ratio framing would
 overstate it), on a single-seed proof of concept.
 
+\paragraph{Which parameters each task actually exercises.} Reading
+Table~\ref{tab:stage1} column-wise rather than row-wise is more informative than
+the raw success gap, because it shows \emph{which} of the three coordinates each
+task puts under load. Key-Door is the diagnostic case: its recovered
+$\theta_{\mathrm{store}}{=}0.116$ is the lowest of the three environments while
+its $\theta_{\mathrm{temporal}}{=}0.819$ is near-maximal, and its
+$\theta_{\mathrm{entity}}$ collapses to exactly $0.000$. That combination is not
+an arbitrary point in the cube --- it is a precise behavioural description of the
+task. A task whose only relevant fact is ``a key was seen, then a door reached''
+needs to retain \emph{order} but almost nothing else, so the optimizer drives
+storage down (discard most events) and entity weighting to the floor (the events
+are not distinguished by \emph{what} object they involve) while holding temporal
+structure high. Goal-Room exercises the opposite corner:
+$\theta_{\mathrm{store}}{=}1.000$ and $\theta_{\mathrm{temporal}}{=}1.000$ say
+that when the environment is small and information-dense the cheapest correct
+policy is simply to store everything and never forget, and indeed its baseline is
+already high ($70\%$) because a fixed default is accidentally close to that
+store-all optimum. MultiHopKeyDoor is the task that most exercises the
+\emph{entity} coordinate ($\theta_{\mathrm{entity}}{=}0.487$, by far the largest
+of the three) precisely because multi-hop credit assignment requires the memory
+to tell one keyed sub-goal from another; it is also the task where the fixed
+baseline is most catastrophically wrong ($2.5\%$), and it couples a high store
+weight with a high temporal weight, i.e.\ it loads all three axes at once.
+
+\paragraph{Why no fixed default can serve the three tasks.} The three recovered
+vectors do not merely differ in magnitude; they \emph{disagree in direction} on
+every axis that matters. Storage is near-zero for Key-Door but saturated for the
+other two; entity weight is exactly zero for Key-Door, moderate for
+MultiHopKeyDoor, and low-but-nonzero for Goal-Room; only the temporal coordinate
+is consistently high. A single fixed $\thetavec$ is a single point, so it can sit
+at most near one of these corners --- which is exactly what the baseline column
+shows: the default happens to land close to Goal-Room's store-all optimum
+($70\%\rightarrow80\%$, a small lift because little was left to gain) and far from
+Key-Door's discard-most optimum and from MultiHopKeyDoor's
+selective-plus-ordered optimum ($2.5\%\rightarrow27.5\%$, the largest lift
+precisely because the default was pointing the wrong way). The lift is therefore
+not uniform ``more tuning helps everywhere''; it is inversely proportional to how
+close the fixed default already sat to each task's corner. That is the sharpest
+possible form of the task-dependence claim: the tasks do not want a
+\emph{stronger} setting of the same knobs, they want \emph{opposing} settings, so
+no grid-tuned constant can be simultaneously correct for all three, and
+per-task adaptation is a requirement of the problem rather than an optimization
+luxury.
+
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.9\linewidth]{fig3_theta_trajectory.png}
@@ -130,6 +174,68 @@ Appendix~\ref{app:tables}. The Pareto view (Figure~\ref{fig:pareto}) confirms
   frontier (high reward, low retrieval cost).}
   \label{fig:pareto}
 \end{figure}
+
+\subsection{What the three Stage-2 findings jointly imply about the
+parameterization}
+\label{sec:stage2structure}
+The benchmark, ablation, transfer, and sensitivity results in
+Section~\ref{sec:stage2} are usually read one at a time, but taken together they
+triangulate a single structural fact about how the ten-dimensional $\thetavec$
+is organized. Three of those results point the same way.
+
+\paragraph{Within-family-but-not-across-family transfer localizes the useful
+variance.} The transfer result (Figure~\ref{fig:transfer}) is not a simple
+``transfer is imperfect'' story. A $\thetavec$ tuned on one environment transfers
+\emph{strongly} to a structurally similar one (Goal-Room $0.69$, HardKeyDoor
+$0.17$) yet collapses to $0.00$ on the larger out-of-distribution task --- and
+crucially it collapses \emph{while retaining high retrieval precision there}. If
+the learned vector had memorized surface idiosyncrasies of its training
+environment, transfer would degrade smoothly with distance; instead it holds
+within a task family and then fails discontinuously at a scale boundary. That
+dissociation --- good retrieval, zero reward --- says the failure is not in the
+memory policy $\thetavec$ encodes but in the task's answering demands outstripping
+what any fixed-$k$ retrieval can supply. The operative variance that $\thetavec$
+captures is therefore \emph{family-level structure} (how to store and rank), not
+instance-level detail, which is exactly the property a parameterization needs if
+it is to be predicted rather than re-tuned per task.
+
+\paragraph{The flat \wgraph{} ablation identifies an inert coordinate.} The
+\wgraph{} sweep (Figure~\ref{fig:wgraph}) is flat: zeroing the graph-traversal
+term barely changes reward, in sharp contrast to $\theta_{\mathrm{novel}}$, whose
+removal collapses reward to $0$ (Figure~\ref{fig:ablation}). Read alongside the
+ablation ranking, this means the ten nominal dimensions are not ten
+\emph{effective} dimensions: at least one axis (\wgraph{}) is a flat direction of
+the objective on this task, a typed storage scaffold rather than a load-bearing
+retrieval knob. That the term nonetheless appears to shift under corpus tuning
+(the $0\rightarrow1.6$ move discussed in Section~\ref{sec:stage2}) without
+changing accuracy is the same observation from the optimizer's side: it drifts
+along a direction the loss does not penalize. An inert coordinate is not a defect
+to be tuned away --- it is the reason the effective search space is smaller than
+its nominal dimension, which is what makes the ten-scalar controller reach the
+top cluster on a modest CMA-ES budget and what makes the neural variant unable to
+clearly beat it: there is little residual signal left in the extra capacity.
+
+\paragraph{The anisotropic objective ties the two together.} The sensitivity
+landscape (Figure~\ref{fig:sensitivity}) shows a sharp peak: reward collapses
+once $\theta_{\mathrm{novel}}$ drops below $\sim$$0.3$. Set against the flat
+\wgraph{} direction, the objective is strongly \emph{anisotropic} --- knife-edged
+along $\theta_{\mathrm{novel}}$, nearly flat along \wgraph{} --- i.e.\ a
+ridge-like surface rather than an isotropic bowl. This single geometric picture
+explains all three earlier observations at once. The narrow, load-bearing axes
+(dominated by $\theta_{\mathrm{novel}}$) are what must be gotten right and what
+transfers within a family, because task families share those axes; the flat axes
+(\wgraph{}) are what neither transfer nor ablation can detect a signal on,
+because moving along them costs nothing. It also reconciles the top-cluster
+\emph{tie} in Figure~\ref{fig:stage2bench} with the necessity of tuning: only a
+few directions carry the reward, so a well-placed ten-scalar vector reaches the
+frontier, but those few directions are sharp enough (the $\sim$$0.3$ cliff) that
+the fixed default falls off the ridge --- which is precisely why the untuned
+starting point sits $+75\%$ below the tuned optimum. The parameterization, in
+short, is low-effective-dimension and anisotropic: a small number of sharp,
+family-shared axes doing the work, wrapped in several inert ones. This is the
+Stage-2 fact that Section~\ref{sec:thetapredict} later exploits, and it is why a
+naive parameter-distance check there is uninformative --- distance along the flat
+directions is retrieval-irrelevant.
 
 \section{Stage 3 --- six real long-context benchmarks}
 \label{sec:stage3}

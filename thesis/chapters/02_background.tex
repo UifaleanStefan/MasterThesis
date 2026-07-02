@@ -97,6 +97,46 @@ signature of this coupling: the best joint setting of write-and-read is genuinel
 corpus-specific, not a global constant that a hand-designed policy could have
 fixed once.
 
+\paragraph{Empirical positioning: learned policy versus fixed policy.}
+The head-to-head comparison in Chapter~\ref{ch:results} lets this positioning
+be stated as a measured claim rather than an architectural preference. The two
+most directly comparable systems are exactly the fixed-policy designs discussed
+above. HippoRAG \citep{gutierrez2024hipporag} fixes its retrieval behaviour in
+the \emph{topology} of an offline knowledge graph and in a
+Personalized-PageRank traversal with a hand-set damping constant; nothing about
+that rule is re-fit when the corpus changes. MemGPT / Letta
+\citep{packer2023memgpt} fixes it in a hand-designed tiered read --- a
+recency-weighted core plus an embedding-scored archival store --- whose promotion
+and scoring thresholds are set once by the designer. Against both we place the
+learned-policy alternative of this thesis: a single $\thetavec$ spanning the
+write side (\wrec{}-style retention and abstraction) and the read side
+(\wembed{}, \wgraph{}, and the recency weight), re-optimized per corpus on a
+cheap \recallk{} objective.
+
+The upshot (Table~\ref{tab:head2head}, each answer judged one-by-one) is the
+positive case for learning the policy rather than freezing it: \emph{no fixed
+retrieval mechanism dominates across corpora.} On the semantically-matched
+financial corpus the corpus-tuned $\Vt{}$ policy is competitive with the
+fixed-policy graph and tiered-read systems, whereas on the surface-lexical legal
+corpus the ranking inverts and the same fixed systems trade places with it ---
+HippoRAG, strong on one corpus, is not uniformly strong, and neither is the
+learned policy. Crucially this is not merely one method beating another: it is
+that the \emph{identity} of the best mechanism changes with the corpus. A design
+that freezes its write-and-read rule --- graph topology plus fixed damping in
+HippoRAG, hand-set tiers in MemGPT/Letta --- must commit in advance to one point
+in that space and cannot follow the crossover. Exposing the same decisions as an
+optimized $\thetavec$ does not guarantee winning every corpus (Chapter~\ref{ch:results}
+is explicit that it does not), but it is the only one of the three approaches
+that can be \emph{re-pointed} at the corpus whose relevance signal happens to
+dominate --- topological, semantic, or lexical --- without a designer editing the
+policy by hand. The corpus-specific crossover is thus not a nuisance to be
+explained away but the empirical premise of the whole approach: if a single
+fixed policy sufficed, there would be nothing for a per-task optimizer to buy.
+That the crossover survives a fair, one-by-one-judged, cross-vendor comparison
+against two published systems --- rather than appearing only against a lexical
+baseline --- is what turns the coupling argument above from a design intuition
+into a result.
+
 \section{Black-box optimization of structured objects}
 Because the storage decision is discrete and non-differentiable (an event is
 either written or not), gradient descent is awkward and a black-box optimizer is
