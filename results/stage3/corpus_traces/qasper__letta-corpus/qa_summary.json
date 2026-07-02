@@ -1,0 +1,43 @@
+{
+  "_manifest": {
+    "git_sha": "cc8d588",
+    "git_dirty": true,
+    "timestamp_utc": "2026-07-01T23:27:08+00:00",
+    "python_version": "3.11.0",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3",
+    "embedding_backend": "sentence-transformers",
+    "seed": 42,
+    "experiment": "stage3_corpus_qa",
+    "benchmark": "qasper",
+    "config": "letta-corpus",
+    "model": "gpt-4o-mini",
+    "protocol": "online_batch"
+  },
+  "benchmark": "qasper",
+  "config": "letta-corpus",
+  "model": "gpt-4o-mini",
+  "seed": 42,
+  "k": 8,
+  "n_docs": 281,
+  "limit_docs": null,
+  "n_qa_total": 1005,
+  "protocol": "online_batch",
+  "do_online": false,
+  "do_batch": true,
+  "online": null,
+  "batch": {
+    "n": 1005,
+    "mean_judge": null,
+    "mean_recall_at_k": 0.3441208198489752,
+    "n_with_judge": 0,
+    "n_with_recall": 927,
+    "n_context_overflow": 0,
+    "n_answer_fallback": 0,
+    "mean_prompt_tokens_actual": 958.3154228855722,
+    "elapsed_seconds": 948.7238085269928
+  },
+  "uncapped_context": false,
+  "total_cost_usd": 0.1586128500000002
+}

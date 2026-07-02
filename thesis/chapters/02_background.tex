@@ -115,12 +115,14 @@ cheap \recallk{} objective.
 
 The upshot (Table~\ref{tab:head2head}, each answer judged one-by-one) is the
 positive case for learning the policy rather than freezing it: \emph{no fixed
-retrieval mechanism dominates across corpora.} On the semantically-matched
-financial corpus the corpus-tuned $\Vt{}$ policy is competitive with the
-fixed-policy graph and tiered-read systems, whereas on the surface-lexical legal
-corpus the ranking inverts and the same fixed systems trade places with it ---
-HippoRAG, strong on one corpus, is not uniformly strong, and neither is the
-learned policy. Crucially this is not merely one method beating another: it is
+retrieval mechanism dominates across corpora.} On the two semantically-matched
+corpora --- financial filings and scientific papers --- the corpus-tuned $\Vt{}$
+policy is competitive-to-best against the fixed-policy graph and tiered-read
+systems, tying both on FinanceBench and significantly beating both on QASPER,
+whereas on the surface-lexical legal corpus the ranking inverts and the same
+fixed systems trade places with it --- HippoRAG is the mirror image of the
+learned policy, weakest on both semantic corpora and strongest on the lexical
+one. Crucially this is not merely one method beating another: it is
 that the \emph{identity} of the best mechanism changes with the corpus. A design
 that freezes its write-and-read rule --- graph topology plus fixed damping in
 HippoRAG, hand-set tiers in MemGPT/Letta --- must commit in advance to one point
