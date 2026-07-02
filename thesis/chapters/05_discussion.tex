@@ -253,6 +253,9 @@ Learned memory beats a fairly-tuned (same-budget) BM25 baseline &
 \textbf{Benchmark-dependent} & FinanceBench $+0.132$ (wins,
 $p_{\mathrm{holm}}{<}10^{-3}$); QASPER \emph{n.s.}\ (tie); CUAD $-0.131$
 (\emph{loses}, $p_{\mathrm{holm}}{<}10^{-13}$); Table~\ref{tab:fairbaseline} \\
+Learned memory vs.\ published memory systems (HippoRAG, Letta) &
+\textbf{Benchmark-dependent} & FB ties both; CUAD HippoRAG \emph{beats}
+\Vt{} ($p_{\mathrm{holm}}{<}0.01$), Letta ties; Table~\ref{tab:head2head} \\
 Point estimates are stable across random seeds (FinanceBench) &
 \textbf{Solid} & 3-seed cross-seed std $\le 0.012$ for both corpus-tuned and
 canonical $\thetavec$ \\
