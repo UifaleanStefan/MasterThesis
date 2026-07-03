@@ -41,6 +41,22 @@ statistically-rigorous results and expanded the write-up. All judging remains
   clean, 0 undefined refs.
 - **Audit state.** 329 cells, 91,077 judge_score lines, all Claude provenance,
   0 duplicate qids, queue-parity green.
+- **Phase 2 full-corpus scaling (added).** Discovered the full-corpus batch cells
+  were already computed (generated for Protocol B, never promoted to headlines):
+  the `batch_calib` cells are clean end-of-corpus batch (mode=batch, standard
+  rubric, full docs\_seen). **CUAD full 510 contracts (n=6702):** lift holds and is
+  monotone, +0.161(10) → +0.144(50) → +0.107(510), p<1e-12. **QASPER full 281
+  papers (n=1005):** V4t corpus-tuned (0.351) is TIED FOR BEST of seven configs --
+  beats canonical/grid-tuned/dump-all/stock-BM25/tuned-attention (all Holm-sig) and
+  **ties a fairly-tuned BM25 (0.367, p=0.30)**, the same dead-heat as the n=94 fair
+  baseline. New tuned-BM25 QASPER cell generated + judged 1-by-1 (fills the
+  head-to-head blank + `tab:fullcorpus`). New `tab:fullcorpus` + `scripts/_agg_fullcorpus.py`
+  (scope-gated on docs\_seen). **NOT done (deferred, disclosed):** CUAD cross-method
+  baselines at 510 (attention/bm25/dump-all/hipporag/letta) -- each a ~5h generation
+  pass, confirmatory only (50-doc already shows BM25/HippoRAG lead CUAD). Thesis 65pp,
+  0 undefined refs; audit 330 cells / 92,082 lines. LESSON: `run_corpus_qa` `--out-dir`
+  does NOT redirect judge_queue -> `online_batch` clobbers committed `__batch` cells;
+  use `--protocol calibration` (writes new `__batch_calib`) for full-corpus baselines.
 
 ## -25. Adversarial self-audit + remediation (June 12 2026)
 
