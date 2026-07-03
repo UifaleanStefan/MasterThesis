@@ -417,15 +417,20 @@ $\thetavec$ stays clear of both the canonical start and the grid-tuned variant;
 the cross-\emph{method} comparison on this surface-lexical corpus (where a tuned
 sparse retriever still leads) is the separate question of
 Tables~\ref{tab:fairbaseline} and~\ref{tab:head2head}. On QASPER at its full
-$281$-paper corpus the learned memory is the \emph{single best} configuration of
-the six tested: corpus-tuned $\Vt{}$ ($0.351$) beats its own canonical start by
-$+0.218$, the full-context dump-all baseline by $+0.240$, stock Okapi BM25 by
-$+0.058$ ($p<10^{-4}$), and even the tuned attention retriever by $+0.023$
-($p{=}0.016$), every margin paired-Wilcoxon significant after Holm correction.
-The full-corpus view therefore \emph{strengthens} the reduced-scope headlines: the
-corpus-tuning effect is not an artifact of a small evaluation corpus, and on the
-semantically-matched scientific-paper domain the learned policy is best-in-class
-at the complete corpus.
+$281$-paper corpus the learned memory is \emph{tied for best} among all seven
+configurations tested: corpus-tuned $\Vt{}$ ($0.351$) beats its own canonical
+start by $+0.218$, the full-context dump-all baseline by $+0.240$, stock Okapi
+BM25 by $+0.058$ ($p<10^{-4}$), and the tuned attention retriever by $+0.023$
+($p{=}0.033$), every margin paired-Wilcoxon significant after Holm correction ---
+and it \emph{ties} the one remaining comparator, a fairly-tuned Okapi BM25 run at
+the same scale ($0.367$ vs.\ $0.351$; $+0.016$ for BM25, $p{=}0.30$, n.s.), which
+is exactly the statistical dead-heat the reduced-scope fair baseline reported
+($n{=}94$; Table~\ref{tab:fairbaseline}). The full-corpus view therefore
+\emph{strengthens} the reduced-scope headlines: the corpus-tuning effect is not an
+artifact of a small evaluation corpus, and on this semantically-matched
+scientific-paper domain the learned policy is tied for best at the complete
+corpus --- matching a purpose-tuned lexical retriever and beating every other
+configuration.
 
 \begin{table}[t]
 \centering
@@ -448,8 +453,9 @@ Configuration & Judged accuracy & $\Delta$ vs.\ tuned & $p_{\mathrm{Holm}}$ \\
 \Vt{} canonical    & $0.043$ {\scriptsize[0.038, 0.047]} & $-0.107$ & $<10^{-6}$ \\
 \midrule
 \multicolumn{4}{l}{\emph{QASPER --- full 281 papers ($n{=}1005$)}} \\
-\Vt{} corpus-tuned & $\mathbf{0.351}$ {\scriptsize[0.327, 0.377]} & --- & --- \\
-Attention (tuned)  & $0.328$ {\scriptsize[0.302, 0.354]} & $-0.023$ & $0.016$ \\
+Okapi BM25 (tuned) & $0.367$ {\scriptsize[0.341, 0.393]} & $+0.016$ & $0.30$ (tie) \\
+\Vt{} corpus-tuned & $0.351$ {\scriptsize[0.327, 0.377]} & --- & --- \\
+Attention (tuned)  & $0.328$ {\scriptsize[0.302, 0.354]} & $-0.023$ & $0.033$ \\
 Okapi BM25 (stock) & $0.294$ {\scriptsize[0.269, 0.318]} & $-0.058$ & $<10^{-4}$ \\
 \Vt{} canonical    & $0.133$ {\scriptsize[0.115, 0.152]} & $-0.218$ & $<10^{-6}$ \\
 dump-all           & $0.111$ {\scriptsize[0.095, 0.128]} & $-0.240$ & $<10^{-6}$ \\
@@ -573,11 +579,12 @@ HippoRAG's entity-seeded graph, running on the rule-based extractor rather than 
 LLM OpenIE module, repeatedly surfaces the wrong passage and abstains (``the
 method is not specified''), and every such refusal scores $0$, whereas the tuned
 semantic memory retrieves the short-span evidence QASPER rewards. (The
-\emph{fairly-tuned} BM25 comparison for QASPER, at the smaller $n{=}94$
-fair-baseline scope, is a statistical \emph{tie} with \Vt{},
-Table~\ref{tab:fairbaseline}; the head-to-head here is at the $n{=}1005$
-calibration scope on which the three memory systems share an identical question
-grid.) On CUAD the ranking \emph{inverts} and the gap turns
+\emph{fairly-tuned} BM25 retriever, run at this same $n{=}1005$ full-corpus scope,
+is a statistical \emph{tie} with \Vt{} --- $0.367$ vs.\ $0.351$, $p{=}0.30$, so
+BM25 is nominally ahead but indistinguishable --- the same dead-heat the $n{=}94$
+fair baseline reported (Table~\ref{tab:fairbaseline}); the learned memory beats
+the two published memory systems here but does not out-retrieve a purpose-tuned
+lexical index on this corpus.) On CUAD the ranking \emph{inverts} and the gap turns
 against the learned memory: HippoRAG ($0.222$) \textbf{beats} \Vt{} ($0.172$) by a
 significant margin ($p_{\mathrm{Holm}}{<}0.01$), \Vt{} ties Letta ($0.146$;
 $+0.026$, n.s.), and both trail the tuned lexical retrievers ($0.303$ BM25,
@@ -605,11 +612,9 @@ nothing to re-point.
   the published \emph{retrieval mechanisms} (disclosed divergences below); the
   tuned lexical retrievers are shown for reference. No mechanism dominates all
   three corpora: the learned memory wins or ties on the two semantic corpora and
-  loses on the lexical one. $^{\dagger}$The tuned-BM25 QASPER cell is left blank
-  to avoid mixing question scopes: the fairly-tuned QASPER BM25 comparison is at
-  the $n{=}94$ fair-baseline scope (a tie with \Vt{}, Table~\ref{tab:fairbaseline}),
-  whereas this head-to-head is at the $n{=}1005$ calibration scope on which the
-  three memory systems share an identical question grid.}
+  loses on the lexical one. All QASPER cells are at the full $n{=}1005$ scope; the
+  learned memory ties the fairly-tuned BM25 reference there ($0.351$ vs.\ $0.367$,
+  $p{=}0.30$), mirroring the $n{=}94$ fair baseline (Table~\ref{tab:fairbaseline}).}
   \label{tab:head2head}
   \footnotesize
   \begin{tabular}{lccc}
@@ -620,7 +625,7 @@ nothing to re-point.
     HippoRAG (reimpl.)             & $0.563$ {\scriptsize[0.49, 0.64]} & $0.286$ {\scriptsize[0.26, 0.31]} & $\mathbf{0.222}$ {\scriptsize[0.19, 0.25]} \\
     MemGPT/Letta (reimpl.)         & $0.607$ {\scriptsize[0.53, 0.68]} & $0.319$ {\scriptsize[0.29, 0.34]} & $0.146$ {\scriptsize[0.12, 0.17]} \\
     \midrule
-    Okapi BM25 (tuned, ref.)       & $0.513$ {\scriptsize[0.45, 0.59]} & ---$^{\dagger}$ & $0.303$ {\scriptsize[0.27, 0.33]} \\
+    Okapi BM25 (tuned, ref.)       & $0.513$ {\scriptsize[0.45, 0.59]} & $\mathbf{0.367}$ {\scriptsize[0.34, 0.39]} & $0.303$ {\scriptsize[0.27, 0.33]} \\
     Attention (tuned, ref.)        & $\mathbf{0.657}$ {\scriptsize[0.59, 0.73]} & $0.328$ {\scriptsize[0.30, 0.35]} & $\mathbf{0.320}$ {\scriptsize[0.25, 0.39]} \\
     \bottomrule
   \end{tabular}

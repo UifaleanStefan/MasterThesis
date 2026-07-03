@@ -19,7 +19,10 @@ correction) and held when CUAD was scaled from ten to fifty and on to the
 \emph{full} five hundred and ten contracts (the batch lift stays significant while
 attenuating with corpus size, $+0.161 \rightarrow +0.144 \rightarrow +0.107$ at
 $n{=}6702$; Table~\ref{tab:fullcorpus}), where at the full $281$-paper QASPER
-corpus the learned memory is the single best of six configurations. The
+corpus the learned memory is tied for best of seven configurations --- beating
+five (its canonical start, the grid-tuned variant, dump-all, stock BM25, and
+tuned attention) and tying a fairly-tuned BM25 index ($0.351$ vs.\ $0.367$,
+$p{=}0.30$). The
 tuning objective is a valid proxy for answer quality: recall@8 and judge score
 correlate at pooled Spearman $\rho=0.69$.
 
@@ -69,9 +72,14 @@ temperature~0 --- so the remaining single-seed gaps are a matter of CI tightenin
 not point-estimate risk, and multi-seed replication of the other large benchmarks
 remains future work). The CUAD corpus-tuning lift is now measured at the
 \emph{full} 510-contract corpus for the learned-memory configurations
-($n{=}6702$, Table~\ref{tab:fullcorpus}); the reduced-scope tables retain the
-50-contract fairly-tuned BM25 comparison (Table~\ref{tab:fairbaseline}) and the
-cross-method CUAD baselines at full scale are being added incrementally.
+($n{=}6702$, Table~\ref{tab:fullcorpus}), and the QASPER cross-method comparison
+(against tuned BM25, tuned attention, and dump-all) is at the full $281$-paper
+scale; the CUAD \emph{cross-method} comparison against tuned lexical retrievers
+and the published memory systems is reported at the 50-contract scope
+(Tables~\ref{tab:fairbaseline},~\ref{tab:head2head}), where a purpose-tuned sparse
+retriever already leads on this surface-lexical corpus --- re-running those
+baselines over all 510 contracts (each a multi-hour generation pass) is left as
+mechanical future work unlikely to change the ranking.
 Answers are judged by a single (cross-vendor) Claude judge; an independent blind
 second pass over a stratified 180-question sample gives quadratic-weighted
 Cohen's $\kappa=0.66$ (\emph{substantial}), but because both passes are
