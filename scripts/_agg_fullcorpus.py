@@ -20,7 +20,8 @@ ROOT = Path(__file__).resolve().parent.parent
 Q = ROOT / "results" / "stage3" / "judge_queue"
 # preferred display order; only those with a judged full-corpus cell are shown
 ORDER = ["v4t-corpus-tuned", "v4t-tuned", "v4t-canonical",
-         "bm25-corpus-tuned", "attention-corpus-tuned", "bm25-corpus", "dump-all"]
+         "bm25-corpus-tuned", "attention-corpus-tuned", "bm25-corpus", "dump-all",
+         "hipporag-corpus", "letta-corpus"]
 BENCHES = {"cuad": ("CUAD", 510), "qasper": ("QASPER", 281)}
 
 def cell_maxdocs(cell):
