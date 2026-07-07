@@ -57,6 +57,19 @@ statistically-rigorous results and expanded the write-up. All judging remains
   0 undefined refs; audit 330 cells / 92,082 lines. LESSON: `run_corpus_qa` `--out-dir`
   does NOT redirect judge_queue -> `online_batch` clobbers committed `__batch` cells;
   use `--protocol calibration` (writes new `__batch_calib`) for full-corpus baselines.
+- **CUAD 510 cross-method baselines (added, July 3-5 2026).** Generated + judged
+  1-by-1 the four principal baselines at the full 510 contracts (each ~2.6-9.8h,
+  6702q, via reusable `judge_cell_wf.js` draft->verify + `process_cell_judge.py`;
+  the occasional verify-agent drop of 1-7 entries/cell is hand-judged and patched).
+  **HEADLINE: the CUAD memory-system ranking is scale-dependent, not just
+  corpus-dependent.** CUAD@50: HippoRAG 0.222 > V4t 0.172 > Letta 0.146. CUAD@510:
+  Letta 0.199 > V4t 0.149 > HippoRAG 0.134 (all paired-Holm-sig) -- HippoRAG's
+  graph collapses (>50k nodes, PPR surfaces wrong-contract clauses), Letta's
+  embedding archival scales gracefully. Tuned lexical/attention retrievers (BM25
+  0.261, attention 0.252) lead at both scales. Folded into tab:fullcorpus (CUAD
+  block now 7 configs, n=6683) + reshuffle prose + 05/06 claims. **dump-all@510
+  DELIBERATELY SKIPPED** (confirmed ~$125 / 831M-input-tokens; killed after ~$4;
+  its token-explosion is already analytical + 50-doc). Audit 333 cells/118,739 lines.
 
 ## -25. Adversarial self-audit + remediation (June 12 2026)
 
