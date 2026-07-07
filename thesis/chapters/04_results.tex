@@ -412,11 +412,22 @@ corpus-tuning lift is significant at every scale we measured and \emph{monotone}
 in the expected direction: $+0.161$ at $10$ contracts, $+0.144$ at $50$, and
 $+0.107$ at the full $510$ ($0.043 \rightarrow 0.150$, paired Wilcoxon
 $p<10^{-12}$, $n{=}6702$). The lift attenuates as the corpus grows --- more
-distractor contracts dilute retrieval --- but does not vanish, and the tuned
-$\thetavec$ stays clear of both the canonical start and the grid-tuned variant;
-the cross-\emph{method} comparison on this surface-lexical corpus (where a tuned
-sparse retriever still leads) is the separate question of
-Tables~\ref{tab:fairbaseline} and~\ref{tab:head2head}. On QASPER at its full
+distractor contracts dilute retrieval --- but does not vanish. The full-corpus
+table also carries the \emph{cross-method} CUAD comparison (all seven
+configurations judged one-by-one at $510$ contracts), and it exposes a
+scale-dependent reshuffle the reduced-scope tables miss. The two tuned lexical
+retrievers still lead (BM25 $0.261$, attention $0.252$), but among the
+\emph{memory systems} the ranking \emph{inverts} between scales: at $50$ contracts
+HippoRAG ($0.222$) beat both \Vt{} ($0.172$) and Letta ($0.146$), whereas at the
+full $510$ the order flips to Letta ($0.199$) $>$ \Vt{} ($0.149$) $>$ HippoRAG
+($0.134$), every gap paired-Wilcoxon significant after Holm correction. HippoRAG's
+entity graph does not scale --- at $510$ contracts it balloons past $50{,}000$
+nodes and its Personalized-PageRank traversal repeatedly surfaces wrong-contract
+clauses (visible throughout the judged rationales) --- whereas Letta's embedding
+archival degrades gracefully. This reinforces the central claim with a \emph{scale}
+axis: not only does no fixed retrieval mechanism dominate across corpora, the
+ranking among memory systems on a single corpus is not even stable across corpus
+\emph{size}. On QASPER at its full
 $281$-paper corpus the learned memory is \emph{tied for best} among all seven
 configurations tested: corpus-tuned $\Vt{}$ ($0.351$) beats its own canonical
 start by $+0.218$, the full-context dump-all baseline by $+0.240$, stock Okapi
@@ -438,19 +449,24 @@ configuration.
 $95\%$ CI) at the \emph{complete} corpus, from the already-judged batch cells
 (mode batch, all questions asked once with the full corpus in memory). Deltas and
 $p$-values are versus \Vt{} corpus-tuned (paired Wilcoxon, Holm-corrected within
-benchmark). The CUAD block reports the learned-memory configurations (the
-corpus-tuning lift); the cross-method fairness comparison on CUAD is in
-Tables~\ref{tab:fairbaseline}--\ref{tab:head2head}.}
+benchmark). Both blocks are full cross-method comparisons; note that the CUAD
+memory-system order (Letta $>$ \Vt{} $>$ HippoRAG) is the \emph{reverse} of the
+50-contract order (Table~\ref{tab:head2head}), a scale-dependent reshuffle
+discussed in the text.}
 \label{tab:fullcorpus}
 \footnotesize
 \begin{tabular}{lccl}
 \toprule
 Configuration & Judged accuracy & $\Delta$ vs.\ tuned & $p_{\mathrm{Holm}}$ \\
 \midrule
-\multicolumn{4}{l}{\emph{CUAD --- full 510 contracts ($n{=}6702$)}} \\
-\Vt{} corpus-tuned & $\mathbf{0.150}$ {\scriptsize[0.143, 0.156]} & --- & --- \\
-\Vt{} tuned (grid) & $0.129$ {\scriptsize[0.124, 0.135]} & $-0.020$ & $<10^{-6}$ \\
-\Vt{} canonical    & $0.043$ {\scriptsize[0.038, 0.047]} & $-0.107$ & $<10^{-6}$ \\
+\multicolumn{4}{l}{\emph{CUAD --- full 510 contracts ($n{=}6683$)}} \\
+Okapi BM25 (tuned)     & $\mathbf{0.261}$ {\scriptsize[0.252, 0.270]} & $+0.112$ & $<10^{-6}$ \\
+Attention (tuned)      & $0.252$ {\scriptsize[0.244, 0.260]} & $+0.103$ & $<10^{-6}$ \\
+MemGPT/Letta (reimpl.) & $0.199$ {\scriptsize[0.192, 0.207]} & $+0.050$ & $<10^{-6}$ \\
+\Vt{} corpus-tuned     & $0.149$ {\scriptsize[0.143, 0.156]} & --- & --- \\
+HippoRAG (reimpl.)     & $0.134$ {\scriptsize[0.129, 0.141]} & $-0.015$ & $<10^{-5}$ \\
+\Vt{} tuned (grid)     & $0.129$ {\scriptsize[0.123, 0.135]} & $-0.020$ & $<10^{-6}$ \\
+\Vt{} canonical        & $0.043$ {\scriptsize[0.038, 0.048]} & $-0.106$ & $<10^{-6}$ \\
 \midrule
 \multicolumn{4}{l}{\emph{QASPER --- full 281 papers ($n{=}1005$)}} \\
 Okapi BM25 (tuned) & $0.367$ {\scriptsize[0.341, 0.393]} & $+0.016$ & $0.30$ (tie) \\
@@ -588,7 +604,11 @@ lexical index on this corpus.) On CUAD the ranking \emph{inverts} and the gap tu
 against the learned memory: HippoRAG ($0.222$) \textbf{beats} \Vt{} ($0.172$) by a
 significant margin ($p_{\mathrm{Holm}}{<}0.01$), \Vt{} ties Letta ($0.146$;
 $+0.026$, n.s.), and both trail the tuned lexical retrievers ($0.303$ BM25,
-$0.320$ attention). The pattern is coherent with the task-structure argument of
+$0.320$ attention). This $50$-contract head-to-head is itself scale-specific: at
+the full $510$ contracts the memory-system order \emph{reverses} (Letta $0.199 >
+\Vt{}\ 0.149 >$ HippoRAG $0.134$; Table~\ref{tab:fullcorpus}), because HippoRAG's
+entity graph does not scale while Letta's embedding archival does. The pattern is
+coherent with the task-structure argument of
 Section~\ref{sec:whybm25}: legal clause extraction rewards \emph{lexical and
 entity} matching, so HippoRAG's entity-seeded graph retrieval and BM25's term
 overlap both outrank a semantic memory, whereas Letta's embedding-plus-recency

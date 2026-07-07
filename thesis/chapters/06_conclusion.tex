@@ -74,12 +74,13 @@ remains future work). The CUAD corpus-tuning lift is now measured at the
 \emph{full} 510-contract corpus for the learned-memory configurations
 ($n{=}6702$, Table~\ref{tab:fullcorpus}), and the QASPER cross-method comparison
 (against tuned BM25, tuned attention, and dump-all) is at the full $281$-paper
-scale; the CUAD \emph{cross-method} comparison against tuned lexical retrievers
-and the published memory systems is reported at the 50-contract scope
-(Tables~\ref{tab:fairbaseline},~\ref{tab:head2head}), where a purpose-tuned sparse
-retriever already leads on this surface-lexical corpus --- re-running those
-baselines over all 510 contracts (each a multi-hour generation pass) is left as
-mechanical future work unlikely to change the ranking.
+scale; and the CUAD cross-method comparison is now also run over all $510$
+contracts for the four principal baselines (tuned BM25, tuned attention, HippoRAG,
+Letta), which unexpectedly revealed a scale-dependent \emph{reshuffle} of the
+memory-system ranking --- HippoRAG's graph collapses and Letta overtakes it and
+\Vt{} (Table~\ref{tab:fullcorpus}). Only the full-context dump-all cell was left
+at reduced scale, its $\sim$124K-token-per-question cost at $510$ contracts being
+prohibitive while its token-explosion scaling is already established analytically.
 Answers are judged by a single (cross-vendor) Claude judge; an independent blind
 second pass over a stratified 180-question sample gives quadratic-weighted
 Cohen's $\kappa=0.66$ (\emph{substantial}), but because both passes are
