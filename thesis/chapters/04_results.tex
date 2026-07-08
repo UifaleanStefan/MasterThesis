@@ -452,7 +452,10 @@ $p$-values are versus \Vt{} corpus-tuned (paired Wilcoxon, Holm-corrected within
 benchmark). Both blocks are full cross-method comparisons; note that the CUAD
 memory-system order (Letta $>$ \Vt{} $>$ HippoRAG) is the \emph{reverse} of the
 50-contract order (Table~\ref{tab:head2head}), a scale-dependent reshuffle
-discussed in the text.}
+discussed in the text. $^{\ddagger}$Full-context dump-all overflows the $128$K
+window on all $150$ probe questions at $510$ contracts ($74{,}435$ stored events
+$\approx 43\times$ the window; only $\sim$2.5\% fits), producing no valid answer
+--- the empirical form of the analytical overflow-at-$N{\approx}11$ result.}
 \label{tab:fullcorpus}
 \footnotesize
 \begin{tabular}{lccl}
@@ -467,6 +470,7 @@ MemGPT/Letta (reimpl.) & $0.199$ {\scriptsize[0.192, 0.207]} & $+0.050$ & $<10^{
 HippoRAG (reimpl.)     & $0.134$ {\scriptsize[0.129, 0.141]} & $-0.015$ & $<10^{-5}$ \\
 \Vt{} tuned (grid)     & $0.129$ {\scriptsize[0.123, 0.135]} & $-0.020$ & $<10^{-6}$ \\
 \Vt{} canonical        & $0.043$ {\scriptsize[0.038, 0.048]} & $-0.106$ & $<10^{-6}$ \\
+dump-all (full ctx.)   & \emph{overflow}$^{\ddagger}$ & --- & --- \\
 \midrule
 \multicolumn{4}{l}{\emph{QASPER --- full 281 papers ($n{=}1005$)}} \\
 Okapi BM25 (tuned) & $0.367$ {\scriptsize[0.341, 0.393]} & $+0.016$ & $0.30$ (tie) \\

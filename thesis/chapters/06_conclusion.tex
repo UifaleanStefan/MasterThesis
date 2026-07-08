@@ -78,9 +78,11 @@ scale; and the CUAD cross-method comparison is now also run over all $510$
 contracts for the four principal baselines (tuned BM25, tuned attention, HippoRAG,
 Letta), which unexpectedly revealed a scale-dependent \emph{reshuffle} of the
 memory-system ranking --- HippoRAG's graph collapses and Letta overtakes it and
-\Vt{} (Table~\ref{tab:fullcorpus}). Only the full-context dump-all cell was left
-at reduced scale, its $\sim$124K-token-per-question cost at $510$ contracts being
-prohibitive while its token-explosion scaling is already established analytically.
+\Vt{} (Table~\ref{tab:fullcorpus}). The full-context dump-all cell was probed at
+$510$ on a $150$-question sample rather than the full corpus (an exhaustive run
+being cost-prohibitive at $\sim$124K tokens/question); it \emph{overflows} the
+$128$K window on every probe question ($74{,}435$ events, $\approx 43\times$ the
+window), empirically confirming the analytical overflow-at-$N{\approx}11$ result.
 Answers are judged by a single (cross-vendor) Claude judge; an independent blind
 second pass over a stratified 180-question sample gives quadratic-weighted
 Cohen's $\kappa=0.66$ (\emph{substantial}), but because both passes are

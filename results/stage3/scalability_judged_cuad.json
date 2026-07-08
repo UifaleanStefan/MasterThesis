@@ -1,55 +1,44 @@
 {
   "benchmark": "cuad",
   "n_values": [
-    50,
-    150,
-    300
+    510
   ],
   "configs": [
-    "v4t-corpus-tuned"
+    "v4t-corpus-tuned",
+    "dump-all"
   ],
-  "probe_docs": 50,
-  "probe_size": 20,
+  "probe_docs": 150,
+  "probe_size": 150,
   "k": 8,
   "seed": 42,
   "dry_run": false,
   "cells": [
     {
       "config": "v4t-corpus-tuned",
-      "n": 50,
-      "total_steps": 6243,
-      "probe_size": 20,
+      "n": 510,
+      "total_steps": 74435,
+      "probe_size": 150,
       "overflow": 0,
-      "judgeable": 20,
-      "run_id": "scaling__cuad__v4t-corpus-tuned__N50__seed42",
+      "judgeable": 150,
+      "run_id": "scaling__cuad__v4t-corpus-tuned__N510__seed42",
       "mean_recall_at_k": 0.0
     },
     {
-      "config": "v4t-corpus-tuned",
-      "n": 150,
-      "total_steps": 20870,
-      "probe_size": 20,
-      "overflow": 0,
-      "judgeable": 20,
-      "run_id": "scaling__cuad__v4t-corpus-tuned__N150__seed42",
-      "mean_recall_at_k": 0.0
-    },
-    {
-      "config": "v4t-corpus-tuned",
-      "n": 300,
-      "total_steps": 48748,
-      "probe_size": 20,
-      "overflow": 0,
-      "judgeable": 20,
-      "run_id": "scaling__cuad__v4t-corpus-tuned__N300__seed42",
-      "mean_recall_at_k": 0.0
+      "config": "dump-all",
+      "n": 510,
+      "total_steps": 74435,
+      "probe_size": 150,
+      "overflow": 150,
+      "judgeable": 0,
+      "run_id": "scaling__cuad__dump-all__N510__seed42",
+      "mean_recall_at_k": 1.0
     }
   ],
-  "elapsed_seconds": 526.4232907295227,
+  "elapsed_seconds": 1044.5651578903198,
   "_manifest": {
-    "git_sha": "34b4108",
+    "git_sha": "306119a",
     "git_dirty": true,
-    "timestamp_utc": "2026-07-01T20:08:00+00:00",
+    "timestamp_utc": "2026-07-08T19:12:32+00:00",
     "python_version": "3.11.0",
     "platform": "Windows-10-10.0.26200-SP0",
     "numpy_version": "2.3.5",

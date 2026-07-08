@@ -12,12 +12,19 @@ OpenAI figures are the runner's own cost counter from each run log unless noted.
 | CUAD-510 hipporag-corpus | $2.89 | 9.8h | PPR over 50k+ nodes |
 | CUAD-510 letta-corpus | $0.89 | 2.6h | |
 | CUAD-510 attention-corpus-tuned | $1.08 | 2.6h | |
-| CUAD-510 dump-all (partial, killed) | ~$4 | — | counter broken; real est. |
-| earlier killed bm25 attempt (~5h) | ~$1.5 | — | no log write |
 | QASPER-281 bm25-corpus-tuned | $0.34 | 0.3h | (Phase-2 QASPER top-up) |
-| **CUAD-510 dump-all (full run)** | **~$125 (est.)** | ~4h | IN PROGRESS; counter broken → estimated from ~124K tok/q × 6702 × $0.15/1M |
-| **OpenAI subtotal (committed)** | **≈ $12.6** | | excludes the in-progress dump-all |
-| **OpenAI total (with full dump-all)** | **≈ $138** | | |
+| CUAD-510 dump-all — killed full attempts (×2) | ~$12–19 sunk | — | no partial saves; wasted |
+| earlier killed bm25 attempt (~5h) | ~$1.5 | — | no log write |
+| **CUAD-510 dump-all @510 (150-q probe)** | **~$0** | ~17m | 150/150 OVERFLOW the 128K window → skipped before any API call; no cost |
+| **OpenAI TOTAL (final)** | **≈ $22** | | vs the ~$138 a full dump-all batch would have cost |
+
+**dump-all @510 outcome:** rather than the ~$138 full 6702-question batch, ran the
+purpose-built `run_scalability_qa.py` 150-question probe. Result: the full context
+(74,435 events ≈ 43× the 128K window) **overflows on all 150 questions** — dump-all
+produces no valid answer at 510, the empirical form of the analytical
+overflow-at-N≈11 result. Cost ≈ $0 (overflow detected pre-API). The ~$12–19 sunk
+on the two killed full-batch attempts (which silently truncate-and-answer) is the
+only waste; switching to the probe capped the rest.
 
 ## Claude judging (subagent tokens, draft→verify)
 
@@ -35,8 +42,9 @@ At Opus API rates (~$5/M in, ~$25/M out; judging is mostly input) this is roughl
 **$300–450**; on a Claude subscription it is plan-covered, not a separate bill.
 
 ## Bottom line
-- **Real external OpenAI spend:** ≈ **$12.6 committed**, → **≈ $138** once the full
-  dump-all @510 completes.
-- **Claude judging:** ≈ **29M tokens** committed (+~7M for dump-all).
-- **Avoided earlier:** killing the first dump-all attempt after ~$4 (before this
-  authorized full run) and skipping nothing else.
+- **Real external OpenAI spend:** ≈ **$22 total** (4 CUAD-510 baselines $6.79 +
+  QASPER top-up $0.34 + ~$12–19 sunk on killed dump-all attempts + ~$0 probe).
+- **Claude judging:** ≈ **28M tokens** (the four judged CUAD-510 baselines +
+  QASPER); dump-all needed no judging (overflow).
+- **Avoided:** ~$116 by probing dump-all (150 q, overflow, ~$0) instead of the
+  full ~$138 6702-question batch.
