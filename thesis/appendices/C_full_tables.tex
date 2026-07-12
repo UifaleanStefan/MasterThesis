@@ -31,6 +31,10 @@ The full twelve-system rankings per environment, the per-component ablation
 table, the cross-environment transfer matrix, and the 2-D sensitivity grid are
 reproduced from the committed results by
 \texttt{python generate\_thesis\_figures.py}. All figures and tables in this
-thesis use the MiniLM sentence-embedding backend (\texttt{all-MiniLM-L6-v2}); an
-earlier TF-IDF backend yields slightly different absolute $\thetavec$ values but
-the same headline conclusion (top cluster; statistical tie).
+thesis use the MiniLM sentence-embedding backend (\texttt{all-MiniLM-L6-v2}),
+\emph{except} the Stage-2 grid benchmark figure (Figure~\ref{fig:stage2bench}),
+whose $0.178$ top-cluster tie is from the earlier TF-IDF backend. This ranking is
+backend-sensitive: under MiniLM the absolute rewards shift and \Vfour{} is
+competitive with, but does not lead, the strongest baselines --- the honest
+reading recorded in the Stage-2 self-audit (Appendix~\ref{app:honesty}). All
+Stage-3 (real-LLM) results use MiniLM throughout.

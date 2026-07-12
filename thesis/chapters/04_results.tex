@@ -96,13 +96,17 @@ luxury.
 
 \paragraph{Top-cluster performance.} On the hardest grid task
 (MultiHopKeyDoor), the CMA-ES-tuned ten-dimensional \Vfour{} reaches the top
-performance cluster (Figure~\ref{fig:stage2bench}): mean reward $0.178$ versus
-the prior best EpisodicSemantic at $0.173$. We state this as a
-\emph{statistical tie}, not a clean ``\#1'': it is a single-seed point estimate
-and EpisodicSemantic's $95\%$ bootstrap confidence interval $[0.120, 0.220]$
-contains $0.178$. The defensible claim is that the ten-dimensional
-parameterization \emph{reaches the top cluster}, a $+75\%$ improvement over its
-own untuned starting point, not that it is uniquely best.
+performance cluster (Figure~\ref{fig:stage2bench}): under a TF-IDF retrieval
+backend its mean reward is $0.178$ versus the then-best EpisodicSemantic at
+$0.173$. We state this as a \emph{statistical tie}, not a clean ``\#1'': it is a
+single-seed point estimate and EpisodicSemantic's $95\%$ bootstrap confidence
+interval $[0.120, 0.220]$ contains $0.178$. The ranking is moreover
+\emph{backend-sensitive}: re-encoding with the MiniLM backend used throughout
+Stage~3 shifts the absolute rewards and \Vfour{} no longer leads the field
+(Appendix~\ref{app:honesty}), so the defensible claim is only that the
+ten-dimensional parameterization is \emph{competitive with the top cluster} --- a
+$+75\%$ improvement over its own untuned starting point --- not that it is
+uniquely or robustly best.
 
 \begin{figure}[t]
   \centering
