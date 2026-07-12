@@ -405,13 +405,13 @@ $50$ contracts, the fair baselines at a $94$-question QASPER subset --- to keep
 the one-by-one judging tractable. Because the corpus-cumulative harness holds the
 \emph{entire} corpus in memory for the end-of-corpus batch regardless of scope, we
 can read the already-judged batch cells at the \emph{complete} corpus --- all
-$510$ CUAD contracts ($n{=}6702$ questions) and all $281$ QASPER papers
-($n{=}1005$) --- and ask whether the conclusions survive
-(Table~\ref{tab:fullcorpus}). They do, and they sharpen. On CUAD the
-corpus-tuning lift is significant at every scale we measured and \emph{monotone}
-in the expected direction: $+0.161$ at $10$ contracts, $+0.144$ at $50$, and
-$+0.107$ at the full $510$ ($0.043 \rightarrow 0.150$, paired Wilcoxon
-$p<10^{-12}$, $n{=}6702$). The lift attenuates as the corpus grows --- more
+$510$ CUAD contracts (up to $6{,}702$ questions; $n{=}6683$ paired across the
+cross-method rows) and all $281$ QASPER papers ($n{=}1005$) --- and ask whether
+the conclusions survive (Table~\ref{tab:fullcorpus}). They do, and they sharpen.
+On CUAD the corpus-tuning lift is significant at every scale we measured and
+\emph{monotone} in the expected direction: $+0.161$ at $10$ contracts, $+0.144$
+at $50$, and $+0.106$ at the full $510$ ($0.043 \rightarrow 0.149$, paired
+Wilcoxon $p<10^{-12}$, $n{=}6683$). The lift attenuates as the corpus grows --- more
 distractor contracts dilute retrieval --- but does not vanish. The full-corpus
 table also carries the \emph{cross-method} CUAD comparison (all seven
 configurations judged one-by-one at $510$ contracts), and it exposes a
@@ -454,7 +454,7 @@ memory-system order (Letta $>$ \Vt{} $>$ HippoRAG) is the \emph{reverse} of the
 50-contract order (Table~\ref{tab:head2head}), a scale-dependent reshuffle
 discussed in the text. $^{\ddagger}$Full-context dump-all overflows the $128$K
 window on all $150$ probe questions at $510$ contracts ($74{,}435$ stored events
-$\approx 43\times$ the window; only $\sim$2.5\% fits), producing no valid answer
+$\approx 43\times$ the window; only $\sim$2.3\% fits), producing no valid answer
 --- the empirical form of the analytical overflow-at-$N{\approx}11$ result.}
 \label{tab:fullcorpus}
 \footnotesize
@@ -638,7 +638,9 @@ nothing to re-point.
   three corpora: the learned memory wins or ties on the two semantic corpora and
   loses on the lexical one. All QASPER cells are at the full $n{=}1005$ scope; the
   learned memory ties the fairly-tuned BM25 reference there ($0.351$ vs.\ $0.367$,
-  $p{=}0.30$), mirroring the $n{=}94$ fair baseline (Table~\ref{tab:fairbaseline}).}
+  $p{=}0.30$), mirroring the $n{=}94$ fair baseline (Table~\ref{tab:fairbaseline}).
+  $^{\ast}$The attention CUAD reference is at the 10-contract pilot scale
+  ($n{=}132$; hence its wider interval); every other CUAD cell is $n{=}644$.}
   \label{tab:head2head}
   \footnotesize
   \begin{tabular}{lccc}
@@ -650,7 +652,7 @@ nothing to re-point.
     MemGPT/Letta (reimpl.)         & $0.607$ {\scriptsize[0.53, 0.68]} & $0.319$ {\scriptsize[0.29, 0.34]} & $0.146$ {\scriptsize[0.12, 0.17]} \\
     \midrule
     Okapi BM25 (tuned, ref.)       & $0.513$ {\scriptsize[0.45, 0.59]} & $\mathbf{0.367}$ {\scriptsize[0.34, 0.39]} & $0.303$ {\scriptsize[0.27, 0.33]} \\
-    Attention (tuned, ref.)        & $\mathbf{0.657}$ {\scriptsize[0.59, 0.73]} & $0.328$ {\scriptsize[0.30, 0.35]} & $\mathbf{0.320}$ {\scriptsize[0.25, 0.39]} \\
+    Attention (tuned, ref.)        & $\mathbf{0.657}$ {\scriptsize[0.59, 0.73]} & $0.328$ {\scriptsize[0.30, 0.35]} & $0.320^{\ast}$ {\scriptsize[0.25, 0.39]} \\
     \bottomrule
   \end{tabular}
 \end{table}

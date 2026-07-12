@@ -74,7 +74,18 @@ accuracy lift that survives Holm-corrected held-out testing on two of the three
 domain-coherent benchmarks} (FinanceBench, CUAD; QASPER is non-significant),
 while two pre-registered domain-incoherent controls also lift and NarrativeQA is
 undefined by construction. The tuning objective is a validated proxy for answer
-quality (recall@8 vs.\ judge score, pooled Spearman $\rho=0.69$). A full-context
+quality (recall@8 vs.\ judge score, pooled Spearman $\rho=0.69$), and the
+corpus-mode result is near-deterministic at temperature~0 (cross-seed
+std.\ $0.012$). Held against fair, same-budget baselines the advantage is
+\textbf{benchmark-dependent}: versus a corpus-tuned Okapi BM25 the learned memory
+wins on FinanceBench, ties on QASPER, and loses on CUAD, and versus faithful
+reimplementations of HippoRAG and MemGPT/Letta no single retrieval mechanism
+dominates across corpora --- on CUAD the memory-system ranking even
+\emph{reverses} between $50$ and the full $510$ contracts. These conclusions hold
+at full corpus scale (all $510$ CUAD contracts, all $281$ QASPER papers), and the
+per-task optimum is itself largely predictable --- a leave-one-benchmark-out model
+recovers $0.80$ of the tuning lift from cheap, LLM-free corpus statistics. A
+full-context
 ``dump-all'' baseline is \emph{statistically tied} with selective retrieval on
 accuracy but roughly 18$\times$ more expensive --- so the case for learned,
 task-adaptive memory at this scale is \textbf{efficiency and scalability}, not an

@@ -29,9 +29,9 @@ quality is not one knob but several interacting decisions --- what to index, how
 to chunk it, how to weight lexical versus semantic similarity, and how much to
 favour recent over old evidence --- and the optimal setting of those decisions
 depends on the task: a multi-hop question over short encyclopaedic paragraphs
-rewards aggressive semantic matching, whereas a single-fact lookup in a long
-filing rewards precise lexical overlap, and a dialogue-memory task rewards
-recency. Systems that fix these decisions globally must therefore compromise
+rewards aggressive semantic matching, whereas exact clause extraction in a legal
+contract rewards precise lexical and entity overlap, and a dialogue-memory task
+rewards recency. Systems that fix these decisions globally must therefore compromise
 across tasks. Second, where the policy \emph{is} learned, it is typically learned
 by gradient descent on large in-domain question--passage supervision, which both
 requires that supervision and entangles the retrieval rule with the parameters of
@@ -57,9 +57,11 @@ optimized, and certainly not re-optimized per task. This thesis fills exactly
 that gap.
 
 It is worth being precise about \emph{where} each system places its intelligence,
-because that locates the gap. MemGPT's intelligence is in a hand-written control
-loop that decides when to page between tiers; the paging heuristics are fixed by
-the designer. HippoRAG's is in an offline knowledge-graph construction step plus a
+because that locates the gap. MemGPT delegates paging to the \emph{LLM itself},
+which calls a fixed set of designer-provided memory-management functions to move
+information between tiers; the paging policy is thus agentic, but the functions
+and their triggers are hand-designed and never optimized against a downstream
+objective. HippoRAG's is in an offline knowledge-graph construction step plus a
 Personalized-PageRank traversal whose behaviour is determined by the graph and a
 fixed damping factor, not tuned to the task. MemoryLLM moves the memory inside the
 model's hidden state, so updating the policy means retraining the model.
@@ -105,9 +107,11 @@ above. HippoRAG \citep{gutierrez2024hipporag} fixes its retrieval behaviour in
 the \emph{topology} of an offline knowledge graph and in a
 Personalized-PageRank traversal with a hand-set damping constant; nothing about
 that rule is re-fit when the corpus changes. MemGPT / Letta
-\citep{packer2023memgpt} fixes it in a hand-designed tiered read --- a
-recency-weighted core plus an embedding-scored archival store --- whose promotion
-and scoring thresholds are set once by the designer. Against both we place the
+\citep{packer2023memgpt} places its intelligence in an LLM that self-manages a
+tiered memory through fixed functions; the controlled reimplementation we compare
+against in Chapter~\ref{ch:results} isolates its \emph{read} surface --- a
+recency-weighted core plus an embedding-scored archival store --- whose thresholds
+are, again, hand-set rather than optimized. Against both we place the
 learned-policy alternative of this thesis: a single $\thetavec$ spanning the
 write side (\wrec{}-style retention and abstraction) and the read side
 (\wembed{}, \wgraph{}, and the recency weight), re-optimized per corpus on a
@@ -120,10 +124,14 @@ corpora --- financial filings and scientific papers --- the corpus-tuned $\Vt{}$
 policy is competitive-to-best against the fixed-policy graph and tiered-read
 systems, tying both on FinanceBench and significantly beating both on QASPER,
 whereas on the surface-lexical legal corpus the ranking inverts and the same
-fixed systems trade places with it --- HippoRAG is the mirror image of the
-learned policy, weakest on both semantic corpora and strongest on the lexical
-one. Crucially this is not merely one method beating another: it is
-that the \emph{identity} of the best mechanism changes with the corpus. A design
+fixed systems trade places with it --- at the $50$-contract scope HippoRAG is the
+mirror image of the learned policy, strongest on the lexical corpus where it is
+weakest on the semantic ones. This ranking is not even stable in corpus
+\emph{size}: scaled to the full $510$ contracts it reverses again (HippoRAG
+collapses and Letta overtakes it; Chapter~\ref{ch:results}), which only sharpens
+the point. Crucially this is not merely one method beating another: it is
+that the \emph{identity} of the best mechanism changes with the corpus --- and
+even with its size. A design
 that freezes its write-and-read rule --- graph topology plus fixed damping in
 HippoRAG, hand-set tiers in MemGPT/Letta --- must commit in advance to one point
 in that space and cannot follow the crossover. Exposing the same decisions as an
@@ -188,7 +196,7 @@ distribution over scores, so the optimizer is really performing stochastic
 optimization, and the population-based estimate of the gradient of the
 expected objective is far more robust to this than a surrogate fit to a
 handful of noisy point evaluations. That the objective turns out to be
-near-deterministic at $T{=}0$ (Section~\ref{sec:gap}) is a convenient
+near-deterministic at $T{=}0$ (Section~\ref{sec:determinism}) is a convenient
 \emph{a posteriori} property, not something the choice of optimizer relied on;
 an optimizer that only worked on quiet objectives would have been the wrong
 tool for a discrete-write policy. Bayesian optimization \citep{snoek2012bayesopt}
@@ -248,8 +256,8 @@ encoder \citep{wang2020minilm,reimers2019sbert}.
 
 The six are not interchangeable, and the spread is the point. They differ in
 document length (a HotpotQA paragraph versus a full NarrativeQA book), in question
-style (lexical-overlap fact lookup in FinanceBench versus paraphrased
-information-seeking in QASPER), and in what ``memory'' even means (a single filing
+style (exact-clause extraction in CUAD versus paraphrase-tolerant
+information-seeking in QASPER and FinanceBench), and in what ``memory'' even means (a single filing
 versus a multi-session dialogue history in LongMemEval). If the optimal
 $\thetavec$ were the same across such different corpora, the central
 task-dependence claim would be false; the diversity is therefore a test, not
@@ -270,8 +278,8 @@ vector $\thetavec$ that governs the \emph{entire} memory-construction pipeline
 --- storage, abstraction, and retrieval scoring --- rather than any one stage;
 (ii) \emph{per-task} optimization of that vector by black-box search, with the
 transfer behavior (within- vs.\ across-family) measured rather than assumed;
-and (iii) a corpus-cumulative evaluation on six real benchmarks with gold
-relevance signals, cross-vendor LLM judging, held-out significance testing, and a
+and (iii) a corpus-cumulative evaluation on six real benchmarks (five with gold
+relevance signals), cross-vendor LLM judging, held-out significance testing, and a
 disclosed adversarial self-audit. To our knowledge, no prior system tunes a
 memory-construction policy per task with a derivative-free optimizer and reports
 its transfer and its comparison against a full-context baseline.
@@ -293,7 +301,7 @@ numeric parameters that can be optimized.}
 \toprule
 System & What it optimizes & Task-adaptive? & Parametric policy? & Evaluation \\
 \midrule
-Dense / BM25 RAG & retrieval ranking only & no & no (fixed scorer) & QA benchmarks \\
+Dense / BM25 RAG & retrieval ranking only & no & partial (BM25 $k_1,b$ tunable; no storage/abstraction params) & QA benchmarks \\
 MemGPT \citep{packer2023memgpt} & paging policy (hand-designed) & no & no & dialog / docs \\
 HippoRAG \citep{gutierrez2024hipporag} & graph-indexed retrieval & no & no & multi-hop QA \\
 Reflexion \citep{shinn2023reflexion} & verbal self-feedback & per episode & no & agent tasks \\

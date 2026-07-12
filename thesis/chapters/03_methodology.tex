@@ -53,13 +53,16 @@ w_{\mathrm{embed}}\, \cos(e_{\text{item}}, e_q) \;+\;
 w_{\mathrm{recency}}\, \rho(\text{item}),
 \label{eq:score}
 \end{equation}
-where $g$ is a graph-traversal signal, $\cos(\cdot)$ is embedding similarity, and
-$\rho$ is a recency term; the storage/abstraction parameters
+where each term is normalized to $[0,1]$: $g$ is a binary graph-traversal
+membership signal, embedding similarity is the cosine rescaled as
+$\tfrac{1}{2}(1{+}\cos(e_{\text{item}},e_q))$, and $\rho(\text{item})=1/(1+\Delta t)$
+is a recency term; the storage/abstraction parameters
 $(\theta_{\mathrm{store}}, \theta_{\mathrm{novel}}, \theta_{\mathrm{entity}},
 \theta_{\mathrm{temporal}}, \theta_{\mathrm{surprise}}, \theta_{\mathrm{erich}},
 \theta_{\mathrm{decay}})$ gate what enters the graph and how it decays. All ten
 components live in $\thetavec$ and are optimized jointly. The MiniLM-era \Vfour{}
-optimum used in Stages~2--3 is
+optimum found in the Stage-2 benchmark (Stage~3 re-seeds and re-tunes
+$\thetavec$ per corpus) is
 $\thetavec \approx (\theta_{\mathrm{store}}{=}0.35,\,
 \theta_{\mathrm{novel}}{=}0.44,\, \theta_{\mathrm{temporal}}{=}0.73,\,
 \theta_{\mathrm{decay}}{=}0.72,\, w_{\mathrm{graph}}{=}1.19,\,
@@ -77,7 +80,7 @@ optimized); the remainder are evaluation symbols.}
 \toprule
 Symbol & Meaning \\
 \midrule
-$\theta_{\mathrm{store}}$ & base storage propensity (bias on the write decision) \\
+$\theta_{\mathrm{store}}$ & storage threshold: an event is written only if its importance score exceeds $\theta_{\mathrm{store}}$ (higher $\Rightarrow$ fewer events stored) \\
 $\theta_{\mathrm{novel}}$ & weight on novelty (distance from already-stored events) in the write decision \\
 $\theta_{\mathrm{surprise}}$ & weight on prediction-surprise in the write decision \\
 $\theta_{\mathrm{erich}}$ & weight on the learned importance/enrichment score \\
@@ -196,13 +199,13 @@ $\thetavec$ induces.
 \Require memory $M$, incoming document $d$, parameters $\thetavec$
 \For{each event $e$ extracted from $d$}
   \State $\text{nov}(e) \gets 1 - \max_{e'\in M}\cos(\mathrm{emb}(e),\mathrm{emb}(e'))$ \Comment{novelty vs.\ stored}
-  \If{$\theta_{\mathrm{store}} + \theta_{\mathrm{novel}}\cdot\mathrm{nov}(e) + \theta_{\mathrm{surprise}}\cdot\mathrm{surp}(e) > 0$}
-    \State add $e$ to $M$ with timestamp; link typed edges (entity / temporal) into the graph
-    \State apply decay $w \gets w\cdot e^{-\theta_{\mathrm{decay}}\,\Delta t}$ to existing nodes
+  \State $\mathrm{imp}(e) \gets \theta_{\mathrm{novel}}\cdot\mathrm{nov}(e) + \theta_{\mathrm{erich}}\cdot\mathrm{erich}(e) + \theta_{\mathrm{surprise}}\cdot\mathrm{surp}(e)$ \Comment{importance score}
+  \If{$\mathrm{imp}(e) > \theta_{\mathrm{store}}$} \Comment{$\theta_{\mathrm{store}}$ is the storage threshold}
+    \State add $e$ to $M$ with timestamp; link typed edges (entity / temporal) into the graph; $\theta_{\mathrm{decay}}$ scales entity importance over time
   \EndIf
 \EndFor
 \State \textbf{at retrieval} for query $q$, score each $e\in M$:
-\State \quad $s(e,q) = w_{\mathrm{graph}}\cdot\mathrm{graph}(e,q) + w_{\mathrm{embed}}\cdot\cos(\mathrm{emb}(e),\mathrm{emb}(q)) + w_{\mathrm{recency}}\cdot\mathrm{recency}(e)$
+\State \quad $s(e,q) = w_{\mathrm{graph}}\cdot\mathrm{graph}(e,q) + w_{\mathrm{embed}}\cdot\tfrac{1}{2}(1+\cos(\mathrm{emb}(e),\mathrm{emb}(q))) + w_{\mathrm{recency}}\cdot\mathrm{recency}(e)$
 \State \Return top-$k$ events by $s(\cdot,q)$
 \end{algorithmic}
 \end{algorithm}
@@ -215,8 +218,9 @@ reaching the goal. These are deliberately simple so that the learned $\thetavec$
 can be inspected directly.
 
 \paragraph{Stage 2 --- benchmark suite.} Twelve memory systems (including
-\Vfour{}, a neural-controller variant, and standard baselines such as
-working-memory, episodic-semantic, summary, attention, and RAG memories) are
+\Vfour{} and its graph variants, and standard baselines such as
+working-memory, episodic-semantic, summary, attention, and RAG memories; the
+neural-controller variant is evaluated separately) are
 evaluated on the four environments, with ablation of each $\thetavec$ component,
 zero-shot $\thetavec$-transfer across environments, and a 2-D sensitivity sweep.
 

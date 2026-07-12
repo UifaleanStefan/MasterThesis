@@ -86,22 +86,24 @@ construction is a learnable, task-adaptive object}. Concretely, this thesis:
   \item \textbf{Subjects its own headline results to an adversarial self-audit}
   and reports the corrected numbers --- including the finding that a
   full-context ``dump-all'' baseline, once a truncation bug was fixed, is
-  statistically tied with selective retrieval on accuracy, which reframes the
-  contribution of learned memory at this scale as one of \emph{efficiency}
-  rather than raw accuracy.
+  statistically tied with selective retrieval on FinanceBench accuracy (and, being
+  bounded by the context window, cannot even run at the largest corpus scale),
+  which reframes the contribution of learned memory at this scale as one of
+  \emph{efficiency} rather than raw accuracy.
 \end{itemize}
 
 In keeping with that self-audit, the thesis is careful to separate four claims
 that a less disciplined account would blur into one. \emph{First}, the accuracy
 of learned memory is \textbf{benchmark-dependent, not uniform}: against a
 same-budget tuned lexical baseline (Table~\ref{tab:fairbaseline}) the learned
-\Vt{} memory wins decisively on \FB{}, ties on QASPER, and \emph{loses} on
+\Vt{} memory wins on \FB{}, ties on QASPER, and \emph{loses} on
 CUAD's legal clause-extraction --- a result reported as such rather than averaged
 away, because the losing case pins down exactly where a single learned memory is
-the wrong tool. \emph{Second}, the tuning is \textbf{near-deterministic}: at
-temperature zero the corpus-tuned optimum is stable across random seeds
-(Section~\ref{sec:stage3}), so the reported lifts are properties of the objective
-and not of a lucky search. \emph{Third}, the task-optimal $\thetavec$ is
+the wrong tool. \emph{Second}, the corpus-mode evaluation is
+\textbf{near-deterministic}: holding the corpus-tuned optimum fixed and re-scoring
+at temperature zero across three seeds gives a cross-seed standard deviation of
+$0.012$ (Section~\ref{sec:determinism}), so the reported lifts are properties of
+the objective rather than of evaluation noise. \emph{Third}, the task-optimal $\thetavec$ is
 \textbf{predictable from cheap corpus descriptors}: a leave-one-benchmark-out
 predictor recovers most of the per-task tuning benefit
 (Figure~\ref{fig:thetatransfer}, Section~\ref{sec:thetapredict}), which is what

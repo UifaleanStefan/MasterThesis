@@ -17,8 +17,8 @@ end-of-corpus accuracy lift survived held-out testing on two of the three
 domain-coherent benchmarks (FinanceBench, CUAD; QASPER did not survive Holm
 correction) and held when CUAD was scaled from ten to fifty and on to the
 \emph{full} five hundred and ten contracts (the batch lift stays significant while
-attenuating with corpus size, $+0.161 \rightarrow +0.144 \rightarrow +0.107$ at
-$n{=}6702$; Table~\ref{tab:fullcorpus}), where at the full $281$-paper QASPER
+attenuating with corpus size, $+0.161 \rightarrow +0.144 \rightarrow +0.106$ at
+$n{=}6683$; Table~\ref{tab:fullcorpus}), where at the full $281$-paper QASPER
 corpus the learned memory is tied for best of seven configurations --- beating
 five (its canonical start, the grid-tuned variant, dump-all, stock BM25, and
 tuned attention) and tying a fairly-tuned BM25 index ($0.351$ vs.\ $0.367$,
@@ -35,9 +35,11 @@ raw accuracy. Concretely, on FinanceBench the dump-all and selective answers are
 statistically non-inferior (overlapping bootstrap CIs, $0.607$--$0.689$ vs.\ the
 tuned cell) while the selective prompt stays flat at $\sim$704 tokens where
 dump-all exceeds the 128K context window at $N{\approx}11$ CUAD contracts and
-reaches $43\times$ the tokens at the full $N{=}510$. The one-time CMA-ES tuning
-cost --- no LLM in the loop, only \recallk{} --- was approximately \$18.5 of
-compute per benchmark, amortized over all subsequent queries.
+reaches $43\times$ the tokens at the full $N{=}510$. The corpus-tuning search
+itself is cheap: CMA-ES optimizes a pure \recallk{} objective with no LLM in the
+loop (negligible dollar cost), and the total \texttt{gpt-4o-mini} \emph{answering}
+cost of the entire six-benchmark Stage-3 evaluation was approximately \$18.5,
+amortized over all queries.
 
 \paragraph{Three results sharpen what ``learnable, task-dependent memory'' buys.}
 First, held under a genuinely fair light --- against an Okapi BM25 baseline tuned
@@ -72,7 +74,7 @@ temperature~0 --- so the remaining single-seed gaps are a matter of CI tightenin
 not point-estimate risk, and multi-seed replication of the other large benchmarks
 remains future work). The CUAD corpus-tuning lift is now measured at the
 \emph{full} 510-contract corpus for the learned-memory configurations
-($n{=}6702$, Table~\ref{tab:fullcorpus}), and the QASPER cross-method comparison
+($n{=}6683$, Table~\ref{tab:fullcorpus}), and the QASPER cross-method comparison
 (against tuned BM25, tuned attention, and dump-all) is at the full $281$-paper
 scale; and the CUAD cross-method comparison is now also run over all $510$
 contracts for the four principal baselines (tuned BM25, tuned attention, HippoRAG,
