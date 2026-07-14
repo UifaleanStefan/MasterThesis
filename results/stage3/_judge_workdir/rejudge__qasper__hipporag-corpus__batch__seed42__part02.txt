@@ -1,0 +1,600 @@
+[0] qid=qasper__hipporag-corpus__batch__doc90_qa2__seed42
+    EXPECT=- | Q: did they collect their own data?
+    GOLD: No
+    PRED: Yes, they collected parallel corpora from TED talks and used Vietnamese monolingual data from the VNESEcorpus of DongDu.
+[1] qid=qasper__hipporag-corpus__batch__doc90_qa3__seed42
+    EXPECT=- | Q: what japanese-vietnamese dataset do they use?
+    GOLD: WIT3's corpus
+    PRED: They use the Vietnamese monolingual data from the VNESEcorpus of DongDu, which includes 349,578 sentences, and the Vietnamese part of the Japanese-Vietnamese parallel corpus.
+[2] qid=qasper__hipporag-corpus__batch__doc91_qa0__seed42
+    EXPECT=- | Q: What are the language pairs explored in this paper?
+    GOLD: De-En
+    PRED: The paper explores empirical evaluation in three language pairs, but the specific language pairs are not mentioned in the provided context.
+[3] qid=qasper__hipporag-corpus__batch__doc92_qa0__seed42
+    EXPECT=- | Q: What subtasks did they participate in?
+    GOLD: Answer with content missing: (Subscript 1: "We did not participate in subtask 5 (E-c)") Authors participated in EI-Reg, EI-Oc, V-Reg and V-Oc subtasks.
+    PRED: They participated in four Spanish subtasks: EI-Reg, EI-Oc, V-Reg, and V-Oc.
+[4] qid=qasper__hipporag-corpus__batch__doc92_qa1__seed42
+    EXPECT=- | Q: What were the scores of their system?
+    GOLD: column Ens Test in Table TABREF19
+    PRED: Their submissions ranked second (EI-Reg), second (EI-Oc), fourth (V-Reg), and fifth (V-Oc).
+[5] qid=qasper__hipporag-corpus__batch__doc92_qa2__seed42
+    EXPECT=- | Q: How was the training data translated?
+    GOLD: using the machine translation platform Apertium
+    PRED: The training data was translated from other languages.
+[6] qid=qasper__hipporag-corpus__batch__doc92_qa3__seed42
+    EXPECT=- | Q: What dataset did they use?
+    GOLD: Selection of tweets with for each tweet a label describing the intensity of the emotion or sentiment provided by organizers and tweets translated form English to Spanish.
+    PRED: The dataset used is from SemEval 2018 Task 1: Affect in Tweets.
+[7] qid=qasper__hipporag-corpus__batch__doc92_qa4__seed42
+    EXPECT=- | Q: What other languages did they translate the data from?
+    GOLD: English
+    PRED: The data was translated from other languages, specifically English and Arabic.
+[8] qid=qasper__hipporag-corpus__batch__doc92_qa5__seed42
+    EXPECT=- | Q: What semi-supervised learning is applied?
+    GOLD: first a model is trained on the training set and then this model is used to predict the labels of the silver data
+    PRED: The study applies a semi-supervised learning method to automatically generate additional training data for predicting emotion intensity in Spanish tweets.
+[9] qid=qasper__hipporag-corpus__batch__doc93_qa0__seed42
+    EXPECT=- | Q: What model is used to encode the images?
+    GOLD: a Convolutional Neural Network (CNN)
+    PRED: An encoder LSTM is used to compute a context vector from the image sequence.
+[10] qid=qasper__hipporag-corpus__batch__doc93_qa1__seed42
+    EXPECT=- | Q: How is the sequential nature of the story captured?
+    GOLD: we provide the decoder with the context of the whole sequence and the content of the current image (i.e. global and local information) to generate the corresponding text that will contribute to the overall story
+    PRED: The sequential nature of the story is captured by using an encoder LSTM to compute a context vector from the image sequence, which is then used as the first state of multiple independent decoder LSTMs, each generating the portion of the story corresponding to each image in the sequence.
+[11] qid=qasper__hipporag-corpus__batch__doc93_qa2__seed42
+    EXPECT=- | Q: Is the position in the sequence part of the input?
+    GOLD: No
+    PRED: Yes, the position in the sequence is part of the input as the model uses a context vector computed from the image sequence.
+[12] qid=qasper__hipporag-corpus__batch__doc93_qa3__seed42
+    EXPECT=- | Q: Do the decoder LSTMs all have the same weights?
+    GOLD: No
+    PRED: No, each decoder LSTM is independent and has its own weights.
+[13] qid=qasper__hipporag-corpus__batch__doc94_qa0__seed42
+    EXPECT=- | Q: Which dataset has been used in this work?
+    GOLD: Reuters-8 dataset without stop words
+    PRED: Reuters text database
+[14] qid=qasper__hipporag-corpus__batch__doc94_qa1__seed42
+    EXPECT=- | Q: What can word subspace represent?
+    GOLD: Word vectors, usually in the context of others within the same class
+    PRED: Word subspace can represent the intrinsic variability of features in a set of word vectors while holding semantic information.
+[15] qid=qasper__hipporag-corpus__batch__doc95_qa0__seed42
+    EXPECT=- | Q: Do the authors also analyze transformer-based architectures?
+    GOLD: No
+    PRED: The provided passages do not mention any analysis of transformer-based architectures.
+[16] qid=qasper__hipporag-corpus__batch__doc96_qa0__seed42
+    EXPECT=- | Q: which non-english language had the best performance?
+    GOLD: Russian
+    PRED: Turkish had the best performance with a 72.71% relative improvement.
+[17] qid=qasper__hipporag-corpus__batch__doc96_qa1__seed42
+    EXPECT=- | Q: which non-english language was the had the worst results?
+    GOLD: Turkish
+    PRED: Turkish
+[18] qid=qasper__hipporag-corpus__batch__doc96_qa2__seed42
+    EXPECT=- | Q: what datasets were used in evaluation?
+    GOLD: SemEval-2016 Challenge Task 5 BIBREF27 , BIBREF28
+    PRED: The datasets used in evaluation were restaurant reviews from four different languages: Spanish, Turkish, Dutch, and Russian.
+[19] qid=qasper__hipporag-corpus__batch__doc96_qa3__seed42
+    EXPECT=- | Q: what are the baselines?
+    GOLD: majority baseline
+    PRED: The baselines refer to the performance metrics or models that the proposed sentiment analysis model is compared against to evaluate its effectiveness.
+[20] qid=qasper__hipporag-corpus__batch__doc96_qa4__seed42
+    EXPECT=- | Q: how did the authors translate the reviews to other languages?
+    GOLD: Using Google translation API.
+    PRED: The authors translated reviews in other languages and reused a sentiment analysis model trained on English reviews to evaluate the sentiments.
+[21] qid=qasper__hipporag-corpus__batch__doc96_qa5__seed42
+    EXPECT=- | Q: what dataset was used for training?
+    GOLD: Amazon reviews
+    PRED: The dataset used for training was English reviews.
+[22] qid=qasper__hipporag-corpus__batch__doc97_qa0__seed42
+    EXPECT=- | Q: Why are current ELS's not sufficiently effective?
+    GOLD: Linked entities may be ambiguous or too common
+    PRED: Current ELS's are not sufficiently effective because they may introduce unresolved ambiguities and irrelevant entities.
+[23] qid=qasper__hipporag-corpus__batch__doc98_qa0__seed42
+    EXPECT=- | Q: What type of system does the baseline classification use?
+    GOLD: support vector machine BIBREF18 , random forest, extra tree and naive bayes classifier BIBREF19
+    PRED: The baseline classification system distinguishes between humorous and non-humorous texts.
+[24] qid=qasper__hipporag-corpus__batch__doc98_qa1__seed42
+    EXPECT=- | Q: What experiments were carried out on the corpus?
+    GOLD: task of humor identification in social media texts is analyzed as a classification problem
+    PRED: The experiments carried out on the corpus involved analyzing the task of humor detection in texts and providing a baseline classification system that distinguishes between humorous and non-humorous texts.
+[25] qid=qasper__hipporag-corpus__batch__doc98_qa2__seed42
+    EXPECT=- | Q: How many annotators tagged each text?
+    GOLD: three
+    PRED: Each text was tagged by three annotators.
+[26] qid=qasper__hipporag-corpus__batch__doc98_qa3__seed42
+    EXPECT=- | Q: Where did the texts in the corpus come from?
+    GOLD: tweets from the past two years from domains like `sports', `politics', `entertainment'
+    PRED: The texts in the corpus came from English-Hindi code-mixed tweets.
+[27] qid=qasper__hipporag-corpus__batch__doc99_qa0__seed42
+    EXPECT=- | Q: What are the user-defined keywords?
+    GOLD: Words that a user wants them to appear in the generated output.
+    PRED: The user-defined keywords are not specified in the provided context.
+[28] qid=qasper__hipporag-corpus__batch__doc99_qa1__seed42
+    EXPECT=- | Q: Does the method achieve sota performance on this dataset?
+    GOLD: No
+    PRED: The passage does not explicitly state whether the method achieves state-of-the-art (SOTA) performance on the dataset.
+[29] qid=qasper__hipporag-corpus__batch__doc99_qa2__seed42
+    EXPECT=- | Q: What are the baselines used in the paper?
+    GOLD: GloVe vectors trained on Wikipedia Corpus with ensembling, and GloVe vectors trained on Airbnb Data without ensembling
+    PRED: The relevant passages do not provide information about the baselines used in the paper "Using General Adversarial Networks for Marketing: A Case Study of Airbnb."
+[30] qid=qasper__hipporag-corpus__batch__doc99_qa3__seed42
+    EXPECT=- | Q: What is the size of the Airbnb?
+    GOLD: roughly 40,000 Manhattan listings
+    PRED: The data provided contained information for roughly 40,000 Manhattan listings that were posted on Airbnb during the defined time period.
+[31] qid=qasper__hipporag-corpus__batch__doc100_qa0__seed42
+    EXPECT=- | Q: Do they report results only on English data?
+    GOLD: Yes
+    PRED: No, they do not report results only on English data.
+[32] qid=qasper__hipporag-corpus__batch__doc100_qa1__seed42
+    EXPECT=- | Q: What experiments do they use to quantify the extent of interpretability?
+    GOLD: Human evaluation for interpretability using the word intrusion test and automated evaluation for interpretability using a semantic category-based approach based on the method and category dataset (SEMCAT).
+    PRED: They use word-analogy and word-similarity tests to quantify the extent of interpretability.
+[33] qid=qasper__hipporag-corpus__batch__doc100_qa2__seed42
+    EXPECT=- | Q: Along which dimension do the semantically related words take larger values?
+    GOLD: dimension corresponding to the concept that the particular word belongs to
+    PRED: Along a specified dimension.
+[34] qid=qasper__hipporag-corpus__batch__doc100_qa3__seed42
+    EXPECT=- | Q: What is the additive modification to the objective function?
+    GOLD: The cost function for any one of the words of concept word-groups is modified by the introduction of an additive term to the cost function. . Each embedding vector dimension is first associated with a concept. For a word belonging to any one of the word-groups representing these concepts, the modified cost term favors an increase for the value of this word's embedding vector dimension corresponding to the concept that the particular word belongs to,
+    PRED: The additive modification encourages the embedding vectors of words that are semantically related to a predefined concept to take larger values along a specified dimension, while leaving the original semantic learning mechanism mostly unaffected.
+[35] qid=qasper__hipporag-corpus__batch__doc101_qa0__seed42
+    EXPECT=- | Q: what NMT models did they compare with?
+    GOLD: RNN-based NMT model
+    PRED: They compared the performance of SMT and various NMT models on the built dataset.
+[36] qid=qasper__hipporag-corpus__batch__doc101_qa1__seed42
+    EXPECT=- | Q: Where does the ancient Chinese dataset come from?
+    GOLD: ancient Chinese history records in several dynasties (about 1000BC-200BC) and articles written by celebrities of that era
+    PRED: The ancient Chinese dataset comes from a large-scale parallel corpus created using an Ancient-Modern Chinese clause alignment method, which contains 1.24M bilingual sentence pairs.
+[37] qid=qasper__hipporag-corpus__batch__doc102_qa0__seed42
+    EXPECT=- | Q: what data did they use?
+    GOLD: Penn Treebank
+    PRED: They applied their system to three datasets from different domains, including the SQuAD dataset, which consists of questions whose answers are free form spans of text from passages in Wikipedia articles.
+[38] qid=qasper__hipporag-corpus__batch__doc102_qa1__seed42
+    EXPECT=- | Q: what previous RNN models do they compare with?
+    GOLD: Variational LSTM, CharCNN, Pointer Sentinel-LSTM, RHN, NAS Cell, SRU, QRNN, RAN, 4-layer skip-connection LSTM, AWD-LSTM, Quantized LSTM
+    PRED: They compare with previous RNN models that exploit different gating mechanisms and transformations.
+[39] qid=qasper__hipporag-corpus__batch__doc103_qa0__seed42
+    EXPECT=- | Q: What datasets do they evaluate on?
+    GOLD: Wall Street Journal (WSJ) portion of the Penn Treebank
+    PRED: They evaluate on the Penn Treebank.
+[40] qid=qasper__hipporag-corpus__batch__doc103_qa1__seed42
+    EXPECT=- | Q: Do they evaluate only on English datasets?
+    GOLD: Yes
+    PRED: The provided context does not specify whether the evaluation is limited to English datasets.
+[41] qid=qasper__hipporag-corpus__batch__doc103_qa2__seed42
+    EXPECT=- | Q: What is the invertibility condition?
+    GOLD: The neural projector must be invertible.
+    PRED: The invertibility condition allows for efficient exact inference and marginal likelihood computation in the model as long as the prior is well-behaved.
+[42] qid=qasper__hipporag-corpus__batch__doc104_qa0__seed42
+    EXPECT=- | Q: Does the dataset feature only English language data?
+    GOLD: Yes
+    PRED: The dataset does not specify that it features only English language data.
+[43] qid=qasper__hipporag-corpus__batch__doc104_qa1__seed42
+    EXPECT=- | Q: What additional features and context are proposed?
+    GOLD: using tweets that one has replied or quoted to as contextual information
+    PRED: The passage does not specify the exact additional features and context proposed for improvements in detecting abusive language on Twitter.
+[44] qid=qasper__hipporag-corpus__batch__doc104_qa2__seed42
+    EXPECT=- | Q: What learning models are used on the dataset?
+    GOLD: Naïve Bayes (NB)
+    PRED: Bidirectional GRU networks with Latent Topic Clustering modules.
+[45] qid=qasper__hipporag-corpus__batch__doc104_qa3__seed42
+    EXPECT=- | Q: What examples of the difficulties presented by the context-dependent nature of online aggression do they authors give?
+    GOLD: detecting abusive language extremely laborious
+    PRED: The authors mention that the context-dependent nature of online aggression makes annotating large collections of data extremely difficult.
+[46] qid=qasper__hipporag-corpus__batch__doc105_qa0__seed42
+    EXPECT=- | Q: How many labels do the datasets have?
+    GOLD: 719313
+    PRED: The passage does not specify the number of labels in the datasets.
+[47] qid=qasper__hipporag-corpus__batch__doc105_qa1__seed42
+    EXPECT=- | Q: What is the architecture of the model?
+    GOLD: one-layer CNN structure from previous works BIBREF22 , BIBREF4
+    PRED: The architecture of the model explicitly minimizes the distance between the source and target instances in an embedded feature space and employs two regularizations: entropy minimization and self-ensemble bootstrapping.
+[48] qid=qasper__hipporag-corpus__batch__doc105_qa2__seed42
+    EXPECT=- | Q: What are the baseline methods?
+    GOLD: (1) Naive
+    PRED: The relevant passages do not provide specific information about the baseline methods used in the study on adaptive semi-supervised learning for cross-domain sentiment classification.
+[49] qid=qasper__hipporag-corpus__batch__doc105_qa3__seed42
+    EXPECT=- | Q: What are the source and target domains?
+    GOLD: Book, electronics, beauty, music, IMDB, Yelp, cell phone, baby, DVDs, kitchen
+    PRED: The source domain is where the sentiment classifier is learned, and the target domain is where the classifier is generalized to.
+[50] qid=qasper__hipporag-corpus__batch__doc106_qa0__seed42
+    EXPECT=- | Q: Do they use graphical models?
+    GOLD: No
+    PRED: No, they do not use graphical models.
+[51] qid=qasper__hipporag-corpus__batch__doc106_qa1__seed42
+    EXPECT=- | Q: What are the sources of the datasets?
+    GOLD: rupnik2016news
+    PRED: The sources of the datasets are real news datasets in multiple languages.
+[52] qid=qasper__hipporag-corpus__batch__doc106_qa2__seed42
+    EXPECT=- | Q: What metric is used for evaluation?
+    GOLD: F1, precision, recall, accuracy
+    PRED: The evaluation metric used is state-of-the-art results on datasets.
+[53] qid=qasper__hipporag-corpus__batch__doc107_qa0__seed42
+    EXPECT=- | Q: What baselines did they consider?
+    GOLD: state-of-the-art PDTB taggers
+    PRED: The passage does not specify any baselines considered in the QASPER: Causal Explanation Analysis on Social Media.
+[54] qid=qasper__hipporag-corpus__batch__doc107_qa1__seed42
+    EXPECT=- | Q: What types of social media did they consider?
+    GOLD: Facebook status update messages
+    PRED: The study considered social media platforms, specifically analyzing personal writing and posts on platforms like Reddit.
+[55] qid=qasper__hipporag-corpus__batch__doc108_qa0__seed42
+    EXPECT=- | Q: How do they perform multilingual training?
+    GOLD: Multilingual training is performed by randomly alternating between languages for every new minibatch
+    PRED: They perform multilingual training by training models in a multilingual fashion, exploiting information across languages.
+[56] qid=qasper__hipporag-corpus__batch__doc108_qa1__seed42
+    EXPECT=- | Q: What languages are evaluated?
+    GOLD: German, English, Spanish, Finnish, French, Russian, Swedish.
+    PRED: The document does not specify the exact languages evaluated in the CoNLL–SIGMORPHON 2018 shared task.
+[57] qid=qasper__hipporag-corpus__batch__doc108_qa2__seed42
+    EXPECT=- | Q: Does the model have attention?
+    GOLD: Yes
+    PRED: The provided passages do not mention whether the model has attention.
+[58] qid=qasper__hipporag-corpus__batch__doc108_qa3__seed42
+    EXPECT=- | Q: What architecture does the decoder have?
+    GOLD: LSTM
+    PRED: The decoder has an encoder-decoder architecture over character sequences.
+[59] qid=qasper__hipporag-corpus__batch__doc108_qa4__seed42
+    EXPECT=- | Q: What architecture does the encoder have?
+    GOLD: LSTM
+    PRED: The encoder has a character-based encoder-decoder architecture.
+[60] qid=qasper__hipporag-corpus__batch__doc108_qa5__seed42
+    EXPECT=- | Q: What is MSD prediction?
+    GOLD: The task of predicting MSD tags: V, PST, V.PCTP, PASS.
+    PRED: MSD prediction refers to the auxiliary task of predicting morphosyntactic descriptions, which acts as a regulariser in the multi-task learning approach used in the system for morphological reinflection.
+[61] qid=qasper__hipporag-corpus__batch__doc108_qa6__seed42
+    EXPECT=- | Q: What type of inflections are considered?
+    GOLD: (unanswerable per source)
+    PRED: Morphological inflections in context.
+[62] qid=qasper__hipporag-corpus__batch__doc109_qa0__seed42
+    EXPECT=- | Q: Which models did they experiment with?
+    GOLD: Stacked LSTMs
+    PRED: They experimented with models on benchmark datasets for natural language inference, paraphrase identification, and sentiment classification, specifically SNLI, MultiNLI, Quora Question Pairs, and SST.
+[63] qid=qasper__hipporag-corpus__batch__doc109_qa1__seed42
+    EXPECT=- | Q: What were their best results on the benchmark datasets?
+    GOLD: In SNLI, our best model achieves the new state-of-the-art accuracy of 87.0%
+    PRED: The models achieved state-of-the-art accuracy on the SNLI and Quora Question Pairs datasets and obtained comparable results on the MultiNLI and SST datasets.
+[64] qid=qasper__hipporag-corpus__batch__doc109_qa2__seed42
+    EXPECT=- | Q: What were the baselines?
+    GOLD: (i) models that use plain stacked LSTMs
+    PRED: The baselines were typical stacked LSTMs.
+[65] qid=qasper__hipporag-corpus__batch__doc109_qa3__seed42
+    EXPECT=- | Q: Which datasets were used?
+    GOLD: SNLI BIBREF22 and MultiNLI BIBREF23
+    PRED: The datasets used were SNLI, MultiNLI, Quora Question Pairs, and SST.
+[66] qid=qasper__hipporag-corpus__batch__doc110_qa0__seed42
+    EXPECT=- | Q: Which baselines did they compare against?
+    GOLD: Various tree structured neural networks including variants of Tree-LSTM, Tree-based CNN, RNTN, and non-tree models including variants of LSTMs, CNNs, residual, and self-attention based networks
+    PRED: They compared against previous tree-structured models and other sophisticated neural models.
+[67] qid=qasper__hipporag-corpus__batch__doc111_qa0__seed42
+    EXPECT=- | Q: Do they report results only on English datasets?
+    GOLD: (unanswerable per source)
+    PRED: The provided context does not specify whether results are reported only on English datasets.
+[68] qid=qasper__hipporag-corpus__batch__doc111_qa1__seed42
+    EXPECT=- | Q: How do the authors examine whether a model is robust to noise or not?
+    GOLD: By evaluating their model on adversarial sets containing misleading sentences
+    PRED: The authors examine whether a model is robust to noise by testing it when only a subset (20%-80%) of the training examples are available and evaluating its performance compared to state-of-the-art MRC models.
+[69] qid=qasper__hipporag-corpus__batch__doc111_qa2__seed42
+    EXPECT=- | Q: What type of model is KAR?
+    GOLD: Lexicon Embedding Layer
+    PRED: KAR is an end-to-end Machine Reading Comprehension (MRC) model.
+[70] qid=qasper__hipporag-corpus__batch__doc111_qa3__seed42
+    EXPECT=- | Q: Do the authors hypothesize that humans' robustness to noise is due to their general knowledge?
+    GOLD: Yes
+    PRED: Yes, the authors explore how to integrate the neural networks of MRC models with the general knowledge of human beings to bridge the gap in robustness to noise.
+[71] qid=qasper__hipporag-corpus__batch__doc112_qa0__seed42
+    EXPECT=- | Q: Where is a question generation model used?
+    GOLD: The question generation model provides each candidate answer with a score by measuring semantic relevance between the question and the generated question based on the semantics of the candidate answer.
+    PRED: A question generation model is used in a framework that consists of both a question answering model and a question generation model, which take knowledge extracted from the document as well as relevant facts from an external knowledge base.
+[72] qid=qasper__hipporag-corpus__batch__doc113_qa0__seed42
+    EXPECT=- | Q: what are their results on the constructed dataset?
+    GOLD: AutoJudge consistently and significantly outperforms all the baselines
+    PRED: Experimental results on the constructed dataset demonstrate that the AutoJudge model achieves significant improvement over state-of-the-art models.
+[73] qid=qasper__hipporag-corpus__batch__doc113_qa1__seed42
+    EXPECT=- | Q: what evaluation metrics are reported?
+    GOLD: precision, recall, F1 and accuracy
+    PRED: The provided passages do not mention any specific evaluation metrics reported for QASPER: Automatic Judgment Prediction via Legal Reading Comprehension.
+[74] qid=qasper__hipporag-corpus__batch__doc113_qa2__seed42
+    EXPECT=- | Q: what civil field is the dataset about?
+    GOLD: divorce
+    PRED: The dataset is about divorce proceedings.
+[75] qid=qasper__hipporag-corpus__batch__doc113_qa3__seed42
+    EXPECT=- | Q: what are the state-of-the-art models?
+    GOLD: SVM
+    PRED: The relevant passages do not specify the names of the state-of-the-art models used for comparison in the QASPER study.
+[76] qid=qasper__hipporag-corpus__batch__doc113_qa4__seed42
+    EXPECT=- | Q: what is the size of the real-world civil case dataset?
+    GOLD: 100 000 documents
+    PRED: The size of the real-world civil case dataset is not specified in the provided passages.
+[77] qid=qasper__hipporag-corpus__batch__doc113_qa5__seed42
+    EXPECT=- | Q: what datasets are used in the experiment?
+    GOLD: build a new one
+    PRED: A real-world civil case dataset for Legal Reading Comprehension (LRC) is used in the experiments.
+[78] qid=qasper__hipporag-corpus__batch__doc114_qa0__seed42
+    EXPECT=- | Q: Do they use attention?
+    GOLD: Yes
+    PRED: The provided passages do not mention the use of attention in the QASPER: Stochastic Answer Networks for SQuAD 2.0.
+[79] qid=qasper__hipporag-corpus__batch__doc114_qa1__seed42
+    EXPECT=- | Q: What other models do they compare to?
+    GOLD: SAN Baseline, BNA, DocQA, R.M-Reader, R.M-Reader+Verifier and DocQA+ELMo
+    PRED: They compare to many existing MRC systems that extract answers by finding a substring in the passages/paragraphs.
+[80] qid=qasper__hipporag-corpus__batch__doc114_qa2__seed42
+    EXPECT=- | Q: What is the architecture of the span detector?
+    GOLD: adopt a multi-turn answer module for the span detector BIBREF1
+    PRED: The architecture of the span detector in the Stochastic Answer Network (SAN) includes a binary classifier for judging whether the question is unanswerable, and both components are jointly optimized.
+[81] qid=qasper__hipporag-corpus__batch__doc115_qa0__seed42
+    EXPECT=- | Q: what language does this paper focus on?
+    GOLD: English
+    PRED: English
+[82] qid=qasper__hipporag-corpus__batch__doc115_qa1__seed42
+    EXPECT=- | Q: what evaluation metrics did they use?
+    GOLD: BLEU
+    PRED: The evaluation metrics used include BLEU, FKGL, and SARI.
+[83] qid=qasper__hipporag-corpus__batch__doc115_qa2__seed42
+    EXPECT=- | Q: by how much did their model improve?
+    GOLD: For the WikiLarge dataset, the improvement over baseline NMT is 2.11 BLEU, 1.7 FKGL and 1.07 SARI. For the WikiSmall dataset, the improvement over baseline NMT is 8.37 BLEU.
+    PRED: Substantial improvements of 6.37 BLEU compared to NMT.
+[84] qid=qasper__hipporag-corpus__batch__doc115_qa3__seed42
+    EXPECT=- | Q: what state of the art methods did they compare with?
+    GOLD: OpenNMT
+    PRED: The methods compared with include statistical machine translation models (PBMT-R, Hybrid, SBMT-SARI) and other state-of-the-art methods in text simplification.
+[85] qid=qasper__hipporag-corpus__batch__doc115_qa4__seed42
+    EXPECT=- | Q: what are the sizes of both datasets?
+    GOLD: training set has 89,042 sentence pairs, and the test set has 100 pairs
+    PRED: WikiSmall has 89,042 sentence pairs in the training set and 100 pairs in the test set. WikiLarge has 296,402 sentence pairs in the training set, with 2,000 for development and 359 for testing.
+[86] qid=qasper__hipporag-corpus__batch__doc116_qa0__seed42
+    EXPECT=- | Q: Do they use datasets with transcribed text or do they determine text from the audio?
+    GOLD: They use text transcription.
+    PRED: They use datasets with transcribed text.
+[87] qid=qasper__hipporag-corpus__batch__doc116_qa1__seed42
+    EXPECT=- | Q: By how much does their model outperform the state of the art results?
+    GOLD: the attention model, MDREA, also outperforms the best existing research results (WAP 0.690 to 0.688)
+    PRED: The proposed model outperforms previous state-of-the-art methods by achieving accuracies ranging from 68.8% to 71.8%.
+[88] qid=qasper__hipporag-corpus__batch__doc116_qa2__seed42
+    EXPECT=- | Q: How do they combine audio and text sequences in their RNN?
+    GOLD: combines the information from these sources using a feed-forward neural model
+    PRED: They encode the information from audio and text sequences using dual recurrent neural networks (RNNs) and then combine the information from these sources to predict the emotion class.
+[89] qid=qasper__hipporag-corpus__batch__doc117_qa0__seed42
+    EXPECT=- | Q: How is keyphrase diversity measured?
+    GOLD: average unique predictions
+    PRED: Keyphrase diversity is measured using two new metrics that consider a variable number of phrases.
+[90] qid=qasper__hipporag-corpus__batch__doc117_qa1__seed42
+    EXPECT=- | Q: How was the StackExchange dataset collected?
+    GOLD: they obtained computer science related topics by looking at titles and user-assigned tags
+    PRED: The StackExchange dataset was collected using questions with titles as the source and user-assigned tags as the target keyphrases.
+[91] qid=qasper__hipporag-corpus__batch__doc117_qa2__seed42
+    EXPECT=- | Q: What does the TextWorld ACG dataset contain?
+    GOLD: (unanswerable per source)
+    PRED: The TextWorld ACG dataset contains keyphrase generation data.
+[92] qid=qasper__hipporag-corpus__batch__doc117_qa3__seed42
+    EXPECT=- | Q: What is the size of the StackExchange dataset?
+    GOLD: (unanswerable per source)
+    PRED: The size of the StackExchange dataset is not specified in the provided passages.
+[93] qid=qasper__hipporag-corpus__batch__doc117_qa4__seed42
+    EXPECT=- | Q: What were the baselines?
+    GOLD: CopyRNN (Meng et al., 2017), Multi-Task (Ye and Wang, 2018), and TG-Net (Chen et al., 2018b)
+    PRED: The baselines were existing keyphrase generation approaches.
+[94] qid=qasper__hipporag-corpus__batch__doc117_qa5__seed42
+    EXPECT=- | Q: What two metrics are proposed?
+    GOLD: average unique predictions
+    PRED: Two new metrics that consider a variable number of phrases.
+[95] qid=qasper__hipporag-corpus__batch__doc118_qa0__seed42
+    EXPECT=- | Q: what ner models were evaluated?
+    GOLD: Stanford NER
+    PRED: Several popular named entity recognition models were evaluated.
+[96] qid=qasper__hipporag-corpus__batch__doc118_qa1__seed42
+    EXPECT=- | Q: what is the source of the news sentences?
+    GOLD: ilur.am
+    PRED: The source of the news sentences is manually annotated data from news articles.
+[97] qid=qasper__hipporag-corpus__batch__doc118_qa2__seed42
+    EXPECT=- | Q: did they use a crowdsourcing platform for manual annotations?
+    GOLD: No
+    PRED: The provided context does not mention the use of a crowdsourcing platform for manual annotations.
+[98] qid=qasper__hipporag-corpus__batch__doc119_qa0__seed42
+    EXPECT=- | Q: what topics did they label?
+    GOLD: Demographics Age, DiagnosisHistory, MedicationHistory, ProcedureHistory, Symptoms/Signs, Vitals/Labs, Procedures/Results, Meds/Treatments, Movement, Other.
+    PRED: They labeled topics of history of present illness notes.
+[99] qid=qasper__hipporag-corpus__batch__doc119_qa1__seed42
+    EXPECT=- | Q: did they compare with other extractive summarization methods?
+    GOLD: No
+    PRED: No, the passage does not mention a comparison with other extractive summarization methods.
+[100] qid=qasper__hipporag-corpus__batch__doc119_qa2__seed42
+    EXPECT=- | Q: what datasets were used?
+    GOLD: MIMIC-III
+    PRED: The dataset used was EHR discharge notes.
+[101] qid=qasper__hipporag-corpus__batch__doc120_qa0__seed42
+    EXPECT=- | Q: what are the existing approaches?
+    GOLD: BOW-Tags
+    PRED: The existing approaches mentioned are BOW-Tags, BOW-KL(Tags), and GloVe.
+[102] qid=qasper__hipporag-corpus__batch__doc120_qa1__seed42
+    EXPECT=- | Q: what dataset is used in this paper?
+    GOLD: the same datasets as BIBREF7
+    PRED: The paper uses meta-data from photo-sharing websites such as Flickr.
+[103] qid=qasper__hipporag-corpus__batch__doc121_qa0__seed42
+    EXPECT=- | Q: What kind of questions are present in the dataset?
+    GOLD: These 8 tasks require different competencies and a different level of understanding of the document to be well answered
+    PRED: The questions in the ReviewQA dataset are linked to a set of relational understanding competencies and are divided into 8 groups regarding the competency required to be answered.
+[104] qid=qasper__hipporag-corpus__batch__doc121_qa1__seed42
+    EXPECT=- | Q: What baselines are presented?
+    GOLD: Logistic regression
+    PRED: Several baselines are presented over the ReviewQA dataset.
+[105] qid=qasper__hipporag-corpus__batch__doc121_qa2__seed42
+    EXPECT=- | Q: What tasks were evaluated?
+    GOLD: ReviewQA's test set
+    PRED: The tasks evaluated in the ReviewQA dataset include relational reasoning skills through natural language questions, sentiment analysis, and various reasoning question types over the relationships between aspects of hotel reviews.
+[106] qid=qasper__hipporag-corpus__batch__doc121_qa3__seed42
+    EXPECT=- | Q: What language are the reviews in?
+    GOLD: (unanswerable per source)
+    PRED: The reviews are in English.
+[107] qid=qasper__hipporag-corpus__batch__doc121_qa4__seed42
+    EXPECT=- | Q: Where are the hotel reviews from?
+    GOLD: TripAdvisor
+    PRED: The hotel reviews are from a dataset called ReviewQA.
+[108] qid=qasper__hipporag-corpus__batch__doc122_qa0__seed42
+    EXPECT=- | Q: Is fine-tuning required to incorporate these embeddings into existing models?
+    GOLD: No
+    PRED: No, fine-tuning is not required to incorporate these embeddings into existing models.
+[109] qid=qasper__hipporag-corpus__batch__doc122_qa1__seed42
+    EXPECT=- | Q: How are meaningful chains in the graph selected?
+    GOLD: No
+    PRED: The document does not provide specific details on how meaningful chains in the graph are selected.
+[110] qid=qasper__hipporag-corpus__batch__doc123_qa0__seed42
+    EXPECT=- | Q: How do they match words before reordering them?
+    GOLD: (unanswerable per source)
+    PRED: They pre-order the assisting language sentence to match the word order of the source language.
+[111] qid=qasper__hipporag-corpus__batch__doc123_qa1__seed42
+    EXPECT=- | Q: On how many language pairs do they show that preordering assisting language sentences helps translation quality?
+    GOLD: 5
+    PRED: They show that bridging the word order gap leads to significant improvement in translation quality on many language pairs.
+[112] qid=qasper__hipporag-corpus__batch__doc123_qa2__seed42
+    EXPECT=- | Q: Which dataset(s) do they experiment with?
+    GOLD: IITB English-Hindi parallel corpus BIBREF22
+    PRED: They experiment on many language pairs.
+[113] qid=qasper__hipporag-corpus__batch__doc124_qa0__seed42
+    EXPECT=- | Q: Which text embedding methodologies are used?
+    GOLD: Document to Vector (Doc2Vec)
+    PRED: The text embedding methodologies used are based on paragraph vectors combined with multi-scale Markov Stability community detection.
+[114] qid=qasper__hipporag-corpus__batch__doc125_qa0__seed42
+    EXPECT=- | Q: Which datasets do they use?
+    GOLD: CoNLL-YAGO
+    PRED: The datasets used are: (1) CoNLL-YAGO, (2) TAC2010, (3) ACE2004, (4) AQUAINT, and (5) WW.
+[115] qid=qasper__hipporag-corpus__batch__doc125_qa1__seed42
+    EXPECT=- | Q: How effective is their NCEL approach overall?
+    GOLD: NCEL consistently outperforms various baselines with a favorable generalization ability
+    PRED: The NCEL approach outperforms the state-of-the-art collective methods across five different datasets, demonstrating its effectiveness and efficiency.
+[116] qid=qasper__hipporag-corpus__batch__doc125_qa2__seed42
+    EXPECT=- | Q: How do they verify generalization ability?
+    GOLD: By calculating Macro F1 metric at the document level.
+    PRED: They verify generalization ability by evaluating NCEL on five publicly available datasets.
+[117] qid=qasper__hipporag-corpus__batch__doc125_qa3__seed42
+    EXPECT=- | Q: Do they only use adjacent entity mentions or use more than that in some cases (next to adjacent)?
+    GOLD: NCEL considers only adjacent mentions.
+    PRED: They only use adjacent entity mentions.
+[118] qid=qasper__hipporag-corpus__batch__doc126_qa0__seed42
+    EXPECT=- | Q: what is the size of the augmented dataset?
+    GOLD: (unanswerable per source)
+    PRED: The size of the augmented dataset is not specified in the provided context.
+[119] qid=qasper__hipporag-corpus__batch__doc127_qa0__seed42
+    EXPECT=- | Q: what is the state of the art on WSJ?
+    GOLD: CNN-DNN-BLSTM-HMM
+    PRED: The state-of-the-art performance on Wall Street Journal (WSJ) is matched by the fully convolutional approach presented in the paper.
+[120] qid=qasper__hipporag-corpus__batch__doc128_qa0__seed42
+    EXPECT=- | Q: Which stock market sector achieved the best performance?
+    GOLD: Energy with accuracy of 0.538
+    PRED: The document does not specify which stock market sector achieved the best performance.
+[121] qid=qasper__hipporag-corpus__batch__doc129_qa0__seed42
+    EXPECT=- | Q: Which fonts are the best indicators of high quality?
+    GOLD: (unanswerable per source)
+    PRED: The relevant passage does not specify which fonts are the best indicators of high quality.
+[122] qid=qasper__hipporag-corpus__batch__doc129_qa1__seed42
+    EXPECT=- | Q: What kind of model do they use?
+    GOLD: visual model is based on fine-tuning an Inception V3 model BIBREF1 over visual renderings of documents, while our textual model is based on a hierarchical biLSTM. We further combine the two into a joint model.
+    PRED: They propose a joint model that combines text content with a visual rendering of the document for document quality assessment.
+[123] qid=qasper__hipporag-corpus__batch__doc129_qa2__seed42
+    EXPECT=- | Q: Did they release their data set of academic papers?
+    GOLD: No
+    PRED: The provided passages do not mention whether a dataset of academic papers was released.
+[124] qid=qasper__hipporag-corpus__batch__doc129_qa3__seed42
+    EXPECT=- | Q: Do the methods that work best on academic papers also work best on Wikipedia?
+    GOLD: Yes
+    PRED: No, the methods that work best on academic papers do not necessarily work best on Wikipedia.
+[125] qid=qasper__hipporag-corpus__batch__doc129_qa4__seed42
+    EXPECT=- | Q: What is their system's absolute accuracy?
+    GOLD: 59.4% on wikipedia dataset, 93.4% on peer-reviewed archive AI papers, 77.1% on peer-reviewed archive Computation and Language papers, and 79.9% on peer-reviewed archive Machine Learning papers
+    PRED: The provided passages do not specify the absolute accuracy of the system in "A Joint Model for Multimodal Document Quality Assessment."
+[126] qid=qasper__hipporag-corpus__batch__doc129_qa5__seed42
+    EXPECT=- | Q: Which is more useful, visual or textual features?
+    GOLD: It depends on the dataset. Experimental results over two datasets reveal that textual and visual features are complementary.
+    PRED: Textual and visual features are complementary, achieving state-of-the-art results when combined.
+[127] qid=qasper__hipporag-corpus__batch__doc129_qa6__seed42
+    EXPECT=- | Q: Which languages do they use?
+    GOLD: English
+    PRED: The passage does not specify any particular languages used in the study.
+[128] qid=qasper__hipporag-corpus__batch__doc129_qa7__seed42
+    EXPECT=- | Q: How large is their data set?
+    GOLD: a sample of 29,794 wikipedia articles and 2,794 arXiv papers
+    PRED: The size of their dataset is not specified in the provided passage.
+[129] qid=qasper__hipporag-corpus__batch__doc129_qa8__seed42
+    EXPECT=- | Q: Where do they get their ground truth quality judgments?
+    GOLD: Wikipedia articles are labelled with one of six quality classes, in descending order of quality: Featured Article (“FA”), Good Article (“GA”), B-class Article (“B”), C-class Article (“C”), Start Article (“Start”), and Stub Article (“Stub”).
+    PRED: They get their ground truth quality judgments from assessing the quality of Wikipedia articles and academic papers.
+[130] qid=qasper__hipporag-corpus__batch__doc130_qa0__seed42
+    EXPECT=- | Q: Were any of these tasks evaluated in any previous work?
+    GOLD: Yes
+    PRED: Yes, the tasks were evaluated using naturally-occurring subject-verb agreement stimuli and manually crafted stimuli for subject-verb agreement and reflexive anaphora phenomena.
+[131] qid=qasper__hipporag-corpus__batch__doc131_qa0__seed42
+    EXPECT=- | Q: Do they report results only on English data?
+    GOLD: (unanswerable per source)
+    PRED: The passages do not specify whether the results are reported only on English data.
+[132] qid=qasper__hipporag-corpus__batch__doc131_qa1__seed42
+    EXPECT=- | Q: What machine learning and deep learning methods are used for RQE?
+    GOLD: Logistic Regression
+    PRED: The paper compares machine learning (ML) and deep learning (DL) methods for Recognizing Question Entailment (RQE) using different kinds of datasets, including textual inference, question similarity, and entailment in both open and clinical domains.
+[133] qid=qasper__hipporag-corpus__batch__doc132_qa0__seed42
+    EXPECT=- | Q: What is an unordered text document, do these arise in real-world corpora?
+    GOLD: A unordered text document is one where sentences in the document are disordered or jumbled. It doesn't appear that unordered text documents appear in corpora, but rather are introduced as part of processing pipeline.
+    PRED: An unordered text document is a text that lacks a predefined structure or organization, making it challenging to extract meaningful information or insights. Yes, unordered text documents do arise in real-world corpora, such as collections of articles or social media posts.
+[134] qid=qasper__hipporag-corpus__batch__doc132_qa1__seed42
+    EXPECT=- | Q: What kind of model do they use?
+    GOLD: Our methodology is described in the Figure 1
+    PRED: They use a model based on statistical and predictive methods, including the TextRank algorithm and Google's Universal Sentence Encoder (USE).
+[135] qid=qasper__hipporag-corpus__batch__doc132_qa2__seed42
+    EXPECT=- | Q: Do they release a data set?
+    GOLD: No
+    PRED: The passage does not mention the release of a dataset.
+[136] qid=qasper__hipporag-corpus__batch__doc132_qa3__seed42
+    EXPECT=- | Q: Do they release code?
+    GOLD: No
+    PRED: The provided passages do not mention whether code is released for QASPER: Structuring an unordered text document.
+[137] qid=qasper__hipporag-corpus__batch__doc132_qa4__seed42
+    EXPECT=- | Q: Which languages do they evaluate on?
+    GOLD: (unanswerable per source)
+    PRED: The passage does not specify any languages evaluated in the context of structuring an unordered text document.
+[138] qid=qasper__hipporag-corpus__batch__doc133_qa0__seed42
+    EXPECT=- | Q: Why masking words in the decoder is helpful?
+    GOLD: ecause this process is similar to the cloze task in BERT's pre-train process, therefore by using the ability of the contextual language model the decoder can generate more fluent and natural sequences.
+    PRED: Masking words in the decoder allows the model to refine the draft output sequence by predicting the correct words for each masked position, leveraging the context from both the input sequence and the draft representation generated by BERT.
+[139] qid=qasper__hipporag-corpus__batch__doc133_qa1__seed42
+    EXPECT=- | Q: What is the ROUGE score of the highest performing model?
+    GOLD: 33.33 average of ROUGE-1, ROUGE-2 and ROUGE-L
+    PRED: The highest performing model outperforms the best published abstractive model on CNN/DailyMail by 0.8 ROUGE-2 and on New York Times by 2.4 ROUGE-2.
+[140] qid=qasper__hipporag-corpus__batch__doc133_qa2__seed42
+    EXPECT=- | Q: How are the different components of the model trained? Is it trained end-to-end?
+    GOLD: the objective of our model is sum of the two processes, jointly trained using "teacher-forcing" algorithm
+    PRED: The model is trained in a two-stage manner, where the first stage generates a draft output sequence using a Transformer-based decoder, and the second stage refines this draft by masking each word and using BERT to predict the refined word for each masked position. It is not explicitly stated that the model is trained end-to-end.
+[141] qid=qasper__hipporag-corpus__batch__doc133_qa3__seed42
+    EXPECT=- | Q: When is this paper published?
+    GOLD: (unanswerable per source)
+    PRED: The publication date is not provided in the relevant passages.
+[142] qid=qasper__hipporag-corpus__batch__doc134_qa0__seed42
+    EXPECT=- | Q: What models are used in the experiment?
+    GOLD: linear SVM
+    PRED: Different machine learning models, including SVMs and neural networks, are used in the experiment.
+[143] qid=qasper__hipporag-corpus__batch__doc134_qa1__seed42
+    EXPECT=- | Q: What are the differences between this dataset and pre-existing ones?
+    GOLD: no prior work has explored the target of the offensive language
+    PRED: The OLID dataset differs from pre-existing datasets for hate speech identification and aggression detection by providing a fine-grained three-layer annotation scheme for offensive content, allowing for the identification of both the type and target of offensive messages, whereas previous datasets typically focused on very specific types of offensive content.
+[144] qid=qasper__hipporag-corpus__batch__doc134_qa2__seed42
+    EXPECT=- | Q: In what language are the tweets?
+    GOLD: English
+    PRED: English
+[145] qid=qasper__hipporag-corpus__batch__doc134_qa3__seed42
+    EXPECT=- | Q: What is the size of the new dataset?
+    GOLD: (unanswerable per source)
+    PRED: The new dataset contains 14,100 tweets.
+[146] qid=qasper__hipporag-corpus__batch__doc134_qa4__seed42
+    EXPECT=- | Q: What kinds of offensive content are explored?
+    GOLD: non-targeted profanity and swearing, targeted insults such as cyberbullying, offensive content related to ethnicity, gender or sexual orientation, political affiliation, religious belief, and anything belonging to hate speech
+    PRED: The research explores several different kinds of offensive content, specifically identifying the type and target of offensive messages in social media.
+[147] qid=qasper__hipporag-corpus__batch__doc134_qa5__seed42
+    EXPECT=- | Q: What is the best performing model?
+    GOLD: CNN
+    PRED: A CNN-based sentence classifier achieved the best results in all three sub-tasks.
+[148] qid=qasper__hipporag-corpus__batch__doc134_qa6__seed42
+    EXPECT=- | Q: How many annotators participated?
+    GOLD: five annotators
+    PRED: The provided passages do not specify the number of annotators that participated in the annotation of the Offensive Language Identification Dataset (OLID).
+[149] qid=qasper__hipporag-corpus__batch__doc134_qa7__seed42
+    EXPECT=- | Q: What is the definition of offensive language?
+    GOLD: Most prior work focuses on a different aspect of offensive language such as abusive language BIBREF0 , BIBREF1 , (cyber-)aggression BIBREF2 , (cyber-)bullying BIBREF3 , BIBREF4 , toxic comments INLINEFORM0 , hate speech BIBREF5 , BIBREF6 , BIBREF7 , BIBREF8 , BIBREF9 , BIBREF10 , and offensive language BIBREF11 . Prior work has focused on these aspects of offensive language in Twitter BIBREF3 , BIBREF7 , BIBREF8 , BIBREF11 , Wikipedia comments, and Facebook posts BIBREF2 .
+    PRED: Offensive language refers to potentially harmful or disrespectful messages that can include insults, threats, and profanity, often targeting specific individuals or groups in social media contexts.

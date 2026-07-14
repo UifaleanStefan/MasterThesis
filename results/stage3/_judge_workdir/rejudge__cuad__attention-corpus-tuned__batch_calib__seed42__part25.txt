@@ -1,0 +1,600 @@
+[0] qid=cuad__attention-corpus-tuned__batch__doc280_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: TRADEMARK LICENSE AGREEMENT
+    PRED: The relevant document name is "Trademark License Agreement."
+[1] qid=cuad__attention-corpus-tuned__batch__doc280_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: the "Licensee"
+    PRED: The relevant parts of the contract related to "Parties" that should be reviewed by a lawyer include the identification of the parties involved, their legal names, addresses, and any specific roles or responsibilities outlined in the agreement.
+[2] qid=cuad__attention-corpus-tuned__batch__doc280_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: [·], 2019
+    PRED: The relevant passage does not provide specific details about the "Agreement Date" in the Trademark License Agreement for review.
+[3] qid=cuad__attention-corpus-tuned__batch__doc280_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: [·], 2019
+    PRED: The relevant passage regarding the "Effective Date" is not provided in the context.
+[4] qid=cuad__attention-corpus-tuned__batch__doc280_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: Notwithstanding the foregoing, this Agreement shall expire if the Investment Advisor or one of its affiliates ceases to serve as investment adviser to the Licensee.
+    PRED: The contract's initial term will expire on January 15, 2023.
+[5] qid=cuad__attention-corpus-tuned__batch__doc280_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This Agreement shall be governed by, and construed in accordance with, the laws of the State of New York without giving effect to the principles of conflicts of law rules.
+    PRED: The relevant passage regarding "Governing Law" in the Trademark License Agreement specifies that the law of the State of New York governs the interpretation of the contract.
+[6] qid=cuad__attention-corpus-tuned__batch__doc280_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Termination For Convenience" that should be reviewed by a lawyer. Details: Can a party terminate this contract without cause (solely by giving a notice and allowing a waiting period to expire)?
+    GOLD: This Agreement shall be terminable (a) by the Licensor
+    PRED: Yes, either ITS or COMWARE can terminate the Agreement with 30 days written notice for any reason whatsoever, indicating that a party can terminate the contract without cause.
+[7] qid=cuad__attention-corpus-tuned__batch__doc280_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: Any purported transfer or other encumbrance without such consent shall be void ab initio.
+    PRED: Consent is required from the other party if the contract is assigned to a third party.
+[8] qid=cuad__attention-corpus-tuned__batch__doc280_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Ip Ownership Assignment" that should be reviewed by a lawyer. Details: Does intellectual property created by one party become the property of the counterparty, either per the terms of the contract or upon the occurrence of certain events?
+    GOLD: The Licensee hereby assigns and agrees to assign any rights it may have as a result of its licensed use, including common law rights, in the Licensed Mark, to Licensor.
+    PRED: The relevant sections to review for "IP Ownership Assignment" in the Trademark License Agreement would include any clauses that specify the ownership of intellectual property created by one party, particularly those that outline whether such IP becomes the property of the counterparty either through the contract terms or upon specific events.
+[9] qid=cuad__attention-corpus-tuned__batch__doc280_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "License Grant" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?
+    GOLD: Subject to the terms and conditions of this Agreement, the Licensor hereby grants to the Licensee, and the Licensee hereby accepts from the Licensor, a personal, non-exclusive, royalty-free right and license to use the Licensed Mark in the Territory solely and exclusively as a component of the Licensee's own company name and in connection with the Licensed Services and any business provided in conjunction therewith by such Licensee.
+    PRED: The provided passages do not contain specific information regarding the "License Grant" section of the contract related to CUAD: NmfSlfIInc_20200115_10-12GA_EX-10.5_11946987_EX-10.5_Trademark License Agreement. Therefore, I cannot determine if the contract contains a license granted by one party to its counterparty.
+[10] qid=cuad__attention-corpus-tuned__batch__doc280_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Transferable License" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?
+    GOLD: Subject to the terms and conditions of this Agreement, the Licensor hereby grants to the Licensee, and the Licensee hereby accepts from the Licensor, a personal, non-exclusive, royalty-free right and license to use the Licensed Mark in the Territory solely and exclusively as a component of the Licensee's own company name and in connection with the Licensed Services and any business provided in conjunction therewith by such Licensee.
+    PRED: Yes, the contract limits the ability of a party to transfer the license being granted to a third party, as indicated by the clause stating that any transfer or assignment not permitted shall be null and void.
+[11] qid=cuad__attention-corpus-tuned__batch__doc280_qa11__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Post-Termination Services" that should be reviewed by a lawyer. Details: Is a party subject to obligations after the termination or expiration of a contract, including any post-termination transition, payment, transfer of IP, wind-down, last-buy, or similar commitments?
+    GOLD: For twenty-four (24) months following termination of this Agreement, the Licensee shall specify on all public- facing materials in a prominent place and in prominent typeface that the Licensee is no longer operating under the Licensed Mark, is no longer associated with the Licensor, or such other notice as may be deemed necessary by the Licensor in its sole discretion in its prosecution, defense, and/or settlement of any Third Party Claim.
+    PRED: The relevant sections regarding obligations after termination or expiration of the contract include: 1. **Rights and Obligations Following Expiration or Termination**: Parties must fulfill all obligations accrued prior to termination, and all sums owed become immediately due. 2. **Return of Confidential Information**: Each party must return the other's confidential information and not retain copies, except as necessary for compliance with statutory obligations. 3. **Survival of Obligations**: Certain obligations and rights that naturally continue beyond termination will survive, including compliance with laws and indemnity. 4. **Termination Conditions**: The agreement can be terminated under …[TRUNC]
+[12] qid=cuad__attention-corpus-tuned__batch__doc280_qa12__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Covenant Not To Sue" that should be reviewed by a lawyer. Details: Is a party restricted from contesting the validity of the counterparty’s ownership of intellectual property or otherwise bringing a claim against the counterparty for matters unrelated to the contract?
+    GOLD: The Licensee shall not otherwise contest, dispute, or challenge the Licensor's right, title, and interest in and to the Licensed Mark.
+    PRED: The relevant passage states that "each party covenants that it shall not, under any circumstances, sue the other party... for patent infringement under any future patents or future patent rights relating to said Developments." This indicates a restriction on contesting the validity of the counterparty’s ownership of intellectual property. However, it does not explicitly mention claims unrelated to the contract, so a lawyer should review the specific language regarding any potential limitations on bringing such claims.
+[13] qid=cuad__attention-corpus-tuned__batch__doc280_qa13__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Third Party Beneficiary" that should be reviewed by a lawyer. Details: Is there a non-contracting party who is a beneficiary to some or all of the clauses in the contract and therefore can enforce its rights against a contracting party?
+    GOLD: The parties agree that the Investment Advisor shall be a third party beneficiary of this Agreement, and shall have the rights and protections provided to the Licensee under this Agreement.
+    PRED: The contract explicitly states that it does not intend to create any rights enforceable by a third party, as indicated in multiple passages: "No Third Party Beneficiaries," "Nothing express or implied in this Agreement is intended to confer... upon any person other than the Parties hereto any rights," and "This Agreement is not for the benefit of any third party." Therefore, there is no non-contracting party who is a beneficiary and can enforce rights against a contracting party.
+[14] qid=cuad__attention-corpus-tuned__batch__doc281_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: CORPORATE SPONSORSHIP AGREEMENT
+    PRED: The contract name is "CORPORATE SPONSORSHIP AGREEMENT."
+[15] qid=cuad__attention-corpus-tuned__batch__doc281_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: Phoenix Performance, LLC
+    PRED: The contract should be reviewed for the identification of the parties involved, including their legal names, addresses, and any specific roles or responsibilities outlined for each party.
+[16] qid=cuad__attention-corpus-tuned__batch__doc281_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: May 18, 2010
+    PRED: The "Agreement Date" in the contract should be reviewed by a lawyer for its legal implications and enforceability.
+[17] qid=cuad__attention-corpus-tuned__batch__doc281_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: May 18, 2010
+    PRED: The passage does not provide specific details regarding the "Effective Date" of the contract that should be reviewed by a lawyer.
+[18] qid=cuad__attention-corpus-tuned__batch__doc281_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: The term of this Agreement (the "Term") shall commence on the Effective Date and conclude on October 31, 2010, unless renewed by agreement or sooner terminated in accordance with this Agreement.
+    PRED: The contract's initial term will expire on May 26, 2015.
+[19] qid=cuad__attention-corpus-tuned__batch__doc281_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This Agreement is to be governed and construed according to the laws of the State of New York without regard to conflicts of law.
+    PRED: The relevant passage does not provide specific details regarding the "Governing Law" of the contract.
+[20] qid=cuad__attention-corpus-tuned__batch__doc281_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: Any attempt to assign without the other party's consent will be null and void and will afford the non-assigning party the right to immediately cancel and terminate this Agreement.
+    PRED: Consent is required from the other party for any assignment of the Agreement, and such consent shall not be unreasonably withheld.
+[21] qid=cuad__attention-corpus-tuned__batch__doc281_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "License Grant" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?
+    GOLD: Each party shall have a non-exclusive, royalty free, non-transferable license to use the name, logo, any item used in connection with that name or logo, and the registered symbols and trademarks of the other party (the "Trademarks") only for the purposes set forth in this Agreement.
+    PRED: The contract does not explicitly mention a "License Grant" that should be reviewed by a lawyer.
+[22] qid=cuad__attention-corpus-tuned__batch__doc281_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Transferable License" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?
+    GOLD: Each party shall have a non-exclusive, royalty free, non-transferable license to use the name, logo, any item used in connection with that name or logo, and the registered symbols and trademarks of the other party (the "Trademarks") only for the purposes set forth in this Agreement.
+    PRED: Yes, the contract limits the ability of a party to transfer the license being granted to a third party without prior written consent from the other party, which consent shall not be unreasonably withheld or delayed.
+[23] qid=cuad__attention-corpus-tuned__batch__doc281_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Cap On Liability" that should be reviewed by a lawyer. Details: Does the contract include a cap on liability upon the breach of a party’s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.
+    GOLD: Upon termination of this Agreement, NEITHER PARTY SHALL BE LIABLE TO THE OTHER FOR ANY CONSEQUENTIAL, EXEMPLARY, SPECIAL, INCIDENTAL OR PUNITIVE DAMAGES, EVEN IF IT HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, WHICH ARE RELATED TO THE AGREEMENT OR ITS BREACH.
+    PRED: The contract includes a section stating that the maximum liability of one Party to the other Party and its affiliates in relation to this Agreement will be [***] ("Liability Cap"). This indicates there is a cap on liability that should be reviewed by a lawyer.
+[24] qid=cuad__attention-corpus-tuned__batch__doc281_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Insurance" that should be reviewed by a lawyer. Details: Is there a requirement for insurance that must be maintained by one party for the benefit of the counterparty?
+    GOLD: CGL coverages shall be written on ISO occurrence form CG 00 01 or a substitute form providing equivalent coverage and shall cover liabilities arising from events, premises, operations, independent contractors, products-completed operations, personal injury and advertising injury, and liability assumed under an insured contract.
+    PRED: Yes, there is a requirement for insurance that must be maintained by one party for the benefit of the counterparty, specifically stating that the Company shall maintain Products Liability Insurance and name the Contractor as an additional insured.
+[25] qid=cuad__attention-corpus-tuned__batch__doc282_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: STRATEGIC ALLIANCE AGREEMENT
+    PRED: The name of the contract is "STRATEGIC ALLIANCE AGREEMENT."
+[26] qid=cuad__attention-corpus-tuned__batch__doc282_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: Petro data Management Services Limited.
+    PRED: The contract should be reviewed for the identification of the parties involved, their legal names, and any specific obligations or rights assigned to each party.
+[27] qid=cuad__attention-corpus-tuned__batch__doc282_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: 24 OCT 2011
+    PRED: The "Agreement Date" for the contract is November 3, 2011.
+[28] qid=cuad__attention-corpus-tuned__batch__doc282_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: 24 OCT 2011
+    PRED: The contract is made on November 3, 2011, which is the "Effective Date."
+[29] qid=cuad__attention-corpus-tuned__batch__doc282_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: The laws of the province of Ontario, Canada, govern this AGREEMENT and, in respect of any dispute, which may arise hereunder; Agent consents to the jurisdiction of the federal and provincial courts of Ontario, Canada.
+    PRED: The governing law for the interpretation of the contract is not specified in the provided context.
+[30] qid=cuad__attention-corpus-tuned__batch__doc282_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Compete" that should be reviewed by a lawyer. Details: Is there a restriction on the ability of a party to compete with the counterparty or operate in a certain geography or business or technology sector?
+    GOLD: Agent may not offer or promote competitive products without the consent of Kallo.
+    PRED: The non-compete provision may not be enforceable under the laws of your state.
+[31] qid=cuad__attention-corpus-tuned__batch__doc282_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Exclusivity" that should be reviewed by a lawyer. Details: Is there an exclusive dealing commitment with the counterparty? This includes a commitment to procure all “requirements” from one party of certain technology, goods, or services or a prohibition on licensing or selling technology, goods or services to third parties, or a prohibition on collaborating or working with other parties), whether during the contract or after the contract  …[TRUNC]
+    GOLD: Agent's appointment shall be exclusive for the Kallo Mobile care suite of products and services marked in Schedule A to this Agreement.
+    PRED: The relevant passage regarding "Exclusivity" in the CUAD: KALLOINC_11_03_2011-EX-10.1-STRATEGIC ALLIANCE AGREEMENT should be reviewed for any commitments to procure all requirements from one party, prohibitions on licensing or selling to third parties, and restrictions on collaborating with other parties during or after the contract.
+[32] qid=cuad__attention-corpus-tuned__batch__doc282_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "No-Solicit Of Customers" that should be reviewed by a lawyer. Details: Is a party restricted from contracting or soliciting customers or partners of the counterparty, whether during the contract or after the contract ends (or both)?
+    GOLD: Kallo shall not allow another Agent to solicit the existing Agents book of business unless it is understood by all parties the end user client desires the transfer.
+    PRED: The contract includes a provision that restricts a party from soliciting customers of the counterparty during the term of the agreement and for a period of twelve (12) months following the termination of the consultancy. Specifically, it states that the CONSULTANT agrees not to solicit, entice, or induce any Customer for the purpose of providing competitive products or services, or to induce any Customer to terminate or reduce its business with the Company. Therefore, a party is restricted from contracting or soliciting customers of the counterparty both during the contract and for a specified period after the contract ends.
+[33] qid=cuad__attention-corpus-tuned__batch__doc282_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Disparagement" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?
+    GOLD: During the term hereof and for a period of two years thereafter, each of Agent and Kallo agrees that it will refrain from making any representation, statement, comment or any other form of communication, whether written or oral (hereinafter collectively referred to as a "Communication"), to any third party, including but not limited to the principals, customers, suppliers and competitors of the other party, which Communication reflects any opinion, judgment, observation or
+    PRED: The provided passages do not contain specific details from the CUAD: KALLOINC_11_03_2011-EX-10.1-STRATEGIC ALLIANCE AGREEMENT regarding "Non-Disparagement." Therefore, it cannot be determined if there is a requirement on a party not to disparage the counterparty based on the available context.
+[34] qid=cuad__attention-corpus-tuned__batch__doc282_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Change Of Control" that should be reviewed by a lawyer. Details: Does one party have the right to terminate or is consent or notice required of the counterparty if such party undergoes a change of control, such as a merger, stock sale, transfer of all or substantially all of its assets or business, or assignment by operation of law?
+    GOLD: In the event Agent changes its legal structure or undergoes a substantial change in ownership of its stock or other ownership interest, Kallo shall have the option of immediate termination of this Agreement.
+    PRED: The contract includes several provisions regarding "Change of Control" that should be reviewed by a lawyer: 1. Either party may terminate the Agreement upon written notice if the other party undergoes a Change of Control (EPISODE step=37482, step=34568). 2. A Change of Control is defined as a transaction resulting in the transfer of at least fifty percent (50%) of equity interest or a merger with other entities (EPISODE step=57548). 3. Termination notice must be delivered within a specified time frame after the Change of Control occurs or is notified (EPISODE step=34568). 4. The contract states that neither party may assign the Agreement without consent, except in specific circumstances, inc …[TRUNC]
+[35] qid=cuad__attention-corpus-tuned__batch__doc282_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: This Agreement is not assignable by Agent without prior written consent by Kallo.
+    PRED: Consent is required from the other party if the contract is assigned to a third party, except in certain cases such as mergers or assignments to affiliates.
+[36] qid=cuad__attention-corpus-tuned__batch__doc282_qa11__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Ip Ownership Assignment" that should be reviewed by a lawyer. Details: Does intellectual property created by one party become the property of the counterparty, either per the terms of the contract or upon the occurrence of certain events?
+    GOLD: If at any time Agent acquires any rights in, or any registration or application for, any of the Trademarks by operation of law or otherwise, it will immediately, upon request by Kallo and at no expense to Kallo, assign such rights, registrations, or applications to Kallo, along with any and all associated goodwill.
+    PRED: The provided passages do not contain specific information regarding "IP Ownership Assignment" or the terms related to whether intellectual property created by one party becomes the property of the counterparty. Therefore, a lawyer should review the actual contract for details on IP ownership assignment.
+[37] qid=cuad__attention-corpus-tuned__batch__doc282_qa12__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "License Grant" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?
+    GOLD: Kallo grants to Agent the non-exclusive and non-transferable right to distribute the use of the Kallo Mobile care suite of products to commercial end user customers.
+    PRED: The contract contains a license granted by one party to its counterparty.
+[38] qid=cuad__attention-corpus-tuned__batch__doc282_qa13__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Transferable License" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?
+    GOLD: Kallo grants to Agent the non-exclusive and non-transferable right to distribute the use of the Kallo Mobile care suite of products to commercial end user customers.
+    PRED: Yes, the contract limits the ability of a party to transfer the license being granted to a third party without prior written consent from the other party.
+[39] qid=cuad__attention-corpus-tuned__batch__doc282_qa14__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Post-Termination Services" that should be reviewed by a lawyer. Details: Is a party subject to obligations after the termination or expiration of a contract, including any post-termination transition, payment, transfer of IP, wind-down, last-buy, or similar commitments?
+    GOLD: Agent shall supply to Kallo the full business data of each customer as a qualified prospect and at the time of sale and shall, during this Agreement and while it is still responsible for its
+    PRED: The contract includes provisions indicating that certain rights and obligations survive termination or expiration, specifically mentioning sections related to "AUDIT," "CONFIDENTIALITY AND INFORMATION PROTECTION," "INDEMNITY," "LICENSE," "LIMITATION OF LIABILITY," "MEDIATION/ARBITRATION," "OWNERSHIP OF WORK PRODUCT," and "MISCELLANEOUS." Additionally, it states that termination does not relieve a party from obligations expressly indicated to survive termination, including payments for milestone events or Net Sales occurring prior to termination. These aspects should be reviewed by a lawyer for any post-termination obligations.
+[40] qid=cuad__attention-corpus-tuned__batch__doc282_qa15__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Audit Rights" that should be reviewed by a lawyer. Details: Does a party have the right to audit the books, records, or physical locations of the counterparty to ensure compliance with the contract?
+    GOLD: Kallo shall permit Agent or its designated Agent(s) to inspect Kallo's books upon Agent's request at Agent's expense during normal business hours of Kallo.
+    PRED: Yes, a party has the right to audit the books and records of the counterparty to ensure compliance with the contract, as outlined in multiple sections regarding audit rights, including provisions for independent auditors, advance notice requirements, and limitations on the frequency and scope of audits.
+[41] qid=cuad__attention-corpus-tuned__batch__doc282_qa16__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Cap On Liability" that should be reviewed by a lawyer. Details: Does the contract include a cap on liability upon the breach of a party’s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.
+    GOLD: In no event shall Kallo be liable for indirect, consequential, or incidental damages (including damages for loss of business profits, business interruption, loss of business information, and the like) arising out of the relationship between Kallo and Agent even if it has been advised of the possibility of such damages.
+    PRED: The contract includes a section on "LIMITATION OF LIABILITY" which states that the maximum liability of one Party to the other Party and its affiliates will be subject to a "Liability Cap." It also mentions exceptions for certain causes, indicating that a lawyer should review the specific terms regarding the cap on liability, the conditions under which it applies, and any time limitations for bringing claims.
+[42] qid=cuad__attention-corpus-tuned__batch__doc282_qa17__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Warranty Duration" that should be reviewed by a lawyer. Details: What is the duration of any warranty against defects or errors in technology, products, or services provided under the contract?
+    GOLD: Supply of drugs/medications and spare parts during and after the warranty period.
+    PRED: The warranty duration against defects or errors in technology, products, or services provided under the contract is ninety (90) days from the date of delivery.
+[43] qid=cuad__attention-corpus-tuned__batch__doc282_qa18__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Insurance" that should be reviewed by a lawyer. Details: Is there a requirement for insurance that must be maintained by one party for the benefit of the counterparty?
+    GOLD: Agent or its successors shall maintain during the term of this Agreement and while it is still responsible for its Book of Business: i.All required workers' compensation or similar insurance; ii.Comprehensive general liability insurance.
+    PRED: Yes, there is a requirement for insurance that must be maintained by one party for the benefit of the counterparty, as indicated in the passages regarding commercial general liability insurance and product liability insurance obligations.
+[44] qid=cuad__attention-corpus-tuned__batch__doc282_qa19__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Covenant Not To Sue" that should be reviewed by a lawyer. Details: Is a party restricted from contesting the validity of the counterparty’s ownership of intellectual property or otherwise bringing a claim against the counterparty for matters unrelated to the contract?
+    GOLD: Agent agrees that it shall take no action inconsistent with Kallo ownership of the Trademarks and agrees not to challenge Kallo's rights in or attempt to register any of the Trademarks, or any other name or mark owned or used by Kallo or any mark confusingly similar thereto.
+    PRED: The contract includes a "Covenant Not to Sue" clause that restricts parties from suing each other for patent infringement related to developments contemplated in the agreement, provided that the Protected Entities have a license. However, it does not explicitly state that a party is restricted from contesting the validity of the counterparty’s ownership of intellectual property or bringing claims unrelated to the contract. Therefore, these aspects should be reviewed by a lawyer for clarity and implications.
+[45] qid=cuad__attention-corpus-tuned__batch__doc283_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: ENDORSEMENT AGREEMENT
+    PRED: The relevant document name is "Endorsement Agreement."
+[46] qid=cuad__attention-corpus-tuned__batch__doc283_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: National Football League Alumni - Northern California Chapter
+    PRED: The relevant passage does not provide specific details about the "Parties" section of the contract for Gridiron Bionutrients Inc. Therefore, there are no highlighted parts related to "Parties" that should be reviewed by a lawyer.
+[47] qid=cuad__attention-corpus-tuned__batch__doc283_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: October 30, 2017
+    PRED: The relevant passage does not provide specific details regarding the "Agreement Date" of the contract that should be reviewed by a lawyer.
+[48] qid=cuad__attention-corpus-tuned__batch__doc283_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: All terms of this Agreement will automatically commence on November 1st, 2017, and expire on November 2nd, 2020.
+    PRED: The relevant passage regarding the "Effective Date" is not provided in the context.
+[49] qid=cuad__attention-corpus-tuned__batch__doc283_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: All terms of this Agreement will automatically commence on November 1st, 2017, and expire on November 2nd, 2020.
+    PRED: The contract's initial term will expire on November 7, 2022.
+[50] qid=cuad__attention-corpus-tuned__batch__doc283_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This Agreement shall be governed by, and its provisions enforced in accordance with, the laws of California without regard to its principles of conflicts of laws.
+    PRED: The relevant passage regarding "Governing Law" in the contract specifies that the law of the State of Delaware governs the interpretation of the contract.
+[51] qid=cuad__attention-corpus-tuned__batch__doc283_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Exclusivity" that should be reviewed by a lawyer. Details: Is there an exclusive dealing commitment with the counterparty? This includes a commitment to procure all “requirements” from one party of certain technology, goods, or services or a prohibition on licensing or selling technology, goods or services to third parties, or a prohibition on collaborating or working with other parties), whether during the contract or after the contract  …[TRUNC]
+    GOLD: NFLA agrees not to grant the right to use the NFLAs Identification to anyone other than Company in connection with the advertisement and promotion of Products.
+    PRED: The provided passages do not contain specific information regarding "Exclusivity" or exclusive dealing commitments in the contract related to CUAD: GridironBionutrientsInc_20171206_8-K_EX-10.1_10972555_EX-10.1_Endorsement Agreement.
+[52] qid=cuad__attention-corpus-tuned__batch__doc283_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: Company will not sublicense pass-through or otherwise grant to any third parties the rights granted to Company hereunder without the NFLA prior written consent, including but not limited to the right to use the Licensed Marks.
+    PRED: The contract requires prior written consent from the other party for any assignment, and any attempt to assign without consent will be null and void.
+[53] qid=cuad__attention-corpus-tuned__batch__doc283_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Revenue/Profit Sharing" that should be reviewed by a lawyer. Details: Is one party required to share revenue or profit with the counterparty for any technology, goods, or services?
+    GOLD: A *donation of $0.05 per Unit sold of Licensed Products within the Contract Territory payable to the **NFL Alumni Northern California Chapter.
+    PRED: The provided passages do not contain specific information regarding the "Revenue/Profit Sharing" terms of the contract related to GridironBionutrientsInc. Therefore, it cannot be determined if one party is required to share revenue or profit with the counterparty for any technology, goods, or services.
+[54] qid=cuad__attention-corpus-tuned__batch__doc283_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Minimum Commitment" that should be reviewed by a lawyer. Details: Is there a minimum order size or minimum amount or units per-time period that one party must buy from the counterparty under the contract?
+    GOLD: NFLA to feature Company on all social media channels a minimum of four (4) times per year.
+    PRED: The relevant passage indicates that there is a commitment to purchase a minimum of 100 Units in aggregate within the first six months of the term of the Agreement. This minimum order size should be reviewed by a lawyer.
+[55] qid=cuad__attention-corpus-tuned__batch__doc283_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "License Grant" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?
+    GOLD: The NFLA agrees to license such rights to the Company.
+    PRED: The provided passages do not contain specific information regarding the "License Grant" in the contract related to GridironBionutrientsInc. Therefore, it cannot be determined if the contract contains a license granted by one party to its counterparty.
+[56] qid=cuad__attention-corpus-tuned__batch__doc283_qa11__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Transferable License" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?
+    GOLD: Company will not sublicense pass-through or otherwise grant to any third parties the rights granted to Company hereunder without the NFLA prior written consent, including but not limited to the right to use the Licensed Marks.
+    PRED: Yes, the contract limits the ability of a party to transfer the license being granted to a third party without prior written consent from the other party, which consent shall not be unreasonably withheld or delayed.
+[57] qid=cuad__attention-corpus-tuned__batch__doc283_qa12__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Post-Termination Services" that should be reviewed by a lawyer. Details: Is a party subject to obligations after the termination or expiration of a contract, including any post-termination transition, payment, transfer of IP, wind-down, last-buy, or similar commitments?
+    GOLD: Company may liquidate and sell its inventory of Licensed Products (including any inventory then in production) for a period of ninety (90) days after the termination date of the Contract Period, subject to the Company's continued obligation to pay the Fee as provided above, and will deliver the Sales Report with respect to such liquidation sales within 30 days following the end of the first reached full quarter following termination.
+    PRED: The relevant sections regarding obligations after termination or expiration of the contract include: - Each party must return all documents and tangible items related to Confidential Information of the other party (Section 5.4.3). - Obligations accrued prior to termination remain due and payable (Section 5.4.1). - The rights and obligations that must survive termination include provisions related to confidentiality, indemnity, and ownership of work product (Section 5.9). - The company must provide reasonable cooperation and assistance to transition services to an alternative provider upon termination (Section 39602). These sections should be reviewed by a lawyer for compliance and implicatio …[TRUNC]
+[58] qid=cuad__attention-corpus-tuned__batch__doc283_qa13__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Cap On Liability" that should be reviewed by a lawyer. Details: Does the contract include a cap on liability upon the breach of a party’s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.
+    GOLD: In no event will NFLA be liable for any indirect, incidental, reliance, special or consequential damages arising out of the performance or nonperformance of this Agreement, whether or not NFLA had been advised of the possibility of such damages.
+    PRED: The provided passages do not contain specific information regarding a "Cap On Liability" in the contract related to Gridiron Bionutrients Inc. Therefore, it cannot be determined if the contract includes a cap on liability or any related details that should be reviewed by a lawyer.
+[59] qid=cuad__attention-corpus-tuned__batch__doc283_qa14__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Insurance" that should be reviewed by a lawyer. Details: Is there a requirement for insurance that must be maintained by one party for the benefit of the counterparty?
+    GOLD: Company agrees to provide and maintain, at its own expense, general commercial and product liability insurance.
+    PRED: Yes, there is a requirement for each Party to obtain and maintain commercial general liability insurance, including product liability insurance, for the benefit of the counterparty.
+[60] qid=cuad__attention-corpus-tuned__batch__doc283_qa15__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Covenant Not To Sue" that should be reviewed by a lawyer. Details: Is a party restricted from contesting the validity of the counterparty’s ownership of intellectual property or otherwise bringing a claim against the counterparty for matters unrelated to the contract?
+    GOLD: Company agrees that it will not file, during the Contract Period or afterward, any application for trademark registration or otherwise obtain or attempt to obtain ownership of any trademark or trade name within the Contract Territory or in any other country of the world which consists of the NFLA Identification or any mark, design or logo intended to obtain any rights to the name of the NFLA or to identify products as being endorsed b the NFLA.
+    PRED: The provided passages do not contain specific information regarding a "Covenant Not To Sue" or any restrictions on contesting the validity of the counterparty’s ownership of intellectual property in the context of the GridironBionutrientsInc endorsement agreement. Therefore, it is unclear if a party is restricted from bringing claims unrelated to the contract.
+[61] qid=cuad__attention-corpus-tuned__batch__doc284_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: ENDORSEMENT AGREEMENT
+    PRED: The document name is "ENDORSEMENT AGREEMENT."
+[62] qid=cuad__attention-corpus-tuned__batch__doc284_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: DAVID DUVAL ENTERPRISES, INC.
+    PRED: The relevant passage does not provide specific details about the "Parties" section of the contract that should be reviewed by a lawyer.
+[63] qid=cuad__attention-corpus-tuned__batch__doc284_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: 1st day of January, 2000
+    PRED: The "Agreement Date" in the contract should be reviewed by a lawyer for its implications on the enforceability and obligations of the parties involved.
+[64] qid=cuad__attention-corpus-tuned__batch__doc284_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: "Contract Period" shall mean that period of time commencing on January 1, 2000 and concluding December 31, 2003, unless terminated sooner as provided herein.
+    PRED: The "Effective Date" means the effective date of this Contract, which shall be the date on which this Contract and the Articles of Association have been approved by the Examination and Approval Authority.
+[65] qid=cuad__attention-corpus-tuned__batch__doc284_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: "Contract Period" shall mean that period of time commencing on January 1, 2000 and concluding December 31, 2003, unless terminated sooner as provided herein.
+    PRED: The contract's initial term will expire on the [*] anniversary of the Effective Date.
+[66] qid=cuad__attention-corpus-tuned__batch__doc284_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This agreement shall be governed by, and its provisions enforced in accordance with, the laws of the State of Ohio, without regard to its principals of conflicts of laws.
+    PRED: The relevant passage does not provide specific details regarding the "Governing Law" of the contract.
+[67] qid=cuad__attention-corpus-tuned__batch__doc284_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Exclusivity" that should be reviewed by a lawyer. Details: Is there an exclusive dealing commitment with the counterparty? This includes a commitment to procure all “requirements” from one party of certain technology, goods, or services or a prohibition on licensing or selling technology, goods or services to third parties, or a prohibition on collaborating or working with other parties), whether during the contract or after the contract  …[TRUNC]
+    GOLD: Licensor agrees not to grant the right to use the Duval Identification to anyone other than Company in connection with the advertisement and promotion of Products.
+    PRED: The relevant passages do not provide specific details regarding "Exclusivity" in the MOSSIMO INC. endorsement agreement. Therefore, it is unclear if there is an exclusive dealing commitment with the counterparty that should be reviewed by a lawyer.
+[68] qid=cuad__attention-corpus-tuned__batch__doc284_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Change Of Control" that should be reviewed by a lawyer. Details: Does one party have the right to terminate or is consent or notice required of the counterparty if such party undergoes a change of control, such as a merger, stock sale, transfer of all or substantially all of its assets or business, or assignment by operation of law?
+    GOLD: In the event of the merger or consolidation of Company with any other entity, Licensor shall have the right to terminate the Contract Period by so notifying Company in writing within sixty (60) days following Licensor's receipt of notice of such merger or consolidation.
+    PRED: The contract allows either party to terminate the Agreement upon written notice if the other party undergoes a Change of Control. However, the termination notice is only effective if delivered within a specified time after the Change of Control occurs or is notified. Additionally, a Change of Control is defined to include various transactions such as mergers, stock sales, and transfers of assets. Consent from the counterparty may be required in certain circumstances, particularly regarding the Manufacturer's Change of Control.
+[69] qid=cuad__attention-corpus-tuned__batch__doc284_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: The rights granted Company hereunder are personal to it, shall be used only by it or its affiliate and shall not without the prior written consent of Licensor be transferred or assigned to any other party.
+    PRED: Consent is required from the other party if the contract is assigned to a third party.
+[70] qid=cuad__attention-corpus-tuned__batch__doc284_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Minimum Commitment" that should be reviewed by a lawyer. Details: Is there a minimum order size or minimum amount or units per-time period that one party must buy from the counterparty under the contract?
+    GOLD: In the event Duval does not meet the Minimum Annual Performance Requirements for a Contract Year, $375,000 of the Additional License Fee will be deemed to be unearned.
+    PRED: Yes, the contract specifies an INITIAL ORDER COMMITMENT where MA commits to purchase a minimum of 100 Units in aggregate within the first six months of the term of this Agreement.
+[71] qid=cuad__attention-corpus-tuned__batch__doc284_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Ip Ownership Assignment" that should be reviewed by a lawyer. Details: Does intellectual property created by one party become the property of the counterparty, either per the terms of the contract or upon the occurrence of certain events?
+    GOLD: In the event that, prior to commencement of the Contract Period, Company has filed one or more applications for registration of any such trademark, or otherwise has obtained any rights to such trademark, Company agrees to cause such applications and/or trademarks to be assigned and transferred to Licensor forthwith.
+    PRED: The relevant passage to review regarding "IP Ownership Assignment" is: "The Parties agree that the ownership of Intellectual Property Rights in technology developed by or for the Company pursuant to an Ancillary Agreement shall be governed by such Ancillary Agreement." This indicates that the ownership of IP may depend on the terms of the Ancillary Agreement, which should be examined for specific conditions regarding IP ownership transfer.
+[72] qid=cuad__attention-corpus-tuned__batch__doc284_qa11__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "License Grant" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?
+    GOLD: It is understood that Company may not use the Duval Identification in connection with any items for sale or resale, other than Company Products as specified herein.
+    PRED: The contract does not explicitly mention a "License Grant" that should be reviewed by a lawyer.
+[73] qid=cuad__attention-corpus-tuned__batch__doc284_qa12__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Cap On Liability" that should be reviewed by a lawyer. Details: Does the contract include a cap on liability upon the breach of a party’s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.
+    GOLD: In no event will Licensor be liable for any indirect, incidental, reliance, special or consequential damages arising out of the performance or non-performance of this Agreement, whether or not Licensor had been advised of the possibility of such damages.
+    PRED: The contract includes a "Liability Cap" that limits the total aggregate liability of one party to another for any claim relating to any breach of the agreement to the aggregate amount of the purchase prices paid by the Distributor to Accuray for Products during the twelve calendar months preceding the notification of the claim. Additionally, it specifies that claims must be notified without unreasonable delay. These sections should be reviewed by a lawyer for compliance and enforceability.
+[74] qid=cuad__attention-corpus-tuned__batch__doc284_qa13__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Liquidated Damages" that should be reviewed by a lawyer. Details: Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?
+    GOLD: Any unearned Additional License Fee is fully &bbsp; refundable and due Company no later then January 31st of the following year.
+    PRED: Yes, the contract contains clauses related to liquidated damages, including a definition of "Liquidated Damages Amount" and provisions acknowledging that certain fees (Termination for Convenience Fee and Termination for Cause Fee) are deemed liquidated damages. Additionally, it specifies that the non-breaching party may demand liquidated damages and specific performance for breaches during the term of cooperation.
+[75] qid=cuad__attention-corpus-tuned__batch__doc284_qa14__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Insurance" that should be reviewed by a lawyer. Details: Is there a requirement for insurance that must be maintained by one party for the benefit of the counterparty?
+    GOLD: Company agrees to provide and maintain, at its own expense, general commercial and product liability insurance with limits no less than Three Million Dollars ($3,000,000) and naming Licensor and Duval as additional named insureds.
+    PRED: Yes, there is a requirement for insurance that must be maintained by one party for the benefit of the counterparty. The Company is required to maintain Products Liability Insurance, under which the Contractor is named as an additional insured.
+[76] qid=cuad__attention-corpus-tuned__batch__doc284_qa15__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Third Party Beneficiary" that should be reviewed by a lawyer. Details: Is there a non-contracting party who is a beneficiary to some or all of the clauses in the contract and therefore can enforce its rights against a contracting party?
+    GOLD: It is understood that Duval is not a party hereto and has no liability hereunder but is an intended specific third party creditor beneficiary hereof.
+    PRED: The contract explicitly states that it does not create any rights enforceable by a third party, indicating that no non-contracting party is a beneficiary and cannot enforce rights against a contracting party.
+[77] qid=cuad__attention-corpus-tuned__batch__doc285_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: AMENDMENT TO SERVICES AGREEMENT
+    PRED: The contract name is "AMENDMENT TO SERVICES AGREEMENT."
+[78] qid=cuad__attention-corpus-tuned__batch__doc285_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: FEDERATED INVESTMENT MANAGEMENT COMPANY
+    PRED: The relevant parts of the contract related to "Parties" that should be reviewed by a lawyer include the identification of each party involved, their legal names, addresses, and any specific roles or responsibilities outlined in the agreement.
+[79] qid=cuad__attention-corpus-tuned__batch__doc285_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: March 30, 2009
+    PRED: The relevant passage does not provide specific details regarding the "Agreement Date" that should be reviewed by a lawyer.
+[80] qid=cuad__attention-corpus-tuned__batch__doc285_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: March 30, 2009
+    PRED: The parts of the contract related to "Effective Date" that should be reviewed by a lawyer include the definitions and implications of the "Effective Date" as stated in the passages: "This Agreement is entered into with effect as of the Effective Date (as defined below)" and "This Agreement is made as of the Effective Date between."
+[81] qid=cuad__attention-corpus-tuned__batch__doc285_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This Amendment shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania.
+    PRED: The relevant passage does not provide specific details regarding the "Governing Law" of the contract. Therefore, it is unclear which state or country's law governs the interpretation of the contract.
+[82] qid=cuad__attention-corpus-tuned__batch__doc286_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: CO-BRANDING AGREEMENT
+    PRED: The document name is "Co-Branding Agreement."
+[83] qid=cuad__attention-corpus-tuned__batch__doc286_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: Dassault Systemes
+    PRED: The contract should be reviewed for the identification of the parties involved, including their legal names, addresses, and any specific roles or responsibilities outlined for each party.
+[84] qid=cuad__attention-corpus-tuned__batch__doc286_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: November 14, 2000
+    PRED: The relevant passage does not provide specific details regarding the "Agreement Date" that should be reviewed by a lawyer.
+[85] qid=cuad__attention-corpus-tuned__batch__doc286_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: November 14, 2000
+    PRED: The relevant passage regarding the "Effective Date" in the contract is not provided in the context. Please refer to the specific document for details on the "Effective Date" that should be reviewed by a lawyer.
+[86] qid=cuad__attention-corpus-tuned__batch__doc286_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: This Agreement shall be effective as of the Effective Date and shall continue in force for three years from the Launch Date (the "Initial Term") unless earlier
+    PRED: The contract's initial term will expire on April 1, 2004.
+[87] qid=cuad__attention-corpus-tuned__batch__doc286_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Renewal Term" that should be reviewed by a lawyer. Details: What is the renewal term after the initial term expires? This includes automatic extensions and unilateral extensions with prior notice.
+    GOLD: The Agreement shall automatically renew for successive one year additional terms unless terminated by either party at least six months prior to the expiration of the then-current term.
+    PRED: The contract states that unless terminated pursuant to Section 25, it will automatically renew for additional successive terms unless either Party provides written notice of non-renewal at least [***] prior to the end of the then-current Term. The specific duration of the Renewal Term is not detailed in the provided passage.
+[88] qid=cuad__attention-corpus-tuned__batch__doc286_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Notice Period To Terminate Renewal" that should be reviewed by a lawyer. Details: What is the notice period required to terminate renewal?
+    GOLD: The Agreement shall automatically renew for successive one year additional terms unless terminated by either party at least six months prior to the expiration of the then-current term.
+    PRED: The notice period required to terminate renewal is ninety (90) days prior to the end of the Initial Term or any Renewal Term.
+[89] qid=cuad__attention-corpus-tuned__batch__doc286_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: state.
+    PRED: The relevant passage does not provide specific details regarding the "Governing Law" of the contract.
+[90] qid=cuad__attention-corpus-tuned__batch__doc286_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Compete" that should be reviewed by a lawyer. Details: Is there a restriction on the ability of a party to compete with the counterparty or operate in a certain geography or business or technology sector?
+    GOLD: Except as contemplated under this Agreement, during the two year period following the Effective Date, Dassault Systemes shall not commercially offer any web service, which is (i) based upon the ACIS-based software transferred to Dassault Systemes in
+    PRED: The contract includes a section on Non-Competition, specifically Section 4.3 and Section 5.8, which should be reviewed by a lawyer to understand any restrictions on the ability of a party to compete with the counterparty or operate in specific geographies, business, or technology sectors.
+[91] qid=cuad__attention-corpus-tuned__batch__doc286_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "No-Solicit Of Customers" that should be reviewed by a lawyer. Details: Is a party restricted from contracting or soliciting customers or partners of the counterparty, whether during the contract or after the contract ends (or both)?
+    GOLD: During the Term of this Agreement, and for a period of one year thereafter, except as expressly provided in this Agreement, PlanetCAD shall not market any services to Customers without the prior written approval of Dassault Systemes.
+    PRED: The provided passages do not contain specific information regarding "No-Solicit Of Customers" in the context of the RandWorldwideInc Co-Branding Agreement. Therefore, it is unclear if a party is restricted from contracting or soliciting customers or partners of the counterparty during or after the contract. A lawyer should review the full agreement for any relevant clauses.
+[92] qid=cuad__attention-corpus-tuned__batch__doc286_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Competitive Restriction Exception" that should be reviewed by a lawyer. Details: This category includes the exceptions or carveouts to Non-Compete, Exclusivity and No-Solicit of Customers above.
+    GOLD: During the Term of this Agreement, PlanetCAD shall be permitted to market new functions and services relating to the Co-Branded Service directly to Dassault Systemes Customers with Dassault Systemes prior written approval, but only to the extent such functions and services are offered by PlanetCAD on the PlanetCAD Web site(s).
+    PRED: The provided passages do not contain specific details regarding the "Competitive Restriction Exception" or any related exceptions or carveouts to Non-Compete, Exclusivity, and No-Solicit of Customers in the RandWorldwideInc Co-Branding Agreement.
+[93] qid=cuad__attention-corpus-tuned__batch__doc286_qa11__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Change Of Control" that should be reviewed by a lawyer. Details: Does one party have the right to terminate or is consent or notice required of the counterparty if such party undergoes a change of control, such as a merger, stock sale, transfer of all or substantially all of its assets or business, or assignment by operation of law?
+    GOLD: In the event there is a change of Control of an Affiliate which terminates its status as an Affiliate of the party to this Agreement, and this Agreement has been assigned to such an Affiliate, this Agreement must be assigned back to the party within 6 months of the effective date of the change of Control.
+    PRED: The contract allows either party to terminate the Agreement upon written notice if the other party undergoes a Change of Control, which includes a merger, stock sale, or transfer of at least fifty percent (50%) of equity ownership. Consent or notice is required from the party undergoing the Change of Control, as termination notices must be delivered within a specified timeframe after the Change of Control occurs or is notified.
+[94] qid=cuad__attention-corpus-tuned__batch__doc286_qa12__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: This Agreement may be assigned or otherwise transferred, by operation of law or otherwise without the express written consent of PlanetCAD and Dassault Systemes, but in such event the assigning Party shall give notice to the non-assigning Party and the non-assigning Party shall have the right to terminate this Agreement within the 30-day period following receipt of such notice.
+    PRED: Neither party may assign this Agreement or subcontract its obligations under this Agreement to another party without the other party's prior, written consent executed by a duly authorized officer.
+[95] qid=cuad__attention-corpus-tuned__batch__doc286_qa13__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Revenue/Profit Sharing" that should be reviewed by a lawyer. Details: Is one party required to share revenue or profit with the counterparty for any technology, goods, or services?
+    GOLD: In the event that Dassault Systemes opts to host the Co-Branded Service pursuant to Section 4.7 [Change of Hosting] herein they shall become the Billing Party and all Net Revenue derived from sales of the Co-Branded Service shall be apportioned [***] percent ([***]%) to Dassault Systems and [***] percent ([***]%) to PlanetCAD.
+    PRED: The provided context does not contain specific details regarding "Revenue/Profit Sharing" in the contract related to RandWorldwideInc. Therefore, it cannot be determined if one party is required to share revenue or profit with the counterparty for any technology, goods, or services.
+[96] qid=cuad__attention-corpus-tuned__batch__doc286_qa14__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Joint Ip Ownership" that should be reviewed by a lawyer. Details: Is there any clause providing for joint or shared ownership of intellectual property between the parties to the contract?
+    GOLD: The parties hereby acknowledge and agree that any and all rights to Know-How developed or shared under this Agreement by either party shall be jointly owned by the parties and may be used by either party in the operation of their respective businesses during and following termination of this Agreement.
+    PRED: The relevant passage states that "JOINT INTELLECTUAL PROPERTY" is defined in the CA, and such definition is incorporated by reference herein. Any and all JOINT INTELLECTUAL PROPERTY licensed under this Agreement shall be set forth in ANNEX I. This indicates that there may be clauses related to joint or shared ownership of intellectual property that should be reviewed by a lawyer.
+[97] qid=cuad__attention-corpus-tuned__batch__doc286_qa15__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "License Grant" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?
+    GOLD: PlanetCAD hereby grants to Dassault Systemes a fully-paid, non-exclusive, worldwide, revocable limited license to the Server Software and Infrastructure for the sole purpose of (i) hosting the Co-Branded Service and (ii) fulfilling its
+    PRED: The contract contains a license granted by one party to its counterparty.
+[98] qid=cuad__attention-corpus-tuned__batch__doc286_qa16__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Transferable License" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?
+    GOLD: On or before the Launch Date, each party shall grant the other party a non-exclusive, non-transferable, revocable right to use their approved Marks, for the sole purpose of advertising, marketing, promotion and sale of the Co-Branded Service.
+    PRED: Yes, the contract limits the ability of a party to transfer the license being granted to a third party, as indicated in Section 11.8, which states that the Agreement shall not be transferred, delegated, or assigned to a third party unless applicable portions of the License Agreement are also transferred. Any unauthorized transfer or assignment is deemed null and void.
+[99] qid=cuad__attention-corpus-tuned__batch__doc286_qa17__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Audit Rights" that should be reviewed by a lawyer. Details: Does a party have the right to audit the books, records, or physical locations of the counterparty to ensure compliance with the contract?
+    GOLD: During such two-year period, and upon reasonable notice to the Billing Party, the Non-Billing Party shall have the right to have an audit conducted through a licensed independent accounting firm, of any billings, collections, and taxes on such itemized statement, and to examine the records and books of account of the Billing Party in connection therewith.
+    PRED: Yes, a party has the right to audit the books and records of the other party to verify the accuracy of reports and payments made under the Agreement, as stated in Section 7.2.1.
+[100] qid=cuad__attention-corpus-tuned__batch__doc286_qa18__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Uncapped Liability" that should be reviewed by a lawyer. Details: Is a party’s liability uncapped upon the breach of its obligation in the contract? This also includes uncap liability for a particular type of breach such as IP infringement or breach of confidentiality obligation.
+    GOLD: EXCEPT FOR LIABILITY ARISING FROM SECTION 9.3 [Intellectual Property Infringement], IN NO EVENT SHALL EITHER PARTY BE LIABLE UNDER THIS AGREEMENT FOR AN AMOUNT GREATER THAN THE AMOUNT THAT SUCH PARTY HAS EARNED PURSUANT TO THE REVENUE SHARING PROVISIONS OF SECTION 5.4 [Share of Net Revenue] IN THE TWELVE MONTH PERIOD PRECEDING THE CLAIM.
+    PRED: The provided passages do not contain specific details regarding "Uncapped Liability" or any related terms in the contract for RandWorldwideInc. Therefore, it is not possible to highlight any parts related to this topic that should be reviewed by a lawyer.
+[101] qid=cuad__attention-corpus-tuned__batch__doc286_qa19__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Cap On Liability" that should be reviewed by a lawyer. Details: Does the contract include a cap on liability upon the breach of a party’s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.
+    GOLD: EXCEPT FOR LIABILITY ARISING FROM SECTION 9.3 [Intellectual Property Infringement], IN NO EVENT SHALL EITHER PARTY BE LIABLE UNDER THIS AGREEMENT FOR AN AMOUNT GREATER THAN THE AMOUNT THAT SUCH PARTY HAS EARNED PURSUANT TO THE REVENUE SHARING PROVISIONS OF SECTION 5.4 [Share of Net Revenue] IN THE TWELVE MONTH PERIOD PRECEDING THE CLAIM.
+    PRED: The contract includes a section stating that "The maximum liability of one Party to the other Party and its affiliates in relation to this Agreement will be [***] ("Liability Cap")." This indicates there is a cap on liability, which should be reviewed by a lawyer for specifics on the maximum amount for recovery and any time limitations for bringing claims.
+[102] qid=cuad__attention-corpus-tuned__batch__doc287_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: STRATEGIC ALLIANCE AGREEMENT
+    PRED: The name of the contract is "Exhibit 10.1."
+[103] qid=cuad__attention-corpus-tuned__batch__doc287_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: GOLD RESOURCE CORPORATION
+    PRED: The relevant parts of the contract related to "Parties" that should be reviewed by a lawyer include the identification of each party involved, their legal names, addresses, and any specific roles or responsibilities outlined in the agreement.
+[104] qid=cuad__attention-corpus-tuned__batch__doc287_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: 5th day of December 2008.
+    PRED: The "Agreement Date" for the contract is December 11, 2008.
+[105] qid=cuad__attention-corpus-tuned__batch__doc287_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This Agreement shall be construed and enforced in accordance with, and the rights of the parties shall be governed by, the laws of the State of New York and the laws of the United States applicable therein.
+    PRED: The relevant passage regarding "Governing Law" in the contract is not provided in the context. Please refer to the specific contract document for details on which state/country's law governs the interpretation of the contract.
+[106] qid=cuad__attention-corpus-tuned__batch__doc287_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Most Favored Nation" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?
+    GOLD: The Company shall immediately inform HOC and provide HOC with a copy of any other standstill provisions in any agreement pertaining to the matters set forth in this Article 6, entered into by the Company with another person subsequent to the date hereof, and notwithstanding delivery of such notice and a copy of any such provisions, HOC shall have the full benefit of any materially more favourable terms, in the opinion of HOC, contained in such standstill and Section 6.1 shall be deemed to be ame …[TRUNC]
+    PRED: The provided passages do not contain specific details regarding the "Most Favored Nation" clause in the CUAD: GOLDRESOURCECORP_12_11_2008-EX-10.1-STRATEGIC ALLIANCE AGREEMENT. Therefore, it is unclear if such a clause exists or if it should be reviewed by a lawyer.
+[107] qid=cuad__attention-corpus-tuned__batch__doc287_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Exclusivity" that should be reviewed by a lawyer. Details: Is there an exclusive dealing commitment with the counterparty? This includes a commitment to procure all “requirements” from one party of certain technology, goods, or services or a prohibition on licensing or selling technology, goods or services to third parties, or a prohibition on collaborating or working with other parties), whether during the contract or after the contract  …[TRUNC]
+    GOLD: Subject to the provisions of Section 8.2, if the Company determines to solicit additional equity financing subsequent to exercise of the Option but prior to Commencement of Production (hereinafter defined) at the El Aguila project, it shall provide written notice to that effect to HOC and HOC shall be entitled to exclusively provide such financing upon the terms and conditions hereinafter set forth.
+    PRED: The relevant passages do not provide specific details regarding "Exclusivity" in the CUAD: GOLDRESOURCECORP_12_11_2008-EX-10.1-STRATEGIC ALLIANCE AGREEMENT. Therefore, it is recommended to review the contract directly for any exclusive dealing commitments or prohibitions related to procurement, licensing, or collaboration with third parties.
+[108] qid=cuad__attention-corpus-tuned__batch__doc287_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Rofr/Rofo/Rofn" that should be reviewed by a lawyer. Details: Is there a clause granting one party a right of first refusal, right of first offer or right of first negotiation to purchase, license, market, or distribute equity interest, technology, assets, products or services?
+    GOLD: If any of HOC Entities provides the Company an acceptance (the "HOC JV Acceptance Notice") in writing in respect of the Joint Venture Proposal Notice, within fifteen (15) Business Days of receipt thereof or such shorter period as may be specified in the Joint Venture Proposal Notice of a determination in respect of the Proposed Joint Venture, the Company shall negotiate exclusively in good faith with HOC to finalize terms of the Proposed Joint Venture acceptable to each of the Parties, acting re …[TRUNC]
+    PRED: The relevant passage regarding the right of first refusal is found in the section titled "Right of First Refusal," which outlines the process for a Licensor or stockholder to notify the Licensee of a bona fide offer and grants the Licensee the right to purchase or acquire the stock or assets on specified terms. This clause should be reviewed by a lawyer for its implications and enforceability.
+[109] qid=cuad__attention-corpus-tuned__batch__doc287_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: This Agreement may not be assigned by either party except with the prior written consent of the other parties hereto.
+    PRED: The contract states that it may not be assigned by either party without the prior written consent of the other party, except that either party may assign the Agreement without consent to an entity that acquires substantially all of the business or assets of the assigning party. Therefore, consent is required if the contract is assigned to a third party, unless it falls under the specified exceptions.
+[110] qid=cuad__attention-corpus-tuned__batch__doc287_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Minimum Commitment" that should be reviewed by a lawyer. Details: Is there a minimum order size or minimum amount or units per-time period that one party must buy from the counterparty under the contract?
+    GOLD: In the event HOC exercises the Option, the Company agrees to use not less than five million U.S. Dollars (US$5,000,000) of the proceeds from the subscription of the Purchased Shares and the Additional Shares to fund exploration activities (including but not limited to drilling, assaying and staking new claims) on the El Aguila project.
+    PRED: The contract specifies a minimum order commitment where MA commits to purchase a minimum of 100 Units in aggregate within the first six months of the term of the Agreement.
+[111] qid=cuad__attention-corpus-tuned__batch__doc287_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Audit Rights" that should be reviewed by a lawyer. Details: Does a party have the right to audit the books, records, or physical locations of the counterparty to ensure compliance with the contract?
+    GOLD: The Company shall, to the extent and for so long as HOC Entities hold at least 14.5% of the Shares on a non-diluted basis, upon HOC's request, permit representatives of the HOC Entities to have access to the site and any of the premises where the business and operations of the Company and its Subsidiaries are conducted and access and duplicating rights (and use commercially reasonable efforts to cause persons or firms possessing such documentation or information to give similar access and duplic …[TRUNC]
+    PRED: Yes, a party has the right to audit the books and records of the counterparty to ensure compliance with the contract, as outlined in the passages regarding audit rights.
+[112] qid=cuad__attention-corpus-tuned__batch__doc287_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Insurance" that should be reviewed by a lawyer. Details: Is there a requirement for insurance that must be maintained by one party for the benefit of the counterparty?
+    GOLD: So long as HOC is entitled to nominate and maintain a director pursuant to this Article 5, the Company shall indemnify each current and former HOC Director and shall maintain director's and officer's liability insurance for the benefit of each such director, with the same rights and benefits as are accorded the directors of the Company generally.
+    PRED: Yes, there is a requirement for insurance that must be maintained by one party for the benefit of the counterparty, as indicated in the passages regarding insurance obligations, including maintaining commercial general liability insurance and product liability insurance.
+[113] qid=cuad__attention-corpus-tuned__batch__doc288_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: Marketing Agreement
+    PRED: The relevant document name is not provided in the context.
+[114] qid=cuad__attention-corpus-tuned__batch__doc288_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: Loop
+    PRED: The "Parties" section of the contract states that Loop Industries, Inc. and Indorama Loop Technologies, LLC are the parties involved, and it is important to review the definitions and rights associated with each party, including their obligations, rights to enter into contracts, and any specific terms related to the Joint Venture Company and its operations.
+[115] qid=cuad__attention-corpus-tuned__batch__doc288_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: September __, 2018
+    PRED: The relevant passage does not provide specific details about the "Agreement Date" for the Loop Industries, Inc. - Marketing Agreement. Therefore, there are no highlighted parts related to the "Agreement Date" that should be reviewed by a lawyer.
+[116] qid=cuad__attention-corpus-tuned__batch__doc288_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: September __, 2018
+    PRED: The relevant passage regarding the "Effective Date" in the Loop Industries, Inc. - Marketing Agreement should be reviewed by a lawyer for its specific terms and implications, including the exact date the contract becomes effective and any conditions that may affect its enforceability.
+[117] qid=cuad__attention-corpus-tuned__batch__doc288_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: This Agreement begins on the Effective Date and shall continue indefinitely unless sooner terminated as provided in this Article 5.
+    PRED: The provided passage does not specify an "Expiration Date" or the date on which the contract's initial term will expire.
+[118] qid=cuad__attention-corpus-tuned__batch__doc288_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This Agreement shall be governed by and interpreted in accordance with the laws of the State of Delaware, United States of America, without reference to conflict-of-laws principles.
+    PRED: The provided passage does not include any specific information regarding "Governing Law" or the state/country's law that governs the interpretation of the contract.
+[119] qid=cuad__attention-corpus-tuned__batch__doc288_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "No-Solicit Of Customers" that should be reviewed by a lawyer. Details: Is a party restricted from contracting or soliciting customers or partners of the counterparty, whether during the contract or after the contract ends (or both)?
+    GOLD: Joint Venture Company shall not, and shall cause each SPV and each of their Affiliates not to, directly or indirectly, market or sell any Loop-branded Products or any Products produced using Licensed Subject Matter to any person or entity except to Authorized Customers pursuant to a Transferred Contract (the "Marketing and Sale Restriction"); provided that if at any time during the term of this Agreement, Loop has delivered Proposed Contract Notices that result in Transferred Contracts having bi …[TRUNC]
+    PRED: The provided passages do not contain specific language regarding "No-Solicit Of Customers" that restricts a party from contracting or soliciting customers or partners of the counterparty during or after the contract ends. Therefore, there are no relevant parts to highlight for review by a lawyer regarding this issue.
+[120] qid=cuad__attention-corpus-tuned__batch__doc288_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Competitive Restriction Exception" that should be reviewed by a lawyer. Details: This category includes the exceptions or carveouts to Non-Compete, Exclusivity and No-Solicit of Customers above.
+    GOLD: Joint Venture Company shall not, and shall cause each SPV and each of their Affiliates not to, directly or indirectly, market or sell any Loop-branded Products or any Products produced using Licensed Subject Matter to any person or entity except to Authorized Customers pursuant to a Transferred Contract (the "Marketing and Sale Restriction"); provided that if at any time during the term of this Agreement, Loop has delivered Proposed Contract Notices that result in Transferred Contracts having bi …[TRUNC]
+    PRED: The relevant part of the contract related to "Competitive Restriction Exception" is Section 2.7, which discusses the Marketing and Sale Restriction and the conditions under which Joint Venture Company may market and solicit orders for Licensed Products. This section outlines the circumstances that allow for exceptions to the exclusivity and marketing restrictions, including the conditions under which these restrictions may be lifted or reinstated. It is advisable for a lawyer to review this section for its implications on competitive restrictions.
+[121] qid=cuad__attention-corpus-tuned__batch__doc288_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: This Assignment shall inure to the benefit of, and shall be binding upon, the Parties and their respective successors and assigns, but, except as provided in Section 3 above, neither Party may assign this Assignment without the prior written consent of the other Party.
+    PRED: Consent is required from the other party for assignment to a third party, except in specific cases such as assignment to an affiliate or as collateral security for lenders.
+[122] qid=cuad__attention-corpus-tuned__batch__doc288_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Minimum Commitment" that should be reviewed by a lawyer. Details: Is there a minimum order size or minimum amount or units per-time period that one party must buy from the counterparty under the contract?
+    GOLD: Joint Venture Company shall not, and shall cause each SPV and each of their Affiliates not to, directly or indirectly, market or sell any Loop-branded Products or any Products produced using Licensed Subject Matter to any person or entity except to Authorized Customers pursuant to a Transferred Contract (the "Marketing and Sale Restriction"); provided that if at any time during the term of this Agreement, Loop has delivered Proposed Contract Notices that result in Transferred Contracts having bi …[TRUNC]
+    PRED: Nothing herein shall be construed to create a requirements contract or to require Premier to purchase any Products, other than the Minimum Annual Order Volume as specified in 2 (c).
+[123] qid=cuad__attention-corpus-tuned__batch__doc288_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Ip Ownership Assignment" that should be reviewed by a lawyer. Details: Does intellectual property created by one party become the property of the counterparty, either per the terms of the contract or upon the occurrence of certain events?
+    GOLD: The Assignor hereby assigns, transfers, and conveys to and in favor of the Assignee all of the Assignor's right, title, and interest in, to, and under the Transferred Contract, together with its related rights, warranties, remedies, powers, and privileges (collectively, the "Assigned Rights").
+    PRED: The ownership of Intellectual Property Rights in technology developed by or for the Company pursuant to an Ancillary Agreement shall be governed by such Ancillary Agreement.
+[124] qid=cuad__attention-corpus-tuned__batch__doc288_qa11__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Uncapped Liability" that should be reviewed by a lawyer. Details: Is a party’s liability uncapped upon the breach of its obligation in the contract? This also includes uncap liability for a particular type of breach such as IP infringement or breach of confidentiality obligation.
+    GOLD: NOTWITHSTANDING THE FOREGOING, NONE OF THE FOREGOING LIMITATIONS OF LIABILITY SET FORTH IN THIS SECTION 3.1 SHALL BE AVAILABLE TO EITHER PARTY WITH RESPECT TO A BREACH OF SECTION 4, CONFIDENTIAL INFORMATION, OR FOR CLAIMS TO THE EXTENT THEY ARISE OUT OF A PARTY'S GROSS NEGLIGENCE, FRAUD, OR WILLFUL MISCONDUCT.
+    PRED: The provided passages do not contain specific information regarding "Uncapped Liability" or details about a party's liability being uncapped upon breach of obligations in the contract, including for IP infringement or breach of confidentiality. Therefore, there are no highlighted parts related to this topic that should be reviewed by a lawyer.
+[125] qid=cuad__attention-corpus-tuned__batch__doc288_qa12__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Cap On Liability" that should be reviewed by a lawyer. Details: Does the contract include a cap on liability upon the breach of a party’s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.
+    GOLD: JOINT VENTURE COMPANY'S TOTAL CUMULATIVE LIABILITY TO THE LOOP PARTIES WITH RESPECT TO A TRANSFERRED CONTRACT, IN ALL CIRCUMSTANCES AND REGARDLESS OF THE THEORY OF RECOVERY, SHALL BE LIMITED TO THE AMOUNT OF ACTUAL, DIRECT, AND DOCUMENTED DAMAGES THE APPLICABLE AUTHORIZED CUSTOMER ACTUALLY RECOVERS FROM THE LOOP PARTIES UNDER THE TRANSFERRED CONTRACT BASED SOLELY ON JOINT VENTURE COMPANY'S BREACH OF SUCH TRANSFERRED CONTRACT.
+    PRED: The contract includes a limitation of liability stating that Joint Venture Company's total cumulative liability to the Loop Parties with respect to a Transferred Contract shall be limited to the amount of actual, direct, and documented damages the applicable Authorized Customer actually recovers from the Loop Parties under the Transferred Contract based solely on Joint Venture Company's breach of such Transferred Contract. Additionally, it specifies that the limitations of liability do not apply to breaches of confidentiality or claims arising from gross negligence, fraud, or willful misconduct.
+[126] qid=cuad__attention-corpus-tuned__batch__doc289_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: MASTER OPERATION AND MAINTENANCE AGREEMENT
+    PRED: The relevant contract is the "Maintenance Agreement."
+[127] qid=cuad__attention-corpus-tuned__batch__doc289_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: BLOOM ENERGY CORPORATION
+    PRED: The relevant passage regarding "Parties" in the contract is not provided in the context.
+[128] qid=cuad__attention-corpus-tuned__batch__doc289_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: April 13, 2012
+    PRED: The "Agreement Date" in the contract is the "Execution Date," which is specified as the 27th day of November 2018.
+[129] qid=cuad__attention-corpus-tuned__batch__doc289_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: The term of this Agreement (the "Term") (a) shall commence on the first day of the Warranty Period for the first Bloom System to achieve Commencement of Operation and (b) shall, unless terminated earlier under Section 4.1 of this Agreement or unless extended by mutual agreement of the Parties, terminate on the date that is the last day of the Warranty Period for the last Bloom System to achieve Commencement of Operation.
+    PRED: The "Effective Date" of the contract is not explicitly mentioned in the provided passage for the CUAD: BloomEnergyCorp_20180321_DRSA (on S-1)_EX-10_11240356_EX-10_Maintenance Agreement. Therefore, there are no specific parts related to "Effective Date" to review.
+[130] qid=cuad__attention-corpus-tuned__batch__doc289_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: The term of this Agreement (the "Term") (a) shall commence on the first day of the Warranty Period for the first Bloom System to achieve Commencement of Operation and (b) shall, unless terminated earlier under Section 4.1 of this Agreement or unless extended by mutual agreement of the Parties, terminate on the date that is the last day of the Warranty Period for the last Bloom System to achieve Commencement of Operation.
+    PRED: The initial term of the contract will expire one year from the effective date, unless either party provides written notification of its intention not to renew at least one month prior to the expiration.
+[131] qid=cuad__attention-corpus-tuned__batch__doc289_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: THIS AGREEMENT SHALL BE GOVERNED BY AND INTERPRETED IN ACCORDANCE WITH THE LAWS OF THE STATE OF NEW YORK WITHOUT REGARD TO CONFLICTS OF LAW PRINCIPLES (OTHER THAN SECTION 5-1401 OF THE NEW YORK GENERAL OBLIGATIONS LAW).
+    PRED: The relevant passage does not provide specific details about the "Governing Law" section of the contract.
+[132] qid=cuad__attention-corpus-tuned__batch__doc289_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Anti-Assignment" that should be reviewed by a lawyer. Details: Is consent or notice required of a party if the contract is assigned to a third party?
+    GOLD: This Agreement and all of the provisions hereof shall be binding upon and inure to the benefit of the Parties and their respective successors and permitted assigns (including by operation of law), but neither this Agreement nor any of the rights, interests or obligations hereunder shall be assigned by any Party, whether by operation of law or otherwise, without the prior written consent of the other Party; provided that either Party may collaterally assign its rights under this Agreement to any  …[TRUNC]
+    PRED: The contract states that it may not be assigned by either party without the prior written consent of the other party, except that the Company may assign this Agreement as collateral security in favor of its lenders, and to a purchaser of all or substantially all of the assets of the Company's business related to the Products. Therefore, consent is required for most assignments, but there are exceptions.
+[133] qid=cuad__attention-corpus-tuned__batch__doc289_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Minimum Commitment" that should be reviewed by a lawyer. Details: Is there a minimum order size or minimum amount or units per-time period that one party must buy from the counterparty under the contract?
+    GOLD: If the Minimum Efficiency Level has
+    PRED: Yes, the contract specifies a minimum order commitment where MA must purchase a minimum of 100 Units in aggregate within the first six months of the term of the Agreement.
+[134] qid=cuad__attention-corpus-tuned__batch__doc289_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "License Grant" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?
+    GOLD: Operator grants to Owner the limited right to use any Training Materials which are provided under this Agreement, and Owner agrees that upon termination of this Agreement for any reason, Owner shall return all Training Materials, including any copies, to Operator.
+    PRED: The contract contains a license granted by one party to its counterparty, which should be reviewed by a lawyer.
+[135] qid=cuad__attention-corpus-tuned__batch__doc289_qa9__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Post-Termination Services" that should be reviewed by a lawyer. Details: Is a party subject to obligations after the termination or expiration of a contract, including any post-termination transition, payment, transfer of IP, wind-down, last-buy, or similar commitments?
+    GOLD: Throughout the Term, and thereafter to the extent relevant to calculations necessary for periods prior to the end of the Term and subject to any confidentiality obligation owed to any third party and/or any restrictions on the disclosure of information which may be subject to intellectual property rights restricting disclosure: (a) Owner shall grant Operator access to all data relating to the electricity production of each Bloom System, it being understood that it is Operator's responsibility to …[TRUNC]
+    PRED: Yes, a party is subject to obligations after the termination or expiration of the contract, including post-termination transition services, payment obligations, and other rights and obligations that survive termination as outlined in the relevant sections of the agreement.
+[136] qid=cuad__attention-corpus-tuned__batch__doc289_qa10__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Audit Rights" that should be reviewed by a lawyer. Details: Does a party have the right to audit the books, records, or physical locations of the counterparty to ensure compliance with the contract?
+    GOLD: All such records required to be created and maintained pursuant to Section 2.12(a) shall be kept available at the Operator's office and made available for the Owner's inspection upon request at all reasonable times.
+    PRED: Yes, a party has the right to audit the books and records of the counterparty to ensure compliance with the contract, as indicated in the passages regarding audit rights.
+[137] qid=cuad__attention-corpus-tuned__batch__doc289_qa11__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Uncapped Liability" that should be reviewed by a lawyer. Details: Is a party’s liability uncapped upon the breach of its obligation in the contract? This also includes uncap liability for a particular type of breach such as IP infringement or breach of confidentiality obligation.
+    GOLD: Subject always to the Maximum Liability limitations set forth in the preceding sentence, except for damages specifically provided for in this Agreement or in connection with the indemnification for damages awarded to a third party under a Third Party Claim, damages hereunder are limited to direct damages, and in no event shall a Party be liable to the other Party, and the Parties hereby waive claims, for (a) indirect, punitive, special or consequential damages or loss of profits; provided, howev …[TRUNC]
+    PRED: The relevant passage regarding liability in the contract states: "Notwithstanding anything in this Agreement to the contrary, the cumulative liability of each of SERVICERS and ISO for all Losses, claims, suits, controversies, breaches or damages arising out of or related to this Agreement." This indicates that the liability may not be uncapped, but a lawyer should review the specific terms and conditions to determine if there are exceptions for particular types of breaches such as IP infringement or confidentiality obligations.
+[138] qid=cuad__attention-corpus-tuned__batch__doc289_qa12__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Cap On Liability" that should be reviewed by a lawyer. Details: Does the contract include a cap on liability upon the breach of a party’s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.
+    GOLD: disbursements in connection therewith) that would otherwise be included in the definition of Indemnifiable Losses because they result from a reduction in the profits of Owner, Diamond State Generation Holdings, LLC, or both, and (b) losses or liabilities incurred by the officers, directors, members, managers, partners, shareholders or Affiliates of such Party (unless on behalf of Owner).
+    PRED: The provided context does not include specific details regarding a "Cap On Liability" in the Bloom Energy Corp Maintenance Agreement. Therefore, it cannot be determined if the contract includes a cap on liability or any related time limitations for claims.
+[139] qid=cuad__attention-corpus-tuned__batch__doc289_qa13__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Warranty Duration" that should be reviewed by a lawyer. Details: What is the duration of any warranty against defects or errors in technology, products, or services provided under the contract?
+    GOLD: In the case of a claim relating to the Power Performance Warranty for a One-Year Power Performance Warranty Period, upon receipt of such notice and verification that such One-Year Power Performance Warranty is applicable, Operator shall make a payment to Owner in an amount to be calculated pursuant to Section 2.6; provided that the cumulative aggregate amount of Operator's liability for all claims under this Section 2.5(c) shall not exceed [***] of the aggregate Purchase Price of all Bloom Syste …[TRUNC]
+    PRED: The warranty duration against defects or errors in technology, products, or services provided under the contract is twelve (12) months as of the date of delivery to Customer.
+[140] qid=cuad__attention-corpus-tuned__batch__doc289_qa14__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Insurance" that should be reviewed by a lawyer. Details: Is there a requirement for insurance that must be maintained by one party for the benefit of the counterparty?
+    GOLD: At all times during the Term without cost to Owner, Operator shall maintain in force the following insurance, which insurance shall not be subject to cancellation, termination or other material adverse changes unless the insurer delivers to Owner
+    PRED: Yes, the contract requires that the Company maintain Products Liability Insurance, under which the Contractor is named as an additional insured, and that all insurance coverages are to be placed with insurers having a Best's rating of no less than "A." This insurance must be maintained during the Term and for a minimum of three years following termination of the Agreement.
+[141] qid=cuad__attention-corpus-tuned__batch__doc290_qa0__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Document Name" that should be reviewed by a lawyer. Details: The name of the contract
+    GOLD: CO-BRANDING, MARKETING AND DISTRIBUTION AGREEMENT
+    PRED: Co-Branding Agreement
+[142] qid=cuad__attention-corpus-tuned__batch__doc290_qa1__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Parties" that should be reviewed by a lawyer. Details: The two or more parties who signed the contract
+    GOLD: Audible Inc.
+    PRED: The relevant sections regarding "Parties" in the contract should be reviewed by a lawyer to ensure clarity on the identities, roles, and responsibilities of each party involved in the Co-Branding Agreement.
+[143] qid=cuad__attention-corpus-tuned__batch__doc290_qa2__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Agreement Date" that should be reviewed by a lawyer. Details: The date of the contract
+    GOLD: January 30, 2000
+    PRED: The relevant passage does not provide specific details regarding the "Agreement Date" that should be reviewed by a lawyer.
+[144] qid=cuad__attention-corpus-tuned__batch__doc290_qa3__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Effective Date" that should be reviewed by a lawyer. Details: The date when the contract is effective
+    GOLD: January 30, 2000
+    PRED: The relevant passage regarding the "Effective Date" in the contract should be reviewed by a lawyer.
+[145] qid=cuad__attention-corpus-tuned__batch__doc290_qa4__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Expiration Date" that should be reviewed by a lawyer. Details: On what date will the contract's initial term expire?
+    GOLD: The term of this Agreement will commence on the Effective Date, and unless earlier terminated as provided elsewhere in this Agreement, will end automatically upon the end of Year 3.
+    PRED: The contract's initial term will expire on November 13, 2003.
+[146] qid=cuad__attention-corpus-tuned__batch__doc290_qa5__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Governing Law" that should be reviewed by a lawyer. Details: Which state/country's law governs the interpretation of the contract?
+    GOLD: This Agreement will be interpreted, construed and enforced in accordance with the Laws of the State of Washington, without reference to its choice of Laws rules.
+    PRED: The provided context does not specify the governing law for the contract related to CUAD: AudibleInc_20001113_10-Q_EX-10.32.
+[147] qid=cuad__attention-corpus-tuned__batch__doc290_qa6__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Compete" that should be reviewed by a lawyer. Details: Is there a restriction on the ability of a party to compete with the counterparty or operate in a certain geography or business or technology sector?
+    GOLD: "ACSI Competitor" means, collectively, such persons and entities as the Parties may agree upon from time to time. ACSI may update any agreed-upon list of ACSI Competitors no more frequently than once per quarter by written notice, provided that: (a) the number of entities specified on such list shall at no time [***]; (b) any entities added to such list must be [***]; and (c) no addition of any ACSI Competitor to such list shall require Company to breach any contractual or legal obligation to su …[TRUNC]
+    PRED: The provided context does not contain specific details regarding a "Non-Compete" clause in the contract related to Audible Inc. Therefore, it is unclear if there are any restrictions on the ability of a party to compete with the counterparty or operate in a certain geography or business or technology sector.
+[148] qid=cuad__attention-corpus-tuned__batch__doc290_qa7__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Exclusivity" that should be reviewed by a lawyer. Details: Is there an exclusive dealing commitment with the counterparty? This includes a commitment to procure all “requirements” from one party of certain technology, goods, or services or a prohibition on licensing or selling technology, goods or services to third parties, or a prohibition on collaborating or working with other parties), whether during the contract or after the contract  …[TRUNC]
+    GOLD: The Parties will issue a joint press release promptly upon concluding Advertising. this Agreement, which press release shall be subject to the Party's mutual approval, which shall in any event state that Company is the exclusive provider on the ACSI Site of premium spoken-word audio product for download or streaming over the world wide web.
+    PRED: The provided passages do not contain specific details regarding "Exclusivity" in the contract related to CUAD: AudibleInc_20001113_10-Q_EX-10.32_2599586_EX-10.32_Co-Branding Agreement.
+[149] qid=cuad__attention-corpus-tuned__batch__doc290_qa8__seed42
+    EXPECT=- | Q: Highlight the parts (if any) of this contract related to "Non-Disparagement" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?
+    GOLD: In the event that: (a) Company at any time engages in
+    PRED: The provided passages do not contain specific information regarding a "Non-Disparagement" clause or requirement related to disparaging the counterparty in the contract for Audible Inc. Therefore, there are no highlighted parts to review regarding this matter.

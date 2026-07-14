@@ -1,0 +1,602 @@
+{
+  "financebench__letta-corpus__batch__doc0_qa0__seed42": [
+    0.0,
+    "Gold FY2018 capex $1577M; pred $1501M is materially off (~5%) so wrong number => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc1_qa0__seed42": [
+    0.0,
+    "Gold FY2018 net PPNE $8.70bn; pred 9.429bn is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc2_qa0__seed42": [
+    0.0,
+    "Gold says NO not capital-intensive; pred says Yes, opposite direction => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc3_qa0__seed42": [
+    0.75,
+    "Gold cites litigation, PFAS exit, Russia exit, divestiture restructuring as margin drivers; pred lists these correctly but omits the gross-margin/1.7% decrease framing => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc4_qa0__seed42": [
+    0.0,
+    "Gold: consumer segment shrank 0.9% organically dragged growth; pred says Corporate and other, wrong segment => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc5_qa0__seed42": [
+    0.0,
+    "Gold quick ratio 0.96 (No, needs improvement); pred abstains claiming no data => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc6_qa0__seed42": [
+    0.0,
+    "Gold lists three NYSE-registered 3M notes; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc7_qa0__seed42": [
+    1.0,
+    "Gold: Yes stable, 65 consecutive years of increases; pred matches exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc8_qa0__seed42": [
+    0.0,
+    "Gold FY2019 fixed asset turnover 24.26; pred 2.56 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc9_qa0__seed42": [
+    0.0,
+    "Gold 3yr avg capex/revenue 1.9%; pred 6.0% is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc10_qa0__seed42": [
+    0.0,
+    "Gold FY2015 operating cash flow ratio 0.66; pred 1.73 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc11_qa0__seed42": [
+    1.0,
+    "Gold YoY operating income change 65.4%; pred 65.4% with correct work => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc12_qa0__seed42": [
+    0.0,
+    "Gold FY2017 operating cash flow ratio 0.83; pred 3.06 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc13_qa0__seed42": [
+    0.0,
+    "Gold: No, operating margin declined 36.8% to 34.6% (metric IS useful); pred wrongly claims metric not useful and gives no correct figure => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc14_qa0__seed42": [
+    0.0,
+    "Gold: Yes FCF conversion improved 143% to 156%; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc15_qa0__seed42": [
+    1.0,
+    "Gold restructuring costs 0; pred 0 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc16_qa0__seed42": [
+    0.5,
+    "Gold inventory turnover 9.5x; pred sets up correct COGS/avg-inventory method (10069/829.5 => ~12.1) but is truncated before stating a final answer and the arithmetic wouldn't equal gold; partial method, no correct extraction => 0.5."
+  ],
+  "financebench__letta-corpus__batch__doc17_qa0__seed42": [
+    1.0,
+    "Gold ROA -0.02; pred -0.015/-1.50% rounds to -0.02 with correct work => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc18_qa0__seed42": [
+    0.0,
+    "Gold DPO 93.86; pred 36.12 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc19_qa0__seed42": [
+    1.0,
+    "Gold revenue YoY change 30.8%; pred 30.7% within trivial rounding => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc20_qa0__seed42": [
+    1.0,
+    "Gold FY2019 net income $11588M; pred 11,588 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc21_qa0__seed42": [
+    1.0,
+    "Gold net AR $1616M; pred 1,615.9M within trivial rounding => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc22_qa0__seed42": [
+    1.0,
+    "Gold: supplemental indentures, Notes due 2026/2028, substitution of substitute issuer, assumption of covenants; pred captures all key specifics => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc23_qa0__seed42": [
+    0.0,
+    "Gold: quick ratio improved 0.67 to 0.69 (metric IS relevant); pred wrongly claims not typically a focus and gives no figures => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc24_qa0__seed42": [
+    0.0,
+    "Gold lists three FY2023 acquisitions; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc25_qa0__seed42": [
+    1.0,
+    "Gold: global leader in packaging; pred correctly says packaging industry with detail => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc26_qa0__seed42": [
+    1.0,
+    "Gold: No, gross margin declined ~0.8%; pred correctly concludes not improving with declining gross profit figures => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc27_qa0__seed42": [
+    0.5,
+    "Gold: 87% of restructuring liability is employee-related; pred mentions employee costs among categories but misses the decisive 87%/majority-employee specific => 0.5."
+  ],
+  "financebench__letta-corpus__batch__doc28_qa0__seed42": [
+    0.0,
+    "Gold Adj EBITDA $2,018M FY2023; pred 2,117 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc29_qa0__seed42": [
+    0.0,
+    "Gold: real growth was flat; pred says decrease of 5%, wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc30_qa0__seed42": [
+    0.0,
+    "Gold D&A % margin 4.2%; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc31_qa0__seed42": [
+    0.0,
+    "Gold: Yes healthy, quick ratio 1.57; pred abstains claiming no data => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc32_qa0__seed42": [
+    1.0,
+    "Gold lists AMD's CPUs/GPUs/DPUs/FPGAs/Adaptive SoC across segments; pred matches all key products => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc33_qa0__seed42": [
+    1.0,
+    "Gold: higher EPYC server, semi-custom, Xilinx embedded; pred captures all three drivers with detail => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc34_qa0__seed42": [
+    1.0,
+    "Gold: driven by amortization of Xilinx intangibles; pred matches exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc35_qa0__seed42": [
+    1.0,
+    "Gold: Operations brought in most cash flow; pred says operating activities $3,565M, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc36_qa0__seed42": [
+    1.0,
+    "Gold: Data Center; pred Data Center segment, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc37_qa0__seed42": [
+    1.0,
+    "Gold: Yes, one customer 16% of net revenue; pred matches exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc38_qa0__seed42": [
+    0.0,
+    "Gold: there are none (no debt securities registered); pred says Common Shares, wrong (common shares are not debt securities) => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc39_qa0__seed42": [
+    1.0,
+    "Gold: US, EMEA, APAC, LACC; pred matches all four with expansions => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc40_qa0__seed42": [
+    1.0,
+    "Gold: performance not measured through operating margin; pred correctly says operating margin not useful for a financial-services company and explains why => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc41_qa0__seed42": [
+    1.0,
+    "Gold: performance not measured through gross margin; pred correctly says gross margin not useful and explains why => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc42_qa0__seed42": [
+    1.0,
+    "Gold: effective tax rate 24.6% to 21.6%; pred matches exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc43_qa0__seed42": [
+    1.0,
+    "Gold: Customer deposits; pred Customer deposits, exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc44_qa0__seed42": [
+    1.0,
+    "Gold: Yes retained card members; pred Yes with retention rate support => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc45_qa0__seed42": [
+    1.0,
+    "Gold cash dividends $0.40bn; pred 0.389bn rounds to 0.40 => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc46_qa0__seed42": [
+    1.0,
+    "Gold unadjusted EBITDA $1832M; pred 1,832 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc47_qa0__seed42": [
+    1.0,
+    "Gold: No, negative working capital -$1561M (2811-1250=1561); pred correctly concludes not positive with those figures => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc48_qa0__seed42": [
+    0.0,
+    "Gold 3yr avg net profit margin 2.8%; pred 3.9% is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc49_qa0__seed42": [
+    1.0,
+    "Gold FY2019 inventories $5409M; pred 5,409 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc50_qa0__seed42": [
+    0.0,
+    "Gold: Yes margins consistent (only 1.1% decline); pred says fluctuated more than 2%, opposite direction => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc51_qa0__seed42": [
+    1.0,
+    "Gold: two FY2022 acquisitions Current Health and Yardbird/Two Peaks, none FY2023/FY2021; pred names both plus correctly notes none in other years => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc52_qa0__seed42": [
+    1.0,
+    "Gold: operating activities ~$1.8bn most cash flow; pred operating $1,824M, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc53_qa0__seed42": [
+    1.0,
+    "Gold: Yes ~42% decline in cash between FY2023 and Q2 FY2024; pred Yes with actual figures $3,205M to $2,253M, correct direction and valid supporting numbers => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc54_qa0__seed42": [
+    0.75,
+    "Gold: Yes decline 982 to 969 (1.32%); pred correct direction/decrease and correct ending 969 but wrong prior-count (977 vs 982) => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc55_qa0__seed42": [
+    0.75,
+    "Gold: Entertainment segment (highest 9% growth, driven by gaming); pred says Gaming which is the driver within entertainment but names the sub-category not the segment => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc56_qa0__seed42": [
+    1.0,
+    "Gold working capital ratio 1.73; pred 1.74 within trivial rounding => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc57_qa0__seed42": [
+    1.0,
+    "Gold revenue growth 101.5%; pred 101.7% within trivial rounding => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc58_qa0__seed42": [
+    1.0,
+    "Gold operating cash flow $382M; pred $381.6M within trivial rounding => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc59_qa0__seed42": [
+    1.0,
+    "Gold FY2018 net PPNE $12645M; pred $12,645 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc60_qa0__seed42": [
+    0.5,
+    "Gold: Yes three categories >20% (Commercial Airplanes 39%, Defense 35%, Services 26%); pred only identifies Commercial Airplanes, missing the other two decisive categories => 0.5."
+  ],
+  "financebench__letta-corpus__batch__doc61_qa0__seed42": [
+    1.0,
+    "Gold: Yes, Lion Air 2018 and Ethiopian 2019 crash lawsuits; pred matches both with dates => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc62_qa0__seed42": [
+    0.0,
+    "Gold: Yes gross margin improving 4.8% to 5.3% (metric IS useful); pred wrongly claims gross margin not useful for Boeing => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc63_qa0__seed42": [
+    0.75,
+    "Gold: limited commercial airlines AND US government (40% of revenue); pred names commercial airlines but omits the US government customer specific => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc64_qa0__seed42": [
+    1.0,
+    "Gold: Yes cyclical due to airline exposure; pred Yes subject to cyclicality => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc65_qa0__seed42": [
+    1.0,
+    "Gold: increase production for 737, 777X, 787 in 2023; pred covers 787 increase, 737 increase, 777X resume 2023, matching all three programs => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc66_qa0__seed42": [
+    0.75,
+    "Gold: FY2022 0.62% vs FY2021 -14.76%; pred correctly notes lower and cites $(31)M expense vs $743M benefit but doesn't state the rate percentages => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc67_qa0__seed42": [
+    0.75,
+    "Gold ROA 0.01; pred computes 0.01565 rounding to 0.02 in its work but the gold rounds to 0.01; pred's stated calc lands near but is truncated; close/defensible near-boundary => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc68_qa0__seed42": [
+    1.0,
+    "Gold COGS margin 39.7%; pred 39.7% with correct work => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc69_qa0__seed42": [
+    1.0,
+    "Gold dividend payout ratio 0.8; pred 0.80 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc70_qa0__seed42": [
+    0.75,
+    "Gold DPO 63.86; pred 66.73 is off ~4.5% via a defensible method variant => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc71_qa0__seed42": [
+    0.0,
+    "Gold 3yr avg operating income margin 10.3%; pred 15.5% is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc72_qa0__seed42": [
+    1.0,
+    "Gold effective tax rate 20% to 23%; pred matches exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc73_qa0__seed42": [
+    1.0,
+    "Gold: Yes positive working capital $831M; pred correctly concludes positive (though uses total current assets/liabilities, direction and conclusion correct) => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc74_qa0__seed42": [
+    0.0,
+    "Gold total assets $59268M; pred $55,556 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc75_qa0__seed42": [
+    0.0,
+    "Gold FY2018 fixed asset turnover 17.98; pred 5.06 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc76_qa0__seed42": [
+    1.0,
+    "Gold: Yes capital-intensive; pred Yes, correct direction => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc77_qa0__seed42": [
+    0.5,
+    "Gold: multiple battles - usual/customary pricing, PBM, controlled substances/opioids; pred only covers the usual-and-customary pricing litigation, missing the other decisive categories => 0.5."
+  ],
+  "financebench__letta-corpus__batch__doc78_qa0__seed42": [
+    1.0,
+    "Gold: Yes paid $0.55/share quarterly; pred Yes paid dividends in Q2 FY2022, correct direction => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc79_qa0__seed42": [
+    1.0,
+    "Gold: Yes, prior CEO of Ulta Beauty (similar retailer); pred names Mary Dillon former Ulta CEO => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc80_qa0__seed42": [
+    1.0,
+    "Gold: Yes, Richard A. Johnson; pred names Richard A. Johnson with vote count => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc81_qa0__seed42": [
+    0.0,
+    "Gold CCC -3.7; pred 66.73 days is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc82_qa0__seed42": [
+    1.0,
+    "Gold working capital ratio 0.68; pred 0.68 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc83_qa0__seed42": [
+    0.75,
+    "Gold FCF $3215M; pred 3,189.4 is off ~0.8% via a defensible extraction => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc84_qa0__seed42": [
+    1.0,
+    "Gold retention ratio 0.54; pred 0.54 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc85_qa0__seed42": [
+    1.0,
+    "Gold: No, low growth 1.3% sales; pred No, low growth 1.3% => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc86_qa0__seed42": [
+    0.25,
+    "Gold: driven by COVID vaccine exit costs, currency in Pharma, commodity inflation offset by supply chain benefits; pred gives sales/volume/price/currency figures unrelated to the specific gross-margin drivers => 0.25."
+  ],
+  "financebench__letta-corpus__batch__doc87_qa0__seed42": [
+    0.5,
+    "Gold inventory turnover 2.7x; pred sets up correct method (31089/11435 => ~2.72) but is truncated before stating the final answer => 0.5."
+  ],
+  "financebench__letta-corpus__batch__doc88_qa0__seed42": [
+    0.0,
+    "Gold: No, growth decelerates 3.6% to 3.5%; pred says Yes accelerate, opposite direction => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc89_qa0__seed42": [
+    1.0,
+    "Gold: US +3.0% vs international -0.6%; pred matches both exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc90_qa0__seed42": [
+    1.0,
+    "Gold: Consumer Health discontinued from Aug 30 2023; pred matches exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc91_qa0__seed42": [
+    1.0,
+    "Gold gain ~$20 billion; pred approximately $20 billion => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc92_qa0__seed42": [
+    1.0,
+    "Gold cash proceeds $13.2 billion; pred $13.2 billion exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc93_qa0__seed42": [
+    0.0,
+    "Gold: Yes increased 20% to 20.1%; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc94_qa0__seed42": [
+    0.0,
+    "Gold: Corporate (-$473M lowest net revenue); pred says Consumer & Community Banking, wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc95_qa0__seed42": [
+    0.0,
+    "Gold: $66.56 per share (book value liquidation); pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc96_qa0__seed42": [
+    1.0,
+    "Gold: gross margin not relevant for a financial institution; pred correctly says not relevant for JPM and explains why => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc97_qa0__seed42": [
+    0.0,
+    "Gold: Corporate & Investment Bank ($3725M highest net income); pred says Consumer & Community Banking, wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc98_qa0__seed42": [
+    1.0,
+    "Gold: Yes VaR risk decreased; pred Yes average total VaR decreased $7M => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc99_qa0__seed42": [
+    0.0,
+    "Gold inventory turnover 6.25; pred 1.51 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc100_qa0__seed42": [
+    0.75,
+    "Gold asset turnover 1.33; pred 1.29 is off ~3% via a defensible method => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc101_qa0__seed42": [
+    1.0,
+    "Gold net working capital $5818M; pred 5,818 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc102_qa0__seed42": [
+    0.0,
+    "Gold 2yr revenue CAGR 0.4%; pred 1.5% is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc103_qa0__seed42": [
+    1.0,
+    "Gold accounts payable $303M; pred $302.578M rounds to 303 => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc104_qa0__seed42": [
+    0.0,
+    "Gold 3yr avg capex/revenue 7.9%; pred 6.5% is materially wrong (~18% off) => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc105_qa0__seed42": [
+    1.0,
+    "Gold: Yes $0.01/share annual dividend FY2022; pred matches exactly => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc106_qa0__seed42": [
+    1.0,
+    "Gold: Las Vegas resorts (~90% EBITDAR); pred Las Vegas Strip Resorts, correct region => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc107_qa0__seed42": [
+    0.0,
+    "Gold: coverage ratio is zero (adj EBIT negative); pred says 1.61, materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc108_qa0__seed42": [
+    1.0,
+    "Gold: MGM China worst topline (revenue declined 44%); pred MGM China with the figure, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc109_qa0__seed42": [
+    1.0,
+    "Gold: corporate bonds (~82%); pred corporate bonds, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc110_qa0__seed42": [
+    1.0,
+    "Gold FY2016 COGS $32780M; pred 32,780 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc111_qa0__seed42": [
+    0.0,
+    "Gold: No, debt decreased $2.5bn; pred says Yes increased (with identical $41,990M both years, self-refuting) opposite direction => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc112_qa0__seed42": [
+    0.0,
+    "Gold EBITDA margin 5.4%; pred 4.51% is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc113_qa0__seed42": [
+    1.0,
+    "Gold total current liabilities $5466M; pred 5,466.3 within trivial rounding => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc114_qa0__seed42": [
+    0.75,
+    "Gold 3yr avg COGS/revenue 55.1%; pred 56.3% is only 1.2pp (~2.2% relative) off via a defensible different extraction, consistent with the ~1-3% band => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc115_qa0__seed42": [
+    1.0,
+    "Gold total current assets $16525M; pred 16,525 exact => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc116_qa0__seed42": [
+    0.0,
+    "Gold inventory turnover 3.46; pred 4.93 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc117_qa0__seed42": [
+    1.0,
+    "Gold: operations highest cash flow; pred operations brought in most, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc118_qa0__seed42": [
+    1.0,
+    "Gold: Yes positive working capital; pred correctly answers Yes-positive using the standard total-current-assets-minus-total-current-liabilities definition ($57,517M-$45,101M), a valid computation not wrong => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc119_qa0__seed42": [
+    1.0,
+    "Gold FY2021 capex $4.60bn; pred 4.625bn rounds to 4.6 => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc120_qa0__seed42": [
+    0.0,
+    "Gold lists Pepsico geographies; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc121_qa0__seed42": [
+    1.0,
+    "Gold: No material legal battles; pred correctly states litigation exists but no material adverse effect, matching the no-material-battle conclusion => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc122_qa0__seed42": [
+    0.0,
+    "Gold restructuring costs $411M; pred says 0, materially wrong (they are outlined) => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc123_qa0__seed42": [
+    0.0,
+    "Gold unadjusted EBITDA less capex $9068M; pred $9,597M is materially wrong (uses wrong operating income) => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc124_qa0__seed42": [
+    1.0,
+    "Gold unadjusted EBITDA margin 16.5%; pred 16.43% rounds to 16.4/16.5, within trivial rounding => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc125_qa0__seed42": [
+    1.0,
+    "Gold: net-zero congruency report proposal defeated; pred defeated with vote counts => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc126_qa0__seed42": [
+    1.0,
+    "Gold: $400,000,000 increase; pred $400,000,000 (3.8bn to 4.2bn) => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc127_qa0__seed42": [
+    0.0,
+    "Gold total borrow capacity $8,400,000,000; pred $4,950,000,000 is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc128_qa0__seed42": [
+    1.0,
+    "Gold: strong start to FY2023; pred strong start with momentum, matches => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc129_qa0__seed42": [
+    1.0,
+    "Gold: raised guidance by 1 percentage point; pred 1 percentage point (8% to 9%) => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc130_qa0__seed42": [
+    1.0,
+    "Gold: Yes PPNE grew YoY; pred Yes $13,745M to $14,882M, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc131_qa0__seed42": [
+    0.75,
+    "Gold: Yes, gain on Consumer Healthcare JV completion; pred identifies the Consumer Healthcare JV gain but muddles the year/amount ($(6)M in 2021) => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc132_qa0__seed42": [
+    0.0,
+    "Gold: Trillium, Array, Therachon; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc133_qa0__seed42": [
+    0.0,
+    "Gold: $77.78 million; pred $700 million is materially wrong => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc134_qa0__seed42": [
+    1.0,
+    "Gold: Developed Rest of the World; pred Developed Rest of World, same region => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc135_qa0__seed42": [
+    1.0,
+    "Gold: Yes, spinning off Upjohn; pred Yes separating Upjohn => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc136_qa0__seed42": [
+    0.0,
+    "Gold: there are none (no debt securities registered); pred says common stock on NASDAQ, wrong (equity not debt) => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc137_qa0__seed42": [
+    0.25,
+    "Gold: Ulta made no acquisitions in FY2023/FY2022; pred abstains claiming no info rather than affirming none, but topic-adjacent => 0.25."
+  ],
+  "financebench__letta-corpus__batch__doc138_qa0__seed42": [
+    1.0,
+    "Gold: lower marketing expenses and leverage of incentive comp from higher sales; pred captures both key drivers plus offsets => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc139_qa0__seed42": [
+    1.0,
+    "Gold: driven by opening 47 new stores; pred cites the 47 new stores plus additional detail => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc140_qa0__seed42": [
+    0.0,
+    "Gold: 36% of repurchases in Q4; pred abstains claiming no info => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc141_qa0__seed42": [
+    0.0,
+    "Gold: wages as % of net sales increased; pred says Decrease, opposite direction => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc142_qa0__seed42": [
+    1.0,
+    "Gold: cross currency swaps ($32,502M notional); pred cross currency swaps, correct => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc143_qa0__seed42": [
+    0.75,
+    "Gold: pension $1097M and health/life $862M in 2024; pred gives $1,097M pension but omits the health/life $862M component => 0.75."
+  ],
+  "financebench__letta-corpus__batch__doc144_qa0__seed42": [
+    0.0,
+    "Gold: No, quick ratio ~0.54 unhealthy; pred abstains claiming no data => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc145_qa0__seed42": [
+    1.0,
+    "Gold: Yes capital intensive (capital intensity ~2.77); pred Yes, correct direction => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc146_qa0__seed42": [
+    0.0,
+    "Gold: No, debt decreased $229M; pred says Yes increased, opposite direction => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc147_qa0__seed42": [
+    1.0,
+    "Gold DPO 42.69; pred 42.52 within trivial rounding/method variance => 1.0."
+  ],
+  "financebench__letta-corpus__batch__doc148_qa0__seed42": [
+    0.0,
+    "Gold change in operating margin +0.2%; pred -6.0% is materially wrong and wrong sign => 0.0."
+  ],
+  "financebench__letta-corpus__batch__doc149_qa0__seed42": [
+    0.0,
+    "Gold 3yr avg EBITDA margin 6.2%; pred 3.9% is materially wrong => 0.0."
+  ]
+}

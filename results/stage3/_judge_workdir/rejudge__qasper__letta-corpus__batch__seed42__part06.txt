@@ -1,0 +1,420 @@
+[0] qid=qasper__letta-corpus__batch__doc253_qa1__seed42
+    EXPECT=- | Q: What is the architecture of their model?
+    GOLD: follow the architecture in berard2018end, but have 3 decoder layers like that in pino2019harnessing
+    PRED: The architecture of their model is an end-to-end many-to-one multilingual model for spoken language translation.
+[1] qid=qasper__letta-corpus__batch__doc253_qa2__seed42
+    EXPECT=- | Q: How was the dataset collected?
+    GOLD: Contributors record voice clips by reading from a bank of donated sentences.
+    PRED: The dataset was created at the sentence level and does not require additional alignments or segmentation, utilizing over 11,000 speakers and over 60 accents.
+[2] qid=qasper__letta-corpus__batch__doc253_qa3__seed42
+    EXPECT=- | Q: Which languages are part of the corpus?
+    GOLD: French (Fr), German (De), Dutch (Nl), Russian (Ru), Spanish (Es), Italian (It), Turkish (Tr), Persian (Fa), Swedish (Sv), Mongolian (Mn) and Chinese (Zh)
+    PRED: The languages included in the CoVoST corpus are French, German, Dutch, Russian, Spanish, Italian, Turkish, Persian, Swedish, Mongolian, and Chinese.
+[3] qid=qasper__letta-corpus__batch__doc253_qa4__seed42
+    EXPECT=- | Q: How is the quality of the data empirically evaluated?
+    GOLD: Validated transcripts were sent to professional translators.
+    PRED: The quality of the data is empirically evaluated by using a random sample set of 100 pairs to be translated by an independent translator for each target language, measuring the percentage of matched translated words between the two translations. Overall, the inter-translator agreement results across all languages is 84.8%.
+[4] qid=qasper__letta-corpus__batch__doc253_qa5__seed42
+    EXPECT=- | Q: Is the data in CoVoST annotated for dialect?
+    GOLD: No
+    PRED: Yes, CoVoST includes data from over 60 accents, which indicates dialectal diversity.
+[5] qid=qasper__letta-corpus__batch__doc253_qa6__seed42
+    EXPECT=- | Q: Is Arabic one of the 11 languages in CoVost?
+    GOLD: No
+    PRED: No, Arabic is not one of the 11 languages in CoVoST.
+[6] qid=qasper__letta-corpus__batch__doc253_qa7__seed42
+    EXPECT=- | Q: How big is Augmented LibriSpeech dataset?
+    GOLD: (unanswerable per source)
+    PRED: The provided passages do not contain information about the size of the Augmented LibriSpeech dataset.
+[7] qid=qasper__letta-corpus__batch__doc254_qa0__seed42
+    EXPECT=- | Q: How was the audio data gathered?
+    GOLD: Through the All India Radio new channel where actors read news.
+    PRED: The audio data was collected and curated from the All India Radio news channel, where an actor read news for about 5-10 minutes, and data was crawled from 2010 to 2019.
+[8] qid=qasper__letta-corpus__batch__doc254_qa1__seed42
+    EXPECT=- | Q: What is the GhostVLAD approach?
+    GOLD: extension of the NetVLAD
+    PRED: The GhostVLAD approach is a pooling strategy used to generate utterance level feature vectors for variable length audio by aggregating local frame level features across time, which improves language identification performance.
+[9] qid=qasper__letta-corpus__batch__doc254_qa2__seed42
+    EXPECT=- | Q: Which 7 Indian languages do they experiment with?
+    GOLD: Hindi, English, Kannada, Telugu, Assamese, Bengali and Malayalam
+    PRED: The specific 7 Indian languages are not mentioned in the provided passages.
+[10] qid=qasper__letta-corpus__batch__doc255_qa0__seed42
+    EXPECT=- | Q: What was the baseline model?
+    GOLD: by answering always YES (in batch 2 and 3)
+    PRED: The baseline model was based on a contextual word embedding model, specifically a Bidirectional Encoder Representations from Transformers (BERT) system, fine-tuned for biomedical question answering using BioBERT.
+[11] qid=qasper__letta-corpus__batch__doc255_qa1__seed42
+    EXPECT=- | Q: What dataset did they use?
+    GOLD: BioASQ dataset
+    PRED: They used the training data provided by BioASQ, which consists of questions, gold standard documents, snippets, concepts, and ideal answers, along with data from previous BioASQ competitions.
+[12] qid=qasper__letta-corpus__batch__doc255_qa2__seed42
+    EXPECT=- | Q: What was their highest recall score?
+    GOLD: 0.7033
+    PRED: Their system achieved the highest recall score for the List-type question answering task in the fourth test batch set.
+[13] qid=qasper__letta-corpus__batch__doc255_qa3__seed42
+    EXPECT=- | Q: What was their highest MRR score?
+    GOLD: 0.5115
+    PRED: The provided passages do not contain information regarding the highest MRR score for QASPER: UNCC Biomedical Semantic Question Answering Systems in BioASQ: Task-7B, Phase-B.
+[14] qid=qasper__letta-corpus__batch__doc256_qa0__seed42
+    EXPECT=- | Q: Is car-speak language collection of abstract features that classifier is later trained on?
+    GOLD: No
+    PRED: Yes, car-speak is an abstract language that pertains to a car's physical attributes, and classifiers are trained to classify it.
+[15] qid=qasper__letta-corpus__batch__doc256_qa1__seed42
+    EXPECT=- | Q: Is order of "words" important in car speak language?
+    GOLD: (unanswerable per source)
+    PRED: The provided passages do not explicitly mention the importance of the order of "words" in car-speak language.
+[16] qid=qasper__letta-corpus__batch__doc256_qa2__seed42
+    EXPECT=- | Q: What are labels in car speak language dataset?
+    GOLD: car
+    PRED: The relevant passages do not provide specific information about the labels in the car-speak language dataset.
+[17] qid=qasper__letta-corpus__batch__doc256_qa3__seed42
+    EXPECT=- | Q: How big is dataset of car-speak language?
+    GOLD: $3,209$ reviews
+    PRED: The size of the dataset of car-speak language is not specified in the provided passages.
+[18] qid=qasper__letta-corpus__batch__doc256_qa4__seed42
+    EXPECT=- | Q: What is the performance of classifiers?
+    GOLD: Table TABREF10
+    PRED: The performance of classifiers is not explicitly detailed in the provided passages.
+[19] qid=qasper__letta-corpus__batch__doc256_qa5__seed42
+    EXPECT=- | Q: What classifiers have been trained?
+    GOLD: KNN RF SVM MLP
+    PRED: Several classifiers have been trained to classify car-speak.
+[20] qid=qasper__letta-corpus__batch__doc256_qa6__seed42
+    EXPECT=- | Q: How does car speak pertains to a car's physical attributes?
+    GOLD: we do not know exactly
+    PRED: Car-speak is abstract language that describes a car's physical attributes, allowing buyers to convey their needs in a way that sales representatives can translate into specific vehicle characteristics.
+[21] qid=qasper__letta-corpus__batch__doc257_qa0__seed42
+    EXPECT=- | Q: What is the interannotator agreement for the human evaluation?
+    GOLD: (unanswerable per source)
+    PRED: The interannotator agreement for the human evaluation is not specified in the provided passages.
+[22] qid=qasper__letta-corpus__batch__doc257_qa1__seed42
+    EXPECT=- | Q: Who were the human evaluators used?
+    GOLD: 20 evaluators were recruited from our institution and asked to each perform 20 annotations
+    PRED: The human evaluators used were a medical doctor (Assessor A), a medical librarian (Assessor B), and a researcher in medical informatics (Assessor C).
+[23] qid=qasper__letta-corpus__batch__doc257_qa2__seed42
+    EXPECT=- | Q: Is the template-based model realistic?
+    GOLD: Yes
+    PRED: Yes, the template-based model is realistic as it can produce more coherent and concise output compared to seq2seq synthesis models.
+[24] qid=qasper__letta-corpus__batch__doc257_qa3__seed42
+    EXPECT=- | Q: Is the student reflection data very different from the newspaper data?
+    GOLD: Yes
+    PRED: Yes, the student reflection data and the newspaper data are quite dissimilar.
+[25] qid=qasper__letta-corpus__batch__doc257_qa4__seed42
+    EXPECT=- | Q: What is the recent abstractive summarization method in this paper?
+    GOLD: pointer networks with coverage mechanism (PG-net)
+    PRED: The recent abstractive summarization method in this paper involves domain transfer and data synthesis for low resource data.
+[26] qid=qasper__letta-corpus__batch__doc258_qa0__seed42
+    EXPECT=- | Q: How is segmentation quality evaluated?
+    GOLD: Segmentation quality is evaluated by calculating the precision, recall, and F-score of the automatic segmentations in comparison to the segmentations made by expert annotators from the ANNODIS subcorpus.
+    PRED: Segmentation quality is evaluated against the Annodis corpus, which is a manually annotated reference.
+[27] qid=qasper__letta-corpus__batch__doc259_qa0__seed42
+    EXPECT=- | Q: Who are the crowdworkers?
+    GOLD: people in the US that use Amazon Mechanical Turk
+    PRED: The crowdworkers are random high-quality contributors that choose to participate in the task.
+[28] qid=qasper__letta-corpus__batch__doc259_qa1__seed42
+    EXPECT=- | Q: Which toolkits do they use?
+    GOLD: BIBREF17
+    PRED: They tested several commercial and open-source NLP toolkits, including Google Cloud NL for named-entity recognition and TensiStrength for entity-level sentiment analysis.
+[29] qid=qasper__letta-corpus__batch__doc259_qa2__seed42
+    EXPECT=- | Q: Which sentiment class is the most accurately predicted by ELS systems?
+    GOLD: neutral sentiment
+    PRED: The most accurate ELS analysis system, TensiStrength, did not match the accuracy of crowdworkers by a large margin of more than 30 percent points, but the specific sentiment class is not mentioned in the provided context.
+[30] qid=qasper__letta-corpus__batch__doc259_qa3__seed42
+    EXPECT=- | Q: Is datasets for sentiment analysis balanced?
+    GOLD: No
+    PRED: The provided passages do not specify whether the datasets for sentiment analysis are balanced.
+[31] qid=qasper__letta-corpus__batch__doc259_qa4__seed42
+    EXPECT=- | Q: What measures are used for evaluation?
+    GOLD: correct classification rate (CCR)
+    PRED: The evaluation measures used are accuracy for named-entity recognition (NER) and entity-level sentiment (ELS) analysis.
+[32] qid=qasper__letta-corpus__batch__doc260_qa0__seed42
+    EXPECT=- | Q: How much training data from the non-English language is used by the system?
+    GOLD: No data. Pretrained model is used.
+    PRED: The relevant passages do not provide specific information about the amount of training data from the non-English language used by the system.
+[33] qid=qasper__letta-corpus__batch__doc260_qa1__seed42
+    EXPECT=- | Q: Is the system tested on low-resource languages?
+    GOLD: Yes
+    PRED: The provided passages do not mention whether the system is tested on low-resource languages.
+[34] qid=qasper__letta-corpus__batch__doc260_qa2__seed42
+    EXPECT=- | Q: What languages are the model transferred to?
+    GOLD: French (fr), Russian (ru), Arabic (ar), Chinese (zh), Hindi (hi), and Vietnamese (vi)
+    PRED: The model is transferred to non-English languages.
+[35] qid=qasper__letta-corpus__batch__doc260_qa3__seed42
+    EXPECT=- | Q: How is the model transferred to other languages?
+    GOLD: Build a bilingual language model, learn the target language specific parameters starting from a pretrained English LM , fine-tune both English and target model to obtain the bilingual LM.
+    PRED: The model is transferred to other languages by building a bilingual language model (LM) starting from a pre-trained English LM, learning the target language specific parameters while keeping the encoder layers of the pre-trained English LM fixed, and then fine-tuning both the English and target models.
+[36] qid=qasper__letta-corpus__batch__doc260_qa4__seed42
+    EXPECT=- | Q: What metrics are used for evaluation?
+    GOLD: translation probabilities
+    PRED: The relevant passages do not provide specific information about the evaluation metrics used for QASPER.
+[37] qid=qasper__letta-corpus__batch__doc260_qa5__seed42
+    EXPECT=- | Q: What datasets are used for evaluation?
+    GOLD: United Nations Parallel Corpus
+    PRED: Europarl and MultiUN.
+[38] qid=qasper__letta-corpus__batch__doc261_qa0__seed42
+    EXPECT=- | Q: What are the results from these proposed strategies?
+    GOLD: Reward of 11.8 for the A2C-chained model, 41.8 for the KG-A2C-chained model, 40 for A2C-Explore and 44 for KG-A2C-Explore.
+    PRED: The proposed exploration strategies outperformed strong baselines on the classic text-adventure game, Zork1, enabling agents to get past a bottleneck where they were previously unable to proceed due to being eaten by a Grue.
+[39] qid=qasper__letta-corpus__batch__doc261_qa1__seed42
+    EXPECT=- | Q: What are the baselines?
+    GOLD: a score of 40
+    PRED: The baselines are DQN++ and DRQN++.
+[40] qid=qasper__letta-corpus__batch__doc261_qa2__seed42
+    EXPECT=- | Q: What are the two new strategies?
+    GOLD: a method that detects bottlenecks in text-games using the overall reward gained and the knowledge graph state
+    PRED: The two new game state exploration strategies introduced are not explicitly named in the provided passages.
+[41] qid=qasper__letta-corpus__batch__doc262_qa0__seed42
+    EXPECT=- | Q: What state-of-the-art deep neural network is used?
+    GOLD: LSTM model
+    PRED: The specific state-of-the-art deep neural network model used is not explicitly mentioned in the provided passages.
+[42] qid=qasper__letta-corpus__batch__doc262_qa1__seed42
+    EXPECT=- | Q: What boundary assembling method is used?
+    GOLD: This motivates us to carry out a backward greedy search over each sentence's label sequence to identify word boundaries. If two words segmented in a sentence are identified as nouns, and one word is immediately before the other, we assemble their boundaries, creating a new word candidate for entity recognition.
+    PRED: The boundary assembling method integrated with a deep neural network model and a conditional random field model for named entity recognition.
+[43] qid=qasper__letta-corpus__batch__doc262_qa2__seed42
+    EXPECT=- | Q: What are previous state of the art results?
+    GOLD: Overall F1 score: - He and Sun (2017) 58.23 - Peng and Dredze (2017) 58.99 - Xu et al. (2018) 59.11
+    PRED: The previous state-of-the-art results refer to the performance metrics achieved by existing methods for Named Entity Recognition in Chinese social media text before the integration of the boundary assembling method in the study.
+[44] qid=qasper__letta-corpus__batch__doc263_qa0__seed42
+    EXPECT=- | Q: Which two news domains are country-independent?
+    GOLD: mainstream news and disinformation
+    PRED: Mainstream news and disinformation news.
+[45] qid=qasper__letta-corpus__batch__doc263_qa1__seed42
+    EXPECT=- | Q: How is the political bias of different sources included in the model?
+    GOLD: By assigning a political bias label to each news article and training only on left-biased or right-biased outlets of both disinformation and mainstream domains
+    PRED: The political bias of different sources is accounted for in the classification experiments by labeling different outlets according to their inherent political biases, and the model is trained only on left-biased or right-biased articles.
+[46] qid=qasper__letta-corpus__batch__doc263_qa2__seed42
+    EXPECT=- | Q: What are the two large-scale datasets used?
+    GOLD: US dataset
+    PRED: The two large-scale datasets used correspond to diffusion cascades of news shared respectively in the United States and Italy.
+[47] qid=qasper__letta-corpus__batch__doc263_qa3__seed42
+    EXPECT=- | Q: What are the global network features which quantify different aspects of the sharing process?
+    GOLD: Number of Strongly Connected Components (SCC)
+    PRED: The specific global network features that quantify different aspects of the sharing process are not detailed in the provided passages.
+[48] qid=qasper__letta-corpus__batch__doc264_qa0__seed42
+    EXPECT=- | Q: Does jiant involve datasets for the 50 NLU tasks?
+    GOLD: Yes
+    PRED: Yes, jiant implements over 50 NLU tasks, including datasets for those tasks.
+[49] qid=qasper__letta-corpus__batch__doc264_qa1__seed42
+    EXPECT=- | Q: Is jiant compatible with models in any programming language?
+    GOLD: Yes
+    PRED: No, jiant is specifically designed for English NLU tasks and supports models primarily in Python, particularly those from Huggingface's Transformers.
+[50] qid=qasper__letta-corpus__batch__doc265_qa0__seed42
+    EXPECT=- | Q: Do they model semantics
+    GOLD: Yes
+    PRED: Yes, they model semantics.
+[51] qid=qasper__letta-corpus__batch__doc265_qa1__seed42
+    EXPECT=- | Q: How do they identify discussions of LGBTQ people in the New York Times?
+    GOLD: act paragraphs containing any word from a predetermined list of LGTBQ terms
+    PRED: They analyze discussions of LGBTQ people in the New York Times from 1986 to 2015.
+[52] qid=qasper__letta-corpus__batch__doc265_qa2__seed42
+    EXPECT=- | Q: Do they analyze specific derogatory words?
+    GOLD: Yes
+    PRED: No, the analysis focuses on linguistic correlates of dehumanization rather than specific derogatory words.
+[53] qid=qasper__letta-corpus__batch__doc266_qa0__seed42
+    EXPECT=- | Q: Is this dataset publicly available for commercial use?
+    GOLD: No
+    PRED: The dataset can be utilized for academic and industrial research, but the provided context does not specify if it is available for commercial use.
+[54] qid=qasper__letta-corpus__batch__doc266_qa1__seed42
+    EXPECT=- | Q: How many different phenotypes are present in the dataset?
+    GOLD: 15 clinical patient phenotypes
+    PRED: The dataset includes 15 clinical patient phenotypes.
+[55] qid=qasper__letta-corpus__batch__doc266_qa2__seed42
+    EXPECT=- | Q: What are 10 other phenotypes that are annotated?
+    GOLD: Adv. Heart Disease, Adv. Lung Disease, Alcohol Abuse, Chronic Neurologic Dystrophies, Dementia, Depression, Developmental Delay, Obesity, Psychiatric disorders and Substance Abuse
+    PRED: The relevant passages do not specify the 10 other phenotypes that are annotated.
+[56] qid=qasper__letta-corpus__batch__doc267_qa0__seed42
+    EXPECT=- | Q: What is the performance of BERT on the task?
+    GOLD: F1 scores are: HUBES-PHI: Detection(0.965), Classification relaxed (0.95), Classification strict (0.937) Medoccan: Detection(0.972), Classification (0.967)
+    PRED: A simple BERT-based model with general-domain pre-training obtains highly competitive results without any domain specific feature engineering.
+[57] qid=qasper__letta-corpus__batch__doc267_qa1__seed42
+    EXPECT=- | Q: What are the other algorithms tested?
+    GOLD: NER model
+    PRED: The other algorithms tested include a logistic regression classifier.
+[58] qid=qasper__letta-corpus__batch__doc267_qa2__seed42
+    EXPECT=- | Q: Does BERT reach the best performance among all the algorithms compared?
+    GOLD: No
+    PRED: The experiments show that a simple BERT-based model with general-domain pre-training obtains highly competitive results without any domain specific feature engineering, but it does not explicitly state that BERT reaches the best performance among all the algorithms compared.
+[59] qid=qasper__letta-corpus__batch__doc267_qa3__seed42
+    EXPECT=- | Q: What are the clinical datasets used in the paper?
+    GOLD: MEDDOCAN
+    PRED: The clinical datasets used in the paper are NUBes-PHI, a novel Spanish clinical reports dataset, and the MEDDOCAN 2019 shared task dataset.
+[60] qid=qasper__letta-corpus__batch__doc268_qa0__seed42
+    EXPECT=- | Q: Have they made any attempt to correct MRC gold standards according to their findings?
+    GOLD: Yes
+    PRED: Yes, they have studied how to introduce semantics-altering grammatical modifiers into gold standards and aim to observe whether state-of-the-art MRC models can perform reading comprehension on text containing them.
+[61] qid=qasper__letta-corpus__batch__doc268_qa1__seed42
+    EXPECT=- | Q: What features are absent from MRC gold standards that can result in potential lexical ambiguity?
+    GOLD: Restrictivity
+    PRED: The absence of features that contribute towards lexical ambiguity.
+[62] qid=qasper__letta-corpus__batch__doc268_qa2__seed42
+    EXPECT=- | Q: What modern MRC gold standards are analyzed?
+    GOLD: fit our problem definition and were published in the years 2016 to 2019, have at least $(2019 - publication\ year) \times 20$ citations
+    PRED: The modern MRC gold standards analyzed are popular state-of-the-art gold standards for machine reading comprehension.
+[63] qid=qasper__letta-corpus__batch__doc268_qa3__seed42
+    EXPECT=- | Q: How does proposed qualitative annotation schema looks like?
+    GOLD: The resulting taxonomy of the framework is shown in Figure FIGREF10
+    PRED: The proposed qualitative annotation schema categorizes gold standards according to linguistic complexity, required reasoning and background knowledge, and factual correctness, while also incorporating a metric based on lexical cues to approximate the complexity of the reading comprehension task.
+[64] qid=qasper__letta-corpus__batch__doc269_qa0__seed42
+    EXPECT=- | Q: How were the datasets annotated?
+    GOLD: 1. Each annotator must assign an integer score between 0 and 6 (inclusive) indicating how semantically similar the two words in a given pair are. A score of 6 indicates very high similarity (i.e., perfect synonymy), while zero indicates no similarity.
+    PRED: The datasets were annotated for the lexical relation of semantic similarity.
+[65] qid=qasper__letta-corpus__batch__doc269_qa1__seed42
+    EXPECT=- | Q: What are the 12 languages covered?
+    GOLD: Chinese Mandarin, Welsh, English, Estonian, Finnish, French, Hebrew, Polish, Russian, Spanish, Kiswahili, Yue Chinese
+    PRED: The 12 languages covered are Mandarin Chinese, Spanish, Russian, Welsh, and Kiswahili, along with other typologically diverse languages.
+[66] qid=qasper__letta-corpus__batch__doc270_qa0__seed42
+    EXPECT=- | Q: What is the previous state of the art?
+    GOLD: RoBERTa
+    PRED: The previous state of the art was 0.7173 AUC.
+[67] qid=qasper__letta-corpus__batch__doc271_qa0__seed42
+    EXPECT=- | Q: Does the paper report the performance of the model for each individual language?
+    GOLD: Yes
+    PRED: No, the paper does not report the performance of the model for each individual language.
+[68] qid=qasper__letta-corpus__batch__doc271_qa1__seed42
+    EXPECT=- | Q: What is the performance of the baseline?
+    GOLD: M-Bert had 76.6 F1 macro score.
+    PRED: Baseline results from multilingual BERT show that zero-shot cross-lingual and cross-target transfer of stance detection is moderately successful with this approach.
+[69] qid=qasper__letta-corpus__batch__doc271_qa2__seed42
+    EXPECT=- | Q: Did they pefrorm any cross-lingual vs single language evaluation?
+    GOLD: Yes
+    PRED: Yes, they performed a cross-lingual evaluation of stance detection using a dataset consisting of German, French, and Italian text.
+[70] qid=qasper__letta-corpus__batch__doc271_qa3__seed42
+    EXPECT=- | Q: What was the performance of multilingual BERT?
+    GOLD: BERT had 76.6 F1 macro score on x-stance dataset.
+    PRED: Baseline results from multilingual BERT show that zero-shot cross-lingual and cross-target transfer of stance detection is moderately successful.
+[71] qid=qasper__letta-corpus__batch__doc271_qa4__seed42
+    EXPECT=- | Q: What annotations are present in dataset?
+    GOLD: answer each question with either `yes', `rather yes', `rather no', or `no'.
+    PRED: The dataset consists of comments written in German, French, and Italian, annotated for stance detection regarding more than 150 political issues.
+[72] qid=qasper__letta-corpus__batch__doc272_qa0__seed42
+    EXPECT=- | Q: Is the LSTM baseline a sub-word model?
+    GOLD: Yes
+    PRED: No, the LSTM baseline is not a sub-word model.
+[73] qid=qasper__letta-corpus__batch__doc272_qa1__seed42
+    EXPECT=- | Q: How is pseudo-perplexity defined?
+    GOLD: Answer with content missing: (formulas in selection): Pseudo-perplexity is perplexity where conditional joint probability is approximated.
+    PRED: Pseudo-perplexity is defined as a measure achieved using the BERT architecture, with a reported score of 14.5 in the context of language modeling.
+[74] qid=qasper__letta-corpus__batch__doc273_qa0__seed42
+    EXPECT=- | Q: How is "propaganda" defined for the purposes of this study?
+    GOLD: an intentional and potentially multicast communication
+    PRED: "Propaganda" is defined as specifically propagandistic fragments that have been manually spotted and labelled by experts in the context of the Propaganda Techniques Corpus (PTC) dataset.
+[75] qid=qasper__letta-corpus__batch__doc273_qa1__seed42
+    EXPECT=- | Q: What metrics are used in evaluation?
+    GOLD: precision
+    PRED: The evaluation metrics used are the scores on the sentence-level propaganda classification task.
+[76] qid=qasper__letta-corpus__batch__doc273_qa2__seed42
+    EXPECT=- | Q: Which natural language(s) are studied in this paper?
+    GOLD: (unanswerable per source)
+    PRED: The paper studies English.
+[77] qid=qasper__letta-corpus__batch__doc274_qa0__seed42
+    EXPECT=- | Q: What hyperparameters are explored?
+    GOLD: Dimension size, window size, architecture, algorithm, epochs, hidden dimension size, learning rate, loss function, optimizer algorithm.
+    PRED: The hyperparameters explored are dimension size, training epochs, window size, and vocabulary size for the training algorithms (hierarchical softmax and negative sampling) of both skipgram and CBoW.
+[78] qid=qasper__letta-corpus__batch__doc274_qa1__seed42
+    EXPECT=- | Q: What Named Entity Recognition dataset is used?
+    GOLD: Groningen Meaning Bank
+    PRED: The specific Named Entity Recognition dataset used is not mentioned in the provided passages.
+[79] qid=qasper__letta-corpus__batch__doc274_qa2__seed42
+    EXPECT=- | Q: What sentiment analysis dataset is used?
+    GOLD: IMDb dataset of movie reviews
+    PRED: The sentiment analysis dataset used is the IMDb dataset of movie reviews.
+[80] qid=qasper__letta-corpus__batch__doc274_qa3__seed42
+    EXPECT=- | Q: Do they test both skipgram and c-bow?
+    GOLD: Yes
+    PRED: Yes, they test both skipgram and CBoW.
+[81] qid=qasper__letta-corpus__batch__doc275_qa0__seed42
+    EXPECT=- | Q: Do they experiment with other tasks?
+    GOLD: No
+    PRED: Yes, they experiment with tasks like Named Entity Recognition, Relation Extraction, and relevance detection.
+[82] qid=qasper__letta-corpus__batch__doc275_qa1__seed42
+    EXPECT=- | Q: What baselines do they introduce?
+    GOLD: Conditional Random Fields
+    PRED: They present four strong baseline systems for the detection of medical entities.
+[83] qid=qasper__letta-corpus__batch__doc275_qa2__seed42
+    EXPECT=- | Q: How large is the corpus?
+    GOLD: 8,275 sentences and 167,739 words in total
+    PRED: The size of the corpus is not specified in the provided passages.
+[84] qid=qasper__letta-corpus__batch__doc275_qa3__seed42
+    EXPECT=- | Q: How was annotation performed?
+    GOLD: Experienced medical doctors used a linguistic annotation tool to annotate entities.
+    PRED: Annotation was performed by annotators who worked on the dataset, following specific annotation guidelines.
+[85] qid=qasper__letta-corpus__batch__doc275_qa4__seed42
+    EXPECT=- | Q: How many documents are in the new corpus?
+    GOLD: 53 documents
+    PRED: The relevant passages do not provide information about the number of documents in the new corpus.
+[86] qid=qasper__letta-corpus__batch__doc275_qa5__seed42
+    EXPECT=- | Q: What baseline systems are proposed?
+    GOLD: Conditional Random Fields
+    PRED: The baseline systems proposed are BioBERT and BiLSTM-CRF.
+[87] qid=qasper__letta-corpus__batch__doc276_qa0__seed42
+    EXPECT=- | Q: What is masked document generation?
+    GOLD: A task for seq2seq model pra-training that recovers a masked document to its original form.
+    PRED: Masked Document Generation (MDG) is a pre-training task for seq2seq models that involves recovering a masked document to its original form.
+[88] qid=qasper__letta-corpus__batch__doc276_qa1__seed42
+    EXPECT=- | Q: Which of the three pretraining tasks is the most helpful?
+    GOLD: SR
+    PRED: The best task to pre-train STEP is not explicitly stated, but it is implied that one of the three tasks significantly improves performance, leading to outperforming the best published abstractive model.
+[89] qid=qasper__letta-corpus__batch__doc277_qa0__seed42
+    EXPECT=- | Q: What is the CORD-19 dataset?
+    GOLD: which contains over 45,000 scholarly articles, including over 33,000 with full text, about COVID-19, SARS-CoV-2, and related coronaviruses
+    PRED: The CORD-19 dataset is a collection of over 45,000 scholarly articles about COVID-19, SARS-CoV-2, and related coronaviruses, including over 33,000 with full text, prepared in response to the COVID-19 pandemic by the White House and a coalition of research groups.
+[90] qid=qasper__letta-corpus__batch__doc277_qa1__seed42
+    EXPECT=- | Q: How large is the collection of COVID-19 literature?
+    GOLD: 45,000 scholarly articles, including over 33,000 with full text
+    PRED: The collection of COVID-19 literature contains over 45,000 scholarly articles, including over 33,000 with full text.
+[91] qid=qasper__letta-corpus__batch__doc278_qa0__seed42
+    EXPECT=- | Q: What are the distinctive characteristics of how Arabic speakers use offensive language?
+    GOLD: Frequent use of direct animal name calling, using simile and metaphors, through indirect speech like sarcasm, wishing evil to others, name alteration, societal stratification, immoral behavior and sexually related uses.
+    PRED: The distinctive characteristics of how Arabic speakers use offensive language include the topics that elicit such language, the dialects most often used, the common modes of offensiveness, and the gender distribution of the authors.
+[92] qid=qasper__letta-corpus__batch__doc278_qa1__seed42
+    EXPECT=- | Q: How did they analyze which topics, dialects and gender are most associated with tweets?
+    GOLD: ascertain the distribution of: types of offensive language, genres where it is used, the dialects used, and the gender of users using such language
+    PRED: They analyzed the annotated tweets to ascertain the distribution of types of offensive language, genres where it is used, the dialects used, and the gender of users using such language.
+[93] qid=qasper__letta-corpus__batch__doc278_qa2__seed42
+    EXPECT=- | Q: How many annotators tagged each tweet?
+    GOLD: One
+    PRED: One annotator tagged each tweet.
+[94] qid=qasper__letta-corpus__batch__doc278_qa3__seed42
+    EXPECT=- | Q: How many tweets are in the dataset?
+    GOLD: 10,000 Arabic tweet dataset
+    PRED: The dataset consists of 3 random samples of tweets, each composed of 1,000 tweets, totaling 3,000 tweets.
+[95] qid=qasper__letta-corpus__batch__doc278_qa4__seed42
+    EXPECT=- | Q: In what way is the offensive dataset not biased by topic, dialect or target?
+    GOLD: It does not use a seed list to gather tweets so the dataset does not skew to specific topics, dialect, targets.
+    PRED: The offensive dataset is not biased by topic, dialect, or target because it was built using a systematic method that includes detailed guidelines for tagging tweets as clean or offensive, ensuring representation across various dialects and topics without favoring any specific ones.
+[96] qid=qasper__letta-corpus__batch__doc279_qa0__seed42
+    EXPECT=- | Q: Which eight NER tasks did they evaluate on?
+    GOLD: BC5CDR-disease, NCBI-disease, BC5CDR-chem, BC4CHEMD, BC2GM, JNLPBA, LINNAEUS, Species-800
+    PRED: The eight NER tasks evaluated were: Disease, Drug, Gene, Mutation, Chemical, Species, Cell Line, and Tissue.
+[97] qid=qasper__letta-corpus__batch__doc279_qa1__seed42
+    EXPECT=- | Q: What in-domain text did they use?
+    GOLD: PubMed+PMC
+    PRED: They used in-domain text related to biomedical Named Entity Recognition (NER) tasks.
+[98] qid=qasper__letta-corpus__batch__doc280_qa0__seed42
+    EXPECT=- | Q: What are examples of these artificats?
+    GOLD: the degree of lexical overlap between them
+    PRED: Translating the premise and the hypothesis independently can reduce the lexical overlap between them.
+[99] qid=qasper__letta-corpus__batch__doc280_qa1__seed42
+    EXPECT=- | Q: What are the languages they use in their experiment?
+    GOLD: English French Spanish German Greek Bulgarian Russian Turkish Arabic Vietnamese Thai Chinese Hindi Swahili Urdu Finnish
+    PRED: The document does not specify the exact languages used in their experiment.
+[100] qid=qasper__letta-corpus__batch__doc280_qa2__seed42
+    EXPECT=- | Q: Does the professional translation or the machine translation introduce the artifacts?
+    GOLD: Yes
+    PRED: Both professional translation and machine translation introduce artifacts.
+[101] qid=qasper__letta-corpus__batch__doc280_qa3__seed42
+    EXPECT=- | Q: Do they recommend translating the premise and hypothesis together?
+    GOLD: No
+    PRED: Yes, they recommend reconsidering the translation process, as translating the premise and hypothesis independently can reduce lexical overlap, which current models are sensitive to.
+[102] qid=qasper__letta-corpus__batch__doc280_qa4__seed42
+    EXPECT=- | Q: Is the improvement over state-of-the-art statistically significant?
+    GOLD: Yes
+    PRED: The provided context does not specify whether the improvement over state-of-the-art is statistically significant.
+[103] qid=qasper__letta-corpus__batch__doc280_qa5__seed42
+    EXPECT=- | Q: What are examples of these artifacts?
+    GOLD: hypothesis-only baseline performs better than chance due to cues on their lexical choice and sentence length
+    PRED: Translating the premise and the hypothesis independently can reduce the lexical overlap between them.
+[104] qid=qasper__letta-corpus__batch__doc280_qa6__seed42
+    EXPECT=- | Q: What languages do they use in their experiments?
+    GOLD: English
+    PRED: The experiments use a non-English language that is human translated into English.
