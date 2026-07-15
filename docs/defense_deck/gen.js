@@ -1,357 +1,187 @@
+// Defense deck v2 — rebuilt to Dirk Hovy's "Effective Presentations" rules:
+//   10-20-30: <=10 content slides, <=20 words/slide, >=30pt font
+//   Dark background; one slide one thought; slides support the talk (not handouts).
+//   Graphs: maximize area, integrate legend, y-axis from 0, no pie/3D.
 const pptxgen = require("pptxgenjs");
 const p = new pptxgen();
 p.layout = "LAYOUT_WIDE"; // 13.3 x 7.5
 p.author = "Stefan Uifalean";
 p.title = "Learnable, Task-Adaptive Structured Memory for LLM Agents";
 
-// ---- palette ----
-const NAVY = "12294A", NAVY2 = "0B1830", TEAL = "1FB6A6", AMBER = "E6A23C";
-const INK = "1B2A44", MUTE = "5E7088", WHITE = "FFFFFF", PANEL = "F2F6FB", LINE = "DCE5EF";
-const HEAD = "Cambria", BODY = "Calibri";
-const W = 13.3, H = 7.5;
+const BG = "0C1A2E", WHITE = "F2F6FB", TEAL = "1FB6A6", AMBER = "E6A23C";
+const MUTE = "8FA6C4", GREY = "7C8FA8", BLUE = "4A7FB5", DIM = "223A5E", GRID = "1E3050";
+const F = "Calibri";
+const W = 13.3;
 
-function footer(s, n, dark) {
-  s.addText("Learnable Task-Adaptive Memory for LLM Agents  ·  S. Uifalean  ·  Bocconi MSc AI",
-    { x: 0.5, y: 7.05, w: 10.5, h: 0.3, fontFace: BODY, fontSize: 9, color: dark ? "8FA6C4" : MUTE, align: "left", margin: 0 });
-  s.addText(String(n), { x: 12.3, y: 7.05, w: 0.5, h: 0.3, fontFace: BODY, fontSize: 9, color: dark ? "8FA6C4" : MUTE, align: "right", margin: 0 });
+let n = 0;
+function slide() {
+  const s = p.addSlide();
+  s.background = { color: BG };
+  return s;
 }
-function title(s, t, kicker) {
-  if (kicker) s.addText(kicker.toUpperCase(), { x: 0.6, y: 0.42, w: 12, h: 0.3, fontFace: BODY, fontSize: 12, bold: true, color: TEAL, charSpacing: 2, margin: 0 });
-  s.addText(t, { x: 0.58, y: kicker ? 0.72 : 0.5, w: 12.1, h: 0.9, fontFace: HEAD, fontSize: 30, bold: true, color: INK, margin: 0 });
-}
-function chip(s, x, y, w, txt, fill, tcol) {
-  s.addShape(p.ShapeType.roundRect, { x, y, w, h: 0.42, rectRadius: 0.08, fill: { color: fill } });
-  s.addText(txt, { x, y, w, h: 0.42, fontFace: BODY, fontSize: 12.5, bold: true, color: tcol || WHITE, align: "center", valign: "middle", margin: 0 });
-}
-// numbered circle badge
-function badge(s, x, y, num, col) {
-  s.addShape(p.ShapeType.ellipse, { x, y, w: 0.52, h: 0.52, fill: { color: col } });
-  s.addText(num, { x, y, w: 0.52, h: 0.52, fontFace: HEAD, fontSize: 20, bold: true, color: WHITE, align: "center", valign: "middle", margin: 0 });
+function pageNum(s) {
+  n += 1;
+  s.addText(String(n), { x: 12.5, y: 6.95, w: 0.4, h: 0.3, fontFace: F, fontSize: 12, color: "3B547A", align: "right", margin: 0 });
 }
 
 // ============================================================ 1 TITLE
-let s = p.addSlide(); s.background = { color: NAVY };
-s.addShape(p.ShapeType.rect, { x: 0, y: 0, w: W, h: 0.14, fill: { color: TEAL } });
-s.addText("MSc THESIS DEFENSE", { x: 0.9, y: 1.5, w: 11, h: 0.4, fontFace: BODY, fontSize: 14, bold: true, color: TEAL, charSpacing: 3, margin: 0 });
-s.addText("Learnable, Task-Adaptive Structured\nMemory for LLM Agents", { x: 0.86, y: 2.0, w: 11.6, h: 1.9, fontFace: HEAD, fontSize: 42, bold: true, color: WHITE, lineSpacingMultiple: 1.0, margin: 0 });
-s.addText("Can an agent learn how to construct its own memory — and is the optimum task-dependent?",
-  { x: 0.9, y: 3.95, w: 11, h: 0.6, fontFace: BODY, fontSize: 17, italic: true, color: "CADCFC", margin: 0 });
-s.addShape(p.ShapeType.line, { x: 0.92, y: 4.9, w: 3.4, h: 0, line: { color: "35507A", width: 1.5 } });
-s.addText([
-  { text: "Stefan Uifalean", options: { bold: true, color: WHITE, fontSize: 15, breakLine: true } },
-  { text: "MSc Artificial Intelligence  ·  Bocconi University", options: { color: "AFC3E0", fontSize: 13, breakLine: true } },
-  { text: "Supervisor: Prof. Dirk Hovy  ·  Academic Year 2025–2026", options: { color: "AFC3E0", fontSize: 13 } },
-], { x: 0.9, y: 5.15, w: 11, h: 1.2, fontFace: BODY, margin: 0, paraSpaceAfter: 4 });
-s.addNotes("Good [morning]. My thesis asks whether an agent can LEARN how to build its own memory, rather than having it hand-designed and frozen — and whether the best memory differs from task to task. I'll motivate the problem, state the two research questions, walk you through the method and three stages of experiments, and come back to answer the questions.");
+let s = slide();
+s.addText("Learnable, Task-Adaptive\nStructured Memory for LLM Agents",
+  { x: 0.9, y: 1.9, w: 11.6, h: 2.0, fontFace: F, fontSize: 44, bold: true, color: WHITE, margin: 0, lineSpacingMultiple: 1.05 });
+s.addShape(p.ShapeType.line, { x: 0.95, y: 4.15, w: 3.0, h: 0, line: { color: TEAL, width: 3 } });
+s.addText("Stefan Uifalean", { x: 0.9, y: 4.5, w: 11, h: 0.5, fontFace: F, fontSize: 30, bold: true, color: WHITE, margin: 0 });
+s.addText("MSc Artificial Intelligence  ·  Bocconi University", { x: 0.9, y: 5.08, w: 11, h: 0.5, fontFace: F, fontSize: 30, color: MUTE, margin: 0 });
+s.addText("Supervisor: Prof. Dirk Hovy", { x: 0.9, y: 5.65, w: 11, h: 0.5, fontFace: F, fontSize: 30, color: MUTE, margin: 0 });
+s.addNotes("Good [morning]. My thesis asks whether an agent can learn how to build its own memory — instead of us hand-designing it and freezing it — and whether the best memory differs from task to task. Ten minutes: I'll show you the problem, the two questions, how we did it, what we found, and the answers.");
+pageNum(s);
 
-// ============================================================ 2 MOTIVATING EXAMPLE
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "A question whose answer the agent has seen — and still gets wrong", "Motivating example");
-// left: scenario text
+// ============================================================ 2 THE FAILURE  (motivation)
+s = slide();
+s.addText("The agent reads 500 contracts.", { x: 0.9, y: 1.05, w: 11.6, h: 0.7, fontFace: F, fontSize: 40, color: WHITE, margin: 0 });
 s.addText([
-  { text: "An agent ingests 500 legal contracts, one clause at a time.", options: { bold: true, color: INK, fontSize: 16, breakLine: true, paraSpaceAfter: 10 } },
-  { text: "You ask: “What law governs contract #3?”", options: { color: INK, fontSize: 16, breakLine: true, paraSpaceAfter: 10 } },
-  { text: "A standard memory scores retrieval by recency — so it returns clauses from contract #500, the most recent thing it saw.", options: { color: MUTE, fontSize: 15, breakLine: true, paraSpaceAfter: 10 } },
-  { text: "The right evidence was read long ago. The memory rule that helps a fresh document actively hurts an end-of-corpus question.", options: { color: INK, fontSize: 15 } },
-], { x: 0.6, y: 1.9, w: 6.5, h: 4.2, fontFace: BODY, margin: 0, valign: "top" });
-// right: simple flow card
-s.addShape(p.ShapeType.roundRect, { x: 7.5, y: 2.0, w: 5.2, h: 4.3, rectRadius: 0.12, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-chip(s, 7.9, 2.4, 4.4, "Doc 1  →  Doc 3  →  …  →  Doc 500", NAVY);
-s.addText("stored by time of arrival", { x: 7.9, y: 2.9, w: 4.4, h: 0.3, fontFace: BODY, fontSize: 11, italic: true, color: MUTE, align: "center", margin: 0 });
-s.addShape(p.ShapeType.roundRect, { x: 8.35, y: 3.55, w: 3.5, h: 0.75, rectRadius: 0.1, fill: { color: WHITE }, line: { color: "C63B3B", width: 1.5 } });
-s.addText([{ text: "retrieves Doc 500  ", options: { color: "C63B3B", bold: true } }, { text: "✗", options: { color: "C63B3B", bold: true } }], { x: 8.35, y: 3.55, w: 3.5, h: 0.75, fontFace: BODY, fontSize: 14, align: "center", valign: "middle", margin: 0 });
-s.addText("wrong contract", { x: 8.35, y: 4.3, w: 3.5, h: 0.3, fontFace: BODY, fontSize: 11, italic: true, color: MUTE, align: "center", margin: 0 });
-s.addText([{ text: "answer was at ", options: { color: MUTE } }, { text: "Doc 3 of 500", options: { color: AMBER, bold: true } }], { x: 8.35, y: 5.1, w: 3.5, h: 0.6, fontFace: BODY, fontSize: 15, align: "center", valign: "middle", margin: 0 });
-footer(s, 2);
-s.addNotes("Concrete example. An agent reads 500 contracts one clause at a time. You ask about contract number 3. A memory that scores retrieval by recency hands back clauses from the most recent contract — number 500 — and gets it wrong, even though it saw the right answer. The rule that's optimal for a fresh document is exactly wrong at end-of-corpus. So the memory rule should depend on the task.");
-
-// ============================================================ 3 PROBLEM GENERALIZED
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Today, an agent’s memory is fixed and hand-designed", "The gap");
-const rows = [
-  ["1", "WHAT to store", "every observation kept, or a fixed rule decides"],
-  ["2", "WHICH concepts to track", "entities / nodes chosen by a frozen heuristic"],
-  ["3", "HOW to score retrieval", "one fixed weighting of similarity vs. recency"],
-];
-let ry = 1.95;
-rows.forEach(([n, h, d]) => {
-  badge(s, 0.7, ry, n, TEAL);
-  s.addText(h, { x: 1.45, y: ry - 0.03, w: 5.4, h: 0.35, fontFace: BODY, fontSize: 16, bold: true, color: INK, margin: 0 });
-  s.addText(d, { x: 1.45, y: ry + 0.3, w: 5.4, h: 0.35, fontFace: BODY, fontSize: 13, color: MUTE, margin: 0 });
-  ry += 1.0;
-});
-s.addShape(p.ShapeType.roundRect, { x: 7.3, y: 1.95, w: 5.4, h: 3.05, rectRadius: 0.12, fill: { color: NAVY } });
-s.addText("Different tasks need different memory", { x: 7.6, y: 2.2, w: 4.8, h: 0.4, fontFace: HEAD, fontSize: 16, bold: true, color: WHITE, margin: 0 });
-s.addText([
-  { text: "multi-hop question", options: { color: TEAL, bold: true } }, { text: "  →  entity relations", options: { color: "CADCFC", breakLine: true, paraSpaceAfter: 10 } },
-  { text: "navigation task", options: { color: TEAL, bold: true } }, { text: "  →  spatial / temporal transitions", options: { color: "CADCFC", breakLine: true, paraSpaceAfter: 10 } },
-  { text: "end-of-corpus question", options: { color: TEAL, bold: true } }, { text: "  →  recency-independent recall", options: { color: "CADCFC" } },
-], { x: 7.6, y: 2.75, w: 4.85, h: 1.7, fontFace: BODY, fontSize: 14, margin: 0, paraSpaceAfter: 8, valign: "top" });
-s.addText("A memory rule optimal for one is often actively harmful for another.", { x: 0.7, y: 5.35, w: 12, h: 0.5, fontFace: BODY, fontSize: 16, italic: true, bold: true, color: INK, align: "center", margin: 0 });
-footer(s, 3);
-s.addNotes("Generalizing: what these systems share is that the memory is FIXED. What to store, which concepts to track, and how to score a retrieval are hand-designed once and frozen. But a multi-hop question needs entity relations, a navigation task needs spatial transitions, and an end-of-corpus question needs recency-independent recall. A rule that's optimal for one is harmful for another — so a single frozen memory must compromise.");
-
-// ============================================================ 4 RESEARCH QUESTIONS
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Research questions", null);
-function rqCard(x, tag, q) {
-  s.addShape(p.ShapeType.roundRect, { x, y: 2.0, w: 5.7, h: 3.5, rectRadius: 0.14, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-  s.addShape(p.ShapeType.roundRect, { x: x + 0.35, y: 2.4, w: 1.1, h: 0.55, rectRadius: 0.1, fill: { color: TEAL } });
-  s.addText(tag, { x: x + 0.35, y: 2.4, w: 1.1, h: 0.55, fontFace: HEAD, fontSize: 17, bold: true, color: WHITE, align: "center", valign: "middle", margin: 0 });
-  s.addText(q, { x: x + 0.35, y: 3.15, w: 5.0, h: 2.1, fontFace: BODY, fontSize: 18, color: INK, margin: 0, valign: "top", lineSpacingMultiple: 1.05 });
+  { text: "Ask about #3 — ", options: { color: WHITE } },
+  { text: "it answers from #500.", options: { color: AMBER, bold: true } },
+], { x: 0.9, y: 1.8, w: 11.6, h: 0.7, fontFace: F, fontSize: 40, margin: 0 });
+// document strip: 36 marks, #3 teal, #500 amber
+const N = 36, sx = 0.9, span = 11.5, step = span / N;
+for (let i = 0; i < N; i++) {
+  const x = sx + i * step;
+  if (i === 2) s.addShape(p.ShapeType.rect, { x, y: 4.2, w: 0.16, h: 1.35, fill: { color: TEAL } });
+  else if (i === N - 1) s.addShape(p.ShapeType.rect, { x, y: 4.2, w: 0.16, h: 1.35, fill: { color: AMBER } });
+  else s.addShape(p.ShapeType.rect, { x, y: 4.85, w: 0.14, h: 0.7, fill: { color: DIM } });
 }
-rqCard(0.7, "RQ1", "Can an agent learn how to construct its own memory — what to store, which concepts to track as nodes, and how to score retrieval?");
-rqCard(6.9, "RQ2", "Is the learned optimum task-dependent — does the best memory genuinely differ from one task to another?");
-s.addText("We answer both empirically, and hold ourselves to a self-audit of every headline number.", { x: 0.7, y: 5.9, w: 12, h: 0.4, fontFace: BODY, fontSize: 14, italic: true, color: MUTE, align: "center", margin: 0 });
-footer(s, 4);
-s.addNotes("This gives two research questions. RQ1: can an agent LEARN how to construct its own memory — what to store, which concepts to track, and how to score retrieval? RQ2: is that learned optimum task-dependent? And a commitment that runs through the thesis: we subject every headline number to an adversarial self-audit and report the corrected figures.");
+s.addText("answer", { x: 0.65, y: 3.7, w: 1.9, h: 0.45, fontFace: F, fontSize: 30, bold: true, color: TEAL, align: "center", margin: 0 });
+s.addText("retrieved", { x: 11.2, y: 3.7, w: 2.0, h: 0.45, fontFace: F, fontSize: 30, bold: true, color: AMBER, align: "center", margin: 0 });
+s.addText("#3", { x: 0.65, y: 5.65, w: 1.9, h: 0.45, fontFace: F, fontSize: 30, color: MUTE, align: "center", margin: 0 });
+s.addText("#500", { x: 11.2, y: 5.65, w: 2.0, h: 0.45, fontFace: F, fontSize: 30, color: MUTE, align: "center", margin: 0 });
+s.addNotes("Here's the problem, concretely. An agent ingests five hundred legal contracts, one clause at a time. You ask it about contract number three. A standard memory scores retrieval by RECENCY — so it hands back clauses from contract five hundred, the most recent thing it saw, and gets the answer wrong. It has SEEN the right evidence. The memory rule that helps a fresh document actively hurts an end-of-corpus question. The rule should depend on the task — but today it's frozen.");
+pageNum(s);
 
-// ============================================================ 5 THE IDEA
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Make memory construction a small learnable vector  θ", "The idea");
-s.addText([
-  { text: "A single parameter vector ", options: { color: INK } }, { text: "θ (up to 10 dimensions)", options: { color: TEAL, bold: true } },
-  { text: " governs the whole pipeline — storage, abstraction, and retrieval scoring.", options: { color: INK } },
-], { x: 0.6, y: 1.85, w: 12, h: 0.7, fontFace: BODY, fontSize: 17, margin: 0 });
-// three grouped chips
-const groups = [
-  ["STORAGE", "θ_store · θ_novel · θ_surprise · θ_erich", "what is written to memory"],
-  ["ABSTRACTION", "θ_entity · θ_temporal · θ_decay", "which nodes & edges form the graph"],
-  ["RETRIEVAL", "w_graph · w_embed · w_recency", "how a candidate is scored at query time"],
-];
-let gx = 0.6;
-groups.forEach(([h, mid, d]) => {
-  s.addShape(p.ShapeType.roundRect, { x: gx, y: 2.75, w: 3.9, h: 1.85, rectRadius: 0.12, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-  s.addText(h, { x: gx + 0.25, y: 2.95, w: 3.4, h: 0.35, fontFace: BODY, fontSize: 13, bold: true, color: TEAL, charSpacing: 1, margin: 0 });
-  s.addText(mid, { x: gx + 0.25, y: 3.35, w: 3.45, h: 0.8, fontFace: "Consolas", fontSize: 12.5, bold: true, color: INK, margin: 0, valign: "top" });
-  s.addText(d, { x: gx + 0.25, y: 4.2, w: 3.45, h: 0.3, fontFace: BODY, fontSize: 11.5, italic: true, color: MUTE, margin: 0 });
-  gx += 4.15;
+// ============================================================ 3 THE TWO QUESTIONS
+s = slide();
+s.addText("Two questions", { x: 0.9, y: 1.0, w: 11.6, h: 0.6, fontFace: F, fontSize: 30, color: MUTE, margin: 0 });
+s.addText("1", { x: 0.9, y: 2.3, w: 0.8, h: 0.9, fontFace: F, fontSize: 44, bold: true, color: TEAL, margin: 0 });
+s.addText("Can an agent learn its own memory?", { x: 1.9, y: 2.3, w: 10.6, h: 0.9, fontFace: F, fontSize: 40, color: WHITE, margin: 0 });
+s.addText("2", { x: 0.9, y: 4.1, w: 0.8, h: 0.9, fontFace: F, fontSize: 44, bold: true, color: TEAL, margin: 0 });
+s.addText("Is the best memory task-dependent?", { x: 1.9, y: 4.1, w: 10.6, h: 0.9, fontFace: F, fontSize: 40, color: WHITE, margin: 0 });
+s.addNotes("That gives two research questions. One: can an agent LEARN how to construct its own memory — what to store, which concepts to track, how to score retrieval? Two: is that learned optimum task-dependent — does the best memory genuinely differ from one task to another? Spoiler: the answer to both is yes, but the second one is the interesting one, and the honest version of the first is narrower than you'd expect. I'll come back to both at the end.");
+pageNum(s);
+
+// ============================================================ 4 THE IDEA
+s = slide();
+s.addText("Memory becomes one vector", { x: 0.9, y: 1.05, w: 11.6, h: 0.8, fontFace: F, fontSize: 44, bold: true, color: WHITE, margin: 0 });
+// theta as 10 cells, grouped
+const cw = 0.72, gap = 0.1, total = 10 * cw + 9 * gap;
+const cx0 = (W - (total + 1.5)) / 2 + 1.5; // leave room for the "θ =" label
+s.addText("θ =", { x: cx0 - 1.5, y: 3.1, w: 1.25, h: 0.95, fontFace: F, fontSize: 44, bold: true, color: WHITE, align: "right", valign: "middle", margin: 0 });
+const groupCol = [TEAL, TEAL, TEAL, TEAL, BLUE, BLUE, BLUE, AMBER, AMBER, AMBER];
+for (let i = 0; i < 10; i++) {
+  s.addShape(p.ShapeType.roundRect, { x: cx0 + i * (cw + gap), y: 3.1, w: cw, h: 0.95, rectRadius: 0.1, fill: { color: groupCol[i] } });
+}
+function grpLabel(i0, i1, txt, col) {
+  const x = cx0 + i0 * (cw + gap);
+  const w = (i1 - i0 + 1) * cw + (i1 - i0) * gap;
+  s.addShape(p.ShapeType.line, { x, y: 4.22, w, h: 0, line: { color: col, width: 2 } });
+  s.addText(txt, { x, y: 4.32, w, h: 0.5, fontFace: F, fontSize: 30, color: col, align: "center", margin: 0 });
+}
+grpLabel(0, 3, "store", TEAL);
+grpLabel(4, 6, "abstract", BLUE);
+grpLabel(7, 9, "retrieve", AMBER);
+s.addText("We learn θ. Not the LLM.", { x: 0.9, y: 5.6, w: 11.6, h: 0.6, fontFace: F, fontSize: 32, color: MUTE, align: "center", margin: 0 });
+s.addNotes("Our answer: make memory construction itself a learnable object. A single vector — theta, ten numbers — governs the whole pipeline. Four numbers decide what gets STORED. Three decide how entities are ABSTRACTED into a memory graph. Three decide how a candidate is scored at RETRIEVAL. That's it. And crucially we optimize theta ONLY — never the agent's policy, never the language model's weights. So this is not a new LLM and not a new RL agent. It's a small, interpretable knob on top of a frozen model.");
+pageNum(s);
+
+// ============================================================ 5 RETRIEVAL = A VOTE
+s = slide();
+s.addText("Retrieval is a vote", { x: 0.9, y: 1.05, w: 11.6, h: 0.8, fontFace: F, fontSize: 44, bold: true, color: WHITE, margin: 0 });
+// bar length = how loud the vote ends up: meaning dominates, freshness matters
+// some, the graph link is near-inert. Do NOT draw link longest — that would
+// imply the opposite of the thesis' actual finding.
+const votes = [["meaning", 0.9, TEAL], ["freshness", 0.55, AMBER], ["link", 0.22, BLUE]];
+let vy = 2.6;
+votes.forEach(([lab, val, col]) => {
+  s.addText(lab, { x: 0.9, y: vy - 0.08, w: 3.1, h: 0.6, fontFace: F, fontSize: 34, color: WHITE, margin: 0 });
+  s.addShape(p.ShapeType.roundRect, { x: 4.2, y: vy, w: 8.2, h: 0.44, rectRadius: 0.22, fill: { color: DIM } });
+  s.addShape(p.ShapeType.roundRect, { x: 4.2, y: vy, w: 8.2 * val, h: 0.44, rectRadius: 0.22, fill: { color: col } });
+  vy += 1.15;
 });
-s.addShape(p.ShapeType.roundRect, { x: 0.6, y: 4.95, w: 12.1, h: 1.35, rectRadius: 0.1, fill: { color: NAVY } });
-s.addText("retrieval score:", { x: 0.9, y: 5.15, w: 3, h: 0.35, fontFace: BODY, fontSize: 13, bold: true, color: TEAL, margin: 0 });
-s.addText("s(item, q)  =  w_graph · g(item,q)   +   w_embed · cos(e_item, e_q)   +   w_recency · ρ(item)",
-  { x: 0.9, y: 5.5, w: 11.5, h: 0.5, fontFace: "Consolas", fontSize: 15, bold: true, color: WHITE, margin: 0 });
-s.addText("We optimize θ only — never the agent’s policy, never the LLM’s weights.", { x: 0.9, y: 6.0, w: 11.5, h: 0.3, fontFace: BODY, fontSize: 12.5, italic: true, color: "CADCFC", margin: 0 });
-footer(s, 5);
-s.addNotes("Our answer is to make memory construction itself a learnable object. A single vector theta — up to ten dimensions in the fullest system — governs the whole pipeline: what gets stored, which nodes and edges form a memory graph, and how a candidate is scored at retrieval as a weighted sum of a graph signal, embedding similarity, and recency. Crucially we optimize theta ONLY — not the policy, not the language model. So this is not a new RL agent or a new LLM.");
+s.addText("θ sets how loud each votes.", { x: 0.9, y: 6.05, w: 11.6, h: 0.6, fontFace: F, fontSize: 32, color: MUTE, margin: 0 });
+s.addNotes("How does retrieval actually work? Every item in memory gets a score, and the agent keeps the top eight. The score is three signals added up. MEANING: does this item mean the same as the question — embedding similarity, zero to one. FRESHNESS: how recently did I see it. LINK: is it connected to the question in the entity graph — on or off. Three of theta's ten numbers are simply how loudly each signal votes. In the contract example, the freshness vote was set too loud, so the newest document always won. Learning theta is learning how loud to set each vote. One honest note: the LINK vote turned out to carry no measurable weight on our corpora — the graph earns its place at storage time, not retrieval time.");
+pageNum(s);
 
-// ============================================================ 6 HOW RETRIEVAL WORKS
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Retrieval is a weighted vote across three signals", "How retrieval works");
-s.addText([
-  { text: "Every memory item gets a score; the agent keeps the top few. ", options: { color: INK } },
-  { text: "θ sets how loudly each signal votes.", options: { color: INK, bold: true } },
-], { x: 0.6, y: 1.85, w: 12.1, h: 0.5, fontFace: BODY, fontSize: 16, margin: 0 });
-const sig = [
-  ["w_embed", "Does it mean\nthe same?", "meaning match · 0…1", 0.85, TEAL, "the governing-law clause scores high"],
-  ["w_recency", "How fresh\nis it?", "freshness · 0…1", 0.62, AMBER, "the newest clause always wins — the trap in our example"],
-  ["w_graph", "Is it linked\nin the graph?", "shares an entity · 0 or 1", 1.0, NAVY, "on/off link — inert at retrieval in Stage 3"],
-];
-let qx = 0.6;
-sig.forEach(([tok, q, cap, score, barcol, ex]) => {
-  s.addShape(p.ShapeType.roundRect, { x: qx, y: 2.65, w: 3.9, h: 2.45, rectRadius: 0.12, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-  s.addText(tok, { x: qx + 0.25, y: 2.82, w: 3.4, h: 0.35, fontFace: "Consolas", fontSize: 15, bold: true, color: TEAL, margin: 0 });
-  s.addText(q, { x: qx + 0.25, y: 3.2, w: 3.4, h: 0.75, fontFace: HEAD, fontSize: 17, bold: true, color: INK, margin: 0, valign: "top", lineSpacingMultiple: 1.0 });
-  s.addShape(p.ShapeType.roundRect, { x: qx + 0.25, y: 4.05, w: 3.4, h: 0.18, rectRadius: 0.09, fill: { color: "E4EBF3" } });
-  s.addShape(p.ShapeType.roundRect, { x: qx + 0.25, y: 4.05, w: 3.4 * score, h: 0.18, rectRadius: 0.09, fill: { color: barcol } });
-  s.addText(cap, { x: qx + 0.25, y: 4.28, w: 3.4, h: 0.3, fontFace: BODY, fontSize: 11.5, italic: true, color: MUTE, margin: 0 });
-  s.addText(ex, { x: qx + 0.25, y: 4.6, w: 3.45, h: 0.45, fontFace: BODY, fontSize: 12, color: MUTE, margin: 0, valign: "top" });
-  qx += 4.15;
+// ============================================================ 6 HOW WE LEARN IT
+s = slide();
+s.addText("Learned by black-box search", { x: 0.9, y: 1.05, w: 11.6, h: 0.8, fontFace: F, fontSize: 44, bold: true, color: WHITE, margin: 0 });
+s.addText("recall@8 — no LLM in the loop", { x: 0.9, y: 1.9, w: 11.6, h: 0.6, fontFace: F, fontSize: 32, color: TEAL, margin: 0 });
+const stg = ["grid worlds", "12 systems", "6 benchmarks"];
+let stx = 1.15;
+stg.forEach((t, i) => {
+  s.addShape(p.ShapeType.roundRect, { x: stx, y: 3.5, w: 3.3, h: 1.5, rectRadius: 0.15, fill: { color: BG }, line: { color: i === 2 ? TEAL : "35507A", width: 2.5 } });
+  s.addText(t, { x: stx, y: 3.5, w: 3.3, h: 1.5, fontFace: F, fontSize: 32, bold: true, color: i === 2 ? TEAL : WHITE, align: "center", valign: "middle", margin: 0 });
+  if (i < 2) s.addText("→", { x: stx + 3.35, y: 3.5, w: 0.85, h: 1.5, fontFace: F, fontSize: 34, color: MUTE, align: "center", valign: "middle", margin: 0 });
+  stx += 4.2;
 });
-s.addShape(p.ShapeType.roundRect, { x: 0.6, y: 5.28, w: 12.1, h: 1.18, rectRadius: 0.1, fill: { color: NAVY } });
-s.addText("score(item)  =  w_embed · meaning  +  w_recency · freshness  +  w_graph · link      →   keep the top 8",
-  { x: 0.9, y: 5.44, w: 11.5, h: 0.4, fontFace: "Consolas", fontSize: 13.5, bold: true, color: WHITE, margin: 0 });
-s.addText([
-  { text: "Learning θ = learning how loud to set each vote.  ", options: { color: "CADCFC", bold: true } },
-  { text: "For an end-of-corpus question the optimizer turns recency down and meaning up.", options: { color: "CADCFC" } },
-], { x: 0.9, y: 5.92, w: 11.5, h: 0.42, fontFace: BODY, fontSize: 13, italic: true, margin: 0 });
-footer(s, 6);
-s.addNotes("Let me make retrieval concrete, because it's the heart of the method. When the agent needs to answer, every item in memory gets a score, and it keeps the top few. The score is just three signals added up. One: does the item MEAN the same as the question — an embedding similarity, zero to one. Two: how RECENT is it — freshness, zero to one. Three: is it LINKED to the question in the entity graph — on or off. Each of the three retrieval weights in theta decides how loudly that signal votes. In our contract example the recency vote was set too loud, so the newest document always won. Learning theta is just learning how loud to set each vote — and for end-of-corpus questions it learns to turn recency down and meaning up. One honesty note I'll return to: the graph vote carried no measurable weight on the Stage 3 corpora, so in practice retrieval came down to meaning versus freshness.");
+s.addNotes("How do we learn theta? Black-box search — an evolution strategy, then CMA-ES. Two reasons it's derivative-free: the storage decision is discrete, and the objective is recall-at-eight of the gold evidence, which uses no language model at all. That matters twice: tuning is cheap, and it cannot be biased by the judge that later scores the answers. We tested in three stages of rising realism: small grid worlds, then a twelve-system benchmark, then six real LLM benchmarks with a GPT-4o-mini answerer and a cross-vendor Claude judge scoring every answer one by one.");
+pageNum(s);
 
-// ============================================================ 7 METHOD
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "How we learn θ: black-box search, no LLM in the loop", "Method");
-s.addShape(p.ShapeType.roundRect, { x: 0.6, y: 1.9, w: 12.1, h: 1.25, rectRadius: 0.1, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-s.addText([
-  { text: "Optimizer:  ", options: { bold: true, color: INK } }, { text: "Evolution Strategy → CMA-ES", options: { bold: true, color: TEAL } },
-  { text: "   ·   Objective:  ", options: { bold: true, color: INK } }, { text: "recall@8 of the gold evidence", options: { bold: true, color: TEAL } },
-], { x: 0.9, y: 2.1, w: 11.5, h: 0.4, fontFace: BODY, fontSize: 16, margin: 0 });
-s.addText("Derivative-free (the store decision is discrete) and LLM-free — so tuning is cheap and never biased by the judge.",
-  { x: 0.9, y: 2.55, w: 11.5, h: 0.5, fontFace: BODY, fontSize: 13.5, color: MUTE, margin: 0 });
-// three-stage timeline
-const stages = [
-  ["STAGE 1", "Grid worlds", "Is θ task-dependent?", TEAL],
-  ["STAGE 2", "12 systems × 4 envs", "Is it competitive? What does each θ do?", NAVY],
-  ["STAGE 3", "6 real LLM benchmarks", "Does it work on real corpus QA?", AMBER],
-];
-let sx = 0.6;
-stages.forEach(([tag, h, d, col], i) => {
-  s.addShape(p.ShapeType.roundRect, { x: sx, y: 3.6, w: 3.75, h: 2.5, rectRadius: 0.12, fill: { color: WHITE }, line: { color: col, width: 2 } });
-  s.addShape(p.ShapeType.roundRect, { x: sx, y: 3.6, w: 3.75, h: 0.6, rectRadius: 0.12, fill: { color: col } });
-  s.addText(tag, { x: sx, y: 3.6, w: 3.75, h: 0.6, fontFace: HEAD, fontSize: 16, bold: true, color: WHITE, align: "center", valign: "middle", margin: 0 });
-  s.addText(h, { x: sx + 0.25, y: 4.4, w: 3.25, h: 0.7, fontFace: BODY, fontSize: 16, bold: true, color: INK, margin: 0, valign: "top" });
-  s.addText(d, { x: sx + 0.25, y: 5.15, w: 3.25, h: 0.8, fontFace: BODY, fontSize: 13, italic: true, color: MUTE, margin: 0, valign: "top" });
-  if (i < 2) s.addText("→", { x: sx + 3.72, y: 4.5, w: 0.45, h: 0.6, fontFace: BODY, fontSize: 26, bold: true, color: MUTE, align: "center", margin: 0 });
-  sx += 4.15;
-});
-footer(s, 7);
-s.addNotes("We learn theta with black-box search — an Evolution Strategy for the small case, then CMA-ES. Two reasons it's derivative-free: the storage decision is discrete, and — importantly — the objective is recall-at-8 of the gold evidence, which uses NO language model. So tuning is cheap and it can't be biased by the judge that later scores answers. We test the idea in three stages of increasing realism: grid worlds, a twelve-system benchmark, and real LLMs over six corpora.");
+// ============================================================ 7 STAGE 1+2 — TASK DEPENDENCE
+s = slide();
+s.addText("2.5%  →  27.5%", { x: 0.6, y: 1.9, w: 12.1, h: 1.7, fontFace: F, fontSize: 96, bold: true, color: TEAL, align: "center", margin: 0 });
+s.addText("Every task learns a different θ.", { x: 0.6, y: 4.0, w: 12.1, h: 0.7, fontFace: F, fontSize: 40, color: WHITE, align: "center", margin: 0 });
+s.addText("hardest grid task — learned vs. fixed memory", { x: 0.6, y: 4.85, w: 12.1, h: 0.6, fontFace: F, fontSize: 28, color: MUTE, align: "center", margin: 0 });
+s.addNotes("Stage one, grid worlds. The headline is not this number — it's that the recovered VECTORS differ. Key-Door learns to discard most events but keep temporal order. Goal-Room learns to store everything. Different tasks, genuinely different optimal memory. That's the cleanest evidence for research question two. On the hardest task, the learned rule lifts success from two and a half percent to twenty-seven and a half. It's a single-seed proof of concept and I say so in the thesis. Stage two scaled this to twelve memory systems on four environments: we reach the top cluster — a statistical TIE with the strongest baseline, not a number one, and I report it as a tie. Ablation tells us why it works: the novelty parameter is load-bearing; zero it and reward collapses. And the graph-traversal weight is inert at retrieval — an honest negative I keep in.");
+pageNum(s);
 
-// ============================================================ 8 STAGE 1
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "The optimizer recovers a different θ for every task", "Stage 1 — grid worlds");
-// table of vectors
-const t1 = [
-  [{ text: "Environment", options: { bold: true, color: WHITE, fill: { color: NAVY } } }, { text: "Learned θ (store, entity, temporal)", options: { bold: true, color: WHITE, fill: { color: NAVY } } }, { text: "Baseline → Learned", options: { bold: true, color: WHITE, fill: { color: NAVY }, align: "center" } }],
-  [{ text: "Key-Door" }, { text: "(0.12,  0.00,  0.82)   — discard, keep order" }, { text: "17.5% → 30%", options: { align: "center" } }],
-  [{ text: "Goal-Room" }, { text: "(1.00,  0.22,  1.00)   — store everything" }, { text: "70% → 80%", options: { align: "center" } }],
-  [{ text: "MultiHopKeyDoor", options: { bold: true } }, { text: "(1.00,  0.49,  0.84)", options: { bold: true } }, { text: "2.5% → 27.5%", options: { align: "center", bold: true, color: AMBER } }],
-];
-s.addTable(t1, { x: 0.6, y: 2.0, w: 8.0, colW: [2.3, 4.3, 1.4], rowH: 0.62, fontFace: BODY, fontSize: 13, color: INK, valign: "middle", border: { type: "solid", color: LINE, pt: 1 }, fill: { color: WHITE } });
-// stat callout
-s.addShape(p.ShapeType.roundRect, { x: 9.0, y: 2.0, w: 3.7, h: 2.55, rectRadius: 0.14, fill: { color: NAVY } });
-s.addText("2.5% → 27.5%", { x: 9.0, y: 2.35, w: 3.7, h: 0.9, fontFace: HEAD, fontSize: 30, bold: true, color: TEAL, align: "center", margin: 0 });
-s.addText("hardest task, learned vs. fixed memory  (+25 points)", { x: 9.2, y: 3.35, w: 3.3, h: 0.9, fontFace: BODY, fontSize: 13, italic: true, color: "CADCFC", align: "center", margin: 0, valign: "top" });
-s.addText("The headline is the difference between the vectors: Key-Door discards most events but preserves temporal order; Goal-Room stores everything. The optimal memory structure is genuinely task-dependent — the first, cleanest evidence for RQ2. (Single-seed proof of concept.)",
-  { x: 0.6, y: 5.1, w: 12.1, h: 1.2, fontFace: BODY, fontSize: 15, color: INK, margin: 0, valign: "top" });
-footer(s, 8);
-s.addNotes("Stage 1, grid worlds, a three-dimensional theta tuned separately per task. The headline is the DIFFERENCE between the recovered vectors: Key-Door learns to discard most events but keep temporal order; Goal-Room learns to store everything. That's the cleanest evidence for RQ2 — the optimal memory is task-dependent. On the hardest task the learned rule lifts success from 2.5 to 27.5 percent. It's a single-seed proof of concept, and we say so.");
-
-// ============================================================ 9 STAGE 2
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Competitive — and we can say exactly why", "Stage 2 — benchmark, ablation, transfer");
-const cards2 = [
-  ["Top cluster", "0.178 vs 0.173", "a statistical tie with the strongest baseline — competitive, not uniquely best"],
-  ["Load-bearing", "θ_novel", "zeroing it collapses reward to 0 — it gates the whole storage pipeline"],
-  ["Honest negative", "inert at retrieval", "the w_graph weight carries no measurable retrieval load on our benchmarks — the graph still scaffolds storage & abstraction"],
-];
-let cx = 0.6;
-cards2.forEach(([h, big, d]) => {
-  s.addShape(p.ShapeType.roundRect, { x: cx, y: 2.0, w: 3.9, h: 2.9, rectRadius: 0.12, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-  s.addText(h.toUpperCase(), { x: cx + 0.25, y: 2.2, w: 3.4, h: 0.35, fontFace: BODY, fontSize: 12, bold: true, color: TEAL, charSpacing: 1, margin: 0 });
-  s.addText(big, { x: cx + 0.25, y: 2.6, w: 3.45, h: 0.7, fontFace: HEAD, fontSize: 21, bold: true, color: INK, margin: 0, valign: "top" });
-  s.addText(d, { x: cx + 0.25, y: 3.4, w: 3.45, h: 1.35, fontFace: BODY, fontSize: 13, color: MUTE, margin: 0, valign: "top" });
-  cx += 4.15;
-});
-s.addShape(p.ShapeType.roundRect, { x: 0.6, y: 5.15, w: 12.1, h: 1.15, rectRadius: 0.1, fill: { color: NAVY } });
-s.addText([
-  { text: "Also:  ", options: { bold: true, color: TEAL } },
-  { text: "a ~2,000-parameter neural controller, given the same search budget, ", options: { color: WHITE } },
-  { text: "matches but does not beat", options: { bold: true, color: WHITE } },
-  { text: " the ten scalars — so a small interpretable θ is a strong, cheap baseline.", options: { color: "CADCFC" } },
-], { x: 0.9, y: 5.4, w: 11.5, h: 0.7, fontFace: BODY, fontSize: 14.5, margin: 0, valign: "middle" });
-footer(s, 9);
-s.addNotes("Stage 2 scales to twelve memory systems on four environments. The ten-dimensional learnable memory reaches the top cluster — 0.178 versus the best baseline's 0.173, which we report honestly as a statistical tie, not a number-one. Ablation tells us WHY it works: the novelty parameter is load-bearing — zero it and reward collapses — while the graph-traversal term carries no measurable retrieval load, an honest negative result we keep in. And a two-thousand-parameter neural controller with the same budget only matches the ten scalars.");
-
-// ============================================================ 10 STAGE 3 SETUP
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Real LLMs, corpus-cumulative QA, cross-vendor judge", "Stage 3 — setup");
-const setup = [
-  ["Answerer", "gpt-4o-mini", "temperature 0"],
-  ["Encoder", "MiniLM", "all-MiniLM-L6-v2"],
-  ["Judge", "Claude, 1-by-1", "cross-vendor, 5-point rubric"],
-];
-let ux = 0.6;
-setup.forEach(([h, big, d]) => {
-  s.addShape(p.ShapeType.roundRect, { x: ux, y: 1.95, w: 3.9, h: 1.5, rectRadius: 0.12, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-  s.addText(h.toUpperCase(), { x: ux + 0.25, y: 2.12, w: 3.4, h: 0.3, fontFace: BODY, fontSize: 11.5, bold: true, color: TEAL, charSpacing: 1, margin: 0 });
-  s.addText(big, { x: ux + 0.25, y: 2.45, w: 3.45, h: 0.5, fontFace: HEAD, fontSize: 18, bold: true, color: INK, margin: 0 });
-  s.addText(d, { x: ux + 0.25, y: 2.98, w: 3.45, h: 0.35, fontFace: BODY, fontSize: 12, italic: true, color: MUTE, margin: 0 });
-  ux += 4.15;
-});
-s.addText("θ is re-tuned per corpus on recall@8; questions are answered end-of-corpus. Six benchmarks, pre-partitioned into three groups:",
-  { x: 0.6, y: 3.7, w: 12.1, h: 0.5, fontFace: BODY, fontSize: 14.5, color: INK, margin: 0 });
-const groups3 = [
-  ["CONFIRMATORY", "FinanceBench · CUAD · QASPER", "lift predicted", TEAL],
-  ["CONTROLS", "HotpotQA · LongMemEval", "pre-registered, no lift predicted", NAVY],
-  ["UNDEFINED", "NarrativeQA", "no gold → objective undefined", MUTE],
-];
-let bx = 0.6;
-groups3.forEach(([h, mid, d, col]) => {
-  s.addShape(p.ShapeType.roundRect, { x: bx, y: 4.35, w: 3.9, h: 1.85, rectRadius: 0.12, fill: { color: WHITE }, line: { color: col, width: 2 } });
-  s.addText(h, { x: bx + 0.25, y: 4.55, w: 3.45, h: 0.35, fontFace: BODY, fontSize: 12.5, bold: true, color: col, charSpacing: 1, margin: 0 });
-  s.addText(mid, { x: bx + 0.25, y: 4.95, w: 3.45, h: 0.75, fontFace: BODY, fontSize: 14.5, bold: true, color: INK, margin: 0, valign: "top" });
-  s.addText(d, { x: bx + 0.25, y: 5.75, w: 3.45, h: 0.35, fontFace: BODY, fontSize: 12, italic: true, color: MUTE, margin: 0 });
-  bx += 4.15;
-});
-footer(s, 10);
-s.addNotes("Stage 3 is the real test. A gpt-4o-mini answerer, a MiniLM encoder, and — importantly — a CROSS-VENDOR Claude judge scoring every answer one-by-one, so the judge isn't grading its own vendor. Theta is re-tuned per corpus. And we pre-registered the six benchmarks into three groups: three domain-coherent ones where we predict a lift, two domain-incoherent CONTROLS, and NarrativeQA which has no gold evidence so the objective is undefined. Fixing that partition up front is what lets the result be a test rather than a search for a favorable subset.");
-
-// ============================================================ 11 STAGE 3 RESULTS (chart)
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Corpus tuning lifts end-of-corpus accuracy", "Stage 3 — results");
-const chartData = [
-  { name: "canonical θ", labels: ["FinanceBench", "CUAD", "QASPER"], values: [0.243, 0.028, 0.250] },
-  { name: "corpus-tuned θ", labels: ["FinanceBench", "CUAD", "QASPER"], values: [0.645, 0.172, 0.415] },
-];
-s.addChart(p.ChartType.bar, chartData, {
-  x: 0.6, y: 1.95, w: 7.4, h: 4.5, barDir: "col", barGrouping: "clustered",
-  chartColors: ["B9C6D8", TEAL], showLegend: true, legendPos: "t", legendColor: INK, legendFontFace: BODY, legendFontSize: 12,
-  showValue: true, dataLabelPosition: "outEnd", dataLabelFontFace: BODY, dataLabelFontSize: 10, dataLabelColor: INK, dataLabelFormatCode: "0.00",
-  valAxisMinVal: 0, valAxisMaxVal: 0.8, valAxisMajorUnit: 0.2, valGridLine: { color: "EAEFF5", size: 1 },
-  catGridLine: { style: "none" }, catAxisLabelColor: INK, catAxisLabelFontFace: BODY, catAxisLabelFontSize: 12,
-  valAxisLabelColor: MUTE, valAxisLabelFontFace: BODY, valAxisLabelFontSize: 10, valAxisLabelFormatCode: "0.0",
+// ============================================================ 8 STAGE 3 — THE CHART
+s = slide();
+s.addText("Re-tuning θ per corpus lifts accuracy", { x: 0.65, y: 0.62, w: 10.1, h: 0.7, fontFace: F, fontSize: 38, bold: true, color: WHITE, margin: 0 });
+// integrated legend (chips, top-right)
+s.addShape(p.ShapeType.rect, { x: 11.0, y: 0.62, w: 0.28, h: 0.28, fill: { color: GREY } });
+s.addText("canonical", { x: 11.4, y: 0.5, w: 1.85, h: 0.5, fontFace: F, fontSize: 30, color: GREY, margin: 0 });
+s.addShape(p.ShapeType.rect, { x: 11.0, y: 1.12, w: 0.28, h: 0.28, fill: { color: TEAL } });
+s.addText("tuned", { x: 11.4, y: 1.0, w: 1.85, h: 0.5, fontFace: F, fontSize: 30, color: TEAL, margin: 0 });
+s.addChart(p.ChartType.bar, [
+  { name: "canonical", labels: ["FinanceBench", "CUAD", "QASPER"], values: [0.243, 0.028, 0.250] },
+  { name: "corpus-tuned", labels: ["FinanceBench", "CUAD", "QASPER"], values: [0.645, 0.172, 0.415] },
+], {
+  x: 0.5, y: 1.5, w: 12.3, h: 5.25, barDir: "col", barGrouping: "clustered", barGapWidthPct: 40,
+  chartColors: [GREY, TEAL],
+  chartArea: { fill: { color: BG } }, plotArea: { fill: { color: BG } },
+  showLegend: false,
+  showValue: true, dataLabelPosition: "outEnd", dataLabelFontFace: F, dataLabelFontSize: 28, dataLabelColor: WHITE, dataLabelFormatCode: "0.00",
+  valAxisMinVal: 0, valAxisMaxVal: 0.78, valAxisHidden: true,
+  valGridLine: { style: "none" }, catGridLine: { style: "none" },
+  catAxisLabelColor: WHITE, catAxisLabelFontFace: F, catAxisLabelFontSize: 30,
+  catAxisLineColor: GRID, valAxisLineColor: BG,
   showTitle: false,
 });
-s.addText("judged accuracy (batch, end-of-corpus)", { x: 0.6, y: 6.45, w: 7.4, h: 0.3, fontFace: BODY, fontSize: 11, italic: true, color: MUTE, align: "center", margin: 0 });
-// right column callouts
-s.addShape(p.ShapeType.roundRect, { x: 8.35, y: 1.95, w: 4.35, h: 1.55, rectRadius: 0.12, fill: { color: NAVY } });
-s.addText("2 of 3", { x: 8.35, y: 2.1, w: 4.35, h: 0.7, fontFace: HEAD, fontSize: 30, bold: true, color: TEAL, align: "center", margin: 0 });
-s.addText("domain-coherent benchmarks survive held-out testing (FinanceBench, CUAD); QASPER does not.", { x: 8.6, y: 2.8, w: 3.85, h: 0.65, fontFace: BODY, fontSize: 12.5, color: "CADCFC", align: "center", margin: 0, valign: "top" });
-s.addShape(p.ShapeType.roundRect, { x: 8.35, y: 3.7, w: 4.35, h: 2.75, rectRadius: 0.12, fill: { color: PANEL }, line: { color: LINE, width: 1 } });
-s.addText("The mechanism", { x: 8.6, y: 3.9, w: 3.85, h: 0.35, fontFace: HEAD, fontSize: 15, bold: true, color: INK, margin: 0 });
-s.addText([
-  { text: "w_recency", options: { fontFace: "Consolas", bold: true, color: INK } }, { text: "  3.78 → 0.003", options: { color: TEAL, bold: true, breakLine: true, paraSpaceAfter: 10 } },
-  { text: "w_embed", options: { fontFace: "Consolas", bold: true, color: INK } }, { text: "     1.08 → 2.63", options: { color: TEAL, bold: true, breakLine: true } },
-], { x: 8.6, y: 4.35, w: 3.85, h: 0.9, fontFace: BODY, fontSize: 13.5, margin: 0, paraSpaceAfter: 6 });
-s.addText("Tuning down-weights recency and up-weights meaning — it retrieves by semantic match, exactly what an end-of-corpus question needs.", { x: 8.6, y: 5.3, w: 3.85, h: 1.05, fontFace: BODY, fontSize: 12.5, italic: true, color: MUTE, margin: 0, valign: "top" });
-footer(s, 11);
-s.addNotes("Here's the headline. Re-tuning theta per corpus lifts end-of-corpus accuracy on all three coherent benchmarks — FinanceBench jumps from 0.24 to 0.65 — and on a held-out split, two of the three survive multiple-comparison correction; QASPER doesn't, and we report it as non-significant. The mechanism is consistent: tuning drives the recency weight toward zero and the embedding weight up. The memory stops chasing the most recent document and retrieves by meaning — which is exactly what an end-of-corpus question needs. We also verified the tuning objective is valid: retrieval recall predicts judge score at rho 0.69.");
+s.addNotes("Stage three, real LLMs over real corpora. Questions are asked at the END of the corpus — the hard case from slide two. Re-tuning theta per corpus lifts judged accuracy on all three domain-coherent benchmarks. FinanceBench goes from 0.24 to 0.65. On a held-out split, two of the three survive multiple-comparison correction — FinanceBench and CUAD do, QASPER does not, and I report that as non-significant. The mechanism is consistent across all of them: tuning drives the recency weight to nearly zero and pushes the embedding weight up. The memory stops chasing the newest document and starts retrieving by meaning — exactly what an end-of-corpus question needs. And the tuning objective is validated: retrieval recall predicts the judge's score at rho 0.69.");
+pageNum(s);
 
-// ============================================================ 12 HONEST REFRAME
-s = p.addSlide(); s.background = { color: WHITE };
-title(s, "Measured honestly, the win is efficiency — not raw accuracy", "The self-audit");
-s.addText([
-  { text: "Our own audit corrected a headline: a full-context ", options: { color: INK } },
-  { text: "“dump-all”", options: { color: INK, bold: true } },
-  { text: " baseline is ", options: { color: INK } },
-  { text: "statistically tied", options: { color: INK, bold: true } },
-  { text: " with selective memory on accuracy. So the case for learned memory at corpus scale is efficiency and scalability.", options: { color: INK } },
-], { x: 0.6, y: 1.9, w: 12.1, h: 0.85, fontFace: BODY, fontSize: 16, margin: 0 });
-const stats = [
-  ["≈ 18×", "cheaper", "same accuracy on FinanceBench, a fraction of the token cost"],
-  ["N ≈ 11", "dump-all breaks", "full-context overflows the 128K window at ~11 CUAD contracts"],
-  ["704", "tokens, flat", "selective retrieval stays constant no matter how big the corpus grows"],
-];
-let px = 0.6;
-stats.forEach(([big, sub, d], i) => {
-  const col = i === 0 ? TEAL : i === 1 ? "C0504D" : NAVY;
-  s.addShape(p.ShapeType.roundRect, { x: px, y: 3.0, w: 3.9, h: 2.95, rectRadius: 0.14, fill: { color: i === 2 ? NAVY : PANEL }, line: { color: i === 2 ? NAVY : LINE, width: 1 } });
-  s.addText(big, { x: px + 0.2, y: 3.35, w: 3.5, h: 0.95, fontFace: HEAD, fontSize: 40, bold: true, color: col === NAVY ? TEAL : col, align: "center", margin: 0 });
-  s.addText(sub, { x: px + 0.2, y: 4.35, w: 3.5, h: 0.4, fontFace: BODY, fontSize: 15, bold: true, color: i === 2 ? WHITE : INK, align: "center", margin: 0 });
-  s.addText(d, { x: px + 0.35, y: 4.8, w: 3.2, h: 1.0, fontFace: BODY, fontSize: 12.5, color: i === 2 ? "CADCFC" : MUTE, align: "center", margin: 0, valign: "top" });
-  px += 4.15;
-});
-footer(s, 12);
-s.addNotes("And here's the part I'm proudest of. Our self-audit caught that a full-context 'dump everything into the prompt' baseline, once a truncation bug was fixed, is statistically TIED with selective memory on accuracy. So we do NOT claim selective retrieval is more accurate. Instead the argument is efficiency and scalability: it matches accuracy at about eighteen times lower cost, and — structurally — dump-all can't even run past about eleven contracts because it overflows the context window, while selective retrieval holds its prompt flat at around 700 tokens. Beyond a few documents, retrieving the right items isn't an optimization, it's a necessity.");
+// ============================================================ 9 THE HONEST TWIST
+s = slide();
+s.addText("18×", { x: 0.6, y: 1.5, w: 12.1, h: 1.8, fontFace: F, fontSize: 110, bold: true, color: TEAL, align: "center", margin: 0 });
+s.addText("cheaper, at the same accuracy", { x: 0.6, y: 3.55, w: 12.1, h: 0.7, fontFace: F, fontSize: 40, color: WHITE, align: "center", margin: 0 });
+s.addShape(p.ShapeType.line, { x: 5.4, y: 4.65, w: 2.5, h: 0, line: { color: "35507A", width: 2 } });
+s.addText("Full context breaks at 11 contracts.", { x: 0.6, y: 4.95, w: 12.1, h: 0.7, fontFace: F, fontSize: 34, color: AMBER, align: "center", margin: 0 });
+s.addNotes("And here's the part I'm proudest of, because our own audit forced it. We tested a 'dump everything into the prompt' baseline. Once we fixed a truncation bug, that baseline is statistically TIED with selective memory on accuracy. So I do NOT claim learned memory is more accurate at corpus scale. The honest claim is efficiency and scalability: it matches that accuracy at roughly eighteen times lower token cost, and — structurally — full-context can't even run past about eleven CUAD contracts before it overflows the context window, while selective retrieval holds its prompt flat at around seven hundred tokens. Beyond a few documents, retrieving the right things stops being an optimization and becomes a necessity.");
+pageNum(s);
 
-// ============================================================ 13 ANSWERS (dark close)
-s = p.addSlide(); s.background = { color: NAVY };
-s.addShape(p.ShapeType.rect, { x: 0, y: 0, w: W, h: 0.14, fill: { color: TEAL } });
-s.addText("BACK TO THE RESEARCH QUESTIONS", { x: 0.9, y: 0.7, w: 11, h: 0.4, fontFace: BODY, fontSize: 14, bold: true, color: TEAL, charSpacing: 2, margin: 0 });
-function ans(y, tag, q, a) {
-  s.addText(tag, { x: 0.9, y, w: 1.2, h: 0.5, fontFace: HEAD, fontSize: 20, bold: true, color: TEAL, margin: 0 });
-  s.addText(q, { x: 2.1, y, w: 10.3, h: 0.4, fontFace: BODY, fontSize: 15, italic: true, color: "AFC3E0", margin: 0 });
-  s.addText(a, { x: 2.1, y: y + 0.42, w: 10.3, h: 0.75, fontFace: BODY, fontSize: 16.5, bold: true, color: WHITE, margin: 0, valign: "top" });
-}
-ans(1.5, "RQ1", "Can memory construction be learned?", "Yes — what to store and how to retrieve are captured by a single vector θ, optimized by black-box search over the LLM.");
-ans(3.15, "RQ2", "Is the learned optimum task-dependent?", "Yes — the optimizer recovers different θ per task; it transfers within a task family but not across families.");
-s.addShape(p.ShapeType.roundRect, { x: 0.9, y: 4.75, w: 11.5, h: 1.15, rectRadius: 0.1, fill: { color: NAVY2 } });
-s.addText([
-  { text: "And measured carefully:  ", options: { bold: true, color: TEAL } },
-  { text: "at corpus scale a learned memory buys efficiency and graceful scaling, not a free accuracy gain — a modest but honest step toward agents that adapt the structure of their own memory.", options: { color: WHITE } },
-], { x: 1.2, y: 4.95, w: 10.9, h: 0.8, fontFace: BODY, fontSize: 14.5, margin: 0, valign: "middle" });
-s.addText("Thank you — questions welcome.", { x: 0.9, y: 6.15, w: 11.5, h: 0.5, fontFace: HEAD, fontSize: 20, bold: true, color: WHITE, margin: 0 });
-s.addNotes("So, back to the questions. RQ1 — can memory construction be learned? Yes: what to store and how to retrieve are captured by a single theta, optimized by black-box search over the language model. RQ2 — is that optimum task-dependent? Yes: the optimizer recovers different theta per task, and it transfers within a task family but not across families. And measured carefully, at corpus scale the learned memory buys efficiency and graceful scaling rather than a free accuracy gain. A modest but defensible step toward agents that adapt not just their actions, but the structure of their own memory. Thank you — I'm happy to take questions.");
+// ============================================================ 10 ANSWERS
+s = slide();
+s.addText("Yes, and yes.", { x: 0.9, y: 1.3, w: 11.6, h: 1.0, fontFace: F, fontSize: 60, bold: true, color: WHITE, margin: 0 });
+s.addText("1", { x: 0.9, y: 3.0, w: 0.7, h: 0.7, fontFace: F, fontSize: 34, bold: true, color: TEAL, margin: 0 });
+s.addText("Memory construction is learnable.", { x: 1.75, y: 3.0, w: 10.8, h: 0.7, fontFace: F, fontSize: 36, color: WHITE, margin: 0 });
+s.addText("2", { x: 0.9, y: 4.1, w: 0.7, h: 0.7, fontFace: F, fontSize: 34, bold: true, color: TEAL, margin: 0 });
+s.addText("The optimum is task-dependent.", { x: 1.75, y: 4.1, w: 10.8, h: 0.7, fontFace: F, fontSize: 36, color: WHITE, margin: 0 });
+s.addText("At scale: efficiency, not free accuracy.", { x: 0.9, y: 5.6, w: 11.6, h: 0.7, fontFace: F, fontSize: 30, italic: true, color: MUTE, margin: 0 });
+s.addNotes("So, back to the two questions. One: yes — what to store and how to retrieve are captured by a single ten-number vector, optimized by black-box search over a frozen LLM. Two: yes — the optimizer recovers a different theta for every task, and it transfers within a task family but not across families. And measured carefully, at corpus scale the win is efficiency and graceful scaling rather than free accuracy. A modest, but honest, step toward agents that adapt not just their actions but the structure of their own memory.");
+pageNum(s);
+
+// ============================================================ 11 THANKS
+s = slide();
+s.addText("Thank you.", { x: 0.9, y: 2.7, w: 11.6, h: 1.0, fontFace: F, fontSize: 54, bold: true, color: WHITE, margin: 0 });
+s.addText("Questions?", { x: 0.9, y: 3.85, w: 11.6, h: 0.8, fontFace: F, fontSize: 40, color: TEAL, margin: 0 });
+s.addNotes("Thank you — I'm happy to take questions.");
 
 p.writeFile({ fileName: "Uifalean_Thesis_Defense.pptx" }).then(f => console.log("WROTE", f));
