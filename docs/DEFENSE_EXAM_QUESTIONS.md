@@ -204,3 +204,65 @@ It is also **more accurate**, not just larger (45 → 68 pages). An adversarial 
 The biggest weakness is the **judging**: every answer is scored by a Claude-class judge, so my reported κ = 0.66 bounds **self-consistency, not agreement with a human or a different vendor**. Every accuracy claim ultimately rests on one judge family, and while it is cross-vendor to the *answerer*, it is not independently validated against human judgment.
 
 The single most strengthening experiment is therefore a **blind human (or non-Claude) rater on the same stratified sample** — it would convert κ from self-consistency to genuine agreement and recalibrate every fair-baseline verdict against a rater with no shared bias with the answerer. If I had to name a close second, it would be a **stronger answerer + a second encoder**, to test whether the efficiency advantage and the learned θ are properties of the method or of one model pair. Both are named in the thesis as future work — I would rather point at the real gap than defend an overclaim, because I never made one.
+
+
+---
+
+# 10-Minute Presentation Script
+
+*Talk track mapped to the 11-slide defense deck. Practice out loud 3× and time it (aim 9:30–10:00). `[CLICK]` = advance a build; `[PAUSE]` = stop and breathe.*
+
+
+### Slide 1 — Title & roadmap  ·  ~0:30
+
+Good [morning], and thank you for being here. My thesis is *Learnable, Task-Adaptive Structured Memory for LLM Agents*. In one line: today an agent's memory is hand-designed and frozen — I ask whether an agent can instead *learn* how to build its own memory, and whether the best memory differs from task to task. In the next ten minutes I'll show you the problem, my two questions, how I did it, and what I found. Spoilers are allowed, so I'll tell you now: the answer to both questions is yes — but the interesting answer is in the details.
+
+
+### Slide 2 — The failure (motivation)  ·  ~1:15
+
+Let me start with a failure. [CLICK] Imagine an agent that reads five hundred legal contracts, one clause at a time. You ask it a simple question: *what law governs contract number three?* A standard memory scores what to retrieve by *recency* — how recently it saw something. So it hands back clauses from contract five hundred, the most recent thing it read, and it gets the answer wrong. [PAUSE] Here is the frustrating part: it *has* seen the right evidence — contract three is sitting in its memory. The rule that helps a fresh document — 'trust the newest thing' — is exactly the rule that *hurts* a question whose answer was read long ago. [PAUSE] That is the whole problem in miniature: a memory rule that is optimal in one situation is actively harmful in another. Yet today we pick one rule and freeze it.
+
+
+### Slide 3 — Two questions  ·  ~0:40
+
+That gives me two research questions. [CLICK] First: can an agent *learn* how to construct its own memory — what to store, which concepts to track, and how to score retrieval? [CLICK] Second: is that learned optimum *task-dependent* — does the best memory genuinely differ from one task to another? I'll answer both at the end.
+
+
+### Slide 4 — Memory becomes one vector  ·  ~1:10
+
+Here is the idea. [CLICK] A memory does three jobs: it decides what to *store*, how to *abstract* what it kept into a graph of entities, and how to *score retrieval* when a question arrives. Normally all three are hand-designed. I collapse all three into a single vector of ten numbers — theta. Four numbers control storage, three control abstraction, three control retrieval. [PAUSE] And the crucial part: [CLICK] I learn *theta only*. I never touch the language model's weights, and I never touch the agent's policy. This is not a new language model and not a new reinforcement-learning agent — it is a small, interpretable knob on top of a frozen model, which is exactly what lets me re-fit it to a new task in minutes.
+
+
+### Slide 5 — Retrieval is a vote  ·  ~1:00
+
+Let me make retrieval concrete, because it is the heart of the method. [CLICK] When a question arrives, every item in memory gets a score, and the agent keeps the top eight. That score is a *vote* across three signals. *Meaning*: does this item mean the same as the question? *Freshness*: how recently did I see it? *Link*: is it connected to the question in the entity graph? [PAUSE] Three of theta's ten numbers are simply *how loud each of those votes is*. In my contract example, the freshness vote was turned up too high, so the newest document always won. Learning theta is learning how loud to set each vote. One honest note I will come back to: the *link* vote turned out to carry no measurable weight on my corpora.
+
+
+### Slide 6 — Learned by black-box search  ·  ~1:00
+
+So how do I learn theta? [CLICK] Not with gradient descent — the decision to store an item is discrete, so there is nothing to differentiate. I use black-box evolutionary search, CMA-ES, the right tool for a small, noisy, ridged landscape. [PAUSE] And the objective it optimizes is *recall at eight of the gold evidence* — did the right document land in the top eight retrieved? That uses no language model at all. Two things fall out of that: tuning is cheap, and — importantly — the judge that later grades answers is nowhere near the optimizer, so I cannot accidentally tune to the judge. [CLICK] I test the idea in three stages of rising realism: small grid worlds, a twelve-system benchmark, and then six real long-context LLM benchmarks.
+
+
+### Slide 7 — Task-dependence (Stages 1 & 2)  ·  ~1:05
+
+Stage one, the grid worlds, gives the cleanest result. [CLICK] On the hardest task, a learned memory lifts success from two and a half percent to twenty-seven and a half. But the *number* is not the point — the point is that the optimizer recovers a genuinely *different* theta for every task. One task learns to throw away almost everything but keep temporal order; another learns to store everything. [PAUSE] That is the direct evidence for my second question: the best memory is task-dependent. Stage two scales this to twelve memory systems on four environments. My learnable memory reaches the top cluster — I report it honestly as a statistical *tie*, not a win. And an ablation tells me *why* it works: one storage parameter is load-bearing — zero it and performance collapses — while the graph term does nothing at retrieval. I keep that negative result in.
+
+
+### Slide 8 — Stage 3 results  ·  ~1:15
+
+Stage three is the real test: real language models, over real corpora, answering questions at the *end* of the corpus — the hard case from my opening example. [CLICK] Re-tuning theta per corpus lifts judged accuracy on all three domain-coherent benchmarks — FinanceBench jumps from 0.24 to 0.65. On a held-out split, two of the three survive multiple-comparison correction; the third, QASPER, does not, and I report it as non-significant. [PAUSE] The mechanism is the same everywhere and it is readable: tuning drives the *freshness* weight down to almost zero and the *meaning* weight up. The memory stops chasing the newest document and starts retrieving by meaning — exactly what an end-of-corpus question needs. And I validated the objective: retrieval recall predicts the judge's score at rho zero point six nine.
+
+
+### Slide 9 — The honest twist  ·  ~1:00
+
+Now the part I am proudest of, because my own audit forced it. [CLICK] I tested a baseline that just dumps *every* document into the prompt. Once I fixed a bug, that baseline is statistically *tied* with my selective memory on accuracy. So I do *not* claim my method is more accurate. [PAUSE] The honest claim is *efficiency*: it matches that accuracy at roughly eighteen times lower cost — and, structurally, dumping everything in *breaks* at about eleven contracts, because it overflows the context window, while selective memory holds its prompt flat at around seven hundred tokens. Beyond a handful of documents, retrieving the right thing is not an optimization — it is a necessity.
+
+
+### Slide 10 — Answers  ·  ~0:40
+
+So, back to my two questions. [CLICK] Can memory construction be learned? Yes — captured by a single ten-number vector, optimized over a frozen model. [CLICK] Is the optimum task-dependent? Yes — the optimizer recovers a different theta per task, and it transfers within a task family but not across. [PAUSE] And measured carefully, at corpus scale the win is efficiency and graceful scaling, not free accuracy — a modest but honest step toward agents that adapt not just their actions, but the structure of their own memory.
+
+
+### Slide 11 — Thanks  ·  ~0:15
+
+Thank you. I would be glad to take your questions.
